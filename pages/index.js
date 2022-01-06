@@ -1,5 +1,5 @@
-import Button from "@material-ui/core/Button";
+import Home from '../src/components/Home'
 
 export default function Root(props) {
-  return <div> Welcome to the root page </div>;
+  return <Home />;
 }
