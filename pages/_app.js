@@ -1,7 +1,35 @@
-import '../styles/globals.css'
+import {useEffect, useState} from "react";
+import ThemeContext from "../src/contexts/themeContext";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+import {Switch} from "@material-ui/core";
+import {ThemeProvider} from "@material-ui/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-export default MyApp
+import '../styles/globals.css';
+import darkTheme from "../styles/darkTheme";
+import lightTheme from "../styles/lightTheme";
+
+import Layout from "../src/components/Layout";
+
+const MyApp = ({Component, pageProps}) => {
+    const [darkMode, setDarkMode] = useState(true)
+    const [customTheme, setCustomTheme] = useState(darkTheme)
+
+    useEffect(() => {
+        setCustomTheme(darkMode ? darkTheme : lightTheme)
+    }, [darkMode]);
+
+    return (
+        <ThemeContext.Provider value={{...customTheme}}>
+            <ThemeProvider theme={{...customTheme}}>
+                <Layout>
+                    <CssBaseline/>
+                    <Component {...pageProps} />
+                    <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>
+                </Layout>
+            </ThemeProvider>
+        </ThemeContext.Provider>
+    );
+};
+
+export default MyApp;
