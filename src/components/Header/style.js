@@ -7,6 +7,7 @@ export const useStyles = makeStyles({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '30px 0',
+        boxShadow: '0px 0px 0px',
         '&__toolbar': {
             width: '100%',
             justifyContent: 'space-between'
@@ -32,28 +33,26 @@ export const useStyles = makeStyles({
             }
         },
 
-        '&__nav-bar': {
-            listStyle: 'none',
-            '&__link': {
-                display: 'inline-block',
-                padding: '0 10px',
-                margin: '10px 14px',
-                '& a': {
-                    fontWeight: 400,
-                    fontSize: 13,
-                    color: theme.palette.primary.main,
-                    textDecoration: 'none',
-                    textTransform: 'uppercase',
-                    letterSpacing: "2px",
-                    // transition: 'all ease 0.4s',
-                    // transition: theme.transitions.create(['all']),
-                    // duration: theme.transitions.duration.enteringScreen,
-                    // easing: theme.transitions.easing.easeOut,
-                    '&:hover': {
-                        color: theme.palette.secondary.main,
-                    },
+        '&__nav': {
+            '& a': {
+                fontWeight: 400,
+                fontSize: 13,
+                color: theme.palette.primary.main,
+                textDecoration: 'none',
+                textTransform: 'uppercase',
+                letterSpacing: "2px",
+                '&:hover': {
+                    color: theme.palette.secondary.main,
                 },
             },
+            '&--default': {
+                display: 'inline',
+                margin: '10px 14px',
+                padding: '0 10px',
+            },
+            '&--drawer': {
+                width: 360,
+            }
         },
         '&__menu': {
             color: "#FF014F",

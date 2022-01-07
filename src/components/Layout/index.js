@@ -2,13 +2,13 @@ import React from 'react';
 
 import {Container} from "@material-ui/core";
 
-import Navbar from '../Navbar'
+import Header from '../Header'
 import Footer from '../Footer';
 
 const Layout = ({children}) => {
     return (
         <>
-            <Navbar/>
+            <Header/>
             <Container maxWidth="xl">
                 {children}
             </Container>
