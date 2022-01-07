@@ -3,10 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 export const useStyles = makeStyles({
     headerWrapper: theme => ({
         backgroundColor: "transparent",
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '30px 0',
+        padding: '16px 0',
         '&__toolbar': {
             width: '100%',
             justifyContent: 'space-between'
@@ -29,7 +26,16 @@ export const useStyles = makeStyles({
                 textTransform: 'uppercase',
                 letterSpacing: 2,
                 color: theme.palette.primary.main,
-            }
+            },
+            [theme.breakpoints.down('xs')]: {
+                '&__pic': {
+                    width: 55,
+                    height: 55,
+                },
+                '&__name': {
+                    fontSize: 16,
+                },
+            },
         },
 
         '&__nav-bar': {
@@ -45,10 +51,6 @@ export const useStyles = makeStyles({
                     textDecoration: 'none',
                     textTransform: 'uppercase',
                     letterSpacing: "2px",
-                    // transition: 'all ease 0.4s',
-                    // transition: theme.transitions.create(['all']),
-                    // duration: theme.transitions.duration.enteringScreen,
-                    // easing: theme.transitions.easing.easeOut,
                     '&:hover': {
                         color: theme.palette.secondary.main,
                     },
@@ -59,13 +61,21 @@ export const useStyles = makeStyles({
             color: "#FF014F",
             '&__icon': {
                 fontSize: 40
-            }
+            },
+            [theme.breakpoints.down('xs')]: {
+                '&__icon': {
+                    fontSize: 35
+                }
+            },
         },
         '&__close-icon': {
             color: "#FF014F",
             width: 50,
             height: 50,
             marginLeft: "auto"
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "12px 0",
         },
     }),
 });
