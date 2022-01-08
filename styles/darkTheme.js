@@ -8,13 +8,13 @@ const darkTheme = createTheme({
     palette: {
         type: "dark",
         background: {
-            default: COLORS.dark.backgroundDefault
+            default: COLORS.black_1
         },
         primary: {
-            main: COLORS.dark.primaryMain
+            main: COLORS.white_2
         },
         secondary: {
-            main: COLORS.dark.secondaryMain
+            main: COLORS.white
         },
     },
 });
