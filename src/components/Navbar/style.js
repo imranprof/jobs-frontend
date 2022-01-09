@@ -26,6 +26,7 @@ export const useStyles = makeStyles({
                 textTransform: 'uppercase',
                 letterSpacing: 2,
                 color: theme.palette.primary.main,
+                fontFamily: "Montserrat, sans-serif"
             },
             [theme.breakpoints.down('xs')]: {
                 '&__pic': {
@@ -43,16 +44,18 @@ export const useStyles = makeStyles({
             '&__link': {
                 display: 'inline-block',
                 padding: '0 10px',
-                margin: '10px 14px',
+                margin: '10px 5px',
                 '& a': {
+                    fontFamily: "Montserrat, sans-serif",
                     fontWeight: 400,
                     fontSize: 13,
                     color: theme.palette.primary.main,
                     textDecoration: 'none',
                     textTransform: 'uppercase',
-                    letterSpacing: "2px",
+                    opacity: .5,
+                    transition: "opacity .4s ease 0s",
                     '&:hover': {
-                        color: theme.palette.secondary.main,
+                        opacity: 1
                     },
                 },
             },
