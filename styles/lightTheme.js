@@ -8,13 +8,13 @@ const lightTheme = createTheme({
     palette: {
         type: "light",
         background: {
-            default: COLORS.light.backgroundDefault
+            default: COLORS.white_1
         },
         primary: {
-            main: COLORS.light.primaryMain
+            main: COLORS.gray
         },
         secondary: {
-            main: COLORS.light.secondaryMain
+            main: COLORS.black
         },
     },
 });

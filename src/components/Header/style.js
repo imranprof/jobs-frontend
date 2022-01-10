@@ -4,6 +4,7 @@ export const useStyles = makeStyles({
     headerWrapper: theme => ({
         backgroundColor: "transparent",
         padding: '16px 0',
+        boxShadow: '0px 0px 0px',
         '&__toolbar': {
             width: '100%',
             justifyContent: 'space-between'
@@ -39,26 +40,26 @@ export const useStyles = makeStyles({
             },
         },
 
-        '&__nav-bar': {
-            listStyle: 'none',
-            '&__link': {
-                display: 'inline-block',
-                padding: '0 10px',
-                margin: '10px 5px',
-                '& a': {
-                    fontFamily: "Montserrat, sans-serif",
-                    fontWeight: 400,
-                    fontSize: 13,
-                    color: theme.palette.primary.main,
-                    textDecoration: 'none',
-                    textTransform: 'uppercase',
-                    opacity: .5,
-                    transition: "opacity .4s ease 0s",
-                    '&:hover': {
-                        opacity: 1
-                    },
+        '&__nav': {
+            '& a': {
+                fontWeight: 400,
+                fontSize: 13,
+                color: theme.palette.primary.main,
+                textDecoration: 'none',
+                textTransform: 'uppercase',
+                letterSpacing: "2px",
+                '&:hover': {
+                    color: theme.palette.secondary.main,
                 },
             },
+            '&--default': {
+                display: 'inline',
+                margin: '10px 14px',
+                padding: '0 10px',
+            },
+            '&--drawer': {
+                width: 360,
+            }
         },
         '&__menu': {
             color: "#FF014F",
