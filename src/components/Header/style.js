@@ -1,8 +1,9 @@
 import {makeStyles} from "@material-ui/core/styles";
+import COLORS from "../../../styles/colors";
 
 export const useStyles = makeStyles({
     headerWrapper: theme => ({
-        backgroundColor: "transparent",
+        backgroundColor: COLORS.transparent,
         padding: '16px 0',
         boxShadow: '0px 0px 0px',
         '&__toolbar': {
@@ -18,7 +19,7 @@ export const useStyles = makeStyles({
                 width: 70,
                 height: 70,
                 borderRadius: '50%',
-                border: '3px solid #2E3237',
+                border: `3px solid ${COLORS.gray_1}`,
                 marginRight: 10,
             },
             '&__name': {
@@ -42,14 +43,17 @@ export const useStyles = makeStyles({
 
         '&__nav': {
             '& a': {
+                fontFamily: "Montserrat, sans-serif",
                 fontWeight: 400,
                 fontSize: 13,
                 color: theme.palette.primary.main,
                 textDecoration: 'none',
                 textTransform: 'uppercase',
                 letterSpacing: "2px",
+                opacity: .5,
+                transition: "opacity .4s ease 0s",
                 '&:hover': {
-                    color: theme.palette.secondary.main,
+                    opacity: 1
                 },
             },
             '&--default': {
@@ -62,7 +66,7 @@ export const useStyles = makeStyles({
             }
         },
         '&__menu': {
-            color: "#FF014F",
+            color: COLORS.pink,
             '&__icon': {
                 fontSize: 40
             },
@@ -73,7 +77,7 @@ export const useStyles = makeStyles({
             },
         },
         '&__close-icon': {
-            color: "#FF014F",
+            color: COLORS.pink,
             width: 50,
             height: 50,
             marginLeft: "auto"
@@ -84,6 +88,6 @@ export const useStyles = makeStyles({
     }),
 });
 
-export function NavbarStyle(theme) {
+export function HeaderStyle(theme) {
     return useStyles(theme);
 }
