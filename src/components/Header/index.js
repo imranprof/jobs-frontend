@@ -15,7 +15,7 @@ const Header = () => {
     return (
         <AppBar className={classes.headerWrapper} position="sticky">
             <Toolbar className={`${classes.headerWrapper}__toolbar`}>
-                <ProfileInfo classes={classes}/>
+                <ProfileInfo classes={classes} showName={true}/>
                 <SideBar classes={classes}/>
                 <Hidden mdDown>
                     <NavItems classes={classes} variant={"default"}/>

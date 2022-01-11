@@ -8,6 +8,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
+import {profileData} from "../../../API/mock/profileData";
 
 const SideBar = ({classes}) => {
     const [open, setOpen] = useState(false);
@@ -23,18 +24,29 @@ const SideBar = ({classes}) => {
                 </IconButton>
             </Hidden>
 
-            <SwipeableDrawer open={open} anchor="left" onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
-                <ProfileInfo classes={classes}/>
-                <IconButton
-                    className={`${classes.headerWrapper}__close-icon`}
-                    onClick={() => setOpen(false)}
-                    role="button"
-                    tabIndex={0}>
-                    <CloseIcon/>
-                </IconButton>
-                <Divider/>
-                <NavItems classes={classes} variant={"drawer"}/>
-                <Divider/>
+            <SwipeableDrawer open={open} anchor="left"
+                             onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
+                <div className={`${classes.headerWrapper}__side-bar`}>
+                    <div className={`${classes.headerWrapper}__side-bar__icons`}>
+                        <ProfileInfo classes={classes} showName={false}/>
+                        <IconButton
+                            className={`${classes.headerWrapper}__close-icon`}
+                            onClick={() => setOpen(false)}
+                        >
+                            <CloseIcon/>
+                        </IconButton>
+                    </div>
+
+                    <p className={`${classes.headerWrapper}__profile__title`}>
+                        {profileData.name}
+                    </p>
+
+                    <Divider/>
+                    <div className={`${classes.headerWrapper}__side-bar__links`}>
+                        <NavItems classes={classes} variant={"drawer"}/>
+                    </div>
+                    <Divider/>
+                </div>
             </SwipeableDrawer>
         </>
     );
