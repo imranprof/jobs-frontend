@@ -7,9 +7,47 @@ export const useStyles = makeStyles({
     homeWrapper: theme => ({
         margin: "30px 0",
         '&__left': {
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center"
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            '&-top': {
+                marginBottom: 142
+            },
+            '&-bottom': {
+                display: "flex",
+                justifyContent: "space-between",
+                '&__title': {
+                    fontSize: 14,
+                    textTransform: "uppercase",
+                    letterSpacing: "2px",
+                    fontWeight: 300,
+                    color: "#c4cfde",
+                    display: "inline-block",
+                    marginBottom: 20
+                },
+                '&__social-links': {
+                    display: "flex",
+                    '& a':{
+                        textDecoration: "none",
+                    }
+                }
+            }
+        },
+        '&__paper': {
+            display: "flex",
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+            background: "linear-gradient(145deg, #1e2024, #23272b)",
+            width: 60,
+            height: 60,
+            marginRight: 25,
+            '&--icon': {
+                color: COLORS.white_2,
+            },
+            '&--img': {
+                maxHeight: 34,
+            }
         },
         '&__headline': {
             fontSize: 14,
@@ -36,7 +74,7 @@ export const useStyles = makeStyles({
         '&__expertise': {
             display: "flex",
             alignItems: "center",
-            fontSize: 54,
+            fontSize: 48,
             fontWeight: 700,
             height: 58
         },

@@ -1,5 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 import COLORS from "../../../styles/colors";
+import FONTS from "../../../styles/fonts";
 
 export const useStyles = makeStyles({
     headerWrapper: theme => ({
@@ -28,7 +29,7 @@ export const useStyles = makeStyles({
                 textTransform: 'uppercase',
                 letterSpacing: 2,
                 color: theme.palette.primary.main,
-                fontFamily: "Montserrat, sans-serif"
+                fontFamily: FONTS.primaryFont
             },
             [theme.breakpoints.down('xs')]: {
                 '&__pic': {
@@ -43,7 +44,7 @@ export const useStyles = makeStyles({
 
         '&__nav': {
             '& a': {
-                fontFamily: "Montserrat, sans-serif",
+                fontFamily: FONTS.primaryFont,
                 fontWeight: 400,
                 fontSize: 13,
                 color: theme.palette.primary.main,
