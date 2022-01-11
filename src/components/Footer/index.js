@@ -3,28 +3,29 @@ import Link from 'next/link';
 
 import Divider from "@material-ui/core/Divider";
 
-import {FooterStyle} from "./style";
 import ThemeContextProvider from "../../contexts/themeContext";
+import {footerData} from "../../../API/mock/footerData";
+import {FooterStyle} from "./style";
 
 const Footer = () => {
     const customTheme = useContext(ThemeContextProvider);
     const classes = FooterStyle(customTheme);
-    const currentYear = new Date().getFullYear();
+    const {footerText, company} = footerData;
 
     return (
         <div className={classes.footerWrapper}>
             <Divider className={`${classes.footerWrapper}__divider`}/>
 
-            <Link href="https://rightcodes.org">
+            <Link href={company.url}>
                 <a className={`${classes.footerWrapper}__logo`} target="_blank">
-                    <img className={`${classes.footerWrapper}__logo-img`} alt="RightCodes Solution" src="rc.png"/>
+                    <img className={`${classes.footerWrapper}__logo-img`} alt={company.name} src={company.logo}/>
                 </a>
             </Link>
 
             <p className={`${classes.footerWrapper}__description`}>
-                &copy; {currentYear}. All rights reserved by&nbsp;
-                <Link href="https://rightcodes.org">
-                    <a className={`${classes.footerWrapper}__link`} target="_blank">RightCodes Solution</a>
+                &copy; {footerText}&nbsp;
+                <Link href={company.url}>
+                    <a className={`${classes.footerWrapper}__link`} target="_blank">{company.name}</a>
                 </Link>.
             </p>
         </div>

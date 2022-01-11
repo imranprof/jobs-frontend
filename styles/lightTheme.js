@@ -16,6 +16,12 @@ const lightTheme = createTheme({
         secondary: {
             main: COLORS.black
         },
+        footer:{
+            main: COLORS.gray
+        },
+        customDivider:{
+            main: COLORS.white_2
+        }
     },
 });
 

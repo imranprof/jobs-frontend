@@ -13,6 +13,12 @@ const darkTheme = createTheme({
         secondary: {
             main: COLORS.white
         },
+        footer:{
+            main: COLORS.white_3
+        } ,
+        customDivider:{
+            main: COLORS.black_2
+        }
     },
 });
 
