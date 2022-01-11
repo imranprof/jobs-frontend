@@ -21,6 +21,9 @@ const lightTheme = createTheme({
         },
         customDivider:{
             main: COLORS.white_2
+        },
+        sideBar: {
+            background: COLORS.white_4
         }
     },
 });
