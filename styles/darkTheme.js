@@ -18,6 +18,9 @@ const darkTheme = createTheme({
         } ,
         customDivider:{
             main: COLORS.black_2
+        },
+        sideBar: {
+            background: COLORS.black_3
         }
     },
 });
