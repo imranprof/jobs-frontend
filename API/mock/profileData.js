@@ -1,4 +1,4 @@
-export const profileInfo = {
+export const profileData = {
     "id": 1,
     "name": "John Doe",
     "headline": "Welcome to my world",

@@ -1,16 +1,16 @@
 import React, {useContext} from 'react';
-import ThemeContextProvider from "../../contexts/themeContext";
 
 import {AppBar, Hidden, Toolbar,} from "@material-ui/core";
 
-import {NavbarStyle} from './style';
+import ThemeContextProvider from "../../contexts/themeContext";
 import ProfileInfo from "./profileInfo";
 import SideBar from "./sideBar";
 import NavItems from "./navItems";
+import {HeaderStyle} from './style';
 
 const Header = () => {
     const customTheme = useContext(ThemeContextProvider);
-    const classes = NavbarStyle(customTheme);
+    const classes = HeaderStyle(customTheme);
 
     return (
         <AppBar className={classes.headerWrapper} position="sticky">
