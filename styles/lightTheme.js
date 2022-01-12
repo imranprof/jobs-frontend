@@ -10,20 +10,20 @@ const lightTheme = createTheme({
         background: {
             default: COLORS.white_1
         },
-        primary: {
+        customBackground: {
+            light: COLORS.white_1,
+            dark: COLORS.white_2,
+            gradiant: {
+                light: COLORS.white_3,
+                dark: COLORS.pink_1
+            },
+            sideBar: COLORS.white_1
+        },
+        customColor: {
             main: COLORS.gray
         },
-        secondary: {
-            main: COLORS.black
-        },
-        footer:{
-            main: COLORS.gray
-        },
-        customDivider:{
-            main: COLORS.white_2
-        },
-        sideBar: {
-            background: COLORS.white_4
+        customDivider: {
+            main: COLORS.white
         }
     },
 });

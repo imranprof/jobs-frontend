@@ -7,20 +7,20 @@ const darkTheme = createTheme({
         background: {
             default: COLORS.black_1
         },
-        primary: {
-            main: COLORS.white_2
+        customBackground: {
+            light: COLORS.black_1,
+            dark: COLORS.black_2,
+            gradiant: {
+                light: COLORS.black_4,
+                dark: COLORS.black_5
+            },
+            sideBar: COLORS.black_2
         },
-        secondary: {
+        customColor: {
             main: COLORS.white
         },
-        footer:{
-            main: COLORS.white_3
-        } ,
-        customDivider:{
-            main: COLORS.black_2
-        },
-        sideBar: {
-            background: COLORS.black_3
+        customDivider: {
+            main: COLORS.black_3
         }
     },
 });

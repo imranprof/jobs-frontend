@@ -15,7 +15,7 @@ export const useStyles = makeStyles({
             alignItems: 'center',
             cursor: 'pointer',
             '&__pic': {
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.customColor.main,
                 width: 70,
                 height: 70,
                 borderRadius: '50%',
@@ -27,7 +27,7 @@ export const useStyles = makeStyles({
                 fontWeight: '600',
                 textTransform: 'uppercase',
                 letterSpacing: 2,
-                color: theme.palette.primary.main,
+                color: theme.palette.customColor.main,
                 fontFamily: "Montserrat, sans-serif"
             },
             '&__title': {
@@ -43,7 +43,7 @@ export const useStyles = makeStyles({
                 fontFamily: "Montserrat, sans-serif",
                 fontWeight: 400,
                 fontSize: 13,
-                color: theme.palette.primary.main,
+                color: theme.palette.customColor.main,
                 textDecoration: 'none',
                 textTransform: 'uppercase',
                 opacity: .8,
@@ -69,7 +69,7 @@ export const useStyles = makeStyles({
             }
         },
         '&__side-bar': {
-            backgroundColor: theme.palette.sideBar.background,
+            background: theme.palette.customBackground.sideBar,
             width: 375,
             height: '100%',
             padding: '25px 40px',
