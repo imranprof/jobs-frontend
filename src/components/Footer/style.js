@@ -8,7 +8,7 @@ export const useStyles = makeStyles({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: 20,
+        padding: '26px 56px 0 56px',
         '&__divider': {
             width: "100%",
             background: theme.palette.customDivider.main,

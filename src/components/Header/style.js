@@ -3,7 +3,8 @@ import {makeStyles} from "@material-ui/core/styles";
 export const useStyles = makeStyles({
     headerWrapper: theme => ({
         backgroundColor: "transparent",
-        padding: '26px 56px',
+        padding: '26px 40px 0 40px',
+        marginBottom: 50,
         boxShadow: '0px 0px 0px',
         '&__toolbar': {
             width: '100%',
@@ -46,11 +47,10 @@ export const useStyles = makeStyles({
                 color: theme.palette.customColor.main,
                 textDecoration: 'none',
                 textTransform: 'uppercase',
-                opacity: .8,
+                opacity: .5,
                 transition: "opacity .4s ease 0s",
                 '&:hover': {
                     opacity: 1,
-                    fontWeight: 500,
                 }
             },
             '&--default': {
