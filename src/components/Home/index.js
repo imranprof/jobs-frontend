@@ -16,7 +16,7 @@ const Home = () => {
 
     return (
         <div className={classes.homeWrapper}>
-            <Grid container spacing={3}>
+            <Grid container>
                 <Grid item xs={12} sm={12} md={7} className={`${classes.homeWrapper}__left`}>
                     <div className={`${classes.homeWrapper}__left-top`}>
                         <span className={`${classes.homeWrapper}__headline`}>{profileData.headline}</span>

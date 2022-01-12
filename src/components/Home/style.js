@@ -5,7 +5,6 @@ import FONTS from "../../../styles/fonts";
 
 export const useStyles = makeStyles({
     homeWrapper: theme => ({
-        margin: "30px 0",
         '&__left': {
             display: "flex",
             flexDirection: "column",
@@ -16,6 +15,7 @@ export const useStyles = makeStyles({
             '&-bottom': {
                 display: "flex",
                 justifyContent: "space-between",
+                width: "90%",
                 '&__title': {
                     fontSize: 14,
                     textTransform: "uppercase",

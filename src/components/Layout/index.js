@@ -8,8 +8,8 @@ import Footer from '../Footer';
 const Layout = ({children}) => {
     return (
         <>
-            <Header/>
-            <Container maxWidth="lg">
+            <Header />
+            <Container fixed>
                 {children}
             </Container>
             <Footer/>
