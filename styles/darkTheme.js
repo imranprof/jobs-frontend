@@ -12,12 +12,16 @@ const darkTheme = createTheme({
             dark: COLORS.black_2,
             gradiant: {
                 light: COLORS.black_4,
-                dark: COLORS.black_5
+                dark: COLORS.black_5,
+                highContrast: COLORS.pink_1,
             },
-            sideBar: COLORS.black_2
+            sideBar: COLORS.black_2,
         },
         customColor: {
-            main: COLORS.white
+            main: COLORS.white_4,
+            light: COLORS.white,
+            dark: COLORS.gray_3,
+            highContrast: COLORS.pink
         },
         customDivider: {
             main: COLORS.black_3

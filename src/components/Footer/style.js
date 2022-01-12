@@ -37,7 +37,7 @@ export const useStyles = makeStyles({
             color: theme.palette.customColor.main,
             display: "inline-block",
             paddingBottom: 2,
-            backgroundImage: `linear-gradient(${COLORS.pink},${COLORS.pink})`,
+            backgroundImage: theme.palette.customBackground.gradiant.highContrast,
             backgroundPosition: "0 100%",
             backgroundSize: "0% 1px",
             backgroundRepeat: "no-repeat",
