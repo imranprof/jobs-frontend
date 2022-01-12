@@ -1,10 +1,9 @@
 import {makeStyles} from "@material-ui/core/styles";
-import COLORS from "../../../styles/colors";
 import FONTS from "../../../styles/fonts";
 
 export const useStyles = makeStyles({
     headerWrapper: theme => ({
-        backgroundColor: COLORS.transparent,
+        backgroundColor: "transparent",
         padding: '26px 56px',
         boxShadow: '0px 0px 0px',
         '&__toolbar': {
@@ -16,11 +15,11 @@ export const useStyles = makeStyles({
             alignItems: 'center',
             cursor: 'pointer',
             '&__pic': {
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.customColor.main,
                 width: 70,
                 height: 70,
                 borderRadius: '50%',
-                border: `3px solid ${COLORS.gray_1}`,
+                border: `3px solid ${theme.palette.customColor.dark}`,
                 marginRight: 10,
                 '& img':{
                     objectFit: "contain",
@@ -31,23 +30,23 @@ export const useStyles = makeStyles({
                 fontWeight: '600',
                 textTransform: 'uppercase',
                 letterSpacing: 2,
-                color: theme.palette.primary.main,
-                fontFamily: FONTS.primaryFont
+                color: theme.palette.customColor.main,
+                fontFamily: FONTS.primaryFont,
+                '&--drawer': {
+                    color: theme.palette.customColor.dark,
+                    width: 285,
+                    fontSize: 16,
+                    margin: '20px 0',
+                    lineHeight: '32px'
+                }
             },
-            '&__title': {
-                color: COLORS.gray_2,
-                width: 285,
-                fontSize: 16,
-                margin: '20px 0',
-                lineHeight: '32px'
-            }
         },
         '&__nav': {
             '& a': {
                 fontFamily: FONTS.primaryFont,
                 fontWeight: 400,
                 fontSize: 13,
-                color: theme.palette.primary.main,
+                color: theme.palette.customColor.main,
                 textDecoration: 'none',
                 textTransform: 'uppercase',
                 opacity: .8,
@@ -73,9 +72,9 @@ export const useStyles = makeStyles({
             }
         },
         '&__side-bar': {
-            backgroundColor: theme.palette.sideBar.background,
+            background: theme.palette.customBackground.sideBar,
             width: 375,
-            height: '100%',
+            height: '100vh',
             padding: '25px 40px',
             '&__icons': {
                 display: 'flex',
@@ -83,23 +82,22 @@ export const useStyles = makeStyles({
                 alignItems: 'center',
             },
             '&__links': {
-                height: '49.5%',
+                height: 420,
                 marginTop: 15,
-
             }
         },
         '&__menu': {
-            color: COLORS.pink,
+            color: theme.palette.customColor.highContrast,
             '&__icon': {
                 fontSize: 40
             }
         },
         '&__close-icon': {
             position: 'absolute',
-            color: COLORS.pink,
+            color: theme.palette.customColor.highContrast,
             width: 45,
             height: 45,
-            marginLeft: '260px',
+            marginLeft: 260,
         }
     }),
 });

@@ -29,15 +29,15 @@ export const useStyles = makeStyles({
         },
         '&__description': {
             fontSize: 17,
-            color: theme.palette.footer.main,
+            color: theme.palette.customColor.main,
             fontFamily: "Poppins, sans-serif"
         },
         '&__link': {
             textDecoration: "none",
-            color: theme.palette.footer.main,
+            color: theme.palette.customColor.main,
             display: "inline-block",
             paddingBottom: 2,
-            backgroundImage: `linear-gradient(${COLORS.pink},${COLORS.pink})`,
+            backgroundImage: theme.palette.customBackground.gradiant.highContrast,
             backgroundPosition: "0 100%",
             backgroundSize: "0% 1px",
             backgroundRepeat: "no-repeat",

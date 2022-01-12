@@ -2,13 +2,12 @@ import React, {useContext} from 'react';
 
 import {Grid} from "@material-ui/core";
 
-import {HomeStyle} from "./style";
 import ThemeContextProvider from "../../contexts/themeContext";
 import {profileData} from "../../../API/mock/profileData";
 import TypeWriter from "./typeWriter";
 import SocialLink from "./socialLink";
 import SKill from "./skill";
-
+import {HomeStyle} from "./style";
 
 const Home = () => {
     const customTheme = useContext(ThemeContextProvider);

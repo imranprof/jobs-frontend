@@ -19,9 +19,9 @@ export const useStyles = makeStyles({
                 '&__title': {
                     fontSize: 14,
                     textTransform: "uppercase",
-                    letterSpacing: "2px",
+                    letterSpacing: 2,
                     fontWeight: 300,
-                    color: "#c4cfde",
+                    color: theme.palette.customColor.main,
                     display: "inline-block",
                     marginBottom: 20
                 },
@@ -38,7 +38,7 @@ export const useStyles = makeStyles({
             justifyContent: "center",
             textAlign: "center",
             alignItems: "center",
-            background: "linear-gradient(145deg, #1e2024, #23272b)",
+            background: theme.palette.customBackground.gradiant.light,
             width: 60,
             height: 60,
             marginRight: 25,
@@ -52,7 +52,7 @@ export const useStyles = makeStyles({
         '&__headline': {
             fontSize: 14,
             fontFamily: FONTS.primaryFont,
-            color: theme.palette.primary.main,
+            color: theme.palette.customColor.main,
             letterSpacing: 3,
             textTransform: "uppercase",
             fontWeight: 500,
@@ -60,7 +60,7 @@ export const useStyles = makeStyles({
             marginBottom: 20
         },
         '&__title': {
-            color: theme.palette.secondary.main,
+            color: theme.palette.customColor.light,
             fontSize: 60,
             fontWeight: 700,
             fontFamily: FONTS.primaryFont,
@@ -69,7 +69,7 @@ export const useStyles = makeStyles({
             marginBottom: 22,
         },
         '&__name': {
-            color: COLORS.pink
+            color: theme.palette.customColor.highContrast
         },
         '&__expertise': {
             display: "flex",
@@ -79,7 +79,7 @@ export const useStyles = makeStyles({
             height: 58
         },
         '&__cursor': {
-            borderRight: "2px solid #C1CCDB",
+            borderRight: `2px solid ${theme.palette.customColor.main}`,
             padding: 3,
             height: 50,
             opacity: 0.5
@@ -88,7 +88,7 @@ export const useStyles = makeStyles({
             fontSize: 16,
             fontFamily: FONTS.secondaryFont,
             lineHeight: "30px",
-            color: theme.palette.primary.main,
+            color: theme.palette.customColor.main,
             paddingRight: "16%",
             opacity: 0.9
         }

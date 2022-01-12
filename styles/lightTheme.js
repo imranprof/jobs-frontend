@@ -2,28 +2,29 @@ import {createTheme} from "@material-ui/core/styles";
 import COLORS from "./colors";
 
 const lightTheme = createTheme({
-    typography: {
-        fontFamily: "'Montserrat', sans-serif"
-    },
     palette: {
         type: "light",
         background: {
             default: COLORS.white_1
         },
-        primary: {
-            main: COLORS.gray
+        customBackground: {
+            light: COLORS.white_1,
+            dark: COLORS.white_2,
+            gradiant: {
+                light: COLORS.white_3,
+                dark: COLORS.pink_1,
+                highContrast: COLORS.pink_1,
+            },
+            sideBar: COLORS.white_1
         },
-        secondary: {
-            main: COLORS.black
+        customColor: {
+            main: COLORS.gray,
+            light: COLORS.gray,
+            dark: COLORS.black,
+            highContrast: COLORS.pink
         },
-        footer:{
-            main: COLORS.gray
-        },
-        customDivider:{
-            main: COLORS.white_2
-        },
-        sideBar: {
-            background: COLORS.white_4
+        customDivider: {
+            main: COLORS.gray_5
         }
     },
 });

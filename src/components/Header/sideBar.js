@@ -37,7 +37,7 @@ const SideBar = ({classes}) => {
                         </IconButton>
                     </div>
 
-                    <p className={`${classes.headerWrapper}__profile__title`}>
+                    <p className={`${classes.headerWrapper}__profile__name ${classes.headerWrapper}__profile__name--drawer`}>
                         {profileData.name}
                     </p>
 
