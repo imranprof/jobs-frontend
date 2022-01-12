@@ -13,22 +13,23 @@ const Footer = () => {
     const {footerText, company} = footerData;
 
     return (
-        <div className={classes.footerWrapper}>
+        <>
             <Divider className={`${classes.footerWrapper}__divider`}/>
-
-            <Link href={company.url}>
-                <a className={`${classes.footerWrapper}__logo`} target="_blank">
-                    <img className={`${classes.footerWrapper}__logo-img`} alt={company.name} src={company.logo}/>
-                </a>
-            </Link>
-
-            <p className={`${classes.footerWrapper}__description`}>
-                &copy; {footerText}&nbsp;
+            <div className={classes.footerWrapper}>
                 <Link href={company.url}>
-                    <a className={`${classes.footerWrapper}__link`} target="_blank">{company.name}</a>
-                </Link>.
-            </p>
-        </div>
+                    <a className={`${classes.footerWrapper}__logo`} target="_blank">
+                        <img className={`${classes.footerWrapper}__logo-img`} alt={company.name} src={company.logo}/>
+                    </a>
+                </Link>
+
+                <p className={`${classes.footerWrapper}__description`}>
+                    &copy; {footerText}&nbsp;
+                    <Link href={company.url}>
+                        <a className={`${classes.footerWrapper}__link`} target="_blank">{company.name}</a>
+                    </Link>.
+                </p>
+            </div>
+        </>
     );
 }
 
