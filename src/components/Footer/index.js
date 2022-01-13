@@ -13,8 +13,6 @@ const Footer = () => {
     const {footerText, company} = footerData;
 
     return (
-        <>
-            <Divider className={`${classes.footerWrapper}__divider`}/>
             <div className={classes.footerWrapper}>
                 <Link href={company.url}>
                     <a className={`${classes.footerWrapper}__logo`} target="_blank">
@@ -29,7 +27,6 @@ const Footer = () => {
                     </Link>.
                 </p>
             </div>
-        </>
     );
 }
 

@@ -43,7 +43,7 @@ export const useStyles = makeStyles({
             height: 60,
             marginRight: 25,
             '&--icon': {
-                color: COLORS.white_2,
+                color: theme.palette.customColor.main,
             },
             '&--img': {
                 maxHeight: 34,
