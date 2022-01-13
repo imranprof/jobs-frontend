@@ -22,7 +22,10 @@ const COLORS = {
 
     pink: "#FF014F",
     pink_1: "linear-gradient(145deg, #ff014f, #d11414)",
-    yellow: "#FFAB1A"
+    yellow: "#FFAB1A",
+
+    boxShadow_1: "rgb(28 30 34) 10px 10px 19px, rgb(38 42 46) -10px -10px 19px",
+    boxShadow_2: "rgb(207 207 207) 10px 10px 19px, rgb(173 179 185) -10px -10px 19px",
 }
 
 export default COLORS

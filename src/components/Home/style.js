@@ -27,10 +27,30 @@ export const useStyles = makeStyles({
                 },
                 '&__social-links': {
                     display: "flex",
-                    '& a':{
+                    '& a': {
                         textDecoration: "none",
                     }
                 }
+            }
+        },
+        '&__thumbnail': {
+            position: "relative",
+            zIndex: 2,
+            '&--img': {
+              width: "100%"
+            },
+            '&::before': {
+                content: '""',
+                position: "absolute",
+                zIndex: -1,
+                width: "100%",
+                height: "calc(100% - 130px)",
+                left: "50%",
+                bottom: 0,
+                transform: "translateX(-50%)",
+                background: theme.palette.customBackground.gradiant.light,
+                boxShadow: theme.palette.customShadow.main,
+                borderRadius: 6
             }
         },
         '&__paper': {

@@ -44,7 +44,9 @@ const Home = () => {
 
                 </Grid>
                 <Grid item xs={12} sm={12} md={5}>
-                    <img src={profileData.avatar} alt={profileData.name} style={{width: '100%'}}/>
+                    <div className={`${classes.homeWrapper}__thumbnail`}>
+                        <img src={profileData.avatar} alt={profileData.name} className={`${classes.homeWrapper}__thumbnail--img`} />
+                    </div>
                 </Grid>
             </Grid>
         </div>

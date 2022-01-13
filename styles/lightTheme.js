@@ -23,6 +23,9 @@ const lightTheme = createTheme({
             dark: COLORS.black,
             highContrast: COLORS.pink
         },
+        customShadow: {
+            main: COLORS.boxShadow_2,
+        },
         customDivider: {
             main: COLORS.gray_5
         }
