@@ -15,13 +15,12 @@ const Home = () => {
     const expertises = profileData.expertises.map(expertise => expertise + '. ');
 
     return (
-        <div className={classes.homeWrapper}>
-            <Grid container>
-                <Grid item xs={12} sm={12} md={7} className={`${classes.homeWrapper}__left`}>
+            <Grid container className={classes.homeWrapper}>
+                <Grid item xs={12} md={7} className={`${classes.homeWrapper}__left`} >
                     <div className={`${classes.homeWrapper}__left-top`}>
-                        <span className={`${classes.homeWrapper}__headline`}>{profileData.headline}</span>
+                        <span className={`${classes.homeWrapper}__left-top__headline`}>{profileData.headline}</span>
                         <TypeWriter expertises={expertises} classes={classes}/>
-                        <p className={`${classes.homeWrapper}__bio`}>{profileData.bio}</p>
+                        <p className={`${classes.homeWrapper}__left-top__bio`}>{profileData.bio}</p>
                     </div>
                     <div className={`${classes.homeWrapper}__left-bottom`}>
                         <div>
@@ -33,7 +32,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div>
-                            <span className={`${classes.homeWrapper}__left-bottom__title`}>Best skill on</span>
+                            <span className={`${classes.homeWrapper}__left-bottom__title`}>best skill on</span>
                             <div className={`${classes.homeWrapper}__left-bottom__social-links`}>
                                 {profileData.skills.map(skill =>
                                     <SKill skill={skill} key={skill.id} classes={classes}/>
@@ -42,14 +41,13 @@ const Home = () => {
                         </div>
                     </div>
 
-                </Grid>
-                <Grid item xs={12} sm={12} md={5}>
+                </Grid >
+                <Grid item xs={12} md={5}>
                     <div className={`${classes.homeWrapper}__thumbnail`}>
                         <img src={profileData.avatar} alt={profileData.name} className={`${classes.homeWrapper}__thumbnail--img`} />
                     </div>
                 </Grid>
             </Grid>
-        </div>
     );
 };
 

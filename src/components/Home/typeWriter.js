@@ -7,9 +7,9 @@ import {profileData} from "../../../API/mock/profileData";
 const TypeWriter = ({expertises, classes}) => {
 
     return (
-        <h1 className={`${classes.homeWrapper}__title`}>
-            Hi, I'm <span className={`${classes.homeWrapper}__name`}>{profileData.name}</span><br/>
-            <span className={`${classes.homeWrapper}__expertise`}>
+        <h1 className={`${classes.homeWrapper}__left-top__title`}>
+            Hi, I'm <span className={`${classes.homeWrapper}__left-top__title__name`}>{profileData.name}</span><br/>
+            <span className={`${classes.homeWrapper}__left-top__title__expertise`}>
                 <span>a&nbsp;</span>
                     <Typewriter
                         options={{
@@ -22,7 +22,7 @@ const TypeWriter = ({expertises, classes}) => {
                             cursor: ""
                         }}
                     />
-                <span className={`${classes.homeWrapper}__cursor`}/>
+                <span className={`${classes.homeWrapper}__left-top__title__cursor`}/>
             </span>
         </h1>
     );
