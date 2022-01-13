@@ -98,6 +98,10 @@ export const useStyles = makeStyles({
                     display: "flex",
                     '& a': {
                         textDecoration: "none",
+                        transition: "transform .4s ease",
+                        '&:hover': {
+                            transform: "translateY(-3px)",
+                        },
                     },
                     '&__paper': {
                         display: "flex",
@@ -105,6 +109,7 @@ export const useStyles = makeStyles({
                         textAlign: "center",
                         alignItems: "center",
                         background: theme.palette.customBackground.gradiant.light,
+                        boxShadow: theme.palette.customShadow.main,
                         width: 60,
                         height: 60,
                         marginRight: 25,
