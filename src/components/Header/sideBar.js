@@ -9,6 +9,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
 import {profileData} from "../../../API/mock/profileData";
+import SocialLinks from "../common/socialLinks/socialLinks";
 
 const SideBar = ({classes}) => {
     const [open, setOpen] = useState(false);
@@ -24,8 +25,11 @@ const SideBar = ({classes}) => {
                 </IconButton>
             </Hidden>
 
-            <SwipeableDrawer open={open} anchor="left"
-                             onOpen={() => setOpen(true)} onClose={() => setOpen(false)}>
+            <SwipeableDrawer
+                open={open} anchor="left"
+                onOpen={() => setOpen(true)}
+                onClose={() => setOpen(false)}
+            >
                 <div className={`${classes.headerWrapper}__side-bar`}>
                     <div className={`${classes.headerWrapper}__side-bar__icons`}>
                         <ProfileInfo classes={classes} showName={false}/>
@@ -45,7 +49,9 @@ const SideBar = ({classes}) => {
                     <div className={`${classes.headerWrapper}__side-bar__links`}>
                         <NavItems classes={classes} variant={"drawer"}/>
                     </div>
-                    <Divider/>
+                    <Divider style={{marginBottom: "30px"}}/>
+
+                    <SocialLinks/>
                 </div>
             </SwipeableDrawer>
         </>
