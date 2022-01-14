@@ -12,7 +12,7 @@ import {HomeStyle} from "./style";
 const Home = () => {
     const customTheme = useContext(ThemeContextProvider);
     const classes = HomeStyle(customTheme);
-    const expertises = profileData.expertises.map(expertise => expertise + '. ');
+    const expertises = profileData.expertises.map(expertise => `${expertise}.`);
 
     return (
             <Grid container className={classes.homeWrapper}>

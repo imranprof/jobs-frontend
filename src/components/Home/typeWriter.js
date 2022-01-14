@@ -5,7 +5,6 @@ import Typewriter from 'typewriter-effect';
 import {profileData} from "../../../API/mock/profileData";
 
 const TypeWriter = ({expertises, classes}) => {
-
     return (
         <h1 className={`${classes.homeWrapper}__left-top__title`}>
             Hi, I'm <span className={`${classes.homeWrapper}__left-top__title__name`}>{profileData.name}</span><br/>
