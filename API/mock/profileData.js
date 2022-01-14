@@ -11,9 +11,9 @@ export const profileData = {
         {id: 3, iconName: "linkedin", url: "https://www.linkedin.com/"},
     ],
     "skills": [
-        {id: 1, image: "ruby.png"},
-        {id: 2, image: "javascript.png"},
-        {id: 3, image: "python.png"},
+        {id: 1, image: "ruby.png", alt: "ruby"},
+        {id: 2, image: "javascript.png", alt: "javascript"},
+        {id: 3, image: "python.png", alt: "python"},
     ]
 }
 

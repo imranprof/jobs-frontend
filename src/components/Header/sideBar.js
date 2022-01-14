@@ -20,7 +20,8 @@ const SideBar = ({classes}) => {
                     className={`${classes.headerWrapper}__menu`}
                     onClick={() => setOpen(true)}
                     role="button"
-                    tabIndex={0}>
+                    tabIndex={0}
+                    aria-label="opens the sidebar for small devices">
                     <MenuIcon className={`${classes.headerWrapper}__menu__icon`}/>
                 </IconButton>
             </Hidden>

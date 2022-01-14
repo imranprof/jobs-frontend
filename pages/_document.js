@@ -7,11 +7,8 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <meta name="theme-color"/>
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                    />
+                    <meta name="description" content="Seek Right Jobs For you"/>
+                    <title>Seek Right Jobs For you</title>
                 </Head>
                 <body>
                 <Main/>

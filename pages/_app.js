@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import ThemeContext from "../src/contexts/themeContext";
 
-import {Switch} from "@material-ui/core";
+import {FormControlLabel, Switch} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -25,7 +25,10 @@ const MyApp = ({Component, pageProps}) => {
                 <Layout>
                     <CssBaseline/>
                     <Component {...pageProps} />
-                    <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>
+                    <FormControlLabel
+                        control={<Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>}
+                        label="Theme Switch"
+                    />
                 </Layout>
             </ThemeProvider>
         </ThemeContext.Provider>
