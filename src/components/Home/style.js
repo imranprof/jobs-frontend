@@ -86,6 +86,9 @@ export const useStyles = makeStyles({
                 justifyContent: "space-between",
                 width: "90%",
                 // ========= Breakpoints =========
+                [theme.breakpoints.down('sm')]: {
+                    width: "100%",
+                },
                 [theme.breakpoints.down('xs')]: {
                     width: "90%",
                     flexDirection: "column",
