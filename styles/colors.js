@@ -26,6 +26,8 @@ const COLORS = {
 
     boxShadow_1: "rgb(28 30 34) 10px 10px 19px, rgb(38 42 46) -10px -10px 19px",
     boxShadow_2: "rgb(207 207 207) 10px 10px 19px, rgb(173 179 185) -10px -10px 19px",
+    boxShadow_4: "rgb(33 36 40) 10px 10px 19px, rgb(33 36 40) -10px -10px 19px;",
+    boxShadow_5: "rgb(238 241 243) 10px 10px 19px, rgb(238 241 243) -10px -10px 19px;",
 }
 
 export default COLORS
