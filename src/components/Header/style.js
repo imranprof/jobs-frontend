@@ -4,9 +4,19 @@ import FONTS from "../../../styles/fonts";
 export const useStyles = makeStyles({
     headerWrapper: theme => ({
         backgroundColor: "transparent",
-        padding: '26px 40px 0 40px',
+        padding: "28px 50px",
         marginBottom: 50,
-        boxShadow: '0px 0px 0px',
+        boxShadow: theme.palette.customShadow.light,
+        position: "static",
+        '&.isSticky': {
+            position: "fixed",
+            width: "100%",
+            backgroundColor: `${theme.palette.customBackground.light}de`,
+            boxShadow: theme.palette.customShadow.main,
+            backdropFilter: "blur(15px)",
+            transition: "ease 0.3s, fadein .3s",
+            padding: '14px 25px'
+        },
         '&__toolbar': {
             width: '100%',
             justifyContent: 'space-between'
@@ -17,49 +27,56 @@ export const useStyles = makeStyles({
             cursor: 'pointer',
             '&__pic': {
                 backgroundColor: theme.palette.customColor.main,
-                width: 70,
-                height: 70,
+                width: 65,
+                height: 65,
                 borderRadius: '50%',
                 border: `3px solid ${theme.palette.customColor.dark}`,
                 marginRight: 10,
-                '& img':{
+                '& img': {
                     objectFit: "contain",
                 }
             },
             '&__name': {
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: '600',
                 textTransform: 'uppercase',
-                letterSpacing: 2,
                 color: theme.palette.customColor.main,
                 fontFamily: FONTS.primaryFont,
                 '&--drawer': {
                     color: theme.palette.customColor.dark,
                     width: 285,
-                    fontSize: 16,
+                    fontSize: 17,
                     margin: '20px 0',
                     lineHeight: '32px'
                 }
             },
             // ========= Breakpoints =========
-            [theme.breakpoints.down('sm')]: {
+            [theme.breakpoints.down('md')]: {
                 '&__pic': {
-                    width: 50,
-                    height: 50,
-                    border: `2px solid ${theme.palette.customColor.dark}`,
+                    width: 60,
+                    height: 60,
                 },
                 '&__name': {
-                    fontSize: 16,
+                    fontSize: 17,
+                }
+            },
+            [theme.breakpoints.down('sm')]: {
+                '&__pic': {
+                    width: 55,
+                    height: 55,
+                },
+                '&__name': {
+                    fontSize: 15,
                 }
             },
             [theme.breakpoints.down('xs')]: {
                 '&__pic': {
-                    width: 40,
-                    height: 40,
+                    width: 50.,
+                    height: 50,
                     border: `2px solid ${theme.palette.customColor.dark}`,
                 },
                 '&__name': {
-                    fontSize: 13,
+                    fontSize: 14,
                 }
             }
         },
@@ -71,7 +88,7 @@ export const useStyles = makeStyles({
                 color: theme.palette.customColor.main,
                 textDecoration: 'none',
                 textTransform: 'uppercase',
-                opacity: .7,
+                opacity: .8,
                 transition: "all .4s ease 0s",
                 '&:hover': {
                     opacity: 1,
@@ -80,7 +97,7 @@ export const useStyles = makeStyles({
             },
             '&--default': {
                 display: 'inline',
-                padding: '0 24px',
+                padding: '0 15px',
             },
             '&--drawer': {
                 width: "auto",
@@ -96,6 +113,7 @@ export const useStyles = makeStyles({
         '&__side-bar': {
             background: theme.palette.customBackground.sideBar,
             padding: '25px 25px 50px 25px',
+            height: "100vh",
             '&__icons': {
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -113,6 +131,7 @@ export const useStyles = makeStyles({
         },
         '&__menu': {
             color: theme.palette.customColor.highContrast,
+            padding: 0,
             '&__icon': {
                 fontSize: 40
             },
@@ -124,7 +143,7 @@ export const useStyles = makeStyles({
             },
             [theme.breakpoints.down('xs')]: {
                 '&__icon': {
-                    fontSize: 30
+                    fontSize: 32
                 },
             }
         },
@@ -134,11 +153,20 @@ export const useStyles = makeStyles({
             height: 45,
         },
         // ========= Breakpoints =========
-        [theme.breakpoints.down('xs')]: {
-            padding: '20px 25px 0 25px',
+        [theme.breakpoints.between('xs',"sm")]: {
+            padding: "15px 25px",
+            '&.isSticky': {
+                padding: '10px 18px',
+            },
             '&__toolbar': {
                 padding: 0
-            }
+            },
+        },
+        [theme.breakpoints.between('sm',"md") ]: {
+            padding: "20px 40px",
+            '&.isSticky': {
+                padding: '12px 32px',
+            },
         }
     }),
 });

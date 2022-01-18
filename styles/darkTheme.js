@@ -8,6 +8,7 @@ const darkTheme = createTheme({
             default: COLORS.black_1
         },
         customBackground: {
+            main: COLORS.white,
             light: COLORS.black_1,
             dark: COLORS.black_2,
             gradiant: {
@@ -25,6 +26,7 @@ const darkTheme = createTheme({
         },
         customShadow: {
             main: COLORS.boxShadow_1,
+            light: COLORS.boxShadow_4,
             default: COLORS.boxShadow_3
         },
         customDivider: {

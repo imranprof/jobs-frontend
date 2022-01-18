@@ -1,5 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
-import COLORS from "../../../styles/colors";
+import FONTS from "../../../styles/fonts";
 
 export const useStyles = makeStyles({
     footerWrapper: theme => ({
@@ -15,7 +15,7 @@ export const useStyles = makeStyles({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            background: COLORS.white,
+            background: theme.palette.customBackground.main,
             borderRadius: "50%",
             marginTop: 20,
         },
@@ -26,7 +26,7 @@ export const useStyles = makeStyles({
         '&__description': {
             fontSize: 17,
             color: theme.palette.customColor.main,
-            fontFamily: "Poppins, sans-serif"
+            fontFamily: FONTS.secondaryFont,
         },
         '&__link': {
             textDecoration: "none",
@@ -37,9 +37,9 @@ export const useStyles = makeStyles({
             backgroundPosition: "0 100%",
             backgroundSize: "0% 1px",
             backgroundRepeat: "no-repeat",
-            transition: "background-size 0.4s, background-position 0s 0.4s, color 0.4s, ease 0s",
+            transition: "background-size 0.4s, background-position 0.4s, color 0.4s, ease 0s",
             '&:hover': {
-                color: COLORS.pink,
+                color: theme.palette.customColor.highContrast,
                 backgroundPosition: "0 100%",
                 backgroundSize: "100% 1px"
             }
