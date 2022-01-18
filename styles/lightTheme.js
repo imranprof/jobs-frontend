@@ -8,6 +8,7 @@ const lightTheme = createTheme({
             default: COLORS.white_1
         },
         customBackground: {
+            main: COLORS.white,
             light: COLORS.white_1,
             dark: COLORS.white_2,
             gradiant: {

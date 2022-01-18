@@ -14,7 +14,7 @@ export const useStyles = makeStyles({
             backgroundColor: `${theme.palette.customBackground.light}de`,
             boxShadow: theme.palette.customShadow.main,
             backdropFilter: "blur(15px)",
-            transition: "ease 0.3s",
+            transition: "ease 0.3s, fadein .3s",
             padding: '14px 25px'
         },
         '&__toolbar': {

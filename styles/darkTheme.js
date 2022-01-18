@@ -8,6 +8,7 @@ const darkTheme = createTheme({
             default: COLORS.black_1
         },
         customBackground: {
+            main: COLORS.white,
             light: COLORS.black_1,
             dark: COLORS.black_2,
             gradiant: {

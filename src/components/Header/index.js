@@ -22,7 +22,7 @@ const Header = () => {
     const isSticky = () => {
         const header = headerRef.current;
         const scrollTop = window.scrollY;
-        scrollTop >= 50 ? header.classList.add("isSticky") : header.classList.remove("isSticky");
+        scrollTop >= 80 ? header.classList.add("isSticky") : header.classList.remove("isSticky");
     };
 
     return (
