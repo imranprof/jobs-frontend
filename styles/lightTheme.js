@@ -25,6 +25,7 @@ const lightTheme = createTheme({
         },
         customShadow: {
             main: COLORS.boxShadow_2,
+            default: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.gray_5
