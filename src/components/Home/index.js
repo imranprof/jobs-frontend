@@ -5,8 +5,8 @@ import {Grid} from "@material-ui/core";
 import ThemeContextProvider from "../../contexts/themeContext";
 import {profileData} from "../../../API/mock/profileData";
 import TypeWriter from "./typeWriter";
-import SocialLinks from "../common/socialLinks/socialLinks";
-import Skills from "../common/skills/skills";
+import SocialLinks from "../common/socialLinks";
+import Skills from "../common/skills";
 import {HomeStyle} from "./style";
 
 const Home = () => {

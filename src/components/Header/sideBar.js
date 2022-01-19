@@ -9,7 +9,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
 import {profileData} from "../../../API/mock/profileData";
-import SocialLinks from "../common/socialLinks/socialLinks";
+import SocialLinks from "../common/socialLinks";
 
 const SideBar = ({classes}) => {
     const [open, setOpen] = useState(false);
