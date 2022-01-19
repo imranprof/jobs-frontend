@@ -28,10 +28,20 @@ const useStyles = makeStyles({
         },
         '&--center': {
             textAlign: "center"
-        }
+        },
+        [theme.breakpoints.down('xs')]: {
+            '&--left': {
+                textAlign: "center"
+            },
+        },
+        [theme.breakpoints.down('sm')]: {
+            '&__title': {
+                fontSize: 38
+            },
+        },
     })
 });
 
-export function SectionHeaderStyle(theme) {
+export function SectionStyle(theme) {
     return useStyles(theme);
 }

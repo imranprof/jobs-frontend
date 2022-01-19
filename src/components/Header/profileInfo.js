@@ -1,18 +1,17 @@
 import {Avatar} from "@material-ui/core";
-import {profileData} from "../../../API/mock/profileData";
 
-const ProfileInfo = ({classes, showName}) => {
+const ProfileInfo = ({ name, avatar, showName, classes}) => {
     return (
         <div className={`${classes.headerWrapper}__profile`}>
             <Avatar
-                alt={profileData.name}
-                src={profileData.avatar}
+                alt={name}
+                src={avatar}
                 className={`${classes.headerWrapper}__profile__pic`}
             />
 
             { showName &&
                 <span className={`${classes.headerWrapper}__profile__name`}>
-                 {profileData.name}
+                 {name}
                 </span>
             }
         </div>

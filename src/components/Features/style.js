@@ -13,6 +13,15 @@ const useStyles = makeStyles({
                 textDecoration: "none",
                 marginBottom: 50
             },
+            [theme.breakpoints.down('xs')]: {
+                height: 270,
+                justifyContent: "center",
+                marginBottom: 20,
+                '& a': {
+                    height: 260,
+                    marginBottom: 0
+                }
+            },
         },
         '&__feature': {
             position: "relative",
@@ -40,32 +49,57 @@ const useStyles = makeStyles({
                     letterSpacing: 1,
                     textTransform: "capitalize",
                     marginTop: 0,
+                    transition: "color 0.4s ease 0s",
                 },
                 '&__description': {
                     color: theme.palette.customColor.main,
                     fontSize: 16,
                     fontFamily: FONTS.secondaryFont,
                     lineHeight: "28px",
-                    marginBottom: 22
+                    marginBottom: 22,
+                    transition: "color 0.4s ease 0s",
                 },
                 '&__read-more-btn': {
                     height: 0,
                     opacity: 0,
-                    // visibility: "hidden",
                     color: theme.palette.customColor.highContrast,
                     transition: "all 0.4s ease 0s",
                 },
                 '&:hover > &__read-more-btn': {
-                    height: 100,
+                    height: 50,
                     opacity: 1,
-                }
+                },
+                '&:hover > &__title, &:hover > &__description': {
+                    color: theme.palette.customColor.light
+                },
+                [theme.breakpoints.down('xs')]: {
+                    '&__title': {
+                        fontSize: 18,
+                        marginBottom: 15,
+                    },
+                    '&__description': {
+                        fontSize: 14,
+                        lineHeight: "20px",
+                        marginBottom: 15
+                    },
+                },
             },
             '&-wrapper': {
-                    transition: "transform 0.4s",
+                transition: "all 0.4s ease 0s",
                 '&:hover': {
-                    transform: "translateY(-20px)"
+                    transform: "translateY(-10px)"
                 }
-            }
+            },
+            [theme.breakpoints.down('xs')]: {
+                display: "flex",
+                alignItems: "center",
+                height: "100%",
+                padding: "30px 30px 0 30px",
+                '&__icon': {
+                    fontSize: 30,
+                    marginBottom: 20,
+                },
+            },
         },
     })
 });
