@@ -7,6 +7,7 @@ import ProfileInfo from "./profileInfo";
 import SideBar from "./sideBar";
 import NavItems from "./navItems";
 import {HeaderStyle} from './style';
+
 const Header = () => {
     const customTheme = useContext(ThemeContextProvider);
     const classes = HeaderStyle(customTheme);

@@ -1,14 +1,13 @@
 import Home from '../src/components/Home'
 import CustomDivider from "../src/components/CustomMui/Divider/divider";
-import Features from "../src/components/Features";
+import Sections from "../src/components/common/sections";
 
 const Root = () => {
     return (
         <>
             <Home/>
             <CustomDivider/>
-            <Features />
-            <CustomDivider/>
+            <Sections/>
         </>
     );
 }
