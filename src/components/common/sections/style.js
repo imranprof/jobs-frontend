@@ -42,6 +42,6 @@ const useStyles = makeStyles({
     })
 });
 
-export function SectionHeaderStyle(theme) {
+export function SectionStyle(theme) {
     return useStyles(theme);
 }

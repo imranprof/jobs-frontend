@@ -1,4 +1,5 @@
 import Features from "../../src/components/Features";
+import Portfolio from "../../src/components/Portfolio";
 
 export const SectionsData = () => [
     {
@@ -13,7 +14,7 @@ export const SectionsData = () => [
         title: "My Portfolio",
         subtitle: "Visit my portfolio and keep your feedback",
         align: "center",
-        component: ""
+        component: <Portfolio />
     },
     {
         id: 3,

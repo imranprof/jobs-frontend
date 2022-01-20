@@ -3,13 +3,13 @@ import Section from "./section";
 
 const Sections = () => {
     const sections = SectionsData();
-    return (
-        <div>
-            {sections.map(section =>
-                <Section section={section} key={section.id}></Section>
-            )}
-        </div>
 
+    return (
+        <>
+            {sections.map(section =>
+                <Section section={section} key={section.id}/>
+            )}
+        </>
     );
 }
 
