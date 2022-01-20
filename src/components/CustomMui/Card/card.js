@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import {Card, CardContent, CardMedia} from "@material-ui/core";
-
-import {CardStyle} from "./style";
-import ThemeContextProvider from "../../../contexts/themeContext";
 import Icon from "@material-ui/core/Icon";
+
+import ThemeContextProvider from "../../../contexts/themeContext";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
+import {CardStyle} from "./style";
 
 const CustomCard = ({portfolio}) => {
     const customTheme = useContext(ThemeContextProvider);
@@ -28,7 +28,12 @@ const CustomCard = ({portfolio}) => {
                         {reactCount}
                     </div>
                 </div>
-                <h4 className={`${classes.cardWrapper}__category-info`}>{title}</h4>
+                <h4 className={`${classes.cardWrapper}__title`}>
+                    <a href="#" className={`${classes.cardWrapper}__title__link`}>
+                        {title}
+                        <Icon className={`${classes.cardWrapper}__title__link__arrow ${FontAwesomeIcons.arrow}`} />
+                    </a>
+                </h4>
             </CardContent>
         </Card>
     );

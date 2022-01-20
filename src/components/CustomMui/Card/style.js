@@ -52,8 +52,38 @@ const useStyles = makeStyles({
                 '&:hover': {
                     color: theme.palette.customColor.highContrast
                 }
-            }
-        }
+            },
+        },
+        '&__title': {
+            fontFamily: FONTS.primaryFont,
+            margin: 0,
+            '&__link': {
+                display: "inline-block",
+                color: theme.palette.customColor.main,
+                fontSize: 23,
+                fontWeight: 600,
+                textDecoration: "none",
+                lineHeight: "34px",
+                transition: "all 0.4s ease",
+                '&__arrow': {
+                    color: theme.palette.customColor.highContrast,
+                    top: 3,
+                    marginLeft: 6,
+                    transform: "rotate(-45deg)",
+                    transition: "all 0.4s ease",
+                    opacity: 0,
+                    fontSize: 0
+                },
+                '&:hover': {
+                    color: theme.palette.customColor.highContrast,
+                },
+                '&:hover > &__arrow': {
+                    opacity: 1,
+                    fontSize: 20
+                }
+            },
+
+        },
     })
 });
 
