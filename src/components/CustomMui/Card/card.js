@@ -13,11 +13,13 @@ const CustomCard = ({portfolio}) => {
 
     return (
         <Card xs={12} sm={6} md={4} className={classes.cardWrapper}>
-            <CardMedia
-                className={`${classes.cardWrapper}__image`}
-                image={image}
-                title={title}
-            />
+            <div className={`${classes.cardWrapper}__image-wrapper`}>
+                <CardMedia
+                    className={`${classes.cardWrapper}__image`}
+                    image={image}
+                    title={title}
+                />
+            </div>
             <CardContent className={`${classes.cardWrapper}__content`}>
                 <div className={`${classes.cardWrapper}__category-info`}>
                     <div className={`${classes.cardWrapper}__category-info__category`}>

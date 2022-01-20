@@ -3,19 +3,38 @@ import FONTS from "../../../../styles/fonts";
 
 const useStyles = makeStyles({
     cardWrapper: theme => ({
+        position: "relative",
         background: theme.palette.customBackground.gradiant.light,
         maxWidth: 400,
         height: "100%",
         borderRadius: 20,
         boxShadow: theme.palette.customShadow.default,
         padding: 30,
-        marginTop: 40,
+        marginTop: 30,
+        zIndex: 1,
+        '&::before': {
+            position: "absolute",
+            content: '""',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            zIndex: -1,
+            transition: "opacity 0.5s ease-in-out",
+            opacity: 0,
+            background: theme.palette.customBackground.gradiant.dark,
+        },
+        '&__image-wrapper': {
+            maxWidth: 340,
+            borderRadius: 10,
+            overflow: "hidden"
+        },
         '&__image': {
-            width: 340,
+            width: "100%",
             height: 260,
             borderRadius: 10,
             objectFit: "cover",
-            zIndex: -1
+            transition: "all 0.4s ease",
         },
         '&__content': {
             padding: "18px 0 0 0 !important", // Override MUI CardContent component
@@ -84,6 +103,13 @@ const useStyles = makeStyles({
             },
 
         },
+        '&:hover::before': {
+            // background: theme.palette.customBackground.gradiant.dark,
+            opacity: 1
+        },
+        '&:hover &__image': {
+            transform: "scale(1.1)"
+        }
     })
 });
 
