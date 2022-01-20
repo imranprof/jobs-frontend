@@ -19,7 +19,7 @@ const useStyles = makeStyles({
             fontSize: 60,
             fontFamily: FONTS.primaryFont,
             fontWeight: 700,
-            lineHeight: 1.2,
+            lineHeight: "50px",
             textTransform: "capitalize",
             marginTop: 15,
         },

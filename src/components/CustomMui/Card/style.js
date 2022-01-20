@@ -25,15 +25,15 @@ const useStyles = makeStyles({
             background: theme.palette.customBackground.gradiant.dark,
         },
         '&__image-wrapper': {
-            maxWidth: 340,
+            width: 340,
+            height: 260,
             borderRadius: 10,
             overflow: "hidden"
         },
         '&__image': {
             width: "100%",
-            height: 260,
+            height: "100%",
             borderRadius: 10,
-            objectFit: "cover",
             transition: "all 0.4s ease",
         },
         '&__content': {
@@ -101,7 +101,12 @@ const useStyles = makeStyles({
                     fontSize: 20
                 }
             },
-
+            [theme.breakpoints.down('xs')]: {
+                '&__link': {
+                    fontSize: 18,
+                    lineHeight: "28px",
+                }
+            },
         },
         '&:hover::before': {
             // background: theme.palette.customBackground.gradiant.dark,
@@ -109,7 +114,15 @@ const useStyles = makeStyles({
         },
         '&:hover &__image': {
             transform: "scale(1.1)"
-        }
+        },
+        [theme.breakpoints.down('xs')]: {
+            maxWidth: 320,
+            padding: 20,
+            '&__image-wrapper': {
+                width: 280,
+                height: 200,
+            }
+        },
     })
 });
 
