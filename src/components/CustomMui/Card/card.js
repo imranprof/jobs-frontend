@@ -38,14 +38,14 @@ const CustomCard = ({element, elementType}) => {
                         {elementData}
                     </div>
                 </div>
-                <h4 className={`${classes.cardWrapper}__title`}>
+                <h1 className={`${classes.cardWrapper}__title`}>
                     <Link href="/" >
                         <a className={`${classes.cardWrapper}__title__link`}>
                             {element.title}
                             <Icon className={`${classes.cardWrapper}__title__link__arrow ${FontAwesomeIcons.arrow}`}/>
                         </a>
                     </Link>
-                </h4>
+                </h1>
             </CardContent>
         </Card>
     );

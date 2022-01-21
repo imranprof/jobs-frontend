@@ -13,7 +13,7 @@ const Feature = ({feature, classes}) => {
                         <Icon
                             className={`${classes.featureWrapper}__feature__icon ${FontAwesomeIcons[feature.iconName]}`}/>
                         <div className={`${classes.featureWrapper}__feature__content`}>
-                            <h4 className={`${classes.featureWrapper}__feature__content__title`}>{feature.title}</h4>
+                            <h1 className={`${classes.featureWrapper}__feature__content__title`}>{feature.title}</h1>
                             <p className={`${classes.featureWrapper}__feature__content__description`}>{feature.description}</p>
                             <Icon
                                 className={`${classes.featureWrapper}__feature__content__read-more-btn ${FontAwesomeIcons.arrow}`}/>
