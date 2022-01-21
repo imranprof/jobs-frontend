@@ -12,9 +12,9 @@ const Portfolio = () => {
     const classes = PortfolioStyle(customTheme);
 
     return (
-        <Grid container spacing={5} className={classes.portfolioWrapper}>
+        <Grid container spacing={4} className={classes.portfolioWrapper}>
             {PortfolioData.map(portfolio => (
-                <CustomCard key={portfolio.id} portfolio={portfolio} />
+                <CustomCard key={portfolio.id} element={portfolio} elementType="portfolio"/>
             ))}
         </Grid>
     );

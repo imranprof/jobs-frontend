@@ -1,5 +1,6 @@
 import Features from "../../src/components/Features";
 import Portfolio from "../../src/components/Portfolio";
+import Blogs from "../../src/components/Blogs";
 
 export const SectionsData = () => [
     {
@@ -28,7 +29,7 @@ export const SectionsData = () => [
         title: "My Blog",
         subtitle: "Visit my blog and keep your feedback",
         align: "center",
-        component: ""
+        component: <Blogs />
     },
     {
         id: 5,

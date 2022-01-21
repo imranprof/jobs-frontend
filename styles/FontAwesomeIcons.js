@@ -9,7 +9,8 @@ const FontAwesomeIcons = {
     "cogs": "fas fa-cogs",
     "slack": "fab fa-slack",
     "arrow": "fas fa-arrow-right",
-    "heart": "far fa-heart"
+    "heart": "far fa-heart",
+    "clock": "far fa-clock",
 }
 
 export default FontAwesomeIcons

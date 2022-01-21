@@ -53,7 +53,7 @@ const useStyles = makeStyles({
                     fontFamily: FONTS.secondaryFont
                 }
             },
-            '&__react-count': {
+            '&__icon-wrapper': {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
