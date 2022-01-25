@@ -1,5 +1,12 @@
-import Button from "@material-ui/core/Button";
+import Home from '../src/components/Home'
+import CustomDivider from "../src/components/CustomMui/Divider/divider";
 
-export default function Root(props) {
-  return <div> Welcome to the root page </div>;
+const Root = () => {
+    return (
+        <>
+            <Home/>
+            <CustomDivider/>
+        </>
+    );
 }
+export default Root
