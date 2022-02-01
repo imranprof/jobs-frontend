@@ -7,5 +7,4 @@ export const footerData = {
         "url": "https://rightcodes.org",
         "logo": "rc.png"
     }
-
 }

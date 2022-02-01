@@ -8,10 +8,9 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
-import {profileData} from "../../../API/mock/profileData";
-import SocialLinks from "../common/socialLinks/socialLinks";
+import SocialLinks from "../common/socialLinks";
 
-const SideBar = ({classes}) => {
+const SideBar = ({name, avatar,classes}) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -33,7 +32,7 @@ const SideBar = ({classes}) => {
             >
                 <div className={`${classes.headerWrapper}__side-bar`}>
                     <div className={`${classes.headerWrapper}__side-bar__icons`}>
-                        <ProfileInfo classes={classes} showName={false}/>
+                        <ProfileInfo name={name} avatar={avatar} showName={false} classes={classes}/>
                         <IconButton
                             className={`${classes.headerWrapper}__close-icon`}
                             onClick={() => setOpen(false)}
@@ -43,7 +42,7 @@ const SideBar = ({classes}) => {
                     </div>
 
                     <p className={`${classes.headerWrapper}__profile__name ${classes.headerWrapper}__profile__name--drawer`}>
-                        {profileData.name}
+                        {name}
                     </p>
 
                     <Divider/>

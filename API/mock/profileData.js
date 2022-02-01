@@ -16,4 +16,3 @@ export const profileData = {
         {id: 3, image: "python.png", alt: "python"},
     ]
 }
-

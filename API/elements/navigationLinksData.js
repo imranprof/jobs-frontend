@@ -1,4 +1,4 @@
-export const navigationLinks = [
+export const NavigationLinksData = [
     {
         "id": 1,
         "name": "Home",
