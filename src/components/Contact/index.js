@@ -14,8 +14,8 @@ const Contact = () => {
 
         return (
             <Grid container spacing={3} className={classes.contactWrapper} >
-                <ContactInfo classes={classes} contactData={ContactData} />
-                <ContactForm />
+                <ContactInfo classes={classes.contactWrapper} contactData={ContactData} />
+                <ContactForm classes={classes.contactWrapper} />
             </Grid>
         );
 }
