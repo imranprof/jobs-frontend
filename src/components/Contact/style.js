@@ -7,16 +7,19 @@ const useStyles = makeStyles({
     marginTop: 20,
     '&__contact-info': {
       background: theme.palette.customBackground.gradiant.light,
-      maxWidth: "100%",
+      width: "100%",
       height: "100%",
       borderRadius: 20,
       boxShadow: theme.palette.customShadow.default,
       padding: 30,
       '&__image-wrapper': {
-        width: 440,
+        width: "100%",
         height: 280,
         borderRadius: 10,
-        overflow: "hidden"
+        overflow: "hidden",
+        [theme.breakpoints.down('xs')]: {
+          height: 200
+        }
       },
       '&__image': {
         width: "100%",
@@ -34,7 +37,7 @@ const useStyles = makeStyles({
           fontFamily: FONTS.primaryFont,
           fontSize: 29,
           lineHeight: "44px",
-          marginBottom: 9
+          marginBottom: 9,
         },
         '&__designation': {
           color: theme.palette.customColor.dark,
@@ -42,6 +45,15 @@ const useStyles = makeStyles({
           fontSize: 18,
           lineHeight: 1.5,
           marginTop: 0
+        },
+        [theme.breakpoints.down('xs')]: {
+          '&__name': {
+            fontSize: 24,
+            lineHeight: "30px"
+          },
+          '&__designation': {
+            fontSize: 16
+          }
         }
       },
       '&__description-area': {
@@ -54,7 +66,11 @@ const useStyles = makeStyles({
         fontFamily: FONTS.secondaryFont,
         lineHeight: "30px",
         display: "inline-block",
-        margin: "0 0 20px 0"
+        margin: "0 0 20px 0",
+        [theme.breakpoints.down('xs')]: {
+          fontSize: 16,
+          lineHeight: "24px"
+        }
       },
       '&__phone, &__email': {
         fontSize: 18,
@@ -78,12 +94,19 @@ const useStyles = makeStyles({
             backgroundPosition: "0 100%",
             backgroundSize: "100% 1px"
           }
+        },
+      },
+      [theme.breakpoints.down('xs')]: {
+        padding: 24,
+        '&__phone, &__email': {
+          fontSize: 16,
+          lineHeight: "26px"
         }
       }
     },
     '&__contact-form': {
       background: theme.palette.customBackground.gradiant.light,
-      maxWidth: "100%",
+      width: "100%",
       height: "100%",
       borderRadius: 20,
       boxShadow: theme.palette.customShadow.default,
@@ -125,6 +148,12 @@ const useStyles = makeStyles({
         '&.message-field': {
           minHeight: 235,
           paddingTop: 15
+        },
+        [theme.breakpoints.down('xs')]: {
+          height: 50,
+          '&.message-field': {
+            minHeight: 180
+          }
         }
       },
       '&__button-wrapper': {
@@ -138,7 +167,14 @@ const useStyles = makeStyles({
       '&__button-link': {
         background: theme.palette.customBackground.gradiant.light,
         textDecoration: "none !important",
-      }
+      },
+      [theme.breakpoints.down('xs')]: {
+        padding: 24
+      },
+      [theme.breakpoints.down('sm')]: {
+        marginLeft: 0,
+        marginTop: 15,
+      },
     },
     '&__send-message-btn': {
       position: "relative",

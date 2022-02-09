@@ -36,18 +36,29 @@ const useStyles = makeStyles({
                 '&--img': {
                     maxHeight: 34,
                 },
-                [theme.breakpoints.down('md')]: {
-                    width: 50,
-                    height: 50,
-                    marginRight: 20,
+                [theme.breakpoints.down('xs')]: {
+                    '&--icon': {
+                        fontSize: 20
+                    },
                 },
                 [theme.breakpoints.down('sm')]: {
                     width: 60,
                     height: 60,
                     marginRight: 25,
-                }
+                },
+                [theme.breakpoints.down('md')]: {
+                    width: 50,
+                    height: 50,
+                    marginRight: 20,
+                },
             },
         },
+        [theme.breakpoints.down('xs')]: {
+            '&__title': {
+                fontSize: 13,
+                marginBottom: 14
+            }
+        }
     })
 });
 

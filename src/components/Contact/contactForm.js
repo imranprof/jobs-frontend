@@ -10,28 +10,28 @@ const ContactForm = ({classes}) => {
       <Card className={`${classes}__contact-form`}>
         <form>
           <Grid container spacing={4}>
-            <Grid item md={6} className={`${classes}__contact-form__input-wrapper`}>
+            <Grid item xs={12} sm={6} className={`${classes}__contact-form__input-wrapper`}>
               <label className={`${classes}__contact-form__label`}>Your Name</label>
               <input className={`${classes}__contact-form__input`}/>
             </Grid>
-            <Grid item md={6} className={`${classes}__contact-form__input-wrapper`}>
+            <Grid item xs={12} sm={6} className={`${classes}__contact-form__input-wrapper`}>
               <label className={`${classes}__contact-form__label`}>Phone Number</label>
               <input className={`${classes}__contact-form__input`}/>
             </Grid>
-            <Grid item md={12} className={`${classes}__contact-form__input-wrapper`}>
+            <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
               <label className={`${classes}__contact-form__label`}>Email</label>
               <input className={`${classes}__contact-form__input`}/>
             </Grid>
-            <Grid item md={12} className={`${classes}__contact-form__input-wrapper`}>
+            <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
               <label className={`${classes}__contact-form__label`}>Subject</label>
               <input className={`${classes}__contact-form__input`}/>
             </Grid>
-            <Grid item md={12} className={`${classes}__contact-form__input-wrapper`}>
+            <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
               <label className={`${classes}__contact-form__label`}>Your Message</label>
               <textarea className={`${classes}__contact-form__input message-field`}/>
             </Grid>
 
-            <Grid item md={12} className={`${classes}__contact-form__button-wrapper`} >
+            <Grid item xs={12} className={`${classes}__contact-form__button-wrapper`} >
               <Link href="#" className={`${classes}__contact-form__button-link`}>
                   <Paper elevation={3} className={`${classes}__send-message-btn`}>
                     <span className={`${classes}__send-message-btn__text`}>Send Message</span>
@@ -39,7 +39,6 @@ const ContactForm = ({classes}) => {
                   </Paper>
               </Link>
             </Grid>
-
           </Grid>
         </form>
       </Card>
