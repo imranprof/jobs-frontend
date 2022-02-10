@@ -164,10 +164,6 @@ const useStyles = makeStyles({
           color: "white !important"
         },
       },
-      '&__button-link': {
-        background: theme.palette.customBackground.gradiant.light,
-        textDecoration: "none !important",
-      },
       [theme.breakpoints.down('xs')]: {
         padding: 24
       },
@@ -188,6 +184,7 @@ const useStyles = makeStyles({
       width: "100%",
       height: 60,
       marginRight: 25,
+      border: "none",
       borderRadius: 6,
       color: theme.palette.customColor.highContrast,
       zIndex: 1,
@@ -204,16 +201,24 @@ const useStyles = makeStyles({
         background: theme.palette.customBackground.gradiant.dark,
       },
       '&:hover::before': {
-        opacity: 1
+        opacity: 1,
+        borderRadius: 6,
+        cursor: "pointer"
       },
       '&__text': {
         fontSize: 14,
         fontWeight: 500,
         fontFamily: FONTS.secondaryFont,
-        marginRight: 10
+        marginRight: 10,
+        '&:hover': {
+          cursor: "pointer"
+        }
       },
       '&__icon': {
-        fontSize: 20
+        fontSize: 20,
+        '&:hover': {
+          cursor: "pointer"
+        }
       }
     }
   })
