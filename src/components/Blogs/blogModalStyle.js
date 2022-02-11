@@ -40,7 +40,6 @@ const useStyles = makeStyles({
             [theme.breakpoints.down(767)]: {
                 padding: 30,
             },
-            // ========= Breakpoints =========
             [theme.breakpoints.down(479)]: {
                 padding: "40px 15px 25px 15px",
             },
@@ -54,6 +53,10 @@ const useStyles = makeStyles({
                 background: theme.palette.customBackground.gradiant.light,
                 color: theme.palette.customColor.dark,
                 transition: ".3s ease",
+                [theme.breakpoints.down(767)]: {
+                    top: 2,
+                    right: 9,
+                },
                 '&:hover': {
                     background: theme.palette.customHoverBackground.main,
                     color: theme.palette.customHoverColor.main,

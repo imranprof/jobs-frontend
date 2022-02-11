@@ -18,14 +18,13 @@ const useStyles = makeStyles({
             zIndex: 99999999,
         },
         '&__dialog': {
-            position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            margin: "1.75rem auto",
+            margin: "28px auto",
             width: "100%",
             maxWidth: 1230,
-            minHeight: "calc(100% - 3.5rem)",
+            minHeight: "calc(100% - 56px)",
         },
         '&__modal-content': {
             position: "relative",
@@ -38,11 +37,25 @@ const useStyles = makeStyles({
             background: theme.palette.customBackground.gradiant.light,
             boxShadow: theme.palette.customShadow.default,
             transition: ".2s linear",
+            // ========= Breakpoints =========
+            [theme.breakpoints.down(767)]: {
+                padding: 30,
+            },
+            [theme.breakpoints.down(479)]: {
+                padding: "40px 15px 25px 15px",
+            },
             '& .MuiGrid-container': {
                 width: "auto",
                 padding: 9,
                 marginLeft: -15,
                 marginRight: -15,
+                // ========= Breakpoints =========
+                [theme.breakpoints.down(767)]: {
+                    paddingTop: 19,
+                },
+                [theme.breakpoints.down(479)]: {
+                    paddingTop: 12,
+                },
             },
             '& .MuiGrid-item': {
                 paddingLeft: 15,
@@ -69,6 +82,10 @@ const useStyles = makeStyles({
                 background: theme.palette.customBackground.gradiant.light,
                 color: theme.palette.customColor.dark,
                 transition: ".3s ease",
+            [theme.breakpoints.down(767)]: {
+                top: 2,
+                right: 9,
+            },
                 '&:hover': {
                     background: theme.palette.customHoverBackground.main,
                     color: theme.palette.customHoverColor.main,
@@ -119,10 +136,7 @@ const useStyles = makeStyles({
                         flexDirection: "column",
                         alignItems: "flex-start",
                         '&__link-button': {
-                            marginTop: 15,
-                            marginRight: 15,
-                            marginBottom: 15,
-                            marginLeft: 0,
+                            margin: "15px 15px 15px 0",
                         }
                     },
                     '&__link-button': {
