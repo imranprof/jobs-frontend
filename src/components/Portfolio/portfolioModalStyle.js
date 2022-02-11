@@ -120,17 +120,25 @@ const useStyles = makeStyles({
                     fontWeight: 700,
                 },
                 '&__description': {
-                    color: theme.palette.customColor.dark,
-                    fontFamily: FONTS.secondaryFont,
-                    fontSize: 18,
-                    fontWeight: 400,
-                    marginTop: 0,
+                    '& p': {
+                        color: theme.palette.customColor.dark,
+                        fontFamily: FONTS.secondaryFont,
+                        fontSize: 18,
+                        fontWeight: 400,
+                        marginTop: 0,
+                        marginRight: 30,
+                        marginBottom: 30,
+                        '&:last-child': {
+                            marginBottom: 0,
+                        }
+                    }
                 },
                 '&__link-button-wrapper': {
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "flex-end",
                     height: "100%",
+                    marginTop: 20,
                     // ========= Breakpoints =========
                     [theme.breakpoints.down(600)]: {
                         flexDirection: "column",
