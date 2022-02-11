@@ -36,7 +36,8 @@ const darkTheme = createTheme({
             main: COLORS.pink
         },
         customHoverBackground: {
-            main: COLORS.black_5
+            main: COLORS.black_5,
+            closeIcon: COLORS.black_4,
         }
     },
 });

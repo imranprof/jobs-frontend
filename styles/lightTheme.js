@@ -36,7 +36,8 @@ const lightTheme = createTheme({
             main: COLORS.white
         },
         customHoverBackground: {
-            main: COLORS.pink_1
+            main: COLORS.pink_1,
+            closeIcon: COLORS.pink_1,
         }
     },
 });

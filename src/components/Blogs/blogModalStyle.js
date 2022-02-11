@@ -58,7 +58,7 @@ const useStyles = makeStyles({
                     right: 9,
                 },
                 '&:hover': {
-                    background: theme.palette.customHoverBackground.main,
+                    background: theme.palette.customHoverBackground.closeIcon,
                     color: theme.palette.customHoverColor.main,
                 }
             },
