@@ -7,7 +7,8 @@ import Icon from "@material-ui/core/Icon";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {CardStyle} from "./style";
-import CustomModal from "../../Portfolio/customModal";
+import PortfolioModal from "../../Portfolio/portfolioModal";
+import BlogModal from "../../Blogs/blogModal";
 
 const CustomCard = ({element, elementType}) => {
     const customTheme = useContext(ThemeContextProvider);
@@ -17,14 +18,16 @@ const CustomCard = ({element, elementType}) => {
     const iconClass = isPortfolio ? "heart" : "clock";
     const elementData = isPortfolio ? element.reactCount : `${element.readTime} read`;
 
-    const [toggleModal, setToggleModal] = useState(false);
+    const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
+    const [toggleBlogModal, setToggleBlogModal] = useState(false);
 
     return (
         <>
             <Card xs={12} sm={6} md={4}
                   className={classes.cardWrapper}
                   onClick={() => {
-                      setToggleModal(true)
+                      if(isPortfolio) setTogglePortfolioModal(true)
+                      else setToggleBlogModal(true)
                   }}>
                 <div className={`${classes.cardWrapper}__image-wrapper`}>
                     <CardMedia
@@ -57,9 +60,14 @@ const CustomCard = ({element, elementType}) => {
                     </h1>
                 </CardContent>
             </Card>
-            {toggleModal && <CustomModal
-                setToggleModal={setToggleModal}
+            {togglePortfolioModal && <PortfolioModal
+                setTogglePortfolioModal={setTogglePortfolioModal}
                 portfolio={element}/>
+            }
+
+            {toggleBlogModal && <BlogModal
+                setToggleBlogModal={setToggleBlogModal}
+                blog={element}/>
             }
         </>
     );
