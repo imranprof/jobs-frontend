@@ -172,6 +172,6 @@ const useStyles = makeStyles({
     })
 });
 
-export function ModalStyle(theme) {
+export function PortfolioModalStyle(theme) {
     return useStyles(theme);
 }

@@ -6,18 +6,18 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import ThemeContextProvider from "../../contexts/themeContext";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
-import {ModalStyle} from "./modalStyle";
+import {PortfolioModalStyle} from "./portfolioModalStyle";
 
-const CustomModal = ({
-                         setToggleModal,
+const PortfolioModal = ({
+                         setTogglePortfolioModal,
                          portfolio: {image, category, title, description}
                      }) => {
     const customTheme = useContext(ThemeContextProvider);
-    const modalWrapper = ModalStyle(customTheme).modalWrapper;
+    const modalWrapper = PortfolioModalStyle(customTheme).modalWrapper;
     const [slidingClass, SetSlidingClass] = useState("");
 
     setTimeout(() => {
-        SetSlidingClass(setToggleModal ? `${modalWrapper}__modal-content--visible` : "")
+        SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
     }, 1);
 
     return (
@@ -26,7 +26,7 @@ const CustomModal = ({
                 <div className={`${modalWrapper}__modal-content ${slidingClass}`} >
                     <IconButton className={`${modalWrapper}__modal-content__close-icon`}
                                 onClick={() => {
-                                    setToggleModal(false)
+                                    setTogglePortfolioModal(false)
                                 }}>
                         <CloseIcon/>
                     </IconButton>
@@ -71,4 +71,4 @@ const CustomModal = ({
     );
 }
 
-export default CustomModal;
+export default PortfolioModal;
