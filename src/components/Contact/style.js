@@ -126,6 +126,11 @@ const useStyles = makeStyles({
         textTransform: "uppercase",
         marginBottom: 14,
         textAlign: "left",
+        '& span': {
+          fontStyle: "italic",
+          textTransform: "capitalize",
+          opacity: 0.5,
+        }
       },
       '&__input': {
         backgroundColor: theme.palette.customBackground.dark,
@@ -163,6 +168,30 @@ const useStyles = makeStyles({
           transform: "translateY(-5px)",
           color: "white !important"
         },
+      },
+      '&__error-message, &__success-message': {
+        width: "100%",
+        padding: 6,
+        margin: "0 16px",
+        borderRadius: 10,
+        textAlign: "center",
+        '& p': {
+          fontSize: 16,
+          fontFamily: FONTS.secondaryFont,
+          margin: 5
+        }
+      },
+      '&__error-message': {
+        background: "#ff00031f",
+        '& p': {
+          color: "#f10",
+        }
+      },
+      '&__success-message': {
+        background: "#3eb75e2e",
+        '& p': {
+          color: "green",
+        }
       },
       [theme.breakpoints.down('xs')]: {
         padding: 24
