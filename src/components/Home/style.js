@@ -7,7 +7,6 @@ export const useStyles = makeStyles({
         width: "100%",
         display: "flex",
         flexWrap: "wrap-reverse",
-
         // homeWrapper left side
         '&__left': {
             display: "flex",
@@ -131,6 +130,9 @@ export const useStyles = makeStyles({
                 marginBottom: 50
             }
         },
+        [theme.breakpoints.down('xs')]: {
+            padding: "0px 16px"
+        }
     })
 });
 
