@@ -5,6 +5,7 @@ import Icon from "@material-ui/core/Icon";
 
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {FormErrorsData} from "../../../API/elements/formErrorsData";
+import InputWrapper from "./inputWrapper";
 
 const ContactForm = ({classes}) => {
   const initialInputValues = {
@@ -60,27 +61,11 @@ const ContactForm = ({classes}) => {
       <Card className={`${classes}__contact-form`}>
         <form onSubmit={submitFormHandler} >
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} className={`${classes}__contact-form__input-wrapper`}>
-              <label htmlFor='name' className={`${classes}__contact-form__label`}>Your Name</label>
-              <input type='text' id='name' name="name" value={formValues.name} className={`${classes}__contact-form__input`} onChange={inputChangeHandler} />
-            </Grid>
-            <Grid item xs={12} sm={6} className={`${classes}__contact-form__input-wrapper`}>
-              <label htmlFor='phone' className={`${classes}__contact-form__label`}>Phone Number</label>
-              <input type='text' id='phone' name="phone" value={formValues.phone} className={`${classes}__contact-form__input`} onChange={inputChangeHandler} />
-            </Grid>
-            <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
-              <label htmlFor='email' className={`${classes}__contact-form__label`}>Email</label>
-              <input type='text' id='email' name="email" value={formValues.email}
-                     className={`${classes}__contact-form__input`} onChange={inputChangeHandler}/>
-            </Grid>
-            <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
-              <label htmlFor='subject' className={`${classes}__contact-form__label`}>Subject <span>(Optional)</span></label>
-              <input type='text' id='subject' name="subject" value={formValues.subject} className={`${classes}__contact-form__input`} onChange={inputChangeHandler} />
-            </Grid>
-            <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
-              <label htmlFor='message' className={`${classes}__contact-form__label`}>Your Message</label>
-              <textarea id='message' name="message" value={formValues.message} className={`${classes}__contact-form__input message-field`} onChange={inputChangeHandler} />
-            </Grid>
+            <InputWrapper type="input" extraSmall={12} small={6} classes={classes} labelFor="name" labelName="Your Name" formValues={formValues.name} changeHandler={inputChangeHandler} />
+            <InputWrapper type="input" extraSmall={12} small={6} classes={classes} labelFor="phone" labelName="Phone Number" formValues={formValues.phone} changeHandler={inputChangeHandler} />
+            <InputWrapper type="input" extraSmall={12} small={12} classes={classes} labelFor="email" labelName="Email" formValues={formValues.email} changeHandler={inputChangeHandler} />
+            <InputWrapper type="input" extraSmall={12} small={12} classes={classes} labelFor="subject" labelName="Subject" formValues={formValues.subject} changeHandler={inputChangeHandler} />
+            <InputWrapper type="textarea" extraSmall={12} small={12} classes={classes} labelFor="message" labelName="Your Message" formValues={formValues.message} changeHandler={inputChangeHandler} />
             <Grid item xs={12} className={`${classes}__contact-form__button-wrapper`}>
               <button type='submit' className={`${classes}__send-message-btn`}>
                 <span className={`${classes}__send-message-btn__text`}>Send Message</span>

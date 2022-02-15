@@ -23,8 +23,8 @@ const ContactInfo = ({classes, contactData}) => {
             </div>
             <div className={`${classes}__contact-info__description-area`}>
               <p className={`${classes}__contact-info__description`}>{description}.</p>
-              <span className={`${classes}__contact-info__phone`}>Phone: <Link href="#" className={`${classes}__contact-info__phone__link`} >{phone}</Link></span>
-              <span className={`${classes}__contact-info__email`}>Email: <Link href="#" className={`${classes}__contact-info__email__link`} >{email}</Link></span>
+              <span className={`${classes}__contact-info__phone`}>Phone: <Link href="#"><a>{phone}</a></Link></span>
+              <span className={`${classes}__contact-info__email`}>Email: <Link href="#"><a>{email}</a></Link></span>
             </div>
             <SocialLinks />
           </Card>

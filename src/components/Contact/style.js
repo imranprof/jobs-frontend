@@ -80,7 +80,7 @@ const useStyles = makeStyles({
         lineHeight: "30px",
         display: "block",
         margin: 0,
-        '&__link': {
+        '& a': {
           color: theme.palette.customColor.main,
           textDecoration: "none",
           display: "inline-block",
