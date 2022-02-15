@@ -4,6 +4,7 @@ import {Card, Grid} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
+import {FormErrorsData} from "../../../API/elements/formErrorsData";
 
 const ContactForm = ({classes}) => {
   const initialInputValues = {
@@ -26,13 +27,12 @@ const ContactForm = ({classes}) => {
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-    setFormErrors(validate(formValues))
+    setFormErrors(validate())
     setIsSubmit(true)
   }
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
       setFormValues(initialInputValues);
       setIsSubmitted(true)
       setTimeout(() => {
@@ -41,30 +41,17 @@ const ContactForm = ({classes}) => {
     }
   }, [formErrors])
 
-  const validate = (values) => {
+  const validate = () => {
     const errors = {};
-    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    let {name, phone, email, message} = values;
-    name = name.trim()
-    phone = phone.trim()
-    email = email.trim()
-    message = message.trim()
-
-    if (!name) {
-      errors.name = "Name can not be empty"
-    }
-    if(!phone) {
-      errors.phone = "Phone number can not be empty"
-    }
-    if (!email) {
-      errors.email = "Email can not be empty"
-    }
-    if (!regex.test(email)) {
-      errors.email = "Please put a valid email address"
-    }
-    if (!message) {
-      errors.message = "Message can not be empty"
-    }
+    const regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    Object.entries(FormErrorsData).map(([key,value]) => {
+      let fieldValue = formValues[key]?.trim();
+      if(!fieldValue) {
+        errors[key] = value["required"]
+      } else if(key === "email" && !regex.test(fieldValue)){
+        errors[key] = value["regex"]
+      }
+    })
     return errors;
   }
 
@@ -83,7 +70,8 @@ const ContactForm = ({classes}) => {
             </Grid>
             <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
               <label htmlFor='email' className={`${classes}__contact-form__label`}>Email</label>
-              <input type='email' id='email' name="email" value={formValues.email} className={`${classes}__contact-form__input`} onChange={inputChangeHandler} />
+              <input type='text' id='email' name="email" value={formValues.email}
+                     className={`${classes}__contact-form__input`} onChange={inputChangeHandler}/>
             </Grid>
             <Grid item xs={12} className={`${classes}__contact-form__input-wrapper`}>
               <label htmlFor='subject' className={`${classes}__contact-form__label`}>Subject <span>(Optional)</span></label>
