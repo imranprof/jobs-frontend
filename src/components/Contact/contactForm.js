@@ -17,7 +17,7 @@ const ContactForm = ({classes}) => {
   const [formValues, setFormValues] = useState(initialInputValues)
   const [formErrors, setFormErrors] = useState({})
   const [isSubmit, setIsSubmit] = useState(false)
-  const [isSubmitSuccessfully, setIsSubmitSuccessfully] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const inputChangeHandler = (event) => {
     const {name, value} = event.target
@@ -34,9 +34,9 @@ const ContactForm = ({classes}) => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
       setFormValues(initialInputValues);
-      setIsSubmitSuccessfully(true)
+      setIsSubmitted(true)
       setTimeout(() => {
-        setIsSubmitSuccessfully(false)
+        setIsSubmitted(false)
       }, 2500)
     }
   }, [formErrors])
@@ -104,7 +104,7 @@ const ContactForm = ({classes}) => {
                 <p>* {Object.values(formErrors)[0]}!</p>
               </div>
             )}
-            {(Object.keys(formErrors).length === 0 && isSubmitSuccessfully) && (
+            {(Object.keys(formErrors).length === 0 && isSubmitted) && (
               <div className={`${classes}__contact-form__success-message`}>
                 <p>Email has been sent successfully!</p>
               </div>
