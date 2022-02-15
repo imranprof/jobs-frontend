@@ -13,4 +13,4 @@ const FontAwesomeIcons = {
     "clock": "far fa-clock",
 }
 
-export default FontAwesomeIcons
+export default FontAwesomeIcons;
