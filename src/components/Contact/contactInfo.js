@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {Card, CardMedia, Grid} from "@material-ui/core";
 
 import SocialLinks from "../common/socialLinks";
@@ -21,8 +23,8 @@ const ContactInfo = ({classes, contactData}) => {
             </div>
             <div className={`${classes}__contact-info__description-area`}>
               <p className={`${classes}__contact-info__description`}>{description}.</p>
-              <span className={`${classes}__contact-info__phone`}>Phone: <a href="#">{phone}</a></span>
-              <span className={`${classes}__contact-info__email`}>Email: <a href="#">{email}</a></span>
+              <span className={`${classes}__contact-info__phone`}>Phone: <Link href="#" className={`${classes}__contact-info__phone__link`} >{phone}</Link></span>
+              <span className={`${classes}__contact-info__email`}>Email: <Link href="#" className={`${classes}__contact-info__email__link`} >{email}</Link></span>
             </div>
             <SocialLinks />
           </Card>
