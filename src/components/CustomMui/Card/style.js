@@ -37,7 +37,7 @@ const useStyles = makeStyles({
             transition: "all 0.4s ease",
         },
         '&__content': {
-            padding: "18px 0 0 0 !important", // Override MUI CardContent component
+            padding: "18px 0 0 0",
         },
         '&__category-info': {
             display: "flex",
@@ -109,7 +109,6 @@ const useStyles = makeStyles({
             },
         },
         '&:hover::before': {
-            // background: theme.palette.customBackground.gradiant.dark,
             opacity: 1
         },
         '&:hover &__image': {
