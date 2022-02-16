@@ -9,7 +9,10 @@ const useStyles = makeStyles({
             fontWeight: 300,
             color: theme.palette.customColor.main,
             display: "inline-block",
-            marginBottom: 20
+            marginBottom: 20,
+            [theme.breakpoints.down('xs')]: {
+                fontSize: 13
+            },
         },
         '&__skills': {
             display: "flex",
@@ -36,16 +39,16 @@ const useStyles = makeStyles({
                 '&--img': {
                     maxHeight: 34,
                 },
+                [theme.breakpoints.down('sm')]: {
+                    '&--img': {
+                        maxHeight: 30,
+                    },
+                },
                 [theme.breakpoints.down('md')]: {
                     width: 50,
                     height: 50,
                     marginRight: 20,
                 },
-                [theme.breakpoints.down('sm')]: {
-                    width: 60,
-                    height: 60,
-                    marginRight: 25,
-                }
             },
         },
     })

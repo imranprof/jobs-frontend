@@ -63,7 +63,7 @@ export const useStyles = makeStyles({
                         fontSize: 30,
                         lineHeight: "35px",
                         '&__expertise': {
-                            fontSize: 25
+                            fontSize: 24
                         }
                     }
                 },
