@@ -12,7 +12,7 @@ const Portfolio = () => {
     const classes = PortfolioStyle(customTheme);
 
     return (
-        <Grid container spacing={4} className={classes.portfolioWrapper}>
+        <Grid container spacing={4} className={classes.portfolioWrapper} id="portfolio">
             {PortfolioData.map(portfolio => (
                 <CustomCard key={portfolio.id} element={portfolio} elementType="portfolio"/>
             ))}

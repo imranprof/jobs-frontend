@@ -1,4 +1,4 @@
-import Link from "next/link";
+import {Link} from 'react-scroll'
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,7 +11,7 @@ const NavItems = ({classes, variant}) => {
             {NavigationLinksData.map((link) =>
                 (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant}`}
                            key={link.id}>
-                    <Link href={link.href}>
+                    <Link to={link.href} spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
                         {link.name}
                     </Link>
                 </ListItem>)

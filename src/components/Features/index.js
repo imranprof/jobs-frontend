@@ -12,7 +12,7 @@ const Features = () => {
     const classes = FeatureStyle(customTheme);
 
     return (
-        <Grid container spacing={3} className={classes.featureWrapper}>
+        <Grid container spacing={3} className={classes.featureWrapper} id="features">
             {featuresData.map(feature => (
                     <Feature key={feature.id} feature={feature} classes={classes}/>
                 )

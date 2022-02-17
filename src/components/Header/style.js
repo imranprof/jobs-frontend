@@ -88,6 +88,7 @@ export const useStyles = makeStyles({
                 color: theme.palette.customColor.main,
                 textDecoration: 'none',
                 textTransform: 'uppercase',
+                cursor: "pointer",
                 opacity: .8,
                 transition: "all .4s ease 0s",
                 '&:hover': {
