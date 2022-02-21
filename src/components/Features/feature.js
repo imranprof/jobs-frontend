@@ -17,7 +17,7 @@ const Feature = ({feature, classes}) => {
                             <h1 className={`${classes.featureWrapper}__feature__content__title`}>{title}</h1>
                             <p className={`${classes.featureWrapper}__feature__content__description`}>{description}</p>
                             <Icon
-                                className={`${classes.featureWrapper}__feature__content__read-more-btn ${FontAwesomeIcons.arrow}`}/>
+                                className={`${classes.featureWrapper}__feature__content__read-more-btn ${FontAwesomeIcons.arrowRight}`}/>
                         </div>
                     </div>
                 </Paper>
