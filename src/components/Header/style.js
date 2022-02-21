@@ -94,7 +94,11 @@ export const useStyles = makeStyles({
                 '&:hover': {
                     opacity: 1,
                     color: theme.palette.customColor.light,
-                }
+                },
+            },
+            '& .active': {
+                opacity: 1,
+                color: theme.palette.customColor.light,
             },
             '&--default': {
                 display: 'inline',

@@ -9,7 +9,7 @@ const NavItems = ({classes, variant}) => {
     return (
         <List>
             {NavigationLinksData.map((link) =>
-                (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant}`}
+                (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}
                            key={link.id}>
                     <Link to={link.href} spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
                         {link.name}

@@ -69,7 +69,7 @@ const ContactForm = ({classes}) => {
             <Grid item xs={12} className={`${classes}__contact-form__button-wrapper`}>
               <button type='submit' className={`${classes}__send-message-btn`}>
                 <span className={`${classes}__send-message-btn__text`}>Send Message</span>
-                <Icon className={`${classes}__send-message-btn__icon ${FontAwesomeIcons.arrow}`} />
+                <Icon className={`${classes}__send-message-btn__icon ${FontAwesomeIcons.arrowRight}`} />
               </button>
             </Grid>
             {(Object.keys(formErrors).length > 0) && (
