@@ -1,4 +1,7 @@
 import Features from "../../src/components/Features";
+import Portfolio from "../../src/components/Portfolio";
+import Blogs from "../../src/components/Blogs";
+import Contact from "../../src/components/Contact";
 
 export const SectionsData = () => [
     {
@@ -13,7 +16,7 @@ export const SectionsData = () => [
         title: "My Portfolio",
         subtitle: "Visit my portfolio and keep your feedback",
         align: "center",
-        component: ""
+        component: <Portfolio />
     },
     {
         id: 3,
@@ -27,14 +30,13 @@ export const SectionsData = () => [
         title: "My Blog",
         subtitle: "Visit my blog and keep your feedback",
         align: "center",
-        component: ""
+        component: <Blogs />
     },
     {
         id: 5,
         title: "Contact With Me",
         subtitle: "contact",
         align: "center",
-        component: ""
+        component: <Contact />
     }
-
 ]
