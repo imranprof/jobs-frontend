@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import React, {useContext, useState} from 'react';
+import {useState, useContext} from 'react';
 import {Card, CardContent, CardMedia} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
@@ -26,7 +26,7 @@ const CustomCard = ({element, elementType}) => {
             <Card xs={12} sm={6} md={4}
                   className={classes.cardWrapper}
                   onClick={() => {
-                      if(isPortfolio) setTogglePortfolioModal(true)
+                      if (isPortfolio) setTogglePortfolioModal(true)
                       else setToggleBlogModal(true)
                   }}>
                 <div className={`${classes.cardWrapper}__image-wrapper`}>

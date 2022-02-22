@@ -2,41 +2,31 @@ export const NavigationLinksData = [
     {
         "id": 1,
         "name": "Home",
-        "href": "#"
+        "href": "home"
     },
     {
         "id": 2,
         "name": "Features",
-        "href": "#"
+        "href": "features"
     },
     {
         "id": 3,
         "name": "Portfolio",
-        "href": "#"
+        "href": "portfolio"
     },
     {
         "id": 4,
         "name": "Resume",
-        "href": "#"
+        "href": "resume"
     },
     {
         "id": 5,
-        "name": "Clients",
-        "href": "#"
+        "name": "Blog",
+        "href": "blog"
     },
     {
         "id": 6,
-        "name": "Pricing",
-        "href": "#"
-    },
-    {
-        "id": 7,
-        "name": "Blog",
-        "href": "#"
-    },
-    {
-        "id": 8,
         "name": "Contact",
-        "href": "#"
+        "href": "contact"
     },
 ]

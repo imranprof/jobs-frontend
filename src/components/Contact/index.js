@@ -13,7 +13,7 @@ const Contact = () => {
     const classes = ContactStyle(customTheme);
 
         return (
-            <Grid container spacing={3} className={classes.contactWrapper} >
+            <Grid container spacing={3} className={classes.contactWrapper} id="contact" >
                 <ContactInfo classes={classes.contactWrapper} contactData={ContactData} />
                 <ContactForm classes={classes.contactWrapper} />
             </Grid>
