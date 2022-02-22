@@ -15,4 +15,4 @@ const FontAwesomeIcons = {
     "angleRight": "fas fa-angle-right",
 }
 
-export default FontAwesomeIcons
+export default FontAwesomeIcons;
