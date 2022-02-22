@@ -12,6 +12,8 @@ const FontAwesomeIcons = {
     "arrowUp": "fas fa-arrow-up",
     "heart": "far fa-heart",
     "clock": "far fa-clock",
+    "thumbsUp": "far fa-thumbs-up",
+    "angleRight": "fas fa-angle-right",
 }
 
 export default FontAwesomeIcons;
