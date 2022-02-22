@@ -4,6 +4,9 @@ export const PortfolioData = [
         image: "portfolio-01.jpg",
         category: "development",
         title: "The services provide for design",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
+            "\n" +
+            "Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!",
         reactCount: "600"
     },
     {
@@ -11,6 +14,9 @@ export const PortfolioData = [
         image: "portfolio-02.jpg",
         category: "application",
         title: "Mobile app landing design & app maintain",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
+            "\n" +
+            "Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!",
         reactCount: "750"
     },
     {
@@ -18,6 +24,9 @@ export const PortfolioData = [
         image: "portfolio-03.jpg",
         category: "photoshop",
         title: "Logo design creativity & application",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
+            "\n" +
+            "Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!",
         reactCount: "630"
     },
     {
@@ -25,6 +34,9 @@ export const PortfolioData = [
         image: "portfolio-04.jpg",
         category: "figma",
         title: "Mobile app landing design & services",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
+            "\n" +
+            "Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!",
         reactCount: "360"
     },
     {
@@ -32,6 +44,9 @@ export const PortfolioData = [
         image: "portfolio-05.jpg",
         category: "web design",
         title: "Design for technology & services",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
+            "\n" +
+            "Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!",
         reactCount: "280"
     },
     {
@@ -39,6 +54,9 @@ export const PortfolioData = [
         image: "portfolio-06.jpg",
         category: "development",
         title: "App for technology & services",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
+            "\n" +
+            "Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!",
         reactCount: "690"
     },
 

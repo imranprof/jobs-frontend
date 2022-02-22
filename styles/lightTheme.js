@@ -31,6 +31,13 @@ const lightTheme = createTheme({
         },
         customDivider: {
             main: COLORS.gray_5
+        },
+        customHoverColor: {
+            main: COLORS.white
+        },
+        customHoverBackground: {
+            main: COLORS.pink_1,
+            closeIcon: COLORS.pink_1,
         }
     },
 });

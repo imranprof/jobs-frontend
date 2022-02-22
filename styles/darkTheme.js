@@ -32,6 +32,13 @@ const darkTheme = createTheme({
         },
         customDivider: {
             main: COLORS.black_3
+        },
+        customHoverColor: {
+            main: COLORS.pink
+        },
+        customHoverBackground: {
+            main: COLORS.black_5,
+            closeIcon: COLORS.black_4,
         }
     },
 });
