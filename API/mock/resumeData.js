@@ -36,6 +36,14 @@ export const ResumeData = {
             endDate: "Jan 2022",
             description: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante."
         },
+        {
+            id: 5,
+            institution: "University of E",
+            startDate: "Jan 2018",
+            endDate: "Jan 2022",
+            description: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
+            rating: "",
+        },
     ],
     skills: [
         {id: 1, name: "ruby", rating: 100},
@@ -48,42 +56,34 @@ export const ResumeData = {
         {
             id: 1,
             title: "University of A",
-            startDate: "",
-            endDate: "",
+            startDate: "Jan 2018",
+            endDate: "Jan 2022",
             description: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
             rating: ""
         },
         {
             id: 2,
             title: "University of B",
-            startDate: "",
-            endDate: "",
+            startDate: "Jan 2018",
+            endDate: "Jan 2022",
             description: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
             rating: ""
         },
         {
             id: 3,
             title: "University of C",
-            startDate: "",
-            endDate: "",
+            startDate: "Jan 2018",
+            endDate: "Jan 2022",
             description: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
             rating: ""
         },
         {
             id: 4,
             title: "University of D",
-            startDate: "",
-            endDate: "",
+            startDate: "Jan 2018",
+            endDate: "Jan 2022",
             description: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
             rating: ""
-        },
-        {
-            id: 5,
-            title: "University of E",
-            startDate: "",
-            endDate: "",
-            description: "The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
-            rating: "",
-        },
+        }
     ],
 }
