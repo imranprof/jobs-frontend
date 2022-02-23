@@ -5,6 +5,7 @@ import {List, ListItem} from "@material-ui/core";
 import ThemeContextProvider from "../../contexts/themeContext";
 import {ResumeStyle} from "./style";
 import {ResumeData} from "../../../API/mock/resumeData";
+import ResumeCards from "./resumeCards";
 
 const Resume = () => {
     const customTheme = useContext(ThemeContextProvider);
@@ -35,11 +36,17 @@ const Resume = () => {
             </List>
         );
     }
+    const navContent = () => {
+        return (
+            <ResumeCards cardType={cardType} cardData={cardData}/>
+        );
+    }
 
     return (
         <div className={resumeWrapper}>
             <div className={`${resumeWrapper}__body`}>
                 {navList()}
+                {navContent()}
             </div>
         </div>
     );

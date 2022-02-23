@@ -76,9 +76,48 @@ const useStyles = makeStyles({
                     }
                 }
             },
+            '&__nav-content': {
+                marginTop: 40,
+                '&__row': {
+                    width: "auto",
+                    marginRight: -15,
+                    marginLeft: -15,
+                    // ========= Breakpoints =========
+                    [theme.breakpoints.down(990)]: {
+                        '& .MuiGrid-grid-xs-6': {
+                            maxWidth: "100%",
+                            flexBasis: "100%",
+                        },
+                        '& > :last-child': {
+                            '& > :first-child': {
+                                marginTop: 0
+                            },
+                            '& > :last-child > :last-child': {
+                                marginBottom: 0
+                            },
+                        },
+                    },
+                    '&__heading': {
+                        '& span': {
+                            fontFamily: FONTS.secondaryFont,
+                            color: theme.palette.customSubTitle.highContrast,
+                            fontSize: 14,
+                            fontWeight: 500,
+                            letterSpacing: 2,
+                        },
+                        '& h4': {
+                            margin: 0,
+                            fontFamily: FONTS.primaryFont,
+                            color: theme.palette.customColor.main,
+                            fontSize: 36,
+                            fontWeight: 700,
+                            textTransform: "capitalize"
+                        },
+                    },
+                },
+            },
         })
-    })
-;
+    });
 
 export function ResumeStyle(theme) {
     return useStyles(theme);
