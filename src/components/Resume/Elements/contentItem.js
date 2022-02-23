@@ -18,7 +18,7 @@ const ContentItem = ({cardType, cardContent}) => {
         if (cardType !== "skills") return cardContent.description
     }
     return (
-        <Grid key={cardContent.id} item container
+        <Grid item container
               className={`${resumeWrapper}__nav-content__row__column__content__item`}>
             <div className={`${resumeWrapper}__nav-content__row__column__content__item__inner`}>
                 <Grid className={`${resumeWrapper}__nav-content__row__column__content__item__inner__heading`}>

@@ -33,8 +33,8 @@ const RowContent = ({cardType, cardData}) => {
         let content = [];
         for (let idx = startIndex; idx < endIndex; idx++) {
             content.push(
-                cardType === "skills" ? <SkillsItem cardType={cardType} cardContent={cardData[idx]}/> :
-                    <ContentItem cardType={cardType} cardContent={cardData[idx]}/>
+                cardType === "skills" ? <SkillsItem key={cardData[idx].id} cardType={cardType} cardContent={cardData[idx]}/> :
+                    <ContentItem key={cardData[idx].id} cardType={cardType} cardContent={cardData[idx]}/>
             );
         }
         return content;

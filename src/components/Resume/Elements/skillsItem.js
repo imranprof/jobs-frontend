@@ -12,7 +12,7 @@ const SkillsItem = ({cardContent}) => {
     }, 10);
 
     return (
-        <div key={cardContent.id} className={`${resumeWrapper}__nav-content__row__column__skills__wrapper`}>
+        <div className={`${resumeWrapper}__nav-content__row__column__skills__wrapper`}>
             <h2 className={`${resumeWrapper}__nav-content__row__column__skills__wrapper__title`}>
                 {cardContent.name}
             </h2>
