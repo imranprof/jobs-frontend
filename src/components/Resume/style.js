@@ -160,9 +160,9 @@ const useStyles = makeStyles({
                                 '& h4': {
                                     color: theme.palette.customColor.light
                                 },
-                                '&__description': {
-                                    color: theme.palette.customColor.main
-                                }
+                            },
+                            '&:hover &__description': {
+                                color: theme.palette.customColor.main
                             },
                             '&:hover &__inner::after': {
                                 background: theme.palette.customColor.highContrast
