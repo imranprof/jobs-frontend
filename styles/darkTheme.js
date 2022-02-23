@@ -28,6 +28,7 @@ const darkTheme = createTheme({
         customShadow: {
             main: COLORS.boxShadow_1,
             light: COLORS.boxShadow_4,
+            dark: COLORS.boxShadow_7,
             default: COLORS.boxShadow_3
         },
         customDivider: {
@@ -46,7 +47,7 @@ const darkTheme = createTheme({
           main: COLORS.black_7,
         },
         beforeShadow: {
-          main: COLORS.boxShadow_7,
+          main: COLORS.boxShadow_8,
         },
         afterBackground: {
             main: COLORS.black_8

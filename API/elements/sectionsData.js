@@ -1,6 +1,7 @@
 import Features from "../../src/components/Features";
 import Portfolio from "../../src/components/Portfolio";
 import Blogs from "../../src/components/Blogs";
+import Contact from "../../src/components/Contact";
 import Resume from "../../src/components/Resume";
 
 export const SectionsData = () => [
@@ -37,7 +38,6 @@ export const SectionsData = () => [
         title: "Contact With Me",
         subtitle: "contact",
         align: "center",
-        component: ""
+        component: <Contact />
     }
-
 ]

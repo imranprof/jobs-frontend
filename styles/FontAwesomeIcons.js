@@ -8,11 +8,12 @@ const FontAwesomeIcons = {
     "tools": "fas fa-tools",
     "cogs": "fas fa-cogs",
     "slack": "fab fa-slack",
-    "arrow": "fas fa-arrow-right",
+    "arrowRight": "fas fa-arrow-right",
+    "arrowUp": "fas fa-arrow-up",
     "heart": "far fa-heart",
     "clock": "far fa-clock",
     "thumbsUp": "far fa-thumbs-up",
     "angleRight": "fas fa-angle-right",
 }
 
-export default FontAwesomeIcons
+export default FontAwesomeIcons;

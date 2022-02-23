@@ -45,7 +45,7 @@ const lightTheme = createTheme({
             main: COLORS.gray_5
         },
         beforeShadow: {
-            main: COLORS.pink_1,
+            main: COLORS.boxShadow_8,
         },
         afterBackground: {
             main: COLORS.white_1

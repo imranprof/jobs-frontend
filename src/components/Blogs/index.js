@@ -12,7 +12,7 @@ const Blogs = () => {
     const classes = BlogsStyle(customTheme);
 
     return (
-        <Grid container spacing={4} className={classes.blogsWrapper}>
+        <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
             {BlogsData.map(blog => (
                 <CustomCard key={blog.id} element={blog} elementType="blog"/>
             ))}

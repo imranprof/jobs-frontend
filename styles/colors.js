@@ -5,6 +5,7 @@ const COLORS = {
     white_3: "linear-gradient(145deg, #e2e8ec, #ffffff)",
     white_4: "#C4CFDE",
     white_5: "#dce1e4",
+
     gray: "#3C3E41",
     gray_1: "#2E3237",
     gray_2: "#858C97",
@@ -37,7 +38,8 @@ const COLORS = {
     boxShadow_4: "rgb(33 36 40) 10px 10px 19px, rgb(33 36 40) -10px -10px 19px;",
     boxShadow_5: "rgb(238 241 243) 10px 10px 19px, rgb(238 241 243) -10px -10px 19px;",
     boxShadow_6: "rgb(151 151 151) 10px 10px 19px, rgb(211 204 204) -10px -10px 19px",
-    boxShadow_7: "inset 8px 8px 16px #00000075, inset -8px -8px 16px #383e4575",
+    boxShadow_7: "1px 4px 2px -3px rgba(0, 0, 0, 0.7) inset, -1px -3px 3px -2px rgba(255, 255, 255, 0.2) inset",
+    boxShadow_8: "inset 8px 8px 16px #00000075, inset -8px -8px 16px #383e4575",
 }
 
 export default COLORS
