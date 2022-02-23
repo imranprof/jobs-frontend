@@ -1,6 +1,7 @@
 import Features from "../../src/components/Features";
 import Portfolio from "../../src/components/Portfolio";
 import Blogs from "../../src/components/Blogs";
+import Resume from "../../src/components/Resume";
 
 export const SectionsData = () => [
     {
@@ -22,7 +23,7 @@ export const SectionsData = () => [
         title: "My Resume",
         subtitle: "7+ Years of Experience",
         align: "center",
-        component: ""
+        component: <Resume />
     },
     {
         id: 4,
