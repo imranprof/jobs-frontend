@@ -22,7 +22,8 @@ const lightTheme = createTheme({
             main: COLORS.gray,
             light: COLORS.gray,
             dark: COLORS.black,
-            highContrast: COLORS.pink
+            highContrast: COLORS.pink,
+            resumeSubTitle: COLORS.pink_2
         },
         customShadow: {
             main: COLORS.boxShadow_2,
@@ -38,6 +39,23 @@ const lightTheme = createTheme({
         customHoverBackground: {
             main: COLORS.pink_1,
             closeIcon: COLORS.pink_1,
+            resumeCard: COLORS.pink_1
+        },
+        beforeBackground: {
+            main: COLORS.gray_5
+        },
+        beforeShadow: {
+            main: COLORS.pink_1,
+        },
+        afterBackground: {
+            main: COLORS.white_1
+        },
+        customBorder: {
+            beforeElement: COLORS.gray_5
+        },
+        progressBar: {
+            main: COLORS.white_5,
+            secondary: COLORS.pink_3
         }
     },
 });

@@ -22,7 +22,8 @@ const darkTheme = createTheme({
             main: COLORS.white_4,
             light: COLORS.white,
             dark: COLORS.gray_3,
-            highContrast: COLORS.pink
+            highContrast: COLORS.pink,
+            resumeSubTitle: COLORS.pink_2
         },
         customShadow: {
             main: COLORS.boxShadow_1,
@@ -30,7 +31,8 @@ const darkTheme = createTheme({
             default: COLORS.boxShadow_3
         },
         customDivider: {
-            main: COLORS.black_3
+            main: COLORS.black_3,
+            secondary: COLORS.black_10
         },
         customHoverColor: {
             main: COLORS.pink
@@ -38,6 +40,23 @@ const darkTheme = createTheme({
         customHoverBackground: {
             main: COLORS.black_5,
             closeIcon: COLORS.black_4,
+            resumeCard: COLORS.black_1
+        },
+        beforeBackground: {
+          main: COLORS.black_7,
+        },
+        beforeShadow: {
+          main: COLORS.boxShadow_7,
+        },
+        afterBackground: {
+            main: COLORS.black_8
+        },
+        customBorder: {
+            beforeElement: COLORS.black_6
+        },
+        progressBar: {
+            main: COLORS.black_9,
+            secondary: COLORS.pink_orange
         }
     },
 });

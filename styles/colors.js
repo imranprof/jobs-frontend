@@ -5,7 +5,6 @@ const COLORS = {
     white_3: "linear-gradient(145deg, #e2e8ec, #ffffff)",
     white_4: "#C4CFDE",
     white_5: "#dce1e4",
-
     gray: "#3C3E41",
     gray_1: "#2E3237",
     gray_2: "#858C97",
@@ -19,10 +18,18 @@ const COLORS = {
     black_3: "#121415",
     black_4: "linear-gradient(145deg, #1e2024, #23272b)",
     black_5: "linear-gradient(to right bottom, #212428, #16181c)",
+    black_6: "#17191c",
+    black_7: "#1b1c1d",
+    black_8: "#222529",
+    black_9: "#212428",
+    black_10: "#1a1d23",
 
     pink: "#FF014F",
     pink_1: "linear-gradient(145deg, #ff014f, #d11414)",
+    pink_2: "#f9004d",
+    pink_3: "linear-gradient(145deg, #fff 0%, #ff014f 100%)",
     yellow: "#FFAB1A",
+    pink_orange: "linear-gradient(145deg, rgb(240, 41, 129) 0%, rgb(200, 25, 1) 100%)",
 
     boxShadow_1: "rgb(28 30 34) 10px 10px 19px, rgb(38 42 46) -10px -10px 19px",
     boxShadow_2: "rgb(207 207 207) 10px 10px 19px, rgb(173 179 185) -10px -10px 19px",
@@ -30,6 +37,7 @@ const COLORS = {
     boxShadow_4: "rgb(33 36 40) 10px 10px 19px, rgb(33 36 40) -10px -10px 19px;",
     boxShadow_5: "rgb(238 241 243) 10px 10px 19px, rgb(238 241 243) -10px -10px 19px;",
     boxShadow_6: "rgb(151 151 151) 10px 10px 19px, rgb(211 204 204) -10px -10px 19px",
+    boxShadow_7: "inset 8px 8px 16px #00000075, inset -8px -8px 16px #383e4575",
 }
 
 export default COLORS

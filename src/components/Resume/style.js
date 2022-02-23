@@ -100,7 +100,7 @@ const useStyles = makeStyles({
                 '&__heading': {
                     '& span': {
                         fontFamily: FONTS.secondaryFont,
-                        color: theme.palette.customSubTitle.highContrast,
+                        color: theme.palette.customColor.resumeSubTitle,
                         fontSize: 14,
                         fontWeight: 500,
                         letterSpacing: 2,
