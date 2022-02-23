@@ -114,6 +114,119 @@ const useStyles = makeStyles({
                         textTransform: "capitalize"
                     },
                 },
+                '&__column': {
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    '&__content': {
+                        position: "relative",
+                        marginTop: 50,
+                        paddingLeft: "5%",
+                        borderLeft: `5px solid ${theme.palette.customBorder.beforeElement}`,
+                        '&__item': {
+                            position: "relative",
+                            marginBottom: 50,
+                            padding: "45px 40px",
+                            borderRadius: 6,
+                            zIndex: 2,
+                            background: theme.palette.customBackground.gradiant.light,
+                            boxShadow: theme.palette.customShadow.default,
+                            '&:last-child': {
+                                marginBottom: 0,
+                            },
+                            // ========= Breakpoints =========
+                            [theme.breakpoints.down(990)]: {
+                                '&:last-child': {
+                                    marginBottom: 45,
+                                },
+                            },
+                            '&::before': {
+                                content: "''",
+                                position: "absolute",
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: 6,
+                                top: 0,
+                                left: 0,
+                                background: theme.palette.customBackground.gradiant.dark,
+                                opacity: 0,
+                                zIndex: -1,
+                                transition: ".4s",
+                            },
+                            '&:hover': {
+                                background: theme.palette.customHoverBackground.resumeCard,
+                                '&::before': {
+                                    opacity: 1,
+                                },
+                                '& h4': {
+                                    color: theme.palette.customColor.light
+                                },
+                                '&__description': {
+                                    color: theme.palette.customColor.main
+                                }
+                            },
+                            '&:hover &__inner::after': {
+                                background: theme.palette.customColor.highContrast
+                            },
+                            '&__inner': {
+                                '&::before': {
+                                    position: "absolute",
+                                    content: "''",
+                                    background: theme.palette.beforeBackground.main,
+                                    width: "5%",
+                                    height: 5,
+                                    top: 63,
+                                    right: "100%",
+                                    zIndex: 0,
+                                    transform: "translateY(-7px)",
+                                },
+                                '&::after': {
+                                    position: "absolute",
+                                    content: "''",
+                                    background: theme.palette.afterBackground.main,
+                                    width: 20,
+                                    height: 20,
+                                    top: 55,
+                                    right: "104%",
+                                    border: `5px solid ${theme.palette.customBorder.beforeElement}`,
+                                    borderRadius: "100%",
+                                    transition: ".4s",
+                                    transform: "translateY(-7px)",
+                                },
+                                '&__heading': {
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    borderBottom: `1px solid ${theme.palette.customDivider.secondary}`,
+                                    marginBottom: 20,
+                                    paddingBottom: 30,
+                                    fontFamily: FONTS.secondaryFont,
+                                    '&__title': {
+                                        '& h4': {
+                                            fontSize: 24,
+                                            fontWeight: 500,
+                                            color: theme.palette.customColor.main,
+                                            margin: 0,
+                                            marginBottom: 7,
+                                            transition: ".4s",
+                                        },
+                                        '& span': {
+                                            display: "block",
+                                            color: theme.palette.customColor.dark,
+                                            fontSize: 14,
+                                        }
+                                    }
+                                },
+                                '&__description': {
+                                    fontFamily: FONTS.secondaryFont,
+                                    fontSize: 18,
+                                    fontWeight: 400,
+                                    color: theme.palette.customColor.dark,
+                                    transition: ".4s",
+                                }
+                            }
+                        },
+                    },
+                },
             },
         },
     })
