@@ -226,6 +226,52 @@ const useStyles = makeStyles({
                             }
                         },
                     },
+                    '&__skills': {
+                        display: "block",
+                        marginTop: 30,
+                        '&__wrapper': {
+                            marginTop: 30,
+                            '&:first-child': {
+                                marginTop: 0,
+                            },
+                            '&__title': {
+                                margin: 0,
+                                marginBottom: 10,
+                                color: "#c3cedd",
+                                fontFamily: FONTS.primaryFont,
+                                fontSize: 12,
+                                textTransform: "uppercase",
+                                fontWeight: 400,
+                                opacity: 0.9,
+                            },
+                            '&__bar': {
+                                display: "flex",
+                                overflow: "visible",
+                                padding: 3,
+                                height: 13,
+                                borderRadius: 10,
+                                backgroundColor: theme.palette.progressBar.main,
+                                boxShadow: theme.palette.beforeShadow.main,
+                                '&__progress-bar': {
+                                    position: "relative",
+                                    width: 0,
+                                    borderRadius: 14,
+                                    background: theme.palette.progressBar.secondary,
+                                    transition: "width .6s ease",
+                                    '& span': {
+                                        position: "absolute",
+                                        right: 0,
+                                        top: -30,
+                                        color: theme.palette.customColor.main,
+                                        fontFamily: FONTS.secondaryFont,
+                                        fontSize: 14,
+                                        fontWeight: 400,
+                                        opacity: 0.9,
+                                    }
+                                }
+                            }
+                        }
+                    }
                 },
             },
         },
