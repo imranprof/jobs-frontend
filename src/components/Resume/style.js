@@ -28,21 +28,21 @@ const useStyles = makeStyles({
             marginTop: 16,
             borderRadius: 10,
             background: theme.palette.customBackground.gradiant.light,
-            boxShadow: theme.palette.customShadow.default,
+            boxShadow: theme.palette.resume.navListShadow,
             // ========= Breakpoints =========
             [theme.breakpoints.down(767)]: {
                 flexDirection: "column",
             },
             '& .Mui-selected': {
-                background: "transparent",
-                boxShadow: theme.palette.customShadow.default,
+                background: theme.palette.customBackground.gradiant.light,
+                boxShadow: theme.palette.resume.navListShadow,
                 borderRadius: 10,
                 '& a': {
-                    color: theme.palette.customHoverColor.main,
+                    color: theme.palette.resume.navListTitle,
                 },
                 '&:hover': {
-                    background: "transparent",
-                    boxShadow: theme.palette.customShadow.default,
+                    background: theme.palette.customBackground.gradiant.light,
+                    boxShadow: theme.palette.resume.navListShadow,
                     borderRadius: 10,
                 },
             },
@@ -58,10 +58,11 @@ const useStyles = makeStyles({
                     height: 64,
                 },
                 '&:hover': {
-                    boxShadow: theme.palette.customShadow.default,
+                    background: theme.palette.customBackground.gradiant.light,
+                    boxShadow: theme.palette.resume.navListShadow,
                     borderRadius: 10,
                     '& a': {
-                        color: theme.palette.customHoverColor.main,
+                        color: theme.palette.resume.navListTitle,
                     }
                 },
                 '& a': {
@@ -100,7 +101,7 @@ const useStyles = makeStyles({
                 '&__heading': {
                     '& span': {
                         fontFamily: FONTS.secondaryFont,
-                        color: theme.palette.customColor.resumeSubTitle,
+                        color: theme.palette.resume.subTitle,
                         fontSize: 14,
                         fontWeight: 500,
                         letterSpacing: 2,
@@ -108,7 +109,7 @@ const useStyles = makeStyles({
                     '& h4': {
                         margin: 0,
                         fontFamily: FONTS.primaryFont,
-                        color: theme.palette.customColor.main,
+                        color: theme.palette.resume.mainTitle,
                         fontSize: 36,
                         fontWeight: 700,
                         textTransform: "capitalize"
@@ -129,7 +130,7 @@ const useStyles = makeStyles({
                             borderRadius: 6,
                             zIndex: 2,
                             background: theme.palette.customBackground.gradiant.light,
-                            boxShadow: theme.palette.customShadow.default,
+                            boxShadow: theme.palette.resume.cardShadow,
                             '&:last-child': {
                                 marginBottom: 0,
                             },
@@ -147,22 +148,24 @@ const useStyles = makeStyles({
                                 borderRadius: 6,
                                 top: 0,
                                 left: 0,
-                                background: theme.palette.customBackground.gradiant.dark,
+                                background: theme.palette.resume.cardBeforeBG,
                                 opacity: 0,
                                 zIndex: -1,
                                 transition: ".4s",
                             },
                             '&:hover': {
-                                background: theme.palette.customHoverBackground.resumeCard,
                                 '&::before': {
                                     opacity: 1,
                                 },
                                 '& h4': {
-                                    color: theme.palette.customColor.light
+                                    color: theme.palette.resume.hover.cardTitle
                                 },
-                            },
-                            '&:hover &__description': {
-                                color: theme.palette.customColor.main
+                                '& span': {
+                                    color: theme.palette.resume.hover.cardSubTitle
+                                },
+                                '& p': {
+                                    color: theme.palette.resume.hover.cardDescription
+                                },
                             },
                             '&:hover &__inner::after': {
                                 background: theme.palette.customColor.highContrast
@@ -196,7 +199,7 @@ const useStyles = makeStyles({
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "space-between",
-                                    borderBottom: `1px solid ${theme.palette.customDivider.secondary}`,
+                                    borderBottom: `1px solid ${theme.palette.resume.cardDivider}`,
                                     marginBottom: 20,
                                     paddingBottom: 30,
                                     fontFamily: FONTS.secondaryFont,
@@ -204,24 +207,27 @@ const useStyles = makeStyles({
                                         '& h4': {
                                             fontSize: 24,
                                             fontWeight: 500,
-                                            color: theme.palette.customColor.main,
+                                            color: theme.palette.resume.cardTitle,
                                             margin: 0,
                                             marginBottom: 7,
                                             transition: ".4s",
                                         },
                                         '& span': {
                                             display: "block",
-                                            color: theme.palette.customColor.dark,
+                                            color: theme.palette.resume.cardSubTitle,
                                             fontSize: 14,
                                         }
                                     }
                                 },
                                 '&__description': {
-                                    fontFamily: FONTS.secondaryFont,
-                                    fontSize: 18,
-                                    fontWeight: 400,
-                                    color: theme.palette.customColor.dark,
-                                    transition: ".4s",
+                                    '& p': {
+                                        margin: 0,
+                                        color: theme.palette.resume.cardDescription,
+                                        fontFamily: FONTS.secondaryFont,
+                                        fontSize: 18,
+                                        fontWeight: 400,
+                                        transition: "all .3s ease-in-out",
+                                    }
                                 }
                             }
                         },
@@ -237,11 +243,11 @@ const useStyles = makeStyles({
                             '&__title': {
                                 margin: 0,
                                 marginBottom: 10,
-                                color: "#c3cedd",
+                                color: theme.palette.progressBar.title,
                                 fontFamily: FONTS.primaryFont,
                                 fontSize: 12,
                                 textTransform: "uppercase",
-                                fontWeight: 400,
+                                fontWeight: 500,
                                 opacity: 0.9,
                             },
                             '&__bar': {
@@ -251,7 +257,7 @@ const useStyles = makeStyles({
                                 height: 13,
                                 borderRadius: 10,
                                 backgroundColor: theme.palette.progressBar.main,
-                                boxShadow: theme.palette.beforeShadow.main,
+                                boxShadow: theme.palette.progressBar.boxShadow,
                                 '&__progress-bar': {
                                     position: "relative",
                                     width: 0,
@@ -262,7 +268,7 @@ const useStyles = makeStyles({
                                         position: "absolute",
                                         right: 0,
                                         top: -30,
-                                        color: theme.palette.customColor.main,
+                                        color: theme.palette.progressBar.percentText,
                                         fontFamily: FONTS.secondaryFont,
                                         fontSize: 14,
                                         fontWeight: 400,

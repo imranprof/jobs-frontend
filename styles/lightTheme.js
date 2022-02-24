@@ -23,7 +23,6 @@ const lightTheme = createTheme({
             light: COLORS.gray,
             dark: COLORS.black,
             highContrast: COLORS.pink,
-            resumeSubTitle: COLORS.pink_2
         },
         customShadow: {
             main: COLORS.boxShadow_2,
@@ -39,7 +38,6 @@ const lightTheme = createTheme({
         customHoverBackground: {
             main: COLORS.pink_1,
             closeIcon: COLORS.pink_1,
-            resumeCard: COLORS.pink_1
         },
         beforeBackground: {
             main: COLORS.gray_5
@@ -51,12 +49,34 @@ const lightTheme = createTheme({
             main: COLORS.white_1
         },
         customBorder: {
-            beforeElement: COLORS.gray_5
+            beforeElement: COLORS.gray_5,
+        },
+        resume: {
+            navListColor: COLORS.black,
+            navListShadow: COLORS.boxShadow_9,
+            navListTitle: COLORS.pink,
+            mainTitle: COLORS.black,
+            subTitle: COLORS.pink_2,
+            cardBeforeBG: COLORS.pink_1,
+            cardShadow: COLORS.boxShadow_9,
+            cardTitle: COLORS.black,
+            cardSubTitle: COLORS.gray,
+            cardDescription: COLORS.gray,
+            cardDivider: COLORS.white_7,
+            hover: {
+                cardTitle: COLORS.black,
+                cardSubTitle: COLORS.white,
+                cardDescription: COLORS.white,
+                cardDivider: COLORS.pink_4,
+            }
         },
         progressBar: {
             main: COLORS.white_5,
-            secondary: COLORS.pink_3
-        }
+            secondary: COLORS.pink_3,
+            title: COLORS.black,
+            percentText: COLORS.gray,
+            boxShadow: "none",
+        },
     },
 });
 

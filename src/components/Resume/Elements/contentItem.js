@@ -30,7 +30,7 @@ const ContentItem = ({cardType, cardContent}) => {
                 </Grid>
                 <Grid
                     className={`${resumeWrapper}__nav-content__row__column__content__item__inner__description`}>
-                    {description()}
+                    <p>{description()}</p>
                 </Grid>
             </div>
         </Grid>

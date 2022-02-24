@@ -23,7 +23,6 @@ const darkTheme = createTheme({
             light: COLORS.white,
             dark: COLORS.gray_3,
             highContrast: COLORS.pink,
-            resumeSubTitle: COLORS.pink_2
         },
         customShadow: {
             main: COLORS.boxShadow_1,
@@ -55,9 +54,30 @@ const darkTheme = createTheme({
         customBorder: {
             beforeElement: COLORS.black_6
         },
+        resume: {
+            navListColor: COLORS.white_4,
+            navListShadow: COLORS.boxShadow_3,
+            navListTitle: COLORS.pink,
+            mainTitle: COLORS.white_4,
+            subTitle: COLORS.pink_2,
+            cardBeforeBG: COLORS.black_5,
+            cardShadow: COLORS.boxShadow_3,
+            cardTitle: COLORS.white_4,
+            cardSubTitle: COLORS.gray_4,
+            cardDescription: COLORS.gray_3,
+            cardDivider: COLORS.black_10,
+            hover: {
+                cardTitle: COLORS.white,
+                cardSubTitle: COLORS.gray_4,
+                cardDescription: COLORS.white_4,
+            }
+        },
         progressBar: {
-            main: COLORS.black_9,
-            secondary: COLORS.pink_orange
+            main: COLORS.black_1,
+            secondary: COLORS.pink_orange,
+            title: COLORS.white_6,
+            percentText: COLORS.white_6,
+            boxShadow: COLORS.boxShadow_8,
         }
     },
 });
