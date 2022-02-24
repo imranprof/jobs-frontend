@@ -13,21 +13,25 @@ const lightTheme = createTheme({
             dark: COLORS.white_2,
             gradiant: {
                 light: COLORS.white_3,
-                dark: COLORS.pink_1,
+                dark: COLORS.pink,
                 highContrast: COLORS.pink_1,
             },
-            sideBar: COLORS.white_1
+            sideBar: COLORS.white_1,
         },
         customColor: {
             main: COLORS.gray,
             light: COLORS.gray,
             dark: COLORS.black,
-            highContrast: COLORS.pink
+            highContrast: COLORS.pink,
+            navLinkActive: COLORS.pink,
+            socialLinkHover: COLORS.white,
+            backToTop: COLORS.pink
         },
         customShadow: {
             main: COLORS.boxShadow_2,
             light: COLORS.boxShadow_5,
-            default: COLORS.boxShadow_6
+            default: COLORS.boxShadow_6,
+            backToTop: COLORS.boxShadow_8
         },
         customDivider: {
             main: COLORS.gray_5

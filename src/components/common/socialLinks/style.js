@@ -30,11 +30,24 @@ const useStyles = makeStyles({
                 width: 60,
                 height: 60,
                 marginRight: 25,
+                transition: "background .4s ease",
                 '&--icon': {
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
                     color: theme.palette.customColor.main,
+                    transition: "color .4s ease",
+                    '&:hover': {
+                        color: theme.palette.customColor.socialLinkHover
+                    }
                 },
                 '&--img': {
                     maxHeight: 34,
+                },
+                '&:hover': {
+                    background: theme.palette.customBackground.gradiant.dark,
                 },
                 [theme.breakpoints.down('xs')]: {
                     '&--icon': {

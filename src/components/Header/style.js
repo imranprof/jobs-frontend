@@ -98,7 +98,7 @@ export const useStyles = makeStyles({
             },
             '& .active': {
                 opacity: 1,
-                color: theme.palette.customColor.light,
+                color: theme.palette.customColor.navLinkActive,
             },
             '&--default': {
                 display: 'inline',

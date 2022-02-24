@@ -22,13 +22,17 @@ const darkTheme = createTheme({
             main: COLORS.white_4,
             light: COLORS.white,
             dark: COLORS.gray_3,
-            highContrast: COLORS.pink
+            highContrast: COLORS.pink,
+            navLinkActive: COLORS.white,
+            socialLinkHover: COLORS.white,
+            backToTop: COLORS.white_4
         },
         customShadow: {
             main: COLORS.boxShadow_1,
             light: COLORS.boxShadow_4,
             dark: COLORS.boxShadow_7,
-            default: COLORS.boxShadow_3
+            default: COLORS.boxShadow_3,
+            backToTop: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.black_3
