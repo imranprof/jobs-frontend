@@ -33,7 +33,8 @@ const lightTheme = createTheme({
             main: COLORS.boxShadow_2,
             light: COLORS.boxShadow_5,
             default: COLORS.boxShadow_6,
-            backToTop: COLORS.boxShadow_8
+            backToTop: COLORS.boxShadow_8,
+            featureShadow: COLORS.boxShadow_9
         },
         customDivider: {
             main: COLORS.gray_5

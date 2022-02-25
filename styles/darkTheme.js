@@ -34,7 +34,8 @@ const darkTheme = createTheme({
             light: COLORS.boxShadow_4,
             dark: COLORS.boxShadow_7,
             default: COLORS.boxShadow_3,
-            backToTop: COLORS.boxShadow_3
+            backToTop: COLORS.boxShadow_3,
+            featureShadow: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.black_3

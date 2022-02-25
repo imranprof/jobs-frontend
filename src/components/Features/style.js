@@ -28,7 +28,7 @@ const useStyles = makeStyles({
             height: "100%",
             textAlign: "left",
             background: theme.palette.customBackground.gradiant.light,
-            boxShadow: theme.palette.customShadow.default,
+            boxShadow: theme.palette.customShadow.featureShadow,
             borderRadius: 10,
             zIndex: 1,
             '&::before': {
@@ -67,6 +67,7 @@ const useStyles = makeStyles({
                 color: theme.palette.customColor.highContrast,
                 marginBottom: 29,
                 overflow: "visible",
+                transition: "color 0.4s ease 0s",
             },
             '&__content': {
                 '&__title': {
