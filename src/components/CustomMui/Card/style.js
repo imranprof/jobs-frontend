@@ -8,7 +8,7 @@ const useStyles = makeStyles({
         maxWidth: 400,
         height: "100%",
         borderRadius: 20,
-        boxShadow: theme.palette.customShadow.default,
+        boxShadow: theme.palette.customShadow.paperCardShadow,
         padding: 30,
         marginTop: 30,
         zIndex: 1,
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
             zIndex: -1,
             transition: "opacity 0.5s ease-in-out",
             opacity: 0,
-            background: theme.palette.customBackground.gradiant.dark,
+            background: theme.palette.customBackground.gradiant.cardHover,
         },
         '&__image-wrapper': {
             width: 340,
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
             borderRadius: 10,
             transition: "all 0.4s ease",
         },
-        '&__content': {
+        '& .MuiCardContent-root': {
             padding: "18px 0 0 0",
         },
         '&__category-info': {
@@ -85,8 +85,8 @@ const useStyles = makeStyles({
                 lineHeight: "34px",
                 transition: "all 0.4s ease",
                 '&__arrow': {
+                    width: 30,
                     color: theme.palette.customColor.highContrast,
-                    top: 3,
                     marginLeft: 6,
                     transform: "rotate(-45deg)",
                     transition: "all 0.4s ease",

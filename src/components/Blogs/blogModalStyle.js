@@ -34,7 +34,7 @@ const useStyles = makeStyles({
             borderRadius: 10,
             fontFamily: FONTS.secondaryFont,
             background: theme.palette.customBackground.gradiant.light,
-            boxShadow: theme.palette.customShadow.default,
+            boxShadow: theme.palette.customShadow.paperCardShadow,
             transition: ".2s linear",
             // ========= Breakpoints =========
             [theme.breakpoints.down(767)]: {

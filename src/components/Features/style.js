@@ -28,7 +28,7 @@ const useStyles = makeStyles({
             height: "100%",
             textAlign: "left",
             background: theme.palette.customBackground.gradiant.light,
-            boxShadow: theme.palette.customShadow.featureShadow,
+            boxShadow: theme.palette.customShadow.paperCardShadow,
             borderRadius: 10,
             zIndex: 1,
             '&::before': {

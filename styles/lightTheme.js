@@ -15,6 +15,7 @@ const lightTheme = createTheme({
                 light: COLORS.white_3,
                 dark: COLORS.pink,
                 highContrast: COLORS.pink_1,
+                cardHover: COLORS.white_3
             },
             sideBar: COLORS.white_1,
         },
@@ -34,7 +35,7 @@ const lightTheme = createTheme({
             light: COLORS.boxShadow_5,
             default: COLORS.boxShadow_6,
             backToTop: COLORS.boxShadow_8,
-            featureShadow: COLORS.boxShadow_9
+            paperCardShadow: COLORS.boxShadow_9
         },
         customDivider: {
             main: COLORS.gray_5

@@ -15,6 +15,7 @@ const darkTheme = createTheme({
                 light: COLORS.black_4,
                 dark: COLORS.black_5,
                 highContrast: COLORS.pink_1,
+                cardHover: COLORS.black_5
             },
             sideBar: COLORS.black_2,
         },
@@ -35,7 +36,7 @@ const darkTheme = createTheme({
             dark: COLORS.boxShadow_7,
             default: COLORS.boxShadow_3,
             backToTop: COLORS.boxShadow_3,
-            featureShadow: COLORS.boxShadow_3
+            paperCardShadow: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.black_3

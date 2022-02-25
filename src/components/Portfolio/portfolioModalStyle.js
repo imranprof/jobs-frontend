@@ -35,7 +35,7 @@ const useStyles = makeStyles({
             overflowX: "hidden",
             overflowY: "auto",
             background: theme.palette.customBackground.gradiant.light,
-            boxShadow: theme.palette.customShadow.default,
+            boxShadow: theme.palette.customShadow.paperCardShadow,
             transition: ".2s linear",
             // ========= Breakpoints =========
             [theme.breakpoints.down(767)]: {
@@ -149,11 +149,11 @@ const useStyles = makeStyles({
                     },
                     '&__link-button': {
                         background: theme.palette.customBackground.gradiant.light,
-                        boxShadow: theme.palette.customShadow.default,
+                        boxShadow: theme.palette.customShadow.paperCardShadow,
                         color: theme.palette.customColor.highContrast,
                         cursor: "pointer",
                         textDecoration: "none",
-                        transition: "transform .4s ease",
+                        transition: "all .4s ease",
                         fontFamily: FONTS.secondaryFont,
                         fontSize: 14,
                         fontWeight: 500,
