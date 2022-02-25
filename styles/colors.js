@@ -45,4 +45,4 @@ const COLORS = {
     boxShadow_9: "5px 5px 15px #D1D9E6, -5px -5px 15px #ffffff",
 }
 
-export default COLORS
+export default COLORS;
