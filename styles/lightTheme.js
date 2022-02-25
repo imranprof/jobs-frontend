@@ -25,7 +25,9 @@ const lightTheme = createTheme({
             highContrast: COLORS.pink,
             navLinkActive: COLORS.pink,
             socialLinkHover: COLORS.white,
-            backToTop: COLORS.pink
+            backToTop: COLORS.pink,
+            featuresHover: COLORS.white,
+            featureIconHover: COLORS.white
         },
         customShadow: {
             main: COLORS.boxShadow_2,

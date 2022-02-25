@@ -29,10 +29,39 @@ const useStyles = makeStyles({
             textAlign: "left",
             background: theme.palette.customBackground.gradiant.light,
             boxShadow: theme.palette.customShadow.default,
-            padding: "50px 50px 35px 50px",
             borderRadius: 10,
-            transition: "0.5s all ease-in-out",
             zIndex: 1,
+            '&::before': {
+                position: "absolute",
+                content: '""',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                zIndex: -1,
+                transition: "all 0.5s ease-in-out",
+                opacity: 0,
+                background: theme.palette.customBackground.gradiant.dark,
+                borderRadius: 10,
+            },
+            '&:hover::before': {
+                opacity: 1,
+                background: theme.palette.customBackground.gradiant.dark,
+            },
+            '&:hover &__icon': {
+                color: theme.palette.customColor.featureIconHover
+            },
+            '&:hover &__content__read-more-btn': {
+                color: theme.palette.customColor.featureIconHover,
+                height: 50,
+                opacity: 1,
+            },
+            '&:hover &__content__title, &:hover &__content__description': {
+                color: theme.palette.customColor.featuresHover
+            },
+            '&:hover &-wrapper': {
+                transform: "translateY(-10px)",
+            },
             '&__icon': {
                 fontSize: 40,
                 color: theme.palette.customColor.highContrast,
@@ -65,13 +94,6 @@ const useStyles = makeStyles({
                     color: theme.palette.customColor.highContrast,
                     transition: "all 0.4s ease 0s",
                 },
-                '&:hover > &__read-more-btn': {
-                    height: 50,
-                    opacity: 1,
-                },
-                '&:hover > &__title, &:hover > &__description': {
-                    color: theme.palette.customColor.light
-                },
                 [theme.breakpoints.down('xs')]: {
                     '&__title': {
                         fontSize: 18,
@@ -85,10 +107,9 @@ const useStyles = makeStyles({
                 },
             },
             '&-wrapper': {
+                height: "100%",
+                padding: "50px 50px 35px 50px",
                 transition: "all 0.4s ease 0s",
-                '&:hover': {
-                    transform: "translateY(-10px)"
-                }
             },
             [theme.breakpoints.down('xs')]: {
                 display: "flex",

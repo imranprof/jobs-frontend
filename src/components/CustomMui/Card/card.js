@@ -54,7 +54,7 @@ const CustomCard = ({element, elementType}) => {
                             <a className={`${classes.cardWrapper}__title__link`}>
                                 {element.title}
                                 <Icon
-                                    className={`${classes.cardWrapper}__title__link__arrow ${FontAwesomeIcons.arrow}`}/>
+                                    className={`${classes.cardWrapper}__title__link__arrow ${FontAwesomeIcons.arrowRight}`}/>
                             </a>
                         </Link>
                     </h1>
