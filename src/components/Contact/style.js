@@ -10,7 +10,7 @@ const useStyles = makeStyles({
       width: "100%",
       height: "100%",
       borderRadius: 20,
-      boxShadow: theme.palette.customShadow.default,
+      boxShadow: theme.palette.customShadow.paperCardShadow,
       padding: 30,
       '&__image-wrapper': {
         width: "100%",
@@ -109,7 +109,7 @@ const useStyles = makeStyles({
       width: "100%",
       height: "100%",
       borderRadius: 20,
-      boxShadow: theme.palette.customShadow.default,
+      boxShadow: theme.palette.customShadow.paperCardShadow,
       padding: 30,
       marginLeft: 10,
       '&__input-wrapper': {
@@ -141,7 +141,7 @@ const useStyles = makeStyles({
         fontFamily: FONTS.primaryFont,
         letterSpacing: "1px",
         transition: "all 0.4s",
-        border: "2px solid #191b1e",
+        border: `2px solid ${theme.palette.customColor.inputBorder}`,
         borderRadius: 6,
         padding: "0 15px",
         '&:focus': {
@@ -162,11 +162,11 @@ const useStyles = makeStyles({
         }
       },
       '&__button-wrapper': {
-        paddingTop: "0 !important",
+        padding: "0 !important",
+        margin: "0 16px 16px 16px !important",
         transition: "transform .4s ease",
         '&:hover': {
           transform: "translateY(-5px)",
-          color: "white !important"
         },
       },
       '&__error-message, &__success-message': {
@@ -209,7 +209,7 @@ const useStyles = makeStyles({
       textAlign: "center",
       textTransform: "uppercase",
       background: theme.palette.customBackground.gradiant.light,
-      boxShadow: theme.palette.customShadow.main,
+      boxShadow: theme.palette.customShadow.paperCardShadow,
       width: "100%",
       height: 60,
       marginRight: 25,
@@ -234,20 +234,18 @@ const useStyles = makeStyles({
         borderRadius: 6,
         cursor: "pointer"
       },
+      '&:hover &__text, &:hover &__icon': {
+        color: theme.palette.customColor.sendMessageBtn,
+        cursor: "pointer"
+      },
       '&__text': {
         fontSize: 14,
         fontWeight: 500,
         fontFamily: FONTS.secondaryFont,
         marginRight: 10,
-        '&:hover': {
-          cursor: "pointer"
-        }
       },
       '&__icon': {
         fontSize: 20,
-        '&:hover': {
-          cursor: "pointer"
-        }
       }
     }
   })

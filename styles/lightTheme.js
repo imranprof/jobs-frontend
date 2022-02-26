@@ -28,7 +28,9 @@ const lightTheme = createTheme({
             socialLinkHover: COLORS.white,
             backToTop: COLORS.pink,
             featuresHover: COLORS.white,
-            featureIconHover: COLORS.white
+            featureIconHover: COLORS.white,
+            inputBorder: COLORS.gray_6,
+            sendMessageBtn: COLORS.white
         },
         customShadow: {
             main: COLORS.boxShadow_2,

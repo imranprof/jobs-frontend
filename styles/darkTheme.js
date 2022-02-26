@@ -28,7 +28,9 @@ const darkTheme = createTheme({
             socialLinkHover: COLORS.white,
             backToTop: COLORS.white_4,
             featuresHover: COLORS.white,
-            featureIconHover: COLORS.pink
+            featureIconHover: COLORS.pink,
+            inputBorder: COLORS.black_2,
+            sendMessageBtn: COLORS.pink
         },
         customShadow: {
             main: COLORS.boxShadow_1,
