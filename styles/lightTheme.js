@@ -17,7 +17,7 @@ const lightTheme = createTheme({
                 highContrast: COLORS.pink_1,
                 cardHover: COLORS.white_3
             },
-            sideBar: COLORS.white_1,
+            sideBar: COLORS.white_1
         },
         customColor: {
             main: COLORS.gray,
@@ -36,7 +36,7 @@ const lightTheme = createTheme({
             main: COLORS.boxShadow_2,
             light: COLORS.boxShadow_5,
             default: COLORS.boxShadow_6,
-            backToTop: COLORS.boxShadow_8,
+            backToTop: COLORS.boxShadow_10,
             paperCardShadow: COLORS.boxShadow_9
         },
         customDivider: {
@@ -48,7 +48,45 @@ const lightTheme = createTheme({
         customHoverBackground: {
             main: COLORS.pink_1,
             closeIcon: COLORS.pink_1,
-        }
+        },
+        beforeBackground: {
+            main: COLORS.gray_5
+        },
+        beforeShadow: {
+            main: COLORS.boxShadow_8,
+        },
+        afterBackground: {
+            main: COLORS.white_1
+        },
+        customBorder: {
+            beforeElement: COLORS.gray_5,
+        },
+        resume: {
+            navListColor: COLORS.black,
+            navListShadow: COLORS.boxShadow_9,
+            navListTitle: COLORS.pink,
+            mainTitle: COLORS.black,
+            subTitle: COLORS.pink_2,
+            cardBeforeBG: COLORS.pink_1,
+            cardShadow: COLORS.boxShadow_9,
+            cardTitle: COLORS.black,
+            cardSubTitle: COLORS.gray,
+            cardDescription: COLORS.gray,
+            cardDivider: COLORS.white_7,
+            hover: {
+                cardTitle: COLORS.black,
+                cardSubTitle: COLORS.white,
+                cardDescription: COLORS.white,
+                cardDivider: COLORS.pink_4,
+            }
+        },
+        progressBar: {
+            main: COLORS.white_5,
+            secondary: COLORS.pink_3,
+            title: COLORS.black,
+            percentText: COLORS.gray,
+            boxShadow: "none",
+        },
     },
 });
 
