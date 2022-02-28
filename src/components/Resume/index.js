@@ -43,7 +43,7 @@ const Resume = () => {
     }
 
     return (
-        <div className={resumeWrapper}>
+        <div className={resumeWrapper} id="resume">
             <div className={`${resumeWrapper}__body`}>
                 {navList()}
                 {navContent()}
