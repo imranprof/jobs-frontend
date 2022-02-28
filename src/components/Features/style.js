@@ -111,6 +111,9 @@ const useStyles = makeStyles({
                 height: "100%",
                 padding: "50px 50px 35px 50px",
                 transition: "all 0.4s ease 0s",
+                [theme.breakpoints.down('xs')]: {
+                    padding: 0
+                }
             },
             [theme.breakpoints.down('xs')]: {
                 display: "flex",
