@@ -14,11 +14,11 @@ const useStyles = makeStyles({
                 marginBottom: 50
             },
             [theme.breakpoints.down('xs')]: {
-                height: 270,
+                minHeight: 270,
                 justifyContent: "center",
                 marginBottom: 20,
                 '& a': {
-                    height: 260,
+                    minHeight: 250,
                     marginBottom: 0
                 }
             },
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
             },
             '&:hover &__content__read-more-btn': {
                 color: theme.palette.customColor.featureIconHover,
-                height: 50,
+                height: "auto",
                 opacity: 1,
             },
             '&:hover &__content__title, &:hover &__content__description': {
