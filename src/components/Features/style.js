@@ -9,7 +9,7 @@ const useStyles = makeStyles({
             display: "flex",
             '& a': {
                 width: "93%",
-                height: 340,
+                minHeight: 340,
                 textDecoration: "none",
                 marginBottom: 50
             },
