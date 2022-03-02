@@ -228,6 +228,7 @@ const useStyles = makeStyles({
         transition: "opacity 0.5s ease-in-out",
         opacity: 0,
         background: theme.palette.customBackground.gradiant.dark,
+        borderRadius: 6
       },
       '&:hover::before': {
         opacity: 1,
