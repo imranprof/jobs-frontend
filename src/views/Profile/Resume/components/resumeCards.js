@@ -2,8 +2,8 @@ import {useContext} from 'react';
 import ThemeContextProvider from "../../../../contexts/themeContext";
 
 import {ResumeStyle} from "../style";
-import RowHeading from "../Elements/rowHeading";
-import RowContent from "../Elements/rowContent";
+import RowHeading from "./rowHeading";
+import RowContent from "./rowContent";
 
 const ResumeCards = ({cardType, cardData}) => {
 
