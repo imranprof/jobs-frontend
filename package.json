@@ -1,15 +1,15 @@
 {
-  "name": "portfolio_frontend",
+  "name": "seek_right_jobs_frontend",
   "version": "1.0.0",
   "private": true,
   "description": "The Portfolio front-end web app.",
   "author": "Rightcodes Solution",
-  "repository": "https://github.com/bondhansarker/portfolio_frontend.git",
+  "repository": "https://github.com/rightcodes-solution/seekrightjobs_front",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8080",
     "build": "next build",
     "start": "concurrently -r 'yarn run dev' 'yarn run open:browser'",
-    "open:browser": "open-cli http://localhost:3000",
+    "open:browser": "open-cli http://localhost:8080",
     "lint": "next lint"
   },
   "dependencies": {
