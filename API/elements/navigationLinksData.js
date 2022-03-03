@@ -2,7 +2,7 @@ export const NavigationLinksData = [
     {
         "id": 1,
         "name": "Home",
-        "href": "home"
+        "href": "topSection"
     },
     {
         "id": 2,
