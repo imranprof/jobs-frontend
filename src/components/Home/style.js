@@ -64,7 +64,10 @@ export const useStyles = makeStyles({
             lineHeight: "35px",
             '&__expertise': {
               fontSize: 24
-            }
+            },
+            '&__cursor': {
+              height: 35,
+            },
           }
         },
         '&__bio': {
@@ -145,14 +148,14 @@ export const useStyles = makeStyles({
       borderRadius: "50%",
       backgroundColor: theme.palette.customBackground.light,
       textAlign: "center",
-      boxShadow: theme.palette.customShadow.default,
+      boxShadow: theme.palette.customShadow.backToTop,
       transition: "all 0.4s",
       '&:hover': {
         backgroundColor: theme.palette.customBackground.dark,
       },
       '& i': {
         display: "block",
-        color: theme.palette.customColor.main,
+        color: theme.palette.customColor.backToTop,
         fontSize: 24,
       }
     },

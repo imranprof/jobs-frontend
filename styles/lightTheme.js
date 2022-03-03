@@ -13,8 +13,9 @@ const lightTheme = createTheme({
             dark: COLORS.white_2,
             gradiant: {
                 light: COLORS.white_3,
-                dark: COLORS.pink_1,
+                dark: COLORS.pink,
                 highContrast: COLORS.pink_1,
+                cardHover: COLORS.white_3
             },
             sideBar: COLORS.white_1
         },
@@ -23,11 +24,20 @@ const lightTheme = createTheme({
             light: COLORS.gray,
             dark: COLORS.black,
             highContrast: COLORS.pink,
+            navLinkActive: COLORS.pink,
+            socialLinkHover: COLORS.white,
+            backToTop: COLORS.pink,
+            featuresHover: COLORS.white,
+            featureIconHover: COLORS.white,
+            inputBorder: COLORS.gray_6,
+            sendMessageBtn: COLORS.white
         },
         customShadow: {
             main: COLORS.boxShadow_2,
             light: COLORS.boxShadow_5,
-            default: COLORS.boxShadow_6
+            default: COLORS.boxShadow_6,
+            backToTop: COLORS.boxShadow_10,
+            paperCardShadow: COLORS.boxShadow_9
         },
         customDivider: {
             main: COLORS.gray_5

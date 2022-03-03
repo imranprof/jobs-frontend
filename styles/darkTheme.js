@@ -15,6 +15,7 @@ const darkTheme = createTheme({
                 light: COLORS.black_4,
                 dark: COLORS.black_5,
                 highContrast: COLORS.pink_1,
+                cardHover: COLORS.black_5
             },
             sideBar: COLORS.black_2,
         },
@@ -23,12 +24,21 @@ const darkTheme = createTheme({
             light: COLORS.white,
             dark: COLORS.gray_3,
             highContrast: COLORS.pink,
+            navLinkActive: COLORS.white,
+            socialLinkHover: COLORS.white,
+            backToTop: COLORS.white_4,
+            featuresHover: COLORS.white,
+            featureIconHover: COLORS.pink,
+            inputBorder: COLORS.black_2,
+            sendMessageBtn: COLORS.pink
         },
         customShadow: {
             main: COLORS.boxShadow_1,
             light: COLORS.boxShadow_4,
             dark: COLORS.boxShadow_7,
-            default: COLORS.boxShadow_3
+            default: COLORS.boxShadow_3,
+            backToTop: COLORS.boxShadow_3,
+            paperCardShadow: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.black_3,

@@ -91,7 +91,10 @@ const useStyles = makeStyles({
                     },
                     '& > :last-child': {
                         '& > :first-child': {
-                            marginTop: 0
+                            marginTop: 0,
+                            '& > :first-child': {
+                                marginTop: 30,
+                            }
                         },
                         '& > :last-child > :last-child': {
                             marginBottom: 0
