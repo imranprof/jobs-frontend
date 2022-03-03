@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 
-import {profileData} from "../../../../API/mock/profileData";
+import {profileData} from "../../../../API/mock/profile/profileData";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import Skill from "./skill";
 import {SkillsStyle} from "./style";

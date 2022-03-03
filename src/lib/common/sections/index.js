@@ -1,4 +1,4 @@
-import {SectionsData} from "../../../../API/elements/sectionsData";
+import {SectionsData} from "../../../../API/elements/profile/sectionsData";
 import Section from "./section";
 
 const Sections = () => {

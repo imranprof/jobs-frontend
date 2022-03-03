@@ -5,7 +5,7 @@ import {Grid} from "@material-ui/core";
 import CustomCard from "../../../lib/CustomMui/Card/card";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import {PortfolioStyle} from "./style";
-import {PortfolioData} from "../../../../API/mock/portfolioData";
+import {PortfolioData} from "../../../../API/mock/profile/portfolioData";
 
 const Portfolio = () => {
     const customTheme = useContext(ThemeContextProvider);

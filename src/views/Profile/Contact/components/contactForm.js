@@ -4,7 +4,7 @@ import {Card, Grid} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
-import {FormErrorsData} from "../../../../../API/elements/formErrorsData";
+import {FormErrorsData} from "../../../../../API/elements/profile/formErrorsData";
 import InputWrapper from "./inputWrapper";
 
 const ContactForm = ({classes}) => {

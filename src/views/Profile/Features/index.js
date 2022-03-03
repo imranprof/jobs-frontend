@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import {Grid} from "@material-ui/core";
 
 import Feature from "./components/feature";
-import {featuresData} from "../../../../API/mock/featuresData";
+import {featuresData} from "../../../../API/mock/profile/featuresData";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import {FeatureStyle} from "./style";
 

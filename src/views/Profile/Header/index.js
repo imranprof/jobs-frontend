@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useRef} from 'react';
 import {AppBar, Hidden, Toolbar,} from "@material-ui/core";
 
 import ThemeContextProvider from "../../../contexts/themeContext";
-import {profileData} from "../../../../API/mock/profileData";
+import {profileData} from "../../../../API/mock/profile/profileData";
 import ProfileInfo from "./components/profileInfo";
 import SideBar from "./components/sideBar";
 import NavItems from "./components/navItems";

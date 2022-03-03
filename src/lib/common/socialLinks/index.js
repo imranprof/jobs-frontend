@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 
 import ThemeContextProvider from "../../../contexts/themeContext";
-import {profileData} from "../../../../API/mock/profileData";
+import {profileData} from "../../../../API/mock/profile/profileData";
 import SocialLink from "./socialLink";
 import {SocialLinkStyle} from "./style";
 

@@ -3,7 +3,7 @@ import {Link} from 'react-scroll'
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
-import {NavigationLinksData} from "../../../../../API/elements/navigationLinksData";
+import {NavigationLinksData} from "../../../../../API/elements/profile/navigationLinksData";
 
 const NavItems = ({classes, variant}) => {
     return (

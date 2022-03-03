@@ -4,7 +4,7 @@ import {animateScroll as scroll} from 'react-scroll';
 import {Grid} from "@material-ui/core";
 
 import ThemeContextProvider from "../../../contexts/themeContext";
-import {profileData} from "../../../../API/mock/profileData";
+import {profileData} from "../../../../API/mock/profile/profileData";
 import TypeWriter from "./typeWriter";
 import SocialLinks from "../../../lib/common/socialLinks";
 import Skills from "../../../lib/common/skills";

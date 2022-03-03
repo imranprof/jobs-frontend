@@ -6,7 +6,7 @@ import {ContactStyle} from "./style";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import ContactInfo from "./components/contactInfo";
 import ContactForm from "./components/contactForm";
-import {ContactData} from "../../../../API/mock/contactData";
+import {ContactData} from "../../../../API/mock/profile/contactData";
 
 const Contact = () => {
     const customTheme = useContext(ThemeContextProvider);

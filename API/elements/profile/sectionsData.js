@@ -1,8 +1,8 @@
-import Features from "../../src/views/Profile/Features";
-import Portfolio from "../../src/views/Profile/Portfolio";
-import Blogs from "../../src/views/Profile/Blogs";
-import Contact from "../../src/views/Profile/Contact";
-import Resume from "../../src/views/Profile/Resume";
+import Features from "../../../src/views/Profile/Features";
+import Portfolio from "../../../src/views/Profile/Portfolio";
+import Blogs from "../../../src/views/Profile/Blogs";
+import Contact from "../../../src/views/Profile/Contact";
+import Resume from "../../../src/views/Profile/Resume";
 
 export const SectionsData = () => [
     {

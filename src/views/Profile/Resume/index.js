@@ -4,7 +4,7 @@ import {List, ListItem} from "@material-ui/core";
 
 import ThemeContextProvider from "../../../contexts/themeContext";
 import {ResumeStyle} from "./style";
-import {ResumeData} from "../../../../API/mock/resumeData";
+import {ResumeData} from "../../../../API/mock/profile/resumeData";
 import ResumeCards from "./components/resumeCards";
 
 const Resume = () => {

@@ -5,7 +5,7 @@ import {Grid} from "@material-ui/core";
 
 import ThemeContextProvider from "../../../contexts/themeContext";
 import {BlogsStyle} from "./style";
-import {BlogsData} from "../../../../API/mock/blogsData";
+import {BlogsData} from "../../../../API/mock/profile/blogsData";
 
 const Blogs = () => {
     const customTheme = useContext(ThemeContextProvider);
