@@ -6,8 +6,8 @@ import {Grid} from "@material-ui/core";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import {profileData} from "../../../../API/mock/profile/profileData";
 import TypeWriter from "./typeWriter";
-import SocialLinks from "../../../lib/common/socialLinks";
-import Skills from "../../../lib/common/skills";
+import SocialLinks from "../../../lib/profile/socialLinks";
+import Skills from "../../../lib/profile/skills";
 import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 

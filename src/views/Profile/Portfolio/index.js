@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 
 import {Grid} from "@material-ui/core";
 
-import CustomCard from "../../../lib/CustomMui/Card/card";
+import CustomCard from "../../../lib/profile/card/card";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import {PortfolioStyle} from "./style";
 import {PortfolioData} from "../../../../API/mock/profile/portfolioData";
