@@ -1,8 +1,9 @@
-import {AppBar, Hidden, Toolbar,} from "@material-ui/core";
+import Link from 'next/link';
+
+import {AppBar, Hidden, Toolbar, Button} from "@material-ui/core";
 
 import {profileData} from "../../../../API/mock/profile/profileData";
 import SideBar from "./components/sideBar";
-import NavItems from "./components/navItems";
 
 const ProfilesHeader = ({ classes, headerRef }) => {
     const {name, avatar} = profileData;
@@ -10,10 +11,17 @@ const ProfilesHeader = ({ classes, headerRef }) => {
     return (
         <AppBar className={classes.headerWrapper} ref={headerRef}>
             <Toolbar className={`${classes.headerWrapper}__toolbar`}>
-                <h2>SeekRightJobs</h2>
+                <h1>SeekRightJobs</h1>
                 <SideBar name={name} avatar={avatar} classes={classes}/>
                 <Hidden mdDown>
-                    <NavItems classes={classes} variant={"default"}/>
+                    <div className={`${classes.headerWrapper}__authentication`}>
+                        <Link href="#">
+                            <a className={`${classes.headerWrapper}__authentication-signin`}>Sign In</a>
+                        </Link>
+                        <Link href="#">
+                            <a className={`${classes.headerWrapper}__authentication-signup`}>Sign Up</a>
+                        </Link>
+                    </div>
                 </Hidden>
             </Toolbar>
         </AppBar>

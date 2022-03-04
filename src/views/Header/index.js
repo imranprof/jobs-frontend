@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useRef} from 'react';
 import ProfileHeader from "../Profile/Header";
 import ProfilesHeader from "../Profiles/Header";
 import ThemeContextProvider from "../../contexts/themeContext";
-import {HeaderStyle} from "../Profile/Header/style";
+import {HeaderStyle} from "./style";
 
 const Header = (props) => {
   const customTheme = useContext(ThemeContextProvider);

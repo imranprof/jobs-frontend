@@ -1,5 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
-import FONTS from "../../../../styles/fonts";
+
+import FONTS from "../../../styles/fonts";
 
 export const useStyles = makeStyles({
     headerWrapper: theme => ({
@@ -21,6 +22,8 @@ export const useStyles = makeStyles({
             width: '100%',
             justifyContent: 'space-between'
         },
+
+        // Profile Header Styles
         '&__profile': {
             display: 'flex',
             alignItems: 'center',
@@ -157,6 +160,67 @@ export const useStyles = makeStyles({
             width: 45,
             height: 45,
         },
+
+        // Profiles Header Styles
+        '&__authentication': {
+            width: "12%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            '&-signin': {
+                fontFamily: FONTS.secondaryFont,
+                fontWeight: 400,
+                fontSize: 14,
+                letterSpacing: "1px",
+                color: theme.palette.customColor.main,
+                textDecoration: 'none',
+                cursor: "pointer",
+                opacity: .8,
+                transition: "all .4s ease 0s",
+                '&:hover': {
+                    opacity: 1,
+                    color: theme.palette.customColor.light,
+                },
+            },
+            '&-signup': {
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontFamily: FONTS.secondaryFont,
+                fontWeight: 400,
+                fontSize: 14,
+                letterSpacing: "1px",
+                textAlign: "center",
+                textDecoration: 'none',
+                background: theme.palette.customBackground.gradiant.light,
+                boxShadow: theme.palette.customShadow.paperCardShadow,
+                width: "55%",
+                height: 48,
+                border: "none",
+                borderRadius: 6,
+                color: theme.palette.customColor.highContrast,
+                zIndex: 1,
+                '&::before': {
+                    position: "absolute",
+                    content: '""',
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0,
+                    zIndex: -1,
+                    transition: "opacity 0.4s ease-in-out",
+                    opacity: 0,
+                    background: theme.palette.customBackground.gradiant.dark,
+                    borderRadius: 6
+                },
+                '&:hover::before': {
+                    opacity: 1,
+                    borderRadius: 6,
+                },
+            }
+        },
+
         // ========= Breakpoints =========
         [theme.breakpoints.between('xs',"sm")]: {
             padding: "15px 25px",
