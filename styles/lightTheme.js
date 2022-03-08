@@ -17,7 +17,7 @@ const lightTheme = createTheme({
                 highContrast: COLORS.pink_1,
                 cardHover: COLORS.white_3
             },
-            sideBar: COLORS.white_1
+            sideBar: COLORS.white_1,
         },
         customColor: {
             main: COLORS.gray,
@@ -30,11 +30,13 @@ const lightTheme = createTheme({
             featuresHover: COLORS.white,
             featureIconHover: COLORS.white,
             inputBorder: COLORS.gray_6,
-            sendMessageBtn: COLORS.white
+            sendMessageBtn: COLORS.white,
+            searchBtn: COLORS.pink
         },
         customShadow: {
             main: COLORS.boxShadow_2,
             light: COLORS.boxShadow_5,
+            dark: COLORS.boxShadow_10,
             default: COLORS.boxShadow_6,
             backToTop: COLORS.boxShadow_10,
             paperCardShadow: COLORS.boxShadow_9
