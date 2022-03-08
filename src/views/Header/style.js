@@ -22,7 +22,7 @@ export const useStyles = makeStyles({
       width: '100%',
       justifyContent: 'space-between',
       '&__right': {
-        width: 490,
+        width: 590,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
@@ -37,6 +37,7 @@ export const useStyles = makeStyles({
       },
       // Search bar
       '&__search': {
+        width: 350,
         height: 48,
         color: theme.palette.customColor.main,
         border: `2px solid ${theme.palette.customColor.inputBorder}`,
