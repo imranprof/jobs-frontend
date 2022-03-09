@@ -30,7 +30,8 @@ const darkTheme = createTheme({
             featuresHover: COLORS.white,
             featureIconHover: COLORS.pink,
             inputBorder: COLORS.black_2,
-            sendMessageBtn: COLORS.pink
+            sendMessageBtn: COLORS.pink,
+            searchBtn: COLORS.white_4
         },
         customShadow: {
             main: COLORS.boxShadow_1,
