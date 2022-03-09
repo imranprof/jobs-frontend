@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import {profileData} from "../../../../API/mock/profile/profileData";
 import SideBar from "./components/sideBar";
+import Logo from "../../../lib/logo";
 
 const ProfilesHeader = ({classes, headerRef}) => {
   const {name, avatar} = profileData;
@@ -21,12 +22,7 @@ const ProfilesHeader = ({classes, headerRef}) => {
   return (
     <AppBar className={classes.headerWrapper} ref={headerRef}>
       <Toolbar className={`${classes.headerWrapper}__toolbar`}>
-
-        <Link href="/">
-          <a className={`${classes.headerWrapper}__toolbar__logo`}>
-            <h1>SeekRightJobs</h1>
-          </a>
-        </Link>
+        <Logo />
 
         <SideBar name={name} avatar={avatar} classes={classes}/>
 
