@@ -6,11 +6,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
-import ProfileInfo from "./profileInfo";
-import NavItems from "./navItems";
-import SocialLinks from "../../../../lib/profile/socialLinks";
+import Logo from "../../../../lib/logo";
 
-const SideBar = ({name, avatar,classes}) => {
+const ProfilesSideBar = ({classes}) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -30,32 +28,27 @@ const SideBar = ({name, avatar,classes}) => {
                 onOpen={() => setOpen(true)}
                 onClose={() => setOpen(false)}
             >
-                <div className={`${classes.headerWrapper}__side-bar`}>
-                    <div className={`${classes.headerWrapper}__side-bar__icons`}>
-                        <ProfileInfo name={name} avatar={avatar} showName={false} classes={classes}/>
-                        <IconButton
-                            className={`${classes.headerWrapper}__close-icon`}
-                            onClick={() => setOpen(false)}
-                        >
-                            <CloseIcon/>
-                        </IconButton>
-                    </div>
+                <div className={`${classes.headerWrapper}__side-bar profiles`}>
 
-                    <p className={`${classes.headerWrapper}__profile__name ${classes.headerWrapper}__profile__name--drawer`}>
-                        {name}
-                    </p>
+                    <IconButton
+                      className={`${classes.headerWrapper}__close-icon`}
+                      onClick={() => setOpen(false)}
+                    >
+                        <CloseIcon/>
+                    </IconButton>
+
+                    <div className={`${classes.headerWrapper}__side-bar__icons`}>
+                        <Logo />
+                    </div>
 
                     <Divider/>
                     <div className={`${classes.headerWrapper}__side-bar__links`}>
-                        <NavItems classes={classes} variant={"drawer"}/>
+                        {/*<NavItems classes={classes} variant={"drawer"}/>*/}
                     </div>
-                    <Divider style={{marginBottom: "30px"}}/>
-
-                    <SocialLinks/>
                 </div>
             </SwipeableDrawer>
         </>
     );
 };
 
-export default SideBar;
+export default ProfilesSideBar;

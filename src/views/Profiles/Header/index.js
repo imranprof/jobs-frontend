@@ -5,12 +5,10 @@ import {useFormik} from "formik";
 import {AppBar, Hidden, InputAdornment, InputBase, Toolbar} from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
 
-import {profileData} from "../../../../API/mock/profile/profileData";
-import SideBar from "./components/sideBar";
+import ProfilesSideBar from "./components/profilesSideBar";
 import Logo from "../../../lib/logo";
 
 const ProfilesHeader = ({classes, headerRef}) => {
-  const {name, avatar} = profileData;
 
   const formik = useFormik({
     initialValues: {searchValue: ''},
@@ -24,7 +22,7 @@ const ProfilesHeader = ({classes, headerRef}) => {
       <Toolbar className={`${classes.headerWrapper}__toolbar`}>
         <Logo />
 
-        <SideBar name={name} avatar={avatar} classes={classes}/>
+        <ProfilesSideBar classes={classes}/>
 
         <Hidden mdDown>
           <div className={`${classes.headerWrapper}__toolbar__right`}>
