@@ -8,7 +8,7 @@ import ThemeContext from "../../contexts/themeContext";
 import darkTheme from "../../../styles/darkTheme";
 import lightTheme from "../../../styles/lightTheme";
 import Header from "../Header"
-import Footer from "../Profile/Footer";
+import Footer from "../Footer";
 
 function withLayout(Component, type) {
   return (props) => {
