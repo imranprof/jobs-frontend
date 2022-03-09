@@ -27,6 +27,8 @@
     "concurrently": "^6.5.1",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
-    "open-cli": "^7.0.1"
+    "formik": "^2.2.9",
+    "open-cli": "^7.0.1",
+    "yup": "^0.32.11"
   }
 }
