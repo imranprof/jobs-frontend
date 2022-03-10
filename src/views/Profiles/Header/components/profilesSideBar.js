@@ -1,12 +1,14 @@
 import React, {useState} from "react";
+import Link from "next/link";
 
 import {Hidden, IconButton} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Logo from "../../../../lib/logo";
+import SearchBar from "../../../../lib/searchBar";
 
 const ProfilesSideBar = ({classes}) => {
     const [open, setOpen] = useState(false);
@@ -28,23 +30,33 @@ const ProfilesSideBar = ({classes}) => {
                 onOpen={() => setOpen(true)}
                 onClose={() => setOpen(false)}
             >
-                <div className={`${classes.headerWrapper}__side-bar profiles`}>
+                <div className={`${classes.headerWrapper}__profiles__side-bar`}>
 
-                    <IconButton
-                      className={`${classes.headerWrapper}__close-icon`}
-                      onClick={() => setOpen(false)}
-                    >
+                    <div className={`${classes.headerWrapper}__profiles__side-bar__wrapper`}>
+                      <IconButton
+                        className={`${classes.headerWrapper}__profiles__close-icon`}
+                        onClick={() => setOpen(false)}
+                      >
                         <CloseIcon/>
-                    </IconButton>
+                      </IconButton>
+                    </div>
 
-                    <div className={`${classes.headerWrapper}__side-bar__icons`}>
-                        <Logo />
+                    <div className={`${classes.headerWrapper}__profiles__side-bar__top`}>
+                      <Logo />
+                      <Link href="#">
+                        <a className={`${classes.headerWrapper}__authentication-signin`}>Sign In</a>
+                      </Link>
                     </div>
 
                     <Divider/>
-                    <div className={`${classes.headerWrapper}__side-bar__links`}>
-                        {/*<NavItems classes={classes} variant={"drawer"}/>*/}
-                    </div>
+
+                  <div className={`${classes.headerWrapper}__profiles__side-bar__bottom`}>
+                    <SearchBar />
+                    <Link href="#">
+                      <a className={`${classes.headerWrapper}__authentication-signup`}>Sign Up</a>
+                    </Link>
+                  </div>
+
                 </div>
             </SwipeableDrawer>
         </>

@@ -39,7 +39,8 @@ const darkTheme = createTheme({
             dark: COLORS.boxShadow_7,
             default: COLORS.boxShadow_3,
             backToTop: COLORS.boxShadow_3,
-            paperCardShadow: COLORS.boxShadow_3
+            paperCardShadow: COLORS.boxShadow_3,
+            buttonShadow: COLORS.boxShadow_11
         },
         customDivider: {
             main: COLORS.black_3,

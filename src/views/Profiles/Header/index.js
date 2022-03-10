@@ -17,9 +17,7 @@ const ProfilesHeader = ({classes, headerRef}) => {
 
         <Hidden mdDown>
           <div className={`${classes.headerWrapper}__toolbar__right`}>
-
             <SearchBar />
-
             <div className={`${classes.headerWrapper}__authentication`}>
               <Link href="#">
                 <a className={`${classes.headerWrapper}__authentication-signin`}>Sign In</a>

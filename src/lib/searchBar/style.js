@@ -36,6 +36,10 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.highContrast,
         }
       },
+      [theme.breakpoints.down('md')]: {
+        width: "100%",
+        marginTop: 25,
+      }
     }
   }),
 });
