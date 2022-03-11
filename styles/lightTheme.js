@@ -18,6 +18,8 @@ const lightTheme = createTheme({
                 cardHover: COLORS.white_3
             },
             sideBar: COLORS.white_1,
+            seeMoreBtn: COLORS.white_2,
+            seeMoreBtnHover: COLORS.gray_6
         },
         customColor: {
             main: COLORS.gray,
@@ -31,7 +33,8 @@ const lightTheme = createTheme({
             featureIconHover: COLORS.white,
             inputBorder: COLORS.gray_6,
             sendMessageBtn: COLORS.white,
-            searchBtn: COLORS.pink
+            searchBtn: COLORS.pink,
+            hourlyRate: COLORS.gray
         },
         customShadow: {
             main: COLORS.boxShadow_2,

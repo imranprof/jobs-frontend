@@ -5,8 +5,9 @@ export const ProfileCardData = [
     designation: "Software Developer",
     image: "profile-1.png",
     hourlyRate: 20,
-    ratings: 5,
-    totalJob: 572
+    ratings: 5.0,
+    totalJob: 572,
+    skills: ['Ruby', 'Ruby on Rails', 'PHP', 'ReactJS', 'MongoDB', 'API Development', 'MySQL']
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ export const ProfileCardData = [
     image: "profile-3.png",
     hourlyRate: 40,
     ratings: 4.5,
-    totalJob: 2322
+    totalJob: 2322,
+    skills: ['Ruby', 'Ruby on Rails', 'PHP', 'AngularJS', 'MongoDB', 'API Development', 'Javascript', 'Problem Solving']
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ export const ProfileCardData = [
     image: "profile-2.jpg",
     hourlyRate: 30,
     ratings: 4.9,
-    totalJob: 8
+    totalJob: 8,
+    skills: ['Business Sense', 'Communication Skills', 'Competitive Spirit', 'Creativity', 'Artistic Ability']
   },
   {
     id: 4,
@@ -33,6 +36,7 @@ export const ProfileCardData = [
     image: "profile-4.png",
     hourlyRate: 25,
     ratings: 4.7,
-    totalJob: 80
+    totalJob: 80,
+    skills: ['Creativity', 'Film Development', 'Editing Software', 'Shooting Film', 'Image manipulation']
   },
 ]
