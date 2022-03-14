@@ -82,6 +82,7 @@ const useStyles = makeStyles({
       height: 80,
       padding: "0 14px 10px 14px",
       marginBottom: 10,
+      textAlign: "center",
       overflowY: "hidden"
     }
   })
