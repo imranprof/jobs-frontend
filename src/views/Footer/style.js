@@ -8,7 +8,7 @@ export const useStyles = makeStyles({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: '26px 56px',
+        padding: '50px 56px 10px 56px',
         '&__logo': {
             width: 60,
             height: 60,
