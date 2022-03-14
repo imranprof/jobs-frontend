@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     display: "inline-table",
     width: "auto",
     height: 10,
-    background: COLORS.gray,
+    background: theme.palette.customBackground.skillBackground,
     padding: "0 5px 2px 5px",
     borderRadius: 5,
     margin: 3,

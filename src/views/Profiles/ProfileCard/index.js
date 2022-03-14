@@ -11,7 +11,7 @@ import SkillSet from "./components/skillSet";
 function ProfileCard({profile}) {
   const customTheme = useContext(ThemeContextProvider);
   const classes = ProfileCardStyle(customTheme);
-  const {name, image} = profile;
+  const {name, image, skills} = profile;
 
   return (
     <Card xs={12} sm={6} md={4} lg={3} className={classes.profileCardWrapper}>
@@ -25,7 +25,7 @@ function ProfileCard({profile}) {
 
       <CardContents classes={classes.profileCardWrapper} profileInfo={profile} />
 
-      <SkillSet classes={classes.profileCardWrapper} />
+      <SkillSet classes={classes.profileCardWrapper} skillsData={skills} />
 
       <Link href="#">
         <Button size="small" className={`${classes.profileCardWrapper}__button-wrapper`} >

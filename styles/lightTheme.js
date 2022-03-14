@@ -19,7 +19,8 @@ const lightTheme = createTheme({
             },
             sideBar: COLORS.white_1,
             seeMoreBtn: COLORS.white_2,
-            seeMoreBtnHover: COLORS.gray_6
+            seeMoreBtnHover: COLORS.gray_6,
+            skillBackground: COLORS.white_6
         },
         customColor: {
             main: COLORS.gray,

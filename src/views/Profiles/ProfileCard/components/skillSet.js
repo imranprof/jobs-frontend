@@ -2,10 +2,13 @@ import React from 'react';
 
 import Skill from "../../../../lib/skill";
 
-const SkillSet = ({ classes }) => {
+const SkillSet = ({ classes, skillsData }) => {
+
   return (
     <div className={`${classes}__skills`}>
-      <Skill />
+      {skillsData.map((skill, key) => (
+        <Skill skill={skill} key={key} />
+      ))}
     </div>
   );
 };

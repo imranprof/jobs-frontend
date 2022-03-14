@@ -19,7 +19,8 @@ const darkTheme = createTheme({
             },
             sideBar: COLORS.black_2,
             seeMoreBtn: COLORS.black_2,
-            seeMoreBtnHover: COLORS.gray_1
+            seeMoreBtnHover: COLORS.gray_1,
+            skillBackground: COLORS.gray
         },
         customColor: {
             main: COLORS.white_4,
