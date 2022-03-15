@@ -23,6 +23,7 @@ const useStyles = makeStyles({
         fontSize: 20,
         fontFamily: FONTS.secondaryFont,
         fontWeight: 500,
+        textTransform: "capitalize"
       },
       '&__designation': {
         fontSize: 12,
