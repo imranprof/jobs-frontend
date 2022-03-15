@@ -53,7 +53,7 @@ const useStyles = makeStyles({
         justifyContent: "center",
         fontFamily: FONTS.primaryFont,
         marginTop: 5,
-        fontSize: 15,
+        fontSize: 14,
         '& .MuiSvgIcon-root': {
           fontSize: "1.2rem",
           marginRight: 5,

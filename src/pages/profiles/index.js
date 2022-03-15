@@ -9,7 +9,7 @@ import SectionHeader from "../../lib/sectionHeader";
 const Profiles = () => {
   return (
     <>
-      <SectionHeader text="checkout profiles on SeekRightJobs" />
+      <SectionHeader text="top talents on SeekRightJobs" />
       <Grid container justifyContent="space-around">
         {ProfileCardData.map(profile => (
           <ProfileCard key={profile.id} profile={profile} />

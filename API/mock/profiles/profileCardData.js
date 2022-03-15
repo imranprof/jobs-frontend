@@ -7,7 +7,7 @@ export const ProfileCardData = [
     hourlyRate: 20,
     ratings: 5.0,
     totalJob: 572,
-    skills: ['Ruby', 'Ruby on Rails', 'PHP', 'ReactJS', 'MongoDB', 'API Development', 'MySQL']
+    skills: ['Ruby', 'Ruby on Rails', 'Javascript', 'ReactJS', 'MongoDB', 'API Development', 'MySQL']
   },
   {
     id: 2,
