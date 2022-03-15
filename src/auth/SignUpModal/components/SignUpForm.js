@@ -1,12 +1,12 @@
-import {Box} from "@material-ui/core";
-import Icon from "@material-ui/core/Icon";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import {useContext, useState} from "react";
+
+import {Button, Box, TextField} from "@material-ui/core";
+
+import {setAuthToken, SignIn, SignUp} from "../../operations";
+import {AuthContext} from "../../../contexts/AuthContext";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
-import {setAuthToken, SignIn, SignUp} from "../../operations";
-import {useState} from "react";
 
 const validationSchema = yup.object({
   email: yup
@@ -30,7 +30,8 @@ const validationSchema = yup.object({
     ),
 });
 
-const SignUpForm = ({setAuthenticated, setShowSignUpModal}) => {
+const SignUpForm = ({setShowSignUpModal}) => {
+  const {setAuthenticated} = useContext(AuthContext);
   const [apiError, setApiError] = useState(undefined);
   const formik = useFormik({
     initialValues: {

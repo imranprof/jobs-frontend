@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Link from 'next/link';
 import {useFormik} from "formik";
 
@@ -9,17 +9,14 @@ import {profileData} from "../../../../API/mock/profile/profileData";
 import SideBar from "./components/sideBar";
 import SignUpModal from "../../../auth/SignUpModal";
 import SignInModal from "../../../auth/SignInModal";
-import {SignOut} from "../../../auth/operations";
+import {setAuthToken, SignOut} from "../../../auth/operations";
+import {AuthContext} from "../../../contexts/AuthContext";
 
 const ProfilesHeader = ({classes, headerRef}) => {
+  const {authenticated, setAuthenticated} = useContext(AuthContext);
   const {name, avatar} = profileData;
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-
-  const [authenticated, setAuthenticated] = useState();
-  useEffect(() => {
-    setAuthenticated(Boolean(localStorage.getItem('token')));
-  }, [authenticated]);
 
   const formik = useFormik({
     initialValues: {searchValue: ''},
@@ -70,7 +67,7 @@ const ProfilesHeader = ({classes, headerRef}) => {
                   </a>
                 </Link>
                 {showSignInModal &&
-                <SignInModal setAuthenticated={setAuthenticated} setShowSignInModal={setShowSignInModal}/>}
+                <SignInModal setShowSignInModal={setShowSignInModal}/>}
                 <Link href="#">
                   <a className={`${classes.headerWrapper}__authentication-signup`}
                      onClick={() => {
@@ -80,7 +77,7 @@ const ProfilesHeader = ({classes, headerRef}) => {
                   </a>
                 </Link>
                 {showSignUpModal &&
-                <SignUpModal setAuthenticated={setAuthenticated} setShowSignUpModal={setShowSignUpModal}/>}
+                <SignUpModal setShowSignUpModal={setShowSignUpModal}/>}
               </div>
             )}
             {authenticated &&

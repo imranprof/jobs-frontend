@@ -7,7 +7,7 @@ import ThemeContextProvider from "../../contexts/themeContext";
 import SignInForm from "./components/SignInForm";
 import {ModalStyle} from "../modalStyle";
 
-const SignInModal = ({setAuthenticated, setShowSignInModal}) => {
+const SignInModal = ({setShowSignInModal}) => {
   const customTheme = useContext(ThemeContextProvider);
   const modalWrapper = ModalStyle(customTheme).modalStyle;
   const [visible, setVisible] = useState("");
@@ -26,7 +26,7 @@ const SignInModal = ({setAuthenticated, setShowSignInModal}) => {
                       }}>
             <CloseIcon/>
           </IconButton>
-          <SignInForm setAuthenticated={setAuthenticated} setShowSignInModal={setShowSignInModal}/>
+          <SignInForm setShowSignInModal={setShowSignInModal}/>
         </div>
       </div>
     </div>

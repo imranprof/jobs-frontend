@@ -12,10 +12,6 @@ import Footer from "../Profile/Footer";
 
 function withLayout(Component, type) {
   return (props) => {
-    useEffect(() => {
-      axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-    });
-
     const [darkMode, setDarkMode] = useState(true)
     const [customTheme, setCustomTheme] = useState(darkTheme)
 

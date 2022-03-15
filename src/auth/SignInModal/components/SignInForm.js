@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 
 import {Button, Icon, Box, TextField} from "@material-ui/core";
 import {setAuthToken, SignIn} from "../../operations";
@@ -6,6 +6,7 @@ import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+import {AuthContext} from "../../../contexts/AuthContext";
 
 const validationSchema = yup.object({
   email: yup
@@ -22,7 +23,8 @@ const validationSchema = yup.object({
     .required('Password is required'),
 });
 
-const SignInForm = ({setAuthenticated, setShowSignInModal}) => {
+const SignInForm = ({setShowSignInModal}) => {
+  const {setAuthenticated} = useContext(AuthContext);
   const [apiError, setApiError] = useState(undefined);
   const HandleApiResponse = response => {
     if (response.statusText === 'Unauthorized') {

@@ -33,10 +33,10 @@ export function SignIn(values) {
 }
 
 export function SignOut(setAuthenticated) {
-  axios.delete(signOutURL).then(() => {
-    setAuthToken(false);
-    setAuthenticated(false);
-  }).catch(error => {
-    alert(error.response.data.message);
-  });
+  axios.delete(signOutURL)
+    .then(() => {
+      setAuthToken(false);
+      setAuthenticated(false);
+    })
+    .catch(err => alert(err.response.data.message));
 }
