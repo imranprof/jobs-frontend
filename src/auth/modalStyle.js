@@ -1,8 +1,8 @@
 import {makeStyles} from "@material-ui/core/styles";
-import FONTS from "../../../styles/fonts";
+import FONTS from "../../styles/fonts";
 
 const useStyles = makeStyles({
-    signInModalWrapper: theme => ({
+    modalStyle: theme => ({
         '&__body': {
             position: "fixed",
             display: "block",
@@ -64,6 +64,9 @@ const useStyles = makeStyles({
                     color: theme.palette.customColor.dark
                 },
                 '& .MuiInputBase-input': {
+                    '&:-webkit-autofill': {
+                        WebkitBoxShadow: '0 0 0 100px #266798 inset',
+                    },
                     backgroundColor: theme.palette.customBackground.dark,
                     color: theme.palette.customColor.main,
                     boxShadow: theme.palette.customShadow.dark,
@@ -97,6 +100,6 @@ const useStyles = makeStyles({
     })
 });
 
-export function SignInModalStyle(theme) {
+export function ModalStyle(theme) {
     return useStyles(theme);
 }
