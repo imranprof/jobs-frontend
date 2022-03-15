@@ -17,19 +17,25 @@ const useStyles = makeStyles({
     '&__image': {
       height: "100%",
     },
+    '& .MuiCardContent-root': {
+      padding: "6px 16px"
+    },
     '&__info': {
       textAlign: "center",
       '&__name': {
         fontSize: 20,
         fontFamily: FONTS.secondaryFont,
         fontWeight: 500,
-        textTransform: "capitalize"
+        textTransform: "capitalize",
+        marginBottom: 3
       },
       '&__designation': {
+        height: 35,
         fontSize: 12,
         fontFamily: FONTS.secondaryFont,
         fontWeight: 500,
-        letterSpacing: "1px"
+        letterSpacing: "1px",
+        overflowY: "hidden"
       },
     },
     '&__rate-info': {
@@ -80,9 +86,9 @@ const useStyles = makeStyles({
     },
     '&__skills': {
       width: "100%",
-      height: 80,
-      padding: "0 14px 10px 14px",
-      marginBottom: 10,
+      height: 55,
+      padding: "0 14px",
+      margin: "10px auto",
       textAlign: "center",
       overflowY: "hidden"
     }

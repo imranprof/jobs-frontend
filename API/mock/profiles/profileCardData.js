@@ -72,7 +72,7 @@ export const ProfileCardData = [
   {
     id: 8,
     name: "Al-amin Bali",
-    designation: "Ruby Developer & Programmer",
+    designation: "Full-stack Developer & Programmer",
     image: "profile-3.png",
     hourlyRate: 40,
     ratings: 4.5,
