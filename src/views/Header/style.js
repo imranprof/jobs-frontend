@@ -230,7 +230,7 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.navLinkActive,
         },
       },
-      '&-signup': {
+      '&-signup, &-sign-out': {
         position: "relative",
         display: "flex",
         justifyContent: "center",

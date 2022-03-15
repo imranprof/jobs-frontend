@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
 import {ThemeProvider} from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import {Container, FormControlLabel, Switch} from "@material-ui/core";
+import {CssBaseline, Container, FormControlLabel, Switch} from "@material-ui/core";
 
 import ThemeContext from "../../contexts/themeContext";
 import darkTheme from "../../../styles/darkTheme";
@@ -12,6 +12,10 @@ import Footer from "../Profile/Footer";
 
 function withLayout(Component, type) {
   return (props) => {
+    useEffect(() => {
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+    });
+
     const [darkMode, setDarkMode] = useState(true)
     const [customTheme, setCustomTheme] = useState(darkTheme)
 
@@ -20,20 +24,20 @@ function withLayout(Component, type) {
     }, [darkMode]);
 
     return (
-        <ThemeContext.Provider value={{...customTheme}}>
-          <ThemeProvider theme={{...customTheme}}>
-            <CssBaseline/>
-            <Header type={type}/>
-            <Container fixed>
-              <Component {...props} />
-            </Container>
-            <Footer/>
-            <FormControlLabel
-              control={<Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>}
-              label="Theme Switch"
-            />
-          </ThemeProvider>
-        </ThemeContext.Provider>
+      <ThemeContext.Provider value={{...customTheme}}>
+        <ThemeProvider theme={{...customTheme}}>
+          <CssBaseline/>
+          <Header type={type}/>
+          <Container fixed>
+            <Component {...props} />
+          </Container>
+          <Footer/>
+          <FormControlLabel
+            control={<Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>}
+            label="Theme Switch"
+          />
+        </ThemeProvider>
+      </ThemeContext.Provider>
     )
   }
 }
