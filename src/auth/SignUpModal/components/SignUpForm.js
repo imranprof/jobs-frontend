@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 import {setAuthToken, SignIn, SignUp} from "../../operations";
-import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {useState} from "react";
 
 const validationSchema = yup.object({
@@ -17,13 +16,17 @@ const validationSchema = yup.object({
   password: yup
     .string()
     .min(6, 'Password should be of minimum 6 characters length')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+      'Password must contain 6 characters, one uppercase, one lowercase, one number and one special case Character'
+    )
     .required('Password is required'),
   passwordConfirmation: yup
     .string()
     .required('this field is required')
     .oneOf(
       [yup.ref('password'), null],
-      'The two passwords that you entered do not match!'
+      "passwords didn't match!"
     ),
 });
 

@@ -15,6 +15,10 @@ const validationSchema = yup.object({
   password: yup
     .string('Enter your password')
     .min(6, 'Password should be of minimum 6 characters length')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+      'Password must contain 6 characters, one uppercase, one lowercase, one number and one special case Character'
+    )
     .required('Password is required'),
 });
 
