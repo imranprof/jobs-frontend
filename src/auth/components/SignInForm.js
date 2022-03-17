@@ -1,12 +1,12 @@
 import {useContext, useState} from "react";
 
 import {Button, Icon, Box, TextField} from "@material-ui/core";
-import {setAuthToken, SignIn} from "../../operations";
-import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
+import {setAuthToken, SignIn} from "../operations";
+import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
-import {AuthContext} from "../../../contexts/AuthContext";
+import {InitialPropContext} from "../../contexts/InitialPropContext";
 
 const validationSchema = yup.object({
   email: yup
@@ -16,23 +16,20 @@ const validationSchema = yup.object({
   password: yup
     .string('Enter your password')
     .min(6, 'Password should be of minimum 6 characters length')
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-      'Password must contain 6 characters, one uppercase, one lowercase, one number and one special case Character'
-    )
+
     .required('Password is required'),
 });
 
-const SignInForm = ({setShowSignInModal}) => {
-  const {setAuthenticated} = useContext(AuthContext);
+const SignInForm = () => {
+  const {setAuthenticated, setModalType} = useContext(InitialPropContext);
   const [apiError, setApiError] = useState(undefined);
   const HandleApiResponse = response => {
-    if (response.statusText === 'Unauthorized') {
-      setApiError(response.data.message);
-    } else {
+    if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
       setAuthenticated(true);
-      setShowSignInModal(false);
+      setModalType('');
+    } else {
+      setApiError(response.data.message);
     }
   }
   const formik = useFormik({

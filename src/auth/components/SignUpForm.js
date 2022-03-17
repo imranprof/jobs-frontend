@@ -2,8 +2,8 @@ import {useContext, useState} from "react";
 
 import {Button, Box, TextField} from "@material-ui/core";
 
-import {setAuthToken, SignIn, SignUp} from "../../operations";
-import {AuthContext} from "../../../contexts/AuthContext";
+import {setAuthToken, SignIn, SignUp} from "../operations";
+import {InitialPropContext} from "../../contexts/InitialPropContext";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
@@ -30,8 +30,8 @@ const validationSchema = yup.object({
     ),
 });
 
-const SignUpForm = ({setShowSignUpModal}) => {
-  const {setAuthenticated} = useContext(AuthContext);
+const SignUpForm = () => {
+  const {setAuthenticated, setModalType} = useContext(InitialPropContext);
   const [apiError, setApiError] = useState(undefined);
   const formik = useFormik({
     initialValues: {
@@ -43,13 +43,13 @@ const SignUpForm = ({setShowSignUpModal}) => {
     validationSchema: validationSchema,
     onSubmit: async values => {
       const response = await SignUp(values);
-      if (response.statusText === 'Conflict') {
-        setApiError(response.data.email);
-      } else {
+      if (response.statusText === 'OK') {
         const response = await SignIn(values);
         setAuthenticated(true);
         setAuthToken(response.data.authToken);
-        setShowSignUpModal(false);
+        setModalType('');
+      } else {
+        setApiError(response.data.email);
       }
     }
   });
