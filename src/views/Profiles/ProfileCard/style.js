@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
+
 import FONTS from "../../../../styles/fonts";
-import COLORS from "../../../../styles/colors";
 
 const useStyles = makeStyles({
   profileCardWrapper: theme => ({
