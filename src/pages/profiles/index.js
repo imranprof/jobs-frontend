@@ -8,6 +8,7 @@ import {ProfileCardData} from "../../../API/mock/profiles/profileCardData";
 import withLayout from "../../views/Layout";
 import ProfileCard from "../../views/Profiles/ProfileCard";
 import SectionHeader from "../../lib/sectionHeader";
+import CustomLoader from "../../lib/customLoader";
 
 const useStyles = makeStyles({
   profilesWrapper: {
@@ -15,10 +16,6 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "space-around"
   },
-  ProfilesLoader: {
-    width: "100%",
-    textAlign: "center"
-  }
 });
 
 const Profiles = () => {
@@ -48,16 +45,16 @@ const Profiles = () => {
           dataLength={items.length}
           next={fetchData}
           hasMore={hasMore}
+          loader={<CustomLoader />}
           className={classes.profilesWrapper}
         >
           {items.map(profile => (
             <ProfileCard key={profile.id} profile={profile}/>
           ))}
         </InfiniteScroll>
-        {(items.length >= itemLength) ? "" : <h4 className={classes.ProfilesLoader} >Loading...</h4> }
       </Grid>
     </>
   );
-}
+};
 
 export default withLayout(Profiles, 'profiles');
