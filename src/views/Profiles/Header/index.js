@@ -1,100 +1,61 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import Link from 'next/link';
-import {useFormik} from "formik";
 
-import {AppBar, Hidden, InputAdornment, InputBase, Toolbar} from "@material-ui/core";
-import SearchIcon from '@material-ui/icons/Search';
+import {AppBar, Hidden, Toolbar} from "@material-ui/core";
 
-import {profileData} from "../../../../API/mock/profile/profileData";
-import SideBar from "./components/sideBar";
-import SignUpModal from "../../../auth/SignUpModal";
-import SignInModal from "../../../auth/SignInModal";
-import {setAuthToken, SignOut} from "../../../auth/operations";
-import {AuthContext} from "../../../contexts/AuthContext";
+import Logo from "../../../lib/logo";
+import SearchBar from "../../../lib/searchBar";
+import {SignOut} from "../../../auth/operations";
+import ProfilesSideBar from "./components/profilesSideBar";
+import {InitialPropContext} from "../../../contexts/InitialPropContext";
 
 const ProfilesHeader = ({classes, headerRef}) => {
-  const {authenticated, setAuthenticated} = useContext(AuthContext);
-  const {name, avatar} = profileData;
-  const [showSignInModal, setShowSignInModal] = useState(false);
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
-
-  const formik = useFormik({
-    initialValues: {searchValue: ''},
-    onSubmit: values => {
-      console.log(values)
-    }
-  })
+  const {authenticated, setAuthenticated, setModalType} = useContext(InitialPropContext);
 
   return (
     <AppBar className={classes.headerWrapper} ref={headerRef}>
       <Toolbar className={`${classes.headerWrapper}__toolbar`}>
+        <Logo/>
 
-        <Link href="/">
-          <a className={`${classes.headerWrapper}__toolbar__logo`}>
-            <h1>SeekRightJobs</h1>
-          </a>
-        </Link>
-
-        <SideBar name={name} avatar={avatar} classes={classes}/>
+        <ProfilesSideBar classes={classes}/>
 
         <Hidden mdDown>
           <div className={`${classes.headerWrapper}__toolbar__right`}>
-            <form onSubmit={formik.handleSubmit}>
-              <InputBase name="searchValue"
-                         type="text"
-                         placeholder="Search..."
-                         value={formik.values.searchValue}
-                         onChange={formik.handleChange}
-                         className={`${classes.headerWrapper}__toolbar__search`}
-                         endAdornment={
-                           <InputAdornment position="end">
-                             <button type="submit" className={`${classes.headerWrapper}__toolbar__search__icon`}>
-                               <SearchIcon />
-                             </button>
-                           </InputAdornment>
-                         }
-              />
-            </form>
-            {!authenticated && (
+            <SearchBar/>
+            {authenticated ? (
+              <Link href="#">
+                <a className={`${classes.headerWrapper}__authentication-sign-out`}
+                   onClick={() => {
+                     SignOut(setAuthenticated);
+                   }}>
+                  Sign Out
+                </a>
+              </Link>
+            ) : (
               <div className={`${classes.headerWrapper}__authentication`}>
                 <Link href="#">
                   <a className={`${classes.headerWrapper}__authentication-signin`}
                      onClick={() => {
-                       setShowSignInModal(true)
-                     }}
-                  >
+                       setModalType('SignIn');
+                     }}>
                     Sign In
                   </a>
                 </Link>
-                {showSignInModal &&
-                <SignInModal setShowSignInModal={setShowSignInModal}/>}
                 <Link href="#">
                   <a className={`${classes.headerWrapper}__authentication-signup`}
                      onClick={() => {
-                       setShowSignUpModal(true)
+                       setModalType('SignUp');
                      }}>
                     Sign Up
                   </a>
                 </Link>
-                {showSignUpModal &&
-                <SignUpModal setShowSignUpModal={setShowSignUpModal}/>}
               </div>
             )}
-            {authenticated &&
-            <Link href="#">
-              <a className={`${classes.headerWrapper}__authentication-sign-out`}
-                 onClick={() => {
-                   SignOut(setAuthenticated);
-                 }}>
-                Sign Out
-              </a>
-            </Link>
-            }
           </div>
         </Hidden>
       </Toolbar>
     </AppBar>
-  );
+  )
 }
 
 export default ProfilesHeader;

@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import React, {useContext, useEffect, useState} from 'react';
 
 import {ThemeProvider} from "@material-ui/styles";
 import {CssBaseline, Container, FormControlLabel, Switch} from "@material-ui/core";
@@ -9,11 +8,14 @@ import darkTheme from "../../../styles/darkTheme";
 import lightTheme from "../../../styles/lightTheme";
 import Header from "../Header"
 import Footer from "../Profile/Footer";
+import {InitialPropContext} from "../../contexts/InitialPropContext";
+import CustomModal from "../../lib/CustomModal";
 
 function withLayout(Component, type) {
   return (props) => {
     const [darkMode, setDarkMode] = useState(true)
     const [customTheme, setCustomTheme] = useState(darkTheme)
+    const {modalType} = useContext(InitialPropContext);
 
     useEffect(() => {
       setCustomTheme(darkMode ? darkTheme : lightTheme)
@@ -23,6 +25,7 @@ function withLayout(Component, type) {
       <ThemeContext.Provider value={{...customTheme}}>
         <ThemeProvider theme={{...customTheme}}>
           <CssBaseline/>
+          {modalType && <CustomModal/>}
           <Header type={type}/>
           <Container fixed>
             <Component {...props} />
