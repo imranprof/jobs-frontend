@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import Link from 'next/link';
 
-import ThemeContextProvider from "../../../contexts/themeContext";
-import {footerData} from "../../../../API/mock/profile/footerData";
+import ThemeContextProvider from "../../contexts/themeContext";
+import {footerData} from "../../../API/mock/profile/footerData";
 import {FooterStyle} from "./style";
 
 const Footer = () => {

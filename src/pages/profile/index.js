@@ -1,6 +1,7 @@
-import CustomDivider from "../../lib/CustomMui/Divider/divider";
-import Sections from "../../lib/common/sections";
+import CustomDivider from "../../lib/profile/divider/divider";
+import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
+import withLayout from "../../views/Layout";
 
 const Profile = () => {
     return (
@@ -11,4 +12,5 @@ const Profile = () => {
         </>
     );
 }
-export default Profile;
+
+export default withLayout(Profile, 'profile');

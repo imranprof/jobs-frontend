@@ -8,9 +8,9 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
-import SocialLinks from "../../../../lib/common/socialLinks";
+import SocialLinks from "../../../../lib/profile/socialLinks";
 
-const SideBar = ({name, avatar,classes}) => {
+const ProfileSideBar = ({name, avatar,classes}) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -58,4 +58,4 @@ const SideBar = ({name, avatar,classes}) => {
     );
 };
 
-export default SideBar;
+export default ProfileSideBar;

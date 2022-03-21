@@ -45,6 +45,7 @@ const COLORS = {
     boxShadow_8: "inset 8px 8px 16px #00000075, inset -8px -8px 16px #383e4575",
     boxShadow_9: "5px 5px 15px #D1D9E6, -5px -5px 15px #ffffff",
     boxShadow_10: "0 0 10px rgb(0 0 0 / 10%)",
+    boxShadow_11: "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
 }
 
 export default COLORS;

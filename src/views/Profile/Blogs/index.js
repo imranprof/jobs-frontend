@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 
-import CustomCard from "../../../lib/CustomMui/Card/card";
+import CustomCard from "../../../lib/profile/card/card";
 import {Grid} from "@material-ui/core";
 
 import ThemeContextProvider from "../../../contexts/themeContext";

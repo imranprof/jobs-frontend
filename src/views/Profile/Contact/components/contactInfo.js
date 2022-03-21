@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import {Card, CardMedia, Grid} from "@material-ui/core";
 
-import SocialLinks from "../../../../lib/common/socialLinks";
+import SocialLinks from "../../../../lib/profile/socialLinks";
 
 const ContactInfo = ({classes, contactData}) => {
     const {name, email, designation, description, phone} = contactData;

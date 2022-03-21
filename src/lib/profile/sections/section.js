@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 
 import ThemeContextProvider from "../../../contexts/themeContext";
 import {SectionStyle} from "./style";
-import CustomDivider from "../../CustomMui/Divider/divider";
+import CustomDivider from "../divider/divider";
 
 const Section = ({section}) => {
     const customTheme = useContext(ThemeContextProvider);
