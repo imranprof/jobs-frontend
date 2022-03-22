@@ -210,6 +210,39 @@ export const useStyles = makeStyles({
     },
 
     // Profiles Header Styles
+    '&__profiles__side-bar': {
+      background: theme.palette.customBackground.sideBar,
+      padding: '10px 25px 20px 25px',
+      height: "100vh",
+      '&__wrapper': {
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-end",
+        marginBottom: 16
+      },
+      '&__top': {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 15
+      },
+      '&__bottom': {
+        height: "90%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between"
+      },
+      [theme.breakpoints.down('md')]: {
+        width: 300,
+        padding: "10px 25px 20px 25px",
+        overflowX: "hidden"
+      }
+    },
+    '&__profiles__close-icon': {
+      color: theme.palette.customColor.highContrast,
+      width: 35,
+      height: 35,
+    },
     '&__authentication': {
       width: 180,
       display: "flex",
@@ -242,7 +275,7 @@ export const useStyles = makeStyles({
         textAlign: "center",
         textDecoration: 'none',
         background: theme.palette.customBackground.gradiant.light,
-        boxShadow: theme.palette.customShadow.paperCardShadow,
+        boxShadow: theme.palette.customShadow.buttonShadow,
         width: 100,
         height: 48,
         border: "none",
@@ -269,6 +302,9 @@ export const useStyles = makeStyles({
         },
         '&:hover': {
           color: theme.palette.customColor.sendMessageBtn,
+        },
+        [theme.breakpoints.down('md')]: {
+          width: "100%",
         }
       }
     },

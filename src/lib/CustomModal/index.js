@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -38,9 +38,7 @@ export default function CustomModal() {
           <div className={`${modalWrapper}__dialog`}>
             <div className={`${modalWrapper}__modal-content ${visible}`}>
               <IconButton className={`${modalWrapper}__modal-content__close-icon`}
-                          onClick={() => {
-                            handleClose();
-                          }}>
+                          onClick={handleClose}>
                 <CloseIcon/>
               </IconButton>
               {modalType === "SignIn" && <SignInForm/>}

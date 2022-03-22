@@ -21,7 +21,7 @@ const validationSchema = yup.object({
 });
 
 const SignInForm = () => {
-  const {setAuthenticated, setModalType} = useContext(InitialPropContext);
+  const {setAuthenticated, modalType, setModalType} = useContext(InitialPropContext);
   const [apiError, setApiError] = useState(undefined);
   const HandleApiResponse = response => {
     if (response.statusText === 'OK') {

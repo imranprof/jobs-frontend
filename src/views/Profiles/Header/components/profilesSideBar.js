@@ -49,7 +49,7 @@ const ProfilesSideBar = ({classes}) => {
             {authenticated ?
               (
                 <Link href="#">
-                  <a className={`${classes.headerWrapper}__authentication-signin`}
+                  <a className={`${classes.headerWrapper}__authentication-sign-out`}
                      onClick={() => {
                        SignOut(setAuthenticated);
                      }}>Sign Out
@@ -74,7 +74,7 @@ const ProfilesSideBar = ({classes}) => {
             <SearchBar/>
             {!authenticated &&
             <Link href="#">
-              <a className={`${classes.headerWrapper}__authentication-sign-out`}
+              <a className={`${classes.headerWrapper}__authentication-signup`}
                  onClick={() => {
                    setModalType('SignUp');
                  }}>Sign Up</a>
