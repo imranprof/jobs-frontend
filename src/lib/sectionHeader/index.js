@@ -2,13 +2,13 @@ import React, {useContext} from 'react';
 import ThemeContextProvider from "../../contexts/themeContext";
 import {SectionHeaderStyle} from "./style";
 
-const SectionHeader = ({ text }) => {
+const SectionHeader = ({ title }) => {
   const customTheme = useContext(ThemeContextProvider);
   const classes = SectionHeaderStyle(customTheme);
 
   return (
     <div className={classes.sectionHeaderWrapper}>
-      <h1>{text}</h1>
+      <h1>{title}</h1>
     </div>
   );
 };

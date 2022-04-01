@@ -1,0 +1,2 @@
+export const SHOW_PROFILES = 'SHOW_PROFILES'
+export const HAS_MORE_PROFILES = 'HAS_MORE_PROFILES'
