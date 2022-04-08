@@ -1,11 +1,13 @@
 import React from 'react';
 import {CardContent, Divider, Typography} from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
+import {connect} from "react-redux";
 
-const CardContents = ({ classes, profileInfo }) => {
-  const {name, designation, hourlyRate, ratings, totalJob} = profileInfo;
+const CardContents = (props) => {
+  const {profile, classes} = props;
+  const {name, designation, hourlyRate, ratings, totalJob} = profile;
 
-  const shortNameGenerate = (name) => {
+  const shortNameGenerator = (name) => {
     if (name.length > 18) {
       const splitNameArray = name.split(" ");
       const firstName = splitNameArray[0];
@@ -20,7 +22,7 @@ const CardContents = ({ classes, profileInfo }) => {
       <CardContent>
         <div className={`${classes}__info`}>
           <Typography gutterBottom variant="h5" component="h2" className={`${classes}__info__name`}>
-            {shortNameGenerate(name)}
+            {shortNameGenerator(name)}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p" className={`${classes}__info__designation`}>
             {designation}
@@ -43,4 +45,10 @@ const CardContents = ({ classes, profileInfo }) => {
   );
 };
 
-export default CardContents;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    profile: state.allProfiles.profiles[ownProps.profileId]
+  }
+}
+
+export default connect(mapStateToProps)(CardContents);
