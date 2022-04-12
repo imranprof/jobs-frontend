@@ -13,11 +13,11 @@ import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
 const CustomCard = ({element, elementType}) => {
     const customTheme = useContext(ThemeContextProvider);
     const classes = CardStyle(customTheme);
-    const { title, image, category, reactCount } = element;
+    const { title, image, category, reactCount, readTime } = element;
 
     const isPortfolio = elementType === "portfolio";
     const iconClass = isPortfolio ? "heart" : "clock";
-    const elementData = isPortfolio ? reactCount : `${element.readTime} read`;
+    const elementData = isPortfolio ? reactCount : `${readTime} read`;
 
     const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
     const [toggleBlogModal, setToggleBlogModal] = useState(false);
