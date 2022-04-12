@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
+import {connect} from "react-redux";
 
 import ThemeContextProvider from "../../../contexts/themeContext";
-import {profileData} from "../../../../API/mock/profile/profileData";
 import SocialLink from "./socialLink";
 import {SocialLinkStyle} from "./style";
 
-const SocialLinks = () => {
+const SocialLinks = (props) => {
     const customTheme = useContext(ThemeContextProvider);
     const classes = SocialLinkStyle(customTheme);
 
@@ -13,7 +13,7 @@ const SocialLinks = () => {
             <div>
                 <span className={`${classes.socialLinksWrapper}__title`}>find with me</span>
                 <div className={`${classes.socialLinksWrapper}__social-links`}>
-                    {profileData.socialLinks.map(link =>
+                    {props.socialLinks.map(link =>
                         <SocialLink link={link} key={link.id} classes={classes}/>
                     )}
                 </div>
@@ -21,4 +21,10 @@ const SocialLinks = () => {
     );
 }
 
-export default SocialLinks;
+const mapStateToProps = (state) => {
+  return {
+    socialLinks: state.profile.socialLinks
+  }
+}
+
+export default connect(mapStateToProps)(SocialLinks);

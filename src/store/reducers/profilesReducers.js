@@ -1,4 +1,4 @@
-import {SHOW_PROFILES} from "../constants/profilesTypes";
+import {SHOW_PROFILES} from "../actionTypes/profilesTypes";
 import {ProfileCardData} from "../../../API/mock/profiles/profileCardData";
 
 const chunkedData = ProfileCardData.slice(0, 8)

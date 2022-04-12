@@ -1,4 +1,4 @@
-import {SHOW_PROFILES} from "../constants/profilesTypes";
+import {SHOW_PROFILES} from "../actionTypes/profilesTypes";
 
 export const showProfiles = (profiles) => {
     return {
