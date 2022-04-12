@@ -19,8 +19,8 @@ const TopSection = (props) => {
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      const backToTop = backToTopRef.current;
-      const scrollTop = window.scrollY;
+      let backToTop = backToTopRef.current;
+      let scrollTop = window.scrollY;
       scrollTop >= 80 ? backToTop.style.display = "flex" : backToTop.style.display = "none";
     })
   }, [])
