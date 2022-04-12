@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {connect} from "react-redux";
 
 import {Hidden, IconButton} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -10,8 +11,11 @@ import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
 import SocialLinks from "../../../../lib/profile/socialLinks";
 
-const ProfileSideBar = ({name, avatar,classes}) => {
+const ProfileSideBar = (props) => {
+    const { profileInfo, classes } = props;
+    const {name, avatar} = profileInfo;
     const [open, setOpen] = useState(false);
+
     return (
         <>
             <Hidden lgUp>
@@ -58,4 +62,10 @@ const ProfileSideBar = ({name, avatar,classes}) => {
     );
 };
 
-export default ProfileSideBar;
+const mapStateToProps = (state) => {
+    return {
+        profileInfo: state.profile
+    }
+}
+
+export default connect(mapStateToProps)(ProfileSideBar);
