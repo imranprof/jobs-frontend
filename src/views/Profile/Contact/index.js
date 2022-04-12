@@ -6,7 +6,6 @@ import {ContactStyle} from "./style";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import ContactInfo from "./components/contactInfo";
 import ContactForm from "./components/contactForm";
-import {ContactData} from "../../../../API/mock/profile/contactData";
 
 const Contact = () => {
     const customTheme = useContext(ThemeContextProvider);
@@ -14,7 +13,7 @@ const Contact = () => {
 
         return (
             <Grid container spacing={3} className={classes.contactWrapper} id="contact" >
-                <ContactInfo classes={classes.contactWrapper} contactData={ContactData} />
+                <ContactInfo classes={classes.contactWrapper} />
                 <ContactForm classes={classes.contactWrapper} />
             </Grid>
         );

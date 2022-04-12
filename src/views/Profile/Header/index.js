@@ -1,12 +1,12 @@
 import {AppBar, Hidden, Toolbar,} from "@material-ui/core";
 
-import {profileData} from "../../../../API/mock/profile/profileData";
+import {TopSectionData} from "../../../../API/mock/profile/topSectionData";
 import ProfileInfo from "./components/profileInfo";
 import ProfileSideBar from "./components/profileSideBar";
 import NavItems from "./components/navItems";
 
 const ProfileHeader = ({ classes, headerRef }) => {
-    const {name, avatar} = profileData;
+    const {name, avatar} = TopSectionData;
 
     return (
         <AppBar className={classes.headerWrapper} ref={headerRef}>

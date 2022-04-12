@@ -1,11 +1,13 @@
 import Link from 'next/link';
+import {connect} from "react-redux";
 
 import {Card, CardMedia, Grid} from "@material-ui/core";
 
 import SocialLinks from "../../../../lib/profile/socialLinks";
 
-const ContactInfo = ({classes, contactData}) => {
-    const {name, email, designation, description, phone} = contactData;
+const ContactInfo = (props) => {
+  const { contactDetails, classes } = props;
+    const {name, email, designation, contactDescription, phone} = contactDetails;
 
     return (
         <Grid item md={5}>
@@ -22,7 +24,7 @@ const ContactInfo = ({classes, contactData}) => {
               <p className={`${classes}__contact-info__title-area__designation`}>{designation}</p>
             </div>
             <div className={`${classes}__contact-info__description-area`}>
-              <p className={`${classes}__contact-info__description`}>{description}.</p>
+              <p className={`${classes}__contact-info__description`}>{contactDescription}.</p>
               <span className={`${classes}__contact-info__phone`}>Phone: <Link href="#"><a>{phone}</a></Link></span>
               <span className={`${classes}__contact-info__email`}>Email: <Link href="#"><a>{email}</a></Link></span>
             </div>
@@ -32,4 +34,10 @@ const ContactInfo = ({classes, contactData}) => {
     );
 }
 
-export default ContactInfo;
+const mapStateToProps = (state) => {
+  return {
+    contactDetails: state.profile
+  }
+}
+
+export default connect(mapStateToProps)(ContactInfo);

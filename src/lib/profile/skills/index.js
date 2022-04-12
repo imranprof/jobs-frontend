@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {connect} from "react-redux";
 
-import {profileData} from "../../../../API/mock/profile/profileData";
+import {topSectionData} from "../../../../API/mock/profile/topSectionData";
 import ThemeContextProvider from "../../../contexts/themeContext";
 import Skill from "./skill";
 import {SkillsStyle} from "./style";
