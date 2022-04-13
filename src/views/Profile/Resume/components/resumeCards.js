@@ -1,12 +1,11 @@
 import {useContext} from 'react';
-import ThemeContextProvider from "../../../../contexts/themeContext";
 
+import ThemeContextProvider from "../../../../contexts/themeContext";
 import {ResumeStyle} from "../style";
 import RowHeading from "./rowHeading";
 import RowContent from "./rowContent";
 
-const ResumeCards = ({cardType, cardData}) => {
-
+const ResumeCards = ({cardData, cardType}) => {
     const customTheme = useContext(ThemeContextProvider);
     const resumeWrapper = ResumeStyle(customTheme).resumeWrapper;
 
