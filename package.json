@@ -2,7 +2,7 @@
   "name": "seek_right_jobs_frontend",
   "version": "1.0.0",
   "private": true,
-  "description": "The Portfolio front-end web app.",
+  "description": "The SeekRightJobs front-end web app.",
   "author": "Rightcodes Solution",
   "repository": "https://github.com/rightcodes-solution/seekrightjobs_front",
   "scripts": {
@@ -16,8 +16,9 @@
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.4",
+    "axios": "^0.26.0",
     "formik": "^2.2.9",
-    "next": "12.0.7",
+    "next": "^12.1.5",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -27,7 +28,8 @@
     "react-scroll": "^1.8.5",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
-    "typewriter-effect": "^2.18.2"
+    "typewriter-effect": "^2.18.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "concurrently": "^6.5.1",
@@ -35,6 +37,7 @@
     "eslint-config-next": "12.0.7",
     "open-cli": "^7.0.1",
     "redux-devtools-extension": "^2.13.9",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "webpack": "^5.72.0"
   }
 }

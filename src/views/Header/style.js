@@ -200,8 +200,7 @@ export const useStyles = makeStyles({
       },
       [theme.breakpoints.down('md')]: {
         width: 300,
-        padding: "10px 25px 20px 25px",
-        overflowX: "hidden"
+        padding: "10px 25px 20px 25px"
       }
     },
     '&__profiles__close-icon': {

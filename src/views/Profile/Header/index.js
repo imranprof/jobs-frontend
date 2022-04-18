@@ -1,7 +1,7 @@
 import {AppBar, Hidden, Toolbar,} from "@material-ui/core";
 
 import ProfileInfo from "./components/profileInfo";
-import ProfileSideBar from "./components/profileSideBar";
+import ProfileSideBar from "./components/sideBar";
 import NavItems from "./components/navItems";
 
 const ProfileHeader = ({ classes, headerRef }) => {
