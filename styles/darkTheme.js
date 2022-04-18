@@ -18,9 +18,6 @@ const darkTheme = createTheme({
                 cardHover: COLORS.black_5
             },
             sideBar: COLORS.black_2,
-            seeMoreBtn: COLORS.black_2,
-            seeMoreBtnHover: COLORS.gray_1,
-            skillBackground: COLORS.gray
         },
         customColor: {
             main: COLORS.white_4,
@@ -34,8 +31,7 @@ const darkTheme = createTheme({
             featureIconHover: COLORS.pink,
             inputBorder: COLORS.black_2,
             sendMessageBtn: COLORS.pink,
-            searchBtn: COLORS.white_4,
-            hourlyRate: COLORS.white_4
+            searchBtn: COLORS.white_4
         },
         customShadow: {
             main: COLORS.boxShadow_1,
@@ -43,8 +39,7 @@ const darkTheme = createTheme({
             dark: COLORS.boxShadow_7,
             default: COLORS.boxShadow_3,
             backToTop: COLORS.boxShadow_3,
-            paperCardShadow: COLORS.boxShadow_3,
-            buttonShadow: COLORS.boxShadow_11
+            paperCardShadow: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.black_3,

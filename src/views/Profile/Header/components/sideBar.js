@@ -10,7 +10,7 @@ import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
 import SocialLinks from "../../../../lib/profile/socialLinks";
 
-const ProfileSideBar = ({name, avatar,classes}) => {
+const SideBar = ({name, avatar,classes}) => {
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -58,4 +58,4 @@ const ProfileSideBar = ({name, avatar,classes}) => {
     );
 };
 
-export default ProfileSideBar;
+export default SideBar;

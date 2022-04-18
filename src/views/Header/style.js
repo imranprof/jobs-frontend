@@ -35,6 +35,40 @@ export const useStyles = makeStyles({
           fontSize: 22
         }
       },
+      // Search bar
+      '&__search': {
+        width: 350,
+        height: 48,
+        color: theme.palette.customColor.main,
+        border: `2px solid ${theme.palette.customColor.inputBorder}`,
+        padding: "0 6px 0 15px",
+        fontSize: 14,
+        boxShadow: theme.palette.customShadow.dark,
+        transition: "all 0.4s ease 0s",
+        fontFamily: FONTS.primaryFont,
+        borderRadius: 25,
+        letterSpacing: 1,
+        backgroundColor: theme.palette.customBackground.dark,
+        '&:focus': {
+          borderColor: theme.palette.customColor.highContrast,
+          backgroundColor: theme.palette.customBackground.dark
+        },
+        '&__icon': {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: theme.palette.customColor.searchBtn,
+          background: "transparent",
+          width: 32,
+          height: 32,
+          border: "none",
+          borderRadius: "50%",
+          transition: "all 0.4s ease",
+          '&:hover': {
+            color: theme.palette.customColor.highContrast,
+          }
+        },
+      }
     },
 
     // Profile Header Styles
@@ -145,7 +179,7 @@ export const useStyles = makeStyles({
         height: 420,
         marginTop: 15,
       },
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('xs')]: {
         width: 300,
         padding: "25px 25px 50px 25px",
         overflowX: "hidden"
@@ -229,7 +263,7 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.navLinkActive,
         },
       },
-      '&-signup': {
+      '&-signup, &-sign-out': {
         position: "relative",
         display: "flex",
         justifyContent: "center",
