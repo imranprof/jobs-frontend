@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const signUpURL = 'http://localhost:3000/users';
-const signInURL = 'http://localhost:3000/sign_in';
-const signOutURL = 'http://localhost:3000/sign_out';
+const signUpURL = process.env.NEXT_PUBLIC_SIGNUP_URL
+const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL
+const signOutURL = process.env.NEXT_PUBLIC_SIGNOUT_URL
 
 export function setAuthToken(token) {
   if (token) {

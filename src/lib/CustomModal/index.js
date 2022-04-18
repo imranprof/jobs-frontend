@@ -1,13 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
+
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import {IconButton} from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+
 import ThemeContextProvider from "../../contexts/themeContext";
 import {ModalStyle} from "./style";
 import {InitialPropContext} from "../../contexts/InitialPropContext";
 import SignInForm from "../../auth/components/SignInForm";
-import {IconButton} from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
 import SignUpForm from "../../auth/components/SignUpForm";
 
 export default function CustomModal() {

@@ -16,7 +16,6 @@ const validationSchema = yup.object({
   password: yup
     .string('Enter your password')
     .min(6, 'Password should be of minimum 6 characters length')
-
     .required('Password is required'),
 });
 
@@ -40,6 +39,7 @@ const SignInForm = () => {
     validationSchema: validationSchema,
     onSubmit: async values => {
       const response = await SignIn(values);
+      console.log(response)
       HandleApiResponse(await response);
     }
   });
