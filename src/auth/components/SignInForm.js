@@ -1,11 +1,12 @@
 import {useContext, useState} from "react";
 
-import {Button, Icon, Box, TextField} from "@material-ui/core";
-import {setAuthToken, SignIn} from "../operations";
-import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
-
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+
+import {Button, Icon, Box, TextField} from "@material-ui/core";
+
+import {setAuthToken, SignIn} from "../operations";
+import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {InitialPropContext} from "../../contexts/InitialPropContext";
 
 const validationSchema = yup.object({
