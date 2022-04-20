@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 
 import {Grid, IconButton} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import CloseIcon from "@material-ui/icons/Close";
 
-import ThemeContextProvider from "../../../../contexts/themeContext";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
 
@@ -15,8 +15,8 @@ const PortfolioModal = ({
   const descriptionSegments = description.split("\n\n").map((segment, index) =>
     <p key={index}>{segment}</p>
   );
-  const customTheme = useContext(ThemeContextProvider);
-  const modalWrapper = PortfolioModalStyle(customTheme).modalWrapper;
+  const theme = useTheme();
+  const modalWrapper = PortfolioModalStyle(theme).modalWrapper;
   const [slidingClass, SetSlidingClass] = useState("");
 
   setTimeout(() => {

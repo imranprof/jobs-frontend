@@ -1,20 +1,19 @@
-import {useContext} from 'react';
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../../../contexts/themeContext";
-import {ResumeStyle} from "../style";
 import RowHeading from "./rowHeading";
 import RowContent from "./rowContent";
+import {ResumeStyle} from "../style";
 
 const ResumeCards = ({cardData, cardType}) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const resumeWrapper = ResumeStyle(customTheme).resumeWrapper;
+  const theme = useTheme();
+  const resumeWrapper = ResumeStyle(theme).resumeWrapper;
 
-    return (
-        <div className={`${resumeWrapper}__nav-content`}>
-            <RowHeading cardType={cardType} cardData={cardData}/>
-            <RowContent cardType={cardType} cardData={cardData}/>
-        </div>
-    );
+  return (
+    <div className={`${resumeWrapper}__nav-content`}>
+      <RowHeading cardType={cardType} cardData={cardData}/>
+      <RowContent cardType={cardType} cardData={cardData}/>
+    </div>
+  );
 }
 
 export default ResumeCards;

@@ -1,15 +1,14 @@
-import {useContext} from 'react';
 import {connect} from "react-redux";
 
 import CustomCard from "../../../lib/profile/card/card";
 import {Grid} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
 import {BlogsStyle} from "./style";
 
 const Blogs = (props) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = BlogsStyle(customTheme);
+    const theme = useTheme();
+    const classes = BlogsStyle(theme);
     const { blogs } = props;
 
     return (

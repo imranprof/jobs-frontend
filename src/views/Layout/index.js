@@ -3,7 +3,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import {ThemeProvider} from "@material-ui/styles";
 import {CssBaseline, Container, FormControlLabel, Switch} from "@material-ui/core";
 
-import ThemeContext from "../../contexts/themeContext";
 import darkTheme from "../../../styles/darkTheme";
 import lightTheme from "../../../styles/lightTheme";
 import Header from "../Header"
@@ -22,7 +21,6 @@ function withLayout(Component, type) {
     }, [darkMode]);
 
     return (
-      <ThemeContext.Provider value={{...customTheme}}>
         <ThemeProvider theme={{...customTheme}}>
           <CssBaseline/>
           {modalType && <CustomModal/>}
@@ -36,7 +34,6 @@ function withLayout(Component, type) {
             label="Theme Switch"
           />
         </ThemeProvider>
-      </ThemeContext.Provider>
     )
   }
 }

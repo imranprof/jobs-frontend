@@ -1,21 +1,21 @@
 import React, {useContext, useState} from 'react';
 
+import {IconButton} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import {IconButton} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
-import ThemeContextProvider from "../../contexts/themeContext";
 import {ModalStyle} from "./style";
 import {InitialPropContext} from "../../contexts/InitialPropContext";
 import SignInForm from "../../auth/components/SignInForm";
 import SignUpForm from "../../auth/components/SignUpForm";
 
 export default function CustomModal() {
+  const theme = useTheme();
   const {modalType, setModalType} = useContext(InitialPropContext);
-  const customTheme = useContext(ThemeContextProvider);
-  const modalWrapper = ModalStyle(customTheme).modalStyle;
+  const modalWrapper = ModalStyle(theme).modalStyle;
   const [visible, setVisible] = useState("")
   setTimeout(() => {
     setVisible(modalType ? `${modalWrapper}__modal-content--visible` : "")

@@ -1,18 +1,16 @@
-import React, {useContext} from 'react';
 import Link from 'next/link';
-
 import {connect} from "react-redux";
 
 import {Button, Card, CardMedia} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import {ProfileCardStyle} from "./style";
-import ThemeContextProvider from "../../../contexts/themeContext";
 import CardContents from "./components/cardContents";
 import SkillSet from "./components/skillSet";
+import {ProfileCardStyle} from "./style";
 
 function ProfileCard(props) {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = ProfileCardStyle(customTheme);
+  const theme = useTheme();
+  const classes = ProfileCardStyle(theme);
   const {profileList} = props;
 
   return (

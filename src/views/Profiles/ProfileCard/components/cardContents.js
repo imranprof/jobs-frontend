@@ -1,7 +1,7 @@
-import React from 'react';
+import {connect} from "react-redux";
+
 import {CardContent, Divider, Typography} from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
-import {connect} from "react-redux";
 
 const CardContents = (props) => {
   const {profile, classes} = props;

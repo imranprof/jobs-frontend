@@ -1,15 +1,14 @@
-import React, {useContext} from 'react';
 import {connect} from "react-redux";
 
 import {Grid} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
 import Feature from "./components/feature";
-import ThemeContextProvider from "../../../contexts/themeContext";
 import {FeatureStyle} from "./style";
 
 const Features = (props) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = FeatureStyle(customTheme);
+    const theme = useTheme();
+    const classes = FeatureStyle(theme);
     const {features} = props;
 
     return (

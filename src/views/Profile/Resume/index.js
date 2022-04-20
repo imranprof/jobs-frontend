@@ -1,14 +1,15 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {connect} from "react-redux";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
+import {useTheme} from "@material-ui/core/styles";
+
 import {ResumeStyle} from "./style";
 import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
 
 const Resume = (props) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const resumeWrapper = ResumeStyle(customTheme).resumeWrapper;
+    const theme = useTheme();
+    const resumeWrapper = ResumeStyle(theme).resumeWrapper;
     const { resume } = props;
 
     let resumeSections = [];

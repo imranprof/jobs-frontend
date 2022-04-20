@@ -1,9 +1,10 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {animateScroll as scroll} from 'react-scroll';
 import {connect} from "react-redux";
 
 import {Grid} from "@material-ui/core";
-import ThemeContextProvider from "../../../contexts/themeContext";
+import {useTheme} from "@material-ui/core/styles";
+
 import TypeWriter from "./typeWriter";
 import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
@@ -11,9 +12,9 @@ import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 const TopSection = (props) => {
+  const theme = useTheme();
+  const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = TopSectionStyle(customTheme);
   const {name, avatar, headline, bio, expertises} = props.profile;
   const profileExpertises = expertises.map(expertise => `${expertise}.`);
 

@@ -39,7 +39,6 @@ const SignInForm = () => {
     validationSchema: validationSchema,
     onSubmit: async values => {
       const response = await SignIn(values);
-      console.log(response)
       HandleApiResponse(await response);
     }
   });

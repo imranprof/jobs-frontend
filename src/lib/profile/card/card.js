@@ -1,18 +1,18 @@
 import Link from 'next/link'
+import {useState} from 'react';
 
-import {useState, useContext} from 'react';
 import {Card, CardContent, CardMedia} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-import {CardStyle} from "./style";
 import PortfolioModal from "../../../views/Profile/Portfolio/components/portfolioModal";
 import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
+import {CardStyle} from "./style";
 
 const CustomCard = ({element, elementType}) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = CardStyle(customTheme);
+    const theme = useTheme();
+    const classes = CardStyle(theme);
     const { title, image, category, reactCount, readTime } = element;
 
     const isPortfolio = elementType === "portfolio";

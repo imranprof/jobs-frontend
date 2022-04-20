@@ -1,22 +1,22 @@
-import {useContext, useState} from "react";
+import {useState} from "react";
 import {useDispatch, connect} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import {Grid} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
 import {ProfileCardData} from "../../../API/mock/profiles/profileCardData";
-import ThemeContextProvider from "../../contexts/themeContext";
 import withLayout from "../../views/Layout";
 import ProfileCard from "../../views/Profiles/ProfileCard";
 import SectionHeader from "../../lib/sectionHeader";
 import CustomLoader from "../../lib/customLoader";
 import EndMessage from "../../lib/endMessage";
-import {ProfilesStyle} from "./style";
 import {showProfiles} from "../../store/actions/profilesAction";
+import {ProfilesStyle} from "./style";
 
 const Profiles = (props) => {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = ProfilesStyle(customTheme);
+  const theme = useTheme();
+  const classes = ProfilesStyle(theme);
   const dispatch = useDispatch();
   const profilesLength = ProfileCardData.length;
   const [hasMore, setHasMore] = useState(true)

@@ -1,11 +1,10 @@
-import React, {useContext} from 'react';
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../contexts/themeContext";
 import {EndMessageStyle} from "./style";
 
 const EndMessage = ({ title }) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = EndMessageStyle(customTheme);
+    const theme = useTheme();
+    const classes = EndMessageStyle(theme);
 
     return (
         <div className={classes.endMessageWrapper}>

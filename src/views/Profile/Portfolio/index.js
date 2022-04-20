@@ -1,16 +1,14 @@
-import React, {useContext} from 'react';
 import {connect} from "react-redux";
 
 import {Grid} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
 import CustomCard from "../../../lib/profile/card/card";
-import ThemeContextProvider from "../../../contexts/themeContext";
 import {PortfolioStyle} from "./style";
-import {PortfolioData} from "../../../../API/mock/profile/portfolioData";
 
 const Portfolio = (props) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = PortfolioStyle(customTheme);
+    const theme = useTheme();
+    const classes = PortfolioStyle(theme);
     const { portfolios } = props;
 
     return (
