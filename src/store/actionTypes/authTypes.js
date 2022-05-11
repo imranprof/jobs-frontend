@@ -1,0 +1,2 @@
+export const AUTHENTICATED = 'AUTHENTICATED';
+export const MODAL_TYPE = 'MODAL_TYPE';

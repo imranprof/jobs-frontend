@@ -1,12 +1,13 @@
-import {useContext, useState} from "react";
+import {useState} from "react";
+import {useDispatch} from "react-redux";
 
 import {Button, Box, TextField} from "@material-ui/core";
 
-import {setAuthToken, SignIn, SignUp} from "../operations";
-import {InitialPropContext} from "../../contexts/InitialPropContext";
+import {setAuthToken, signIn, signUp} from "../operations";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+import {authenticate, modalType} from "../../store/actions/authAction";
 
 const validationSchema = yup.object({
   email: yup
@@ -31,7 +32,7 @@ const validationSchema = yup.object({
 });
 
 const SignUpForm = () => {
-  const {setAuthenticated, setModalType} = useContext(InitialPropContext);
+  const dispatch = useDispatch();
   const [apiError, setApiError] = useState(undefined);
   const formik = useFormik({
     initialValues: {
@@ -42,12 +43,12 @@ const SignUpForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async values => {
-      const response = await SignUp(values);
-      if (response.statusText === 'OK') {
-        const response = await SignIn(values);
-        setAuthenticated(true);
+      const response = await dispatch(signUp(values));
+      if (response.statusText === 'Created') {
+        const response = await dispatch(signIn(values));
         setAuthToken(response.data.authToken);
-        setModalType('');
+        dispatch(authenticate(true))
+        dispatch(modalType(''))
       } else {
         setApiError(response.data.email);
       }

@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createWrapper } from "next-redux-wrapper";
 
@@ -12,7 +13,7 @@ const initialState = {};
 export const store = createStore(
     rootReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(logger)),
+    composeWithDevTools(applyMiddleware(logger, thunk)),
 );
 
 // assigning store to next wrapper

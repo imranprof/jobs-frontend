@@ -1,20 +1,23 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import Link from "next/link";
+import {connect, useDispatch} from "react-redux";
 
 import {Hidden, IconButton} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
-
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+
 import Logo from "../../../../lib/logo";
 import SearchBar from "../../../../lib/searchBar";
-import {InitialPropContext} from "../../../../contexts/InitialPropContext";
 import {SignOut} from "../../../../auth/operations";
+import {modalType} from "../../../../store/actions/authAction";
 
-const ProfilesSideBar = ({classes}) => {
+const ProfilesSideBar = (props) => {
+  const { classes } = props;
   const [open, setOpen] = useState(false);
-  const {authenticated, setAuthenticated, modalType, setModalType} = useContext(InitialPropContext);
+  const dispatch = useDispatch();
+
   return (
     <>
       <Hidden lgUp>
@@ -46,46 +49,49 @@ const ProfilesSideBar = ({classes}) => {
 
           <div className={`${classes.headerWrapper}__profiles__side-bar__top`}>
             <Logo/>
-            {authenticated ?
-              (
-                <Link href="#">
-                  <a className={`${classes.headerWrapper}__authentication-sign-out`}
-                     onClick={() => {
-                       SignOut(setAuthenticated);
-                     }}>Sign Out
-                  </a>
-                </Link>
-              ) :
-              (
-                <Link href="#">
-                  <a className={`${classes.headerWrapper}__authentication-signin`}
-                     onClick={() => {
-                       setModalType('SignIn');
-                     }}>Sign In
-                  </a>
-                </Link>
-              )
-            }
+            {!props.isAuthenticated && (
+              <Link href="#">
+                <a className={`${classes.headerWrapper}__authentication-signin`}
+                   onClick={() => {
+                     dispatch(modalType('SignIn'))
+                   }}>Sign In
+                </a>
+              </Link>
+            )}
           </div>
 
           <Divider/>
 
           <div className={`${classes.headerWrapper}__profiles__side-bar__bottom`}>
             <SearchBar/>
-            {!authenticated &&
-            <Link href="#">
-              <a className={`${classes.headerWrapper}__authentication-signup`}
-                 onClick={() => {
-                   setModalType('SignUp');
-                 }}>Sign Up</a>
-            </Link>
-            }
+            {props.isAuthenticated ? (
+              <Link href="#">
+                <a className={`${classes.headerWrapper}__authentication-sign-out`}
+                   onClick={() => {
+                     dispatch(SignOut())
+                   }}>Sign out
+                </a>
+              </Link>
+            ) : (
+              <Link href="#">
+                <a className={`${classes.headerWrapper}__authentication-signup`}
+                   onClick={() => {
+                     dispatch(modalType('SignUp'))
+                   }}>Sign Up</a>
+              </Link>
+            )}
           </div>
-
         </div>
       </SwipeableDrawer>
     </>
   );
 };
 
-export default ProfilesSideBar;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    modalType: state.auth.modalType
+  }
+}
+
+export default connect(mapStateToProps)(ProfilesSideBar);

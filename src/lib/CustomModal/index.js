@@ -1,4 +1,5 @@
-import React, {useContext, useState} from 'react';
+import {useState} from 'react';
+import {connect, useDispatch} from "react-redux";
 
 import {IconButton} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -8,26 +9,27 @@ import Fade from '@material-ui/core/Fade';
 import CloseIcon from "@material-ui/icons/Close";
 
 import {ModalStyle} from "./style";
-import {InitialPropContext} from "../../contexts/InitialPropContext";
 import SignInForm from "../../auth/components/SignInForm";
 import SignUpForm from "../../auth/components/SignUpForm";
+import {modalType} from "../../store/actions/authAction";
 
-export default function CustomModal() {
+const CustomModal = (props) => {
+  const dispatch = useDispatch()
   const theme = useTheme();
-  const {modalType, setModalType} = useContext(InitialPropContext);
+
   const modalWrapper = ModalStyle(theme).modalStyle;
   const [visible, setVisible] = useState("")
   setTimeout(() => {
-    setVisible(modalType ? `${modalWrapper}__modal-content--visible` : "")
+    setVisible(props.modalType ? `${modalWrapper}__modal-content--visible` : "")
   }, 100);
   const handleClose = () => {
-    setModalType('');
+    dispatch(modalType(''))
   }
   return (
     <Modal
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
-      open={Boolean(modalType)}
+      open={Boolean(props.modalType)}
       onClose={handleClose}
       closeAfterTransition
       BackdropComponent={Backdrop}
@@ -35,7 +37,7 @@ export default function CustomModal() {
         timeout: 500,
       }}
     >
-      <Fade in={Boolean(modalType)}>
+      <Fade in={Boolean(props.modalType)}>
         <div className={`${modalWrapper}__body`}>
           <div className={`${modalWrapper}__dialog`}>
             <div className={`${modalWrapper}__modal-content ${visible}`}>
@@ -43,8 +45,8 @@ export default function CustomModal() {
                           onClick={handleClose}>
                 <CloseIcon/>
               </IconButton>
-              {modalType === "SignIn" && <SignInForm/>}
-              {modalType === "SignUp" && <SignUpForm/>}
+              {props.modalType === "SignIn" && <SignInForm/>}
+              {props.modalType === "SignUp" && <SignUpForm/>}
             </div>
           </div>
         </div>
@@ -52,3 +54,11 @@ export default function CustomModal() {
     </Modal>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    modalType: state.auth.modalType
+  }
+}
+
+export default connect(mapStateToProps)(CustomModal);
