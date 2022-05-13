@@ -37,12 +37,15 @@ const SignInForm = ({error}) => {
   return (
     <Box component="form" onSubmit={formik.handleSubmit}>
       {error &&
-        <Box display="flex"
-             justifyContent="center"
-             color="red"
-             marginTop={-3}
-             marginBottom={2}
-        >{error}</Box>
+        <Box
+          display="flex"
+          justifyContent="center"
+          color="red"
+          marginTop={-3}
+          marginBottom={2}
+        >
+          {error}
+        </Box>
       }
       <TextField
         fullWidth
