@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {authenticate} from "../store/actions/authAction";
+import {authenticate, modalType, signInRejected} from "../store/actions/authAction";
 
 const signUpURL = process.env.NEXT_PUBLIC_SIGNUP_URL
 const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL
@@ -13,6 +13,18 @@ export function setAuthToken(token) {
   } else {
     localStorage.removeItem('token');
     delete axios.defaults.headers.common["Authorization"];
+  }
+}
+
+export function handleApiResponse(response) {
+  return async (dispatch) => {
+    if (response.statusText === 'OK') {
+      setAuthToken(response.data.authToken);
+      await dispatch(authenticate(true))
+      await dispatch(modalType(''))
+    } else {
+      await dispatch(signInRejected(response.data.message))
+    }
   }
 }
 

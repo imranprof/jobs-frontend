@@ -7,10 +7,9 @@ import {ResumeStyle} from "./style";
 import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
 
-const Resume = (props) => {
+const Resume = ({ resume }) => {
     const theme = useTheme();
     const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-    const { resume } = props;
 
     let resumeSections = [];
     for (let key in resume) {

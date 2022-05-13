@@ -1,5 +1,5 @@
 import axios from "axios";
-import {AUTHENTICATED, MODAL_TYPE} from "../actionTypes/authTypes";
+import {AUTHENTICATED, MODAL_TYPE, SIGN_IN_REQUESTED, SIGN_IN_RECEIVED, SIGN_IN_REJECTED} from "../actionTypes/authTypes";
 
 const getToken = () => {
   if (typeof window !== 'undefined') {
@@ -23,13 +23,19 @@ export const authReducers = (state = initialState, action) => {
     case AUTHENTICATED:
       return {
         ...state,
-        isAuthenticated: getToken()
+        isAuthenticated: getToken(),
       }
     case MODAL_TYPE:
       return {
         ...state,
         modalType: action.payload
       }
+    case SIGN_IN_REQUESTED:
+      return { ...state, loading: true };
+    case SIGN_IN_RECEIVED:
+      return { ...state, loading: false, error: '' };
+    case SIGN_IN_REJECTED:
+      return { ...state, loading: false, error: action.error };
     default:
       return state
   }

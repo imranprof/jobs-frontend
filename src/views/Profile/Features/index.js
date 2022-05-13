@@ -6,10 +6,9 @@ import {useTheme} from "@material-ui/core/styles";
 import Feature from "./components/feature";
 import {FeatureStyle} from "./style";
 
-const Features = (props) => {
+const Features = ({features}) => {
     const theme = useTheme();
     const classes = FeatureStyle(theme);
-    const {features} = props;
 
     return (
         <Grid container spacing={3} className={classes.featureWrapper} id="features">

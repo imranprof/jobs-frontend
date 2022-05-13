@@ -18,6 +18,18 @@ const ProfilesSideBar = (props) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
+  const handleSignInClick = () => {
+    dispatch(modalType('SignIn'))
+  }
+
+  const handleSignUpClick = () => {
+    dispatch(modalType('SignUp'))
+  }
+
+  const handleSignOutClick = () => {
+    dispatch(SignOut())
+  }
+
   return (
     <>
       <Hidden lgUp>
@@ -52,9 +64,7 @@ const ProfilesSideBar = (props) => {
             {!props.isAuthenticated && (
               <Link href="#">
                 <a className={`${classes.headerWrapper}__authentication-signin`}
-                   onClick={() => {
-                     dispatch(modalType('SignIn'))
-                   }}>Sign In
+                   onClick={handleSignInClick}>Sign In
                 </a>
               </Link>
             )}
@@ -67,17 +77,13 @@ const ProfilesSideBar = (props) => {
             {props.isAuthenticated ? (
               <Link href="#">
                 <a className={`${classes.headerWrapper}__authentication-sign-out`}
-                   onClick={() => {
-                     dispatch(SignOut())
-                   }}>Sign out
+                   onClick={handleSignOutClick}>Sign out
                 </a>
               </Link>
             ) : (
               <Link href="#">
                 <a className={`${classes.headerWrapper}__authentication-signup`}
-                   onClick={() => {
-                     dispatch(modalType('SignUp'))
-                   }}>Sign Up</a>
+                   onClick={handleSignUpClick}>Sign Up</a>
               </Link>
             )}
           </div>

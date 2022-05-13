@@ -22,7 +22,7 @@ const TopSection = (props) => {
     window.addEventListener('scroll', () => {
       let backToTop = backToTopRef.current;
       let scrollTop = window.scrollY;
-      scrollTop >= 80 ? backToTop.style.display = "flex" : backToTop.style.display = "none";
+      backToTop.style.display = scrollTop >= 80 ? "flex" : "none";
     })
   }, [])
 

@@ -13,6 +13,18 @@ const ProfilesHeader = (props) => {
   const {classes, headerRef} = props;
   const dispatch = useDispatch()
 
+  const handleSignInClick = () => {
+    dispatch(modalType('SignIn'))
+  }
+
+  const handleSignUpClick = () => {
+    dispatch(modalType('SignUp'))
+  }
+
+  const handleSignOutClick = async () => {
+    await dispatch(SignOut())
+  }
+
   return (
     <AppBar className={classes.headerWrapper} ref={headerRef}>
       <Toolbar className={`${classes.headerWrapper}__toolbar`}>
@@ -26,9 +38,7 @@ const ProfilesHeader = (props) => {
             {props.isAuthenticated ? (
               <Link href="#">
                 <a className={`${classes.headerWrapper}__authentication-sign-out`}
-                   onClick={async () => {
-                     await dispatch(SignOut())
-                   }}>
+                   onClick={handleSignOutClick}>
                   Sign out
                 </a>
               </Link>
@@ -36,17 +46,13 @@ const ProfilesHeader = (props) => {
               <div className={`${classes.headerWrapper}__authentication`}>
                 <Link href="#">
                   <a className={`${classes.headerWrapper}__authentication-signin`}
-                     onClick={() => {
-                       dispatch(modalType('SignIn'))
-                     }}>
+                     onClick={handleSignInClick}>
                     Sign In
                   </a>
                 </Link>
                 <Link href="#">
                   <a className={`${classes.headerWrapper}__authentication-signup`}
-                     onClick={() => {
-                       dispatch(modalType('SignUp'))
-                     }}>
+                     onClick={handleSignUpClick}>
                     Sign Up
                   </a>
                 </Link>
