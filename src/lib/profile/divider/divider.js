@@ -1,13 +1,11 @@
-import {useContext} from "react";
-
+import {useTheme} from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
 import {DividerStyle} from "./style";
 
 const CustomDivider = () =>  {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = DividerStyle(customTheme);
+    const theme = useTheme();
+    const classes = DividerStyle(theme);
     return (
         <Divider className={`${classes.divider}`}/>
     );

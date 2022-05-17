@@ -1,12 +1,12 @@
-import {useContext} from "react";
 import Link from "next/link";
 
-import ThemeContextProvider from "../../contexts/themeContext";
+import {useTheme} from "@material-ui/core/styles";
+
 import {LogoStyle} from "./style";
 
 const Logo = () => {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = LogoStyle(customTheme);
+  const theme = useTheme();
+  const classes = LogoStyle(theme);
 
   return (
     <Link href="/">

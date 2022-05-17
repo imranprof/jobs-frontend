@@ -1,28 +1,28 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {animateScroll as scroll} from 'react-scroll';
+import {connect} from "react-redux";
 
 import {Grid} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
-import {profileData} from "../../../../API/mock/profile/profileData";
 import TypeWriter from "./typeWriter";
 import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
-const TopSection = () => {
+const TopSection = (props) => {
+  const theme = useTheme();
+  const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = TopSectionStyle(customTheme);
-  const {name, avatar, headline, bio} = profileData;
-  const expertises = profileData.expertises.map(expertise => `${expertise}.`);
+  const {name, avatar, headline, bio, expertises} = props.profile;
+  const profileExpertises = expertises.map(expertise => `${expertise}.`);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      const backToTop = backToTopRef.current;
-      const scrollTop = window.scrollY;
-      scrollTop >= 80 ? backToTop.style.display = "flex" : backToTop.style.display = "none";
+      let backToTop = backToTopRef.current;
+      let scrollTop = window.scrollY;
+      backToTop.style.display = scrollTop >= 80 ? "flex" : "none";
     })
   }, [])
 
@@ -31,11 +31,11 @@ const TopSection = () => {
       <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
         <div className={`${classes.topSectionWrapper}__left-top`}>
           <span className={`${classes.topSectionWrapper}__left-top__headline`}>{headline}</span>
-          <TypeWriter name={name} expertises={expertises} classes={classes}/>
+          <TypeWriter name={name} expertises={profileExpertises} classes={classes}/>
           <p className={`${classes.topSectionWrapper}__left-top__bio`}>{bio}</p>
         </div>
         <div className={`${classes.topSectionWrapper}__left-bottom`}>
-          <SocialLinks/>
+          <SocialLinks />
           <Skills/>
         </div>
       </Grid>
@@ -53,4 +53,10 @@ const TopSection = () => {
   );
 };
 
-export default TopSection;
+const mapStateToProps = (state) => {
+  return {
+    profile: state.profile,
+  }
+}
+
+export default connect(mapStateToProps)(TopSection);

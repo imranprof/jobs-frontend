@@ -1,14 +1,12 @@
-import {useContext} from 'react';
-
 import {Grid} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../../../contexts/themeContext";
 import {ResumeStyle} from "../style";
 import ColumnContent from "./columnContent";
 
 const RowContent = ({cardType, cardData}) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const resumeWrapper = ResumeStyle(customTheme).resumeWrapper;
+    const theme = useTheme();
+    const resumeWrapper = ResumeStyle(theme).resumeWrapper;
     const wrapperClass = cardType === "skills" ? "skills" : "content";
 
     const columnWrapper = position => {

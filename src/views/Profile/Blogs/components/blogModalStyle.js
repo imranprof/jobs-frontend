@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+
 import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
