@@ -2,12 +2,14 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 
 import {Button, Box, TextField} from "@material-ui/core";
-
-import {setAuthToken, signIn, signUp} from "../operations";
+import {useTheme} from "@material-ui/core/styles";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+
+import {setAuthToken, signIn, signUp} from "../operations";
 import {authenticate, modalType} from "../../store/actions/authAction";
+import {AuthStyle} from "./style";
 
 const validationSchema = yup.object({
   email: yup
@@ -32,11 +34,14 @@ const validationSchema = yup.object({
 });
 
 const SignUpForm = () => {
+  const theme = useTheme();
+  const classes = AuthStyle(theme);
   const dispatch = useDispatch();
   const [apiError, setApiError] = useState(undefined);
   const formik = useFormik({
     initialValues: {
-      name: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
       passwordConfirmation: '',
@@ -57,18 +62,32 @@ const SignUpForm = () => {
 
   return (
     <Box component="form" onSubmit={formik.handleSubmit}>
-      <TextField
-        fullWidth
-        variant="outlined"
-        required
-        id="name"
-        name="name"
-        label="Name"
-        value={formik.values.name}
-        onChange={formik.handleChange}
-        error={formik.touched.name && Boolean(formik.errors.name)}
-        helperText={formik.touched.name && formik.errors.name}
-      />
+      <div className={classes.authWrapper}>
+        <TextField
+          variant="outlined"
+          required
+          id="first_name"
+          name="first_name"
+          label="First Name"
+          value={formik.values.first_name}
+          onChange={formik.handleChange}
+          error={formik.touched.first_name && Boolean(formik.errors.first_name)}
+          helperText={formik.touched.first_name && formik.errors.first_name}
+          className={`${classes.authWrapper}__name`}
+        />
+        <TextField
+          variant="outlined"
+          required
+          id="last_name"
+          name="last_name"
+          label="Last Name"
+          value={formik.values.last_name}
+          onChange={formik.handleChange}
+          error={formik.touched.last_name && Boolean(formik.errors.last_name)}
+          helperText={formik.touched.last_name && formik.errors.last_name}
+          className={`${classes.authWrapper}__name`}
+        />
+      </div>
       <TextField
         fullWidth
         variant="outlined"

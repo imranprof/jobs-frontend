@@ -30,8 +30,8 @@ export function handleApiResponse(response) {
 
 export function signUp(values) {
   return async () => {
-  const {name, email, password, passwordConfirmation} = values
-  const data = {user: {name, email, password, passwordConfirmation}}
+  const {first_name, last_name, email, password, password_confirmation} = values
+  const data = {user: {first_name, last_name, email, password, password_confirmation}}
   const response = await axios.post(signUpURL, data)
     .then(data => data)
     .catch(err => err.response);
