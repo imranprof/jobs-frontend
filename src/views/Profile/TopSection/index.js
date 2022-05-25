@@ -10,6 +10,7 @@ import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
+import EditButton from "../../../lib/editButton";
 
 const TopSection = () => {
   const backToTopRef = useRef(null);
@@ -30,7 +31,10 @@ const TopSection = () => {
     <Grid container className={classes.topSectionWrapper} id="topSection">
       <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
         <div className={`${classes.topSectionWrapper}__left-top`}>
-          <span className={`${classes.topSectionWrapper}__left-top__headline`}>{headline}</span>
+          <span className={`${classes.topSectionWrapper}__left-top__headline`}>
+            {headline}
+            <EditButton />
+          </span>
           <TypeWriter name={name} expertises={expertises} classes={classes}/>
           <p className={`${classes.topSectionWrapper}__left-top__bio`}>{bio}</p>
         </div>
