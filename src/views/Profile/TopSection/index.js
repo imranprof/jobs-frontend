@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {animateScroll as scroll} from 'react-scroll';
 
 import {Grid} from "@material-ui/core";
@@ -11,6 +11,7 @@ import Skills from "../../../lib/profile/skills";
 import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import EditButton from "../../../lib/editButton";
+import CustomButton from "../../../lib/customButtons";
 
 const TopSection = () => {
   const backToTopRef = useRef(null);
@@ -18,6 +19,10 @@ const TopSection = () => {
   const classes = TopSectionStyle(customTheme);
   const {name, avatar, headline, bio} = profileData;
   const expertises = profileData.expertises.map(expertise => `${expertise}.`);
+
+  const [editMode, setEditMode] = useState(false);
+  const [headlineText, setHeadlineText] = useState(headline);
+  const [editState, setEditState] = useState({headline: headlineText})
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -27,14 +32,40 @@ const TopSection = () => {
     })
   }, [])
 
+  const inputChangeHandler = (e) => {
+    setEditState({
+      headline: e.target.value
+    })
+  }
+
+  const editHandler = () => {
+    if (editState.headline !== "") {
+      setHeadlineText(editState.headline);
+      setEditMode(false);
+    }
+  };
+
   return (
     <Grid container className={classes.topSectionWrapper} id="topSection">
       <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
         <div className={`${classes.topSectionWrapper}__left-top`}>
-          <span className={`${classes.topSectionWrapper}__left-top__headline`}>
-            {headline}
-            <EditButton />
-          </span>
+          {editMode ? (
+            <div>
+              <input
+                value={editState.headline}
+                onChange={inputChangeHandler}
+                className={`${classes.topSectionWrapper}__left-top__headline-input`}
+              />
+              <CustomButton handler={editHandler} mode={setEditMode} />
+            </div>
+          ) : (
+            <span className={`${classes.topSectionWrapper}__left-top__headline`}>
+              {headlineText}
+              <span onClick={() => setEditMode(true)}>
+                <EditButton />
+              </span>
+            </span>
+          )}
           <TypeWriter name={name} expertises={expertises} classes={classes}/>
           <p className={`${classes.topSectionWrapper}__left-top__bio`}>{bio}</p>
         </div>

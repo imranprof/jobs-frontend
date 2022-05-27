@@ -44,7 +44,8 @@ const darkTheme = createTheme({
             default: COLORS.boxShadow_3,
             backToTop: COLORS.boxShadow_3,
             paperCardShadow: COLORS.boxShadow_3,
-            buttonShadow: COLORS.boxShadow_11
+            buttonShadow: COLORS.boxShadow_11,
+            editInputShadow: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.black_3,
@@ -68,7 +69,8 @@ const darkTheme = createTheme({
             main: COLORS.black_8
         },
         customBorder: {
-            beforeElement: COLORS.black_6
+            beforeElement: COLORS.black_6,
+            editInputElement: COLORS.gray_4
         },
         resume: {
             navListColor: COLORS.white_4,

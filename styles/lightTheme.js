@@ -45,6 +45,7 @@ const lightTheme = createTheme({
             backToTop: COLORS.boxShadow_10,
             paperCardShadow: COLORS.boxShadow_9,
             buttonShadow: COLORS.boxShadow_9,
+            editInputShadow: COLORS.boxShadow_5
         },
         customDivider: {
             main: COLORS.gray_5
@@ -67,6 +68,7 @@ const lightTheme = createTheme({
         },
         customBorder: {
             beforeElement: COLORS.gray_5,
+            editInputElement: COLORS.gray
         },
         resume: {
             navListColor: COLORS.black,

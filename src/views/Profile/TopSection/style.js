@@ -14,6 +14,19 @@ export const useStyles = makeStyles({
       justifyContent: "center",
       '&-top': {
         marginBottom: 142,
+        '&__headline-input': {
+          display: "block",
+          width: "85%",
+          height: 40,
+          color: theme.palette.customColor.main,
+          background: "transparent",
+          border: `1px solid ${theme.palette.customBorder.editInputElement}`,
+          boxShadow: theme.palette.customShadow.editInputShadow,
+          borderRadius: 3,
+          fontSize: 16,
+          marginBottom: 15,
+          paddingLeft: 10
+        },
         '&__headline': {
           fontSize: 14,
           fontFamily: FONTS.primaryFont,
