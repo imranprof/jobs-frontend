@@ -13,7 +13,7 @@ import {
 import {Container} from "@material-ui/core";
 
 
-const Profileshare = (props) => {
+export const ProfileShare = (props) => {
     return (
 
         <div>

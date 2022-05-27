@@ -10,50 +10,7 @@ import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-
-//new code start here
-
-import {
-    FacebookShareButton,
-    LinkedinShareButton,
-    TwitterShareButton,
-} from "react-share";
-
-import {
-    FacebookIcon,
-    LinkedinIcon,
-    TwitterIcon
-} from "react-share";
-
-
-const ProfileShare = (props) => {
-    return (
-
-        <div>
-            <h3>Share Profile in Social app</h3>
-            <TwitterShareButton url="http://localhost:8080/profile"
-                                hashtag = "#seekRightjobs">
-
-                <TwitterIcon logoFillcolor="white" size={55} round={true}></TwitterIcon>
-            </TwitterShareButton>
-            <FacebookShareButton url="https://facebook.com/imransart"
-                                 hashtag = "#seekRightjobs">
-                <FacebookIcon logoFillcolor="white" size={55} round={true}></FacebookIcon>
-
-            </FacebookShareButton>
-
-            <LinkedinShareButton url="https://twitter.com/Imransart1"
-                                 hashtag = "#seekRightjobs">
-                <LinkedinIcon logoFillcolor="white" size={55} round={true}></LinkedinIcon>
-            </LinkedinShareButton>
-        </div>
-
-
-
-    );
-}
-
-//new code end
+import { ProfileShare } from "../../../lib/profile/profileshare/profileShare";
 
 
 const TopSection = (props) => {
