@@ -24,6 +24,10 @@ const TopSection = () => {
   const [headlineText, setHeadlineText] = useState(headline);
   const [editState, setEditState] = useState({headline: headlineText})
 
+  const [bioEditMode, setBioEditMode] = useState(false);
+  const [bioText, setBioText] = useState(bio);
+  const [bioEditState, setBioEditState] = useState({bio: bioText})
+
   useEffect(() => {
     window.addEventListener('scroll', () => {
       const backToTop = backToTopRef.current;
@@ -38,10 +42,23 @@ const TopSection = () => {
     })
   }
 
+  const inputBioChangeHandler = (e) => {
+    setBioEditState({
+      bio: e.target.value
+    })
+  }
+
   const editHandler = () => {
     if (editState.headline !== "") {
       setHeadlineText(editState.headline);
       setEditMode(false);
+    }
+  };
+
+  const bioEditHandler = () => {
+    if (bioEditState.bio !== "") {
+      setBioText(bioEditState.bio);
+      setBioEditMode(false);
     }
   };
 
@@ -59,15 +76,32 @@ const TopSection = () => {
               <CustomButton handler={editHandler} mode={setEditMode} />
             </div>
           ) : (
-            <span className={`${classes.topSectionWrapper}__left-top__headline`}>
-              {headlineText}
+            <div className={`${classes.topSectionWrapper}__left-top__headline`}>
+              <span className={`${classes.topSectionWrapper}__left-top__headline-text`}>{headlineText}</span>
               <span onClick={() => setEditMode(true)}>
                 <EditButton />
               </span>
-            </span>
+            </div>
           )}
           <TypeWriter name={name} expertises={expertises} classes={classes}/>
-          <p className={`${classes.topSectionWrapper}__left-top__bio`}>{bio}</p>
+          {bioEditMode ? (
+            <div>
+              <textarea
+                value={bioEditState.bio}
+                onChange={inputBioChangeHandler}
+                className={`${classes.topSectionWrapper}__left-top__bio-input`}
+              />
+              <CustomButton handler={bioEditHandler} mode={setBioEditMode} />
+            </div>
+          ) : (
+            <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
+              <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{bioText}</p>
+              <span onClick={() => setBioEditMode(true)}>
+              <EditButton />
+            </span>
+            </div>
+          )}
+
         </div>
         <div className={`${classes.topSectionWrapper}__left-bottom`}>
           <SocialLinks/>

@@ -11,7 +11,6 @@ export const useStyles = makeStyles({
     alignItems: "center",
     cursor: "pointer",
     boxShadow: theme.palette.customShadow.main,
-    marginLeft: 14,
     zIndex: 1,
     '&::before': {
       position: "absolute",
@@ -33,7 +32,7 @@ export const useStyles = makeStyles({
     '& .fa-solid': {
       textAlign: "center",
       fontSize: 16,
-      paddingLeft: 3
+      marginLeft: 3
     },
     '&:hover .fa-solid': {
       color: theme.palette.customColor.light,

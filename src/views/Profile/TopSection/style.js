@@ -36,10 +36,26 @@ export const useStyles = makeStyles({
           fontWeight: 500,
           display: "block",
           marginBottom: 20,
+          '&-text': {
+            marginRight: 14
+          },
           // ========= Breakpoints =========
           [theme.breakpoints.down('xs')]: {
             letterSpacing: 1
           }
+        },
+        '&__bio-input': {
+          display: "block",
+          width: "85%",
+          height: 100,
+          color: theme.palette.customColor.main,
+          background: "transparent",
+          border: `1px solid ${theme.palette.customBorder.editInputElement}`,
+          boxShadow: theme.palette.customShadow.editInputShadow,
+          borderRadius: 3,
+          fontSize: 16,
+          marginBottom: 15,
+          padding: 10
         },
         '&__title': {
           color: theme.palette.customColor.light,
@@ -83,12 +99,17 @@ export const useStyles = makeStyles({
             },
           }
         },
-        '&__bio': {
+        '&__bio-wrapper': {
+          width: "90%",
+          display: "flex",
+          paddingTop: 12
+        },
+        '&__bio-text': {
           fontSize: 16,
           fontFamily: FONTS.secondaryFont,
           lineHeight: "30px",
           color: theme.palette.customColor.main,
-          paddingRight: "16%",
+          margin: "0 10px 0 0",
           opacity: 0.9,
           // ========= Breakpoints =========
           [theme.breakpoints.down('sm')]: {
