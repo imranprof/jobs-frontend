@@ -10,10 +10,7 @@ const Profile = () => {
             <TopSection/>
             <CustomDivider/>
             <Sections/>
-            <div>
-                <ProfileShare shareUrl={"https://facebook.com/imransart"}/>
-            </div>
-
+            <ProfileShare shareUrl={"https://facebook.com/imransart"}/>
         </>
     );
 }

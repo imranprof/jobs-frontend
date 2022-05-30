@@ -1,3 +1,4 @@
+import {Container} from "@material-ui/core";
 import {
     FacebookShareButton,
     LinkedinShareButton,
@@ -15,21 +16,21 @@ export const ProfileShare = (props) => {
     return (
 
         <div>
-            <h3>Share Profile</h3>
+            <h3>Share On</h3>
             <TwitterShareButton url={props.shareUrl}
-                                title={"Stay connect with me in seekRightsjob\n\n"}
-                                tags="#seekRightsjob">
-                <TwitterIcon round={true}/>
+                                title={"Stay connect with me in Seek Right jobs\n\n"}
+                                tags="#seekRightjobs">
+                <TwitterIcon round={true} size={45}/>
             </TwitterShareButton>
             <FacebookShareButton url={props.shareUrl}
-                                 quote={"Stay connect with me in seekRightsjob"}
+                                 quote={"Stay connect with me in Seek Right jobs"}
                                  hashtag="#seekRightsjob">
-                <FacebookIcon round={true}/>
+                <Container><FacebookIcon round={true} size={45}/></Container>
             </FacebookShareButton>
             <LinkedinShareButton url={props.shareUrl}
-                                 title={"Stay connect with me in seekRightsjob"}
-                                 source="www.seekrightsjob.org">
-                <LinkedinIcon round={true}/>
+                                 title={"Stay connect with me in Seek Right jobs"}
+                                 source="www.seekrightjobs.org">
+                <LinkedinIcon  round={true} size={45}/>
             </LinkedinShareButton>
         </div>
 
