@@ -10,7 +10,6 @@ import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-import { ProfileShare } from "../../../lib/profile/profileshare/profileShare";
 
 
 const TopSection = (props) => {
@@ -39,21 +38,13 @@ const TopSection = (props) => {
         <div className={`${classes.topSectionWrapper}__left-bottom`}>
           <SocialLinks />
           <Skills/>
-
         </div>
-
-        <div>
-          <ProfileShare shareUrl = "https://facebook.com/imransart"/>
-        </div>
-
       </Grid>
-
       <Grid item xs={12} md={5}>
         <div className={`${classes.topSectionWrapper}__thumbnail`}>
           <img src={avatar} alt={name} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
         </div>
       </Grid>
-
       <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef} onClick={() => scroll.scrollToTop()}>
         <i className={`${FontAwesomeIcons.arrowUp}`}/>
       </div>

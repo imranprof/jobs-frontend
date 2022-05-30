@@ -15,7 +15,7 @@ export const ProfileShare = (props) => {
     return (
 
         <div>
-            <h3>Share Profile in Social app</h3>
+            <h3>Share Profile</h3>
             <TwitterShareButton url={props.shareUrl}
                                 title={"Stay connect with me in seekRightsjob\n\n"}
                                 tags="#seekRightsjob">
