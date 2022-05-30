@@ -43,7 +43,7 @@ const TopSection = (props) => {
         </div>
 
         <div>
-          <ProfileShare/>
+          <ProfileShare shareUrl = "https://facebook.com/imransart"/>
         </div>
 
       </Grid>

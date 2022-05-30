@@ -1,4 +1,3 @@
-
 import {
     FacebookShareButton,
     LinkedinShareButton,
@@ -10,7 +9,6 @@ import {
     LinkedinIcon,
     TwitterIcon
 } from "react-share";
-import {Container} from "@material-ui/core";
 
 
 export const ProfileShare = (props) => {
@@ -18,26 +16,22 @@ export const ProfileShare = (props) => {
 
         <div>
             <h3>Share Profile in Social app</h3>
-            <TwitterShareButton url="http://localhost:8080/profile"
-                                quote={"share in twitter"}
-                                hashtag = "#React">
-
-                <TwitterIcon logoFillcolor="white" round={true}></TwitterIcon>
+            <TwitterShareButton url={props.shareUrl}
+                                title={"Stay connect with me in seekRightsjob\n\n"}
+                                tags="#seekRightsjob">
+                <TwitterIcon round={true}/>
             </TwitterShareButton>
-            <FacebookShareButton url="https://facebook.com/imransart"
-                                 quote={"share in Facebook"}
-                                 hashtag = "#React">
-                <FacebookIcon logoFillcolor="white" round={true}></FacebookIcon>
-
+            <FacebookShareButton url={props.shareUrl}
+                                 quote={"Stay connect with me in seekRightsjob"}
+                                 hashtag="#seekRightsjob">
+                <FacebookIcon round={true}/>
             </FacebookShareButton>
-
-            <LinkedinShareButton url="https://twitter.com/Imransart1"
-                                 quote={"share in Linkedin"}
-                                 hashtag = "#React">
-                <LinkedinIcon logoFillcolor="white" round={true}></LinkedinIcon>
+            <LinkedinShareButton url={props.shareUrl}
+                                 title={"Stay connect with me in seekRightsjob"}
+                                 source="www.seekrightsjob.org">
+                <LinkedinIcon round={true}/>
             </LinkedinShareButton>
         </div>
-
 
 
     );
