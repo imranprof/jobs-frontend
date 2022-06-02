@@ -4,6 +4,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
 import {NavigationLinksData} from "../../../../../API/elements/profile/navigationLinksData";
+import {Button, Popover} from "@material-ui/core";
 
 const NavItems = ({classes, variant}) => {
     return (
@@ -16,6 +17,7 @@ const NavItems = ({classes, variant}) => {
                     </Link>
                 </ListItem>)
             )}
+            <Button className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant}`}>Share</Button>
         </List>
     );
 };
