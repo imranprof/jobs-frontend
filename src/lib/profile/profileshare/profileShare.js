@@ -1,4 +1,4 @@
-import {Box, Container, Paper} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 import {
     FacebookShareButton,
     LinkedinShareButton,
