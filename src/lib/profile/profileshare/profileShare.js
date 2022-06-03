@@ -15,16 +15,16 @@ import {
 export const ProfileShare = (props) => {
     return (
 
-        <Box>
+        <Box marginTop={.5} marginRight={.5} marginLeft={.5}>
             <TwitterShareButton url={props.shareUrl}
                                 title={"Stay connect with me in Seek Right jobs\n\n"}
-                                tags="#seekRightjobs">
+                                tags="#seekRightjobs" outline-ofset="5">
                 <TwitterIcon borderRadius={15} size={30}/>
             </TwitterShareButton>
             <FacebookShareButton url={props.shareUrl}
                                  quote={"Stay connect with me in Seek Right jobs"}
                                  hashtag="#seekRightsjob">
-                <Container><FacebookIcon borderRadius={15} size={30}/></Container>
+                <Box marginLeft={1} marginRight={1}><FacebookIcon borderRadius={15} size={30}/></Box>
             </FacebookShareButton>
             <LinkedinShareButton url={props.shareUrl}
                                  title={"Stay connect with me in Seek Right jobs"}
