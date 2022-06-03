@@ -114,19 +114,16 @@ export const useStyles = makeStyles({
         },
       },
       '&__share': {
-        display: "flex",
-        position: 'relative',
-        alignItems: "center",
         textAlign: "center",
         textTransform: "uppercase",
         background: theme.palette.customBackground.gradiant.light,
         boxShadow: theme.palette.customShadow.paperCardShadow,
         width: "15%",
-        marginTop: "15px",
-        height: 35,
+        height: 40,
         border: "none",
         borderRadius: 5,
-        color: theme.palette.customColor.highContrast
+        color: theme.palette.customColor.highContrast,
+        marginLeft: 10
       },
       '& .active': {
         opacity: 1,

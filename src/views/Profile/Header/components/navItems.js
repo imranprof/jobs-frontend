@@ -12,19 +12,19 @@ import {ProfileShare} from "../../../../lib/profile/profileshare/profileShare";
 const NavItems = ({classes, variant}) => {
     const [anchorElBottom, setAnchorElBottom] = React.useState(null);
     return (
-        <List>
-            {NavigationLinksData.map((link) =>
-                (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}
-                           key={link.id}>
-                    <Link to={link.href} spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
-                        {link.name}
-                    </Link>
-                </ListItem>)
-            )}
+        <List style={{width:'660px'}}>
+                {NavigationLinksData.map((link) =>
+                    (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}
+                               key={link.id}>
+                        <Link to={link.href} spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
+                            {link.name}
+                        </Link>
+                    </ListItem>)
+                )}
 
-            <Button onClick={event => setAnchorElBottom(event.currentTarget)} className={`${classes.headerWrapper}__nav__share`}>
-                Share
-            </Button>
+                <Button onClick={event => setAnchorElBottom(event.currentTarget)} className={`${classes.headerWrapper}__nav__share`}>
+                    Share
+                </Button>
             <Popover
                 open={Boolean(anchorElBottom)}
                 anchorEl={anchorElBottom}
