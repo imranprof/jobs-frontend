@@ -22,7 +22,7 @@ const NavItems = ({classes, variant}) => {
                 </ListItem>)
             )}
 
-            <Button onClick={event => setAnchorElBottom(event.currentTarget)} className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--`}>
+            <Button onClick={event => setAnchorElBottom(event.currentTarget)} className={`${classes.headerWrapper}__nav__share`}>
                 Share
             </Button>
             <Popover

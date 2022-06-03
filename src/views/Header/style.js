@@ -113,6 +113,21 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.light,
         },
       },
+      '&__share': {
+        display: "flex",
+        position: 'relative',
+        alignItems: "center",
+        textAlign: "center",
+        textTransform: "uppercase",
+        background: theme.palette.customBackground.gradiant.light,
+        boxShadow: theme.palette.customShadow.paperCardShadow,
+        width: "15%",
+        marginTop: "15px",
+        height: 35,
+        border: "none",
+        borderRadius: 5,
+        color: theme.palette.customColor.highContrast
+      },
       '& .active': {
         opacity: 1,
         color: theme.palette.customColor.navLinkActive,
