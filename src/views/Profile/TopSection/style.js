@@ -99,10 +99,16 @@ export const useStyles = makeStyles({
             },
           }
         },
-        '&__bio-wrapper': {
-          width: "90%",
+        '&__greetings-expertise': {
           display: "flex",
+          justifyContent: "space-between",
+          width: "90%",
           paddingTop: 12
+        },
+        '&__bio-wrapper': {
+          display: "flex",
+          paddingTop: 12,
+          width: "90%"
         },
         '&__bio-text': {
           fontSize: 16,

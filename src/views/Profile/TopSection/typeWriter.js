@@ -1,11 +1,12 @@
 import React from 'react';
 
 import Typewriter from 'typewriter-effect';
+import {profileData} from "../../../../API/mock/profile/profileData";
 
-const TypeWriter = ({name, expertises, classes}) => {
+const TypeWriter = ({name, intro, expertises, classes}) => {
     return (
         <h1 className={`${classes.topSectionWrapper}__left-top__title`}>
-            Hi, I'm <span className={`${classes.topSectionWrapper}__left-top__title__name`}>{name}</span><br/>
+          {intro} <span className={`${classes.topSectionWrapper}__left-top__title__name`}>{name}</span><br/>
             <span className={`${classes.topSectionWrapper}__left-top__title__expertise`}>
                 <span>a&nbsp;</span>
                     <Typewriter

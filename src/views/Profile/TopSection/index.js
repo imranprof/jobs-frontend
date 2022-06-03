@@ -12,21 +12,26 @@ import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/customButtons";
+import MuiCustomModal from "../../../lib/profile/muiCustomModal";
 
 const TopSection = () => {
   const backToTopRef = useRef(null);
   const customTheme = useContext(ThemeContextProvider);
   const classes = TopSectionStyle(customTheme);
-  const {name, avatar, headline, bio} = profileData;
+  const {name, avatar, headline, bio, intro} = profileData;
   const expertises = profileData.expertises.map(expertise => `${expertise}.`);
-
-  const [editMode, setEditMode] = useState(false);
+  // Headline
   const [headlineText, setHeadlineText] = useState(headline);
-  const [editState, setEditState] = useState({headline: headlineText})
-
-  const [bioEditMode, setBioEditMode] = useState(false);
+  const [headlineEditState, setHeadlineEditState] = useState({headline: headlineText})
+  const [headlineEditMode, setHeadlineEditMode] = useState(false);
+  // Intro/Expertises
+  const [introText, setIntroText] = useState(intro);
+  const [introEditState, setIntroEditState] = useState({intro: introText})
+  const [openModal, setOpenModal] = useState(false);
+  // Bio
   const [bioText, setBioText] = useState(bio);
   const [bioEditState, setBioEditState] = useState({bio: bioText})
+  const [bioEditMode, setBioEditMode] = useState(false);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -36,9 +41,15 @@ const TopSection = () => {
     })
   }, [])
 
-  const inputChangeHandler = (e) => {
-    setEditState({
+  const inputHeadlineChangeHandler = (e) => {
+    setHeadlineEditState({
       headline: e.target.value
+    })
+  }
+
+  const inputIntroChangeHandler = (e) => {
+    setIntroEditState({
+      intro: e.target.value
     })
   }
 
@@ -48,10 +59,10 @@ const TopSection = () => {
     })
   }
 
-  const editHandler = () => {
-    if (editState.headline !== "") {
-      setHeadlineText(editState.headline);
-      setEditMode(false);
+  const headlineEditHandler = () => {
+    if (headlineEditState.headline !== "") {
+      setHeadlineText(headlineEditState.headline);
+      setHeadlineEditMode(false);
     }
   };
 
@@ -62,28 +73,58 @@ const TopSection = () => {
     }
   };
 
+  const introEditHandler = () => {
+    if (introEditState.intro !== "") {
+      setIntroText(introEditState.intro);
+      handleClose();
+    }
+  };
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
   return (
     <Grid container className={classes.topSectionWrapper} id="topSection">
       <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
         <div className={`${classes.topSectionWrapper}__left-top`}>
-          {editMode ? (
+          {headlineEditMode ? (
             <div>
               <input
-                value={editState.headline}
-                onChange={inputChangeHandler}
+                value={headlineEditState.headline}
+                onChange={inputHeadlineChangeHandler}
                 className={`${classes.topSectionWrapper}__left-top__headline-input`}
               />
-              <CustomButton handler={editHandler} mode={setEditMode} />
+              <CustomButton handler={headlineEditHandler} mode={setHeadlineEditMode}/>
             </div>
           ) : (
             <div className={`${classes.topSectionWrapper}__left-top__headline`}>
               <span className={`${classes.topSectionWrapper}__left-top__headline-text`}>{headlineText}</span>
-              <span onClick={() => setEditMode(true)}>
-                <EditButton />
+              <span onClick={() => setHeadlineEditMode(true)}>
+                <EditButton/>
               </span>
             </div>
           )}
-          <TypeWriter name={name} expertises={expertises} classes={classes}/>
+
+          <MuiCustomModal
+            handleClose={handleClose}
+            open={openModal}
+            fullName={name}
+            inputValue={introEditState.intro}
+            inputIntroChangeHandler={inputIntroChangeHandler}
+            introEditHandler={introEditHandler}
+          />
+          <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
+            <TypeWriter name={name} intro={introText} expertises={expertises} classes={classes}/>
+            <span onClick={handleOpen}>
+                <EditButton/>
+              </span>
+          </div>
+
           {bioEditMode ? (
             <div>
               <textarea
@@ -91,13 +132,13 @@ const TopSection = () => {
                 onChange={inputBioChangeHandler}
                 className={`${classes.topSectionWrapper}__left-top__bio-input`}
               />
-              <CustomButton handler={bioEditHandler} mode={setBioEditMode} />
+              <CustomButton handler={bioEditHandler} mode={setBioEditMode}/>
             </div>
           ) : (
             <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
               <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{bioText}</p>
               <span onClick={() => setBioEditMode(true)}>
-              <EditButton />
+              <EditButton/>
             </span>
             </div>
           )}
@@ -115,7 +156,8 @@ const TopSection = () => {
         </div>
       </Grid>
 
-      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef} onClick={() => scroll.scrollToTop()}>
+      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
+           onClick={() => scroll.scrollToTop()}>
         <i className={`${FontAwesomeIcons.arrowUp}`}/>
       </div>
     </Grid>

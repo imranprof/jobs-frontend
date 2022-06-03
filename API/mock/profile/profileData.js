@@ -1,6 +1,7 @@
 export const profileData = {
     "name": "John Doe",
     "headline": "Welcome to my world",
+    "intro": "Hi, I'm",
     "title": "a Rails Developer.",
     "bio": "I use animation as a third dimension by which to simplify experiences and kuiding thro each and every interaction. I’m not adding motion just to spruce things up, but doing it in ways that.",
     "avatar": "profile-pic.png",
