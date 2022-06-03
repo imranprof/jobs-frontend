@@ -24,7 +24,7 @@ export const ProfileShare = (props) => {
             <FacebookShareButton url={props.shareUrl}
                                  quote={"Stay connect with me in Seek Right jobs"}
                                  hashtag="#seekRightsjob">
-                <Box marginLeft={1} marginRight={1}><FacebookIcon borderRadius={15} size={30}/></Box>
+                <Box marginLeft={1.5} marginRight={1.5}><FacebookIcon borderRadius={15} size={30}/></Box>
             </FacebookShareButton>
             <LinkedinShareButton url={props.shareUrl}
                                  title={"Stay connect with me in Seek Right jobs"}
