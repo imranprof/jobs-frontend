@@ -6,13 +6,13 @@ import React from "react";
 
 import {NavigationLinksData} from "../../../../../API/elements/profile/navigationLinksData";
 import {Button, Popover} from "@material-ui/core";
-import {ProfileShare} from "../../../../lib/profile/profileshare/profileShare";
+import ProfileShare from "../../../../lib/profile/profileshare/profileShare";
 
 
 const NavItems = ({classes, variant}) => {
     const [anchorElBottom, setAnchorElBottom] = React.useState(null);
     return (
-        <List style={{width:'660px'}}>
+        <List className={`${classes.headerWrapper}__nav__navItem`}>
                 {NavigationLinksData.map((link) =>
                     (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}
                                key={link.id}>
@@ -38,7 +38,7 @@ const NavItems = ({classes, variant}) => {
                     horizontal: "center"
                 }}
             >
-                <ProfileShare shareUrl={"https://facebook.com/imransart"}/>
+                <ProfileShare shareUrl={"https://facebook.com/imransart"} classes={classes}/>
 
             </Popover>
         </List>

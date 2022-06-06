@@ -113,6 +113,9 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.light,
         },
       },
+      '&__navItem': {
+        width:'660px'
+      },
       '&__share': {
         textAlign: "center",
         textTransform: "uppercase",
@@ -123,7 +126,18 @@ export const useStyles = makeStyles({
         border: "none",
         borderRadius: 5,
         color: theme.palette.customColor.highContrast,
-        marginLeft: 10
+        '&:hover':{
+          opacity: 1,
+          borderRadius: 6,
+          background: theme.palette.customBackground.gradiant.dark,
+          color: theme.palette.customColor.sendMessageBtn
+        },
+        '&__shareBar':{
+          width: 150,
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 10
+        },
       },
       '& .active': {
         opacity: 1,
