@@ -21,21 +21,21 @@ const ProfileShare = ({shareUrl, classes}) => {
                 <TwitterShareButton url={shareUrl}
                                     title={"Stay connect with me in Seek Right jobs\n\n"}
                                     tags="#seekRightjobs" outline-ofset="5">
-                    <TwitterIcon borderRadius={15} size={30}/>
+                    <TwitterIcon className={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
                 </TwitterShareButton>
             </div>
             <div>
                 <FacebookShareButton url={shareUrl}
                                      quote={"Stay connect with me in Seek Right jobs"}
                                      hashtag="#seekRightsjob">
-                    <FacebookIcon borderRadius={15} size={30}/>
+                    <FacebookIcon className={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
                 </FacebookShareButton>
             </div>
             <div>
                 <LinkedinShareButton url={shareUrl}
                                      title={"Stay connect with me in Seek Right jobs"}
                                      source="www.seekrightjobs.org">
-                    <LinkedinIcon  borderRadius={15} size={30}/>
+                    <LinkedinIcon  className={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
                 </LinkedinShareButton>
             </div>
         </Box>

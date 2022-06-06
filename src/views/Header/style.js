@@ -133,10 +133,16 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.sendMessageBtn
         },
         '&__shareBar':{
-          width: 150,
+          width: 170,
           display: "flex",
           justifyContent: "space-between",
-          padding: 10
+          padding: 7,
+          background: theme.palette.customBackground.gradiant.light,
+          '&__icon':{
+            borderRadius: 10,
+            height: 40,
+            width: 40
+          }
         },
       },
       '& .active': {
