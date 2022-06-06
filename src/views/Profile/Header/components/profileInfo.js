@@ -1,6 +1,11 @@
+import {connect} from "react-redux";
+
 import {Avatar} from "@material-ui/core";
 
-const ProfileInfo = ({ name, avatar, showName, classes}) => {
+const ProfileInfo = (props) => {
+  const {profileInfo, showName, classes} = props;
+  const { name, avatar } = profileInfo;
+
     return (
         <div className={`${classes.headerWrapper}__profile`}>
             <Avatar
@@ -18,4 +23,10 @@ const ProfileInfo = ({ name, avatar, showName, classes}) => {
     );
 };
 
-export default ProfileInfo;
+const mapStateToProps = (state) => {
+  return {
+    profileInfo: state.profile
+  }
+}
+
+export default connect(mapStateToProps)(ProfileInfo);

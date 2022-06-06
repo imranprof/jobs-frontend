@@ -1,55 +1,39 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
+import {connect} from "react-redux";
 
-import {List, ListItem} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
 import {ResumeStyle} from "./style";
-import {ResumeData} from "../../../../API/mock/profile/resumeData";
 import ResumeCards from "./components/resumeCards";
+import NavList from "./components/navList";
 
-const Resume = () => {
-    const customTheme = useContext(ThemeContextProvider);
-    const resumeWrapper = ResumeStyle(customTheme).resumeWrapper;
+const Resume = ({ resume }) => {
+    const theme = useTheme();
+    const resumeWrapper = ResumeStyle(theme).resumeWrapper;
 
     let resumeSections = [];
-    for (let key in ResumeData) {
+    for (let key in resume) {
         resumeSections.push(key);
     }
+
     const [selected, setSelected] = useState(0);
-
     const cardType = resumeSections[selected];
-    const cardData = ResumeData[cardType];
-
-    const navList = () => {
-        return (
-            <List className={`${resumeWrapper}__nav-list`}>
-                {resumeSections.map((section, idx) => (
-                    <ListItem
-                        className={`${resumeWrapper}__nav-list__item`}
-                        key={idx}
-                        selected={selected === idx}
-                        onClick={() => setSelected(idx)}
-                    >
-                        <a>{section}</a>
-                    </ListItem>
-                ))}
-            </List>
-        );
-    }
-    const navContent = () => {
-        return (
-            <ResumeCards cardType={cardType} cardData={cardData}/>
-        );
-    }
+    const cardData = resume[cardType];
 
     return (
         <div className={resumeWrapper} id="resume">
             <div className={`${resumeWrapper}__body`}>
-                {navList()}
-                {navContent()}
+                <NavList resumeSections={resumeSections} resumeClasses={resumeWrapper} selected={selected} setSelected={setSelected} />
+                <ResumeCards cardData={cardData} cardType={cardType} />
             </div>
         </div>
     );
 }
 
-export default Resume;
+const mapStateToProps = (state) => {
+    return {
+        resume: state.profile.resume
+    }
+}
+
+export default connect(mapStateToProps)(Resume);

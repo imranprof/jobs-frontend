@@ -1,13 +1,12 @@
-import React, {useContext} from 'react';
-
 import {TailSpin} from "react-loader-spinner";
 
-import ThemeContextProvider from "../../contexts/themeContext";
+import {useTheme} from "@material-ui/core/styles";
+
 import {LoaderStyle} from "./style";
 
 const CustomLoader = () => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = LoaderStyle(customTheme);
+    const theme = useTheme();
+    const classes = LoaderStyle(theme);
 
     return (
         <div className={classes.loaderWrapper}>

@@ -1,5 +1,4 @@
 import {makeStyles} from "@material-ui/core/styles";
-import COLORS from "../../../styles/colors";
 
 const useStyles = makeStyles({
   skillWrapper: theme => ({

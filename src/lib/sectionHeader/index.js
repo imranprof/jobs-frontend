@@ -1,14 +1,14 @@
-import React, {useContext} from 'react';
-import ThemeContextProvider from "../../contexts/themeContext";
+import {useTheme} from "@material-ui/core/styles";
+
 import {SectionHeaderStyle} from "./style";
 
-const SectionHeader = ({ text }) => {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = SectionHeaderStyle(customTheme);
+const SectionHeader = ({ title }) => {
+  const theme = useTheme();
+  const classes = SectionHeaderStyle(theme);
 
   return (
     <div className={classes.sectionHeaderWrapper}>
-      <h1>{text}</h1>
+      <h1>{title}</h1>
     </div>
   );
 };

@@ -1,23 +1,29 @@
-import {useContext} from 'react';
+import {connect} from "react-redux";
 
 import CustomCard from "../../../lib/profile/card/card";
 import {Grid} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
 import {BlogsStyle} from "./style";
-import {BlogsData} from "../../../../API/mock/profile/blogsData";
 
-const Blogs = () => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = BlogsStyle(customTheme);
+const Blogs = (props) => {
+    const theme = useTheme();
+    const classes = BlogsStyle(theme);
+    const { blogs } = props;
 
     return (
         <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
-            {BlogsData.map(blog => (
+            {blogs.map(blog => (
                 <CustomCard key={blog.id} element={blog} elementType="blog"/>
             ))}
         </Grid>
     );
 }
 
-export default Blogs;
+const mapStateToProps = (state) => {
+    return {
+        blogs: state.profile.blogs
+    }
+}
+
+export default connect(mapStateToProps)(Blogs);
