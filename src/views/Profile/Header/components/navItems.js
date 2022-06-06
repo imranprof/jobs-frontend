@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import React from "react";
 
 import {NavigationLinksData} from "../../../../../API/elements/profile/navigationLinksData";
-import {Button, Popover} from "@material-ui/core";
+import {Box, Button, Popover} from "@material-ui/core";
 import ProfileShare from "../../../../lib/profile/profileshare/profileShare";
 
 
@@ -38,6 +38,7 @@ const NavItems = ({classes, variant}) => {
                     horizontal: "center"
                 }}
             >
+                <Box className={`${classes.headerWrapper}__nav__share__arrow`}/>
                 <ProfileShare shareUrl={"https://facebook.com/imransart"} classes={classes}/>
 
             </Popover>

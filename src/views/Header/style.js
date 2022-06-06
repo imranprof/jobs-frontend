@@ -142,8 +142,22 @@ export const useStyles = makeStyles({
             borderRadius: 10,
             height: 40,
             width: 40
-          }
+          },
         },
+        '&__arrow':{
+          position: "relative",
+          "&::before": {
+            backgroundColor: "white",
+            content: '""',
+            display: "block",
+            position: "absolute",
+            width: 12,
+            height: 12,
+            top: -6,
+            transform: "rotate(45deg)",
+            left: "calc(50% - 6px)"
+          }
+        }
       },
       '& .active': {
         opacity: 1,
