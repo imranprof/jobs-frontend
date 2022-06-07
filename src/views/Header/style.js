@@ -133,12 +133,12 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.sendMessageBtn
         },
         '&__shareBar':{
-          width: 170,
+          width: 150,
           display: "flex",
           justifyContent: "space-between",
-          padding: 10,
+          padding: 9,
           background: theme.palette.customBackground.gradiant.light,
-          borderRadius: 5,
+          borderRadius: 7,
           '&__arrow':{
             marginTop: "9px",
             position: "relative",
@@ -147,8 +147,8 @@ export const useStyles = makeStyles({
               content: '""',
               display: "block",
               position: "absolute",
-              width: 12,
-              height: 12,
+              width: 11,
+              height: 11,
               top: -6,
               transform: "rotate(45deg)",
               left: "calc(50% - 6px)"
@@ -156,8 +156,8 @@ export const useStyles = makeStyles({
           },
           '&__icon':{
             borderRadius: 10,
-            height: 40,
-            width: 40
+            height: 30,
+            width: 30
           },
         }
       },
