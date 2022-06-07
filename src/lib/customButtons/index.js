@@ -1,13 +1,11 @@
-import {useContext} from 'react';
-
+import {useTheme} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 
-import ThemeContextProvider from "../../contexts/themeContext";
 import {CustomButtonsStyle} from "./style";
 
 const CustomButtons = ({handler, mode}) => {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = CustomButtonsStyle(customTheme);
+  const theme = useTheme();
+  const classes = CustomButtonsStyle(theme);
 
   return (
     <div className={classes.customButtonsWrapper} >

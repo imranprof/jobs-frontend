@@ -1,14 +1,12 @@
-import {useContext} from "react";
-
 import {Paper} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../contexts/themeContext";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {EditButtonStyle} from "./style";
 
 const EditButton = () => {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = EditButtonStyle(customTheme);
+  const theme = useTheme();
+  const classes = EditButtonStyle(theme);
 
   return (
     <Paper elevation={3} className={classes.editButtonWrapper}>
