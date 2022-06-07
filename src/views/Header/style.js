@@ -132,7 +132,6 @@ export const useStyles = makeStyles({
           background: theme.palette.customBackground.gradiant.dark,
           color: theme.palette.customColor.sendMessageBtn
         },
-
         '&__shareBar':{
           width: 170,
           display: "flex",
@@ -144,7 +143,6 @@ export const useStyles = makeStyles({
             marginTop: "9px",
             position: "relative",
             '&::before':{
-
               background: theme.palette.customBackground.gradiant.light,
               content: '""',
               display: "block",
