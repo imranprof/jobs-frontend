@@ -137,13 +137,14 @@ export const useStyles = makeStyles({
           display: "flex",
           justifyContent: "space-between",
           padding: 9,
-          background: theme.palette.customBackground.gradiant.light,
+          background: theme.palette.customBackground.shareBar,
           borderRadius: 7,
           '&__arrow':{
             marginTop: "9px",
             position: "relative",
+            boxShadow: "none",
             '&::before':{
-              background: theme.palette.customBackground.gradiant.light,
+              background: theme.palette.customBackground.shareBar,
               content: '""',
               display: "block",
               position: "absolute",
