@@ -9,6 +9,7 @@ import {Box, Button, Popover} from "@material-ui/core";
 import ProfileShare from "../../../../lib/profile/profileshare/profileShare";
 
 
+
 const NavItems = ({classes, variant}) => {
     const [anchorElBottom, setAnchorElBottom] = React.useState(null);
     return (
@@ -37,8 +38,15 @@ const NavItems = ({classes, variant}) => {
                     vertical: "top",
                     horizontal: "center"
                 }}
+                PaperProps={{
+                    style: {
+                        backgroundColor: "transparent",
+                        boxShadow: "none",
+                        borderRadius: 0
+                    }
+                }}
             >
-                <Box className={`${classes.headerWrapper}__nav__share__arrow`}/>
+                <Box className={`${classes.headerWrapper}__nav__share__shareBar__arrow`}/>
                 <ProfileShare shareUrl={"https://facebook.com/imransart"} classes={classes}/>
 
             </Popover>

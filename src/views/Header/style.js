@@ -114,49 +114,53 @@ export const useStyles = makeStyles({
         },
       },
       '&__navItem': {
-        width:'660px'
+        width:'660px',
       },
       '&__share': {
         textAlign: "center",
         textTransform: "uppercase",
         background: theme.palette.customBackground.gradiant.light,
-        boxShadow: theme.palette.customShadow.paperCardShadow,
+        boxShadow: theme.palette.customShadow.buttonShadow,
         width: "15%",
         height: 40,
         border: "none",
         borderRadius: 5,
         color: theme.palette.customColor.highContrast,
         '&:hover':{
-          opacity: 1,
+          opacity: .8,
           borderRadius: 6,
           background: theme.palette.customBackground.gradiant.dark,
           color: theme.palette.customColor.sendMessageBtn
         },
+
         '&__shareBar':{
           width: 170,
           display: "flex",
           justifyContent: "space-between",
-          padding: 7,
+          padding: 10,
           background: theme.palette.customBackground.gradiant.light,
+          borderRadius: 5,
+          '&__arrow':{
+            marginTop: "9px",
+            position: "relative",
+            '&::before':{
+
+              background: theme.palette.customBackground.gradiant.light,
+              content: '""',
+              display: "block",
+              position: "absolute",
+              width: 12,
+              height: 12,
+              top: -6,
+              transform: "rotate(45deg)",
+              left: "calc(50% - 6px)"
+            }
+          },
           '&__icon':{
             borderRadius: 10,
             height: 40,
             width: 40
           },
-        },
-        '&__arrow':{
-          position: "relative",
-          "&::before": {
-            backgroundColor: "white",
-            content: '""',
-            display: "block",
-            position: "absolute",
-            width: 12,
-            height: 12,
-            top: -6,
-            transform: "rotate(45deg)",
-            left: "calc(50% - 6px)"
-          }
         }
       },
       '& .active': {
