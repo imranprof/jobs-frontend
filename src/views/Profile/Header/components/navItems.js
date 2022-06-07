@@ -5,8 +5,8 @@ import ListItem from "@material-ui/core/ListItem";
 import React from "react";
 
 import {NavigationLinksData} from "../../../../../API/elements/profile/navigationLinksData";
-import {Box, Button, Popover} from "@material-ui/core";
-import ProfileShare from "../../../../lib/profile/profileshare/profileShare";
+import {Button} from "@material-ui/core";
+import ShareBar from "../../../../lib/profile/profileshare/shareBar";
 
 
 
@@ -26,30 +26,7 @@ const NavItems = ({classes, variant}) => {
                 <Button onClick={event => setAnchorElBottom(event.currentTarget)} className={`${classes.headerWrapper}__nav__share`}>
                     Share
                 </Button>
-            <Popover
-                open={Boolean(anchorElBottom)}
-                anchorEl={anchorElBottom}
-                onClose={() => setAnchorElBottom(null)}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center"
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center"
-                }}
-                PaperProps={{
-                    style: {
-                        backgroundColor: "transparent",
-                        boxShadow: "none",
-                        borderRadius: 0
-                    }
-                }}
-            >
-                <Box className={`${classes.headerWrapper}__nav__share__shareBar__arrow`}/>
-                <ProfileShare shareUrl={"https://facebook.com/imransart"} classes={classes}/>
-
-            </Popover>
+            <ShareBar classes={classes} anchorElBottom={anchorElBottom} setAnchorElBottom={setAnchorElBottom}/>
         </List>
     );
 };
