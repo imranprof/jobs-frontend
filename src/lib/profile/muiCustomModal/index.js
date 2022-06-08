@@ -1,10 +1,11 @@
+import {useState} from "react";
 import {connect} from "react-redux";
 import Select from "react-select";
 
+import {useTheme} from "@material-ui/core/styles";
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
-import {useTheme} from "@material-ui/core/styles";
 
 import {MuiCustomModalStyle} from "./style";
 import CustomButton from "../../customButtons";
@@ -31,16 +32,29 @@ const MuiCustomModal = (props) => {
   const theme = useTheme();
   const classes = MuiCustomModalStyle(theme);
 
-  const selectChangeHandler = (e) => {
-    setExpertisesEditValue({
-      expertises: Array.isArray(e) ? e.map(obj => obj.label) : []
-    })
-  }
-
   const selectedExpertises = []
-  props.expertises.forEach(function (element) {
+  props.expertises.map((element) => {
     selectedExpertises.push({label: element, value: element})
   });
+
+  const filteredExpertise = (selectedExpertises) => {
+    if (selectedExpertises !== undefined) {
+      let tempExpertises = expertisesData
+      return tempExpertises.filter((el) => {
+        return !selectedExpertises.find((f) => {
+          return f.label === el.label
+        })
+      })
+    }
+  }
+
+  const [filteredExpertiseList, setFilteredExpertiseList] = useState(filteredExpertise(selectedExpertises))
+  const selectChangeHandler = (elements) => {
+    setExpertisesEditValue({
+      expertises: Array.isArray(elements) ? elements.map(obj => obj.label) : []
+    })
+    setFilteredExpertiseList(filteredExpertise(elements))
+  }
 
   return (
     <div>
@@ -72,7 +86,7 @@ const MuiCustomModal = (props) => {
                 <h4>Select your expertises</h4>
                 <Select
                   isMulti
-                  options={expertisesData}
+                  options={filteredExpertiseList}
                   defaultValue={selectedExpertises}
                   onChange={selectChangeHandler}
                   className={classes.multiSelectDropdown}
