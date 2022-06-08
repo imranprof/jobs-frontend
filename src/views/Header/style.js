@@ -113,24 +113,32 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.light,
         },
       },
+      '&__navShare': {
+        display: "flex",
+        width: "660px"
+      },
       '&__navItem': {
-        width:'660px',
+         width: "550px"
       },
       '&__share': {
+        position: "relative",
         textAlign: "center",
         textTransform: "uppercase",
         background: theme.palette.customBackground.gradiant.light,
         boxShadow: theme.palette.customShadow.buttonShadow,
-        width: "15%",
+        width: "130%",
         height: 40,
         border: "none",
         borderRadius: 5,
         color: theme.palette.customColor.highContrast,
         '&:hover':{
-          opacity: .8,
+          opacity: 1,
           borderRadius: 6,
           background: theme.palette.customBackground.gradiant.dark,
           color: theme.palette.customColor.sendMessageBtn
+        },
+        '&__popUp': {
+          zIndex: 999999999
         },
         '&__shareBar':{
           width: 150,
@@ -138,6 +146,7 @@ export const useStyles = makeStyles({
           justifyContent: "space-between",
           padding: 9,
           background: theme.palette.customBackground.shareBar,
+          // background: "#222f40",
           borderRadius: 7,
           '&__arrow':{
             marginTop: "9px",

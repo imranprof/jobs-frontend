@@ -1,35 +1,26 @@
-import {Box, Popover} from "@material-ui/core";
+import {Box, Popover, Popper} from "@material-ui/core";
 import ProfileShare from "./profileShare";
 import React from "react";
 
 
-const ShareBar = ({classes, anchorElBottom, setAnchorElBottom}) => {
+const ShareBar = ({classes, openEl, anchorEl}) => {
     return (
         <div>
-            <Popover
-                open={Boolean(anchorElBottom)}
-                anchorEl={anchorElBottom}
-                onClose={() => setAnchorElBottom(null)}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center"
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center"
-                }}
-                PaperProps={{
-                    style: {
-                        backgroundColor: "transparent",
-                        boxShadow: "none",
-                        borderRadius: 0
-                    }
-                }}
+            <Popper open={openEl} anchorEl={anchorEl}
+                    placement="bottom"
+                    popperOptions={{positionFixed: true}}
+
+                    modifiers={{
+                        offset: {
+                            enabled: true,
+                            offset: "0, 0"
+                        }
+                    }}
+                    className={`${classes.headerWrapper}__nav__share__popUp`}
             >
                 <Box className={`${classes.headerWrapper}__nav__share__shareBar__arrow`}/>
                 <ProfileShare shareUrl={"https://facebook.com/imransart"} classes={classes}/>
-
-            </Popover>
+            </Popper>
         </div>
 
     );

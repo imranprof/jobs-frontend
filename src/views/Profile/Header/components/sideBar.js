@@ -10,6 +10,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
 import SocialLinks from "../../../../lib/profile/socialLinks";
+import ProfileShare from "../../../../lib/profile/profileshare/profileShare";
 
 const ProfileSideBar = (props) => {
     const { profileInfo, classes } = props;
@@ -56,6 +57,10 @@ const ProfileSideBar = (props) => {
                     <Divider style={{marginBottom: "30px"}}/>
 
                     <SocialLinks/>
+                    <Divider style={{marginTop: "30px"}}/>
+                    <h4>Share me</h4>
+                    <ProfileShare shareUrl={"https://facebook.com/imransart"} classes={classes}/>
+
                 </div>
             </SwipeableDrawer>
         </>

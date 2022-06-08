@@ -21,7 +21,7 @@ const darkTheme = createTheme({
             seeMoreBtn: COLORS.black_2,
             seeMoreBtnHover: COLORS.gray_1,
             skillBackground: COLORS.gray,
-            shareBar: COLORS.black_1
+            shareBar: COLORS.gray_1
         },
         customColor: {
             main: COLORS.white_4,
