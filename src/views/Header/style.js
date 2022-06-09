@@ -130,7 +130,7 @@ export const useStyles = makeStyles({
         height: 40,
         border: "none",
         borderRadius: 5,
-        transition: "0.5s ease-in-out",
+        transition: "all .5s ease",
         color: theme.palette.customColor.highContrast,
         '&:hover':{
           opacity: 1,
