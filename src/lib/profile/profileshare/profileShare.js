@@ -34,8 +34,7 @@ const ProfileShare = ({shareUrl, boxClass, iconClass}) => {
             <div>
                 <LinkedinShareButton url={shareUrl}
                                      title={"Stay connect with me in Seek Right jobs"}
-                                     title={"Stay connect with me in Seek Right jobs"}
-                                     source="www.rightcodesolution.org">
+                >
                     <LinkedinIcon   className={iconClass}/>
                 </LinkedinShareButton>
             </div>

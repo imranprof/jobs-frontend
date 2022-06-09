@@ -19,7 +19,7 @@ const ShareBar = ({classes, openEl, anchorEl}) => {
                     className={`${classes.headerWrapper}__nav__share__popUp`}
             >
                 <Box className={`${classes.headerWrapper}__nav__share__shareBar__arrow`}/>
-                <ProfileShare shareUrl={"https://facebook.com/imransart"} boxClass={`${classes.headerWrapper}__nav__share__shareBar`} iconClass={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
+                <ProfileShare shareUrl={""} boxClass={`${classes.headerWrapper}__nav__share__shareBar`} iconClass={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
             </Popper>
         </div>
 
