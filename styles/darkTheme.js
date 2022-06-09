@@ -36,7 +36,8 @@ const darkTheme = createTheme({
             inputBorder: COLORS.black_2,
             sendMessageBtn: COLORS.pink,
             searchBtn: COLORS.white_4,
-            hourlyRate: COLORS.white_4
+            hourlyRate: COLORS.white_4,
+            shareBtn: COLORS.black_6
         },
         customShadow: {
             main: COLORS.boxShadow_1,
