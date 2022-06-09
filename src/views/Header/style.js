@@ -216,11 +216,12 @@ export const useStyles = makeStyles({
         width: 190,
         height: 60,
         '&__title':{
-          color: "#c4cfde",
+          color: theme.palette.customColor.main,
           fontSize: "14px",
           fontWeight: 300,
           marginBottom: "15px",
           marginTop: "50px",
+          display: "inline-block",
           textTransform: "uppercase",
 
         },
