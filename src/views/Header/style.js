@@ -130,12 +130,15 @@ export const useStyles = makeStyles({
         height: 40,
         border: "none",
         borderRadius: 5,
+        transition: ".5s",
         color: theme.palette.customColor.highContrast,
         '&:hover':{
           opacity: 1,
           borderRadius: 6,
+          transition: ".5s ease-in-out",
           background: theme.palette.customBackground.gradiant.dark,
-          color: theme.palette.customColor.sendMessageBtn
+          color: theme.palette.customColor.sendMessageBtn,
+          cursor: "pointer"
         },
         '&__popUp': {
           zIndex: 999999999
