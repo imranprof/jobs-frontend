@@ -14,6 +14,7 @@ import {TopSectionStyle} from "./style";
 import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/customButtons";
+import IntroExpertises from "../EditComponents/topSection/introExpertises";
 
 import {
   headlineText,
@@ -117,15 +118,17 @@ const TopSection = (props) => {
             </div>
           )}
 
-          <MuiCustomModal
-            handleClose={modalClose}
-            open={openModal}
-            fullName={name}
-            inputValue={introEditValue.intro}
-            inputIntroChangeHandler={inputIntroChangeHandler}
-            introEditHandler={introEditHandler}
-            setExpertisesEditValue={setExpertisesEditValue}
-          />
+          <MuiCustomModal handleClose={modalClose} open={openModal}>
+            <IntroExpertises
+              handleClose={modalClose}
+              fullName={name}
+              inputValue={introEditValue.intro}
+              inputIntroChangeHandler={inputIntroChangeHandler}
+              introEditHandler={introEditHandler}
+              setExpertisesEditValue={setExpertisesEditValue}
+            />
+          </MuiCustomModal>
+
           <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
             <TypeWriter name={name} intro={props.intro} expertises={expertisesList} classes={classes}/>
             <span onClick={() => setOpenModal(true)}>
@@ -152,6 +155,7 @@ const TopSection = (props) => {
           )}
 
         </div>
+
         <div className={`${classes.topSectionWrapper}__left-bottom`}>
           <SocialLinks/>
           <Skills/>

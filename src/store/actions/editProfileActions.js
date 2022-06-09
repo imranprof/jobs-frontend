@@ -24,7 +24,7 @@ export const introText = (intro) => {
   }
 }
 
-// Expertises
+// IntroExpertises
 export const expertisesText = (expertises) => {
   return {
     type: EXPERTISE_VALUES,

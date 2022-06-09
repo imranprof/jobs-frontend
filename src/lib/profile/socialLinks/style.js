@@ -2,6 +2,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     socialLinksWrapper: theme => ({
+        display: "flex",
         '&__title': {
             fontSize: 14,
             textTransform: "uppercase",
