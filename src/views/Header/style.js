@@ -211,7 +211,6 @@ export const useStyles = makeStyles({
       '&__share-bar': {
         display: "flex",
         justifyContent: "space-between",
-        textAlign: "center",
         alignItems: "center",
         background: "transparent",
         width: 190,
@@ -221,14 +220,15 @@ export const useStyles = makeStyles({
           fontSize: "14px",
           fontWeight: 300,
           marginBottom: "15px",
-          marginTop: "25px",
+          marginTop: "50px",
           textTransform: "uppercase",
 
         },
         '&__icon': {
           borderRadius: 5,
           height: 45,
-          width: 45
+          width: 45,
+          boxShadow: theme.palette.customShadow.main
         }
       }
     },
