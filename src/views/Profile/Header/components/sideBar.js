@@ -57,9 +57,9 @@ const ProfileSideBar = (props) => {
                     <Divider style={{marginBottom: "30px"}}/>
 
                     <SocialLinks/>
-                    <Divider style={{marginTop: "30px"}}/>
-                    <h4>Share me</h4>
-                    <ProfileShare shareUrl={"https://facebook.com/imransart"} classes={classes}/>
+                    <Divider style={{marginTop: "35px"}}/>
+                    <p className={`${classes.headerWrapper}__side-bar__share-bar__title`}>Share Me</p>
+                    <ProfileShare shareUrl={"https://facebook.com/imransart"}  boxClass={`${classes.headerWrapper}__side-bar__share-bar`} iconClass={`${classes.headerWrapper}__side-bar__share-bar__icon`}/>
 
                 </div>
             </SwipeableDrawer>

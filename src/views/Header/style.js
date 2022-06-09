@@ -207,6 +207,29 @@ export const useStyles = makeStyles({
         width: 300,
         padding: "25px 25px 50px 25px",
         overflowX: "hidden"
+      },
+      '&__share-bar': {
+        display: "flex",
+        justifyContent: "space-between",
+        textAlign: "center",
+        alignItems: "center",
+        background: "transparent",
+        width: 190,
+        height: 60,
+        '&__title':{
+          color: "#c4cfde",
+          fontSize: "14px",
+          fontWeight: 300,
+          marginBottom: "15px",
+          marginTop: "25px",
+          textTransform: "uppercase",
+
+        },
+        '&__icon': {
+          borderRadius: 5,
+          height: 45,
+          width: 45
+        }
       }
     },
     '&__menu': {

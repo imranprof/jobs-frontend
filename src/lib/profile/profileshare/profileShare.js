@@ -13,29 +13,30 @@ import {
 
 
 
-const ProfileShare = ({shareUrl, classes}) => {
+const ProfileShare = ({shareUrl, boxClass, iconClass}) => {
     return (
 
-        <Box className={`${classes.headerWrapper}__nav__share__shareBar`}>
+        <Box className={boxClass} >
             <div>
                 <TwitterShareButton url={shareUrl}
                                     title={"Stay connect with me in Seek Right jobs\n\n"}
                                     tags="#seekRightjobs" outline-ofset="5">
-                    <TwitterIcon className={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
+                    <TwitterIcon  className={iconClass}/>
                 </TwitterShareButton>
             </div>
             <div>
                 <FacebookShareButton url={shareUrl}
                                      quote={"Stay connect with me in Seek Right jobs"}
                                      hashtag="#seekRightsjob">
-                    <FacebookIcon className={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
+                    <FacebookIcon className={iconClass}/>
                 </FacebookShareButton>
             </div>
             <div>
                 <LinkedinShareButton url={shareUrl}
                                      title={"Stay connect with me in Seek Right jobs"}
-                                     source="www.seekrightjobs.org">
-                    <LinkedinIcon  className={`${classes.headerWrapper}__nav__share__shareBar__icon`}/>
+                                     title={"Stay connect with me in Seek Right jobs"}
+                                     source="www.rightcodesolution.org">
+                    <LinkedinIcon   className={iconClass}/>
                 </LinkedinShareButton>
             </div>
         </Box>
