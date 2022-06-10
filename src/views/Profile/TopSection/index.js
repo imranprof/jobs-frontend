@@ -11,7 +11,6 @@ import Skills from "../../../lib/profile/skills";
 import {TopSectionStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
-
 const TopSection = (props) => {
   const theme = useTheme();
   const classes = TopSectionStyle(theme);
