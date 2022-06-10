@@ -2,13 +2,9 @@ import axios from "axios";
 
 import {authenticate, modalType, signInRejected} from "../store/actions/authAction";
 
-
-//const signUpURL = process.env.NEXT_PUBLIC_SIGNUP_URL
-//const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL
-//const signOutURL = process.env.NEXT_PUBLIC_SIGNOUT_URL
-const signUpURL = "http://127.0.0.1:3000/users"
-const signInURL = "http://127.0.0.1:3000/sign_in"
-const signOutURL = "http://127.0.0.1:3000/sign_out"
+const signUpURL = process.env.NEXT_PUBLIC_SIGNUP_URL
+const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL
+const signOutURL = process.env.NEXT_PUBLIC_SIGNOUT_URL
 
 export function setAuthToken(token) {
   if (token) {
