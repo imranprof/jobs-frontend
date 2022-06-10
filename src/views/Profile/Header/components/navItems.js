@@ -1,11 +1,10 @@
+import React from "react";
 import {Link} from 'react-scroll'
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import React from "react";
 
 import {NavigationLinksData} from "../../../../../API/elements/profile/navigationLinksData";
-
 
 const NavItems = ({classes, variant}) => {
 
