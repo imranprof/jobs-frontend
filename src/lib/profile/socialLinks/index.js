@@ -11,7 +11,7 @@ const SocialLinks = (props) => {
 
   return (
     <div>
-      <span className={`${classes.socialLinksWrapper}__title`}>find with me</span>
+      <span className={`${classes.socialLinksWrapper}__title`}>find me</span>
       <div className={`${classes.socialLinksWrapper}__social-links`}>
         {props.socialLinks.map(link =>
           <SocialLink link={link} key={link.id} classes={classes}/>

@@ -20,7 +20,8 @@ const darkTheme = createTheme({
             sideBar: COLORS.black_2,
             seeMoreBtn: COLORS.black_2,
             seeMoreBtnHover: COLORS.gray_1,
-            skillBackground: COLORS.gray
+            skillBackground: COLORS.gray,
+            shareBar: COLORS.gray_1
         },
         customColor: {
             main: COLORS.white_4,
@@ -35,7 +36,8 @@ const darkTheme = createTheme({
             inputBorder: COLORS.black_2,
             sendMessageBtn: COLORS.pink,
             searchBtn: COLORS.white_4,
-            hourlyRate: COLORS.white_4
+            hourlyRate: COLORS.white_4,
+            shareBtn: COLORS.black_6
         },
         customShadow: {
             main: COLORS.boxShadow_1,
