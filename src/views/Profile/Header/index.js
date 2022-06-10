@@ -12,17 +12,12 @@ const ProfileHeader = ({ classes, headerRef }) => {
             <Toolbar className={`${classes.headerWrapper}__toolbar`}>
                 <ProfileInfo showName={true} classes={classes} />
                 <ProfileSideBar classes={classes}/>
-
                 <Hidden mdDown>
                     <div className={`${classes.headerWrapper}__nav__navShare`}>
                         <NavItems classes={classes} variant={"default"}/>
                         <ShareButton classes={classes}/>
                     </div>
-
                 </Hidden>
-
-
-
             </Toolbar>
         </AppBar>
     );
