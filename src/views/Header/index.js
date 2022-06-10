@@ -1,13 +1,14 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
+
+import {useTheme} from "@material-ui/core/styles";
 
 import ProfileHeader from "../Profile/Header";
 import ProfilesHeader from "../Profiles/Header";
-import ThemeContextProvider from "../../contexts/themeContext";
 import {HeaderStyle} from "./style";
 
 const Header = (props) => {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = HeaderStyle(customTheme);
+  const theme = useTheme();
+  const classes = HeaderStyle(theme);
   const headerRef = useRef(null);
   const { type } = props;
 

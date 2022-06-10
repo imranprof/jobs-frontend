@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+
 import FONTS from "../../../styles/fonts";
 
 const useStyles = makeStyles({
@@ -56,7 +57,6 @@ const useStyles = makeStyles({
           color: theme.palette.customHoverColor.main,
         }
       },
-
       '& .MuiTextField-root': {
         marginBottom: 15,
         '& label': {
@@ -95,7 +95,14 @@ const useStyles = makeStyles({
           background: theme.palette.customHoverBackground.main,
           transform: "translateY(-5px)",
         },
-      }
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: "70%"
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: "95%",
+        padding: "60px 20px 24px 20px"
+      },
     }
   })
 });

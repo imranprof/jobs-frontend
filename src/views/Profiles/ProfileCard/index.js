@@ -1,39 +1,51 @@
-import React, {useContext} from 'react';
 import Link from 'next/link';
+import {connect} from "react-redux";
 
-import { Button, Card, CardMedia } from "@material-ui/core";
+import {Button, Card, CardMedia} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
-import {ProfileCardStyle} from "./style";
-import ThemeContextProvider from "../../../contexts/themeContext";
 import CardContents from "./components/cardContents";
 import SkillSet from "./components/skillSet";
+import {ProfileCardStyle} from "./style";
 
-function ProfileCard({profile}) {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = ProfileCardStyle(customTheme);
-  const {name, image, skills} = profile;
+function ProfileCard(props) {
+  const theme = useTheme();
+  const classes = ProfileCardStyle(theme);
+  const {profileList} = props;
 
   return (
-    <Card xs={12} sm={6} md={4} lg={3} className={classes.profileCardWrapper}>
-      <div className={`${classes.profileCardWrapper}__image-wrapper`}>
-        <CardMedia
-          className={`${classes.profileCardWrapper}__image`}
-          image={image}
-          title={name}
-        />
-      </div>
+    <>
+      {
+        profileList && profileList.map((profile) => (
+          <Card key={profile.id} xs={12} sm={6} md={4} lg={3} className={classes.profileCardWrapper}>
+            <div className={`${classes.profileCardWrapper}__image-wrapper`}>
+              <CardMedia
+                className={`${classes.profileCardWrapper}__image`}
+                image={profile.image}
+                title={profile.name}
+              />
+            </div>
 
-      <CardContents classes={classes.profileCardWrapper} profileInfo={profile} />
+            <CardContents classes={classes.profileCardWrapper} profileId={profile.id} />
 
-      <SkillSet classes={classes.profileCardWrapper} skillsData={skills} />
+            <SkillSet classes={classes.profileCardWrapper} skills={profile.skills} />
 
-      <Link href="#">
-        <Button size="small" className={`${classes.profileCardWrapper}__button-wrapper`} >
-          See More
-        </Button>
-      </Link>
-    </Card>
+            <Link href="#">
+              <Button size="small" className={`${classes.profileCardWrapper}__button-wrapper`}>
+                See More
+              </Button>
+            </Link>
+          </Card>
+        ))
+      }
+    </>
   );
-};
+}
 
-export default ProfileCard;
+const mapStateToProps = (state) => {
+  return {
+    profileList: state.allProfiles.profiles
+  }
+}
+
+export default connect(mapStateToProps)(ProfileCard);

@@ -1,5 +1,5 @@
-import {useContext} from "react";
 import Link from 'next/link';
+import {connect, useDispatch} from "react-redux";
 
 import {AppBar, Hidden, Toolbar} from "@material-ui/core";
 
@@ -7,10 +7,23 @@ import Logo from "../../../lib/logo";
 import SearchBar from "../../../lib/searchBar";
 import {SignOut} from "../../../auth/operations";
 import ProfilesSideBar from "./components/profilesSideBar";
-import {InitialPropContext} from "../../../contexts/InitialPropContext";
+import {modalType} from "../../../store/actions/authAction";
 
-const ProfilesHeader = ({classes, headerRef}) => {
-  const {authenticated, setAuthenticated, setModalType} = useContext(InitialPropContext);
+const ProfilesHeader = (props) => {
+  const {classes, headerRef} = props;
+  const dispatch = useDispatch()
+
+  const handleSignInClick = () => {
+    dispatch(modalType('SignIn'))
+  }
+
+  const handleSignUpClick = () => {
+    dispatch(modalType('SignUp'))
+  }
+
+  const handleSignOutClick = async () => {
+    await dispatch(SignOut())
+  }
 
   return (
     <AppBar className={classes.headerWrapper} ref={headerRef}>
@@ -22,30 +35,24 @@ const ProfilesHeader = ({classes, headerRef}) => {
         <Hidden mdDown>
           <div className={`${classes.headerWrapper}__toolbar__right`}>
             <SearchBar/>
-            {authenticated ? (
+            {props.isAuthenticated ? (
               <Link href="#">
                 <a className={`${classes.headerWrapper}__authentication-sign-out`}
-                   onClick={() => {
-                     SignOut(setAuthenticated);
-                   }}>
-                  Sign Out
+                   onClick={handleSignOutClick}>
+                  Sign out
                 </a>
               </Link>
             ) : (
               <div className={`${classes.headerWrapper}__authentication`}>
                 <Link href="#">
                   <a className={`${classes.headerWrapper}__authentication-signin`}
-                     onClick={() => {
-                       setModalType('SignIn');
-                     }}>
+                     onClick={handleSignInClick}>
                     Sign In
                   </a>
                 </Link>
                 <Link href="#">
                   <a className={`${classes.headerWrapper}__authentication-signup`}
-                     onClick={() => {
-                       setModalType('SignUp');
-                     }}>
+                     onClick={handleSignUpClick}>
                     Sign Up
                   </a>
                 </Link>
@@ -58,4 +65,11 @@ const ProfilesHeader = ({classes, headerRef}) => {
   )
 }
 
-export default ProfilesHeader;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    modalType: state.auth.modalType
+  }
+}
+
+export default connect(mapStateToProps)(ProfilesHeader);

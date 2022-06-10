@@ -1,7 +1,6 @@
-import React from 'react';
-
 import {Grid, Paper} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
+
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 
 const Feature = ({feature, classes}) => {

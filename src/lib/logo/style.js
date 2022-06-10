@@ -5,7 +5,6 @@ import FONTS from "../../../styles/fonts";
 export const useStyles = makeStyles({
   logoWrapper: theme => ({
     '&__logo': {
-      height: 24,
       textDecoration: "none",
       color: theme.palette.customColor.main,
       display: "inline-block",

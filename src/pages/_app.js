@@ -1,6 +1,8 @@
 import Head from "next/head";
+import {Provider} from "react-redux";
+
+import {store} from "../store";
 import '../../styles/globals.css';
-import {InitialPropProvider} from "../contexts/InitialPropContext";
 
 function MyApp({Component, pageProps}) {
   return (
@@ -9,9 +11,9 @@ function MyApp({Component, pageProps}) {
         <meta name="description" content="Seek Right Jobs For you"/>
         <title>Seek Right Jobs For you</title>
       </Head>
-      <InitialPropProvider>
+      <Provider store={store}>
         <Component {...pageProps} />
-      </InitialPropProvider>
+      </Provider>
     </>
   )
 }

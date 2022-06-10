@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {connect} from "react-redux";
 
 import {Hidden, IconButton} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -9,9 +10,13 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
 import SocialLinks from "../../../../lib/profile/socialLinks";
+import ProfileShare from "../../../../lib/profile/profileshare/profileShare";
 
-const SideBar = ({name, avatar,classes}) => {
+const ProfileSideBar = (props) => {
+    const { profileInfo, classes } = props;
+    const {name, avatar} = profileInfo;
     const [open, setOpen] = useState(false);
+
     return (
         <>
             <Hidden lgUp>
@@ -52,10 +57,18 @@ const SideBar = ({name, avatar,classes}) => {
                     <Divider style={{marginBottom: "30px"}}/>
 
                     <SocialLinks/>
+                    <p className={`${classes.headerWrapper}__side-bar__share-bar__title`}>Share Me</p>
+                    <ProfileShare shareUrl={"http://rightcodes.org/"}  boxClass={`${classes.headerWrapper}__side-bar__share-bar`} iconClass={`${classes.headerWrapper}__side-bar__share-bar__icon`}/>
                 </div>
             </SwipeableDrawer>
         </>
     );
 };
 
-export default SideBar;
+const mapStateToProps = (state) => {
+    return {
+        profileInfo: state.profile
+    }
+}
+
+export default connect(mapStateToProps)(ProfileSideBar);

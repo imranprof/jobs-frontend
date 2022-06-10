@@ -1,11 +1,10 @@
-import React, {useContext} from 'react';
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../contexts/themeContext";
 import {SkillStyle} from "./style";
 
 const Skill = ({skill}) => {
-  const customTheme = useContext(ThemeContextProvider);
-  const classes = SkillStyle(customTheme);
+  const theme = useTheme();
+  const classes = SkillStyle(theme);
 
   return (
       <div className={classes.skillWrapper} >

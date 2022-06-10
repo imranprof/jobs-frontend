@@ -1,12 +1,12 @@
-import {useContext, useState} from "react";
-
-import {Button, Icon, Box, TextField} from "@material-ui/core";
-import {setAuthToken, SignIn} from "../operations";
-import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
+import {useDispatch, connect} from "react-redux";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
-import {InitialPropContext} from "../../contexts/InitialPropContext";
+
+import {Button, Icon, Box, TextField} from "@material-ui/core";
+
+import {signIn, handleApiResponse} from "../operations";
+import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 
 const validationSchema = yup.object({
   email: yup
@@ -19,18 +19,9 @@ const validationSchema = yup.object({
     .required('Password is required'),
 });
 
-const SignInForm = () => {
-  const {setAuthenticated, modalType, setModalType} = useContext(InitialPropContext);
-  const [apiError, setApiError] = useState(undefined);
-  const HandleApiResponse = response => {
-    if (response.statusText === 'OK') {
-      setAuthToken(response.data.authToken);
-      setAuthenticated(true);
-      setModalType('');
-    } else {
-      setApiError(response.data.message);
-    }
-  }
+const SignInForm = ({error}) => {
+  const dispatch = useDispatch()
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -38,21 +29,23 @@ const SignInForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async values => {
-      const response = await SignIn(values);
-      console.log(response)
-      HandleApiResponse(await response);
+      const response = await dispatch(signIn(values));
+      dispatch(handleApiResponse(await response));
     }
   });
 
   return (
     <Box component="form" onSubmit={formik.handleSubmit}>
-      {apiError &&
-      <Box display="flex"
-           justifyContent="center"
-           color="red"
-           marginTop={-3}
-           marginBottom={2}
-      >{apiError}</Box>
+      {error &&
+        <Box
+          display="flex"
+          justifyContent="center"
+          color="red"
+          marginTop={-3}
+          marginBottom={2}
+        >
+          {error}
+        </Box>
       }
       <TextField
         fullWidth
@@ -85,4 +78,10 @@ const SignInForm = () => {
   );
 }
 
-export default SignInForm;
+const mapStateToProps = (state) => {
+  return {
+    error: state.auth.error
+  }
+}
+
+export default connect(mapStateToProps)(SignInForm);

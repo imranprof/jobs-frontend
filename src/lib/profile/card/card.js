@@ -1,22 +1,23 @@
 import Link from 'next/link'
+import {useState} from 'react';
 
-import {useState, useContext} from 'react';
 import {Card, CardContent, CardMedia} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-import {CardStyle} from "./style";
 import PortfolioModal from "../../../views/Profile/Portfolio/components/portfolioModal";
 import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
+import {CardStyle} from "./style";
 
 const CustomCard = ({element, elementType}) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = CardStyle(customTheme);
+    const theme = useTheme();
+    const classes = CardStyle(theme);
+    const { title, image, category, reactCount, readTime } = element;
 
     const isPortfolio = elementType === "portfolio";
     const iconClass = isPortfolio ? "heart" : "clock";
-    const elementData = isPortfolio ? element.reactCount : `${element.readTime} read`;
+    const elementData = isPortfolio ? reactCount : `${readTime} read`;
 
     const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
     const [toggleBlogModal, setToggleBlogModal] = useState(false);
@@ -32,15 +33,15 @@ const CustomCard = ({element, elementType}) => {
                 <div className={`${classes.cardWrapper}__image-wrapper`}>
                     <CardMedia
                         className={`${classes.cardWrapper}__image`}
-                        image={element.image}
-                        title={element.title}
+                        image={image}
+                        title={title}
                     />
                 </div>
                 <CardContent className={`${classes.cardWrapper}__content`}>
                     <div className={`${classes.cardWrapper}__category-info`}>
                         <div className={`${classes.cardWrapper}__category-info__category`}>
-                            <Link href="/">
-                                <a>{element.category}</a>
+                            <Link href="#">
+                                <a>{category}</a>
                             </Link>
                         </div>
                         <div className={`${classes.cardWrapper}__category-info__icon-wrapper`}>
@@ -50,9 +51,9 @@ const CustomCard = ({element, elementType}) => {
                         </div>
                     </div>
                     <h1 className={`${classes.cardWrapper}__title`}>
-                        <Link href="/">
+                        <Link href="#">
                             <a className={`${classes.cardWrapper}__title__link`}>
-                                {element.title}
+                                {title}
                                 <Icon
                                     className={`${classes.cardWrapper}__title__link__arrow ${FontAwesomeIcons.arrowRight}`}/>
                             </a>

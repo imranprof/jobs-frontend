@@ -18,6 +18,10 @@ const lightTheme = createTheme({
                 cardHover: COLORS.white_3
             },
             sideBar: COLORS.white_1,
+            seeMoreBtn: COLORS.white_2,
+            seeMoreBtnHover: COLORS.gray_6,
+            skillBackground: COLORS.white_6,
+            shareBar: COLORS.white_2
         },
         customColor: {
             main: COLORS.gray,
@@ -31,7 +35,9 @@ const lightTheme = createTheme({
             featureIconHover: COLORS.white,
             inputBorder: COLORS.gray_6,
             sendMessageBtn: COLORS.white,
-            searchBtn: COLORS.pink
+            searchBtn: COLORS.pink,
+            hourlyRate: COLORS.gray,
+            shareBtn: COLORS.pink
         },
         customShadow: {
             main: COLORS.boxShadow_2,
@@ -39,7 +45,8 @@ const lightTheme = createTheme({
             dark: COLORS.boxShadow_10,
             default: COLORS.boxShadow_6,
             backToTop: COLORS.boxShadow_10,
-            paperCardShadow: COLORS.boxShadow_9
+            paperCardShadow: COLORS.boxShadow_9,
+            buttonShadow: COLORS.boxShadow_9,
         },
         customDivider: {
             main: COLORS.gray_5

@@ -1,24 +1,23 @@
-import React, {useContext} from 'react';
+import {useTheme} from "@material-ui/core/styles";
 
-import ThemeContextProvider from "../../../contexts/themeContext";
-import {SectionStyle} from "./style";
 import CustomDivider from "../divider/divider";
+import {SectionStyle} from "./style";
 
 const Section = ({section}) => {
-    const customTheme = useContext(ThemeContextProvider);
-    const classes = SectionStyle(customTheme);
-    const {title, subtitle, align, component} = section;
+  const theme = useTheme();
+  const classes = SectionStyle(theme);
+  const {title, subtitle, align, component} = section;
 
-    return (
-        <>
-            <div className={`${classes.sectionHeaderWrapper}--${align}`}>
-                <span className={`${classes.sectionHeaderWrapper}__subtitle`}>{subtitle}</span>
-                <h2 className={`${classes.sectionHeaderWrapper}__title`}>{title}</h2>
-            </div>
-            {component && component}
-            <CustomDivider/>
-        </>
-    );
+  return (
+    <>
+      <div className={`${classes.sectionHeaderWrapper}--${align}`}>
+        <span className={`${classes.sectionHeaderWrapper}__subtitle`}>{subtitle}</span>
+        <h2 className={`${classes.sectionHeaderWrapper}__title`}>{title}</h2>
+      </div>
+      {component && component}
+      <CustomDivider/>
+    </>
+  );
 }
 
 export default Section;
