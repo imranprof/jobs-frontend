@@ -59,7 +59,6 @@ const ProfileSideBar = (props) => {
                     <SocialLinks/>
                     <p className={`${classes.headerWrapper}__side-bar__share-bar__title`}>Share Me</p>
                     <ProfileShare shareUrl={"http://rightcodes.org/"}  boxClass={`${classes.headerWrapper}__side-bar__share-bar`} iconClass={`${classes.headerWrapper}__side-bar__share-bar__icon`}/>
-
                 </div>
             </SwipeableDrawer>
         </>
