@@ -13,7 +13,6 @@ import {
 
 const ProfileShare = ({shareUrl, boxClass, iconClass}) => {
   return (
-
     <Box className={boxClass}>
       <div>
         <TwitterShareButton url={shareUrl}
