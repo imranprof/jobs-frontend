@@ -23,7 +23,7 @@ const SocialLinks = (props) => {
       <div>
         <span className={`${classes.socialLinksWrapper}__title`}>find with me</span>
         <div className={`${classes.socialLinksWrapper}__social-links`}>
-          {Object.entries(props.socialLinks).map(([iconName, url]) => (
+          {Object.entries(props.links).map(([iconName, url]) => (
             <SocialLink link={url} iconName={iconName} key={url} classes={classes}/>
           ))}
         </div>
@@ -42,7 +42,7 @@ const SocialLinks = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    socialLinks: state.editProfile.links
+    links: state.editProfile.links
   }
 }
 

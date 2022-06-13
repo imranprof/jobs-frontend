@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Typewriter from 'typewriter-effect';
-import {profileData} from "../../../../API/mock/profile/profileData";
 
 const TypeWriter = ({name, intro, expertises, classes}) => {
     return (
