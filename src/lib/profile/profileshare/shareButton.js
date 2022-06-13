@@ -1,3 +1,4 @@
+
 import React from "react";
 import {Button, ClickAwayListener} from "@material-ui/core";
 import ShareBar from "./shareBar";
@@ -7,7 +8,7 @@ const ShareButton = ({classes}) => {
   const [openEl, setOpen] = React.useState(false);
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    setOpen(openEl ? null : event.currentTarget)
+    setOpen(openEl ? false : true)
   };
   const handleClose = () => {
     setOpen(false);
