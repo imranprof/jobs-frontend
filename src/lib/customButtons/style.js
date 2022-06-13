@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 export const useStyles = makeStyles({
   customButtonsWrapper: theme => ({
     width: "85%",
-    marginBottom: 15,
+    margin: "15px 0",
     '&__button': {
       textTransform: "capitalize",
       marginRight: 6,

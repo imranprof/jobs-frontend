@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import {connect} from "react-redux";
+import {useFormik} from "formik";
 import {animateScroll as scroll} from 'react-scroll';
 
 import {Grid} from "@material-ui/core";
@@ -15,7 +16,7 @@ import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/customButtons";
 import IntroExpertises from "../EditComponents/topSection/components/introExpertises";
-
+import ErrorMessages from "../../../lib/errorMessages";
 import {
   headlineText,
   headlineEditMode,
@@ -31,10 +32,8 @@ const TopSection = (props) => {
   const backToTopRef = useRef(null);
   const {name, avatar} = ProfileData;
 
-  const [headlineEditValue, setHeadlineEditValue] = useState({headline: props.headline})
   const [introEditValue, setIntroEditValue] = useState({intro: props.intro})
   const [openModal, setOpenModal] = useState(false);
-  const [bioEditValue, setBioEditValue] = useState({bio: props.bio})
   const [expertisesEditValue, setExpertisesEditValue] = useState({expertises: props.expertises})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
 
@@ -46,37 +45,41 @@ const TopSection = (props) => {
     })
   }, [])
 
-  const inputHeadlineChangeHandler = (e) => {
-    setHeadlineEditValue({
-      headline: e.target.value
-    })
-  }
+  const headlineHandler = useFormik({
+    initialValues: {headline: props.headline},
+    onSubmit: values => {
+      props.setHeadline(values.headline);
+      props.setHeadlineMode(false);
+    },
+    validate: values => {
+      let errors = {}
+      if(!values.headline) {
+        errors.headline = "Headline can't be empty"
+      }
+      return errors;
+    }
+  })
+
+  const bioHandler = useFormik({
+    initialValues: {bio: props.bio},
+    onSubmit: values => {
+      props.setBio(values.bio);
+      props.setBioMode(false);
+    },
+    validate: values => {
+      let errors = {}
+      if(!values.bio) {
+        errors.bio = "Bio can't be empty"
+      }
+      return errors;
+    }
+  })
 
   const inputIntroChangeHandler = (e) => {
     setIntroEditValue({
       intro: e.target.value
     })
   }
-
-  const inputBioChangeHandler = (e) => {
-    setBioEditValue({
-      bio: e.target.value
-    })
-  }
-
-  const headlineEditHandler = () => {
-    if (headlineEditValue.headline !== "") {
-      props.setHeadline(headlineEditValue.headline)
-      props.setHeadlineMode(false)
-    }
-  };
-
-  const bioEditHandler = () => {
-    if (bioEditValue.bio !== "") {
-      props.setBio(bioEditValue.bio)
-      props.setBioMode(false)
-    }
-  };
 
   const introEditHandler = (e) => {
     if (introEditValue.intro !== "") {
@@ -103,11 +106,14 @@ const TopSection = (props) => {
           {props.headlineEditMode ? (
             <div>
               <input
-                value={headlineEditValue.headline}
-                onChange={inputHeadlineChangeHandler}
+                type="text"
+                value={headlineHandler.values.headline}
+                name='headline'
+                onChange={headlineHandler.handleChange}
                 className={`${classes.topSectionWrapper}__left-top__headline-input`}
               />
-              <CustomButton handler={headlineEditHandler} mode={props.setHeadlineMode} />
+              {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline} /> : null}
+              <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode} />
             </div>
           ) : (
             <div className={`${classes.topSectionWrapper}__left-top__headline`}>
@@ -139,11 +145,13 @@ const TopSection = (props) => {
           {props.bioEditMode ? (
             <div>
               <textarea
-                value={bioEditValue.bio}
-                onChange={inputBioChangeHandler}
+                value={bioHandler.values.bio}
+                name="bio"
+                onChange={bioHandler.handleChange}
                 className={`${classes.topSectionWrapper}__left-top__bio-input`}
               />
-              <CustomButton handler={bioEditHandler} mode={props.setBioMode}/>
+              {bioHandler.errors.bio ? <ErrorMessages error={bioHandler.errors.bio} /> : null}
+              <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
             </div>
           ) : (
             <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
@@ -190,7 +198,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
-  setHeadline: (editValue) => dispatch(headlineText(editValue)),
+  setHeadline: (value) => dispatch(headlineText(value)),
   setIntro: (editValue) => dispatch(introText(editValue)),
   setExpertises: (expertisesValue) => dispatch(expertisesText(expertisesValue)),
   setBioMode: (boolean) => dispatch(bioEditMode(boolean)),

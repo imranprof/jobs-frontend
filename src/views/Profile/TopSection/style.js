@@ -24,7 +24,6 @@ export const useStyles = makeStyles({
           boxShadow: theme.palette.customShadow.editInputShadow,
           borderRadius: 3,
           fontSize: 16,
-          marginBottom: 15,
           paddingLeft: 10
         },
         '&__headline': {
