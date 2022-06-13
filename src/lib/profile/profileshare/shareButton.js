@@ -1,4 +1,3 @@
-
 import React from "react";
 import {Button, ClickAwayListener} from "@material-ui/core";
 import ShareBar from "./shareBar";
