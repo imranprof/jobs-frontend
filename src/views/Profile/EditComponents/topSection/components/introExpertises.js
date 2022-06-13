@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 
 import {useTheme} from "@material-ui/core/styles";
 
-import CustomButton from "../../../../lib/customButtons";
-import {expertisesText} from "../../../../store/actions/editProfileActions";
-import {TopSectionEditStyle} from "./style";
+import CustomButton from "../../../../../lib/customButtons";
+import {expertisesText} from "../../../../../store/actions/editProfileActions";
+import {TopSectionEditStyle} from "../style";
 
 const expertisesData = [
   {value: 1, label: "Developer"},

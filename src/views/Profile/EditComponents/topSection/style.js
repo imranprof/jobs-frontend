@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     '&__introWrapper': {
       display: "flex",
       alignItems: "center",
-      margin: "30px 0",
+      marginBottom: 30,
       '&__input': {
         display: "block",
         width: "50%",
@@ -32,7 +32,36 @@ const useStyles = makeStyles({
       '&__selectDropdown': {
         color: COLORS.black,
       }
-    }
+    },
+    '&__socialLinks': {
+      width: "100%",
+      height: 300,
+      '&-wrapper': {
+        display: "flex",
+        alignItems: "center",
+        marginBottom: 20
+      },
+      '&-icon': {
+        width: 30,
+        height: 30,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: 20,
+        marginRight: 10
+      },
+      '&-input': {
+        display: "block",
+        width: "80%",
+        height: 40,
+        color: theme.palette.customColor.main,
+        background: "transparent",
+        border: `1px solid ${theme.palette.customBorder.editInputElement}`,
+        borderRadius: 3,
+        fontSize: 16,
+        paddingLeft: 10
+      }
+    },
   })
 })
 

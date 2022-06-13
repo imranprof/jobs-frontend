@@ -7,6 +7,7 @@ import SocialLink from "./socialLink";
 import {SocialLinkStyle} from "./style";
 import EditButton from "../../editButton";
 import MuiCustomModal from "../muiCustomModal";
+import SocialLinksEdit from "../../../views/Profile/EditComponents/topSection/components/socialLinksEdit";
 
 const SocialLinks = (props) => {
   const theme = useTheme();
@@ -22,14 +23,14 @@ const SocialLinks = (props) => {
       <div>
         <span className={`${classes.socialLinksWrapper}__title`}>find with me</span>
         <div className={`${classes.socialLinksWrapper}__social-links`}>
-          {props.socialLinks.map(link =>
-            <SocialLink link={link} key={link.id} classes={classes}/>
-          )}
+          {Object.entries(props.socialLinks).map(([iconName, url]) => (
+            <SocialLink link={url} iconName={iconName} key={url} classes={classes}/>
+          ))}
         </div>
       </div>
 
       <MuiCustomModal handleClose={modalClose} open={openModal}>
-        <h3>Edit Content</h3>
+        <SocialLinksEdit handleClose={modalClose} />
       </MuiCustomModal>
 
       <span onClick={() => setOpenModal(true)}>
@@ -41,7 +42,7 @@ const SocialLinks = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    socialLinks: state.profile.socialLinks
+    socialLinks: state.editProfile.links
   }
 }
 

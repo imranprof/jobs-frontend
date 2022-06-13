@@ -14,7 +14,7 @@ import {TopSectionStyle} from "./style";
 import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/customButtons";
-import IntroExpertises from "../EditComponents/topSection/introExpertises";
+import IntroExpertises from "../EditComponents/topSection/components/introExpertises";
 
 import {
   headlineText,

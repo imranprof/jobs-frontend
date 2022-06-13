@@ -1,4 +1,4 @@
-import {HEADLINE_TEXT, HEADLINE_EDIT_MODE, INTRO_TEXT, EXPERTISE_VALUES, BIO_TEXT, BIO_EDIT_MODE} from "../actionTypes/editProfileTypes";
+import {HEADLINE_TEXT, HEADLINE_EDIT_MODE, INTRO_TEXT, EXPERTISE_VALUES, BIO_TEXT, BIO_EDIT_MODE, SOCIAL_LINKS_UPDATE} from "../actionTypes/editProfileTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const initialState = {
@@ -8,7 +8,8 @@ const initialState = {
   introMode: false,
   bio: ProfileData.bio,
   bioMode: false,
-  expertises: ProfileData.expertises
+  expertises: ProfileData.expertises,
+  links: ProfileData.socialLinks
 }
 
 // ***TopSection***
@@ -43,6 +44,11 @@ export const editProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         bioMode: action.payload,
+      }
+    case SOCIAL_LINKS_UPDATE:
+      return {
+        ...state,
+        links: action.payload,
       }
     default:
       return state

@@ -9,3 +9,5 @@ export const EXPERTISE_VALUES = 'EXPERTISE_VALUES'
 // Bio
 export const BIO_TEXT = 'BIO_TEXT'
 export const BIO_EDIT_MODE = 'BIO_EDIT_MODE'
+// Social Links
+export const SOCIAL_LINKS_UPDATE = 'SOCIAL_LINKS_UPDATE'

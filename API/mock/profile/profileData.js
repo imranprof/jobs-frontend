@@ -10,11 +10,11 @@ export const ProfileData = {
   contactDescription: "I am available for freelance work. Connect with me via and call in to my account",
   phone: "+01234567890",
   expertises: ["Developer", "Programmer", "Designer", "Professional Coder", "Rails Developer"],
-  socialLinks: [
-    {id: 1, iconName: "facebook", url: "https://www.facebook.com/"},
-    {id: 2, iconName: "github", url: "https://www.github.com/"},
-    {id: 3, iconName: "linkedin", url: "https://www.linkedin.com/"},
-  ],
+  socialLinks: {
+    "facebook": "https://www.facebook.com/",
+    "github": "https://www.github.com/",
+    "linkedin": "https://www.linkedin.com/",
+  },
   skills: [
     {id: 1, image: "ruby.png", alt: "ruby"},
     {id: 2, image: "javascript.png", alt: "javascript"},

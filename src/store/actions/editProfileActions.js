@@ -1,4 +1,4 @@
-import {HEADLINE_TEXT, HEADLINE_EDIT_MODE, INTRO_TEXT, EXPERTISE_VALUES, BIO_TEXT, BIO_EDIT_MODE} from "../actionTypes/editProfileTypes";
+import {HEADLINE_TEXT, HEADLINE_EDIT_MODE, INTRO_TEXT, EXPERTISE_VALUES, BIO_TEXT, BIO_EDIT_MODE, SOCIAL_LINKS_UPDATE} from "../actionTypes/editProfileTypes";
 
 // ***TopSection***
 // Headline
@@ -44,5 +44,13 @@ export const bioEditMode = (boolean) => {
   return {
     type: BIO_EDIT_MODE,
     payload: boolean
+  }
+}
+
+// Social Links
+export const socialLinksUpdate = (links) => {
+  return {
+    type: SOCIAL_LINKS_UPDATE,
+    payload: links
   }
 }
