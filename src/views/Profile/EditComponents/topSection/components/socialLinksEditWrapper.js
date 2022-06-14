@@ -12,7 +12,7 @@ const SocialLinksEditWrapper = ({iconName, urlValue, name, changeHandler}) => {
         <i className={iconName} />
       </div>
       <input
-        value={urlValue}
+        value={urlValue || ""}
         name={name}
         onChange={changeHandler}
         className={`${classes.topSectionEditWrapper}__socialLinks-input`}
