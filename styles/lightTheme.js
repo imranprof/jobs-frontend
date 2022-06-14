@@ -52,7 +52,8 @@ const lightTheme = createTheme({
             main: COLORS.gray_5
         },
         customHoverColor: {
-            main: COLORS.white
+            main: COLORS.white,
+            light: COLORS.white
         },
         customHoverBackground: {
             main: COLORS.pink_1,

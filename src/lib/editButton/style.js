@@ -7,10 +7,12 @@ export const useStyles = makeStyles({
     position: "relative",
     display: "inline-flex",
     borderRadius: "50%",
+    background: theme.palette.customBackground.gradiant.light,
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
     boxShadow: theme.palette.customShadow.main,
+    transition: "all 0.3s ease",
     zIndex: 1,
     '&::before': {
       position: "absolute",
@@ -20,22 +22,25 @@ export const useStyles = makeStyles({
       bottom: 0,
       left: 0,
       zIndex: -1,
-      transition: "all 0.5s ease-in-out",
       opacity: 0,
       borderRadius: "50%",
     },
+    '&:hover': {
+      transform: "translateY(-2px)",
+    },
     '&:hover::before': {
       opacity: 1,
-      background: theme.palette.customBackground.gradiant.light,
-      border: `1px solid ${theme.palette.customColor.dark}`
+      background: theme.palette.customBackground.gradiant.dark,
     },
     '& .fa-solid': {
       textAlign: "center",
-      fontSize: 16,
-      marginLeft: 3
+      fontSize: 14,
+      marginLeft: 3,
+      color: theme.palette.customColor.main,
+      transition: "all 0.3s ease",
     },
     '&:hover .fa-solid': {
-      color: theme.palette.customColor.light,
+      color: theme.palette.customHoverColor.light
     },
   })
 });

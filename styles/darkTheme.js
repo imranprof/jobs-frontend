@@ -53,7 +53,8 @@ const darkTheme = createTheme({
             secondary: COLORS.black_10
         },
         customHoverColor: {
-            main: COLORS.pink
+            main: COLORS.pink,
+            light: COLORS.white
         },
         customHoverBackground: {
             main: COLORS.black_5,
