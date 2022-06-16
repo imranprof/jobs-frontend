@@ -8,7 +8,7 @@ import {BlogModalStyle} from "./blogModalStyle";
 
 const BlogModal = ({
                      setToggleBlogModal,
-                     blog: {image, description}
+                     blog: {image, description, title, category}
                    }) => {
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
@@ -29,6 +29,8 @@ const BlogModal = ({
             <CloseIcon/>
           </IconButton>
           <Grid container>
+            <span className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</span>
+            <Grid item className={`${blogModalWrapper}__modal-content__blog-title`}>{title}</Grid>
             <Grid className={`${blogModalWrapper}__modal-content__image-container`}>
               <img
                 src={image}

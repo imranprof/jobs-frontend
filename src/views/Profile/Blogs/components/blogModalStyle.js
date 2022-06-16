@@ -77,6 +77,23 @@ const useStyles = makeStyles({
                     marginBottom: 30
                 },
             },
+            '&__blog-title': {
+                marginBottom: "40px",
+                fontFamily: FONTS.primaryFont,
+                fontSize: 32,
+                fontWeight: 700,
+                color: theme.palette.customColor.main
+
+            },
+            '&__blog-category': {
+                marginBottom: 9,
+                fontFamily: FONTS.primaryFont,
+                fontSize: 14,
+                fontWeight: 500,
+                width: 300,
+                color: theme.palette.customColor.highContrast,
+                textTransform: 'uppercase'
+            },
             '&__text-content': {
                 '& span': {
                     display: "block",
