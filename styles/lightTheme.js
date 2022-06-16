@@ -37,7 +37,8 @@ const lightTheme = createTheme({
             sendMessageBtn: COLORS.white,
             searchBtn: COLORS.pink,
             hourlyRate: COLORS.gray,
-            shareBtn: COLORS.pink
+            shareBtn: COLORS.pink,
+            dangerColor: COLORS.danger
         },
         customShadow: {
             main: COLORS.boxShadow_2,
@@ -47,12 +48,14 @@ const lightTheme = createTheme({
             backToTop: COLORS.boxShadow_10,
             paperCardShadow: COLORS.boxShadow_9,
             buttonShadow: COLORS.boxShadow_9,
+            editInputShadow: COLORS.boxShadow_5
         },
         customDivider: {
             main: COLORS.gray_5
         },
         customHoverColor: {
-            main: COLORS.white
+            main: COLORS.white,
+            light: COLORS.white
         },
         customHoverBackground: {
             main: COLORS.pink_1,
@@ -69,6 +72,7 @@ const lightTheme = createTheme({
         },
         customBorder: {
             beforeElement: COLORS.gray_5,
+            editInputElement: COLORS.gray
         },
         resume: {
             navListColor: COLORS.black,

@@ -37,7 +37,9 @@ const darkTheme = createTheme({
             sendMessageBtn: COLORS.pink,
             searchBtn: COLORS.white_4,
             hourlyRate: COLORS.white_4,
-            shareBtn: COLORS.black_6
+            shareBtn: COLORS.black_6,
+            dangerColor: COLORS.danger
+
         },
         customShadow: {
             main: COLORS.boxShadow_1,
@@ -46,14 +48,16 @@ const darkTheme = createTheme({
             default: COLORS.boxShadow_3,
             backToTop: COLORS.boxShadow_3,
             paperCardShadow: COLORS.boxShadow_3,
-            buttonShadow: COLORS.boxShadow_11
+            buttonShadow: COLORS.boxShadow_11,
+            editInputShadow: COLORS.boxShadow_3
         },
         customDivider: {
             main: COLORS.black_3,
             secondary: COLORS.black_10
         },
         customHoverColor: {
-            main: COLORS.pink
+            main: COLORS.pink,
+            light: COLORS.white
         },
         customHoverBackground: {
             main: COLORS.black_5,
@@ -70,7 +74,8 @@ const darkTheme = createTheme({
             main: COLORS.black_8
         },
         customBorder: {
-            beforeElement: COLORS.black_6
+            beforeElement: COLORS.black_6,
+            editInputElement: COLORS.gray_4
         },
         resume: {
             navListColor: COLORS.white_4,
