@@ -5,6 +5,7 @@ import {useTheme} from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 
 import {BlogModalStyle} from "./blogModalStyle";
+import EditButton from "../../../../lib/editButton";
 
 const BlogModal = ({
                      setToggleBlogModal,
@@ -31,6 +32,7 @@ const BlogModal = ({
           <Grid container>
             <span className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</span>
             <Grid item className={`${blogModalWrapper}__modal-content__blog-title`}>{title}</Grid>
+            <span> <EditButton/> </span>
             <Grid className={`${blogModalWrapper}__modal-content__image-container`}>
               <img
                 src={image}

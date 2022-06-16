@@ -82,6 +82,7 @@ const useStyles = makeStyles({
                 fontFamily: FONTS.primaryFont,
                 fontSize: 32,
                 fontWeight: 700,
+                marginRight: 20,
                 color: theme.palette.customColor.main
 
             },
