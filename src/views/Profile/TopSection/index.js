@@ -81,13 +81,9 @@ const TopSection = (props) => {
     })
   }
 
-  const introEditHandler = (e) => {
-    if (introEditValue.intro !== "") {
+  const introEditHandler = () => {
+    if (introEditValue.intro !== "" && expertisesEditValue.expertises.length !== 0) {
       props.setIntro(introEditValue.intro);
-      setOpenModal(false);
-    }
-
-    if (expertisesEditValue.expertises.length !== 0) {
       props.setExpertises(expertisesEditValue.expertises);
       setOpenModal(false);
     } else {
@@ -131,6 +127,7 @@ const TopSection = (props) => {
               inputValue={introEditValue.intro}
               inputIntroChangeHandler={inputIntroChangeHandler}
               introEditHandler={introEditHandler}
+              expertisesEditValue={expertisesEditValue.expertises}
               setExpertisesEditValue={setExpertisesEditValue}
             />
           </MuiCustomModal>

@@ -2,11 +2,11 @@ import {connect} from "react-redux";
 import Select from "react-select";
 
 import {useTheme} from "@material-ui/core/styles";
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 import {TopSectionEditStyle} from "../style";
 import CustomButton from "../../../../../lib/customButtons";
 import {skillsUpdate} from "../../../../../store/actions/editProfileActions";
+import ErrorMessages from "../../../../../lib/errorMessages";
 
 const skillsData = [
   {id: 1, name: "Ruby", image: "ruby.png", value: "Ruby", label: "Ruby"},
@@ -45,18 +45,8 @@ const SkillsEdit = (props) => {
           onChange={selectChangeHandler}
           className={`${classes.topSectionEditWrapper}__skillsWrapper__selectDropdown`}
         />
-        {(skillsEditValue.skills.length > 3) &&
-          (<div className={`${classes.topSectionEditWrapper}__skillsWrapper__selectDropdown__error-msg`}>
-            <ErrorOutlineIcon />
-            <p>Maximum 3 skills</p>
-          </div>)
-        }
-        {(skillsEditValue.skills.length === 0) &&
-        (<div className={`${classes.topSectionEditWrapper}__skillsWrapper__selectDropdown__error-msg`}>
-          <ErrorOutlineIcon />
-          <p>Select at least one skill</p>
-        </div>)
-        }
+        {(skillsEditValue.skills.length > 3) && <ErrorMessages error="Maximum 3 skills" />}
+        {(skillsEditValue.skills.length === 0) && <ErrorMessages error="Select at least one skill" />}
       </div>
 
       <CustomButton handler={skillsEditHandler} mode={handleClose}/>

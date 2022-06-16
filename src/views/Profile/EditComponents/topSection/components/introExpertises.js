@@ -7,6 +7,7 @@ import {useTheme} from "@material-ui/core/styles";
 import CustomButton from "../../../../../lib/customButtons";
 import {expertisesText} from "../../../../../store/actions/editProfileActions";
 import {TopSectionEditStyle} from "../style";
+import ErrorMessages from "../../../../../lib/errorMessages";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -17,7 +18,7 @@ const expertisesData = [
 ]
 
 const IntroExpertises = (props) => {
-  const {fullName, inputIntroChangeHandler, inputValue, introEditHandler, setExpertisesEditValue, handleClose} = props;
+  const {fullName, inputIntroChangeHandler, inputValue, introEditHandler, expertisesEditValue, setExpertisesEditValue, handleClose} = props;
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
 
@@ -55,6 +56,7 @@ const IntroExpertises = (props) => {
         />
         <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
       </div>
+      {inputValue === "" && <ErrorMessages error="Intro can't be blank" />}
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
         <div>
@@ -66,12 +68,13 @@ const IntroExpertises = (props) => {
             onChange={selectChangeHandler}
             className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectDropdown`}
           />
+          {expertisesEditValue.length === 0 && <ErrorMessages error="Select at least one expertise" />}
         </div>
         <CustomButton handler={introEditHandler} mode={handleClose}/>
       </div>
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {

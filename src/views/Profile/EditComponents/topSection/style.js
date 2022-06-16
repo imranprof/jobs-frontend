@@ -6,7 +6,6 @@ const useStyles = makeStyles({
     '&__introWrapper': {
       display: "flex",
       alignItems: "center",
-      marginBottom: 30,
       '&__input': {
         display: "block",
         width: "50%",
@@ -69,14 +68,6 @@ const useStyles = makeStyles({
       justifyContent: "space-between",
       '&__selectDropdown': {
         color: COLORS.black,
-        '&__error-msg': {
-          display: "flex",
-          alignItems: "center",
-          color: "red",
-          '& > p': {
-            marginLeft: 5
-          }
-        }
       }
     },
   })

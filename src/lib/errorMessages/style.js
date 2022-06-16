@@ -2,8 +2,12 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
   errorMessagesWrapper: theme => ({
+    display: "flex",
+    alignItems: "center",
     color: theme.palette.customColor.dangerColor,
-    marginTop: 5
+    '& > p': {
+      marginLeft: 5
+    }
   })
 });
 
