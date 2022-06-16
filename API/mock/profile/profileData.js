@@ -16,9 +16,9 @@ export const ProfileData = {
     "linkedin": "https://www.linkedin.com/",
   },
   skills: [
-    {id: 1, image: "ruby.png", alt: "ruby"},
-    {id: 2, image: "javascript.png", alt: "javascript"},
-    {id: 3, image: "python.png", alt: "python"},
+    {id: 1, name: "Ruby", image: "ruby.png"},
+    {id: 2, name: "Javascript", image: "javascript.png"},
+    {id: 3, name: "Python", image: "python.png"},
   ],
   features: [
     {

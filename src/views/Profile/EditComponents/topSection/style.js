@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     },
     '&__socialLinks': {
       width: "100%",
-      height: 300,
+      height: 220,
       '&-wrapper': {
         display: "flex",
         alignItems: "center",
@@ -60,6 +60,23 @@ const useStyles = makeStyles({
         borderRadius: 3,
         fontSize: 16,
         paddingLeft: 10
+      }
+    },
+    '&__skillsWrapper': {
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      '&__selectDropdown': {
+        color: COLORS.black,
+        '&__error-msg': {
+          display: "flex",
+          alignItems: "center",
+          color: "red",
+          '& > p': {
+            marginLeft: 5
+          }
+        }
       }
     },
   })

@@ -42,6 +42,7 @@ const SocialLinksEdit = (props) => {
 
   return (
     <div>
+      <h3>Edit social links</h3>
       <form className={`${classes.topSectionEditWrapper}__socialLinks`}>
         <SocialLinksEditWrapper
           name="facebook"
