@@ -83,7 +83,19 @@ const useStyles = makeStyles({
                 fontSize: 32,
                 fontWeight: 700,
                 marginRight: 20,
-                color: theme.palette.customColor.main
+                color: theme.palette.customColor.main,
+                '&__input': {
+                    display: "block",
+                    width: "85%",
+                    height: 40,
+                    color: theme.palette.customColor.main,
+                    background: "transparent",
+                    border: `1px solid ${theme.palette.customBorder.editInputElement}`,
+                    boxShadow: theme.palette.customShadow.editInputShadow,
+                    borderRadius: 3,
+                    fontSize: 16,
+                    paddingLeft: 10
+                }
 
             },
             '&__blog-category': {
