@@ -106,12 +106,12 @@ const useStyles = makeStyles({
                 width: "100%",
                 display: "flex",
                 padding: 5,
-                maxWidth: "350px"
+                maxWidth: "300px"
             },
             '&__blog-category': {
-                marginBottom: 9,
+                margin: 10,
                 fontFamily: FONTS.primaryFont,
-                fontSize: 14,
+                fontSize: 12,
                 fontWeight: 500,
                 color: theme.palette.customColor.highContrast,
                 textTransform: 'uppercase'

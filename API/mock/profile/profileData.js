@@ -124,7 +124,7 @@ export const ProfileData = {
     {
       id: 1,
       image: "blog-01.jpg",
-      category: ["canada","singapore","nothing"],
+      category: ["canada","singapore"],
       title: "The services provide for design",
       readTime: "2 min",
       description: <div>
