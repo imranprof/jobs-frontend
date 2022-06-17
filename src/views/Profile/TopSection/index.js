@@ -7,6 +7,7 @@ import {Grid} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import TypeWriter from "./typeWriter";
+import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import MuiCustomModal from "../../../lib/profile/muiCustomModal";
