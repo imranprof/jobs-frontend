@@ -124,7 +124,7 @@ export const ProfileData = {
     {
       id: 1,
       image: "blog-01.jpg",
-      category: "canada",
+      category: ["canada","singapore","nothing"],
       title: "The services provide for design",
       readTime: "2 min",
       description: <div>
@@ -188,7 +188,7 @@ export const ProfileData = {
     {
       id: 2,
       image: "blog-02.jpg",
-      category: "development",
+      category: ["development", "mobile", "apps"],
       title: "Mobile app landing design & app maintain",
       readTime: "2 hour",
       description: <div>
@@ -252,7 +252,7 @@ export const ProfileData = {
     {
       id: 3,
       image: "blog-03.jpg",
-      category: "application",
+      category: ["application"],
       title: "T-shirt design is the part of design",
       readTime: "5 min",
       description: <div>

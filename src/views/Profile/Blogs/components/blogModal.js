@@ -30,6 +30,7 @@ const BlogModal = ({
       setBlogEditMode(false);
     }
     })
+  console.log(category);
 
   return (
     <div className={`${blogModalWrapper}__body`}>
@@ -42,9 +43,13 @@ const BlogModal = ({
             <CloseIcon/>
           </IconButton>
           <Grid container>
-            <span className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</span>
+            <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
+              {category.map(category => (
+                <div className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
+              ))}
+            </div>
             {blogEditMode ? (
-              <div className={`${blogModalWrapper}__modal-content__blog-title`}>
+              <div>
                 <textarea
                   rows = {2}
                   type="textarea"

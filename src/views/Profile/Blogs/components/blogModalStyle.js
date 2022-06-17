@@ -98,12 +98,18 @@ const useStyles = makeStyles({
                 }
 
             },
+            '&__blog-categories': {
+                width: "40%",
+                display: "flex",
+                justifyContent: "space-between",
+                padding: 5
+            },
             '&__blog-category': {
                 marginBottom: 9,
                 fontFamily: FONTS.primaryFont,
                 fontSize: 14,
                 fontWeight: 500,
-                width: "100%",
+
                 color: theme.palette.customColor.highContrast,
                 textTransform: 'uppercase'
             },
