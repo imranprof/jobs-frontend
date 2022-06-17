@@ -10,7 +10,6 @@ import TypeWriter from "./typeWriter";
 import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import MuiCustomModal from "../../../lib/profile/muiCustomModal";
-import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {TopSectionStyle} from "./style";
 import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
@@ -158,7 +157,6 @@ const TopSection = (props) => {
             </span>
             </div>
           )}
-
         </div>
 
         <div className={`${classes.topSectionWrapper}__left-bottom`}>
@@ -166,15 +164,13 @@ const TopSection = (props) => {
           <Skills/>
         </div>
       </Grid>
-
       <Grid item xs={12} md={5}>
         <div className={`${classes.topSectionWrapper}__thumbnail`}>
           <img src={avatar} alt={name} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
         </div>
       </Grid>
 
-      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
-           onClick={() => scroll.scrollToTop()}>
+      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef} onClick={() => scroll.scrollToTop()}>
         <i className={`${FontAwesomeIcons.arrowUp}`}/>
       </div>
     </Grid>

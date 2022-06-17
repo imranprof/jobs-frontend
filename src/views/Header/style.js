@@ -113,6 +113,65 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.light,
         },
       },
+      '&__navShare': {
+        display: "flex",
+        width: "660px"
+      },
+      '&__navItem': {
+         width: "550px"
+      },
+      '&__share': {
+        position: "relative",
+        textAlign: "center",
+        textTransform: "uppercase",
+        background: theme.palette.customBackground.gradiant.light,
+        boxShadow: theme.palette.customShadow.paperCardShadow,
+        width: "130%",
+        height: 40,
+        border: "none",
+        borderRadius: 5,
+        transition: "all .5s ease",
+        color: theme.palette.customColor.highContrast,
+        '&:hover':{
+          opacity: 1,
+          borderRadius: 6,
+          background: theme.palette.customColor.shareBtn,
+          color: theme.palette.customColor.sendMessageBtn,
+          cursor: "pointer"
+        },
+        '&__popUp': {
+          zIndex: 999999999
+        },
+        '&__shareBar':{
+          width: 150,
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 9,
+          background: theme.palette.customBackground.shareBar,
+          borderRadius: 7,
+          '&__arrow':{
+            marginTop: "9px",
+            position: "relative",
+            boxShadow: "none",
+            '&::before':{
+              background: theme.palette.customBackground.shareBar,
+              content: '""',
+              display: "block",
+              position: "absolute",
+              width: 11,
+              height: 11,
+              top: -6,
+              transform: "rotate(45deg)",
+              left: "calc(50% - 6px)"
+            }
+          },
+          '&__icon':{
+            borderRadius: 10,
+            height: 30,
+            width: 30
+          },
+        }
+      },
       '& .active': {
         opacity: 1,
         color: theme.palette.customColor.navLinkActive,
@@ -149,6 +208,30 @@ export const useStyles = makeStyles({
         width: 300,
         padding: "25px 25px 50px 25px",
         overflowX: "hidden"
+      },
+      '&__share-bar': {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        background: "transparent",
+        width: 190,
+        height: 60,
+        '&__title':{
+          color: theme.palette.customColor.main,
+          fontSize: "14px",
+          fontWeight: 300,
+          marginBottom: "15px",
+          marginTop: "50px",
+          display: "inline-block",
+          textTransform: "uppercase",
+
+        },
+        '&__icon': {
+          borderRadius: 5,
+          height: 45,
+          width: 45,
+          boxShadow: theme.palette.customShadow.main
+        }
       }
     },
     '&__menu': {

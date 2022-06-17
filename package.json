@@ -26,6 +26,7 @@
     "react-loader-spinner": "^6.0.0-0",
     "react-redux": "^7.2.6",
     "react-scroll": "^1.8.5",
+    "react-share": "^4.4.0",
     "react-select": "^5.3.2",
     "typewriter-effect": "^2.18.2",
     "redux": "^4.1.2",
