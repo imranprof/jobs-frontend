@@ -95,21 +95,24 @@ const useStyles = makeStyles({
                     fontSize: 20,
                     marginBottom: 15,
                     padding: 10
+                },
+                '&__editButton': {
+                    display: "flex",
+                    justifyContent: "space-between"
                 }
 
             },
             '&__blog-categories': {
-                width: "40%",
+                width: "100%",
                 display: "flex",
-                justifyContent: "space-between",
-                padding: 5
+                padding: 5,
+                maxWidth: "350px"
             },
             '&__blog-category': {
                 marginBottom: 9,
                 fontFamily: FONTS.primaryFont,
                 fontSize: 14,
                 fontWeight: 500,
-
                 color: theme.palette.customColor.highContrast,
                 textTransform: 'uppercase'
             },

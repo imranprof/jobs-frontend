@@ -281,7 +281,7 @@ export const ProfileData = {
           amet
           suscipit nisl. Sed eget nisl laoreet, suscipit enim nec, viverra eros. Nunc
           imperdiet risus
-          leo,
+          leo,F
           in rutrum erat dignissim id.</p>
         <p>Ut rhoncus vestibulum facilisis. Duis et lorem vitae ligula cursus venenatis.
           Class aptent
@@ -402,5 +402,6 @@ export const ProfileData = {
         rating: ""
       }
     ],
-  }
+  },
+  categories: ["Development", "Apps", "Mobile", "Security", "Cryptography", "linux"]
 }

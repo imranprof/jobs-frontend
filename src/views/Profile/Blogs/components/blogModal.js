@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 
 import {Grid, IconButton} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -9,7 +10,7 @@ import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
 import {useFormik} from "formik";
 
-const BlogModal = ({
+const BlogModal = ({props,
                      setToggleBlogModal,
                      blog: {image, description, title, category}
                    }) => {
@@ -18,6 +19,8 @@ const BlogModal = ({
   const [visibilityClass, setVisibilityClass] = useState("");
   const [blogEditMode, setBlogEditMode] = useState(false);
   const [blogTitle, setTitle] = useState(title)
+  const [categories, setCategories] = useState(category);
+  const [categoriesEditMode, setCategoriesEditMode] = useState(false);
 
   setTimeout(() => {
     setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
@@ -43,16 +46,22 @@ const BlogModal = ({
             <CloseIcon/>
           </IconButton>
           <Grid container>
+            {categoriesEditMode ? (
+              <div>This is category edit mode</div>
+            ) : (
             <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
-              {category.map(category => (
-                <div className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
-              ))}
+                {category.map(category => (
+                  <div className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
+                ))}
+              <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
             </div>
+
+            )}
+
             {blogEditMode ? (
               <div>
                 <textarea
                   rows = {2}
-                  type="textarea"
                   value={blogHandler.values.title}
                   name = "title"
                   onChange={blogHandler.handleChange}
@@ -61,9 +70,9 @@ const BlogModal = ({
                 <CustomButton handler={blogHandler.handleSubmit}  mode={setBlogEditMode}/>
               </div>
             ) : (
-              <div>
+              <div className={`${blogModalWrapper}__modal-content__blog-title__editButton`}>
               <Grid item className={`${blogModalWrapper}__modal-content__blog-title`}>{blogTitle}</Grid>
-              <span onClick={ ()=>setBlogEditMode(!blogEditMode)}> <EditButton/> </span>
+              <div onClick={ ()=>setBlogEditMode(!blogEditMode)}> <EditButton/> </div>
               </div>
             )}
 
@@ -83,4 +92,10 @@ const BlogModal = ({
   );
 }
 
-export default BlogModal;
+const mapStateToProps = (state) => {
+  return {
+    categories: state.profile.categories
+  }
+}
+
+export default connect(mapStateToProps)(BlogModal);
