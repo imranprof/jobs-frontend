@@ -86,15 +86,15 @@ const useStyles = makeStyles({
                 color: theme.palette.customColor.main,
                 '&__input': {
                     display: "block",
-                    width: "85%",
-                    height: 40,
+                    height: 100,
                     color: theme.palette.customColor.main,
                     background: "transparent",
                     border: `1px solid ${theme.palette.customBorder.editInputElement}`,
                     boxShadow: theme.palette.customShadow.editInputShadow,
                     borderRadius: 3,
-                    fontSize: 16,
-                    paddingLeft: 10
+                    fontSize: 20,
+                    marginBottom: 15,
+                    padding: 10
                 }
 
             },
@@ -103,7 +103,7 @@ const useStyles = makeStyles({
                 fontFamily: FONTS.primaryFont,
                 fontSize: 14,
                 fontWeight: 500,
-                width: 300,
+                width: "100%",
                 color: theme.palette.customColor.highContrast,
                 textTransform: 'uppercase'
             },

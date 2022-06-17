@@ -6,7 +6,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
-import ErrorMessages from "../../../../lib/errorMessages";
 import CustomButton from "../../../../lib/customButtons";
 import {useFormik} from "formik";
 
@@ -24,15 +23,13 @@ const BlogModal = ({
     setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
 
-
-
-  const changeBlogMode = () => {
-    setBlogEditMode(blogEditMode ? false : true);
-  }
-  const changeTitle = (value) => {
-    setTitle(value);
-  }
-
+  const blogHandler = useFormik({
+    initialValues: {title: blogTitle},
+    onSubmit: values => {
+      setTitle(values.title);
+      setBlogEditMode(false);
+    }
+    })
 
   return (
     <div className={`${blogModalWrapper}__body`}>
@@ -47,20 +44,21 @@ const BlogModal = ({
           <Grid container>
             <span className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</span>
             {blogEditMode ? (
-              <div>
-                <input
-                  type="text"
-                  value={blogTitle}
-                  name='Blog Title'
-                  onChange={e => changeTitle(e.target.value)}
+              <div className={`${blogModalWrapper}__modal-content__blog-title`}>
+                <textarea
+                  rows = {2}
+                  type="textarea"
+                  value={blogHandler.values.title}
+                  name = "title"
+                  onChange={blogHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__blog-title__input`}
                 />
-                <CustomButton  mode={changeBlogMode}/>
+                <CustomButton handler={blogHandler.handleSubmit}  mode={setBlogEditMode}/>
               </div>
             ) : (
               <div>
-              <Grid item className={`${blogModalWrapper}__modal-content__blog-title`}>{title}</Grid>
-              <span onClick={ changeBlogMode}> <EditButton/> </span>
+              <Grid item className={`${blogModalWrapper}__modal-content__blog-title`}>{blogTitle}</Grid>
+              <span onClick={ ()=>setBlogEditMode(!blogEditMode)}> <EditButton/> </span>
               </div>
             )}
 
