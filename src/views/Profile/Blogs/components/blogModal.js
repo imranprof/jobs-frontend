@@ -1,39 +1,89 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {useFormik} from "formik";
+import Select from 'react-select';
+import dynamic from 'next/dynamic'
 
 import {Grid, IconButton} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
-
 import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
-import {useFormik} from "formik";
 
-const BlogModal = ({props,
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then(mod => mod.Editor),
+  { ssr: false })
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { EditorState } from 'draft-js';
+
+const BlogModal = ({
                      setToggleBlogModal,
-                     blog: {image, description, title, category}
+                     blog: {image, description, title, categories, category}
                    }) => {
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [blogEditMode, setBlogEditMode] = useState(false);
   const [blogTitle, setTitle] = useState(title)
-  const [categories, setCategories] = useState(category);
+  const [categoriesEditValue, setCategoriesEditValue] = useState({categories: category})
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
+  const [categoryList,setCategoryList]  = useState({categories: category});
+  const [descriptionValue,setDescriptionValue] = useState(description);
+  const [descriptionMode, setDescriptionMode] = useState(false);
+
+
 
   setTimeout(() => {
     setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
 
-  const blogHandler = useFormik({
+  const titleHandler = useFormik({
     initialValues: {title: blogTitle},
     onSubmit: values => {
       setTitle(values.title);
       setBlogEditMode(false);
     }
     })
-  console.log(category);
+
+
+
+  const categoriesData = [
+    {value: 1, label: "development"},
+    {value: 2, label: "mobile"},
+    {value: 3, label: "apps"},
+    {value: 4, label: "security"}
+  ]
+  const selectedCategories = []
+  categoryList.categories?.map((element) => {
+    selectedCategories.push({label: element, value: element})
+  });
+
+  const filteredCategories = (selectedCategories) => {
+    if (selectedCategories !== undefined) {
+      let tempExpertises = categoriesData
+      return tempExpertises.filter((ex1) => {
+        return !selectedCategories.find((ex2) => {
+          return ex1.label === ex2.label
+        })
+      })
+    }
+  }
+  const [filteredCategoriesList, setFilteredCategoriesList] = useState(filteredCategories(selectedCategories))
+  const selectChangeHandler = (elements) => {
+    setCategoriesEditValue({
+      categories: Array.isArray(elements) ? elements.map(obj => obj.label) : []
+    })
+
+    setFilteredCategoriesList(filteredCategories(elements))
+    // console.log(filteredCategoriesList);
+  }
+  const categoryHandler = (e) => {
+    setCategoryList(categoriesEditValue);
+    setCategoriesEditMode(!categoriesEditMode);
+  }
+
+
 
   return (
     <div className={`${blogModalWrapper}__body`}>
@@ -47,27 +97,36 @@ const BlogModal = ({props,
           </IconButton>
           <Grid container>
             {categoriesEditMode ? (
-              <div>This is category edit mode</div>
+              <div className={`${blogModalWrapper}__modal-content__categories-edit`}>
+              <Select
+                isMulti
+                options = {filteredCategoriesList}
+                defaultValue={selectedCategories}
+                onChange = {selectChangeHandler}
+                className={`${blogModalWrapper}__modal-content__categories-edit__selectDropdown`}
+              />
+              <CustomButton handler={categoryHandler} mode={setCategoriesEditMode}/>
+              </div>
             ) : (
             <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
-                {category.map(category => (
-                  <div className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
-                ))}
+                {(categoryList.categories?.map(e => (
+                  <div className={`${blogModalWrapper}__modal-content__blog-category`}>{e}</div>
+                )))}
               <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
             </div>
 
             )}
 
             {blogEditMode ? (
-              <div>
+              <div className={`${blogModalWrapper}__modal-content__blog-title__edit`}>
                 <textarea
                   rows = {2}
-                  value={blogHandler.values.title}
+                  value={titleHandler.values.title}
                   name = "title"
-                  onChange={blogHandler.handleChange}
+                  onChange={titleHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__blog-title__input`}
                 />
-                <CustomButton handler={blogHandler.handleSubmit}  mode={setBlogEditMode}/>
+                <CustomButton handler={titleHandler.handleSubmit}  mode={setBlogEditMode}/>
               </div>
             ) : (
               <div className={`${blogModalWrapper}__modal-content__blog-title__editButton`}>
@@ -83,7 +142,18 @@ const BlogModal = ({props,
               />
             </Grid>
             <Grid item className={`${blogModalWrapper}__modal-content__text-content`}>
-              {description}
+              {descriptionMode? (
+                <Editor
+
+                />
+              ) : (
+                  <div>
+                    <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
+                    {description}
+                  </div>
+
+                )}
+
             </Grid>
           </Grid>
         </div>
@@ -91,6 +161,7 @@ const BlogModal = ({props,
     </div>
   );
 }
+
 
 const mapStateToProps = (state) => {
   return {

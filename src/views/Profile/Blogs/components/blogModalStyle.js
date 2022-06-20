@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import FONTS from "../../../../../styles/fonts";
+import COLORS from "../../../../../styles/colors";
 
 const useStyles = makeStyles({
     blogModalWrapper: theme => ({
@@ -96,25 +97,35 @@ const useStyles = makeStyles({
                     marginBottom: 15,
                     padding: 10
                 },
+                '&__edit': {
+                    width: "100%"
+                },
                 '&__editButton': {
                     display: "flex",
-                    justifyContent: "space-between"
+                    width: "100%"
                 }
 
             },
             '&__blog-categories': {
                 width: "100%",
-                display: "flex",
-                padding: 5,
-                maxWidth: "300px"
+                display: "flex"
             },
             '&__blog-category': {
-                margin: 10,
+                marginRight: 10,
                 fontFamily: FONTS.primaryFont,
                 fontSize: 12,
                 fontWeight: 500,
                 color: theme.palette.customColor.highContrast,
                 textTransform: 'uppercase'
+            },
+            '&__categories-edit': {
+                height: "75%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                '&__selectDropdown': {
+                    color: COLORS.black,
+                }
             },
             '&__text-content': {
                 '& span': {
