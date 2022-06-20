@@ -19,7 +19,7 @@ import { EditorState } from 'draft-js';
 
 const BlogModal = ({
                      setToggleBlogModal,
-                     blog: {image, description, title, categories, category}
+                     blog: {image, description, title,category}
                    }) => {
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
@@ -29,7 +29,6 @@ const BlogModal = ({
   const [categoriesEditValue, setCategoriesEditValue] = useState({categories: category})
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
   const [categoryList,setCategoryList]  = useState({categories: category});
-  const [descriptionValue,setDescriptionValue] = useState(description);
   const [descriptionMode, setDescriptionMode] = useState(false);
 
   const [editorState, setEditorState] = useState(
