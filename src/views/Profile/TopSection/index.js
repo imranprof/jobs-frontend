@@ -24,6 +24,7 @@ import {
   bioEditMode,
   expertisesText
 } from "../../../store/actions/editProfileActions";
+import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 const TopSection = (props) => {
   const theme = useTheme();
@@ -52,7 +53,7 @@ const TopSection = (props) => {
     },
     validate: values => {
       let errors = {}
-      if(!values.headline) {
+      if (!values.headline) {
         errors.headline = "Headline can't be empty"
       }
       return errors;
@@ -67,7 +68,7 @@ const TopSection = (props) => {
     },
     validate: values => {
       let errors = {}
-      if(!values.bio) {
+      if (!values.bio) {
         errors.bio = "Bio can't be empty"
       }
       return errors;
@@ -107,8 +108,8 @@ const TopSection = (props) => {
                 onChange={headlineHandler.handleChange}
                 className={`${classes.topSectionWrapper}__left-top__headline-input`}
               />
-              {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline} /> : null}
-              <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode} />
+              {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline}/> : null}
+              <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
             </div>
           ) : (
             <div className={`${classes.topSectionWrapper}__left-top__headline`}>
@@ -146,7 +147,7 @@ const TopSection = (props) => {
                 onChange={bioHandler.handleChange}
                 className={`${classes.topSectionWrapper}__left-top__bio-input`}
               />
-              {bioHandler.errors.bio ? <ErrorMessages error={bioHandler.errors.bio} /> : null}
+              {bioHandler.errors.bio ? <ErrorMessages error={bioHandler.errors.bio}/> : null}
               <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
             </div>
           ) : (
@@ -170,7 +171,8 @@ const TopSection = (props) => {
         </div>
       </Grid>
 
-      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef} onClick={() => scroll.scrollToTop()}>
+      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
+           onClick={() => scroll.scrollToTop()}>
         <i className={`${FontAwesomeIcons.arrowUp}`}/>
       </div>
     </Grid>
