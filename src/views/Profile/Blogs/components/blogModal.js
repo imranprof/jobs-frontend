@@ -32,7 +32,9 @@ const BlogModal = ({
   const [descriptionValue,setDescriptionValue] = useState(description);
   const [descriptionMode, setDescriptionMode] = useState(false);
 
-
+  const [editorState, setEditorState] = useState(
+    () => EditorState.createEmpty(),
+  );
 
   setTimeout(() => {
     setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
@@ -143,9 +145,13 @@ const BlogModal = ({
             </Grid>
             <Grid item className={`${blogModalWrapper}__modal-content__text-content`}>
               {descriptionMode? (
-                <Editor
+                <div>
+                  <Editor
+                    // editorState = {editorState}
+                    oonEditorStateChange={setEditorState}
+                  />
+                </div>
 
-                />
               ) : (
                   <div>
                     <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
