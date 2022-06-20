@@ -3,6 +3,11 @@ import {connect} from 'react-redux';
 import {useFormik} from "formik";
 import Select from 'react-select';
 import dynamic from 'next/dynamic'
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then(mod => mod.Editor),
+  { ssr: false })
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { EditorState } from 'draft-js';
 
 import {Grid, IconButton} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -10,12 +15,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
-
-const Editor = dynamic(
-  () => import('react-draft-wysiwyg').then(mod => mod.Editor),
-  { ssr: false })
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState } from 'draft-js';
 
 const BlogModal = ({
                      setToggleBlogModal,
