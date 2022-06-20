@@ -46,8 +46,6 @@ const BlogModal = ({
     }
     })
 
-
-
   const categoriesData = [
     {value: 1, label: "development"},
     {value: 2, label: "mobile"},
@@ -69,21 +67,19 @@ const BlogModal = ({
       })
     }
   }
+
   const [filteredCategoriesList, setFilteredCategoriesList] = useState(filteredCategories(selectedCategories))
   const selectChangeHandler = (elements) => {
     setCategoriesEditValue({
       categories: Array.isArray(elements) ? elements.map(obj => obj.label) : []
     })
-
     setFilteredCategoriesList(filteredCategories(elements))
-    // console.log(filteredCategoriesList);
   }
+
   const categoryHandler = (e) => {
     setCategoryList(categoriesEditValue);
     setCategoriesEditMode(!categoriesEditMode);
   }
-
-
 
   return (
     <div className={`${blogModalWrapper}__body`}>
