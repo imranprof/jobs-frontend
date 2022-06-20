@@ -49,26 +49,14 @@ const useStyles = makeStyles({
         opacity: 1,
         background: theme.palette.customBackground.gradiant.dark,
       },
-      '&:hover &__icon': {
-        color: theme.palette.customColor.featureIconHover
-      },
-      '&:hover &__content__read-more-btn': {
-        color: theme.palette.customColor.featureIconHover,
-        height: "auto",
-        opacity: 1,
-      },
       '&:hover &__content__title, &:hover &__content__description': {
         color: theme.palette.customColor.featuresHover
       },
-      '&:hover &-wrapper': {
-        transform: "translateY(-10px)",
-      },
       '&__icon': {
+        width: "100%",
         fontSize: 40,
         color: theme.palette.customColor.highContrast,
-        marginBottom: 29,
-        overflow: "visible",
-        transition: "color 0.4s ease 0s",
+        marginBottom: 20,
       },
       '&__content': {
         '&__title': {
@@ -90,12 +78,6 @@ const useStyles = makeStyles({
           marginBottom: 22,
           transition: "color 0.4s ease 0s",
         },
-        '&__read-more-btn': {
-          height: 0,
-          opacity: 0,
-          color: theme.palette.customColor.highContrast,
-          transition: "all 0.4s ease 0s",
-        },
         [theme.breakpoints.down('xs')]: {
           '&__title': {
             fontSize: 18,
@@ -110,10 +92,10 @@ const useStyles = makeStyles({
       },
       '&-wrapper': {
         height: "100%",
-        padding: "50px 50px 35px 50px",
+        padding: "65px 40px 15px",
         transition: "all 0.4s ease 0s",
         '&__action-btn': {
-          width: "22%",
+          width: 85,
           position: "absolute",
           top: 15,
           right: 15,
