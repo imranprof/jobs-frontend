@@ -402,6 +402,5 @@ export const ProfileData = {
         rating: ""
       }
     ],
-  },
-  categories: ["Development", "Apps", "Mobile", "Security", "Cryptography", "linux"]
+  }
 }
