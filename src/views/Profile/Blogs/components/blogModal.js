@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
 import {useFormik} from "formik";
 import Select from 'react-select';
 import dynamic from 'next/dynamic'
@@ -188,11 +187,5 @@ const BlogModal = ({
   );
 }
 
+export default BlogModal;
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.profile.categories
-  }
-}
-
-export default connect(mapStateToProps)(BlogModal);
