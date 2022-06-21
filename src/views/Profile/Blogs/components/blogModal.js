@@ -121,8 +121,8 @@ const BlogModal = ({
               </div>
             ) : (
             <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
-                {(categoryList.categories?.map(e => (
-                  <div className={`${blogModalWrapper}__modal-content__blog-category`}>{e}</div>
+                {(categoryList.categories?.map(category => (
+                  <div className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
                 )))}
               <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
             </div>
@@ -165,10 +165,6 @@ const BlogModal = ({
                     editorClassName="editorClassName"
                   />
                   <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
-
-                  <textarea disabled
-                            value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
-                  />
                 </div>
 
               ) : (
