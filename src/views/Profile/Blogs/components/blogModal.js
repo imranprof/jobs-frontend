@@ -34,14 +34,13 @@ const BlogModal = ({
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
   const [categoryList,setCategoryList]  = useState({categories: category});
   const [descriptionMode, setDescriptionMode] = useState(false);
+  const [currentDescription, setCurrentDescription] = useState(description);
 
-  const blocksFromHtml = htmlToDraft('<div>this is header</div>');
+  const blocksFromHtml = htmlToDraft(currentDescription);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
-  const curState = EditorState.createWithContent(contentState);
-  const [editorState, setEditorState] = useState(
-    curState
-  );
+  const currentState = EditorState.createWithContent(contentState);
+  const [editorState, setEditorState] = useState(currentState)
 
   setTimeout(() => {
     setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
@@ -92,9 +91,12 @@ const BlogModal = ({
 
   const changeEditorState = (state) => {
     setEditorState(state);
-    console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   }
-  console.log(description);
+  const descriptionHandler = () => {
+    setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    setDescriptionMode(!descriptionMode);
+  }
 
   return (
     <div className={`${blogModalWrapper}__body`}>
@@ -163,6 +165,8 @@ const BlogModal = ({
                     wrapperClassName="wrapperClassName"
                     editorClassName="editorClassName"
                   />
+                  <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
+
                   <textarea disabled
                             value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
                   />
@@ -171,7 +175,7 @@ const BlogModal = ({
               ) : (
                   <div>
                     <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
-                    {description}
+                      <div dangerouslySetInnerHTML={{__html: currentDescription}} />
                   </div>
 
                 )}
