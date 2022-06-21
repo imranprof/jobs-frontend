@@ -6,6 +6,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {FeaturesEditStyle} from "../style";
 import CustomButtons from "../../../../../lib/customButtons";
 import {featuresUpdate} from "../../../../../store/actions/editProfileActions";
+import ErrorMessages from "../../../../../lib/errorMessages";
 
 const FeaturesEdit = (props) => {
   const theme = useTheme();
@@ -30,7 +31,17 @@ const FeaturesEdit = (props) => {
 
   const formik = useFormik({
     initialValues: initialFeatureValue,
-    onSubmit: featureUpdate
+    onSubmit: featureUpdate,
+    validate: values => {
+      let errors = {}
+      if(!values.title) {
+        errors.title = "Title can't be empty"
+      }
+      if(!values.description) {
+        errors.description = "Description can't be empty"
+      }
+      return errors;
+    }
   })
 
   return (
@@ -39,16 +50,18 @@ const FeaturesEdit = (props) => {
 
       <div className={`${classes.featuresEditWrapper}__content-wrapper`}>
         <div>
-          <h5 className={`${classes.featuresEditWrapper}__content-label`}>Title</h5>
+          <h4 className={`${classes.featuresEditWrapper}__content-label`}>Title</h4>
           <input type="text" name="title" value={formik.values.title} onChange={formik.handleChange} className={`${classes.featuresEditWrapper}__title`} />
+          {formik.errors.title ? <ErrorMessages error={formik.errors.title} /> : null}
         </div>
         <div>
-          <h5 className={`${classes.featuresEditWrapper}__content-label`}>Description</h5>
+          <h4 className={`${classes.featuresEditWrapper}__content-label`}>Description</h4>
           <textarea name="description" value={formik.values.description} onChange={formik.handleChange} className={`${classes.featuresEditWrapper}__description`} />
+          {formik.errors.description ? <ErrorMessages error={formik.errors.description} /> : null}
         </div>
-      </div>
 
-      <CustomButtons handler={formik.handleSubmit} mode={handleClose} />
+        <CustomButtons handler={formik.handleSubmit} mode={handleClose} />
+      </div>
     </div>
   );
 };

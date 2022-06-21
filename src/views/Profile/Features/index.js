@@ -12,8 +12,12 @@ const Features = (props) => {
   const classes = FeatureStyle(theme);
 
   const featureRemoveHandler = (item) => {
-    const filteredItems = props.features.filter(feature => feature.id !== item.id)
-    props.featuresRemove(filteredItems)
+    if (props.features.length > 1) {
+      const filteredItems = props.features.filter(feature => feature.id !== item.id)
+      props.featuresRemove(filteredItems)
+    } else {
+      alert("You must have at least one feature!")
+    }
   }
 
   return (

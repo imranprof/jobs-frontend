@@ -49,7 +49,7 @@ const useStyles = makeStyles({
         opacity: 1,
         background: theme.palette.customBackground.gradiant.dark,
       },
-      '&:hover &__content__title, &:hover &__content__description': {
+      '&:hover &__content__title, &:hover &__content__description, &:hover &__icon': {
         color: theme.palette.customColor.featuresHover
       },
       '&__icon': {
@@ -57,6 +57,7 @@ const useStyles = makeStyles({
         fontSize: 40,
         color: theme.palette.customColor.highContrast,
         marginBottom: 20,
+        transition: "color 0.4s ease",
       },
       '&__content': {
         '&__title': {

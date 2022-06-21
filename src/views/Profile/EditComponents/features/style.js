@@ -27,7 +27,7 @@ const useStyles = makeStyles({
       fontSize: 16,
     },
     '&__content-label': {
-      marginBottom: 5
+      margin: "15px 0 10px 0"
     }
   }),
 })
