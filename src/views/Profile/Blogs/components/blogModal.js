@@ -121,8 +121,8 @@ const BlogModal = ({
               </div>
             ) : (
             <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
-                {(categoryList.categories?.map(category => (
-                  <div className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
+                {(categoryList.categories?.map((category,index) => (
+                  <div key = {index} className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
                 )))}
               <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
             </div>
