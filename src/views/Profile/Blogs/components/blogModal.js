@@ -47,6 +47,7 @@ const BlogModal = ({
 
   const titleHandler = useFormik({
     initialValues: {title: blogTitle},
+    validateOnChange: false,
     onSubmit: values => {
       setTitle(values.title);
       setBlogEditMode(false);
