@@ -13,7 +13,7 @@ const htmlToDraft = typeof window === 'object' && require('html-to-draftjs').def
 
 
 
-import {Grid, IconButton} from "@material-ui/core";
+import {Grid, IconButton, Input} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import {BlogModalStyle} from "./blogModalStyle";
@@ -130,13 +130,13 @@ const BlogModal = ({
 
             {blogEditMode ? (
               <div className={`${blogModalWrapper}__modal-content__blog-title__edit`}>
-                <textarea
-                  rows = {2}
-                  value={titleHandler.values.title}
+                <Input
                   name = "title"
+                  value={titleHandler.values.title}
                   onChange={titleHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__blog-title__input`}
                 />
+
                 <CustomButton handler={titleHandler.handleSubmit}  mode={setBlogEditMode}/>
               </div>
             ) : (
