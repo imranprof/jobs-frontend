@@ -7,7 +7,12 @@ const Editor = dynamic(
   () => import('react-draft-wysiwyg').then(mod => mod.Editor),
   { ssr: false })
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState } from 'draft-js';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import draftToHtml from "draftjs-to-html";
+
+const htmlToDraft = typeof window === 'object' && require('html-to-draftjs').default;
+
+
 
 import {Grid, IconButton} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -30,8 +35,12 @@ const BlogModal = ({
   const [categoryList,setCategoryList]  = useState({categories: category});
   const [descriptionMode, setDescriptionMode] = useState(false);
 
+  const blocksFromHtml = htmlToDraft('<div>this is header</div>');
+  const { contentBlocks, entityMap } = blocksFromHtml;
+  const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+  const curState = EditorState.createWithContent(contentState);
   const [editorState, setEditorState] = useState(
-    () => EditorState.createEmpty(),
+    curState
   );
 
   setTimeout(() => {
@@ -80,6 +89,12 @@ const BlogModal = ({
     setCategoryList(categoriesEditValue);
     setCategoriesEditMode(!categoriesEditMode);
   }
+
+  const changeEditorState = (state) => {
+    setEditorState(state);
+    console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+  }
+  console.log(description);
 
   return (
     <div className={`${blogModalWrapper}__body`}>
@@ -140,9 +155,16 @@ const BlogModal = ({
             <Grid item className={`${blogModalWrapper}__modal-content__text-content`}>
               {descriptionMode? (
                 <div>
+
                   <Editor
-                    // editorState = {editorState}
-                    oonEditorStateChange={setEditorState}
+                    editorState = {editorState}
+                    onEditorStateChange={changeEditorState}
+                    toolbarClassName="toolbarClassName"
+                    wrapperClassName="wrapperClassName"
+                    editorClassName="editorClassName"
+                  />
+                  <textarea disabled
+                            value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
                   />
                 </div>
 
