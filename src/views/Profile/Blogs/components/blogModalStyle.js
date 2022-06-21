@@ -108,7 +108,8 @@ const useStyles = makeStyles({
             },
             '&__blog-categories': {
                 width: "100%",
-                display: "flex"
+                display: "flex",
+                marginBottom: 20
             },
             '&__blog-category': {
                 marginRight: 10,
