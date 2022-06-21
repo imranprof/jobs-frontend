@@ -90,7 +90,6 @@ const BlogModal = ({
 
   const changeEditorState = (state) => {
     setEditorState(state);
-    // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   }
   const descriptionHandler = () => {
     setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
