@@ -142,7 +142,6 @@ const BlogModal = ({
                   onChange={titleHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__blog-title__input`}
                 />
-                {console.log(blogTitle)}
                 <CustomButton handler={titleHandler.handleSubmit}  mode={()=>titleCancelHandler(blogTitle)}/>
               </div>
             ) : (
