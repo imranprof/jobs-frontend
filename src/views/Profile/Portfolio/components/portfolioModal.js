@@ -12,6 +12,11 @@ import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
 import {useFormik} from "formik";
 
+let changedSelectedCategories = false;
+let tempSelectedCategories = [];
+let tempEditTitle;
+let tempEditDescription;
+
 const PortfolioModal = ({
                           setTogglePortfolioModal,
                           portfolio: {image, categories, title, description}
@@ -38,44 +43,40 @@ const PortfolioModal = ({
   }));
 
   const [editCategoryMode, toggleEditCategoryMode] = useState(false)
-  const [selectedCategories, setSelectCategories] = useState(mapCategoriesForMultiSelect(categories));
+  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(categories));
 
-  const filterCategories = (selectedCategories) => {
-    if (selectedCategories !== undefined || selectedCategories === []) {
-      let tempCategories = mapCategoriesForMultiSelect(categoriesData)
-      return tempCategories.filter((ex1) => {
-        return !selectedCategories.find((ex2) => {
-          return ex1.label === ex2.label
-        })
-      })
-    }
+  const filterCategories = (categories) => {
+    return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
+      let flag = true;
+      for (let i = 0; i < categories.length; i++) {
+        if (categories[i].value === category.value) {
+          flag = false;
+        }
+      }
+      if (flag) return category;
+    });
   };
 
-  const [filteredCategories, setFilteredCategories] = useState(filterCategories(selectedCategories));
-  let categoriesEditValues = [];
+  const [filteredCategories, setFilteredCategories] = useState(filterCategories(categories));
 
-  const setCategoriesEditValues = (elements) => {
-    console.log("/***/\nSetCategoriesEditValues:")
-    categoriesEditValues = elements
-    setFilteredCategories(filterCategories(categoriesEditValues))
-  };
+  const setEditCategories = (categories) => {
+    tempSelectedCategories = categories
+    changedSelectedCategories = true
+    setFilteredCategories(filterCategories(categories))
+  }
 
   const categoryHandler = () => {
-    console.log("/***/\nCategoryHandler:")
-    setFilteredCategories(filterCategories(categoriesEditValues))
-    setSelectCategories(filterCategories(filteredCategories))
+    if (changedSelectedCategories) setSelectedCategories(tempSelectedCategories)
+    setFilteredCategories(filterCategories(tempSelectedCategories))
     toggleEditCategoryMode(false)
   };
 
   const [editTitleMode, toggleEditTitleMode] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
-  const titleHandler = useFormik({
-    initialValues: {title: title},
-    onSubmit: values => {
-      setEditTitle(values.title);
-      toggleEditTitleMode(false);
-    }
-  });
+  const titleHandler = () => {
+    setEditTitle(tempEditTitle);
+    toggleEditTitleMode(false);
+  };
 
   const [editDescMode, toggleEditDescMode] = useState(false);
   const [editDesc, setEditDesc] = useState(description);
@@ -86,14 +87,10 @@ const PortfolioModal = ({
     );
   }
 
-  const descriptionHandler = useFormik({
-    initialValues: {description: description},
-    validateOnChange: false,
-    onSubmit: values => {
-      setEditDesc(values.description);
-      toggleEditDescMode(false);
-    }
-  });
+  const descriptionHandler = () => {
+    setEditDesc(tempEditDescription);
+    toggleEditDescMode(false);
+  };
 
   return (
     <div className={`${modalWrapper}__body`}>
@@ -122,11 +119,11 @@ const PortfolioModal = ({
                       isMulti
                       options={filteredCategories}
                       defaultValue={selectedCategories}
-                      onChange={setCategoriesEditValues}
+                      onChange={setEditCategories}
                       className={`${modalWrapper}__modal-content__text-content__category__selectDropdown`}
                     />
                   </div>
-                  <CustomButton handler={() => categoryHandler(selectedCategories)} mode={toggleEditCategoryMode}/>
+                  <CustomButton handler={categoryHandler} mode={toggleEditCategoryMode}/>
                 </div>
               </> : <>
                 {selectedCategories?.map((category, index) => <span key={index}
@@ -136,25 +133,32 @@ const PortfolioModal = ({
 
                 <span onClick={() => {
                   toggleEditCategoryMode(!editCategoryMode)
+                  changedSelectedCategories = false
+                  tempSelectedCategories = selectedCategories
+                  setFilteredCategories(filterCategories(selectedCategories))
                 }}>
                   <EditButton/>
                 </span> </>}
               </div>
               {editTitleMode ? <div>
-                  <textarea
-                    value={titleHandler.values.title}
+                  <TextareaAutosize
+                    defaultValue={editTitle}
                     name="title"
-                    onChange={titleHandler.handleChange}
+                    onChange={(e) => {
+                      tempEditTitle = e.target.value;
+                    }
+                    }
                     className={`${modalWrapper}__modal-content__text-content__title__input`}
                   />
-                  <CustomButton handler={titleHandler.handleSubmit} mode={toggleEditTitleMode}/>
+                  <CustomButton handler={titleHandler} mode={toggleEditTitleMode}/>
                 </div>
                 : <div className={`${modalWrapper}__modal-content__text-content__wrapper`}>
                   <span className={`${modalWrapper}__modal-content__text-content__title`}>
                     {editTitle}
                   </span>
                   <span onClick={() => {
-                    toggleEditTitleMode(!editTitleMode)
+                    toggleEditTitleMode(!editTitleMode);
+                    tempEditTitle = editTitle;
                   }}>
                     <EditButton/>
                   </span>
@@ -162,19 +166,23 @@ const PortfolioModal = ({
               }
               {editDescMode ? <div>
                   <TextareaAutosize
-                    defaultValue={descriptionHandler.values.description}
+                    defaultValue={tempEditDescription}
                     name="description"
-                    onChange={descriptionHandler.handleChange}
+                    onChange={(e) => {
+                      tempEditDescription = e.target.value;
+                    }
+                    }
                     className={`${modalWrapper}__modal-content__text-content__description__input`}
                   />
-                  <CustomButton handler={descriptionHandler.handleSubmit} mode={toggleEditDescMode}/>
+                  <CustomButton handler={descriptionHandler} mode={toggleEditDescMode}/>
                 </div> :
                 <div className={`${modalWrapper}__modal-content__text-content__wrapper`}>
                   <div className={`${modalWrapper}__modal-content__text-content__description`}>
                     {descriptionSegments(editDesc)}
                   </div>
                   <span onClick={() => {
-                    toggleEditDescMode(!editDescMode)
+                    toggleEditDescMode(!editDescMode);
+                    tempEditDescription = editDesc;
                   }}>
                     <EditButton/>
                   </span>
