@@ -13,8 +13,8 @@ const Blogs = (props) => {
 
     return (
         <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
-            {blogs.map(blog => (
-                <CustomCard key={blog.id} element={blog} elementType="blog"/>
+            {blogs.map((blog,index) => (
+                <CustomCard key={index} element={blog} elementType="blog"/>
             ))}
         </Grid>
     );
