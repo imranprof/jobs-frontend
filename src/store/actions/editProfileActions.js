@@ -1,4 +1,15 @@
-import {HEADLINE_TEXT, HEADLINE_EDIT_MODE, INTRO_TEXT, EXPERTISE_VALUES, BIO_TEXT, BIO_EDIT_MODE, SOCIAL_LINKS_UPDATE, SKILLS_VALUES} from "../actionTypes/editProfileTypes";
+import {
+  HEADLINE_TEXT,
+  HEADLINE_EDIT_MODE,
+  INTRO_TEXT,
+  EXPERTISE_VALUES,
+  BIO_TEXT,
+  BIO_EDIT_MODE,
+  SOCIAL_LINKS_UPDATE,
+  SKILLS_VALUES,
+  FEATURES_UPDATE,
+  FEATURES_REMOVE,
+} from "../actionTypes/editProfileTypes";
 
 // ***TopSection***
 // Headline
@@ -60,5 +71,20 @@ export const skillsUpdate = (skills) => {
   return {
     type: SKILLS_VALUES,
     payload: skills
+  }
+}
+
+// ***TopSection***
+export const featuresUpdate = (features) => {
+  return {
+    type: FEATURES_UPDATE,
+    payload: features
+  }
+}
+
+export const featuresRemove = (features) => {
+  return {
+    type: FEATURES_REMOVE,
+    payload: features
   }
 }
