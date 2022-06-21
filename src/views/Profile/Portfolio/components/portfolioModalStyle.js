@@ -105,9 +105,12 @@ const useStyles = makeStyles({
       '&__text-content': {
         display: "flex",
         flexDirection: "column",
-        '&__wrapper': {
+        '&__categoryWrapper': {
           display: "flex",
           alignItems: "center",
+        },
+        '&__wrapper': {
+          display: "flex",
         },
         '&__category': {
           color: theme.palette.customColor.dark,

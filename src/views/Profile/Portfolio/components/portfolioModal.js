@@ -60,15 +60,15 @@ const PortfolioModal = ({
   const [filteredCategories, setFilteredCategories] = useState(filterCategories(categories));
 
   const setEditCategories = (categories) => {
-    tempSelectedCategories = categories
-    changedSelectedCategories = true
-    setFilteredCategories(filterCategories(categories))
-  }
+    tempSelectedCategories = categories;
+    changedSelectedCategories = true;
+    setFilteredCategories(filterCategories(categories));
+  };
 
   const categoryHandler = () => {
-    if (changedSelectedCategories) setSelectedCategories(tempSelectedCategories)
-    setFilteredCategories(filterCategories(tempSelectedCategories))
-    toggleEditCategoryMode(false)
+    if (changedSelectedCategories) setSelectedCategories(tempSelectedCategories);
+    setFilteredCategories(filterCategories(tempSelectedCategories));
+    toggleEditCategoryMode(false);
   };
 
   const [editTitleMode, toggleEditTitleMode] = useState(false);
@@ -85,7 +85,7 @@ const PortfolioModal = ({
     return description.split("\n\n").map((segment, index) =>
       <p key={index}>{segment}</p>
     );
-  }
+  };
 
   const descriptionHandler = () => {
     setEditDesc(tempEditDescription);
@@ -111,7 +111,7 @@ const PortfolioModal = ({
               />
             </Grid>
             <Grid item md={6} className={`${modalWrapper}__modal-content__text-content`}>
-              <div className={`${modalWrapper}__modal-content__text-content__wrapper`}> {editCategoryMode ? <>
+              <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper`}> {editCategoryMode ? <>
                 <div className={`${modalWrapper}__modal-content__text-content__category`}>
                   <div>
                     <h4>Select categories</h4>
