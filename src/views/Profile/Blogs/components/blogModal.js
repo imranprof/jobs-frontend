@@ -53,8 +53,8 @@ const BlogModal = ({
       setBlogEditMode(false);
     }
     })
-  const titleCancelHandler = (e) =>{
-    titleHandler.handleReset(e);
+  const titleCancelHandler = () =>{
+    titleHandler.setFieldValue("title", blogTitle);
     setBlogEditMode(!blogEditMode);
 
   }
@@ -142,7 +142,7 @@ const BlogModal = ({
                   onChange={titleHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__blog-title__input`}
                 />
-                <CustomButton handler={titleHandler.handleSubmit}  mode={()=>titleCancelHandler(blogTitle)}/>
+                <CustomButton handler={titleHandler.handleSubmit}  mode={titleCancelHandler}/>
               </div>
             ) : (
               <div className={`${blogModalWrapper}__modal-content__blog-title__editButton`}>
