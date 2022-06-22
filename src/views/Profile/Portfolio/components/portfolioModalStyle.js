@@ -108,9 +108,15 @@ const useStyles = makeStyles({
         '&__categoryWrapper': {
           display: "flex",
           alignItems: "center",
+          marginBottom: 10,
+          '&__categories': {
+            display: "flex",
+            flexWrap: "wrap",
+          }
         },
         '&__wrapper': {
           display: "flex",
+          justifyContent: "space-between"
         },
         '&__category': {
           color: theme.palette.customColor.dark,
@@ -146,9 +152,13 @@ const useStyles = makeStyles({
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
             borderRadius: 3,
             fontSize: 34,
+            '& input': {
+              padding: "8px"
+            }
           }
         },
         '&__description': {
+          marginRight: 10,
           '& p': {
             color: theme.palette.customColor.dark,
             fontFamily: FONTS.secondaryFont,
@@ -163,11 +173,15 @@ const useStyles = makeStyles({
           },
           '&__input': {
             width: "100%",
-            fontSize: 18,
-            fontWeight: 400,
-            color: theme.palette.customColor.main,
             background: "transparent",
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
+            overflowY: "auto",
+            '& div': {
+              fontSize: 18,
+              fontWeight: 400,
+              color: theme.palette.customColor.main,
+              padding: "8px"
+            }
           }
         },
         '&__link-button-wrapper': {
