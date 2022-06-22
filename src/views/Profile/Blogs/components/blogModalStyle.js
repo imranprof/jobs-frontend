@@ -109,10 +109,11 @@ const useStyles = makeStyles({
             '&__blog-categories': {
                 width: "100%",
                 display: "flex",
-                marginBottom: 20
+                marginBottom: 20,
+                alignItems: "center"
             },
             '&__blog-category': {
-                marginRight: 10,
+                marginRight: 15,
                 fontFamily: FONTS.primaryFont,
                 fontSize: 12,
                 fontWeight: 500,
@@ -126,6 +127,23 @@ const useStyles = makeStyles({
                 justifyContent: "space-between",
                 '&__selectDropdown': {
                     color: COLORS.black,
+                }
+            },
+            '&__description': {
+                width: "100%",
+                '&__edit-button': {
+                    display: "flex",
+                    justifyContent: "flex-end"
+                },
+               '&__editor': {
+                   borderStyle: "solid",
+                   borderWidth: ".5px",
+                   maxHeight: 500,
+                   padding: 10,
+                   borderColor: theme.palette.customColor.inputBorder
+               },
+                '&__editor_wrapper': {
+
                 }
             },
             '&__text-content': {

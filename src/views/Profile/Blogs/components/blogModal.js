@@ -164,17 +164,18 @@ const BlogModal = ({
                   <Editor
                     editorState = {editorState}
                     onEditorStateChange={changeEditorState}
-                    toolbarClassName="toolbarClassName"
-                    wrapperClassName="wrapperClassName"
-                    editorClassName="editorClassName"
+                    toolbarClassName="class"
+                    wrapperClassName={`${blogModalWrapper}__modal-content__description__editor-wrapper`}
+                    editorClassName={`${blogModalWrapper}__modal-content__description__editor`}
                   />
-                  <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
+                    <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
+
                 </div>
 
               ) : (
-                  <div>
-                    <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
-                      <div dangerouslySetInnerHTML={{__html: currentDescription}} />
+                  <div className={`${blogModalWrapper}__modal-content__description`}>
+                    <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__description__edit-button`}><EditButton/></div>
+                    <div  dangerouslySetInnerHTML={{__html: currentDescription}} />
                   </div>
 
                 )}
