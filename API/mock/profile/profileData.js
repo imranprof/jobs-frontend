@@ -189,7 +189,8 @@ export const ProfileData = {
       category: ["development", "mobile", "apps"],
       title: "Mobile app landing design & app maintain",
       readTime: "2 hour",
-      description:`<span>2 May, 2021</span>
+      description: <div>
+        <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
           facer
@@ -243,7 +244,8 @@ export const ProfileData = {
           sollicitudin
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
-          et.</p>`
+          et.</p>
+      </div>
     },
     {
       id: 3,

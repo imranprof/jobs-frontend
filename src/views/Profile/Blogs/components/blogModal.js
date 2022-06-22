@@ -6,12 +6,8 @@ const Editor = dynamic(
   () => import('react-draft-wysiwyg').then(mod => mod.Editor),
   { ssr: false })
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import { EditorState, convertToRaw, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from "draftjs-to-html";
-
-const htmlToDraft = typeof window === 'object' && require('html-to-draftjs').default;
-
-
 
 import {Grid, IconButton, Input} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -35,11 +31,12 @@ const BlogModal = ({
   const [descriptionMode, setDescriptionMode] = useState(false);
   const [currentDescription, setCurrentDescription] = useState(description);
 
-  const blocksFromHtml = htmlToDraft(currentDescription);
+  const blocksFromHtml = convertFromHTML(currentDescription);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
   const currentState = EditorState.createWithContent(contentState);
   const [editorState, setEditorState] = useState(currentState)
+
 
   setTimeout(() => {
     setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
@@ -99,6 +96,7 @@ const BlogModal = ({
   const descriptionHandler = () => {
     setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
     setDescriptionMode(!descriptionMode);
+    console.log(editorState);
   }
 
   return (
@@ -124,14 +122,16 @@ const BlogModal = ({
               <CustomButton handler={categoryHandler} mode={setCategoriesEditMode}/>
               </div>
             ) : (
-            <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
-                {(categoryList.categories?.map((category,index) => (
-                  <div key = {index} className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
-                )))}
-              <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
-            </div>
+                <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
+                  {(categoryList.categories?.map((category,index) => (
+                    <div key = {index} className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
+                  )))}
+                  <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
 
-            )}
+                </div>
+
+
+              )}
 
             {blogEditMode ? (
               <div className={`${blogModalWrapper}__modal-content__blog-title__edit`}>
