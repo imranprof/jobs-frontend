@@ -72,8 +72,7 @@ const BlogModal = ({
 
   const filteredCategories = (selectedCategories) => {
     if (selectedCategories !== undefined) {
-      let tempExpertises = categoriesData
-      return tempExpertises.filter((ex1) => {
+      return categoriesData.filter((ex1) => {
         return !selectedCategories.find((ex2) => {
           return ex1.label === ex2.label
         })
