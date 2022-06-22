@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Select from "react-select";
+import {useFormik} from "formik";
 
 import {Grid, IconButton, Input, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -10,7 +11,6 @@ import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
-import {useFormik} from "formik";
 
 const PortfolioModal = ({
                           setTogglePortfolioModal,
