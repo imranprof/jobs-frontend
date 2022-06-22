@@ -127,8 +127,7 @@ export const ProfileData = {
       category: ["canada","singapore"],
       title: "The services provide for design",
       readTime: "2 min",
-      description: `<div>
-        <span>2 May, 2021</span>
+      description: `<span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
           facer
@@ -182,8 +181,7 @@ export const ProfileData = {
           sollicitudin
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
-          et.</p>
-      </div>`
+          et.</p>`
     },
     {
       id: 2,
@@ -191,8 +189,7 @@ export const ProfileData = {
       category: ["development", "mobile", "apps"],
       title: "Mobile app landing design & app maintain",
       readTime: "2 hour",
-      description:`<div>
-        <span>2 May, 2021</span>
+      description:`<span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
           facer
@@ -246,8 +243,7 @@ export const ProfileData = {
           sollicitudin
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
-          et.</p>
-      </div>`
+          et.</p>`
     },
     {
       id: 3,
@@ -255,8 +251,7 @@ export const ProfileData = {
       category: ["application"],
       title: "T-shirt design is the part of design",
       readTime: "5 min",
-      description: `<div>
-        <span>2 May, 2021</span>
+      description: `<span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
           facer
@@ -310,8 +305,7 @@ export const ProfileData = {
           sollicitudin
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
-          et.</p>
-      </div>`
+          et.</p>`
     },
   ],
   resume: {
