@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import {useFormik} from "formik";
 
+import {TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import {FeaturesEditStyle} from "../style";
@@ -50,18 +51,36 @@ const FeaturesEdit = (props) => {
 
       <div className={`${classes.featuresEditWrapper}__content-wrapper`}>
         <div>
-          <h4 className={`${classes.featuresEditWrapper}__content-label`}>Title</h4>
-          <input type="text" name="title" value={formik.values.title} onChange={formik.handleChange} className={`${classes.featuresEditWrapper}__title`} />
+          <TextField
+            fullWidth
+            variant="outlined"
+            required
+            size="small"
+            id="title"
+            name="title"
+            label="Title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+            error={formik.touched.title && Boolean(formik.errors.title)}
+            helperText={formik.touched.title && formik.errors.title}
+          />
           {formik.errors.title ? <ErrorMessages error={formik.errors.title} /> : null}
         </div>
         <div>
           <h4 className={`${classes.featuresEditWrapper}__content-label`}>Description</h4>
-          <textarea name="description" value={formik.values.description} onChange={formik.handleChange} className={`${classes.featuresEditWrapper}__description`} />
+          <TextField
+            multiline={true}
+            fullWidth
+            rows={5}
+            variant="outlined"
+            name="description"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+          />
           {formik.errors.description ? <ErrorMessages error={formik.errors.description} /> : null}
         </div>
-
-        <CustomButtons handler={formik.handleSubmit} mode={handleClose} />
       </div>
+      <CustomButtons handler={formik.handleSubmit} mode={handleClose} />
     </div>
   );
 };
