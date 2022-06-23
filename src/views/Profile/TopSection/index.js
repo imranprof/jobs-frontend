@@ -25,7 +25,6 @@ import {
   bioEditMode,
   expertisesText
 } from "../../../store/actions/editProfileActions";
-import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 const TopSection = (props) => {
   const theme = useTheme();
