@@ -152,7 +152,7 @@ const useStyles = makeStyles({
           fontWeight: 700,
           [theme.breakpoints.down('xs')]: {
             fontSize: 24,
-            fontWeight: 'xs',
+            fontWeight: 600,
           },
           '&__input': {
             width: "100%",
