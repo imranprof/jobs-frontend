@@ -15,6 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
+import {renderToString} from "react-dom/server";
 
 const BlogModal = ({
                      setToggleBlogModal,
@@ -31,12 +32,12 @@ const BlogModal = ({
   const [descriptionMode, setDescriptionMode] = useState(false);
   const [currentDescription, setCurrentDescription] = useState(description);
 
-  const blocksFromHtml = convertFromHTML(currentDescription);
+  const html = renderToString(currentDescription);
+  const blocksFromHtml = convertFromHTML(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
   const currentState = EditorState.createWithContent(contentState);
-  const [editorState, setEditorState] = useState(currentState)
-
+  const [editorState, setEditorState] = useState(currentState);
 
   setTimeout(() => {
     setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
@@ -55,6 +56,7 @@ const BlogModal = ({
     setBlogEditMode(!blogEditMode);
 
   }
+  console.log(typeof currentDescription);
 
   const categoriesData = [
     {value: 1, label: "development"},
@@ -96,7 +98,9 @@ const BlogModal = ({
   const descriptionHandler = () => {
     setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
     setDescriptionMode(!descriptionMode);
-    console.log(editorState);
+    console.log(currentDescription);
+    console.log(typeof currentDescription);
+
   }
 
   return (
@@ -174,7 +178,19 @@ const BlogModal = ({
               ) : (
                   <div className={`${blogModalWrapper}__modal-content__description`}>
                     <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__description__edit-button`}><EditButton/></div>
-                    <div  dangerouslySetInnerHTML={{__html: currentDescription}} />
+                    <div>
+                      {typeof currentDescription === 'string' ? (
+                          <div  dangerouslySetInnerHTML={{__html: currentDescription}} />
+
+                      ) :
+                        (
+                          <div>
+                            {currentDescription}
+                          </div>
+
+                        ) }
+                    </div>
+
                   </div>
 
                 )}
