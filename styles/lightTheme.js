@@ -100,6 +100,10 @@ const lightTheme = createTheme({
             percentText: COLORS.gray,
             boxShadow: "none",
         },
+        scrollBar: {
+            track: COLORS.gray_4,
+            thumb: COLORS.white_6
+        },
     },
 });
 

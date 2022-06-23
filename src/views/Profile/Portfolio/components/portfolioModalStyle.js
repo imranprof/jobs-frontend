@@ -137,7 +137,7 @@ const useStyles = makeStyles({
             fontFamily: FONTS.primaryFont,
             fontSize: 16,
             fontWeight: 500,
-            [theme.breakpoints.down(600)]: {
+            [theme.breakpoints.down('xs')]: {
               fontSize: 15
             }
           }
@@ -150,9 +150,9 @@ const useStyles = makeStyles({
           fontFamily: FONTS.primaryFont,
           fontSize: 34,
           fontWeight: 700,
-          [theme.breakpoints.down(600)]: {
+          [theme.breakpoints.down('xs')]: {
             fontSize: 24,
-            fontWeight: 600,
+            fontWeight: 'xs',
           },
           '&__input': {
             width: "100%",
@@ -161,7 +161,7 @@ const useStyles = makeStyles({
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
             borderRadius: 3,
             fontSize: 34,
-            [theme.breakpoints.down(600)]: {
+            [theme.breakpoints.down('xs')]: {
               fontSize: 24,
             },
             '& input': {
@@ -178,7 +178,7 @@ const useStyles = makeStyles({
             fontWeight: 400,
             marginRight: 30,
             marginBottom: 30,
-            [theme.breakpoints.down(600)]: {
+            [theme.breakpoints.down('xs')]: {
               fontSize: 14,
               marginRight: 8,
               marginBottom: 8,
@@ -194,11 +194,23 @@ const useStyles = makeStyles({
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
             overflowY: "auto",
             '& div': {
+              '& textarea': {
+                '&::-webkit-scrollbar-track': {
+                  background: theme.palette.scrollBar.track,
+                },
+                '&::-webkit-scrollbar': {
+                  width: 3,
+                  background: theme.palette.scrollBar.track,
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: theme.palette.scrollBar.thumb,
+                },
+              },
               fontSize: 18,
               fontWeight: 400,
               color: theme.palette.customColor.main,
               padding: "8px",
-              [theme.breakpoints.down(600)]: {
+              [theme.breakpoints.down('xs')]: {
                 fontSize: 14,
                 marginRight: 8,
                 marginBottom: 8,
@@ -213,7 +225,7 @@ const useStyles = makeStyles({
           height: "100%",
           marginTop: 20,
           // ========= Breakpoints =========
-          [theme.breakpoints.down(600)]: {
+          [theme.breakpoints.down('xs')]: {
             flexDirection: "column",
             alignItems: "flex-start",
             '&__link-button': {
@@ -236,7 +248,7 @@ const useStyles = makeStyles({
             [theme.breakpoints.between(960, 967)]: {
               fontSize: 13,
             },
-            [theme.breakpoints.down(600)]: {
+            [theme.breakpoints.down('xs')]: {
               padding: "10px 15px",
               margin: "10px 10px 10px 0px",
               fontSize: 12
