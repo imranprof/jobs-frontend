@@ -105,6 +105,7 @@ const useStyles = makeStyles({
       '&__text-content': {
         display: "flex",
         flexDirection: "column",
+        flexGrow: 1,
         '&__categoryWrapper': {
           display: "flex",
           alignItems: "center",
@@ -136,15 +137,23 @@ const useStyles = makeStyles({
             fontFamily: FONTS.primaryFont,
             fontSize: 16,
             fontWeight: 500,
+            [theme.breakpoints.down(600)]: {
+              fontSize: 15
+            }
           }
         },
         '&__title': {
           marginTop: 0,
           marginBottom: 21,
+          marginRight: 8,
           color: theme.palette.customColor.main,
           fontFamily: FONTS.primaryFont,
           fontSize: 34,
           fontWeight: 700,
+          [theme.breakpoints.down(600)]: {
+            fontSize: 24,
+            fontWeight: 600,
+          },
           '&__input': {
             width: "100%",
             color: theme.palette.customColor.main,
@@ -152,6 +161,9 @@ const useStyles = makeStyles({
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
             borderRadius: 3,
             fontSize: 34,
+            [theme.breakpoints.down(600)]: {
+              fontSize: 24,
+            },
             '& input': {
               padding: "8px"
             }
@@ -164,9 +176,14 @@ const useStyles = makeStyles({
             fontFamily: FONTS.secondaryFont,
             fontSize: 18,
             fontWeight: 400,
-            marginTop: 0,
             marginRight: 30,
             marginBottom: 30,
+            [theme.breakpoints.down(600)]: {
+              fontSize: 14,
+              marginRight: 8,
+              marginBottom: 8,
+            },
+            marginTop: 0,
             '&:last-child': {
               marginBottom: 0,
             },
@@ -180,7 +197,12 @@ const useStyles = makeStyles({
               fontSize: 18,
               fontWeight: 400,
               color: theme.palette.customColor.main,
-              padding: "8px"
+              padding: "8px",
+              [theme.breakpoints.down(600)]: {
+                fontSize: 14,
+                marginRight: 8,
+                marginBottom: 8,
+              },
             }
           }
         },
@@ -213,6 +235,11 @@ const useStyles = makeStyles({
             // ========= Breakpoints =========
             [theme.breakpoints.between(960, 967)]: {
               fontSize: 13,
+            },
+            [theme.breakpoints.down(600)]: {
+              padding: "10px 15px",
+              margin: "10px 10px 10px 0px",
+              fontSize: 12
             },
             '&:nth-child(1)': {
               marginRight: 15,
