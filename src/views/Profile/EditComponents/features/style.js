@@ -6,7 +6,7 @@ const useStyles = makeStyles({
       margin: "0 0 30px 0"
     },
     '&__content-wrapper': {
-      height: 300,
+      height: 290,
       '& label.Mui-focused': {
         color: theme.palette.customBorder.customInputBorder
       },
@@ -26,11 +26,10 @@ const useStyles = makeStyles({
         '&.Mui-focused fieldset': {
           borderColor: theme.palette.customBorder.customInputBorder,
         }
+      },
+      '&__gap': {
+        margin: "30px 0"
       }
-    },
-    '&__content-label': {
-      fontSize: 13,
-      margin: "15px 0 10px 0"
     },
   }),
 })

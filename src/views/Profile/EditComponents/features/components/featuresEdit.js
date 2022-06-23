@@ -30,19 +30,27 @@ const FeaturesEdit = (props) => {
     handleClose()
   }
 
+  const featureValidation = (values) => {
+    let errors = {}
+    if(!values.title) {
+      errors.title = "Title can't be empty"
+    } else if(values.title.length > 30) {
+      errors.title = "Title must be within 30 characters"
+    }
+
+    if(!values.description) {
+      errors.description = "Description can't be empty"
+    } else if(values.description.length > 150) {
+      errors.description = "Description must be within 150 characters"
+    }
+
+    return errors;
+  }
+
   const formik = useFormik({
     initialValues: initialFeatureValue,
     onSubmit: featureUpdate,
-    validate: values => {
-      let errors = {}
-      if(!values.title) {
-        errors.title = "Title can't be empty"
-      }
-      if(!values.description) {
-        errors.description = "Description can't be empty"
-      }
-      return errors;
-    }
+    validate: featureValidation
   })
 
   return (
@@ -50,28 +58,26 @@ const FeaturesEdit = (props) => {
       <h3 className={`${classes.featuresEditWrapper}__top-label`}>Edit feature</h3>
 
       <div className={`${classes.featuresEditWrapper}__content-wrapper`}>
-        <div>
+        <div className={`${classes.featuresEditWrapper}__content-wrapper__gap`}>
           <TextField
             fullWidth
             variant="outlined"
             required
             size="small"
-            id="title"
             name="title"
             label="Title"
             value={formik.values.title}
             onChange={formik.handleChange}
-            error={formik.touched.title && Boolean(formik.errors.title)}
-            helperText={formik.touched.title && formik.errors.title}
           />
           {formik.errors.title ? <ErrorMessages error={formik.errors.title} /> : null}
         </div>
-        <div>
-          <h4 className={`${classes.featuresEditWrapper}__content-label`}>Description</h4>
+        <div className={`${classes.featuresEditWrapper}__content-wrapper__gap`}>
           <TextField
+            required
             multiline={true}
             fullWidth
             rows={5}
+            label="Description"
             variant="outlined"
             name="description"
             value={formik.values.description}
