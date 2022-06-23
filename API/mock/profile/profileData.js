@@ -127,7 +127,8 @@ export const ProfileData = {
       category: ["canada","singapore"],
       title: "The services provide for design",
       readTime: "2 min",
-      description: `<span>2 May, 2021</span>
+      description: <div>
+        <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
           facer
@@ -181,7 +182,8 @@ export const ProfileData = {
           sollicitudin
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
-          et.</p>`
+          et.</p>
+      </div>
     },
     {
       id: 2,
@@ -253,7 +255,8 @@ export const ProfileData = {
       category: ["application"],
       title: "T-shirt design is the part of design",
       readTime: "5 min",
-      description: `<span>2 May, 2021</span>
+      description: <div>
+        <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
           facer
@@ -307,7 +310,8 @@ export const ProfileData = {
           sollicitudin
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
-          et.</p>`
+          et.</p>
+      </div>
     },
   ],
   resume: {
