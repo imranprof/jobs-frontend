@@ -24,7 +24,7 @@ const BlogModal = ({
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
-  const [blogEditMode, setBlogEditMode] = useState(false);
+  const [titleEditMode, setTitleEditMode] = useState(false);
   const [blogTitle, setTitle] = useState(title)
   const [categoriesEditValue, setCategoriesEditValue] = useState({categories: category})
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
@@ -48,12 +48,12 @@ const BlogModal = ({
     validateOnChange: false,
     onSubmit: values => {
       setTitle(values.title);
-      setBlogEditMode(false);
+      setTitleEditMode(false);
     }
     })
   const titleCancelHandler = () =>{
     titleHandler.setFieldValue("title", blogTitle);
-    setBlogEditMode(!blogEditMode);
+    setTitleEditMode(!titleEditMode);
 
   }
 
@@ -133,7 +133,7 @@ const BlogModal = ({
 
               )}
 
-            {blogEditMode ? (
+            {titleEditMode ? (
               <div className={`${blogModalWrapper}__modal-content__blog-title__edit`}>
                 <Input
                   name = "title"
@@ -146,7 +146,7 @@ const BlogModal = ({
             ) : (
               <div className={`${blogModalWrapper}__modal-content__blog-title__editButton`}>
               <Grid item className={`${blogModalWrapper}__modal-content__blog-title`}>{blogTitle}</Grid>
-              <div onClick={ ()=>setBlogEditMode(!blogEditMode)}> <EditButton/> </div>
+              <div onClick={ ()=>setTitleEditMode(!titleEditMode)}> <EditButton/> </div>
               </div>
             )}
 
