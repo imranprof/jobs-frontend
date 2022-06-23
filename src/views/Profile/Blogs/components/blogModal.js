@@ -97,9 +97,6 @@ const BlogModal = ({
   const descriptionHandler = () => {
     setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
     setDescriptionMode(!descriptionMode);
-    // console.log(currentDescription);
-    // console.log(typeof currentDescription);
-
   }
 
   return (
