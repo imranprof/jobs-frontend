@@ -56,7 +56,6 @@ const BlogModal = ({
     setBlogEditMode(!blogEditMode);
 
   }
-  console.log(typeof currentDescription);
 
   const categoriesData = [
     {value: 1, label: "development"},
@@ -98,8 +97,8 @@ const BlogModal = ({
   const descriptionHandler = () => {
     setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
     setDescriptionMode(!descriptionMode);
-    console.log(currentDescription);
-    console.log(typeof currentDescription);
+    // console.log(currentDescription);
+    // console.log(typeof currentDescription);
 
   }
 
