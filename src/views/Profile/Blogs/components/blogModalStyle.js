@@ -87,7 +87,6 @@ const useStyles = makeStyles({
                 color: theme.palette.customColor.main,
                 '&__input': {
                     display: "block",
-                    height: 100,
                     color: theme.palette.customColor.main,
                     background: "transparent",
                     border: `1px solid ${theme.palette.customBorder.editInputElement}`,
