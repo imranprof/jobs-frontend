@@ -9,6 +9,7 @@ import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import PortfolioModal from "../../../views/Profile/Portfolio/components/portfolioModal";
 import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
 import {CardStyle} from "./style";
+import RemoveButton from "../../removeButton";
 
 const CustomCard = ({element, elementType}) => {
     const theme = useTheme();
@@ -33,8 +34,14 @@ const CustomCard = ({element, elementType}) => {
     }
 
     return (
-        <>
-            <Card xs={12} sm={6} md={4}
+        <div  xs={12} sm={6} md={4} className={classes.container}>
+            <div>
+                <div className={classes.removeButtonWrapper}>
+                    <span onClick={() => console.log(`${element.id} remove button`)}>
+                        <RemoveButton/>
+                    </span>
+                </div>
+            <Card
                   className={classes.cardWrapper}
                   onClick={() => {
                       if (isPortfolio) setTogglePortfolioModal(true)
@@ -71,6 +78,7 @@ const CustomCard = ({element, elementType}) => {
                     </h1>
                 </CardContent>
             </Card>
+            </div>
             {togglePortfolioModal && <PortfolioModal
                 setTogglePortfolioModal={setTogglePortfolioModal}
                 portfolio={element}/>
@@ -80,7 +88,7 @@ const CustomCard = ({element, elementType}) => {
                 setToggleBlogModal={setToggleBlogModal}
                 blog={element}/>
             }
-        </>
+        </div>
     );
 }
 

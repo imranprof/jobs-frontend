@@ -3,6 +3,14 @@ import {makeStyles} from "@material-ui/core/styles";
 import FONTS from "../../../../styles/fonts";
 
 const useStyles = makeStyles({
+    container: theme => ({
+       marginTop: 30
+    }),
+    removeButtonWrapper: theme => ({
+       display: "flex",
+       flexDirection: "row-reverse",
+        marginBottom: 8,
+    }),
     cardWrapper: theme => ({
         position: "relative",
         background: theme.palette.customBackground.gradiant.light,
@@ -11,7 +19,6 @@ const useStyles = makeStyles({
         borderRadius: 20,
         boxShadow: theme.palette.customShadow.paperCardShadow,
         padding: 30,
-        marginTop: 30,
         zIndex: 1,
         '&::before': {
             position: "absolute",
