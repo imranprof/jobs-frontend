@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+
 import COLORS from "../../../../../styles/colors";
 
 const useStyles = makeStyles({
@@ -70,7 +71,7 @@ const useStyles = makeStyles({
         color: COLORS.black,
       }
     },
-  })
+  }),
 })
 
 export function TopSectionEditStyle(theme) {

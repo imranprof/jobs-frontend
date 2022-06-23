@@ -31,7 +31,7 @@ export const ProfileData = {
       id: 2,
       iconName: "bookOpen",
       title: "app development",
-      description: " It uses a dictionary of over 200 Latin words, combined with a handful of model sentence."
+      description: "It uses a dictionary of over 200 Latin words, combined with a handful of model sentence."
     },
     {
       id: 3,

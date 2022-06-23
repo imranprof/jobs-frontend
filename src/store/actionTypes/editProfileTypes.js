@@ -13,3 +13,7 @@ export const BIO_EDIT_MODE = 'BIO_EDIT_MODE'
 export const SOCIAL_LINKS_UPDATE = 'SOCIAL_LINKS_UPDATE'
 // Skills
 export const SKILLS_VALUES = 'SKILLS_VALUES'
+
+// ***Features***
+export const FEATURES_UPDATE = 'FEATURES_UPDATE'
+export const FEATURES_REMOVE = 'FEATURES_REMOVE'

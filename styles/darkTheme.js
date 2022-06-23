@@ -74,7 +74,8 @@ const darkTheme = createTheme({
         },
         customBorder: {
             beforeElement: COLORS.black_6,
-            editInputElement: COLORS.gray_4
+            editInputElement: COLORS.gray_4,
+            customInputBorder: COLORS.white_6
         },
         resume: {
             navListColor: COLORS.white_4,
