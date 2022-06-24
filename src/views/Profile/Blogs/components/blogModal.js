@@ -116,7 +116,6 @@ const BlogModal = ({
               <Select
                 isMulti
                 options = {filterCategories(categoryHandler.values.categories)}
-                // defaultValue={selectedCategories}
                 value = {categoryHandler.values.categories}
                 onChange ={categories => {
                   categoryHandler.setValues({categories: categories})
