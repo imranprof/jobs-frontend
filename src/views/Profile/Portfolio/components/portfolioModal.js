@@ -149,7 +149,8 @@ const PortfolioModal = ({
                 </span> </>}
               </div>
               {editTitleMode ? <div>
-                  <Input
+                  <TextField
+                    variant="outlined"
                     value={titleHandler.values.title}
                     name="title"
                     onChange={titleHandler.handleChange}

@@ -156,16 +156,33 @@ const useStyles = makeStyles({
           },
           '&__input': {
             width: "100%",
-            color: theme.palette.customColor.main,
-            background: "transparent",
-            border: `1px solid ${theme.palette.customBorder.editInputElement}`,
-            borderRadius: 3,
-            fontSize: 34,
-            [theme.breakpoints.down('xs')]: {
-              fontSize: 24,
+            '& label.Mui-focused': {
+              color: theme.palette.customBorder.customInputBorder
+            },
+            '& .MuiInput-underline:after': {
+              borderBottomColor: theme.palette.customBorder.customInputBorder
+            },
+            '& .MuiFilledInput-underline:after': {
+              borderBottomColor: theme.palette.customBorder.customInputBorder
+            },
+            '& .MuiOutlinedInput-input': {
+              padding: 12
+            },
+            '& .MuiOutlinedInput-inputMultiline': {
+              padding: 0
+            },
+            '& .MuiOutlinedInput-root': {
+              '&.Mui-focused fieldset': {
+                borderColor: theme.palette.customBorder.customInputBorder,
+              }
             },
             '& input': {
-              padding: "8px"
+              color: theme.palette.customColor.main,
+              background: "transparent",
+              fontSize: 34,
+              [theme.breakpoints.down('xs')]: {
+                fontSize: 24,
+              },
             }
           }
         },
