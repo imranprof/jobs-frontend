@@ -141,7 +141,7 @@ const useStyles = makeStyles({
                    borderColor: theme.palette.customColor.inputBorder
                },
                 '&__toolbar-editor-wrapper': {
-                    height: "100%",
+                    maxHeight: 800,
                     width: "100%"
                 }
             },
