@@ -92,35 +92,6 @@ const BlogModal = ({
     }
   })
 
-
-  // const selectedCategories = []
-  // categoryList.categories?.map((element) => {
-  //   selectedCategories.push({label: element, value: element})
-  // });
-  //
-  // const filteredCategories = (selectedCategories) => {
-  //   if (selectedCategories !== undefined) {
-  //     return categoriesData.filter((ex1) => {
-  //       return !selectedCategories.find((ex2) => {
-  //         return ex1.label === ex2.label
-  //       })
-  //     })
-  //   }
-  // }
-  //
-  // const [filteredCategoriesList, setFilteredCategoriesList] = useState(filteredCategories(selectedCategories))
-  // const selectChangeHandler = (elements) => {
-  //   setCategoriesEditValue({
-  //     categories: Array.isArray(elements) ? elements.map(obj => obj.label) : []
-  //   })
-  //   setFilteredCategoriesList(filteredCategories(elements))
-  // }
-  //
-  // const categoryHandler = (e) => {
-  //   setCategoryList(categoriesEditValue);
-  //   setCategoriesEditMode(!categoriesEditMode);
-  // }
-
   const changeEditorState = (state) => {
     setEditorState(state);
   }
