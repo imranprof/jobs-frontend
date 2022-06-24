@@ -91,6 +91,12 @@ const useStyles = makeStyles({
                 '&__editButton': {
                     display: "flex",
                     width: "100%"
+                },
+                '&__input': {
+                    width: "100%"
+                },
+                [theme.breakpoints.down('xs')]: {
+                    fontSize: 20
                 }
 
             },
@@ -149,14 +155,20 @@ const useStyles = makeStyles({
                     fontFamily: FONTS.primaryFont,
                     fontSize: 32,
                     fontWeight: 700,
-                    color: theme.palette.customColor.main
+                    color: theme.palette.customColor.main,
+                    [theme.breakpoints.down('xs')]: {
+                        fontSize: 20
+                    }
                 },
                 '& h4': {
                     marginBottom: 20,
                     fontFamily: FONTS.primaryFont,
                     fontSize: 30,
                     fontWeight: 700,
-                    color: theme.palette.customColor.main
+                    color: theme.palette.customColor.main,
+                    [theme.breakpoints.down('xs')]: {
+                        fontSize: 18
+                    }
                 },
                 '& p': {
                     marginBottom: 40,
