@@ -49,18 +49,21 @@ const IntroExpertises = (props) => {
   return (
     <>
       <div className={`${classes.topSectionEditWrapper}__introWrapper`}>
-        <input
-          value={inputValue}
-          onChange={inputIntroChangeHandler}
-          className={`${classes.topSectionEditWrapper}__introWrapper__input`}
-        />
-        <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
+        <div className={`${classes.topSectionEditWrapper}__introWrapper-child`}>
+          <input
+            value={inputValue}
+            onChange={inputIntroChangeHandler}
+            className={`${classes.topSectionEditWrapper}__introWrapper__input`}
+          />
+          <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
+        </div>
+        {inputValue === "" && <ErrorMessages error="Intro can't be blank" />}
+        {inputValue.length > 15 && <ErrorMessages error="Intro must have within 15 characters" />}
       </div>
-      {inputValue === "" && <ErrorMessages error="Intro can't be blank" />}
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
         <div>
-          <h4>Select your expertises</h4>
+          <h4 className={`${classes.topSectionEditWrapper}__expertisesWrapper__label`}>Select your expertises</h4>
           <Select
             isMulti
             options={filteredExpertiseList}

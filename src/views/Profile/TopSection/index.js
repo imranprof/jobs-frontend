@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {useFormik} from "formik";
 import {animateScroll as scroll} from 'react-scroll';
 
-import {Grid} from "@material-ui/core";
+import {Grid, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import TypeWriter from "./typeWriter";
@@ -36,6 +36,8 @@ const TopSection = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [expertisesEditValue, setExpertisesEditValue] = useState({expertises: props.expertises})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
+  const {intro} = introEditValue;
+  const {expertises} = expertisesEditValue;
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -55,6 +57,8 @@ const TopSection = (props) => {
       let errors = {}
       if (!values.headline) {
         errors.headline = "Headline can't be empty"
+      } else if(values.headline.length > 50) {
+        errors.headline = "Headline must have within 50 characters"
       }
       return errors;
     }
@@ -70,6 +74,8 @@ const TopSection = (props) => {
       let errors = {}
       if (!values.bio) {
         errors.bio = "Bio can't be empty"
+      } else if(values.bio.length > 500) {
+        errors.bio = "Bio must have within 500 characters"
       }
       return errors;
     }
@@ -82,7 +88,7 @@ const TopSection = (props) => {
   }
 
   const introEditHandler = () => {
-    if (introEditValue.intro !== "" && expertisesEditValue.expertises.length !== 0) {
+    if ((intro && intro.length <= 15) && expertises.length > 0) {
       props.setIntro(introEditValue.intro);
       props.setExpertises(expertisesEditValue.expertises);
       setOpenModal(false);
@@ -100,13 +106,13 @@ const TopSection = (props) => {
       <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
         <div className={`${classes.topSectionWrapper}__left-top`}>
           {props.headlineEditMode ? (
-            <div>
-              <input
-                type="text"
-                value={headlineHandler.values.headline}
+            <div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
+              <TextField
+                fullWidth
+                variant="outlined"
                 name='headline'
+                value={headlineHandler.values.headline}
                 onChange={headlineHandler.handleChange}
-                className={`${classes.topSectionWrapper}__left-top__headline-input`}
               />
               {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline}/> : null}
               <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
@@ -140,12 +146,16 @@ const TopSection = (props) => {
           </div>
 
           {props.bioEditMode ? (
-            <div>
-              <textarea
-                value={bioHandler.values.bio}
+            <div className={`${classes.topSectionWrapper}__left-top__bio-inputWrapper`}>
+              <TextField
+                fullWidth
+                multiline
+                rows={5}
+                variant="outlined"
                 name="bio"
+                value={bioHandler.values.bio}
                 onChange={bioHandler.handleChange}
-                className={`${classes.topSectionWrapper}__left-top__bio-input`}
+                // className={`${classes.topSectionWrapper}__left-top__bio-input`}
               />
               {bioHandler.errors.bio ? <ErrorMessages error={bioHandler.errors.bio}/> : null}
               <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
