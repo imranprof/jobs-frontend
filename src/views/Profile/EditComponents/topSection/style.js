@@ -5,8 +5,11 @@ import COLORS from "../../../../../styles/colors";
 const useStyles = makeStyles({
   topSectionEditWrapper: theme => ({
     '&__introWrapper': {
-      display: "flex",
-      alignItems: "center",
+      height: 70,
+      '&-child': {
+        display: "flex",
+        alignItems: "center",
+      },
       '&__input': {
         display: "block",
         width: "50%",
@@ -21,14 +24,18 @@ const useStyles = makeStyles({
       '&__fullName': {
         color: theme.palette.customColor.highContrast,
         fontSize: 16,
-        marginLeft: 15
+        marginLeft: 15,
+        fontWeight: 700
       }
     },
     '&__expertisesWrapper': {
-      height: "75%",
+      height: "83%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
+      '&__label': {
+        marginBottom: 10
+      },
       '&__selectDropdown': {
         color: COLORS.black,
       }
