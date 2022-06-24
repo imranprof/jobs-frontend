@@ -139,7 +139,11 @@ const useStyles = makeStyles({
                    maxHeight: 500,
                    padding: 10,
                    borderColor: theme.palette.customColor.inputBorder
-               }
+               },
+                '&__toolbar-editor-wrapper': {
+                    height: "100%",
+                    width: "100%"
+                }
             },
             '&__text-content': {
                 '& span': {

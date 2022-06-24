@@ -164,18 +164,14 @@ const BlogModal = ({
             </Grid>
             <Grid item className={`${blogModalWrapper}__modal-content__text-content`}>
               {descriptionMode? (
-                <div>
-
+                <div >
                   <Editor
                     editorState = {editorState}
                     onEditorStateChange={changeEditorState}
-                    toolbarClassName="class"
+                    wrapperClassName = {`${blogModalWrapper}__modal-content__description__toolbar-editor-wrapper`}
                     editorClassName={`${blogModalWrapper}__modal-content__description__editor`}
                   />
-                    <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
-
                 </div>
-
               ) : (
                   <div className={`${blogModalWrapper}__modal-content__description`}>
                     <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__description__edit-button`}><EditButton/></div>
@@ -188,15 +184,20 @@ const BlogModal = ({
                           <div>
                             {currentDescription}
                           </div>
-
                         ) }
                     </div>
-
                   </div>
-
                 )}
-
             </Grid>
+            {
+              descriptionMode? (
+                  <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
+                ) :
+                (
+                  <div></div>
+                )
+            }
+
           </Grid>
         </div>
       </div>
