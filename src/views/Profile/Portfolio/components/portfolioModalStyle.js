@@ -194,18 +194,6 @@ const useStyles = makeStyles({
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
             overflowY: "auto",
             '& div': {
-              '& textarea': {
-                '&::-webkit-scrollbar-track': {
-                  background: theme.palette.scrollBar.track,
-                },
-                '&::-webkit-scrollbar': {
-                  width: 3,
-                  background: theme.palette.scrollBar.track,
-                },
-                '&::-webkit-scrollbar-thumb': {
-                  background: theme.palette.scrollBar.thumb,
-                },
-              },
               fontSize: 18,
               fontWeight: 400,
               color: theme.palette.customColor.main,
