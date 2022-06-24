@@ -136,7 +136,7 @@ const useStyles = makeStyles({
                '&__editor': {
                    borderStyle: "solid",
                    borderWidth: ".5px",
-                   maxHeight: 500,
+                   maxHeight: 400,
                    padding: 10,
                    borderColor: theme.palette.customColor.inputBorder
                },
