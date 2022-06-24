@@ -189,15 +189,9 @@ const BlogModal = ({
                   </div>
                 )}
             </Grid>
-            {
-              descriptionMode? (
-                  <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
-                ) :
-                (
-                  <div></div>
-                )
+            { descriptionMode &&
+            <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>
             }
-
           </Grid>
         </div>
       </div>
