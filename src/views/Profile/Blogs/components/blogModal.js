@@ -9,7 +9,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from "draftjs-to-html";
 
-import {Grid, IconButton, Input} from "@material-ui/core";
+import {Grid, IconButton, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import {BlogModalStyle} from "./blogModalStyle";
@@ -135,7 +135,9 @@ const BlogModal = ({
 
             {titleEditMode ? (
               <div className={`${blogModalWrapper}__modal-content__blog-title__edit`}>
-                <Input
+                <TextField
+                  multiline
+                  variant = "outlined"
                   name = "title"
                   value={titleHandler.values.title}
                   onChange={titleHandler.handleChange}

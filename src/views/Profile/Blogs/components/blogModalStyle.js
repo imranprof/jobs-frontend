@@ -85,17 +85,6 @@ const useStyles = makeStyles({
                 fontWeight: 700,
                 marginRight: 20,
                 color: theme.palette.customColor.main,
-                '&__input': {
-                    display: "block",
-                    color: theme.palette.customColor.main,
-                    background: "transparent",
-                    border: `1px solid ${theme.palette.customBorder.editInputElement}`,
-                    boxShadow: theme.palette.customShadow.editInputShadow,
-                    borderRadius: 3,
-                    fontSize: 20,
-                    marginBottom: 15,
-                    padding: 10
-                },
                 '&__edit': {
                     width: "100%"
                 },
