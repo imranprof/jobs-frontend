@@ -59,7 +59,8 @@ const BlogModal = ({
     {id: 1, title: "development"},
     {id: 2, title: "mobile"},
     {id: 3, title: "apps"},
-    {id: 4, title: "security"}
+    {id: 4, title: "security"},
+    {id: 5, title: "ios"}
   ];
 
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
@@ -125,11 +126,11 @@ const BlogModal = ({
               <CustomButton handler={categoryHandler.handleSubmit} mode={categoryHandler.handleReset}/>
               </div>
             ) : (
-                <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
+                <div className={`${blogModalWrapper}__modal-content__categories-wrapper`}>
                   {(selectedCategories?.map((category,index) => (
-                    <span key = {index} className={`${blogModalWrapper}__modal-content__blog-category`}>{category.label}</span>
+                    <div key = {index} className={`${blogModalWrapper}__modal-content__category`}>{category.label}</div>
                   )))}
-                  <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
+                  <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)}><EditButton/></div>
 
                 </div>
 
@@ -137,20 +138,20 @@ const BlogModal = ({
               )}
 
             {titleEditMode ? (
-              <div className={`${blogModalWrapper}__modal-content__blog-title__edit`}>
+              <div className={`${blogModalWrapper}__modal-content__title__edit`}>
                 <TextField
                   multiline
                   variant = "outlined"
                   name = "title"
                   value={titleHandler.values.title}
                   onChange={titleHandler.handleChange}
-                  className={`${blogModalWrapper}__modal-content__blog-title__input`}
+                  className={`${blogModalWrapper}__modal-content__title__input`}
                 />
                 <CustomButton handler={titleHandler.handleSubmit}  mode={titleCancelHandler}/>
               </div>
             ) : (
-              <div className={`${blogModalWrapper}__modal-content__blog-title__editButton`}>
-              <Grid item className={`${blogModalWrapper}__modal-content__blog-title`}>{blogTitle}</Grid>
+              <div className={`${blogModalWrapper}__modal-content__title__editButton`}>
+              <Grid item className={`${blogModalWrapper}__modal-content__title`}>{blogTitle}</Grid>
               <div onClick={ ()=>setTitleEditMode(!titleEditMode)}> <EditButton/> </div>
               </div>
             )}
@@ -169,7 +170,6 @@ const BlogModal = ({
                     editorState = {editorState}
                     onEditorStateChange={changeEditorState}
                     toolbarClassName="class"
-                    wrapperClassName={`${blogModalWrapper}__modal-content__description__editor-wrapper`}
                     editorClassName={`${blogModalWrapper}__modal-content__description__editor`}
                   />
                     <CustomButton handler={descriptionHandler} mode={setDescriptionMode}/>

@@ -78,7 +78,7 @@ const useStyles = makeStyles({
                     marginBottom: 30
                 },
             },
-            '&__blog-title': {
+            '&__title': {
                 marginBottom: "40px",
                 fontFamily: FONTS.primaryFont,
                 fontSize: 32,
@@ -96,17 +96,21 @@ const useStyles = makeStyles({
                     width: "100%"
                 },
                 [theme.breakpoints.down('xs')]: {
-                    fontSize: 20
+                    fontSize: 20,
+                    marginRight: 10
                 }
 
             },
-            '&__blog-categories': {
+            '&__categories-wrapper': {
                 width: "100%",
                 display: "flex",
                 marginBottom: 20,
-                alignItems: "center"
+                alignItems: "center",
+                marginTop: 10,
+                flexWrap: "wrap"
+
             },
-            '&__blog-category': {
+            '&__category': {
                 marginRight: 15,
                 fontFamily: FONTS.primaryFont,
                 fontSize: 12,
@@ -135,10 +139,7 @@ const useStyles = makeStyles({
                    maxHeight: 500,
                    padding: 10,
                    borderColor: theme.palette.customColor.inputBorder
-               },
-                '&__editor_wrapper': {
-
-                }
+               }
             },
             '&__text-content': {
                 '& span': {
