@@ -13,7 +13,7 @@ import {CardStyle} from "./style";
 const CustomCard = ({element, elementType}) => {
     const theme = useTheme();
     const classes = CardStyle(theme);
-    const { title, image, category, reactCount, readTime } = element;
+    const { title, image, categories, reactCount, readTime } = element;
 
     const isPortfolio = elementType === "portfolio";
     const iconClass = isPortfolio ? "heart" : "clock";
@@ -21,6 +21,16 @@ const CustomCard = ({element, elementType}) => {
 
     const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
     const [toggleBlogModal, setToggleBlogModal] = useState(false);
+
+    const getCategories = () => {
+        if (categories){
+            let tempCategories = ""
+            for (let i = 0; i < categories.length - 1; i++) {
+                tempCategories += categories[i].title + " ";
+            }
+            tempCategories += categories[categories.length - 1].title;
+            return tempCategories;}
+    }
 
     return (
         <>
@@ -41,7 +51,7 @@ const CustomCard = ({element, elementType}) => {
                     <div className={`${classes.cardWrapper}__category-info`}>
                         <div className={`${classes.cardWrapper}__category-info__category`}>
                             <Link href="#">
-                                <a>{category}</a>
+                                <a>{getCategories()}</a>
                             </Link>
                         </div>
                         <div className={`${classes.cardWrapper}__category-info__icon-wrapper`}>
