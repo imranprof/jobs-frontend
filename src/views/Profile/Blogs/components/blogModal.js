@@ -19,16 +19,14 @@ import {renderToString} from "react-dom/server";
 
 const BlogModal = ({
                      setToggleBlogModal,
-                     blog: {image, description, title,category}
+                     blog: {image, description, title,categories}
                    }) => {
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [titleEditMode, setTitleEditMode] = useState(false);
   const [blogTitle, setTitle] = useState(title)
-  const [categoriesEditValue, setCategoriesEditValue] = useState({categories: category})
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
-  const [categoryList,setCategoryList]  = useState({categories: category});
   const [descriptionMode, setDescriptionMode] = useState(false);
   const [currentDescription, setCurrentDescription] = useState(description);
 
@@ -58,38 +56,70 @@ const BlogModal = ({
   }
 
   const categoriesData = [
-    {value: 1, label: "development"},
-    {value: 2, label: "mobile"},
-    {value: 3, label: "apps"},
-    {value: 4, label: "security"}
-  ]
-  const selectedCategories = []
-  categoryList.categories?.map((element) => {
-    selectedCategories.push({label: element, value: element})
-  });
+    {id: 1, title: "development"},
+    {id: 2, title: "mobile"},
+    {id: 3, title: "apps"},
+    {id: 4, title: "security"}
+  ];
 
-  const filteredCategories = (selectedCategories) => {
-    if (selectedCategories !== undefined) {
-      return categoriesData.filter((ex1) => {
-        return !selectedCategories.find((ex2) => {
-          return ex1.label === ex2.label
-        })
-      })
+  const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
+    value: category.id,
+    label: category.title
+  }));
+  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(categories));
+
+  const filterCategories = (categories) => {
+    return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
+      let flag = true;
+      for (let i = 0; i < categories?.length; i++) {
+        if (categories[i].value === category.value) {
+          flag = false;
+        }
+      }
+      if (flag) return category;
+    });
+  };
+
+  const categoryHandler = useFormik({
+    initialValues: {categories: selectedCategories},
+    enableReinitialize: true,
+    onSubmit: values => {
+      setSelectedCategories(values.categories);
+      setCategoriesEditMode(false)
+    },
+    onReset: () => {
+      setCategoriesEditMode(false);
     }
-  }
+  })
 
-  const [filteredCategoriesList, setFilteredCategoriesList] = useState(filteredCategories(selectedCategories))
-  const selectChangeHandler = (elements) => {
-    setCategoriesEditValue({
-      categories: Array.isArray(elements) ? elements.map(obj => obj.label) : []
-    })
-    setFilteredCategoriesList(filteredCategories(elements))
-  }
 
-  const categoryHandler = (e) => {
-    setCategoryList(categoriesEditValue);
-    setCategoriesEditMode(!categoriesEditMode);
-  }
+  // const selectedCategories = []
+  // categoryList.categories?.map((element) => {
+  //   selectedCategories.push({label: element, value: element})
+  // });
+  //
+  // const filteredCategories = (selectedCategories) => {
+  //   if (selectedCategories !== undefined) {
+  //     return categoriesData.filter((ex1) => {
+  //       return !selectedCategories.find((ex2) => {
+  //         return ex1.label === ex2.label
+  //       })
+  //     })
+  //   }
+  // }
+  //
+  // const [filteredCategoriesList, setFilteredCategoriesList] = useState(filteredCategories(selectedCategories))
+  // const selectChangeHandler = (elements) => {
+  //   setCategoriesEditValue({
+  //     categories: Array.isArray(elements) ? elements.map(obj => obj.label) : []
+  //   })
+  //   setFilteredCategoriesList(filteredCategories(elements))
+  // }
+  //
+  // const categoryHandler = (e) => {
+  //   setCategoryList(categoriesEditValue);
+  //   setCategoriesEditMode(!categoriesEditMode);
+  // }
 
   const changeEditorState = (state) => {
     setEditorState(state);
@@ -114,17 +144,20 @@ const BlogModal = ({
               <div className={`${blogModalWrapper}__modal-content__categories-edit`}>
               <Select
                 isMulti
-                options = {filteredCategoriesList}
-                defaultValue={selectedCategories}
-                onChange = {selectChangeHandler}
+                options = {filterCategories(categoryHandler.values.categories)}
+                // defaultValue={selectedCategories}
+                value = {categoryHandler.values.categories}
+                onChange ={categories => {
+                  categoryHandler.setValues({categories: categories})
+                }}
                 className={`${blogModalWrapper}__modal-content__categories-edit__selectDropdown`}
               />
-              <CustomButton handler={categoryHandler} mode={setCategoriesEditMode}/>
+              <CustomButton handler={categoryHandler.handleSubmit} mode={categoryHandler.handleReset}/>
               </div>
             ) : (
                 <div className={`${blogModalWrapper}__modal-content__blog-categories`}>
-                  {(categoryList.categories?.map((category,index) => (
-                    <div key = {index} className={`${blogModalWrapper}__modal-content__blog-category`}>{category}</div>
+                  {(selectedCategories?.map((category,index) => (
+                    <span key = {index} className={`${blogModalWrapper}__modal-content__blog-category`}>{category.label}</span>
                   )))}
                   <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)} className={`${blogModalWrapper}__modal-content__blog-category`}><EditButton/></div>
 
