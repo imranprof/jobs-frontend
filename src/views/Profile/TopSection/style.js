@@ -14,6 +14,9 @@ export const useStyles = makeStyles({
       justifyContent: "center",
       '&-top': {
         marginBottom: 80,
+        '&__editBtnWrapper': {
+          height: "fit-content",
+        },
         '&__headline-inputWrapper': {
           width: "85%",
           [theme.breakpoints.down('xs')]: {

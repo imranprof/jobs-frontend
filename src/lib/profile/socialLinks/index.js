@@ -33,7 +33,7 @@ const SocialLinks = (props) => {
         <SocialLinksEdit handleClose={modalClose} />
       </MuiCustomModal>
 
-      <span onClick={() => setOpenModal(true)}>
+      <span className={`${classes.socialLinksWrapper}__social-links__editBtnWrapper`} onClick={() => setOpenModal(true)}>
         <EditButton/>
       </span>
     </div>

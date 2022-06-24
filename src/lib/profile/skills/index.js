@@ -49,7 +49,7 @@ const Skills = (props) => {
         />
       </MuiCustomModal>
 
-      <span onClick={() => setOpenModal(true)}>
+      <span className={`${classes.skillsWrapper}__skills__editBtnWrapper`} onClick={() => setOpenModal(true)}>
         <EditButton/>
       </span>
     </div>
