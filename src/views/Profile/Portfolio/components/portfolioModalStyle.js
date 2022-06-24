@@ -210,6 +210,7 @@ const useStyles = makeStyles({
             background: "transparent",
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
             overflowY: "auto",
+            borderRadius: 4,
             '& div': {
               fontSize: 18,
               fontWeight: 400,
