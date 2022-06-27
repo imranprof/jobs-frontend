@@ -6,6 +6,9 @@ const useStyles = makeStyles({
         '&__remove-button': {
             display : "flex",
             justifyContent: "flex-end"
+        },
+        '&__blog-card': {
+            marginBottom: "75px"
         }
     })
 });

@@ -15,10 +15,14 @@ const Blogs = (props) => {
     return (
         <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
             {blogs.map(blog => (
-                <div key = {blog.id}>
-                    <div className={`${classes.blogsWrapper}__remove-button`}><RemoveButton key = {blog.id}/></div>
-                    <CustomCard key={blog.id} element={blog} elementType="blog"/>
-                </div>
+              <div key = {blog.id} className={`${classes.blogsWrapper}__blog-card`}>
+                  <div className={`${classes.blogsWrapper}__remove-button`}>
+                      <span>
+                         <RemoveButton key = {blog.id}/>
+                      </span>
+                  </div>
+                  <CustomCard key={blog.id} element={blog} elementType="blog"/>
+              </div>
             ))}
         </Grid>
     );
