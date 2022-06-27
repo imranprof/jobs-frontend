@@ -12,6 +12,7 @@ import draftToHtml from "draftjs-to-html";
 import {Grid, IconButton, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
+
 import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
@@ -29,7 +30,6 @@ const BlogModal = ({
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
   const [descriptionMode, setDescriptionMode] = useState(false);
   const [currentDescription, setCurrentDescription] = useState(description);
-
   const html = renderToString(currentDescription);
   const blocksFromHtml = convertFromHTML(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
@@ -49,10 +49,10 @@ const BlogModal = ({
       setTitleEditMode(false);
     }
     })
+
   const titleCancelHandler = () =>{
     titleHandler.setFieldValue("title", blogTitle);
     setTitleEditMode(!titleEditMode);
-
   }
 
   const categoriesData = [
@@ -67,8 +67,8 @@ const BlogModal = ({
     value: category.id,
     label: category.title
   }));
-  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(categories));
 
+  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(categories));
   const filterCategories = (categories) => {
     return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
       let flag = true;
@@ -96,6 +96,7 @@ const BlogModal = ({
   const changeEditorState = (state) => {
     setEditorState(state);
   }
+
   const descriptionHandler = () => {
     setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
     setDescriptionMode(!descriptionMode);
@@ -133,8 +134,6 @@ const BlogModal = ({
                   <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)}><EditButton/></div>
 
                 </div>
-
-
               )}
 
             {titleEditMode ? (
@@ -162,12 +161,14 @@ const BlogModal = ({
                 alt="modal image"
               />
             </Grid>
+
             <Grid item className={`${blogModalWrapper}__modal-content__text-content`}>
               {descriptionMode? (
                 <div >
                   <Editor
                     editorState = {editorState}
                     onEditorStateChange={changeEditorState}
+                    toolbarClassName = {`${blogModalWrapper}__modal-content__description__toolbar`}
                     wrapperClassName = {`${blogModalWrapper}__modal-content__description__toolbar-editor-wrapper`}
                     editorClassName={`${blogModalWrapper}__modal-content__description__editor`}
                   />
@@ -178,7 +179,6 @@ const BlogModal = ({
                     <div>
                       {typeof currentDescription === 'string' ? (
                           <div  dangerouslySetInnerHTML={{__html: currentDescription}} />
-
                       ) :
                         (
                           <div>
@@ -200,4 +200,3 @@ const BlogModal = ({
 }
 
 export default BlogModal;
-
