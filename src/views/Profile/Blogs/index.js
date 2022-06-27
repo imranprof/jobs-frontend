@@ -15,8 +15,8 @@ const Blogs = (props) => {
 
     const blogRemoveHandler =(blog_id)=> {
         console.log(blog_id+" selected");
-        console.log(blogs);
-
+        delete props.blogs[blog_id];
+        props.blogsRemove(props.blogs);
     }
 
     return (
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    blogs: (values) => dispatch(blogsRemove(values))
+    blogsRemove: (blogs) => dispatch(blogsRemove(blogs))
 })
 
-export default connect(mapStateToProps)(Blogs);
+export default connect(mapStateToProps, mapDispatchToProps)(Blogs);
