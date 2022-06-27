@@ -7,7 +7,7 @@ const initialState = {
   blogs: ProfileData.blogs
 }
 
-export const blogReducer = (state = initialState.blogs, action) => {
+export const blogReducer = (state = initialState, action) => {
   switch (action.type) {
     case BLOGS_REMOVE:
       return {

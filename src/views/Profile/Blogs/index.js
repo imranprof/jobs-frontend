@@ -14,9 +14,8 @@ const Blogs = (props) => {
     const { blogs} = props;
 
     const blogRemoveHandler =(blog_id)=> {
-        console.log(blog_id+" selected");
-        delete props.blogs[blog_id];
-        props.blogsRemove(props.blogs);
+        const currentBlogs = blogs.filter(blog=> blog.id !== blog_id)
+        props.blogsRemove(currentBlogs);
     }
 
     return (
@@ -37,7 +36,7 @@ const Blogs = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        blogs: state.blogs
+        blogs: state.blogs.blogs
     }
 }
 
