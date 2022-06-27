@@ -140,6 +140,11 @@ const useStyles = makeStyles({
                    padding: 10,
                    borderColor: theme.palette.customColor.inputBorder
                },
+                '&__toolbar': {
+                    '& .rdw-dropdownoption-default': {
+                        color: COLORS.gray
+                    }
+                },
                 '&__toolbar-editor-wrapper': {
                     maxHeight: 800,
                     width: "100%"
