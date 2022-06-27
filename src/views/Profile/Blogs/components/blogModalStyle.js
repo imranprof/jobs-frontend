@@ -90,7 +90,8 @@ const useStyles = makeStyles({
                 },
                 '&__editButton': {
                     display: "flex",
-                    width: "100%"
+                    width: "100%",
+                    zIndex: 0
                 },
                 '&__input': {
                     width: "100%"
