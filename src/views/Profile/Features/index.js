@@ -5,25 +5,39 @@ import {useTheme} from "@material-ui/core/styles";
 
 import Feature from "./components/feature";
 import {FeatureStyle} from "./style";
+import {featuresRemove} from "../../../store/actions/editProfileActions";
 
-const Features = ({features}) => {
-    const theme = useTheme();
-    const classes = FeatureStyle(theme);
+const Features = (props) => {
+  const theme = useTheme();
+  const classes = FeatureStyle(theme);
 
-    return (
-        <Grid container spacing={3} className={classes.featureWrapper} id="features">
-            {features.map(feature => (
-                    <Feature key={feature.id} feature={feature} classes={classes}/>
-                )
-            )}
-        </Grid>
-    );
+  const featureRemoveHandler = (item) => {
+    if (props.features.length > 1) {
+      const filteredItems = props.features.filter(feature => feature.id !== item.id)
+      props.featuresRemove(filteredItems)
+    } else {
+      alert("You must have at least one feature!")
+    }
+  }
+
+  return (
+    <Grid container spacing={3} className={classes.featureWrapper} id="features">
+      {props.features.map(feature => (
+          <Feature key={feature.id} feature={feature} featureRemove={featureRemoveHandler} classes={classes}/>
+        )
+      )}
+    </Grid>
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        features: state.profile.features
-    }
+  return {
+    features: state.editProfile.features
+  }
 }
 
-export default connect(mapStateToProps)(Features);
+const mapDispatchToProps = (dispatch) => ({
+  featuresRemove: (values) => dispatch(featuresRemove(values))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Features);

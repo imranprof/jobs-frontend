@@ -1,12 +1,15 @@
 import {makeStyles} from "@material-ui/core/styles";
+
 import COLORS from "../../../../../styles/colors";
 
 const useStyles = makeStyles({
   topSectionEditWrapper: theme => ({
     '&__introWrapper': {
-      display: "flex",
-      alignItems: "center",
-      marginBottom: 30,
+      height: 70,
+      '&-child': {
+        display: "flex",
+        alignItems: "center",
+      },
       '&__input': {
         display: "block",
         width: "50%",
@@ -21,21 +24,25 @@ const useStyles = makeStyles({
       '&__fullName': {
         color: theme.palette.customColor.highContrast,
         fontSize: 16,
-        marginLeft: 15
+        marginLeft: 15,
+        fontWeight: 700
       }
     },
     '&__expertisesWrapper': {
-      height: "75%",
+      height: "83%",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
+      '&__label': {
+        marginBottom: 10
+      },
       '&__selectDropdown': {
         color: COLORS.black,
       }
     },
     '&__socialLinks': {
       width: "100%",
-      height: 300,
+      height: 220,
       '&-wrapper': {
         display: "flex",
         alignItems: "center",
@@ -62,7 +69,16 @@ const useStyles = makeStyles({
         paddingLeft: 10
       }
     },
-  })
+    '&__skillsWrapper': {
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      '&__selectDropdown': {
+        color: COLORS.black,
+      }
+    },
+  }),
 })
 
 export function TopSectionEditStyle(theme) {

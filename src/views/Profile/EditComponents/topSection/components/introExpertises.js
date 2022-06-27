@@ -7,6 +7,7 @@ import {useTheme} from "@material-ui/core/styles";
 import CustomButton from "../../../../../lib/customButtons";
 import {expertisesText} from "../../../../../store/actions/editProfileActions";
 import {TopSectionEditStyle} from "../style";
+import ErrorMessages from "../../../../../lib/errorMessages";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -17,7 +18,7 @@ const expertisesData = [
 ]
 
 const IntroExpertises = (props) => {
-  const {fullName, inputIntroChangeHandler, inputValue, introEditHandler, setExpertisesEditValue, handleClose} = props;
+  const {fullName, inputIntroChangeHandler, inputValue, introEditHandler, expertisesEditValue, setExpertisesEditValue, handleClose} = props;
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
 
@@ -48,17 +49,21 @@ const IntroExpertises = (props) => {
   return (
     <>
       <div className={`${classes.topSectionEditWrapper}__introWrapper`}>
-        <input
-          value={inputValue}
-          onChange={inputIntroChangeHandler}
-          className={`${classes.topSectionEditWrapper}__introWrapper__input`}
-        />
-        <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
+        <div className={`${classes.topSectionEditWrapper}__introWrapper-child`}>
+          <input
+            value={inputValue}
+            onChange={inputIntroChangeHandler}
+            className={`${classes.topSectionEditWrapper}__introWrapper__input`}
+          />
+          <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
+        </div>
+        {inputValue === "" && <ErrorMessages error="Intro can't be blank" />}
+        {inputValue.length > 15 && <ErrorMessages error="Intro must have within 15 characters" />}
       </div>
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
         <div>
-          <h4>Select your expertises</h4>
+          <h4 className={`${classes.topSectionEditWrapper}__expertisesWrapper__label`}>Select your expertises</h4>
           <Select
             isMulti
             options={filteredExpertiseList}
@@ -66,12 +71,13 @@ const IntroExpertises = (props) => {
             onChange={selectChangeHandler}
             className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectDropdown`}
           />
+          {expertisesEditValue.length === 0 && <ErrorMessages error="Select at least one expertise" />}
         </div>
         <CustomButton handler={introEditHandler} mode={handleClose}/>
       </div>
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {

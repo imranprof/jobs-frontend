@@ -13,20 +13,12 @@ export const useStyles = makeStyles({
       flexDirection: "column",
       justifyContent: "center",
       '&-top': {
-        marginBottom: 142,
-        '&__headline-input': {
-          display: "block",
+        marginBottom: 80,
+        '&__headline-inputWrapper': {
           width: "85%",
-          height: 40,
-          color: theme.palette.customColor.main,
-          background: "transparent",
-          border: `1px solid ${theme.palette.customBorder.editInputElement}`,
-          boxShadow: theme.palette.customShadow.editInputShadow,
-          borderRadius: 3,
-          fontSize: 16,
-          paddingLeft: 10
         },
         '&__headline': {
+          width: "85%",
           fontSize: 14,
           fontFamily: FONTS.primaryFont,
           color: theme.palette.customColor.main,
@@ -35,6 +27,7 @@ export const useStyles = makeStyles({
           fontWeight: 500,
           display: "block",
           marginBottom: 20,
+          wordBreak: "break-word",
           '&-text': {
             marginRight: 14
           },
@@ -43,18 +36,8 @@ export const useStyles = makeStyles({
             letterSpacing: 1
           }
         },
-        '&__bio-input': {
-          display: "block",
-          width: "85%",
-          height: 100,
-          color: theme.palette.customColor.main,
-          background: "transparent",
-          border: `1px solid ${theme.palette.customBorder.editInputElement}`,
-          boxShadow: theme.palette.customShadow.editInputShadow,
-          borderRadius: 3,
-          fontSize: 16,
-          marginBottom: 15,
-          padding: 10
+        '&__bio-inputWrapper': {
+          width: "85%"
         },
         '&__title': {
           color: theme.palette.customColor.light,

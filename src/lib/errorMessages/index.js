@@ -1,4 +1,5 @@
 import {useTheme} from "@material-ui/core/styles";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
 import {ErrorMessagesStyle} from "./style";
 
@@ -8,7 +9,8 @@ const ErrorMessages = ({error}) => {
 
   return (
     <div className={classes.errorMessagesWrapper}>
-      {error}
+      <ErrorOutlineIcon/>
+      <p>{error}</p>
     </div>
   );
 };
