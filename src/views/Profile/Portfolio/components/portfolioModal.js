@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {connect} from "react-redux";
 import Select from "react-select";
 import {useFormik} from "formik";
 
@@ -11,10 +12,17 @@ import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
+import {
+  bioEditMode, bioText,
+  expertisesText,
+  headlineEditMode,
+  headlineText,
+  introText
+} from "../../../../store/actions/editProfileActions";
 
 const PortfolioModal = ({
                           setTogglePortfolioModal,
-                          portfolio: {image, categories, title, description}
+                          portfolio: {id, image, categories, title, description}
                         }) => {
   const theme = useTheme();
   const modalWrapper = PortfolioModalStyle(theme).modalWrapper;
@@ -215,4 +223,19 @@ const PortfolioModal = ({
   );
 }
 
-export default PortfolioModal;
+
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
+  setHeadline: (value) => dispatch(headlineText(value)),
+  setIntro: (editValue) => dispatch(introText(editValue)),
+  setExpertises: (expertisesValue) => dispatch(expertisesText(expertisesValue)),
+  setBioMode: (boolean) => dispatch(bioEditMode(boolean)),
+  setBio: (editValue) => dispatch(bioText(editValue))
+});
+
+export default connect(mapStateToProps)(PortfolioModal);
