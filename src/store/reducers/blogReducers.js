@@ -1,6 +1,7 @@
 import {
   BLOGS_REMOVE,
-  UPDATE_BLOG_TITLE
+  BLOG_TITLE,
+  BLOG_DESCRIPTION
 } from "../actionTypes/blogTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
@@ -11,10 +12,18 @@ export const blogReducer = (blogs = initialState, action) => {
     case BLOGS_REMOVE:
       console.log(action.payload);
       return action.payload
-    case UPDATE_BLOG_TITLE:
+    case BLOG_TITLE:
       return blogs.map(blog=> {
         if(blog.id === action.payload.blog_id){
           blog.title = action.payload.title
+        }
+        return blog;
+      })
+
+    case BLOG_DESCRIPTION:
+      return blogs.map(blog=> {
+        if(blog.id === action.payload.blog_id){
+          blog.description = action.payload.description
         }
         return blog;
       })

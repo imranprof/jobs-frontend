@@ -18,7 +18,7 @@ import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
-import {updateTitle} from "../../../../store/actions/blogActions";
+import {updateDescription, updateTitle} from "../../../../store/actions/blogActions";
 
 
 const BlogModal = (props) => {
@@ -29,8 +29,7 @@ const BlogModal = (props) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
   const [descriptionMode, setDescriptionMode] = useState(false);
-  const [currentDescription, setCurrentDescription] = useState(blog.description);
-  const html = renderToString(currentDescription);
+  const html = renderToString(blog.description);
   const blocksFromHtml = convertFromHTML(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
@@ -100,7 +99,8 @@ const BlogModal = (props) => {
   }
 
   const descriptionHandler = () => {
-    setCurrentDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    let tempDescription = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    props.updateDescription(blog.id, tempDescription);
     setDescriptionMode(!descriptionMode);
   }
 
@@ -179,12 +179,12 @@ const BlogModal = (props) => {
                   <div className={`${blogModalWrapper}__modal-content__description`}>
                     <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__description__edit-button`}><EditButton/></div>
                     <div>
-                      {typeof currentDescription === 'string' ? (
-                          <div  dangerouslySetInnerHTML={{__html: currentDescription}} />
+                      {typeof blog.description === 'string' ? (
+                          <div  dangerouslySetInnerHTML={{__html: blog.description}} />
                       ) :
                         (
                           <div>
-                            {currentDescription}
+                            {blog.description}
                           </div>
                         ) }
                     </div>
@@ -203,7 +203,8 @@ const BlogModal = (props) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id))
+  updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id)),
+  updateDescription: (blog_id, description) => dispatch(updateDescription(blog_id, description))
 })
 
 
