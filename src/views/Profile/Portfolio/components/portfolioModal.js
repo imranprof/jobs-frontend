@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Select from "react-select";
 import {useFormik} from "formik";
 
-import {Grid, IconButton, Input, TextField} from "@material-ui/core";
+import {Grid, IconButton, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 import CloseIcon from "@material-ui/icons/Close";
@@ -12,40 +12,47 @@ import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
-import {
-  bioEditMode, bioText,
-  expertisesText,
-  headlineEditMode,
-  headlineText,
-  introText
-} from "../../../../store/actions/editProfileActions";
+import {updateTitle, updateDescription, updateCategories} from "../../../../store/actions/portfolioActions";
+import {ProfileData} from "../../../../../API/mock/profile/profileData";
 
-const PortfolioModal = ({
-                          setTogglePortfolioModal,
-                          portfolio: {id, image, categories, title, description}
-                        }) => {
+const PortfolioModal = (props => {
   const theme = useTheme();
   const modalWrapper = PortfolioModalStyle(theme).modalWrapper;
   const [slidingClass, SetSlidingClass] = useState("");
+  const {title, image, categories, description} = props.portfolio;
+  const {categoriesData} = ProfileData;
+  const {setTogglePortfolioModal} = props;
+
+  const updateCategoriesHandler = (portfolio, selectedCategories) => {
+    portfolio.categories = mapCategoriesForState(selectedCategories);
+    props.updateCategories(portfolio);
+  }
+
+  const updateTitleHandler = (portfolio, title) => {
+    portfolio.title = title;
+    props.updateTitle(portfolio);
+  }
+
+  const updateDescriptionHandler = (portfolio, description) => {
+    portfolio.description = description;
+    props.updateDescription(portfolio);
+  }
 
   setTimeout(() => {
     SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
   }, 1);
-
-  const categoriesData = [
-    {id: 1, title: "Development"},
-    {id: 2, title: "Application"},
-    {id: 3, title: "Photoshop"},
-    {id: 4, title: "Figma"},
-    {id: 5, title: "Web Design"}
-  ];
 
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
     value: category.id,
     label: category.title
   }));
 
-  const [editCategoryMode, toggleEditCategoryMode] = useState(false)
+  const mapCategoriesForState = (categories) => categories?.map((category) => ({
+    id: category.value,
+    title: category.label
+  }));
+
+  const [editCategoryMode, toggleEditCategoryMode] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(categories));
 
   const filterCategories = (categories) => {
@@ -65,12 +72,20 @@ const PortfolioModal = ({
     enableReinitialize: true,
     onSubmit: values => {
       setSelectedCategories(values.categories);
+      updateCategoriesHandler(props.portfolio, values.categories);
       toggleEditCategoryMode(false);
     },
     onReset: () => {
       toggleEditCategoryMode(false);
+    },
+    validate: values => {
+      let errors = {};
+      if (!values.categories || values.categories?.length < 1) {
+        errors.categories = "Project must have at least one category";
+      }
+      return errors;
     }
-  })
+  });
 
   const [editTitleMode, toggleEditTitleMode] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
@@ -80,10 +95,16 @@ const PortfolioModal = ({
     enableReinitialize: true,
     onSubmit: values => {
       setEditTitle(values.title);
+      updateTitleHandler(props.portfolio, values.title);
       toggleEditTitleMode(false);
     },
     onReset: () => {
       toggleEditTitleMode(false);
+    },
+    validate: values => {
+      let errors = {};
+      if (!values.title) errors.title = "Required"
+      return errors;
     }
   });
 
@@ -101,6 +122,7 @@ const PortfolioModal = ({
     enableReinitialize: true,
     onSubmit: values => {
       setEditDesc(values.description);
+      updateDescriptionHandler(props.portfolio, values.description);
       toggleEditDescMode(false);
     },
     onReset: () => {
@@ -221,21 +243,12 @@ const PortfolioModal = ({
       </div>
     </div>
   );
-}
-
-
-const mapStateToProps = (state) => {
-  return {
-  }
-}
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
-  setHeadline: (value) => dispatch(headlineText(value)),
-  setIntro: (editValue) => dispatch(introText(editValue)),
-  setExpertises: (expertisesValue) => dispatch(expertisesText(expertisesValue)),
-  setBioMode: (boolean) => dispatch(bioEditMode(boolean)),
-  setBio: (editValue) => dispatch(bioText(editValue))
+  updateTitle: (portfolio) => dispatch(updateTitle(portfolio)),
+  updateDescription: (portfolio) => dispatch(updateDescription(portfolio)),
+  updateCategories: (portfolio) => dispatch(updateCategories(portfolio)),
 });
 
-export default connect(mapStateToProps)(PortfolioModal);
+export default connect(null, mapDispatchToProps)(PortfolioModal);

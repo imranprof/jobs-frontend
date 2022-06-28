@@ -402,5 +402,12 @@ export const ProfileData = {
         rating: ""
       }
     ],
-  }
+  },
+  categoriesData: [
+    {id: 1, title: "Development"},
+    {id: 2, title: "Application"},
+    {id: 3, title: "Photoshop"},
+    {id: 4, title: "Figma"},
+    {id: 5, title: "Web Design"}
+  ]
 }
