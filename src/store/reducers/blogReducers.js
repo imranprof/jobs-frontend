@@ -10,7 +10,6 @@ const initialState = ProfileData.blogs
 export const blogReducer = (blogs = initialState, action) => {
   switch (action.type) {
     case BLOGS_REMOVE:
-      console.log(action.payload);
       return action.payload
     case BLOG_TITLE:
       return blogs.map(blog=> {
