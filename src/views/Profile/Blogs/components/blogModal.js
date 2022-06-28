@@ -27,7 +27,6 @@ const BlogModal = (props) => {
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [titleEditMode, setTitleEditMode] = useState(false);
-  const [blogTitle, setTitle] = useState(blog.title)
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
   const [descriptionMode, setDescriptionMode] = useState(false);
   const [currentDescription, setCurrentDescription] = useState(blog.description);
