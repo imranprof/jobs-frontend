@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import {useFormik} from "formik";
 import Select from 'react-select';
 import dynamic from 'next/dynamic'
@@ -17,19 +18,19 @@ import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
+import {updateTitle} from "../../../../store/actions/blogActions";
 
-const BlogModal = ({
-                     setToggleBlogModal,
-                     blog: {image, description, title,categories}
-                   }) => {
+
+const BlogModal = (props) => {
+  const {blog} = props;
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [titleEditMode, setTitleEditMode] = useState(false);
-  const [blogTitle, setTitle] = useState(title)
+  const [blogTitle, setTitle] = useState(blog.title)
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
   const [descriptionMode, setDescriptionMode] = useState(false);
-  const [currentDescription, setCurrentDescription] = useState(description);
+  const [currentDescription, setCurrentDescription] = useState(blog.description);
   const html = renderToString(currentDescription);
   const blocksFromHtml = convertFromHTML(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
@@ -37,15 +38,17 @@ const BlogModal = ({
   const currentState = EditorState.createWithContent(contentState);
   const [editorState, setEditorState] = useState(currentState);
 
+
   setTimeout(() => {
-    setVisibilityClass(setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
+    setVisibilityClass(props.setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
 
+
   const titleHandler = useFormik({
-    initialValues: {title: blogTitle},
+    initialValues: {title: blog.title},
     validateOnChange: false,
     onSubmit: values => {
-      setTitle(values.title);
+      props.updateTitle(values.title, blog.id);
       setTitleEditMode(false);
     }
     })
@@ -68,7 +71,7 @@ const BlogModal = ({
     label: category.title
   }));
 
-  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(categories));
+  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(props.blog.categories));
   const filterCategories = (categories) => {
     return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
       let flag = true;
@@ -108,7 +111,7 @@ const BlogModal = ({
         <div className={`${blogModalWrapper}__modal-content ${visibilityClass}`}>
           <IconButton className={`${blogModalWrapper}__modal-content__close-icon`}
                       onClick={() => {
-                        setToggleBlogModal(false)
+                        props.setToggleBlogModal(false)
                       }}>
             <CloseIcon/>
           </IconButton>
@@ -150,14 +153,14 @@ const BlogModal = ({
               </div>
             ) : (
               <div className={`${blogModalWrapper}__modal-content__title__editButton`}>
-              <Grid item className={`${blogModalWrapper}__modal-content__title`}>{blogTitle}</Grid>
+              <Grid item className={`${blogModalWrapper}__modal-content__title`}>{blog.title}</Grid>
               <div onClick={ ()=>setTitleEditMode(!titleEditMode)}> <EditButton/> </div>
               </div>
             )}
 
             <Grid className={`${blogModalWrapper}__modal-content__image-container`}>
               <img
-                src={image}
+                src={blog.image}
                 alt="modal image"
               />
             </Grid>
@@ -199,4 +202,10 @@ const BlogModal = ({
   );
 }
 
-export default BlogModal;
+
+const mapDispatchToProps = (dispatch) => ({
+  updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id))
+})
+
+
+export default connect(null,mapDispatchToProps)(BlogModal);
