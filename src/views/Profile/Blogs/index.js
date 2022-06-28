@@ -24,7 +24,7 @@ const Blogs = (props) => {
               <div key = {blog.id} className={`${classes.blogsWrapper}__blog-card`}>
                   <div className={`${classes.blogsWrapper}__remove-button`}>
                       <span onClick ={()=>blogRemoveHandler(blog.id)}>
-                         <RemoveButton key = {blog.id} />
+                         <RemoveButton />
                       </span>
                   </div>
                   <CustomCard key={blog.id} element={blog} elementType="blog"/>
@@ -36,7 +36,7 @@ const Blogs = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        blogs: state.blogs.blogs
+        blogs: state.blogs
     }
 }
 
