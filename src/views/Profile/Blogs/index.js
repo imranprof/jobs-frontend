@@ -35,7 +35,6 @@ const Blogs = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         blogs: state.blogs
     }

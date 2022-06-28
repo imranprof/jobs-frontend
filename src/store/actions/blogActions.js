@@ -11,9 +11,12 @@ export const blogsRemove = (blogs) => {
 }
 
 export const updateTitle = (title, blog_id) => {
-  console.log(blog_id);
   return {
     type: UPDATE_BLOG_TITLE,
     payload: {blog_id: blog_id, title: title}
   }
+}
+
+export const updateCategories = () => {
+
 }
