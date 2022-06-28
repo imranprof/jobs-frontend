@@ -1,2 +1,2 @@
 export const BLOGS_REMOVE = 'BLOGS_REMOVE'
-export const UPDATE_TITLE = 'UPDATE_TITLE'
+export const UPDATE_BLOG_TITLE = 'UPDATE_BLOG_TITLE'
