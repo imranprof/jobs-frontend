@@ -53,7 +53,7 @@ const BlogModal = (props) => {
     })
 
   const titleCancelHandler = () =>{
-    titleHandler.setFieldValue("title", blogTitle);
+    titleHandler.setFieldValue("title", blog.title);
     setTitleEditMode(!titleEditMode);
   }
 
