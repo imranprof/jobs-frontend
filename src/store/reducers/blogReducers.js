@@ -42,4 +42,3 @@ export const blogReducer = (blogs = initialState, action) => {
       return blogs
   }
 }
-
