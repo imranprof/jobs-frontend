@@ -466,5 +466,12 @@ export const ProfileData = {
         rating: ""
       }
     ],
-  }
+  },
+  categoriesData : [
+    {id: 1, title: "development"},
+    {id: 2, title: "mobile"},
+    {id: 3, title: "apps"},
+    {id: 4, title: "security"},
+    {id: 5, title: "ios"}
+  ]
 }
