@@ -7,7 +7,8 @@ import {ResumeStyle} from "./style";
 import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
 
-const Resume = ({ resume }) => {
+const Resume = (props) => {
+    const { resume } = props;
     const theme = useTheme();
     const resumeWrapper = ResumeStyle(theme).resumeWrapper;
 
@@ -32,7 +33,7 @@ const Resume = ({ resume }) => {
 
 const mapStateToProps = (state) => {
     return {
-        resume: state.profile.resume
+        resume: state.editResume.resume
     }
 }
 

@@ -1,0 +1,1 @@
+export const RESUME_UPDATE = 'RESUME_UPDATE'
