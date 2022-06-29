@@ -106,6 +106,23 @@ const BlogModal = (props) => {
     setDescriptionMode(!descriptionMode);
   }
 
+  const editHandler = useFormik( {
+    initialValues: {categories: selectedCategories, title: blog.title},
+    onSubmit: values => {
+      setSelectedCategories(values.categories);
+      props.updateCategories(blog.id, mapCategoriesForSave(values.categories));
+      setCategoriesEditMode(false)
+
+      props.updateTitle(values.title, blog.id);
+      setTitleEditMode(false);
+    }
+  })
+  const editMode = () => {
+    setCategoriesEditMode(!categoriesEditMode);
+    setTitleEditMode(!titleEditMode);
+    setDescriptionMode(!descriptionMode);
+  }
+
   return (
     <div className={`${blogModalWrapper}__body`}>
       <div className={`${blogModalWrapper}__dialog`}>
@@ -135,8 +152,7 @@ const BlogModal = (props) => {
                   {(selectedCategories?.map((category,index) => (
                     <div key = {index} className={`${blogModalWrapper}__modal-content__category`}>{category.label}</div>
                   )))}
-                  <div onClick={ ()=>setCategoriesEditMode(!categoriesEditMode)}><EditButton/></div>
-
+                  <div onClick={ ()=>editMode()}><EditButton/></div>
                 </div>
               )}
 
@@ -155,7 +171,6 @@ const BlogModal = (props) => {
             ) : (
               <div className={`${blogModalWrapper}__modal-content__title__editButton`}>
               <Grid item className={`${blogModalWrapper}__modal-content__title`}>{blog.title}</Grid>
-              <div onClick={ ()=>setTitleEditMode(!titleEditMode)}> <EditButton/> </div>
               </div>
             )}
 
@@ -179,7 +194,6 @@ const BlogModal = (props) => {
                 </div>
               ) : (
                   <div className={`${blogModalWrapper}__modal-content__description`}>
-                    <div onClick={ ()=>setDescriptionMode(!descriptionMode)} className={`${blogModalWrapper}__modal-content__description__edit-button`}><EditButton/></div>
                     <div>
                       {typeof blog.description === 'string' ? (
                           <div  dangerouslySetInnerHTML={{__html: blog.description}} />
