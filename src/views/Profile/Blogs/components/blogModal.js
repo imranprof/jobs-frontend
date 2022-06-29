@@ -20,7 +20,6 @@ import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
 import {updateCategories, updateDescription, updateTitle} from "../../../../store/actions/blogActions";
 
-
 const BlogModal = (props) => {
   const {blog} = props;
   const theme = useTheme();
@@ -214,12 +213,10 @@ const BlogModal = (props) => {
   );
 }
 
-
 const mapDispatchToProps = (dispatch) => ({
   updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id)),
   updateDescription: (blog_id, description) => dispatch(updateDescription(blog_id, description)),
   updateCategories: (blog_id, categories) => dispatch(updateCategories(blog_id, categories))
 })
-
 
 export default connect(null,mapDispatchToProps)(BlogModal);

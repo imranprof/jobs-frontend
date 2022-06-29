@@ -10,8 +10,10 @@ const initialState = ProfileData.blogs
 
 export const blogReducer = (blogs = initialState, action) => {
   switch (action.type) {
+
     case BLOGS_REMOVE:
       return action.payload
+
     case BLOG_TITLE:
       return blogs.map(blog=> {
         if(blog.id === action.payload.blog_id){
@@ -27,6 +29,7 @@ export const blogReducer = (blogs = initialState, action) => {
         }
         return blog;
       })
+
     case BLOG_CATEGORIES:
       return blogs.map(blog=> {
         if(blog.id === action.payload.blog_id){
@@ -34,6 +37,7 @@ export const blogReducer = (blogs = initialState, action) => {
         }
         return blog;
       })
+
     default:
       return blogs
   }
