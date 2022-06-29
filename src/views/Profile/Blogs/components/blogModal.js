@@ -41,11 +41,9 @@ const BlogModal = (props) => {
   const currentState = EditorState.createWithContent(contentState);
   const [editorState, setEditorState] = useState(currentState);
 
-
   setTimeout(() => {
     setVisibilityClass(props.setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
-
 
   const titleHandler = useFormik({
     initialValues: {title: blog.title},
@@ -72,7 +70,7 @@ const BlogModal = (props) => {
 
   const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(blog.categories));
   const filterCategories = (categories) => {
-    return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
+    return mapCategoriesForMultiSelect(props.categoriesData).filter((category) => {
       let flag = true;
       for (let i = 0; i < categories?.length; i++) {
         if (categories[i].value === category.value) {
@@ -204,6 +202,11 @@ const BlogModal = (props) => {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return{
+    categoriesData: state.profile.categoriesData
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id)),
@@ -211,4 +214,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateCategories: (blog_id, categories) => dispatch(updateCategories(blog_id, categories))
 })
 
-export default connect(null,mapDispatchToProps)(BlogModal);
+export default connect(mapStateToProps,mapDispatchToProps)(BlogModal);
