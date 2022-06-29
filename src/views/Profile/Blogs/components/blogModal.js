@@ -61,14 +61,6 @@ const BlogModal = (props) => {
     setTitleEditMode(!titleEditMode);
   }
 
-  const categoriesData = [
-    {id: 1, title: "development"},
-    {id: 2, title: "mobile"},
-    {id: 3, title: "apps"},
-    {id: 4, title: "security"},
-    {id: 5, title: "ios"}
-  ];
-
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
     value: category.id,
     label: category.title
