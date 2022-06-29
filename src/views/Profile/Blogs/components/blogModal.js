@@ -29,7 +29,13 @@ const BlogModal = (props) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
   const [categoriesEditMode, setCategoriesEditMode] = useState(false);
   const [descriptionMode, setDescriptionMode] = useState(false);
-  const html = renderToString(blog.description);
+  let html;
+  if(typeof blog.description === 'string'){
+    html = blog.description;
+  }
+  else{
+    html = renderToString(blog.description);
+  }
   const blocksFromHtml = convertFromHTML(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
@@ -99,7 +105,9 @@ const BlogModal = (props) => {
   }
 
   const descriptionHandler = () => {
-    let tempDescription = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    const rawContent = convertToRaw(editorState.getCurrentContent());
+    const tempDescription = draftToHtml(rawContent);
+    console.log(typeof tempDescription);
     props.updateDescription(blog.id, tempDescription);
     setDescriptionMode(!descriptionMode);
   }
