@@ -19,6 +19,26 @@ export const useStyles = makeStyles({
         },
         '&__headline-inputWrapper': {
           width: "85%",
+          '& label.Mui-focused': {
+            color: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiFilledInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiOutlinedInput-input': {
+            padding: 12
+          },
+          '& .MuiOutlinedInput-inputMultiline': {
+            padding: 0
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.customBorder.customInputBorder,
+            }
+          },
           [theme.breakpoints.down('xs')]: {
             width: "100%"
           }
@@ -47,6 +67,26 @@ export const useStyles = makeStyles({
         },
         '&__bio-inputWrapper': {
           width: "85%",
+          '& label.Mui-focused': {
+            color: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiFilledInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiOutlinedInput-input': {
+            padding: 12
+          },
+          '& .MuiOutlinedInput-inputMultiline': {
+            padding: 0
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.customBorder.customInputBorder,
+            }
+          },
           [theme.breakpoints.down('xs')]: {
             width: "100%"
           }

@@ -4,9 +4,9 @@ import Select from "react-select";
 import {useTheme} from "@material-ui/core/styles";
 
 import {TopSectionEditStyle} from "../style";
-import CustomButton from "../../../../../lib/customButtons";
+import CustomButton from "../../../../../lib/profile/customButtons";
 import {skillsUpdate} from "../../../../../store/actions/editProfileActions";
-import ErrorMessages from "../../../../../lib/errorMessages";
+import ErrorMessage from "../../../../../lib/errorMessage";
 
 const skillsData = [
   {id: 1, name: "Ruby", image: "ruby.png", value: "Ruby", label: "Ruby"},
@@ -45,8 +45,8 @@ const SkillsEdit = (props) => {
           onChange={selectChangeHandler}
           className={`${classes.topSectionEditWrapper}__skillsWrapper__selectDropdown`}
         />
-        {(skillsEditValue.skills.length > 3) && <ErrorMessages error="Maximum 3 skills" />}
-        {(skillsEditValue.skills.length === 0) && <ErrorMessages error="Select at least one skill" />}
+        {(skillsEditValue.skills.length > 3) && <ErrorMessage error="Maximum 3 skills" />}
+        {(skillsEditValue.skills.length === 0) && <ErrorMessage error="Select at least one skill" />}
       </div>
 
       <CustomButton handler={skillsEditHandler} mode={handleClose}/>

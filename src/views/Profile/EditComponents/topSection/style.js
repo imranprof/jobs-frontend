@@ -5,20 +5,29 @@ const useStyles = makeStyles({
   topSectionEditWrapper: theme => ({
     '&__introWrapper': {
       height: 70,
+      '& label.Mui-focused': {
+        color: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiFilledInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiOutlinedInput-input': {
+        padding: 12
+      },
+      '& .MuiOutlinedInput-inputMultiline': {
+        padding: 0
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: theme.palette.customBorder.customInputBorder,
+        }
+      },
       '&-child': {
         display: "flex",
         alignItems: "center",
-      },
-      '&__input': {
-        display: "block",
-        width: "50%",
-        height: 40,
-        color: theme.palette.customColor.main,
-        background: "transparent",
-        border: `1px solid ${theme.palette.customBorder.editInputElement}`,
-        borderRadius: 3,
-        fontSize: 16,
-        paddingLeft: 10
       },
       '&__fullName': {
         color: theme.palette.customColor.highContrast,
@@ -45,7 +54,27 @@ const useStyles = makeStyles({
       '&-wrapper': {
         display: "flex",
         alignItems: "center",
-        marginBottom: 20
+        marginBottom: 20,
+        '& label.Mui-focused': {
+          color: theme.palette.customBorder.customInputBorder
+        },
+        '& .MuiInput-underline:after': {
+          borderBottomColor: theme.palette.customBorder.customInputBorder
+        },
+        '& .MuiFilledInput-underline:after': {
+          borderBottomColor: theme.palette.customBorder.customInputBorder
+        },
+        '& .MuiOutlinedInput-input': {
+          padding: 12
+        },
+        '& .MuiOutlinedInput-inputMultiline': {
+          padding: 0
+        },
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: theme.palette.customBorder.customInputBorder,
+          }
+        },
       },
       '&-icon': {
         width: 30,
@@ -56,17 +85,6 @@ const useStyles = makeStyles({
         fontSize: 20,
         marginRight: 10
       },
-      '&-input': {
-        display: "block",
-        width: "80%",
-        height: 40,
-        color: theme.palette.customColor.main,
-        background: "transparent",
-        border: `1px solid ${theme.palette.customBorder.editInputElement}`,
-        borderRadius: 3,
-        fontSize: 16,
-        paddingLeft: 10
-      }
     },
     '&__skillsWrapper': {
       height: "100%",

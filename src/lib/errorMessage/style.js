@@ -1,7 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
-  errorMessagesWrapper: theme => ({
+  errorMessageWrapper: theme => ({
     display: "flex",
     alignItems: "center",
     color: theme.palette.customColor.dangerColor,
@@ -11,6 +11,6 @@ export const useStyles = makeStyles({
   })
 });
 
-export function ErrorMessagesStyle(theme) {
+export function ErrorMessageStyle(theme) {
   return useStyles(theme);
 }

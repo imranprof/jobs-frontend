@@ -9,13 +9,13 @@ import {useTheme} from "@material-ui/core/styles";
 import TypeWriter from "./typeWriter";
 import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
-import MuiCustomModal from "../../../lib/profile/muiCustomModal";
+import EditCustomModal from "../../../lib/profile/editCustomModal";
 import {TopSectionStyle} from "./style";
 import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
-import CustomButton from "../../../lib/customButtons";
-import IntroExpertises from "../EditComponents/topSection/components/introExpertises";
-import ErrorMessages from "../../../lib/errorMessages";
+import CustomButton from "../../../lib/profile/customButtons";
+import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
+import ErrorMessage from "../../../lib/errorMessage";
 import {
   headlineText,
   headlineEditMode,
@@ -109,12 +109,13 @@ const TopSection = (props) => {
             <div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
               <TextField
                 fullWidth
+                size="small"
                 variant="outlined"
                 name='headline'
                 value={headlineHandler.values.headline}
                 onChange={headlineHandler.handleChange}
               />
-              {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline}/> : null}
+              {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
               <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
             </div>
           ) : (
@@ -126,8 +127,8 @@ const TopSection = (props) => {
             </div>
           )}
 
-          <MuiCustomModal handleClose={modalClose} open={openModal}>
-            <IntroExpertises
+          <EditCustomModal handleClose={modalClose} open={openModal}>
+            <IntroExpertisesEdit
               handleClose={modalClose}
               fullName={name}
               inputValue={introEditValue.intro}
@@ -136,7 +137,7 @@ const TopSection = (props) => {
               expertisesEditValue={expertisesEditValue.expertises}
               setExpertisesEditValue={setExpertisesEditValue}
             />
-          </MuiCustomModal>
+          </EditCustomModal>
 
           <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
             <TypeWriter name={name} intro={props.intro} expertises={expertisesList} classes={classes}/>
@@ -157,7 +158,7 @@ const TopSection = (props) => {
                 value={bioHandler.values.bio}
                 onChange={bioHandler.handleChange}
               />
-              {bioHandler.errors.bio ? <ErrorMessages error={bioHandler.errors.bio}/> : null}
+              {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
               <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
             </div>
           ) : (

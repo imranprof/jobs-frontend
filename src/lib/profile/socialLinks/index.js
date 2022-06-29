@@ -6,7 +6,7 @@ import {useTheme} from "@material-ui/core/styles";
 import SocialLink from "./socialLink";
 import {SocialLinkStyle} from "./style";
 import EditButton from "../../editButton";
-import MuiCustomModal from "../muiCustomModal";
+import EditCustomModal from "../editCustomModal";
 import SocialLinksEdit from "../../../views/Profile/EditComponents/topSection/components/socialLinksEdit";
 
 const SocialLinks = (props) => {
@@ -29,9 +29,9 @@ const SocialLinks = (props) => {
         </div>
       </div>
 
-      <MuiCustomModal handleClose={modalClose} open={openModal}>
+      <EditCustomModal handleClose={modalClose} open={openModal}>
         <SocialLinksEdit handleClose={modalClose} />
-      </MuiCustomModal>
+      </EditCustomModal>
 
       <span className={`${classes.socialLinksWrapper}__social-links__editBtnWrapper`} onClick={() => setOpenModal(true)}>
         <EditButton/>

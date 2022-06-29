@@ -3,11 +3,11 @@ import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import Backdrop from '@material-ui/core/Backdrop';
 
-import {MuiCustomModalStyle} from "./style";
+import {EditCustomModalStyle} from "./style";
 
-const MuiCustomModal = (props) => {
+const EditCustomModal = (props) => {
   const theme = useTheme();
-  const classes = MuiCustomModalStyle(theme);
+  const classes = EditCustomModalStyle(theme);
   const {handleClose, open, children} = props;
 
   return (
@@ -34,4 +34,4 @@ const MuiCustomModal = (props) => {
   );
 }
 
-export default MuiCustomModal;
+export default EditCustomModal;

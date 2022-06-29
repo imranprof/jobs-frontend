@@ -1,4 +1,13 @@
-import {HEADLINE_TEXT, HEADLINE_EDIT_MODE, INTRO_TEXT, EXPERTISE_VALUES, BIO_TEXT, BIO_EDIT_MODE, SOCIAL_LINKS_UPDATE, SKILLS_VALUES} from "../actionTypes/editProfileTypes";
+import {
+  HEADLINE_TEXT,
+  HEADLINE_EDIT_MODE,
+  INTRO_TEXT,
+  EXPERTISE_VALUES,
+  BIO_TEXT,
+  BIO_EDIT_MODE,
+  SOCIAL_LINKS_UPDATE,
+  SKILLS_VALUES
+} from "../actionTypes/editProfileTypes";
 
 // ***TopSection***
 // Headline
