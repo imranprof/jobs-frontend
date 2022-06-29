@@ -115,10 +115,6 @@ const useStyles = makeStyles({
             flexWrap: "wrap",
           }
         },
-        '&__wrapper': {
-          display: "flex",
-          justifyContent: "space-between"
-        },
         '&__category': {
           color: theme.palette.customColor.dark,
           fontFamily: FONTS.primaryFont,
@@ -145,7 +141,6 @@ const useStyles = makeStyles({
         '&__title': {
           marginTop: 0,
           marginBottom: 21,
-          marginRight: 8,
           color: theme.palette.customColor.main,
           fontFamily: FONTS.primaryFont,
           fontSize: 34,

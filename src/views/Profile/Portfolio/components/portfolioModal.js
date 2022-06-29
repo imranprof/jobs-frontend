@@ -10,7 +10,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
-import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
 import {updateTitle, updateDescription, updateCategories} from "../../../../store/actions/portfolioActions";
 import {ProfileData} from "../../../../../API/mock/profile/profileData";
@@ -21,7 +20,7 @@ const PortfolioModal = (props => {
   const [slidingClass, SetSlidingClass] = useState("");
   const {title, image, categories, description} = props.portfolio;
   const {categoriesData} = ProfileData;
-  const {setTogglePortfolioModal} = props;
+  const {setTogglePortfolioModal, editMode} = props;
 
   const updateCategoriesHandler = (portfolio, selectedCategories) => {
     portfolio.categories = mapCategoriesForState(selectedCategories);
@@ -52,8 +51,7 @@ const PortfolioModal = (props => {
     title: category.label
   }));
 
-  const [editCategoryMode, toggleEditCategoryMode] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(categories));
+  const [mode, toggleMode] = useState(editMode)
 
   const filterCategories = (categories) => {
     return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
@@ -67,16 +65,23 @@ const PortfolioModal = (props => {
     });
   };
 
-  const categoryHandler = useFormik({
-    initialValues: {categories: selectedCategories},
+  const formHandler = useFormik({
+    initialValues: {
+      categories: mapCategoriesForMultiSelect(categories),
+      title: title,
+      description: description,
+    },
     enableReinitialize: true,
+    validateOnChange: false,
     onSubmit: values => {
-      setSelectedCategories(values.categories);
+      console.log(values)
       updateCategoriesHandler(props.portfolio, values.categories);
-      toggleEditCategoryMode(false);
+      updateTitleHandler(props.portfolio, values.title);
+      updateDescriptionHandler(props.portfolio, values.description);
+      toggleMode(false);
     },
     onReset: () => {
-      toggleEditCategoryMode(false);
+      toggleMode(false);
     },
     validate: values => {
       let errors = {};
@@ -87,48 +92,11 @@ const PortfolioModal = (props => {
     }
   });
 
-  const [editTitleMode, toggleEditTitleMode] = useState(false);
-  const [editTitle, setEditTitle] = useState(title);
-
-  const titleHandler = useFormik({
-    initialValues: {title: editTitle},
-    enableReinitialize: true,
-    onSubmit: values => {
-      setEditTitle(values.title);
-      updateTitleHandler(props.portfolio, values.title);
-      toggleEditTitleMode(false);
-    },
-    onReset: () => {
-      toggleEditTitleMode(false);
-    },
-    validate: values => {
-      let errors = {};
-      if (!values.title) errors.title = "Required"
-      return errors;
-    }
-  });
-
-  const [editDescMode, toggleEditDescMode] = useState(false);
-  const [editDesc, setEditDesc] = useState(description);
-
   const descriptionSegments = (description) => {
     return description.split("\n\n").map((segment, index) =>
       <p key={index}>{segment}</p>
     );
   };
-
-  const descriptionHandler = useFormik({
-    initialValues: {description: editDesc},
-    enableReinitialize: true,
-    onSubmit: values => {
-      setEditDesc(values.description);
-      updateDescriptionHandler(props.portfolio, values.description);
-      toggleEditDescMode(false);
-    },
-    onReset: () => {
-      toggleEditDescMode(false);
-    }
-  });
 
   return (
     <div className={`${modalWrapper}__body`}>
@@ -149,78 +117,65 @@ const PortfolioModal = (props => {
               />
             </Grid>
             <Grid item md={6} className={`${modalWrapper}__modal-content__text-content`}>
-              <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper`}> {editCategoryMode ? <>
-                <div className={`${modalWrapper}__modal-content__text-content__category`}>
-                  <div>
+              {mode ?
+                <>
+                  <div className={`${modalWrapper}__modal-content__text-content__category`}>
                     <h4>Select categories</h4>
                     <Select
                       isMulti
-                      options={filterCategories(categoryHandler.values.categories)}
-                      value={categoryHandler.values.categories}
+                      name="categories"
+                      options={filterCategories(formHandler.values.categories)}
+                      value={formHandler.values.categories}
                       onChange={categories => {
-                        categoryHandler.setValues({categories: categories})
+                        formHandler.setValues({
+                          categories: categories,
+                          description: formHandler.values.description,
+                          title: formHandler.values.title
+                        })
                       }}
                       className={`${modalWrapper}__modal-content__text-content__category__selectDropdown`}
                     />
                   </div>
-                  <CustomButton handler={categoryHandler.handleSubmit} mode={categoryHandler.handleReset}/>
-                </div>
-              </> : <>
-                <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper__categories`}>
-                  {selectedCategories?.map((category, index) => <span key={index}
-                                                                      className={`${modalWrapper}__modal-content__text-content__category__text`}>
-                  {category.label}
-                </span>)}</div>
-
-                <span onClick={() => {
-                  toggleEditCategoryMode(!editCategoryMode)
-                }}>
-                  <EditButton/>
-                </span> </>}
-              </div>
-              {editTitleMode ? <div>
-                  <TextField
-                    variant="outlined"
-                    value={titleHandler.values.title}
-                    name="title"
-                    onChange={titleHandler.handleChange}
-                    className={`${modalWrapper}__modal-content__text-content__title__input`}
-                  />
-                  <CustomButton handler={titleHandler.handleSubmit} mode={titleHandler.handleReset}/>
-                </div>
-                : <div className={`${modalWrapper}__modal-content__text-content__wrapper`}>
-                  <span className={`${modalWrapper}__modal-content__text-content__title`}>
-                    {editTitle}
-                  </span>
-                  <span onClick={() => {
-                    toggleEditTitleMode(!editTitleMode);
-                  }}>
-                    <EditButton/>
-                  </span>
-                </div>
-              }
-              {editDescMode ? <div>
-                  <TextField
-                    value={descriptionHandler.values.description}
-                    name="description"
-                    multiline
-                    maxRows={6}
-                    InputProps={{disableUnderline: true}}
-                    onChange={descriptionHandler.handleChange}
-                    className={`${modalWrapper}__modal-content__text-content__description__input`}
-                  />
-                  <CustomButton handler={descriptionHandler.handleSubmit} mode={descriptionHandler.handleReset}/>
-                </div> :
-                <div className={`${modalWrapper}__modal-content__text-content__wrapper`}>
-                  <div className={`${modalWrapper}__modal-content__text-content__description`}>
-                    {descriptionSegments(editDesc)}
+                  <div>
+                    <TextField
+                      variant="outlined"
+                      value={formHandler.values.title}
+                      name="title"
+                      onChange={formHandler.handleChange}
+                      className={`${modalWrapper}__modal-content__text-content__title__input`}
+                    />
                   </div>
-                  <span onClick={() => {
-                    toggleEditDescMode(!editDescMode);
-                  }}>
-                    <EditButton/>
-                  </span>
-                </div>
+                  <div>
+                    <TextField
+                      value={formHandler.values.description}
+                      name="description"
+                      multiline
+                      maxRows={6}
+                      InputProps={{disableUnderline: true}}
+                      onChange={formHandler.handleChange}
+                      className={`${modalWrapper}__modal-content__text-content__description__input`}
+                    />
+                  </div>
+                  <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
+                </> :
+                <>
+                  <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper`}>
+                    <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper__categories`}>
+                      {mapCategoriesForMultiSelect(categories)?.map((category, index) => <span key={index}
+                                                                                               className={`${modalWrapper}__modal-content__text-content__category__text`}>
+                  {category.label}
+                </span>)}
+                    </div>
+                  </div>
+                  <div className={`${modalWrapper}__modal-content__text-content`}>
+                    <div className={`${modalWrapper}__modal-content__text-content__title`}>
+                      {title}
+                    </div>
+                    <div className={`${modalWrapper}__modal-content__text-content__description`}>
+                      {descriptionSegments(description)}
+                    </div>
+                  </div>
+                </>
               }
               <div
                 className={`${modalWrapper}__modal-content__text-content__link-button-wrapper`}>

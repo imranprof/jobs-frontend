@@ -9,6 +9,8 @@ import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import PortfolioModal from "../../../views/Profile/Portfolio/components/portfolioModal";
 import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
 import {CardStyle} from "./style";
+import RemoveButton from "../../removeButton";
+import EditButton from "../../editButton";
 
 const CustomCard = ({element, elementType}) => {
   const theme = useTheme();
@@ -21,7 +23,7 @@ const CustomCard = ({element, elementType}) => {
 
   const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
-
+  const [editMode, setEditMode] = useState(false)
   const getCategories = () => {
     if (categories) {
       let tempCategories = ""
@@ -38,9 +40,29 @@ const CustomCard = ({element, elementType}) => {
       <Card xs={12} sm={6} md={4}
             className={classes.cardWrapper}
             onClick={() => {
+              setEditMode(false);
               if (isPortfolio) setTogglePortfolioModal(true)
               else setToggleBlogModal(true)
+              console.log("CustomCard",editMode)
             }}>
+        <span className={`${classes.cardWrapper}__buttons`}>
+          <span onClick={(e) => {
+            setEditMode(true);
+            if (isPortfolio) setTogglePortfolioModal(true);
+            else setToggleBlogModal(true);
+            e.stopPropagation();
+          }} id="edit">
+            <EditButton/>
+          </span>
+          <span onClick={(e) => {
+            if (isPortfolio) console.log("Delete PortFolio")
+            else console.log("Delete Blog")
+            e.stopPropagation();
+          }} id="delete">
+            <RemoveButton/>
+          </span>
+        </span>
+
         <div className={`${classes.cardWrapper}__image-wrapper`}>
           <CardMedia
             className={`${classes.cardWrapper}__image`}
@@ -74,11 +96,13 @@ const CustomCard = ({element, elementType}) => {
       </Card>
       {togglePortfolioModal && <PortfolioModal
         setTogglePortfolioModal={setTogglePortfolioModal}
+        editMode={editMode}
         portfolio={element}/>
       }
 
       {toggleBlogModal && <BlogModal
         setToggleBlogModal={setToggleBlogModal}
+        editMode={editMode}
         blog={element}/>
       }
     </>
