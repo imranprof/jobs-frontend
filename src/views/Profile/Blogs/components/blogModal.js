@@ -18,7 +18,7 @@ import {BlogModalStyle} from "./blogModalStyle";
 import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
-import {updateDescription, updateTitle} from "../../../../store/actions/blogActions";
+import {updateCategories, updateDescription, updateTitle} from "../../../../store/actions/blogActions";
 
 
 const BlogModal = (props) => {
@@ -74,8 +74,12 @@ const BlogModal = (props) => {
     value: category.id,
     label: category.title
   }));
+  const mapCategoriesForSave = (categories) => categories?.map((category) => ({
+    id: category.value,
+    title: category.label
+  }));
 
-  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(props.blog.categories));
+  const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(blog.categories));
   const filterCategories = (categories) => {
     return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
       let flag = true;
@@ -93,6 +97,7 @@ const BlogModal = (props) => {
     enableReinitialize: true,
     onSubmit: values => {
       setSelectedCategories(values.categories);
+      props.updateCategories(blog.id, mapCategoriesForSave(values.categories));
       setCategoriesEditMode(false)
     },
     onReset: () => {
@@ -212,7 +217,8 @@ const BlogModal = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id)),
-  updateDescription: (blog_id, description) => dispatch(updateDescription(blog_id, description))
+  updateDescription: (blog_id, description) => dispatch(updateDescription(blog_id, description)),
+  updateCategories: (blog_id, categories) => dispatch(updateCategories(blog_id, categories))
 })
 
 

@@ -1,7 +1,8 @@
 import {
   BLOGS_REMOVE,
   BLOG_TITLE,
-  BLOG_DESCRIPTION
+  BLOG_DESCRIPTION,
+  BLOG_CATEGORIES
 } from "../actionTypes/blogTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
@@ -26,7 +27,13 @@ export const blogReducer = (blogs = initialState, action) => {
         }
         return blog;
       })
-
+    case BLOG_CATEGORIES:
+      return blogs.map(blog=> {
+        if(blog.id === action.payload.blog_id){
+          blog.categories = action.payload.categories
+        }
+        return blog;
+      })
     default:
       return blogs
   }
