@@ -86,7 +86,9 @@ const useStyles = makeStyles({
                 marginRight: 20,
                 color: theme.palette.customColor.main,
                 '&__edit': {
-                    width: "100%"
+                    width: "100%",
+                    marginTop: "10px",
+                    marginBottom: "10px"
                 },
                 '&__editButton': {
                     display: "flex",
@@ -124,6 +126,7 @@ const useStyles = makeStyles({
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                width: "50%",
                 '&__selectDropdown': {
                     color: COLORS.black,
                 }
