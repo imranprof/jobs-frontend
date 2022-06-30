@@ -69,7 +69,6 @@ const BlogModal = (props) => {
   }
 
   const descriptionHandler = () => {
-    console.log("description handler call");
     const rawContent = convertToRaw(editorState.getCurrentContent());
     const tempDescription = draftToHtml(rawContent);
     props.updateDescription(blog.id, tempDescription);
