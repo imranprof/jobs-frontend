@@ -130,16 +130,17 @@ const useStyles = makeStyles({
             '&__item': {
               position: "relative",
               marginBottom: 50,
-              padding: "45px 40px",
+              padding: "30px 40px",
               borderRadius: 6,
               zIndex: 2,
               background: theme.palette.customBackground.gradiant.light,
               boxShadow: theme.palette.resume.cardShadow,
               '&__action-buttons': {
-                width: 100,
+                width: 80,
                 display: "flex",
                 marginLeft: "auto",
-                justifyContent: "space-around"
+                marginBottom: 10,
+                justifyContent: "space-between"
               },
               '&:last-child': {
                 marginBottom: 0,
@@ -210,8 +211,8 @@ const useStyles = makeStyles({
                   alignItems: "center",
                   justifyContent: "space-between",
                   borderBottom: `1px solid ${theme.palette.resume.cardDivider}`,
-                  marginBottom: 20,
-                  paddingBottom: 30,
+                  marginBottom: 10,
+                  paddingBottom: 20,
                   fontFamily: FONTS.secondaryFont,
                   '&__title': {
                     '& h4': {
@@ -230,6 +231,18 @@ const useStyles = makeStyles({
                   }
                 },
                 '&__description': {
+                  maxHeight: 150,
+                  overflowY: "auto",
+                  '&::-webkit-scrollbar-track': {
+                    background: theme.palette.scrollBar.track,
+                  },
+                  '&::-webkit-scrollbar': {
+                    width: 3,
+                    background: theme.palette.scrollBar.track,
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    background: theme.palette.scrollBar.thumb,
+                  },
                   '& p': {
                     margin: 0,
                     color: theme.palette.resume.cardDescription,

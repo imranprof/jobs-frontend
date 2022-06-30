@@ -36,9 +36,14 @@ const ResumeEdit = (props) => {
     let errors = {}
     if(!values[keyType]) {
       errors[keyType] = `${labelType} can't be empty`
+    } else if(values[keyType].length > 100) {
+      errors[keyType] = `${labelType} must have within 100 characters`
     }
+
     if(!values.description) {
       errors.description = "Description can't be empty"
+    } else if(values.description.length > 500) {
+      errors.description = "Description must have within 500 characters"
     }
     return errors;
   }
