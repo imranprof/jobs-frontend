@@ -17,7 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
-import {updateCategories, updateDescription, updateTitle} from "../../../../store/actions/blogActions";
+import {updateCategories, updateDescription, updateTitle, updateBlog} from "../../../../store/actions/blogActions";
 
 const BlogModal = (props) => {
   const {blog, editMode} = props;
@@ -71,7 +71,7 @@ const BlogModal = (props) => {
   const descriptionHandler = () => {
     const rawContent = convertToRaw(editorState.getCurrentContent());
     const tempDescription = draftToHtml(rawContent);
-    props.updateDescription(blog.id, tempDescription);
+    return tempDescription;
   }
 
   const editHandler = useFormik( {
@@ -80,9 +80,7 @@ const BlogModal = (props) => {
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
-      props.updateCategories(blog.id, mapCategoriesForSave(values.categories));
-      props.updateTitle(values.title, blog.id);
-      descriptionHandler();
+      props.updateBlog(blog.id, mapCategoriesForSave(values.categories), values.title, descriptionHandler());
       setMode(false);
     },
     onReset: () => {
@@ -189,7 +187,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id)),
   updateDescription: (blog_id, description) => dispatch(updateDescription(blog_id, description)),
-  updateCategories: (blog_id, categories) => dispatch(updateCategories(blog_id, categories))
+  updateCategories: (blog_id, categories) => dispatch(updateCategories(blog_id, categories)),
+  updateBlog: (blog_id, categories, title, description) => dispatch(updateBlog(blog_id, categories, title, description))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(BlogModal);

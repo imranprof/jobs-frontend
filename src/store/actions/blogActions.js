@@ -1,6 +1,6 @@
 import {
   BLOGS_REMOVE,
-  BLOG_TITLE, BLOG_DESCRIPTION, BLOG_CATEGORIES
+  UPDATE_BLOG
 } from "../actionTypes/blogTypes";
 
 export const blogsRemove = (blogs) => {
@@ -10,23 +10,9 @@ export const blogsRemove = (blogs) => {
   }
 }
 
-export const updateTitle = (title, blog_id) => {
+export const updateBlog = (id, categories, title, description) => {
   return {
-    type: BLOG_TITLE,
-    payload: {blog_id: blog_id, title: title}
-  }
-}
-
-export const updateDescription = (id, description) => {
-  return {
-    type: BLOG_DESCRIPTION,
-    payload: {blog_id: id, description: description}
-  }
-}
-
-export const updateCategories = (id, categories) => {
-  return {
-    type: BLOG_CATEGORIES,
-    payload: {blog_id: id, categories: categories}
+    type: UPDATE_BLOG,
+    payload: {blog_id: id, categories: categories, title: title, description: description}
   }
 }
