@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import {useState} from 'react';
+import {connect} from "react-redux";
 
 import {Card, CardContent, CardMedia} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -11,10 +12,12 @@ import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
 import {CardStyle} from "./style";
 import RemoveButton from "../../removeButton";
 import EditButton from "../../editButton";
+import {removePortfolio} from "../../../store/actions/portfolioActions";
 
-const CustomCard = ({element, elementType}) => {
+const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
+  const {element, elementType, portfolios, blogs} = props;
   const {title, image, categories, reactCount, readTime} = element;
 
   const isPortfolio = elementType === "portfolio";
@@ -34,6 +37,13 @@ const CustomCard = ({element, elementType}) => {
       return tempCategories;
     }
   }
+  const removeHandler = (item) => {
+    if (isPortfolio) {
+      props.removePortfolio(portfolios.filter(portfolio => portfolio.id !== item.id))
+    } else {
+      // props.removeBlog(blogs.filter(blog => blog.id !== item.id))
+    }
+  }
 
   return (
     <>
@@ -43,7 +53,6 @@ const CustomCard = ({element, elementType}) => {
               setEditMode(false);
               if (isPortfolio) setTogglePortfolioModal(true)
               else setToggleBlogModal(true)
-              console.log("CustomCard",editMode)
             }}>
         <span className={`${classes.cardWrapper}__buttons`}>
           <span onClick={(e) => {
@@ -55,8 +64,7 @@ const CustomCard = ({element, elementType}) => {
             <EditButton/>
           </span>
           <span onClick={(e) => {
-            if (isPortfolio) console.log("Delete PortFolio")
-            else console.log("Delete Blog")
+            removeHandler(element)
             e.stopPropagation();
           }} id="delete">
             <RemoveButton/>
@@ -109,4 +117,16 @@ const CustomCard = ({element, elementType}) => {
   );
 }
 
-export default CustomCard;
+const mapStateToProps = (state) => {
+  return {
+    portfolios: state.portfolios,
+    // blogs: state.blogs,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
+  // removeBlog: (blog) => dispatch(removeBlog(blog))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomCard);

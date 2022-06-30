@@ -13,7 +13,7 @@ const Portfolio = (props) => {
 
   return (
     <Grid container spacing={4} className={classes.portfolioWrapper} id="portfolio">
-      {portfolios.map(portfolio => (
+      {portfolios?.map(portfolio => (
         <CustomCard key={portfolio.id} element={portfolio} elementType="portfolio"/>
       ))}
     </Grid>
