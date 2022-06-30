@@ -85,7 +85,7 @@ const BlogModal = (props) => {
     },
     onReset: () => {
       setMode(false);
-  }
+    }
   })
 
   return (
