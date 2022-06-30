@@ -15,19 +15,16 @@ import {useTheme} from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 
 import {BlogModalStyle} from "./blogModalStyle";
-import EditButton from "../../../../lib/editButton";
 import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
 import {updateCategories, updateDescription, updateTitle} from "../../../../store/actions/blogActions";
 
 const BlogModal = (props) => {
-  const {blog} = props;
+  const {blog, editMode} = props;
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
-  const [titleEditMode, setTitleEditMode] = useState(false);
-  const [categoriesEditMode, setCategoriesEditMode] = useState(false);
-  const [descriptionMode, setDescriptionMode] = useState(false);
+  const [mode, setMode] = useState(editMode);
   let html;
   if(typeof blog.description === 'string'){
     html = blog.description;
@@ -44,20 +41,6 @@ const BlogModal = (props) => {
   setTimeout(() => {
     setVisibilityClass(props.setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
-
-  // const titleHandler = useFormik({
-  //   initialValues: {title: blog.title},
-  //   validateOnChange: false,
-  //   onSubmit: values => {
-  //     props.updateTitle(values.title, blog.id);
-  //     setTitleEditMode(false);
-  //   }
-  //   })
-
-  // const titleCancelHandler = () =>{
-  //   titleHandler.setFieldValue("title", blog.title);
-  //   setTitleEditMode(!titleEditMode);
-  // }
 
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
     value: category.id,
@@ -81,19 +64,6 @@ const BlogModal = (props) => {
     });
   };
 
-  // const categoryHandler = useFormik({
-  //   initialValues: {categories: selectedCategories},
-  //   enableReinitialize: true,
-  //   onSubmit: values => {
-  //     setSelectedCategories(values.categories);
-  //     props.updateCategories(blog.id, mapCategoriesForSave(values.categories));
-  //     setCategoriesEditMode(false)
-  //   },
-  //   onReset: () => {
-  //     setCategoriesEditMode(false);
-  //   }
-  // })
-
   const changeEditorState = (state) => {
     setEditorState(state);
   }
@@ -114,16 +84,12 @@ const BlogModal = (props) => {
       props.updateCategories(blog.id, mapCategoriesForSave(values.categories));
       props.updateTitle(values.title, blog.id);
       descriptionHandler();
-      setTitleEditMode(false);
-      setCategoriesEditMode(false);
-      setDescriptionMode(false);
-    }
-  })
-  const editMode = () => {
-    setCategoriesEditMode(!categoriesEditMode);
-    setTitleEditMode(!titleEditMode);
-    setDescriptionMode(!descriptionMode);
+      setMode(false);
+    },
+    onReset: () => {
+      setMode(false);
   }
+  })
 
   return (
     <div className={`${blogModalWrapper}__body`}>
@@ -136,7 +102,7 @@ const BlogModal = (props) => {
             <CloseIcon/>
           </IconButton>
           <Grid container>
-            {categoriesEditMode ? (
+            {mode ? (
               <div className={`${blogModalWrapper}__modal-content__categories-edit`}>
               <Select
                 isMulti
@@ -147,18 +113,16 @@ const BlogModal = (props) => {
                 }}
                 className={`${blogModalWrapper}__modal-content__categories-edit__selectDropdown`}
               />
-              {/*<CustomButton handler={categoryHandler.handleSubmit} mode={categoryHandler.handleReset}/>*/}
               </div>
             ) : (
                 <div className={`${blogModalWrapper}__modal-content__categories-wrapper`}>
                   {(selectedCategories?.map((category,index) => (
                     <div key = {index} className={`${blogModalWrapper}__modal-content__category`}>{category.label}</div>
                   )))}
-                  <div onClick={ ()=>editMode()}><EditButton/></div>
                 </div>
               )}
 
-            {titleEditMode ? (
+            {mode ? (
               <div className={`${blogModalWrapper}__modal-content__title__edit`}>
                 <TextField
                   multiline
@@ -168,7 +132,6 @@ const BlogModal = (props) => {
                   onChange={editHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__title__input`}
                 />
-                {/*<CustomButton handler={titleHandler.handleSubmit}  mode={titleCancelHandler}/>*/}
               </div>
             ) : (
               <div className={`${blogModalWrapper}__modal-content__title__editButton`}>
@@ -184,7 +147,7 @@ const BlogModal = (props) => {
             </Grid>
 
             <Grid item className={`${blogModalWrapper}__modal-content__text-content`}>
-              {descriptionMode? (
+              {mode? (
                 <div >
                   <Editor
                     editorState = {editorState}
@@ -209,8 +172,8 @@ const BlogModal = (props) => {
                   </div>
                 )}
             </Grid>
-            { descriptionMode &&
-            <CustomButton handler={editHandler.handleSubmit} mode={()=>editMode()}/>
+            { mode &&
+            <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset}/>
             }
           </Grid>
         </div>
