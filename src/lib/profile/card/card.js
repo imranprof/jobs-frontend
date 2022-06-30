@@ -13,6 +13,7 @@ import {CardStyle} from "./style";
 import RemoveButton from "../../removeButton";
 import EditButton from "../../editButton";
 import {removePortfolio} from "../../../store/actions/portfolioActions";
+import {blogsRemove} from "../../../store/actions/blogActions";
 
 const CustomCard = (props) => {
   const theme = useTheme();
@@ -41,7 +42,8 @@ const CustomCard = (props) => {
     if (isPortfolio) {
       props.removePortfolio(portfolios.filter(portfolio => portfolio.id !== item.id))
     } else {
-      // props.removeBlog(blogs.filter(blog => blog.id !== item.id))
+      console.log("button click");
+      props.blogsRemove(blogs.filter(blog => blog.id !== item.id))
     }
   }
 
@@ -120,13 +122,13 @@ const CustomCard = (props) => {
 const mapStateToProps = (state) => {
   return {
     portfolios: state.portfolios,
-    // blogs: state.blogs,
+    blogs: state.blogs
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
-  // removeBlog: (blog) => dispatch(removeBlog(blog))
+  blogsRemove: (blog) => dispatch(blogsRemove(blog))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomCard);
