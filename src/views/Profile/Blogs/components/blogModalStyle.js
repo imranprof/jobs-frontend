@@ -126,7 +126,7 @@ const useStyles = makeStyles({
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                width: "50%",
+                width: "70%",
                 '&__selectDropdown': {
                     color: COLORS.black,
                 }
