@@ -62,7 +62,7 @@ export const ProfileData = {
     {
       id: 1,
       image: "portfolio-01.jpg",
-      category: "development",
+      categories: [{id: 1, title: "Development"}, {id: 2, title: "Application"}],
       title: "The services provide for design",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -72,7 +72,7 @@ export const ProfileData = {
     {
       id: 2,
       image: "portfolio-02.jpg",
-      category: "application",
+      categories: [{id: 3, title: "Photoshop"}, {id: 4, title: "Figma"}],
       title: "Mobile app landing design & app maintain",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -82,7 +82,7 @@ export const ProfileData = {
     {
       id: 3,
       image: "portfolio-03.jpg",
-      category: "photoshop",
+      categories: [{id: 3, title: "Photoshop"}, {id: 4, title: "Figma"}],
       title: "Logo design creativity & application",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -92,7 +92,7 @@ export const ProfileData = {
     {
       id: 4,
       image: "portfolio-04.jpg",
-      category: "figma",
+      categories: [{id: 3, title: "Photoshop"}, {id: 4, title: "Figma"}],
       title: "Mobile app landing design & services",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -102,7 +102,7 @@ export const ProfileData = {
     {
       id: 5,
       image: "portfolio-05.jpg",
-      category: "web design",
+      categories: [{id: 5, title: "Web design"}],
       title: "Design for technology & services",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -112,7 +112,7 @@ export const ProfileData = {
     {
       id: 6,
       image: "portfolio-06.jpg",
-      category: "development",
+      category: "Development",
       title: "App for technology & services",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
