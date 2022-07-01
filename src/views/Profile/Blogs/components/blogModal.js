@@ -18,8 +18,10 @@ import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
 import {updateBlog} from "../../../../store/actions/blogActions";
+import CustomSnackbar from "../../../../lib/customSnackbar";
 
 const BlogModal = (props) => {
+  console.log(props);
   const {blog, editMode} = props;
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
@@ -37,6 +39,7 @@ const BlogModal = (props) => {
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
   const currentState = EditorState.createWithContent(contentState);
   const [editorState, setEditorState] = useState(currentState);
+  const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
   setTimeout(() => {
     setVisibilityClass(props.setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
@@ -71,6 +74,7 @@ const BlogModal = (props) => {
   const descriptionHandler = () => {
     const rawContent = convertToRaw(editorState.getCurrentContent());
     const tempDescription = draftToHtml(rawContent);
+    console.log(tempDescription.length);
     return tempDescription;
   }
 
@@ -79,15 +83,33 @@ const BlogModal = (props) => {
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
-      props.updateBlog(blog.id, mapCategoriesForSave(values.categories), values.title, descriptionHandler());
+      props.updateBlog(blog.id, mapCategoriesForSave(values.categories), values.title, descriptionHandler())
+      setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
       setMode(false);
     },
     onReset: () => {
       setMode(false);
+    },
+    validate: values => {
+      let errors = "";
+      if (!values.categories || values.categories?.length < 1) {
+        errors = "categories error";
+        setToast({show: true, severity: "error", text: "Required Categories must not be blank"});
+      }
+      if( !values.title){
+        errors = "title errors";
+        setToast({show: true, severity: "error", text: "Required title field must not be blank"});
+      }
+      if(descriptionHandler().length<=8){
+        errors = "description errors";
+        setToast({show: true, severity: "error", text: "Required description field must not be blank"});
+      }
+      return errors;
     }
   })
 
   return (
+    <>
     <div className={`${blogModalWrapper}__body`}>
       <div className={`${blogModalWrapper}__dialog`}>
         <div className={`${blogModalWrapper}__modal-content ${visibilityClass}`}>
@@ -172,9 +194,17 @@ const BlogModal = (props) => {
             <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset}/>
             }
           </Grid>
+          {toast.show &&
+          <CustomSnackbar
+            toast={toast}
+            setToast={setToast}/>
+          }
         </div>
       </div>
     </div>
+
+
+    </>
   );
 }
 const mapStateToProps = (state) => {
