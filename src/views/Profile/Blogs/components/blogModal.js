@@ -71,10 +71,11 @@ const BlogModal = (props) => {
   const changeEditorState = (state) => {
     setEditorState(state);
   }
-
+  let readTime = props.readTime;
   const descriptionHandler = () => {
     const rawContent = convertToRaw(editorState.getCurrentContent());
     const tempDescription = draftToHtml(rawContent);
+    readTime = Math.round(readingTime(tempDescription).minutes);
     return tempDescription;
   }
 
@@ -83,8 +84,6 @@ const BlogModal = (props) => {
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
-      let readTime = readingTime(html).text;
-      console.log(readTime);
       props.updateBlog(blog.id, mapCategoriesForSave(values.categories), values.title, descriptionHandler(), readTime)
       setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
       setMode(false);
