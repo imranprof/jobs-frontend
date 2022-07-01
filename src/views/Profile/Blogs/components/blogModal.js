@@ -92,18 +92,18 @@ const BlogModal = (props) => {
       setMode(false);
     },
     validate: values => {
-      let errors = "";
+      let errors = {};
       if (!values.categories || values.categories?.length < 1) {
-        errors = "categories error";
-        setToast({show: true, severity: "error", text: "Required Categories must not be blank"});
+        errors.categories = "Required Categories must not be blank";
+        setToast({show: true, severity: "error", text: errors.categories});
       }
       if( !values.title){
-        errors = "title errors";
-        setToast({show: true, severity: "error", text: "Required title field must not be blank"});
+        errors.title = "Required title field must not be blank";
+        setToast({show: true, severity: "error", text: errors.title});
       }
       if(descriptionHandler().length<=8){
-        errors = "description errors";
-        setToast({show: true, severity: "error", text: "Required description field must not be blank"});
+        errors.description = "Required description field must not be blank";
+        setToast({show: true, severity: "error", text: errors.description});
       }
       return errors;
     }
