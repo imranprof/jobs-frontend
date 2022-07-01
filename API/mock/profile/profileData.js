@@ -112,7 +112,7 @@ export const ProfileData = {
     {
       id: 6,
       image: "portfolio-06.jpg",
-      category: "Development",
+      categories: [{id: 1, title: "Development"}],
       title: "App for technology & services",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +

@@ -27,8 +27,8 @@ const useStyles = makeStyles({
     },
     '&__buttons': {
       position: "absolute",
-      top: 12,
-      right: 5,
+      top: 10,
+      right: 4,
       '& > span': {
         marginRight: 8
       }
