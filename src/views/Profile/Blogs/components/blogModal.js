@@ -17,7 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/customButtons";
 import {renderToString} from "react-dom/server";
-import {updateCategories, updateDescription, updateTitle, updateBlog} from "../../../../store/actions/blogActions";
+import {updateBlog} from "../../../../store/actions/blogActions";
 
 const BlogModal = (props) => {
   const {blog, editMode} = props;
@@ -76,7 +76,6 @@ const BlogModal = (props) => {
 
   const editHandler = useFormik( {
     initialValues: {categories: selectedCategories, title: blog.title},
-    enableReinitialize: true,
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
