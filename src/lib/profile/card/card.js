@@ -47,8 +47,13 @@ const CustomCard = (props) => {
       }
     }
     else {
-      console.log("button click");
-      props.blogsRemove(blogs.filter(blog => blog.id !== item.id))
+      if(blogs.length < 2) {
+        setToast({show: true, severity: "error", text: "You must have at least one blog!"});
+      }
+      else{
+        props.blogsRemove(blogs.filter(blog => blog.id !== item.id))
+        setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
+      }
     }
   }
 
