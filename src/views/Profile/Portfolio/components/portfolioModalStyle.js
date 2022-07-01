@@ -150,7 +150,7 @@ const useStyles = makeStyles({
           },
           '&__input': {
             width: "100%",
-            margin: "14px 0",
+            marginTop: 14,
             '& label.Mui-focused': {
               color: theme.palette.customBorder.customInputBorder
             },
@@ -206,6 +206,7 @@ const useStyles = makeStyles({
             border: `1px solid ${theme.palette.customBorder.editInputElement}`,
             overflowY: "auto",
             borderRadius: 4,
+            marginTop: 14,
             '& div': {
               fontSize: 18,
               fontWeight: 400,

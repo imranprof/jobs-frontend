@@ -14,6 +14,7 @@ import CustomButton from "../../../../lib/customButtons";
 import {updatePortfolio} from "../../../../store/actions/portfolioActions";
 import {ProfileData} from "../../../../../API/mock/profile/profileData";
 import CustomSnackbar from "../../../../lib/customSnackbar";
+import ErrorMessages from "../../../../lib/errorMessages";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
@@ -72,7 +73,6 @@ const PortfolioModal = (props => {
       title: title,
       description: description,
     },
-    validateOnChange: false,
     onSubmit: values => {
       updateHandler({
         portfolio: props.portfolio,
@@ -90,21 +90,16 @@ const PortfolioModal = (props => {
       let errors = {};
       if (!values.categories || values.categories?.length < 1) {
         errors.categories = "Portfolio must have at least one category!";
-        setToast({show: true, severity: "error", text: errors.categories});
       }
       if (!values.title) {
         errors.title = "Portfolio must have a title!";
-        setToast({show: true, severity: "error", text: errors.title});
       } else if (values.title.length > 50) {
         errors.title = "Portfolio title can have maximum 50 characters!";
-        setToast({show: true, severity: "error", text: errors.title});
       }
       if (!values.description) {
         errors.description = "Portfolio must have a description!";
-        setToast({show: true, severity: "error", text: errors.description});
       } else if (values.description.length > 500) {
         errors.description = "Portfolio description can have maximum 500 characters!";
-        setToast({show: true, severity: "error", text: errors.description});
       }
       return errors;
     }
@@ -147,6 +142,7 @@ const PortfolioModal = (props => {
                       onChange={categoriesChangeHandler}
                       className={`${modalWrapper}__modal-content__text-content__category__selectDropdown`}
                     />
+                    {formHandler.errors.categories && <ErrorMessages error={formHandler.errors.categories}/>}
                   </div>
                   <TextField
                     variant="outlined"
@@ -155,6 +151,7 @@ const PortfolioModal = (props => {
                     onChange={formHandler.handleChange}
                     className={`${modalWrapper}__modal-content__text-content__title__input`}
                   />
+                  {formHandler.errors.title && <ErrorMessages error={formHandler.errors.title}/>}
                   <div>
                     <TextField
                       value={formHandler.values.description}
@@ -165,6 +162,7 @@ const PortfolioModal = (props => {
                       onChange={formHandler.handleChange}
                       className={`${modalWrapper}__modal-content__text-content__description__input`}
                     />
+                    {formHandler.errors.description && <ErrorMessages error={formHandler.errors.description}/>}
                   </div>
                   <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
                 </> :
