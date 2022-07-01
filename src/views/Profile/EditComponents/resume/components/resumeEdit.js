@@ -1,32 +1,40 @@
-import React from 'react';
 import {useFormik} from "formik";
 import {connect} from "react-redux";
 
-import {TextField} from "@material-ui/core";
+import {MenuItem, TextField} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
 import CustomButtons from "../../../../../lib/customButtons";
 import {resumeUpdate} from "../../../../../store/actions/resumeActions";
-import {useTheme} from "@material-ui/core/styles";
 import {ResumeEditStyle} from "../style";
 import ErrorMessages from "../../../../../lib/errorMessages";
 
 const ResumeEdit = (props) => {
   const theme = useTheme();
   const classes = ResumeEditStyle(theme);
-  const {cardType, title, description, handleClose, cardId} = props;
+  const {cardType, title, description, handleClose, cardContent} = props;
   const labelType = (cardType === "education") ? "Institution" : "Company"
   const keyType = (cardType === "education") ? "institution" : "title"
+  const {startDate, endDate} = cardContent
+  const splitStartDate = startDate.split(" ")
+  const splitEndDate = endDate.split(" ")
 
   const initialResumeValues = {
-    id: cardId,
+    id: cardContent.id,
     [keyType]: title,
-    description: description
+    description: description,
+    startMonth: splitStartDate[0],
+    startYear: splitStartDate[1],
+    endMonth: splitEndDate[0],
+    endYear: splitEndDate[1],
   }
 
   const resumeUpdate = values => {
     const cardIndex = props.resume[cardType].findIndex(type => type.id === values.id)
     props.resume[cardType][cardIndex][keyType] = values[keyType]
     props.resume[cardType][cardIndex].description = values.description
+    props.resume[cardType][cardIndex].startDate = `${values.startMonth} ${values.startYear}`
+    props.resume[cardType][cardIndex].endDate = `${values.endMonth} ${values.endYear}`
 
     props.setResume(props.resume)
     handleClose()
@@ -54,6 +62,15 @@ const ResumeEdit = (props) => {
     validate: resumeValidation
   })
 
+  const monthsName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+  const yearsGenerator = (startYear) => {
+    let currentYear = new Date().getFullYear(), years = [];
+    while ( startYear <= currentYear ) {
+      years.push(currentYear--);
+    }
+    return years;
+  }
+
   return (
     <div>
       <h3 className={`${classes.resumeEditWrapper}__top-label`}>Edit {cardType}</h3>
@@ -71,6 +88,96 @@ const ResumeEdit = (props) => {
             onChange={formik.handleChange}
           />
           {formik.errors[keyType] ? <ErrorMessages error={formik.errors[keyType]} /> : null}
+        </div>
+
+        <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
+          <div className={`${classes.resumeEditWrapper}__content-wrapper__fullDateWrapper`}>
+            <div className={`${classes.resumeEditWrapper}__content-wrapper__mainDateWrapper`}>
+              <span>Start date</span>
+              <div className={`${classes.resumeEditWrapper}__content-wrapper__dateWrapper`}>
+                <TextField
+                  required
+                  select
+                  label="Month"
+                  variant="outlined"
+                  size="small"
+                  name="startMonth"
+                  defaultValue=""
+                  value={formik.values.startMonth}
+                  onChange={formik.handleChange}
+                >
+                  <MenuItem value="">
+                    <em>Month</em>
+                  </MenuItem>
+                  {monthsName.map((month, index) => (
+                    <MenuItem value={month} key={index}>{month}</MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  required
+                  select
+                  label="Year"
+                  variant="outlined"
+                  size="small"
+                  name="startYear"
+                  defaultValue=""
+                  value={formik.values.startYear}
+                  onChange={formik.handleChange}
+                >
+                  <MenuItem value="">
+                    <em>Year</em>
+                  </MenuItem>
+                  {yearsGenerator(1990).map((year, index) => (
+                    <MenuItem value={year} key={index}>{year}</MenuItem>
+                  ))}
+                </TextField>
+              </div>
+            </div>
+
+            <span className={`${classes.resumeEditWrapper}__content-wrapper__hyphen`}>_</span>
+
+            <div className={`${classes.resumeEditWrapper}__content-wrapper__mainDateWrapper`}>
+            <span>End date (or expected)</span>
+            <div className={`${classes.resumeEditWrapper}__content-wrapper__dateWrapper`}>
+              <TextField
+                required
+                select
+                label="Month"
+                variant="outlined"
+                size="small"
+                name="endMonth"
+                defaultValue=""
+                value={formik.values.endMonth}
+                onChange={formik.handleChange}
+              >
+                <MenuItem value="">
+                  <em>Month</em>
+                </MenuItem>
+                {monthsName.map((month, index) => (
+                  <MenuItem value={month} key={index}>{month}</MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                required
+                select
+                label="Year"
+                variant="outlined"
+                size="small"
+                name="endYear"
+                defaultValue=""
+                value={formik.values.endYear}
+                onChange={formik.handleChange}
+              >
+                <MenuItem value="">
+                  <em>Year</em>
+                </MenuItem>
+                {yearsGenerator(1990).map((year, index) => (
+                  <MenuItem value={year} key={index}>{year}</MenuItem>
+                ))}
+              </TextField>
+            </div>
+            </div>
+          </div>
         </div>
 
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>

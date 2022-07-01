@@ -6,7 +6,7 @@ const useStyles = makeStyles({
       margin: "0 0 30px 0"
     },
     '&__content-wrapper': {
-      height: 290,
+      height: "80%",
       '& label.Mui-focused': {
         color: theme.palette.customBorder.customInputBorder
       },
@@ -27,10 +27,30 @@ const useStyles = makeStyles({
           borderColor: theme.palette.customBorder.customInputBorder,
         }
       },
+      '& .MuiSelect-selectMenu': {
+        width: 74,
+      },
       '&__gap': {
-        margin: "30px 0"
+        margin: "18px 0",
+      },
+      '&__fullDateWrapper': {
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+      },
+      '&__mainDateWrapper': {
+        width: "46%"
+      },
+      '&__dateWrapper': {
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: 10
+      },
+      '&__hyphen': {
+        paddingTop: 34
       }
-    },
+    }
   }),
 })
 

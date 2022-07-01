@@ -13,7 +13,6 @@ const ContentItem = ({cardType, cardContent}) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
   const [openModal, setOpenModal] = useState(false);
-
   const title = (cardType === "education") ? cardContent.institution : cardContent.title;
   const subTitle = `${cardContent.startDate} - ${cardContent.endDate}`;
   const description = cardContent.description;
@@ -47,10 +46,10 @@ const ContentItem = ({cardType, cardContent}) => {
       <MuiCustomModal handleClose={modalClose} open={openModal}>
         <ResumeEdit
           cardType={cardType}
+          cardContent={cardContent}
           title={title}
           description={description}
           handleClose={modalClose}
-          cardId={cardContent.id}
         />
       </MuiCustomModal>
     </>
