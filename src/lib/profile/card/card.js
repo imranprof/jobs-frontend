@@ -17,7 +17,7 @@ import {removePortfolio} from "../../../store/actions/portfolioActions";
 const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
-  const {element, elementType, portfolios, blogs} = props;
+  const {element, elementType, portfolios, setToast} = props;
   const {title, image, categories, reactCount, readTime} = element;
 
   const isPortfolio = elementType === "portfolio";
@@ -26,22 +26,24 @@ const CustomCard = (props) => {
 
   const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
-  const [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(false);
+
   const getCategories = () => {
     if (categories) {
-      let tempCategories = ""
-      for (let i = 0; i < categories.length - 1; i++) {
-        tempCategories += categories[i].title + " ";
-      }
-      if (categories[categories.length - 1]) tempCategories += categories[categories.length - 1].title;
-      return tempCategories;
+      let categoriesText = categories[0].title
+      if (categories?.length === 2) categoriesText += " " + categories[1].title
+      if (categories?.length > 2) categoriesText += ` ${categories[1].title}...`
+      return categoriesText;
     }
   }
   const removeHandler = (item) => {
     if (isPortfolio) {
-      props.removePortfolio(portfolios.filter(portfolio => portfolio.id !== item.id))
-    } else {
-      // props.removeBlog(blogs.filter(blog => blog.id !== item.id))
+      if (portfolios.length < 2) {
+        setToast({show: true, severity: "error", text: "You must have at least one portfolio!"});
+      } else {
+        props.removePortfolio(portfolios.filter(portfolio => portfolio.id !== item.id))
+        setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
+      }
     }
   }
 
@@ -64,7 +66,7 @@ const CustomCard = (props) => {
             <EditButton/>
           </span>
           <span onClick={(e) => {
-            removeHandler(element)
+            removeHandler(element);
             e.stopPropagation();
           }} id="delete">
             <RemoveButton/>
@@ -92,7 +94,7 @@ const CustomCard = (props) => {
             </div>
           </div>
           <h1 className={`${classes.cardWrapper}__title`}>
-            <Link href="#">
+            <Link scroll={false} href="#">
               <a className={`${classes.cardWrapper}__title__link`}>
                 {title}
                 <Icon
@@ -120,13 +122,13 @@ const CustomCard = (props) => {
 const mapStateToProps = (state) => {
   return {
     portfolios: state.portfolios,
-    // blogs: state.blogs,
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
-  // removeBlog: (blog) => dispatch(removeBlog(blog))
-})
+const mapDispatchToProps = (dispatch) => (
+  {
+    removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
+  }
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomCard);
