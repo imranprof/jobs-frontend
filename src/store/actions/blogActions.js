@@ -10,9 +10,9 @@ export const blogsRemove = (blogs) => {
   }
 }
 
-export const updateBlog = (id, categories, title, description) => {
+export const updateBlog = (id, categories, title, description, readTime) => {
   return {
     type: UPDATE_BLOG,
-    payload: {blog_id: id, categories: categories, title: title, description: description}
+    payload: {blog_id: id, categories: categories, title: title, description: description, readTime: readTime}
   }
 }

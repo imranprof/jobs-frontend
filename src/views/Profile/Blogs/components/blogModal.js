@@ -21,7 +21,7 @@ import {updateBlog} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 
 const BlogModal = (props) => {
-  console.log(props);
+
   const {blog, editMode} = props;
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
@@ -34,6 +34,7 @@ const BlogModal = (props) => {
   else{
     html = renderToString(blog.description);
   }
+  const readingTime = require('reading-time');
   const blocksFromHtml = convertFromHTML(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
@@ -74,7 +75,6 @@ const BlogModal = (props) => {
   const descriptionHandler = () => {
     const rawContent = convertToRaw(editorState.getCurrentContent());
     const tempDescription = draftToHtml(rawContent);
-    console.log(tempDescription.length);
     return tempDescription;
   }
 
@@ -83,7 +83,9 @@ const BlogModal = (props) => {
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
-      props.updateBlog(blog.id, mapCategoriesForSave(values.categories), values.title, descriptionHandler())
+      let readTime = readingTime(html).text;
+      console.log(readTime);
+      props.updateBlog(blog.id, mapCategoriesForSave(values.categories), values.title, descriptionHandler(), readTime)
       setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
       setMode(false);
     },
@@ -211,7 +213,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateBlog: (blog_id, categories, title, description) => dispatch(updateBlog(blog_id, categories, title, description))
+  updateBlog: (blog_id, categories, title, description, readTime) => dispatch(updateBlog(blog_id, categories, title, description, readTime))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(BlogModal);

@@ -18,6 +18,7 @@ export const blogReducer = (blogs = initialState, action) => {
           blog.categories = action.payload.categories,
           blog.title = action.payload.title,
           blog.description = action.payload.description
+          blog.readTime = action.payload.readTime
         }
         return blog;
       })
