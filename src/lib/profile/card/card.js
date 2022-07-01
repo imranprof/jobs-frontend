@@ -23,7 +23,7 @@ const CustomCard = (props) => {
 
   const isPortfolio = elementType === "portfolio";
   const iconClass = isPortfolio ? "heart" : "clock";
-  const elementData = isPortfolio ? reactCount : `${readTime} read`;
+  const elementData = isPortfolio ? reactCount : `${readTime}`;
 
   const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
