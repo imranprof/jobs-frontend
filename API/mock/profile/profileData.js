@@ -126,7 +126,7 @@ export const ProfileData = {
       image: "blog-01.jpg",
       categories: [{id: 1, title: "mobile"}, {id: 2, title: "apps"}],
       title: "The services provide for design",
-      readTime: "2 min",
+      readTime: 2,
       description: <div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
@@ -190,7 +190,7 @@ export const ProfileData = {
       image: "blog-02.jpg",
       categories: [{id: 1, title: "mobile"}, {id: 2, title: "development"}, {id: 3, title: "apps"}],
       title: "Mobile app landing design & app maintain",
-      readTime: "2 hour",
+      readTime: 2,
       description: <div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
@@ -254,7 +254,7 @@ export const ProfileData = {
       image: "blog-03.jpg",
       categories: [{id: 1, title: "development"}],
       title: "T-shirt design is the part of design",
-      readTime: "5 min",
+      readTime: 3,
       description: <div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
@@ -318,7 +318,7 @@ export const ProfileData = {
       image: "portfolio-05.jpg",
       categories: [{id: 1, title: "mobile"}, {id: 2, title: "development"}, {id: 3, title: "apps"}],
       title: "this is new blog",
-      readTime: "2 hour",
+      readTime: 4,
       description: <div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
