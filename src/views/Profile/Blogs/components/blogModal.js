@@ -109,7 +109,6 @@ const BlogModal = (props) => {
   })
 
   return (
-    <>
     <div className={`${blogModalWrapper}__body`}>
       <div className={`${blogModalWrapper}__dialog`}>
         <div className={`${blogModalWrapper}__modal-content ${visibilityClass}`}>
@@ -202,11 +201,9 @@ const BlogModal = (props) => {
         </div>
       </div>
     </div>
-
-
-    </>
   );
 }
+
 const mapStateToProps = (state) => {
   return{
     categoriesData: state.profile.categoriesData
