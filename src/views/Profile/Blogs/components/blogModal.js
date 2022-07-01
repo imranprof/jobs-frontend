@@ -184,9 +184,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateTitle: (blog_title, blog_id) => dispatch(updateTitle(blog_title, blog_id)),
-  updateDescription: (blog_id, description) => dispatch(updateDescription(blog_id, description)),
-  updateCategories: (blog_id, categories) => dispatch(updateCategories(blog_id, categories)),
   updateBlog: (blog_id, categories, title, description) => dispatch(updateBlog(blog_id, categories, title, description))
 })
 
