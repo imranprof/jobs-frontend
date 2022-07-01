@@ -119,7 +119,6 @@ const useStyles = makeStyles({
           color: theme.palette.customColor.dark,
           fontFamily: FONTS.primaryFont,
           marginTop: 9,
-          marginBottom: 6,
           width: "100%",
           '&__selectDropdown': {
             fontSize: 14,
@@ -151,6 +150,7 @@ const useStyles = makeStyles({
           },
           '&__input': {
             width: "100%",
+            margin: "14px 0",
             '& label.Mui-focused': {
               color: theme.palette.customBorder.customInputBorder
             },
