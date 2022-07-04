@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {connect} from "react-redux";
 
 import {Grid} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -9,12 +8,11 @@ import RemoveButton from "../../../../lib/removeButton";
 import MuiCustomModal from "../../../../lib/profile/muiCustomModal";
 import ResumeEdit from "../../EditComponents/resume/components/resumeEdit";
 import {ResumeStyle} from "../style";
-import {resumeItemRemove} from "../../../../store/actions/resumeActions";
 
 const ContentItem = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-  const {cardType, cardContent} = props;
+  const {cardType, cardContent, resumeItemRemoveHandler} = props;
   const [openModal, setOpenModal] = useState(false);
   const title = (cardType === "education") ? cardContent.institution : cardContent.title;
   const subTitle = `${cardContent.startDate} - ${cardContent.endDate}`;
@@ -22,16 +20,6 @@ const ContentItem = (props) => {
 
   const modalClose = () => {
     setOpenModal(false)
-  }
-
-  const resumeItemRemoveHandler = (item) => {
-    if (props.resume[cardType].length > 1) {
-      props.resume[cardType] = props.resume[cardType].filter(content => content.id !== item.id)
-
-      props.setResumeItemRemove({...props.resume})
-    } else {
-      alert(`You must have at least one ${cardType}!`)
-    }
   }
 
   return (
@@ -71,14 +59,4 @@ const ContentItem = (props) => {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    resume: state.editResume.resume
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  setResumeItemRemove: (values) => dispatch(resumeItemRemove(values))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContentItem);
+export default ContentItem;
