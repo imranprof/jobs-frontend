@@ -14,7 +14,6 @@ const Blogs = (props) => {
     const { blogs} = props;
     const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
-
     return (
       <>
         <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
