@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {connect} from "react-redux";
 
 import {Grid} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -8,10 +9,12 @@ import RemoveButton from "../../../../lib/removeButton";
 import MuiCustomModal from "../../../../lib/profile/muiCustomModal";
 import ResumeEdit from "../../EditComponents/resume/components/resumeEdit";
 import {ResumeStyle} from "../style";
+import {resumeItemRemove} from "../../../../store/actions/resumeActions";
 
-const ContentItem = ({cardType, cardContent}) => {
+const ContentItem = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
+  const {cardType, cardContent} = props;
   const [openModal, setOpenModal] = useState(false);
   const title = (cardType === "education") ? cardContent.institution : cardContent.title;
   const subTitle = `${cardContent.startDate} - ${cardContent.endDate}`;
@@ -21,14 +24,26 @@ const ContentItem = ({cardType, cardContent}) => {
     setOpenModal(false)
   }
 
+  const resumeItemRemoveHandler = (item) => {
+    if (props.resume[cardType].length > 1) {
+      props.resume[cardType] = props.resume[cardType].filter(content => content.id !== item.id)
+
+      props.setResumeItemRemove({...props.resume})
+    } else {
+      alert(`You must have at least one ${cardType}!`)
+    }
+  }
+
   return (
     <>
       <Grid item container className={`${resumeWrapper}__nav-content__row__column__content__item`}>
         <div className={`${resumeWrapper}__nav-content__row__column__content__item__action-buttons`}>
-        <span onClick={() => setOpenModal(true)}>
-          <EditButton />
-        </span>
-          <RemoveButton />
+          <span onClick={() => setOpenModal(true)}>
+            <EditButton/>
+          </span>
+          <span onClick={() => resumeItemRemoveHandler(cardContent)}>
+            <RemoveButton/>
+          </span>
         </div>
         <div className={`${resumeWrapper}__nav-content__row__column__content__item__inner`}>
           <Grid className={`${resumeWrapper}__nav-content__row__column__content__item__inner__heading`}>
@@ -56,4 +71,14 @@ const ContentItem = ({cardType, cardContent}) => {
   );
 }
 
-export default ContentItem;
+const mapStateToProps = (state) => {
+  return {
+    resume: state.editResume.resume
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  setResumeItemRemove: (values) => dispatch(resumeItemRemove(values))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContentItem);

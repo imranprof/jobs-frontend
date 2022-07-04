@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {connect} from "react-redux";
 
 import {useTheme} from "@material-ui/core/styles";
@@ -8,33 +8,38 @@ import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
 
 const Resume = (props) => {
-    const { resume } = props;
-    const theme = useTheme();
-    const resumeWrapper = ResumeStyle(theme).resumeWrapper;
+  const theme = useTheme();
+  const resumeWrapper = ResumeStyle(theme).resumeWrapper;
+  const {resume} = props;
 
-    let resumeSections = [];
-    for (let key in resume) {
-        resumeSections.push(key);
-    }
+  let resumeSections = [];
+  for (let key in resume) {
+    resumeSections.push(key);
+  }
 
-    const [selected, setSelected] = useState(0);
-    const cardType = resumeSections[selected];
-    const cardData = resume[cardType];
+  const [selected, setSelected] = useState(0);
+  const cardType = resumeSections[selected];
+  const cardData = resume[cardType];
 
-    return (
-        <div className={resumeWrapper} id="resume">
-            <div className={`${resumeWrapper}__body`}>
-                <NavList resumeSections={resumeSections} resumeClasses={resumeWrapper} selected={selected} setSelected={setSelected} />
-                <ResumeCards cardData={cardData} cardType={cardType} />
-            </div>
-        </div>
-    );
+  return (
+    <div className={resumeWrapper} id="resume">
+      <div className={`${resumeWrapper}__body`}>
+        <NavList
+          resumeSections={resumeSections}
+          resumeClasses={resumeWrapper}
+          selected={selected}
+          setSelected={setSelected}
+        />
+        <ResumeCards cardData={cardData} cardType={cardType}/>
+      </div>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        resume: state.editResume.resume
-    }
+  return {
+    resume: state.editResume.resume
+  }
 }
 
 export default connect(mapStateToProps)(Resume);
