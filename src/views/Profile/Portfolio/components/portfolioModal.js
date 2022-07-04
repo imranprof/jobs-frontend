@@ -11,8 +11,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
 import CustomButton from "../../../../lib/customButtons";
-import {updateTitle, updateDescription, updateCategories} from "../../../../store/actions/portfolioActions";
+import {updatePortfolio} from "../../../../store/actions/portfolioActions";
 import {ProfileData} from "../../../../../API/mock/profile/profileData";
+import CustomSnackbar from "../../../../lib/customSnackbar";
+import ErrorMessages from "../../../../lib/errorMessages";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
@@ -21,21 +23,8 @@ const PortfolioModal = (props => {
   const {title, image, categories, description} = props.portfolio;
   const {categoriesData} = ProfileData;
   const {setTogglePortfolioModal, editMode} = props;
-
-  const updateCategoriesHandler = (portfolio, selectedCategories) => {
-    portfolio.categories = mapCategoriesForState(selectedCategories);
-    props.updateCategories(portfolio);
-  }
-
-  const updateTitleHandler = (portfolio, title) => {
-    portfolio.title = title;
-    props.updateTitle(portfolio);
-  }
-
-  const updateDescriptionHandler = (portfolio, description) => {
-    portfolio.description = description;
-    props.updateDescription(portfolio);
-  }
+  const [mode, toggleMode] = useState(editMode)
+  const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
   setTimeout(() => {
     SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
@@ -51,7 +40,12 @@ const PortfolioModal = (props => {
     title: category.label
   }));
 
-  const [mode, toggleMode] = useState(editMode)
+  const updateHandler = ({portfolio, selectedCategories, title, description}) => {
+    portfolio.categories = mapCategoriesForState(selectedCategories);
+    portfolio.title = title;
+    portfolio.description = description;
+    props.updatePortfolio(portfolio);
+  }
 
   const filterCategories = (categories) => {
     return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
@@ -65,19 +59,28 @@ const PortfolioModal = (props => {
     });
   };
 
+  const categoriesChangeHandler = categories => {
+    formHandler.setValues({
+      categories: categories,
+      description: formHandler.values.description,
+      title: formHandler.values.title
+    })
+  }
+
   const formHandler = useFormik({
     initialValues: {
       categories: mapCategoriesForMultiSelect(categories),
       title: title,
       description: description,
     },
-    enableReinitialize: true,
-    validateOnChange: false,
     onSubmit: values => {
-      console.log(values)
-      updateCategoriesHandler(props.portfolio, values.categories);
-      updateTitleHandler(props.portfolio, values.title);
-      updateDescriptionHandler(props.portfolio, values.description);
+      updateHandler({
+        portfolio: props.portfolio,
+        selectedCategories: values.categories,
+        title: values.title,
+        description: values.description
+      });
+      setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
       toggleMode(false);
     },
     onReset: () => {
@@ -86,7 +89,17 @@ const PortfolioModal = (props => {
     validate: values => {
       let errors = {};
       if (!values.categories || values.categories?.length < 1) {
-        errors.categories = "Project must have at least one category";
+        errors.categories = "Portfolio must have at least one category!";
+      }
+      if (!values.title) {
+        errors.title = "Portfolio must have a title!";
+      } else if (values.title.length > 50) {
+        errors.title = "Portfolio title can have maximum 50 characters!";
+      }
+      if (!values.description) {
+        errors.description = "Portfolio must have a description!";
+      } else if (values.description.length > 500) {
+        errors.description = "Portfolio description can have maximum 500 characters!";
       }
       return errors;
     }
@@ -126,25 +139,19 @@ const PortfolioModal = (props => {
                       name="categories"
                       options={filterCategories(formHandler.values.categories)}
                       value={formHandler.values.categories}
-                      onChange={categories => {
-                        formHandler.setValues({
-                          categories: categories,
-                          description: formHandler.values.description,
-                          title: formHandler.values.title
-                        })
-                      }}
+                      onChange={categoriesChangeHandler}
                       className={`${modalWrapper}__modal-content__text-content__category__selectDropdown`}
                     />
+                    {formHandler.errors.categories && <ErrorMessages error={formHandler.errors.categories}/>}
                   </div>
-                  <div>
-                    <TextField
-                      variant="outlined"
-                      value={formHandler.values.title}
-                      name="title"
-                      onChange={formHandler.handleChange}
-                      className={`${modalWrapper}__modal-content__text-content__title__input`}
-                    />
-                  </div>
+                  <TextField
+                    variant="outlined"
+                    value={formHandler.values.title}
+                    name="title"
+                    onChange={formHandler.handleChange}
+                    className={`${modalWrapper}__modal-content__text-content__title__input`}
+                  />
+                  {formHandler.errors.title && <ErrorMessages error={formHandler.errors.title}/>}
                   <div>
                     <TextField
                       value={formHandler.values.description}
@@ -155,6 +162,7 @@ const PortfolioModal = (props => {
                       onChange={formHandler.handleChange}
                       className={`${modalWrapper}__modal-content__text-content__description__input`}
                     />
+                    {formHandler.errors.description && <ErrorMessages error={formHandler.errors.description}/>}
                   </div>
                   <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
                 </> :
@@ -196,14 +204,17 @@ const PortfolioModal = (props => {
           </Grid>
         </div>
       </div>
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}
+      />}
     </div>
   );
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updateTitle: (portfolio) => dispatch(updateTitle(portfolio)),
-  updateDescription: (portfolio) => dispatch(updateDescription(portfolio)),
-  updateCategories: (portfolio) => dispatch(updateCategories(portfolio)),
+  updatePortfolio: (portfolio) => dispatch(updatePortfolio(portfolio)),
 });
 
 export default connect(null, mapDispatchToProps)(PortfolioModal);

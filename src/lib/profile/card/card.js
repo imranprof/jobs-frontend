@@ -37,6 +37,15 @@ const CustomCard = (props) => {
       return categoriesText;
     }
   }
+
+  const getTitle = () => {
+    if (title.length > 40) {
+      return `${title.slice(0, 40)}...`;
+    } else {
+      return title;
+    }
+  }
+
   const removeHandler = (item) => {
     if (isPortfolio) {
       if (portfolios.length < 2) {
@@ -106,7 +115,7 @@ const CustomCard = (props) => {
           <h1 className={`${classes.cardWrapper}__title`}>
             <Link scroll={false} href="#">
               <a className={`${classes.cardWrapper}__title__link`}>
-                {title}
+                {getTitle()}
                 <Icon
                   className={`${classes.cardWrapper}__title__link__arrow ${FontAwesomeIcons.arrowRight}`}/>
               </a>
@@ -117,7 +126,8 @@ const CustomCard = (props) => {
       {togglePortfolioModal && <PortfolioModal
         setTogglePortfolioModal={setTogglePortfolioModal}
         editMode={editMode}
-        portfolio={element}/>
+        portfolio={element}
+        setToast={setToast}/>
       }
 
       {toggleBlogModal && <BlogModal
@@ -136,9 +146,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
-  blogsRemove: (blog) => dispatch(blogsRemove(blog))
-})
+const mapDispatchToProps = (dispatch) => (
+  {
+    removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
+    blogsRemove: (blog) => dispatch(blogsRemove(blog))
+  }
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomCard);

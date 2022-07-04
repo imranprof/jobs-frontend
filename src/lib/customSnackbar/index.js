@@ -3,7 +3,6 @@ import {useTheme} from "@material-ui/core/styles";
 import {Alert} from "@material-ui/lab";
 
 import {CustomSnackbarStyle} from "./style";
-import {useState} from "react";
 
 const CustomSnackbar = ({
                           toast, setToast
