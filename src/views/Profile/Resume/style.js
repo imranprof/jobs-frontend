@@ -263,11 +263,6 @@ const useStyles = makeStyles({
               '&:first-child': {
                 marginTop: 0,
               },
-              '&-actionButtons': {
-                display: "flex",
-                justifyContent: "flex-end",
-                marginBottom: 10
-              },
               '&__title': {
                 margin: 0,
                 marginBottom: 10,
