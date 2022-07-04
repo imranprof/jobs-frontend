@@ -124,7 +124,7 @@ export const ProfileData = {
     {
       id: 1,
       image: "blog-01.jpg",
-      categories: [{id: 1, title: "mobile"}, {id: 2, title: "apps"}],
+      categories: [{id: 2, title: "mobile"}, {id: 3, title: "apps"}],
       title: "The services provide for design",
       readTime: 2,
       description: <div>
@@ -188,7 +188,7 @@ export const ProfileData = {
     {
       id: 2,
       image: "blog-02.jpg",
-      categories: [{id: 1, title: "mobile"}, {id: 2, title: "development"}, {id: 3, title: "apps"}],
+      categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
       title: "Mobile app landing design & app maintain",
       readTime: 2,
       description: <div>
@@ -316,7 +316,7 @@ export const ProfileData = {
     {
       id: 4,
       image: "portfolio-05.jpg",
-      categories: [{id: 1, title: "mobile"}, {id: 2, title: "development"}, {id: 3, title: "apps"}],
+      categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
       title: "this is new blog",
       readTime: 4,
       description: <div>
