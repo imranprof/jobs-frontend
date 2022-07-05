@@ -30,7 +30,7 @@ const SocialLinks = (props) => {
       </div>
 
       <MuiCustomModal handleClose={modalClose} open={openModal}>
-        <SocialLinksEdit handleClose={modalClose} />
+        <SocialLinksEdit setToast={props.setToast} handleClose={modalClose} />
       </MuiCustomModal>
 
       <span onClick={() => setOpenModal(true)}>

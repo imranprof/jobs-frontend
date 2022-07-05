@@ -23,6 +23,7 @@ const Skills = (props) => {
   const skillsEditHandler = () => {
     if (skillsEditValue.skills.length !== 0 && skillsEditValue.skills.length <= 3) {
       props.setSkills(skillsEditValue.skills);
+      props.setToast({show: true, severity: "success", text: "Successfully updated the skills"});
       setOpenModal(false);
     } else {
       setOpenModal(true);
