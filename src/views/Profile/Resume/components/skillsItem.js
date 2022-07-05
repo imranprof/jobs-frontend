@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {connect} from "react-redux";
 
 import {useTheme} from "@material-ui/core/styles";
 
@@ -54,4 +55,10 @@ const SkillsItem = (props) => {
   );
 }
 
-export default SkillsItem;
+const mapStateToProps = (state) => {
+  return {
+    resume: state.editResume.resume
+  }
+}
+
+export default connect(mapStateToProps)(SkillsItem);
