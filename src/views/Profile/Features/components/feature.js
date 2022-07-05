@@ -9,7 +9,7 @@ import RemoveButton from "../../../../lib/removeButton";
 import MuiCustomModal from "../../../../lib/profile/muiCustomModal";
 import FeaturesEdit from "../../EditComponents/features/components/featuresEdit";
 
-const Feature = ({feature, classes, featureRemove}) => {
+const Feature = ({feature, classes, featureRemove, setToast}) => {
   const {iconName, title, description} = feature;
   const [openModal, setOpenModal] = useState(false);
 
@@ -40,7 +40,7 @@ const Feature = ({feature, classes, featureRemove}) => {
       </a>
 
       <MuiCustomModal handleClose={modalClose} open={openModal}>
-        <FeaturesEdit feature={feature} handleClose={modalClose} />
+        <FeaturesEdit feature={feature} setToast={setToast} handleClose={modalClose}/>
       </MuiCustomModal>
     </Grid>
   );
