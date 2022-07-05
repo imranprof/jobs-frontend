@@ -4,13 +4,15 @@ import {profileReducer} from "./profileReducers";
 import {authReducers} from "./authReducers";
 import {editProfileReducer} from "./editProfileReducers";
 import {resumeReducers} from "./resumeReducers";
+import {portfolioReducer} from "./portfolioReducers"
 
 const rootReducers = combineReducers({
     allProfiles: profilesReducer,
     profile: profileReducer,
     editProfile: editProfileReducer,
     editResume: resumeReducers,
-    auth: authReducers
+    auth: authReducers,
+    portfolios: portfolioReducer,
 })
 
 export default rootReducers;
