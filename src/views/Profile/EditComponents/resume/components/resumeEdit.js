@@ -37,6 +37,7 @@ const ResumeEdit = (props) => {
     props.resume[cardType][cardIndex].endDate = `${values.endMonth} ${values.endYear}`
 
     props.setResume(props.resume)
+    props.setToast({show: true, severity: "success", text: `Successfully updated the ${cardType}`})
     handleClose()
   }
 

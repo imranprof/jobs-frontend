@@ -49,7 +49,8 @@ const SkillsItem = (props) => {
       </div>
 
       <MuiCustomModal handleClose={modalClose} open={openModal}>
-        <ResumeSkillsEdit cardType={cardType} cardContent={cardContent} handleClose={modalClose} />
+        <ResumeSkillsEdit cardType={cardType} cardContent={cardContent} handleClose={modalClose}
+                          setToast={props.setToast}/>
       </MuiCustomModal>
     </>
   );

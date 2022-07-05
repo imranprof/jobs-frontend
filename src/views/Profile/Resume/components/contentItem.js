@@ -53,6 +53,7 @@ const ContentItem = (props) => {
           title={title}
           description={description}
           handleClose={modalClose}
+          setToast={props.setToast}
         />
       </MuiCustomModal>
     </>

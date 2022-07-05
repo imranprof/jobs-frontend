@@ -18,8 +18,9 @@ const ColumnContent = (props) => {
       props.resume[cardType] = props.resume[cardType].filter(content => content.id !== item.id)
 
       props.setResumeItemRemove({...props.resume})
+      props.setToast({show: true, severity: "success", text: `Successfully deleted the ${cardType}!`})
     } else {
-      alert(`You must have at least one ${cardType}!`)
+      props.setToast({show: true, severity: "error", text: `You must have at least one ${cardType}!`})
     }
   }
 
@@ -32,12 +33,14 @@ const ColumnContent = (props) => {
           cardType={cardType}
           cardContent={cardData[idx]}
           resumeItemRemoveHandler={resumeItemRemoveHandler}
+          setToast={props.setToast}
         /> :
         <ContentItem
           key={cardData[idx].id}
           cardType={cardType}
           cardContent={cardData[idx]}
           resumeItemRemoveHandler={resumeItemRemoveHandler}
+          setToast={props.setToast}
         />
     );
   }

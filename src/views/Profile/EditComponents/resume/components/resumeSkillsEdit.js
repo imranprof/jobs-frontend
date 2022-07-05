@@ -27,6 +27,7 @@ const ResumeSkillsEdit = (props) => {
     props.resume[cardType][skillIndex].rating = values.rating
 
     props.setResume(props.resume)
+    props.setToast({show: true, severity: "success", text: "Successfully updated the skill"})
     handleClose()
   }
 
