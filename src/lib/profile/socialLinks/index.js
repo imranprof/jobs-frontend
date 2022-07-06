@@ -13,6 +13,7 @@ const SocialLinks = (props) => {
   const theme = useTheme();
   const classes = SocialLinkStyle(theme);
   const [openModal, setOpenModal] = useState(false);
+  const {setToast} = props
 
   const modalClose = () => {
     setOpenModal(false)
@@ -30,7 +31,7 @@ const SocialLinks = (props) => {
       </div>
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
-        <SocialLinksEdit handleClose={modalClose} />
+        <SocialLinksEdit setToast={setToast} handleClose={modalClose} />
       </EditCustomModal>
 
       <span className={`${classes.socialLinksWrapper}__social-links__editBtnWrapper`} onClick={() => setOpenModal(true)}>

@@ -13,7 +13,7 @@ import ErrorMessage from "../../../../../lib/errorMessage";
 const SocialLinksEdit = (props) => {
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
-  const {handleClose} = props;
+  const {handleClose, setToast} = props;
 
   const updateLinks = values => {
     Object.keys(values).map((key) => {
@@ -22,7 +22,7 @@ const SocialLinksEdit = (props) => {
       }
     })
     props.setLinks(values);
-    props.setToast({show: true, severity: "success", text: "Successfully updated the social links"});
+    setToast({show: true, severity: "success", text: "Successfully updated the social links"});
     handleClose(true)
   }
 
