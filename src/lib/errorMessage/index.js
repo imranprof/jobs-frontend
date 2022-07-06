@@ -1,18 +1,18 @@
 import {useTheme} from "@material-ui/core/styles";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
-import {ErrorMessagesStyle} from "./style";
+import {ErrorMessageStyle} from "./style";
 
-const ErrorMessages = ({error}) => {
+const ErrorMessage = ({error}) => {
   const theme = useTheme();
-  const classes = ErrorMessagesStyle(theme);
+  const classes = ErrorMessageStyle(theme);
 
   return (
-    <div className={classes.errorMessagesWrapper}>
+    <div className={classes.errorMessageWrapper}>
       <ErrorOutlineIcon/>
       <p>{error}</p>
     </div>
   );
 };
 
-export default ErrorMessages;
+export default ErrorMessage;
