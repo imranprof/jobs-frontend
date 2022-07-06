@@ -22,6 +22,7 @@ const SocialLinksEdit = (props) => {
       }
     })
     props.setLinks(values);
+    props.setToast({show: true, severity: "success", text: "Successfully updated the social links"});
     handleClose(true)
   }
 

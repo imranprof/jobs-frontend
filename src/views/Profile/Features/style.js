@@ -75,16 +75,6 @@ const useStyles = makeStyles({
           overflowWrap: "break-word",
           whiteSpace: "break-spaces",
           overflow: "auto",
-          '&::-webkit-scrollbar-track': {
-            background: theme.palette.scrollBar.track,
-          },
-          '&::-webkit-scrollbar': {
-            width: 3,
-            background: theme.palette.scrollBar.track,
-          },
-          '&::-webkit-scrollbar-thumb': {
-            background: theme.palette.scrollBar.thumb,
-          },
         },
         '&__description': {
           height: 120,
