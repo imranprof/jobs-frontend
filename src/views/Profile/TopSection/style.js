@@ -14,8 +14,34 @@ export const useStyles = makeStyles({
       justifyContent: "center",
       '&-top': {
         marginBottom: 80,
+        '&__editBtnWrapper': {
+          height: "fit-content",
+        },
         '&__headline-inputWrapper': {
           width: "85%",
+          '& label.Mui-focused': {
+            color: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiFilledInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiOutlinedInput-input': {
+            padding: 12
+          },
+          '& .MuiOutlinedInput-inputMultiline': {
+            padding: 0
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.customBorder.customInputBorder,
+            }
+          },
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
         },
         '&__headline': {
           width: "85%",
@@ -33,11 +59,37 @@ export const useStyles = makeStyles({
           },
           // ========= Breakpoints =========
           [theme.breakpoints.down('xs')]: {
+            width: "100%",
+            fontSize: 14,
+            margin: 0,
             letterSpacing: 1
           }
         },
         '&__bio-inputWrapper': {
-          width: "85%"
+          width: "85%",
+          '& label.Mui-focused': {
+            color: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiFilledInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiOutlinedInput-input': {
+            padding: 12
+          },
+          '& .MuiOutlinedInput-inputMultiline': {
+            padding: 0
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.customBorder.customInputBorder,
+            }
+          },
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
         },
         '&__title': {
           color: theme.palette.customColor.light,
@@ -67,14 +119,17 @@ export const useStyles = makeStyles({
           [theme.breakpoints.down('md')]: {
             fontSize: 50,
             '&__expertise': {
-              fontSize: 40
+              height: 38,
+              fontSize: 38
             }
           },
           [theme.breakpoints.down('xs')]: {
-            fontSize: 30,
+            fontSize: 26,
             lineHeight: "35px",
             '&__expertise': {
-              fontSize: 24
+              fontSize: 20,
+              lineHeight: 0,
+              marginBottom: 0
             },
             '&__cursor': {
               height: 35,
@@ -85,12 +140,18 @@ export const useStyles = makeStyles({
           display: "flex",
           justifyContent: "space-between",
           width: "90%",
-          paddingTop: 12
+          paddingTop: 12,
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
         },
         '&__bio-wrapper': {
           display: "flex",
           paddingTop: 12,
-          width: "90%"
+          width: "90%",
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
         },
         '&__bio-text': {
           fontSize: 16,
@@ -101,6 +162,7 @@ export const useStyles = makeStyles({
           opacity: 0.9,
           // ========= Breakpoints =========
           [theme.breakpoints.down('sm')]: {
+            fontSize: 14,
             paddingRight: 0
           }
         },

@@ -10,11 +10,11 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
-import CustomButton from "../../../../lib/customButtons";
+import CustomButton from "../../../../lib/profile/customButtons";
 import {updatePortfolio} from "../../../../store/actions/portfolioActions";
 import {ProfileData} from "../../../../../API/mock/profile/profileData";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import ErrorMessages from "../../../../lib/errorMessages";
+import ErrorMessage from "../../../../lib/errorMessage";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
@@ -142,7 +142,7 @@ const PortfolioModal = (props => {
                       onChange={categoriesChangeHandler}
                       className={`${modalWrapper}__modal-content__text-content__category__selectDropdown`}
                     />
-                    {formHandler.errors.categories && <ErrorMessages error={formHandler.errors.categories}/>}
+                    {formHandler.errors.categories && <ErrorMessage error={formHandler.errors.categories}/>}
                   </div>
                   <TextField
                     variant="outlined"
@@ -151,7 +151,7 @@ const PortfolioModal = (props => {
                     onChange={formHandler.handleChange}
                     className={`${modalWrapper}__modal-content__text-content__title__input`}
                   />
-                  {formHandler.errors.title && <ErrorMessages error={formHandler.errors.title}/>}
+                  {formHandler.errors.title && <ErrorMessage error={formHandler.errors.title}/>}
                   <div>
                     <TextField
                       value={formHandler.values.description}
@@ -162,7 +162,7 @@ const PortfolioModal = (props => {
                       onChange={formHandler.handleChange}
                       className={`${modalWrapper}__modal-content__text-content__description__input`}
                     />
-                    {formHandler.errors.description && <ErrorMessages error={formHandler.errors.description}/>}
+                    {formHandler.errors.description && <ErrorMessage error={formHandler.errors.description}/>}
                   </div>
                   <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
                 </> :

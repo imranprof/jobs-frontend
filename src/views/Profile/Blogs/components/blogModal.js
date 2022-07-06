@@ -15,7 +15,7 @@ import {useTheme} from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 
 import {BlogModalStyle} from "./blogModalStyle";
-import CustomButton from "../../../../lib/customButtons";
+import CustomButton from "../../../../lib/profile/customButtons";
 import {renderToString} from "react-dom/server";
 import {updateBlog} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
