@@ -21,7 +21,6 @@ export function handleApiResponse(response) {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
       await dispatch(authenticate(true))
-      await dispatch(modalType(''))
     } else {
       await dispatch(signInRejected(response.data.message))
     }
