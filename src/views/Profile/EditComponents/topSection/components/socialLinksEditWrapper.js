@@ -1,4 +1,5 @@
 import {useTheme} from "@material-ui/core/styles";
+import {TextField} from "@material-ui/core";
 
 import {TopSectionEditStyle} from "../style";
 
@@ -11,11 +12,13 @@ const SocialLinksEditWrapper = ({iconName, urlValue, name, changeHandler}) => {
       <div className={`${classes.topSectionEditWrapper}__socialLinks-icon`}>
         <i className={iconName} />
       </div>
-      <input
+      <TextField
+        fullWidth
+        size="small"
+        variant="outlined"
         value={urlValue || ""}
         name={name}
         onChange={changeHandler}
-        className={`${classes.topSectionEditWrapper}__socialLinks-input`}
       />
     </div>
   );

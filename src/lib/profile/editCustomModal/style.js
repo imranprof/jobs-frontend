@@ -17,6 +17,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export function MuiCustomModalStyle(theme) {
+export function EditCustomModalStyle(theme) {
   return useStyles(theme);
 }
