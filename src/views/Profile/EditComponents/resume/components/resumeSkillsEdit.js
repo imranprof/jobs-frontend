@@ -5,8 +5,8 @@ import {Slider, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import {resumeUpdate} from "../../../../../store/actions/resumeActions";
-import CustomButtons from "../../../../../lib/customButtons";
-import ErrorMessages from "../../../../../lib/errorMessages";
+import CustomButtons from "../../../../../lib/profile/customButtons";
+import ErrorMessage from "../../../../../lib/errorMessage";
 import {ResumeEditStyle} from "../style";
 
 const ResumeSkillsEdit = (props) => {
@@ -61,7 +61,7 @@ const ResumeSkillsEdit = (props) => {
             value={formik.values.name}
             onChange={formik.handleChange}
           />
-          {formik.errors.name ? <ErrorMessages error={formik.errors.name} /> : null}
+          {formik.errors.name ? <ErrorMessage error={formik.errors.name} /> : null}
         </div>
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
           <h4>Select your rating</h4>

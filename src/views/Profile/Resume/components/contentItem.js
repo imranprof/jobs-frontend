@@ -5,7 +5,7 @@ import {useTheme} from "@material-ui/core/styles";
 
 import EditButton from "../../../../lib/editButton";
 import RemoveButton from "../../../../lib/removeButton";
-import MuiCustomModal from "../../../../lib/profile/muiCustomModal";
+import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import ResumeEdit from "../../EditComponents/resume/components/resumeEdit";
 import {ResumeStyle} from "../style";
 
@@ -46,7 +46,7 @@ const ContentItem = (props) => {
         </div>
       </Grid>
 
-      <MuiCustomModal handleClose={modalClose} open={openModal}>
+      <EditCustomModal handleClose={modalClose} open={openModal}>
         <ResumeEdit
           cardType={cardType}
           cardContent={cardContent}
@@ -55,7 +55,7 @@ const ContentItem = (props) => {
           handleClose={modalClose}
           setToast={props.setToast}
         />
-      </MuiCustomModal>
+      </EditCustomModal>
     </>
   );
 }

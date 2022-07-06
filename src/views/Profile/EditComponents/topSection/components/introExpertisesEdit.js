@@ -2,12 +2,13 @@ import {useState} from 'react';
 import Select from "react-select";
 import {connect} from "react-redux";
 
+import {TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
-import CustomButton from "../../../../../lib/customButtons";
+import CustomButton from "../../../../../lib/profile/customButtons";
 import {expertisesText} from "../../../../../store/actions/editProfileActions";
 import {TopSectionEditStyle} from "../style";
-import ErrorMessages from "../../../../../lib/errorMessages";
+import ErrorMessage from "../../../../../lib/errorMessage";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -17,8 +18,16 @@ const expertisesData = [
   {value: 5, label: "Rails Developer"}
 ]
 
-const IntroExpertises = (props) => {
-  const {fullName, inputIntroChangeHandler, inputValue, introEditHandler, expertisesEditValue, setExpertisesEditValue, handleClose} = props;
+const IntroExpertisesEdit = (props) => {
+  const {
+    fullName,
+    inputIntroChangeHandler,
+    inputValue,
+    introEditHandler,
+    expertisesEditValue,
+    setExpertisesEditValue,
+    handleClose
+  } = props;
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
 
@@ -50,15 +59,16 @@ const IntroExpertises = (props) => {
     <>
       <div className={`${classes.topSectionEditWrapper}__introWrapper`}>
         <div className={`${classes.topSectionEditWrapper}__introWrapper-child`}>
-          <input
+          <TextField
+            size="small"
+            variant="outlined"
             value={inputValue}
             onChange={inputIntroChangeHandler}
-            className={`${classes.topSectionEditWrapper}__introWrapper__input`}
           />
           <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
         </div>
-        {inputValue === "" && <ErrorMessages error="Intro can't be blank" />}
-        {inputValue.length > 15 && <ErrorMessages error="Intro must have within 15 characters" />}
+        {inputValue === "" && <ErrorMessage error="Intro can't be blank"/>}
+        {inputValue.length > 15 && <ErrorMessage error="Intro must have within 15 characters"/>}
       </div>
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
@@ -71,7 +81,7 @@ const IntroExpertises = (props) => {
             onChange={selectChangeHandler}
             className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectDropdown`}
           />
-          {expertisesEditValue.length === 0 && <ErrorMessages error="Select at least one expertise" />}
+          {expertisesEditValue.length === 0 && <ErrorMessage error="Select at least one expertise"/>}
         </div>
         <CustomButton handler={introEditHandler} mode={handleClose}/>
       </div>
@@ -89,4 +99,4 @@ const mapDispatchToProps = (dispatch) => ({
   setExpertises: (editValue) => dispatch(expertisesText(editValue)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(IntroExpertises);
+export default connect(mapStateToProps, mapDispatchToProps)(IntroExpertisesEdit);

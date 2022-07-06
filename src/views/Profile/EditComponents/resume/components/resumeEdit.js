@@ -4,10 +4,10 @@ import {connect} from "react-redux";
 import {MenuItem, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
-import CustomButtons from "../../../../../lib/customButtons";
+import CustomButtons from "../../../../../lib/profile/customButtons";
 import {resumeUpdate} from "../../../../../store/actions/resumeActions";
 import {ResumeEditStyle} from "../style";
-import ErrorMessages from "../../../../../lib/errorMessages";
+import ErrorMessage from "../../../../../lib/errorMessage";
 
 const ResumeEdit = (props) => {
   const theme = useTheme();
@@ -193,7 +193,7 @@ const ResumeEdit = (props) => {
             value={formik.values.description}
             onChange={formik.handleChange}
           />
-          {formik.errors.description ? <ErrorMessages error={formik.errors.description} /> : null}
+          {formik.errors.description ? <ErrorMessage error={formik.errors.description} /> : null}
         </div>
 
       </div>
