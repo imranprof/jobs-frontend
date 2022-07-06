@@ -14,6 +14,7 @@ const FontAwesomeIcons = {
     "clock": "far fa-clock",
     "thumbsUp": "far fa-thumbs-up",
     "angleRight": "fas fa-angle-right",
+    "pencil": "fa-solid fa-pencil",
     "signIn": "fa-solid fa-right-to-bracket",
 }
 

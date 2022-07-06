@@ -13,8 +13,38 @@ export const useStyles = makeStyles({
       flexDirection: "column",
       justifyContent: "center",
       '&-top': {
-        marginBottom: 142,
+        marginBottom: 80,
+        '&__editBtnWrapper': {
+          height: "fit-content",
+        },
+        '&__headline-inputWrapper': {
+          width: "85%",
+          '& label.Mui-focused': {
+            color: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiFilledInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiOutlinedInput-input': {
+            padding: 12
+          },
+          '& .MuiOutlinedInput-inputMultiline': {
+            padding: 0
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.customBorder.customInputBorder,
+            }
+          },
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
+        },
         '&__headline': {
+          width: "85%",
           fontSize: 14,
           fontFamily: FONTS.primaryFont,
           color: theme.palette.customColor.main,
@@ -23,9 +53,42 @@ export const useStyles = makeStyles({
           fontWeight: 500,
           display: "block",
           marginBottom: 20,
+          wordBreak: "break-word",
+          '&-text': {
+            marginRight: 14
+          },
           // ========= Breakpoints =========
           [theme.breakpoints.down('xs')]: {
+            width: "100%",
+            fontSize: 14,
+            margin: 0,
             letterSpacing: 1
+          }
+        },
+        '&__bio-inputWrapper': {
+          width: "85%",
+          '& label.Mui-focused': {
+            color: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiFilledInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiOutlinedInput-input': {
+            padding: 12
+          },
+          '& .MuiOutlinedInput-inputMultiline': {
+            padding: 0
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.customBorder.customInputBorder,
+            }
+          },
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
           }
         },
         '&__title': {
@@ -56,29 +119,50 @@ export const useStyles = makeStyles({
           [theme.breakpoints.down('md')]: {
             fontSize: 50,
             '&__expertise': {
-              fontSize: 40
+              height: 38,
+              fontSize: 38
             }
           },
           [theme.breakpoints.down('xs')]: {
-            fontSize: 30,
+            fontSize: 26,
             lineHeight: "35px",
             '&__expertise': {
-              fontSize: 24
+              fontSize: 20,
+              lineHeight: 0,
+              marginBottom: 0
             },
             '&__cursor': {
               height: 35,
             },
           }
         },
-        '&__bio': {
+        '&__greetings-expertise': {
+          display: "flex",
+          justifyContent: "space-between",
+          width: "90%",
+          paddingTop: 12,
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
+        },
+        '&__bio-wrapper': {
+          display: "flex",
+          paddingTop: 12,
+          width: "90%",
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
+        },
+        '&__bio-text': {
           fontSize: 16,
           fontFamily: FONTS.secondaryFont,
           lineHeight: "30px",
           color: theme.palette.customColor.main,
-          paddingRight: "16%",
+          margin: "0 10px 0 0",
           opacity: 0.9,
           // ========= Breakpoints =========
           [theme.breakpoints.down('sm')]: {
+            fontSize: 14,
             paddingRight: 0
           }
         },

@@ -1,6 +1,7 @@
 export const ProfileData = {
   name: "John Doe",
   headline: "Welcome to my world",
+  intro: "Hi, I'm",
   title: "a Rails Developer.",
   bio: "I use animation as a third dimension by which to simplify experiences and kuiding thro each and every interaction. I’m not adding motion just to spruce things up, but doing it in ways that.",
   avatar: "profile-pic.png",
@@ -9,15 +10,15 @@ export const ProfileData = {
   contactDescription: "I am available for freelance work. Connect with me via and call in to my account",
   phone: "+01234567890",
   expertises: ["Developer", "Programmer", "Designer", "Professional Coder", "Rails Developer"],
-  socialLinks: [
-    {id: 1, iconName: "facebook", url: "https://www.facebook.com/"},
-    {id: 2, iconName: "github", url: "https://www.github.com/"},
-    {id: 3, iconName: "linkedin", url: "https://www.linkedin.com/"},
-  ],
+  socialLinks: {
+    "facebook": "https://www.facebook.com/",
+    "github": "https://www.github.com/",
+    "linkedin": "https://www.linkedin.com/",
+  },
   skills: [
-    {id: 1, image: "ruby.png", alt: "ruby"},
-    {id: 2, image: "javascript.png", alt: "javascript"},
-    {id: 3, image: "python.png", alt: "python"},
+    {id: 1, name: "Ruby", image: "ruby.png"},
+    {id: 2, name: "Javascript", image: "javascript.png"},
+    {id: 3, name: "Python", image: "python.png"},
   ],
   features: [
     {
