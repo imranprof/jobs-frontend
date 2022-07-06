@@ -10,13 +10,13 @@ import TypeWriter from "./typeWriter";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
-import MuiCustomModal from "../../../lib/profile/muiCustomModal";
+import EditCustomModal from "../../../lib/profile/editCustomModal";
 import {TopSectionStyle} from "./style";
 import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
-import CustomButton from "../../../lib/customButtons";
-import IntroExpertises from "../EditComponents/topSection/components/introExpertises";
-import ErrorMessages from "../../../lib/errorMessages";
+import CustomButton from "../../../lib/profile/customButtons";
+import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
+import ErrorMessage from "../../../lib/errorMessage";
 import {
   headlineText,
   headlineEditMode,
@@ -55,9 +55,9 @@ const TopSection = (props) => {
     },
     validate: values => {
       let errors = {}
-      if(!values.headline) {
+      if (!values.headline) {
         errors.headline = "Headline can't be empty"
-      } else if(values.headline.length > 50) {
+      } else if (values.headline.length > 50) {
         errors.headline = "Headline must have within 50 characters"
       }
       return errors;
@@ -72,9 +72,9 @@ const TopSection = (props) => {
     },
     validate: values => {
       let errors = {}
-      if(!values.bio) {
+      if (!values.bio) {
         errors.bio = "Bio can't be empty"
-      } else if(values.bio.length > 500) {
+      } else if (values.bio.length > 500) {
         errors.bio = "Bio must have within 500 characters"
       }
       return errors;
@@ -109,13 +109,14 @@ const TopSection = (props) => {
             <div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
               <TextField
                 fullWidth
+                size="small"
                 variant="outlined"
                 name='headline'
                 value={headlineHandler.values.headline}
                 onChange={headlineHandler.handleChange}
               />
-              {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline} /> : null}
-              <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode} />
+              {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
+              <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
             </div>
           ) : (
             <div className={`${classes.topSectionWrapper}__left-top__headline`}>
@@ -126,8 +127,8 @@ const TopSection = (props) => {
             </div>
           )}
 
-          <MuiCustomModal handleClose={modalClose} open={openModal}>
-            <IntroExpertises
+          <EditCustomModal handleClose={modalClose} open={openModal}>
+            <IntroExpertisesEdit
               handleClose={modalClose}
               fullName={name}
               inputValue={introEditValue.intro}
@@ -136,11 +137,12 @@ const TopSection = (props) => {
               expertisesEditValue={expertisesEditValue.expertises}
               setExpertisesEditValue={setExpertisesEditValue}
             />
-          </MuiCustomModal>
+          </EditCustomModal>
 
           <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
             <TypeWriter name={name} intro={props.intro} expertises={expertisesList} classes={classes}/>
-            <span onClick={() => setOpenModal(true)}>
+            <span className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+                  onClick={() => setOpenModal(true)}>
                 <EditButton/>
               </span>
           </div>
@@ -155,15 +157,17 @@ const TopSection = (props) => {
                 name="bio"
                 value={bioHandler.values.bio}
                 onChange={bioHandler.handleChange}
-                // className={`${classes.topSectionWrapper}__left-top__bio-input`}
               />
-              {bioHandler.errors.bio ? <ErrorMessages error={bioHandler.errors.bio} /> : null}
+              {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
               <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
             </div>
           ) : (
             <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
               <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{props.bio}</p>
-              <span onClick={() => props.setBioMode(true)}>
+              <span
+                className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+                onClick={() => props.setBioMode(true)}
+              >
               <EditButton/>
             </span>
             </div>
@@ -181,7 +185,8 @@ const TopSection = (props) => {
         </div>
       </Grid>
 
-      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef} onClick={() => scroll.scrollToTop()}>
+      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
+           onClick={() => scroll.scrollToTop()}>
         <i className={`${FontAwesomeIcons.arrowUp}`}/>
       </div>
     </Grid>

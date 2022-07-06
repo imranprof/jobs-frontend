@@ -6,7 +6,7 @@ import Icon from "@material-ui/core/Icon";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import EditButton from "../../../../lib/editButton";
 import RemoveButton from "../../../../lib/removeButton";
-import MuiCustomModal from "../../../../lib/profile/muiCustomModal";
+import MuiCustomModal from "../../../../lib/profile/editCustomModal";
 import FeaturesEdit from "../../EditComponents/features/components/featuresEdit";
 
 const Feature = ({feature, classes, featureRemove}) => {

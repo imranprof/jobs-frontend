@@ -5,9 +5,9 @@ import {TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import {FeaturesEditStyle} from "../style";
-import CustomButtons from "../../../../../lib/customButtons";
+import CustomButtons from "../../../../../lib/profile/customButtons";
 import {featuresUpdate} from "../../../../../store/actions/editProfileActions";
-import ErrorMessages from "../../../../../lib/errorMessages";
+import ErrorMessages from "../../../../../lib/errorMessage";
 
 const FeaturesEdit = (props) => {
   const theme = useTheme();

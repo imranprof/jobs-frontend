@@ -5,10 +5,10 @@ import {useTheme} from "@material-ui/core/styles";
 
 import SocialLinksEditWrapper from "./socialLinksEditWrapper";
 import FontAwesomeIcons from "../../../../../../styles/FontAwesomeIcons";
-import CustomButton from "../../../../../lib/customButtons";
+import CustomButton from "../../../../../lib/profile/customButtons";
 import {TopSectionEditStyle} from "../style";
 import {socialLinksUpdate} from "../../../../../store/actions/editProfileActions";
-import ErrorMessages from "../../../../../lib/errorMessages";
+import ErrorMessage from "../../../../../lib/errorMessage";
 
 const SocialLinksEdit = (props) => {
   const theme = useTheme();
@@ -62,7 +62,7 @@ const SocialLinksEdit = (props) => {
           urlValue={formik.values.linkedin}
           changeHandler={formik.handleChange}
         />
-        {formik.errors.values ? <ErrorMessages error={formik.errors.values}/> : null}
+        {formik.errors.values ? <ErrorMessage error={formik.errors.values}/> : null}
       </form>
       <CustomButton handler={formik.handleSubmit} mode={handleClose}/>
     </div>

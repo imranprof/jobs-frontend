@@ -7,7 +7,7 @@ import Skill from "./skill";
 import {SkillsStyle} from "./style";
 import EditButton from "../../editButton";
 import SkillsEdit from "../../../views/Profile/EditComponents/topSection/components/skillsEdit";
-import MuiCustomModal from "../muiCustomModal";
+import EditCustomModal from "../editCustomModal";
 import {skillsUpdate} from "../../../store/actions/editProfileActions";
 
 const Skills = (props) => {
@@ -40,16 +40,16 @@ const Skills = (props) => {
         </div>
       </div>
 
-      <MuiCustomModal handleClose={modalClose} open={openModal}>
+      <EditCustomModal handleClose={modalClose} open={openModal}>
         <SkillsEdit
           skillsEditHandler={skillsEditHandler}
           skillsEditValue={skillsEditValue}
           setSkillsEditValue={setSkillsEditValue}
           handleClose={modalClose}
         />
-      </MuiCustomModal>
+      </EditCustomModal>
 
-      <span onClick={() => setOpenModal(true)}>
+      <span className={`${classes.skillsWrapper}__skills__editBtnWrapper`} onClick={() => setOpenModal(true)}>
         <EditButton/>
       </span>
     </div>
