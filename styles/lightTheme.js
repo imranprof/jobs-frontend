@@ -100,6 +100,10 @@ const lightTheme = createTheme({
       title: COLORS.black,
       percentText: COLORS.gray,
       boxShadow: "none",
+    },
+    scrollBar: {
+      track: COLORS.gray_4,
+      thumb: COLORS.white_6
     }
   },
 });
