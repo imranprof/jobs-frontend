@@ -6,7 +6,7 @@ import Icon from "@material-ui/core/Icon";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import EditButton from "../../../../lib/editButton";
 import RemoveButton from "../../../../lib/removeButton";
-import MuiCustomModal from "../../../../lib/profile/editCustomModal";
+import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import FeaturesEdit from "../../EditComponents/features/components/featuresEdit";
 
 const Feature = ({feature, classes, featureRemove, setToast}) => {
@@ -39,9 +39,9 @@ const Feature = ({feature, classes, featureRemove, setToast}) => {
         </Paper>
       </a>
 
-      <MuiCustomModal handleClose={modalClose} open={openModal}>
-        <FeaturesEdit feature={feature} setToast={setToast} handleClose={modalClose}/>
-      </MuiCustomModal>
+      <EditCustomModal handleClose={modalClose} open={openModal}>
+        <FeaturesEdit feature={feature} handleClose={modalClose} />
+      </EditCustomModal>
     </Grid>
   );
 }

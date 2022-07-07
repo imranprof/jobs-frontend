@@ -7,7 +7,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {FeaturesEditStyle} from "../style";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import {featuresUpdate} from "../../../../../store/actions/editProfileActions";
-import ErrorMessages from "../../../../../lib/errorMessage";
+import ErrorMessage from "../../../../../lib/errorMessage";
 
 const FeaturesEdit = (props) => {
   const theme = useTheme();
@@ -70,7 +70,7 @@ const FeaturesEdit = (props) => {
             value={formik.values.title}
             onChange={formik.handleChange}
           />
-          {formik.errors.title ? <ErrorMessages error={formik.errors.title}/> : null}
+          {formik.errors.title ? <ErrorMessage error={formik.errors.title} /> : null}
         </div>
         <div className={`${classes.featuresEditWrapper}__content-wrapper__gap`}>
           <TextField
@@ -84,7 +84,7 @@ const FeaturesEdit = (props) => {
             value={formik.values.description}
             onChange={formik.handleChange}
           />
-          {formik.errors.description ? <ErrorMessages error={formik.errors.description}/> : null}
+          {formik.errors.description ? <ErrorMessage error={formik.errors.description} /> : null}
         </div>
       </div>
       <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
