@@ -9,7 +9,7 @@ import RemoveButton from "../../../../lib/removeButton";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import FeaturesEdit from "../../EditComponents/features/components/featuresEdit";
 
-const Feature = ({feature, classes, featureRemove}) => {
+const Feature = ({feature, classes, featureRemove, setToast}) => {
   const {iconName, title, description} = feature;
   const [openModal, setOpenModal] = useState(false);
 

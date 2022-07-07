@@ -12,7 +12,7 @@ import ErrorMessage from "../../../../../lib/errorMessage";
 const FeaturesEdit = (props) => {
   const theme = useTheme();
   const classes = FeaturesEditStyle(theme);
-  const {feature, handleClose} = props;
+  const {feature, handleClose, setToast} = props;
   const {id, title, description} = feature
 
   const initialFeatureValue = {
@@ -26,21 +26,22 @@ const FeaturesEdit = (props) => {
     props.features[featureIndex].title = values.title
     props.features[featureIndex].description = values.description
 
-    props.editFeatures(props.features)
+    props.editFeatures(props.features);
+    setToast({show: true, severity: "success", text: "Successfully updated the feature."});
     handleClose()
   }
 
   const featureValidation = (values) => {
     let errors = {}
-    if(!values.title) {
+    if (!values.title) {
       errors.title = "Title can't be empty"
-    } else if(values.title.length > 30) {
+    } else if (values.title.length > 30) {
       errors.title = "Title must be within 30 characters"
     }
 
-    if(!values.description) {
+    if (!values.description) {
       errors.description = "Description can't be empty"
-    } else if(values.description.length > 150) {
+    } else if (values.description.length > 150) {
       errors.description = "Description must be within 150 characters"
     }
 
@@ -86,7 +87,7 @@ const FeaturesEdit = (props) => {
           {formik.errors.description ? <ErrorMessage error={formik.errors.description} /> : null}
         </div>
       </div>
-      <CustomButtons handler={formik.handleSubmit} mode={handleClose} />
+      <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
     </div>
   );
 };
