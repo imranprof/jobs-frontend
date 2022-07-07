@@ -6,7 +6,9 @@ import {
   BIO_TEXT,
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
-  SKILLS_VALUES
+  SKILLS_VALUES,
+  FEATURES_UPDATE,
+  FEATURES_REMOVE,
 } from "../actionTypes/editProfileTypes";
 
 // ***TopSection***
@@ -69,5 +71,20 @@ export const skillsUpdate = (skills) => {
   return {
     type: SKILLS_VALUES,
     payload: skills
+  }
+}
+
+// ***TopSection***
+export const featuresUpdate = (features) => {
+  return {
+    type: FEATURES_UPDATE,
+    payload: features
+  }
+}
+
+export const featuresRemove = (features) => {
+  return {
+    type: FEATURES_REMOVE,
+    payload: features
   }
 }

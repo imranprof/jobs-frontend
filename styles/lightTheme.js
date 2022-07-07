@@ -72,7 +72,8 @@ const lightTheme = createTheme({
     },
     customBorder: {
       beforeElement: COLORS.gray_5,
-      editInputElement: COLORS.gray
+      editInputElement: COLORS.gray,
+      customInputBorder: COLORS.black_1
     },
     resume: {
       navListColor: COLORS.black,
@@ -99,6 +100,10 @@ const lightTheme = createTheme({
       title: COLORS.black,
       percentText: COLORS.gray,
       boxShadow: "none",
+    },
+    scrollBar: {
+      track: COLORS.gray_4,
+      thumb: COLORS.white_6
     }
   },
 });
