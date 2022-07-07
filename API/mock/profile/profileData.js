@@ -1,6 +1,7 @@
 export const ProfileData = {
   name: "John Doe",
   headline: "Welcome to my world",
+  intro: "Hi, I'm",
   title: "a Rails Developer.",
   bio: "I use animation as a third dimension by which to simplify experiences and kuiding thro each and every interaction. I’m not adding motion just to spruce things up, but doing it in ways that.",
   avatar: "profile-pic.png",
@@ -9,15 +10,15 @@ export const ProfileData = {
   contactDescription: "I am available for freelance work. Connect with me via and call in to my account",
   phone: "+01234567890",
   expertises: ["Developer", "Programmer", "Designer", "Professional Coder", "Rails Developer"],
-  socialLinks: [
-    {id: 1, iconName: "facebook", url: "https://www.facebook.com/"},
-    {id: 2, iconName: "github", url: "https://www.github.com/"},
-    {id: 3, iconName: "linkedin", url: "https://www.linkedin.com/"},
-  ],
+  socialLinks: {
+    "facebook": "https://www.facebook.com/",
+    "github": "https://www.github.com/",
+    "linkedin": "https://www.linkedin.com/",
+  },
   skills: [
-    {id: 1, image: "ruby.png", alt: "ruby"},
-    {id: 2, image: "javascript.png", alt: "javascript"},
-    {id: 3, image: "python.png", alt: "python"},
+    {id: 1, name: "Ruby", image: "ruby.png"},
+    {id: 2, name: "Javascript", image: "javascript.png"},
+    {id: 3, name: "Python", image: "python.png"},
   ],
   features: [
     {
@@ -30,7 +31,7 @@ export const ProfileData = {
       id: 2,
       iconName: "bookOpen",
       title: "app development",
-      description: " It uses a dictionary of over 200 Latin words, combined with a handful of model sentence."
+      description: "It uses a dictionary of over 200 Latin words, combined with a handful of model sentence."
     },
     {
       id: 3,
@@ -61,7 +62,7 @@ export const ProfileData = {
     {
       id: 1,
       image: "portfolio-01.jpg",
-      category: "development",
+      categories: [{id: 1, title: "Development"}, {id: 2, title: "Application"}],
       title: "The services provide for design",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -71,7 +72,7 @@ export const ProfileData = {
     {
       id: 2,
       image: "portfolio-02.jpg",
-      category: "application",
+      categories: [{id: 3, title: "Photoshop"}, {id: 4, title: "Figma"}],
       title: "Mobile app landing design & app maintain",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -81,7 +82,7 @@ export const ProfileData = {
     {
       id: 3,
       image: "portfolio-03.jpg",
-      category: "photoshop",
+      categories: [{id: 3, title: "Photoshop"}, {id: 4, title: "Figma"}],
       title: "Logo design creativity & application",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -91,7 +92,7 @@ export const ProfileData = {
     {
       id: 4,
       image: "portfolio-04.jpg",
-      category: "figma",
+      categories: [{id: 3, title: "Photoshop"}, {id: 4, title: "Figma"}],
       title: "Mobile app landing design & services",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -101,7 +102,7 @@ export const ProfileData = {
     {
       id: 5,
       image: "portfolio-05.jpg",
-      category: "web design",
+      categories: [{id: 5, title: "Web design"}],
       title: "Design for technology & services",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -111,7 +112,7 @@ export const ProfileData = {
     {
       id: 6,
       image: "portfolio-06.jpg",
-      category: "development",
+      categories: [{id: 1, title: "Development"}],
       title: "App for technology & services",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.\n" +
         "\n" +
@@ -123,9 +124,9 @@ export const ProfileData = {
     {
       id: 1,
       image: "blog-01.jpg",
-      category: "canada",
+      categories: [{id: 2, title: "mobile"}, {id: 3, title: "apps"}],
       title: "The services provide for design",
-      readTime: "2 min",
+      readTime: 2,
       description: <div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
@@ -187,9 +188,9 @@ export const ProfileData = {
     {
       id: 2,
       image: "blog-02.jpg",
-      category: "development",
+      categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
       title: "Mobile app landing design & app maintain",
-      readTime: "2 hour",
+      readTime: 2,
       description: <div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
@@ -251,9 +252,73 @@ export const ProfileData = {
     {
       id: 3,
       image: "blog-03.jpg",
-      category: "application",
+      categories: [{id: 1, title: "development"}],
       title: "T-shirt design is the part of design",
-      readTime: "5 min",
+      readTime: 3,
+      description: <div>
+        <span>2 May, 2021</span>
+        <h2>Digital Marketo to Their New Office.</h2>
+        <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
+          facer
+          possim assum.
+          Typi non
+          habent claritatem insitam; est usus legentis in iis qui facit eorum
+          claritatem.
+          Investigationes
+          demonstraverunt
+          lectores legere me lius quod ii legunt saepius. Claritas est etiam processus
+          dynamicus, qui
+          sequitur
+          mutationem consuetudium lectorum.</p>
+        <h4>Nobis eleifend option conguenes.</h4>
+        <p>Mauris tempor, orci id pellentesque convallis, massa mi congue eros, sed
+          posuere
+          massa nunc quis
+          dui.
+          Integer ornare varius mi, in vehicula orci scelerisque sed. Fusce a massa
+          nisi.
+          Curabitur sit
+          amet
+          suscipit nisl. Sed eget nisl laoreet, suscipit enim nec, viverra eros. Nunc
+          imperdiet risus
+          leo,F
+          in rutrum erat dignissim id.</p>
+        <p>Ut rhoncus vestibulum facilisis. Duis et lorem vitae ligula cursus venenatis.
+          Class aptent
+          taciti sociosqu
+          ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc vitae
+          nisi
+          tortor. Morbi
+          leo
+          nulla, posuere vel lectus a, egestas posuere lacus. Fusce eleifend hendrerit
+          bibendum. Morbi
+          nec
+          efficitur ex.</p>
+        <h4>Mauris tempor, orci id pellentesque.</h4>
+        <p>Nulla non ligula vel nisi blandit egestas vel eget leo. Praesent fringilla
+          dapibus dignissim.
+          Pellentesque
+          quis quam enim. Vestibulum ultrices, leo id suscipit efficitur, odio lorem
+          rhoncus dolor, a
+          facilisis
+          neque mi ut ex. Quisque tempor urna a nisi pretium, a pretium massa
+          tristique.
+          Nullam in
+          aliquam
+          diam. Maecenas at nibh gravida, ornare eros non, commodo ligula. Sed
+          efficitur
+          sollicitudin
+          auctor.
+          Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
+          et.</p>
+      </div>
+    },
+    {
+      id: 4,
+      image: "portfolio-05.jpg",
+      categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
+      title: "this is new blog",
+      readTime: 4,
       description: <div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
@@ -401,5 +466,12 @@ export const ProfileData = {
         rating: ""
       }
     ],
-  }
+  },
+  categoriesData : [
+    {id: 1, title: "development"},
+    {id: 2, title: "mobile"},
+    {id: 3, title: "apps"},
+    {id: 4, title: "security"},
+    {id: 5, title: "ios"}
+  ]
 }
