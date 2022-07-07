@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const portfoliosURL = process.env.NEXT_PUBLIC_PORTFOLIOS_URL
+const portfoliosURL = process.env.NEXT_PUBLIC_PORTFOLIOS_URL;
 
 export function getPortfoliosData(values) {
   const {id} = values
@@ -12,8 +12,8 @@ export function getPortfoliosData(values) {
     .catch(err => err.response);
 }
 
-export function deletePortfolio(portfolio_id) {
-  const data = {
+export function deletePortfolio(portfolio_id, deletePortfolio) {
+  axios.patch(portfoliosURL, {
     "user": {
       "projects_attributes": [
         {
@@ -22,9 +22,6 @@ export function deletePortfolio(portfolio_id) {
         }
       ]
     }
-  }
-  return axios.get(portfoliosURL, {
-    data: data
-  }).then(res => res.data)
+  }).then(res => deletePortfolio(res.data.portfolio_data.projects))
     .catch(err => err.response);
 }

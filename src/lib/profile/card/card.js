@@ -13,6 +13,7 @@ import {CardStyle} from "./style";
 import RemoveButton from "../../removeButton";
 import EditButton from "../../editButton";
 import {removePortfolio} from "../../../store/actions/portfolioActions";
+import {deletePortfolio} from "../../../views/Profile/Portfolio/operations";
 
 const CustomCard = (props) => {
   const theme = useTheme();
@@ -50,7 +51,7 @@ const CustomCard = (props) => {
       if (portfolios.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one portfolio!"});
       } else {
-        props.removePortfolio(portfolios.filter(portfolio => portfolio.id !== item.id))
+        deletePortfolio(item.id, props.removePortfolio);
         setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
       }
     }
