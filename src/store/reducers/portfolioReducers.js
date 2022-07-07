@@ -1,10 +1,10 @@
 import {
   REMOVE_PORTFOLIO,
   UPDATE_PORTFOLIO,
+  GET_PORTFOLIOS
 } from "../actionTypes/portfolioTypes";
-import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const initialState = ProfileData.portfolios;
+const initialState = [];
 
 export const portfolioReducer = (portfolios = initialState, action) => {
   switch (action.type) {
@@ -19,6 +19,8 @@ export const portfolioReducer = (portfolios = initialState, action) => {
         }
         return portfolio;
       });
+    case GET_PORTFOLIOS:
+      return action.payload;
     default:
       return portfolios;
   }

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {connect} from "react-redux";
 
 import {Grid} from "@material-ui/core";
@@ -7,6 +7,8 @@ import {useTheme} from "@material-ui/core/styles";
 import CustomCard from "../../../lib/profile/card/card";
 import {PortfolioStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
+import {getPortfolios} from "../../../store/actions/portfolioActions"
+import {getPortfoliosData} from "./operations";
 
 
 const Portfolio = (props) => {
@@ -14,6 +16,18 @@ const Portfolio = (props) => {
   const classes = PortfolioStyle(theme);
   const {portfolios} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+
+  useEffect(
+    () => {
+      getPortfoliosData({id: 1}).then(res => {
+          props.getPortfolios(res.portfolio_data.projects)
+        }
+      ).catch(
+        err => console.log(err)
+      )
+    }, []
+  )
+
 
   return (
     <>
@@ -38,4 +52,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Portfolio);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getPortfolios: (portfolios) => dispatch(getPortfolios(portfolios))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
