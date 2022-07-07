@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: 500,
-    height: 400,
+    height: 450,
     backgroundColor: theme.palette.customBackground.dark,
     borderRadius: 6,
     boxShadow: "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px",
