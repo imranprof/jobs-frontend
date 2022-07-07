@@ -13,16 +13,17 @@ import {CardStyle} from "./style";
 import RemoveButton from "../../removeButton";
 import EditButton from "../../editButton";
 import {removePortfolio} from "../../../store/actions/portfolioActions";
+import {blogsRemove} from "../../../store/actions/blogActions";
 
 const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
-  const {element, elementType, portfolios, setToast} = props;
+  const {element, elementType, portfolios, setToast, blogs} = props;
   const {title, image, categories, reactCount, readTime} = element;
 
   const isPortfolio = elementType === "portfolio";
   const iconClass = isPortfolio ? "heart" : "clock";
-  const elementData = isPortfolio ? reactCount : `${readTime} read`;
+  const elementData = isPortfolio ? reactCount : `${readTime} min read`;
 
   const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
@@ -52,6 +53,15 @@ const CustomCard = (props) => {
       } else {
         props.removePortfolio(portfolios.filter(portfolio => portfolio.id !== item.id))
         setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
+      }
+    }
+    else {
+      if(blogs.length < 2) {
+        setToast({show: true, severity: "error", text: "You must have at least one blog!"});
+      }
+      else{
+        props.blogsRemove(blogs.filter(blog => blog.id !== item.id))
+        setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
       }
     }
   }
@@ -132,11 +142,15 @@ const CustomCard = (props) => {
 const mapStateToProps = (state) => {
   return {
     portfolios: state.portfolios,
+    blogs: state.blogs
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
-});
+const mapDispatchToProps = (dispatch) => (
+  {
+    removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
+    blogsRemove: (blog) => dispatch(blogsRemove(blog))
+  }
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomCard);
