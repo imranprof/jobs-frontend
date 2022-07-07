@@ -7,7 +7,6 @@ import {Grid, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import TypeWriter from "./typeWriter";
-import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
@@ -26,6 +25,7 @@ import {
   bioEditMode,
   expertisesText
 } from "../../../store/actions/editProfileActions";
+import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 const TopSection = (props) => {
   const theme = useTheme();
