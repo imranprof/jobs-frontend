@@ -27,9 +27,6 @@ export function deletePortfolio(portfolio_id, deletePortfolio) {
 }
 
 export function update(oldPortfolio, updatedPortfolio, updatePortfolio) {
-  console.log("OLD", oldPortfolio.categories)
-  console.log("NEW", updatedPortfolio.categories)
-
   let deleteCategories = oldPortfolio.categories.map(
     category => {
       let flag = true;
@@ -45,7 +42,6 @@ export function update(oldPortfolio, updatedPortfolio, updatePortfolio) {
     }
   )
 
-  console.log("delete", deleteCategories);
   let addCategories = updatedPortfolio.categories.map(
     category => {
       let flag = true;
@@ -59,8 +55,6 @@ export function update(oldPortfolio, updatedPortfolio, updatePortfolio) {
       }
     }
   );
-
-  console.log("add", addCategories);
 
   const data = {
     "user": {
