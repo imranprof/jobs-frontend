@@ -1,4 +1,5 @@
 import {useDispatch, connect} from "react-redux";
+import {useRouter} from "next/router";
 
 import {useFormik} from 'formik';
 import * as yup from 'yup';
@@ -7,6 +8,7 @@ import {Button, Icon, Box, TextField} from "@material-ui/core";
 
 import {signIn, handleApiResponse} from "../operations";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
+import {useEffect} from "react";
 
 const validationSchema = yup.object({
   email: yup
@@ -19,8 +21,16 @@ const validationSchema = yup.object({
     .required('Password is required'),
 });
 
-const SignInForm = ({error}) => {
+const SignInForm = ({error, isAuthenticated}) => {
   const dispatch = useDispatch()
+
+  const router = useRouter();
+
+  useEffect(()=> {
+    if(isAuthenticated){
+      router.push('/profile')
+    }
+  }, [isAuthenticated])
 
   const formik = useFormik({
     initialValues: {
@@ -29,6 +39,7 @@ const SignInForm = ({error}) => {
     },
     validationSchema: validationSchema,
     onSubmit: async values => {
+      await router.prefetch('/profile');
       const response = await dispatch(signIn(values));
       dispatch(handleApiResponse(await response));
     }
@@ -71,7 +82,7 @@ const SignInForm = ({error}) => {
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={formik.touched.password && formik.errors.password}
       />
-      <Button fullWidth type="submit" endIcon={<Icon className={FontAwesomeIcons.signIn}/>}>
+      <Button fullWidth type="submit" endIcon={<Icon className={FontAwesomeIcons.signIn}/>} >
         Sign In
       </Button>
     </Box>
@@ -80,7 +91,8 @@ const SignInForm = ({error}) => {
 
 const mapStateToProps = (state) => {
   return {
-    error: state.auth.error
+    error: state.auth.error,
+    isAuthenticated: state.auth.isAuthenticated,
   }
 }
 

@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import FONTS from "../../../../../styles/fonts";
+import COLORS from "../../../../../styles/colors";
 
 const useStyles = makeStyles({
     blogModalWrapper: theme => ({
@@ -77,6 +78,82 @@ const useStyles = makeStyles({
                     marginBottom: 30
                 },
             },
+            '&__title': {
+                marginBottom: "40px",
+                fontFamily: FONTS.primaryFont,
+                fontSize: 32,
+                fontWeight: 700,
+                marginRight: 20,
+                color: theme.palette.customColor.main,
+                '&__edit': {
+                    width: "100%",
+                    marginTop: "10px",
+                    marginBottom: "10px"
+                },
+                '&__editButton': {
+                    display: "flex",
+                    width: "100%",
+                    zIndex: 0
+                },
+                '&__input': {
+                    width: "100%"
+                },
+                [theme.breakpoints.down('xs')]: {
+                    fontSize: 20,
+                    marginRight: 10
+                }
+
+            },
+            '&__categories-wrapper': {
+                width: "100%",
+                display: "flex",
+                marginBottom: 20,
+                alignItems: "center",
+                marginTop: 10,
+                flexWrap: "wrap"
+
+            },
+            '&__category': {
+                marginRight: 15,
+                fontFamily: FONTS.primaryFont,
+                fontSize: 12,
+                fontWeight: 500,
+                color: theme.palette.customColor.highContrast,
+                textTransform: 'uppercase'
+            },
+            '&__categories-edit': {
+                height: "75%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "70%",
+                '&__selectDropdown': {
+                    color: COLORS.black,
+                }
+            },
+            '&__description': {
+                width: "100%",
+                '&__edit-button': {
+                    display: "flex",
+                    justifyContent: "flex-end"
+                },
+               '&__editor': {
+                   borderStyle: "solid",
+                   borderWidth: ".5px",
+                   maxHeight: 400,
+                   padding: 10,
+                   borderColor: theme.palette.customColor.inputBorder
+               },
+                '&__toolbar': {
+                    '& .rdw-dropdownoption-default': {
+                        color: COLORS.gray
+                    }
+                },
+                '&__toolbar-editor-wrapper': {
+                    maxHeight: 800,
+                    width: "100%"
+                }
+            },
             '&__text-content': {
                 '& span': {
                     display: "block",
@@ -92,14 +169,20 @@ const useStyles = makeStyles({
                     fontFamily: FONTS.primaryFont,
                     fontSize: 32,
                     fontWeight: 700,
-                    color: theme.palette.customColor.main
+                    color: theme.palette.customColor.main,
+                    [theme.breakpoints.down('xs')]: {
+                        fontSize: 20
+                    }
                 },
                 '& h4': {
                     marginBottom: 20,
                     fontFamily: FONTS.primaryFont,
                     fontSize: 30,
                     fontWeight: 700,
-                    color: theme.palette.customColor.main
+                    color: theme.palette.customColor.main,
+                    [theme.breakpoints.down('xs')]: {
+                        fontSize: 18
+                    }
                 },
                 '& p': {
                     marginBottom: 40,
