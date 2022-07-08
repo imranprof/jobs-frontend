@@ -20,10 +20,13 @@ const Portfolio = (props) => {
   useEffect(
     () => {
       getPortfoliosData({id: 1}).then(res => {
-          props.getPortfolios(res.portfolio_data.projects)
+          props.getPortfolios({
+            allPortfolios: res.portfolio_data.projects,
+            allCategories: res.all_categories
+          });
         }
       ).catch(
-        err => console.log(err)
+        err => err
       )
     }, []
   )
@@ -48,7 +51,7 @@ const Portfolio = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    portfolios: state.portfolios
+    portfolios: state.portfolios.allPortfolios
   }
 }
 

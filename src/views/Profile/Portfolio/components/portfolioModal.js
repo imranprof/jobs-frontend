@@ -12,17 +12,16 @@ import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
 import {updatePortfolio} from "../../../../store/actions/portfolioActions";
-import {ProfileData} from "../../../../../API/mock/profile/profileData";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import ErrorMessage from "../../../../lib/errorMessage";
+import {update} from "../operations";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
   const modalWrapper = PortfolioModalStyle(theme).modalWrapper;
   const [slidingClass, SetSlidingClass] = useState("");
   const {title, image, categories, description} = props.portfolio;
-  const {categoriesData} = ProfileData;
-  const {setTogglePortfolioModal, editMode} = props;
+  const {categoriesData, setTogglePortfolioModal, editMode} = props;
   const [mode, toggleMode] = useState(editMode)
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
@@ -41,17 +40,18 @@ const PortfolioModal = (props => {
   }));
 
   const updateHandler = ({portfolio, selectedCategories, title, description}) => {
+    const oldPortfolio = {...portfolio};
     portfolio.categories = mapCategoriesForState(selectedCategories);
     portfolio.title = title;
     portfolio.description = description;
-    props.updatePortfolio(portfolio);
+    update(oldPortfolio, portfolio, props.updatePortfolio);
   }
 
   const filterCategories = (categories) => {
     return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
       let flag = true;
       for (let i = 0; i < categories?.length; i++) {
-        if (categories[i].value === category.value) {
+        if (categories[i].label === category.label) {
           flag = false;
         }
       }
@@ -213,8 +213,12 @@ const PortfolioModal = (props => {
   );
 })
 
+const mapStateToProps = (state) => ({
+  categoriesData: state.portfolios.allCategories
+});
+
 const mapDispatchToProps = (dispatch) => ({
   updatePortfolio: (portfolio) => dispatch(updatePortfolio(portfolio)),
 });
 
-export default connect(null, mapDispatchToProps)(PortfolioModal);
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioModal);

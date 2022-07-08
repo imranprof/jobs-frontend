@@ -4,24 +4,31 @@ import {
   GET_PORTFOLIOS
 } from "../actionTypes/portfolioTypes";
 
-const initialState = [];
+const initialState = {
+  allPortfolios: [],
+  allCategories: []
+};
 
-export const portfolioReducer = (portfolios = initialState, action) => {
+export const portfolioReducer = (state = initialState, action) => {
   switch (action.type) {
     case REMOVE_PORTFOLIO:
-      return action.payload;
+      return {
+        ...state,
+        allPortfolios: action.payload
+      };
     case UPDATE_PORTFOLIO:
-      return portfolios.map((portfolio) => {
-        if (portfolio.id === action.payload.id) {
-          portfolio.title = action.payload.title;
-          portfolio.description = action.payload.description;
-          portfolio.categories = action.payload.categories;
-        }
-        return portfolio;
-      });
+      return {
+        ...state,
+        allPortfolios: action.payload
+      };
     case GET_PORTFOLIOS:
-      return action.payload;
+      return {
+        ...state,
+        ...action.payload
+      };
     default:
-      return portfolios;
+      return {
+        ...state
+      };
   }
 }
