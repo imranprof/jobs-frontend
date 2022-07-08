@@ -40,7 +40,11 @@ const useStyles = makeStyles({
           lineHeight: "44px",
           marginBottom: 9,
         },
+        '&__designationWrapper': {
+          display: "flex"
+        },
         '&__designation': {
+          marginRight: 10,
           color: theme.palette.customColor.dark,
           fontFamily: FONTS.secondaryFont,
           fontSize: 18,
@@ -60,6 +64,9 @@ const useStyles = makeStyles({
       '&__description-area': {
         marginBottom: 38,
       },
+      '&__descriptionWrapper': {
+        display: "flex"
+      },
       '&__description': {
         fontSize: 18,
         fontWeight: 400,
@@ -73,6 +80,9 @@ const useStyles = makeStyles({
           lineHeight: "24px"
         }
       },
+      '&__phoneWrapper': {
+        display: "flex"
+      },
       '&__phone, &__email': {
         fontSize: 18,
         fontWeight: 400,
@@ -80,7 +90,7 @@ const useStyles = makeStyles({
         fontFamily: FONTS.secondaryFont,
         lineHeight: "30px",
         display: "block",
-        margin: 0,
+        marginRight: 10,
         '& a': {
           color: theme.palette.customColor.main,
           textDecoration: "none",

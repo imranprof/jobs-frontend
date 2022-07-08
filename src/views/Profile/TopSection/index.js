@@ -120,7 +120,7 @@ const TopSection = (props) => {
                   value={headlineHandler.values.headline}
                   onChange={headlineHandler.handleChange}
                 />
-                {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline}/> : null}
+                {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
                 <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
               </div>
             ) : (
