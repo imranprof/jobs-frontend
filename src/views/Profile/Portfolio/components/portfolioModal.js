@@ -29,13 +29,20 @@ const PortfolioModal = (props => {
     SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
   }, 1);
 
+  const allCategories = categoriesData?.map((category) => ({
+    category_id: category.id,
+    title: category.title
+  }));
+
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
-    value: category.id,
+    id: category.id,
+    value: category.category_id,
     label: category.title
   }));
 
   const mapCategoriesForState = (categories) => categories?.map((category) => ({
-    id: category.value,
+    id: category.id,
+    category_id: category.value,
     title: category.label
   }));
 
@@ -48,7 +55,7 @@ const PortfolioModal = (props => {
   }
 
   const filterCategories = (categories) => {
-    return mapCategoriesForMultiSelect(categoriesData).filter((category) => {
+    return mapCategoriesForMultiSelect(allCategories)?.filter((category) => {
       let flag = true;
       for (let i = 0; i < categories?.length; i++) {
         if (categories[i].label === category.label) {

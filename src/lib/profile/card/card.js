@@ -31,7 +31,7 @@ const CustomCard = (props) => {
   const [editMode, setEditMode] = useState(false);
 
   const getCategories = () => {
-    if (categories) {
+    if (categories?.length>0) {
       let categoriesText = categories[0].title
       if (categories?.length === 2) categoriesText += " " + categories[1].title
       if (categories?.length > 2) categoriesText += ` ${categories[1].title}...`

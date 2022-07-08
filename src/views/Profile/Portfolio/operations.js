@@ -27,6 +27,41 @@ export function deletePortfolio(portfolio_id, deletePortfolio) {
 }
 
 export function update(oldPortfolio, updatedPortfolio, updatePortfolio) {
+  console.log("OLD", oldPortfolio.categories)
+  console.log("NEW", updatedPortfolio.categories)
+
+  let deleteCategories = oldPortfolio.categories.map(
+    category => {
+      let flag = true;
+      for (let i = 0; i < updatedPortfolio.categories.length; i++) {
+        if (updatedPortfolio.categories[i].category_id === category.category_id) {
+          flag = false;
+        }
+      }
+      if (flag) return {
+        id: category.id,
+        _destroy: true
+      }
+    }
+  )
+
+  console.log("delete", deleteCategories);
+  let addCategories = updatedPortfolio.categories.map(
+    category => {
+      let flag = true;
+      for (let i = 0; i < oldPortfolio.categories.length; i++) {
+        if (oldPortfolio.categories[i].category_id === category.category_id) {
+          flag = false;
+        }
+      }
+      if (flag) return {
+        category_id: category.category_id
+      }
+    }
+  );
+
+  console.log("add", addCategories);
+
   const data = {
     "user": {
       "projects_attributes": [
@@ -37,13 +72,7 @@ export function update(oldPortfolio, updatedPortfolio, updatePortfolio) {
           "react_count": updatedPortfolio.react_count,
           "live_url": updatedPortfolio.live_url,
           "source_url": updatedPortfolio.source_url,
-          "categorizations_attributes": updatedPortfolio.categories.map(
-            (category) => {
-              return {
-                "category_id": category.id,
-              }
-            }
-          )
+          "categorizations_attributes": [...addCategories, ...deleteCategories]
         }
       ]
     }
