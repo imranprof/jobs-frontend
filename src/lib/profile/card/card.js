@@ -49,7 +49,7 @@ const CustomCard = (props) => {
 
   const removeHandler = (item) => {
     if (isPortfolio) {
-      if (portfolios.length < 2) {
+      if (portfolios.allPortfolios.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one portfolio!"});
       } else {
         deletePortfolio(item.id, props.removePortfolio);
