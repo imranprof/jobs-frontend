@@ -12,6 +12,7 @@ const getToken = () => {
 }
 
 const initialState = {
+  userID: null,
   isAuthenticated: getToken(),
   modalType: '',
   loading: false,
@@ -24,6 +25,7 @@ export const authReducers = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: getToken(),
+        userID: action.payload.userID
       }
     case MODAL_TYPE:
       return {
