@@ -20,7 +20,7 @@ export function handleApiResponse(response) {
   return async (dispatch) => {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
-      await dispatch(authenticate(true))
+      await dispatch(authenticate({userID: response.data.user_id, authenticate: true}))
     } else {
       await dispatch(signInRejected(response.data.message))
     }
@@ -45,6 +45,7 @@ export function signIn(values) {
     const response = await axios.post(signInURL, auth)
       .then(data => data)
       .catch(err => err.response);
+
     return (response);
   }
 }

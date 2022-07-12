@@ -1,9 +1,9 @@
 import {AUTHENTICATED, MODAL_TYPE, SIGN_IN_RECEIVED, SIGN_IN_REQUESTED, SIGN_IN_REJECTED} from "../actionTypes/authTypes";
 
-export const authenticate = (boolean) => {
+export const authenticate = ({userID, authenticate}) => {
   return {
     type: AUTHENTICATED,
-    payload: boolean
+    payload: {userID, authenticate}
   }
 }
 
