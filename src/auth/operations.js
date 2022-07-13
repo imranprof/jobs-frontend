@@ -16,11 +16,20 @@ export function setAuthToken(token) {
   }
 }
 
+export function setUserID(userID) {
+  if (userID) {
+    localStorage.setItem('userID', userID);
+  } else {
+    localStorage.removeItem('userID');
+  }
+}
+
 export function handleApiResponse(response) {
   return async (dispatch) => {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
-      await dispatch(authenticate({userID: response.data.user_id, authenticate: true}))
+      setUserID(response.data.user_id);
+      await dispatch(authenticate({authenticate: true}))
     } else {
       await dispatch(signInRejected(response.data.message))
     }
@@ -55,6 +64,7 @@ export function SignOut() {
     await axios.delete(signOutURL)
       .then(async () => {
         await setAuthToken(false)
+        await setUserID(false)
         await dispatch(authenticate(false))
       })
       .catch(err => alert(err));
