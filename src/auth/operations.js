@@ -64,6 +64,7 @@ export function SignOut() {
     await axios.delete(signOutURL)
       .then(async () => {
         await setAuthToken(false)
+        await setUserID(false)
         await dispatch(authenticate(false))
       })
       .catch(err => alert(err));
