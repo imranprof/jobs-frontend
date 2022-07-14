@@ -7,22 +7,27 @@ import {
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
   SKILLS_VALUES,
+  SET_PROFILE_ID,
   FEATURES_UPDATE,
-  FEATURES_REMOVE,
+  FEATURES_REMOVE, SET_NAME,
 } from "../actionTypes/editProfileTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const {headline, intro, bio, expertises, socialLinks, skills, features} = ProfileData;
+
 const initialState = {
-  headline: headline,
+  id: null,
+  firstName: null,
+  lastName: null,
+  headline: null,
   headlineMode: false,
-  intro: intro,
+  intro: null,
   introMode: false,
-  bio: bio,
+  bio: null,
   bioMode: false,
-  expertises: expertises,
-  links: socialLinks,
-  skills: skills,
+  expertises: [],
+  links: {},
+  skills: [],
   features: features
 }
 
@@ -78,6 +83,17 @@ export const editProfileReducer = (state = initialState, action) => {
       return {
         ...state,
         features: action.payload,
+      }
+    case SET_PROFILE_ID:
+      return {
+        ...state,
+        id: action.payload
+      }
+    case SET_NAME:
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName
       }
     default:
       return state

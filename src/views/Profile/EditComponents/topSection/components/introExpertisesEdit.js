@@ -9,6 +9,7 @@ import CustomButton from "../../../../../lib/profile/customButtons";
 import {expertisesText} from "../../../../../store/actions/editProfileActions";
 import {TopSectionEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
+import {useFormik} from "formik";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -22,15 +23,16 @@ const IntroExpertisesEdit = (props) => {
   const {
     fullName,
     inputIntroChangeHandler,
-    inputValue,
+    introEditValue,
     introEditHandler,
     expertisesEditValue,
     setExpertisesEditValue,
-    handleClose
+    handleClose,
+    intro
   } = props;
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
-
+  console.log("From Intro Expertises value", intro)
   const selectedExpertises = []
   props.expertises.map((element) => {
     selectedExpertises.push({label: element, value: element})
@@ -55,6 +57,14 @@ const IntroExpertisesEdit = (props) => {
     setFilteredExpertiseList(filteredExpertise(elements))
   }
 
+  const formHandler = useFormik({
+    initialValues: {intro: intro, expertises: props.expertises},
+    enableReinitialize: true,
+    onSubmit: values => {
+      console.log("IntroExpertises Submit", values)
+    }
+  });
+
   return (
     <>
       <div className={`${classes.topSectionEditWrapper}__introWrapper`}>
@@ -62,13 +72,14 @@ const IntroExpertisesEdit = (props) => {
           <TextField
             size="small"
             variant="outlined"
-            value={inputValue}
-            onChange={inputIntroChangeHandler}
+            name={"intro"}
+            value={formHandler.values.intro}
+            onChange={formHandler.handleChange}
           />
           <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
         </div>
-        {inputValue === "" && <ErrorMessage error="Intro can't be blank"/>}
-        {inputValue.length > 15 && <ErrorMessage error="Intro must have within 15 characters"/>}
+        {introEditValue?.intro === "" && <ErrorMessage error="Intro can't be blank"/>}
+        {introEditValue?.intro?.length > 15 && <ErrorMessage error="Intro must have within 15 characters"/>}
       </div>
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
@@ -77,13 +88,13 @@ const IntroExpertisesEdit = (props) => {
           <Select
             isMulti
             options={filteredExpertiseList}
-            defaultValue={selectedExpertises}
+            defaultValue={formHandler.values.expertises}
             onChange={selectChangeHandler}
             className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectDropdown`}
           />
           {expertisesEditValue.length === 0 && <ErrorMessage error="Select at least one expertise"/>}
         </div>
-        <CustomButton handler={introEditHandler} mode={handleClose}/>
+        <CustomButton handler={formHandler.handleSubmit} mode={handleClose}/>
       </div>
     </>
   )
@@ -91,7 +102,8 @@ const IntroExpertisesEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    expertises: state.editProfile.expertises
+    expertises: state.editProfile.expertises,
+    intro: state.editProfile.intro
   }
 }
 

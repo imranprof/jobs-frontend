@@ -18,14 +18,18 @@ import IntroExpertisesEdit from "../EditComponents/topSection/components/introEx
 import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {
-  headlineText,
-  headlineEditMode,
-  introText,
-  bioText,
   bioEditMode,
-  expertisesText
+  bioText,
+  expertisesText,
+  headlineEditMode,
+  headlineText,
+  introText,
+  setName,
+  setProfileID,
+  socialLinksUpdate
 } from "../../../store/actions/editProfileActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
+import {getProfileData, setProfile, updateBio, updateHeadline} from "./operations";
 
 const TopSection = (props) => {
   const theme = useTheme();
@@ -46,13 +50,21 @@ const TopSection = (props) => {
       let backToTop = backToTopRef.current;
       let scrollTop = window.scrollY;
       backToTop.style.display = scrollTop >= 80 ? "flex" : "none";
-    })
+    });
+    getProfileData({id: props.userID}).then(data => {
+      setProfile(data, props);
+    });
   }, [])
 
   const headlineHandler = useFormik({
     initialValues: {headline: props.headline},
-    onSubmit: values => {
-      props.setHeadline(values.headline);
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      updateHeadline({
+        headline: values.headline,
+        setHeadline: props.setHeadline,
+        profileID: props.profileID
+      });
       props.setHeadlineMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the headline"});
     },
@@ -69,8 +81,13 @@ const TopSection = (props) => {
 
   const bioHandler = useFormik({
     initialValues: {bio: props.bio},
+    enableReinitialize: true,
     onSubmit: values => {
-      props.setBio(values.bio);
+      updateBio({
+        bio: values.bio,
+        setBio: props.setBio,
+        profileID: props.profileID
+      })
       props.setBioMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the bio"});
     },
@@ -120,7 +137,7 @@ const TopSection = (props) => {
                   value={headlineHandler.values.headline}
                   onChange={headlineHandler.handleChange}
                 />
-                {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline}/> : null}
+                {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
                 <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
               </div>
             ) : (
@@ -132,47 +149,48 @@ const TopSection = (props) => {
               </div>
             )}
 
-          <EditCustomModal handleClose={modalClose} open={openModal}>
-            <IntroExpertisesEdit
-              handleClose={modalClose}
-              fullName={name}
-              inputValue={introEditValue.intro}
-              inputIntroChangeHandler={inputIntroChangeHandler}
-              introEditHandler={introEditHandler}
-              expertisesEditValue={expertisesEditValue.expertises}
-              setExpertisesEditValue={setExpertisesEditValue}
-            />
-          </EditCustomModal>
+            <EditCustomModal handleClose={modalClose} open={openModal}>
+              <IntroExpertisesEdit
+                handleClose={modalClose}
+                fullName={`${props.firstName} ${props.lastName}`}
+                introEditValue={introEditValue}
+                inputIntroChangeHandler={inputIntroChangeHandler}
+                introEditHandler={introEditHandler}
+                expertisesEditValue={expertisesEditValue.expertises} // etao puraton
+                setExpertisesEditValue={setExpertisesEditValue}
+              />
+            </EditCustomModal>
 
-          <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
-            <TypeWriter name={name} intro={props.intro} expertises={expertisesList} classes={classes}/>
-            <span className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
-                  onClick={() => setOpenModal(true)}>
+            <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
+              <TypeWriter name={`${props.firstName} ${props.lastName}`} intro={props.intro} expertises={expertisesList}
+                          classes={classes}/>
+              <span className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+                    onClick={() => setOpenModal(true)}>
                 <EditButton/>
               </span>
             </div>
 
-          {props.bioEditMode ? (
-            <div className={`${classes.topSectionWrapper}__left-top__bio-inputWrapper`}>
-              <TextField
-                fullWidth
-                multiline
-                rows={5}
-                variant="outlined"
-                name="bio"
-                value={bioHandler.values.bio}
-                onChange={bioHandler.handleChange}
-              />
-              {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
-              <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
-            </div>
-          ) : (
-            <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
-              <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{props.bio}</p>
-              <span
-                className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
-                onClick={() => props.setBioMode(true)}
-              >
+            {props.bioEditMode ? (
+              <div className={`${classes.topSectionWrapper}__left-top__bio-inputWrapper`}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={5}
+                  variant="outlined"
+                  name="bio"
+                  value={bioHandler.values.bio}
+                  onChange={bioHandler.handleChange}
+                />
+                {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
+                <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
+              </div>
+            ) : (
+              <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
+                <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{props.bio}</p>
+                <span
+                  className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+                  onClick={() => props.setBioMode(true)}
+                >
               <EditButton/>
             </span>
               </div>
@@ -207,23 +225,30 @@ const TopSection = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.profile,
+    userID: state.auth.userID,
+    profileID: state.editProfile.id,
+    firstName: state.editProfile.firstName,
+    lastName: state.editProfile.lastName,
     headline: state.editProfile.headline,
     headlineEditMode: state.editProfile.headlineMode,
     intro: state.editProfile.intro,
     bio: state.editProfile.bio,
     bioEditMode: state.editProfile.bioMode,
-    expertises: state.editProfile.expertises
+    expertises: state.editProfile.expertises,
+    features: state.editProfile.features
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  setProfileID: (value) => dispatch(setProfileID(value)),
+  setName: (values) => dispatch(setName(values)),
   setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
   setHeadline: (value) => dispatch(headlineText(value)),
   setIntro: (editValue) => dispatch(introText(editValue)),
   setExpertises: (expertisesValue) => dispatch(expertisesText(expertisesValue)),
   setBioMode: (boolean) => dispatch(bioEditMode(boolean)),
-  setBio: (editValue) => dispatch(bioText(editValue))
+  setBio: (editValue) => dispatch(bioText(editValue)),
+  setLinks: (values) => dispatch(socialLinksUpdate(values)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopSection);

@@ -1,4 +1,7 @@
 // ***TopSection***
+export const SET_PROFILE_ID = 'SET_PROFILE_ID'
+// First name and last name
+export const SET_NAME = 'SET_NAME'
 // Headline
 export const HEADLINE_TEXT = 'HEADLINE_TEXT'
 export const HEADLINE_EDIT_MODE = 'HEADLINE_EDIT_MODE'
