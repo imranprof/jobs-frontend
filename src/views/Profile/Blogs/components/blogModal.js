@@ -28,11 +28,11 @@ const BlogModal = (props) => {
   const [visibilityClass, setVisibilityClass] = useState("");
   const [mode, setMode] = useState(editMode);
   let html;
-  if(typeof blog.description === 'string'){
-    html = blog.description;
+  if(typeof blog.body === 'string'){
+    html = blog.body;
   }
   else{
-    html = renderToString(blog.description);
+    html = renderToString(blog.body);
   }
   const readingTime = require('reading-time');
   const blocksFromHtml = convertFromHTML(html);
@@ -178,12 +178,12 @@ const BlogModal = (props) => {
               ) : (
                   <div className={`${blogModalWrapper}__modal-content__description`}>
                     <div>
-                      {typeof blog.description === 'string' ? (
-                          <div  dangerouslySetInnerHTML={{__html: blog.description}} />
+                      {typeof blog.body === 'string' ? (
+                          <div  dangerouslySetInnerHTML={{__html: blog.body}} />
                       ) :
                         (
                           <div>
-                            {blog.description}
+                            {blog.body}
                           </div>
                         ) }
                     </div>

@@ -1,19 +1,24 @@
 import {
   BLOGS_REMOVE,
+  GET_BLOGS,
   UPDATE_BLOG
 } from "../actionTypes/blogTypes";
-import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const initialState = ProfileData.blogs
+const initialState = {
+  allBlogs: []
+}
 
-export const blogReducer = (blogs = initialState, action) => {
+export const blogReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case BLOGS_REMOVE:
-      return action.payload
+      return {
+        ...state,
+        allBlogs: action.payload
+      }
 
     case UPDATE_BLOG:
-      return blogs.map(blog=> {
+      return state.allBlogs.map(blog=> {
         if(blog.id === action.payload.blog_id){
           blog.categories = action.payload.categories,
           blog.title = action.payload.title,
@@ -23,7 +28,14 @@ export const blogReducer = (blogs = initialState, action) => {
         return blog;
       })
 
+    case GET_BLOGS:
+      return {
+        ...state,
+        allBlogs: action.payload
+      }
+
+
     default:
-      return blogs
+      return state
   }
 }
