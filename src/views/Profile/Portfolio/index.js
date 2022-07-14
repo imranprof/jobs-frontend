@@ -14,12 +14,12 @@ import {getPortfoliosData} from "./operations";
 const Portfolio = (props) => {
   const theme = useTheme();
   const classes = PortfolioStyle(theme);
-  const {portfolios} = props;
+  const {portfolios, userID} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
   useEffect(
     () => {
-      getPortfoliosData({id: 1}).then(res => {
+      userID && getPortfoliosData({id: userID}).then(res => {
           props.getPortfolios({
             allPortfolios: res.portfolio_data.projects,
             allCategories: res.all_categories
@@ -51,6 +51,7 @@ const Portfolio = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    userID: state.auth.userID,
     portfolios: state.portfolios.allPortfolios
   }
 }
