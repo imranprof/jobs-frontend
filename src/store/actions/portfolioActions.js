@@ -1,4 +1,4 @@
-import {UPDATE_PORTFOLIO, REMOVE_PORTFOLIO} from "../actionTypes/portfolioTypes";
+import {UPDATE_PORTFOLIO, REMOVE_PORTFOLIO, GET_PORTFOLIOS} from "../actionTypes/portfolioTypes";
 
 export const updatePortfolio = (portfolios) => {
   return {
@@ -10,6 +10,13 @@ export const updatePortfolio = (portfolios) => {
 export const removePortfolio = (portfolios) => {
   return {
     type: REMOVE_PORTFOLIO,
+    payload: portfolios
+  }
+}
+
+export const getPortfolios = (portfolios) => {
+  return {
+    type: GET_PORTFOLIOS,
     payload: portfolios
   }
 }

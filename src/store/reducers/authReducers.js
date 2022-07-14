@@ -1,5 +1,11 @@
 import axios from "axios";
-import {AUTHENTICATED, MODAL_TYPE, SIGN_IN_REQUESTED, SIGN_IN_RECEIVED, SIGN_IN_REJECTED} from "../actionTypes/authTypes";
+import {
+  AUTHENTICATED,
+  MODAL_TYPE,
+  SIGN_IN_REQUESTED,
+  SIGN_IN_RECEIVED,
+  SIGN_IN_REJECTED
+} from "../actionTypes/authTypes";
 
 const getToken = () => {
   if (typeof window !== 'undefined') {
@@ -7,11 +13,22 @@ const getToken = () => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = token;
     }
-  return Boolean(token)
+    return Boolean(token)
+  }
+}
+
+const getUserID = () => {
+  if (typeof window !== 'undefined') {
+    const userID = localStorage.getItem('userID')
+    if (userID) {
+      return userID;
+    }
+    return null;
   }
 }
 
 const initialState = {
+  userID: getUserID(),
   isAuthenticated: getToken(),
   modalType: '',
   loading: false,
@@ -24,6 +41,7 @@ export const authReducers = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: getToken(),
+        userID: getUserID()
       }
     case MODAL_TYPE:
       return {
@@ -31,11 +49,11 @@ export const authReducers = (state = initialState, action) => {
         modalType: action.payload
       }
     case SIGN_IN_REQUESTED:
-      return { ...state, loading: true };
+      return {...state, loading: true};
     case SIGN_IN_RECEIVED:
-      return { ...state, loading: false, error: '' };
+      return {...state, loading: false, error: ''};
     case SIGN_IN_REJECTED:
-      return { ...state, loading: false, error: action.error };
+      return {...state, loading: false, error: action.error};
     default:
       return state
   }
