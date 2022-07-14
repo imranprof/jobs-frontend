@@ -28,8 +28,8 @@ export const getBlogs = (blogs) => {
 }
 
 export const getBlogsAction = (values) => {
-  const {id, dispatch} = values
-  return () => {
+  const {id} = values
+  return (dispatch) => {
     axios.get(profileUrl, {
       params: {
         user_id: id

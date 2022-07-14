@@ -20,7 +20,7 @@ const Blogs = (props) => {
 
     useEffect(
         () => {
-            userID && getBlogsAction({id: userID, dispatch})()
+            userID && dispatch(getBlogsAction({id: userID}))
         }, []
     )
 
