@@ -20,11 +20,11 @@ const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
   const {element, elementType, portfolios, setToast, blogs} = props;
-  const {title, image, categories, reactCount, readTime} = element;
+  const {title, image, categories, reactCount, reading_time} = element;
 
   const isPortfolio = elementType === "portfolio";
   const iconClass = isPortfolio ? "heart" : "clock";
-  const elementData = isPortfolio ? reactCount : `${readTime} read`;
+  const elementData = isPortfolio ? reactCount : `${reading_time} read`;
 
   const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
