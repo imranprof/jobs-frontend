@@ -12,12 +12,12 @@ export function getPortfoliosData(values) {
     .catch(err => err.response);
 }
 
-export function deletePortfolio(portfolio_id, deletePortfolio) {
+export function deletePortfolio(portfolioID, deletePortfolio) {
   axios.patch(profileURL, {
     "user": {
       "projects_attributes": [
         {
-          "id": portfolio_id,
+          "id": portfolioID,
           "_destroy": true
         }
       ]
