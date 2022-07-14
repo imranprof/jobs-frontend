@@ -40,6 +40,4 @@ export const getBlogsAction = (values) => {
       .catch(err => err.response);
   }
 
-
-
 }
