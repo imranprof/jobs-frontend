@@ -2,6 +2,8 @@
 export const SET_PROFILE_ID = 'SET_PROFILE_ID'
 // First name and last name
 export const SET_NAME = 'SET_NAME'
+// Avatar
+export const SET_AVATAR = 'SET_AVATAR'
 // Headline
 export const HEADLINE_TEXT = 'HEADLINE_TEXT'
 export const HEADLINE_EDIT_MODE = 'HEADLINE_EDIT_MODE'

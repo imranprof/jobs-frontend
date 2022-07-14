@@ -4,7 +4,6 @@ const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
 
 export function getProfileData(values) {
   const {id} = values
-  console.log(profileURL)
   return axios.get(profileURL, {
     params: {
       user_id: id
@@ -14,12 +13,22 @@ export function getProfileData(values) {
 }
 
 export const setProfile = ({profile, features},
-                           {setHeadline, setBio, setIntro, setExpertises, setLinks, setProfileID, setName}) => {
+                           {
+                             setHeadline,
+                             setBio,
+                             setIntro,
+                             setExpertises,
+                             setLinks,
+                             setProfileID,
+                             setName,
+                             setAvatar
+                           }) => {
   setName({firstName: profile.first_name, lastName: profile.last_name})
   setProfileID(profile.id);
   setHeadline(profile.headline);
   setBio(profile.bio);
   setIntro(profile.title);
+  setAvatar(profile.avatar);
   setExpertises(profile.expertises);
   delete profile.social_links.id;
   setLinks(profile.social_links);

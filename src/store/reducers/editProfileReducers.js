@@ -9,7 +9,7 @@ import {
   SKILLS_VALUES,
   SET_PROFILE_ID,
   FEATURES_UPDATE,
-  FEATURES_REMOVE, SET_NAME,
+  FEATURES_REMOVE, SET_NAME, SET_AVATAR,
 } from "../actionTypes/editProfileTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
@@ -25,6 +25,7 @@ const initialState = {
   introMode: false,
   bio: null,
   bioMode: false,
+  avatar: null,
   expertises: [],
   links: {},
   skills: [],
@@ -94,6 +95,11 @@ export const editProfileReducer = (state = initialState, action) => {
         ...state,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName
+      }
+    case SET_AVATAR:
+      return {
+        ...state,
+        avatar: action.payload
       }
     default:
       return state

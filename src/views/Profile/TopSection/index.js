@@ -23,7 +23,7 @@ import {
   expertisesText,
   headlineEditMode,
   headlineText,
-  introText,
+  introText, setAvatar,
   setName,
   setProfileID,
   socialLinksUpdate
@@ -35,7 +35,7 @@ const TopSection = (props) => {
   const theme = useTheme();
   const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
-  const {name, avatar} = ProfileData;
+  // const {name, avatar} = ProfileData;
 
   const [introEditValue, setIntroEditValue] = useState({intro: props.intro})
   const [openModal, setOpenModal] = useState(false);
@@ -204,7 +204,7 @@ const TopSection = (props) => {
         </Grid>
         <Grid item xs={12} md={5}>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
-            <img src={avatar} alt={name} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
+            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
           </div>
         </Grid>
 
@@ -233,6 +233,7 @@ const mapStateToProps = (state) => {
     headlineEditMode: state.editProfile.headlineMode,
     intro: state.editProfile.intro,
     bio: state.editProfile.bio,
+    avatar: state.editProfile.avatar,
     bioEditMode: state.editProfile.bioMode,
     expertises: state.editProfile.expertises,
     features: state.editProfile.features
@@ -242,6 +243,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   setProfileID: (value) => dispatch(setProfileID(value)),
   setName: (values) => dispatch(setName(values)),
+  setAvatar: (values) => dispatch(setAvatar(values)),
   setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
   setHeadline: (value) => dispatch(headlineText(value)),
   setIntro: (editValue) => dispatch(introText(editValue)),

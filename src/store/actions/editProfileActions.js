@@ -8,7 +8,7 @@ import {
   SOCIAL_LINKS_UPDATE,
   SKILLS_VALUES,
   FEATURES_UPDATE,
-  FEATURES_REMOVE, SET_PROFILE_ID, SET_NAME,
+  FEATURES_REMOVE, SET_PROFILE_ID, SET_NAME, SET_AVATAR,
 } from "../actionTypes/editProfileTypes";
 
 // ***TopSection***
@@ -81,10 +81,19 @@ export const skillsUpdate = (skills) => {
   }
 }
 
+// Name
 export const setName = (values) => {
   return {
     type: SET_NAME,
     payload: values
+  }
+}
+
+// Avatar
+export const setAvatar = (avatar) => {
+  return {
+    type: SET_AVATAR,
+    payload: avatar
   }
 }
 
