@@ -153,6 +153,8 @@ const TopSection = (props) => {
               <IntroExpertisesEdit
                 handleClose={modalClose}
                 fullName={`${props.firstName} ${props.lastName}`}
+                setIntro={props.setIntro}
+                profileID={props.profileID}
                 introEditValue={introEditValue}
                 inputIntroChangeHandler={inputIntroChangeHandler}
                 introEditHandler={introEditHandler}
@@ -204,7 +206,8 @@ const TopSection = (props) => {
         </Grid>
         <Grid item xs={12} md={5}>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
-            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
+            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`}
+                 className={`${classes.topSectionWrapper}__thumbnail--img`}/>
           </div>
         </Grid>
 

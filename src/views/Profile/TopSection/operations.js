@@ -61,3 +61,20 @@ export const updateBio = ({bio, setBio, profileID}) => {
   axios.patch(profileURL, data).then(res => setBio(res.data.profile.bio))
     .catch(err => err.response);
 }
+
+export const updateIntroAndExpertises = ({intro, setIntro, expertises, setExpertises, profileID}) => {
+  const data = {
+    "user": {
+      "user_profile_attributes": {
+        "id": profileID,
+        "title": intro,
+        "expertises": expertises
+      }
+    }
+  }
+
+  axios.patch(profileURL, data).then(res => {
+    setIntro(res.data.profile.title);
+    setExpertises(res.data.profile.expertises);
+  }).catch(err => err.response);
+}

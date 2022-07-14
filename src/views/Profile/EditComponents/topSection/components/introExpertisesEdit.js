@@ -10,6 +10,7 @@ import {expertisesText} from "../../../../../store/actions/editProfileActions";
 import {TopSectionEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import {useFormik} from "formik";
+import {updateIntroAndExpertises} from "../../../TopSection/operations";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -22,26 +23,21 @@ const expertisesData = [
 const IntroExpertisesEdit = (props) => {
   const {
     fullName,
-    inputIntroChangeHandler,
-    introEditValue,
-    introEditHandler,
-    expertisesEditValue,
-    setExpertisesEditValue,
     handleClose,
+    setIntro,
+    setExpertises,
+    profileID,
     intro
   } = props;
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
-  console.log("From Intro Expertises value", intro)
-  const selectedExpertises = []
-  props.expertises.map((element) => {
-    selectedExpertises.push({label: element, value: element})
-  });
+  const [selectedExpertises, setSelectedExpertises] = useState(props.expertises.map((element, index) => (
+    {value: index, label: element}))
+  );
 
   const filteredExpertise = (selectedExpertises) => {
     if (selectedExpertises !== undefined) {
-      let tempExpertises = expertisesData
-      return tempExpertises.filter((ex1) => {
+      return expertisesData.filter((ex1) => {
         return !selectedExpertises.find((ex2) => {
           return ex1.label === ex2.label
         })
@@ -49,19 +45,25 @@ const IntroExpertisesEdit = (props) => {
     }
   }
 
-  const [filteredExpertiseList, setFilteredExpertiseList] = useState(filteredExpertise(selectedExpertises))
   const selectChangeHandler = (elements) => {
-    setExpertisesEditValue({
-      expertises: Array.isArray(elements) ? elements.map(obj => obj.label) : []
-    })
-    setFilteredExpertiseList(filteredExpertise(elements))
+    setSelectedExpertises(elements);
   }
 
   const formHandler = useFormik({
-    initialValues: {intro: intro, expertises: props.expertises},
+    initialValues: {intro: intro, expertises: selectedExpertises},
     enableReinitialize: true,
     onSubmit: values => {
-      console.log("IntroExpertises Submit", values)
+      const expertiseLabels = values.expertises.map(
+        expertise => expertise.label
+      )
+      updateIntroAndExpertises({
+        intro: values.intro,
+        setIntro: setIntro,
+        expertises: `{${expertiseLabels}}`,
+        setExpertises: setExpertises,
+        profileID: profileID
+      });
+      handleClose();
     }
   });
 
@@ -78,8 +80,8 @@ const IntroExpertisesEdit = (props) => {
           />
           <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
         </div>
-        {introEditValue?.intro === "" && <ErrorMessage error="Intro can't be blank"/>}
-        {introEditValue?.intro?.length > 15 && <ErrorMessage error="Intro must have within 15 characters"/>}
+        {/*{introEditValue?.intro === "" && <ErrorMessage error="Intro can't be blank"/>}*/}
+        {/*{introEditValue?.intro?.length > 15 && <ErrorMessage error="Intro must have within 15 characters"/>}*/}
       </div>
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
@@ -87,12 +89,12 @@ const IntroExpertisesEdit = (props) => {
           <h4 className={`${classes.topSectionEditWrapper}__expertisesWrapper__label`}>Select your expertises</h4>
           <Select
             isMulti
-            options={filteredExpertiseList}
+            options={filteredExpertise(selectedExpertises)}
             defaultValue={formHandler.values.expertises}
             onChange={selectChangeHandler}
             className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectDropdown`}
           />
-          {expertisesEditValue.length === 0 && <ErrorMessage error="Select at least one expertise"/>}
+          {selectedExpertises.length === 0 && <ErrorMessage error="Select at least one expertise"/>}
         </div>
         <CustomButton handler={formHandler.handleSubmit} mode={handleClose}/>
       </div>
