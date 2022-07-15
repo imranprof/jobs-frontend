@@ -26,10 +26,9 @@ const BlogModal = (props) => {
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [mode, setMode] = useState(editMode);
-  let html;
-  html = blog.body
   const readingTime = require('reading-time');
-  const blocksFromHtml = convertFromHTML(html);
+
+  const blocksFromHtml = convertFromHTML(blog.body);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
   const currentState = EditorState.createWithContent(contentState);
