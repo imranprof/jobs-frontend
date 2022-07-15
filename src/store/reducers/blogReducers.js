@@ -13,11 +13,11 @@ export const blogReducer = (state = initialState, action) => {
 
     case BLOGS_REMOVE:
       return {
-        ...state,
-        allBlogs: action.payload
+        ...state
       }
 
     case UPDATE_BLOG:
+      console.log(state.allBlogs)
       return state.allBlogs.map(blog=> {
         if(blog.id === action.payload.blog_id){
           blog.categories = action.payload.categories,

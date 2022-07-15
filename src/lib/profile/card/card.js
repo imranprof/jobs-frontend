@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {useState} from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 
 import {Card, CardContent, CardMedia} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -14,7 +14,7 @@ import RemoveButton from "../../removeButton";
 import EditButton from "../../editButton";
 import {removePortfolio} from "../../../store/actions/portfolioActions";
 import {deletePortfolio} from "../../../views/Profile/Portfolio/operations";
-import {blogsRemove} from "../../../store/actions/blogActions";
+import {blogsRemoveAction} from "../../../store/actions/blogActions";
 
 const CustomCard = (props) => {
   const theme = useTheme();
@@ -29,6 +29,8 @@ const CustomCard = (props) => {
   const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
+
+  const dispatch = useDispatch();
 
   const getCategories = () => {
     if (categories?.length>0) {
@@ -61,7 +63,8 @@ const CustomCard = (props) => {
         setToast({show: true, severity: "error", text: "You must have at least one blog!"});
       }
       else{
-        props.blogsRemove(blogs.filter(blog => blog.id !== item.id))
+        const {userID} = props
+        userID && dispatch(blogsRemoveAction({blogID:item.id, userID}))
         setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
       }
     }
@@ -143,14 +146,14 @@ const CustomCard = (props) => {
 const mapStateToProps = (state) => {
   return {
     portfolios: state.portfolios,
-    blogs: state.blogs
+    blogs: state.blogs.allBlogs,
+    userID: state.auth.userID
   }
 }
 
 const mapDispatchToProps = (dispatch) => (
   {
-    removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
-    blogsRemove: (blog) => dispatch(blogsRemove(blog))
+    removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio))
   }
 )
 

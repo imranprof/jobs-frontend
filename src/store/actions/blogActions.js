@@ -5,13 +5,35 @@ import {
   GET_BLOGS
 } from "../actionTypes/blogTypes";
 
-export const blogsRemove = (blogs) => {
+const profileUrl = process.env.NEXT_PUBLIC_PROFILE_URL;
+
+export const blogsRemove = () => {
   return {
-    type: BLOGS_REMOVE,
-    payload: blogs
+    type: BLOGS_REMOVE
   }
 }
-const profileUrl = process.env.NEXT_PUBLIC_PROFILE_URL;
+
+export const blogsRemoveAction = (values) => {
+  const {blogID, userID} = values
+  console.log(userID, blogID)
+  return (dispatch) => {
+    axios.patch(profileUrl, {
+      "user": {
+        "blogs_attributes": [
+          {
+            "id": blogID,
+            "_destroy": true
+          }
+        ]
+      }
+    }).then(res => {
+      console.log(res)
+      dispatch(blogsRemove());
+      dispatch(getBlogsAction({id: userID}));
+    })
+        .catch(err => err.response);
+  }
+}
 
 export const updateBlog = (id, categories, title, description, readTime) => {
   return {
