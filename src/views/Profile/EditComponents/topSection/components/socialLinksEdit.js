@@ -1,4 +1,4 @@
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 
 import {useTheme} from "@material-ui/core/styles";
@@ -7,21 +7,20 @@ import SocialLinksEditWrapper from "./socialLinksEditWrapper";
 import FontAwesomeIcons from "../../../../../../styles/FontAwesomeIcons";
 import CustomButton from "../../../../../lib/profile/customButtons";
 import {TopSectionEditStyle} from "../style";
-import {socialLinksUpdate} from "../../../../../store/actions/topSectionActions";
+import {socialLinksUpdateAction} from "../../../../../store/actions/topSectionActions";
 import ErrorMessage from "../../../../../lib/errorMessage";
 
 const SocialLinksEdit = (props) => {
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
-  const {handleClose, setToast} = props;
+  const {handleClose, setToast, profileID} = props;
+  const dispatch = useDispatch();
 
   const updateLinks = values => {
-    Object.keys(values).map((key) => {
-      if (values[key] === "") {
-        values[key] = void (0)
-      }
-    })
-    props.setLinks(values);
+    dispatch(socialLinksUpdateAction({
+      socialLinks: values,
+      profileID: profileID
+    }));
     setToast({show: true, severity: "success", text: "Successfully updated the social links"});
     handleClose(true)
   }
@@ -72,12 +71,9 @@ const SocialLinksEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    profileID: state.topSection.id,
     links: state.topSection.links,
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setLinks: (values) => dispatch(socialLinksUpdate(values)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SocialLinksEdit);
+export default connect(mapStateToProps)(SocialLinksEdit);

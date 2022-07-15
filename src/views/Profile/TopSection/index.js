@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {animateScroll as scroll} from 'react-scroll';
 
@@ -18,17 +18,11 @@ import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {
   bioEditMode,
-  bioText,
-  expertisesText,
-  headlineEditMode,
-  headlineText, introText,
-  setAvatar,
-  setName,
-  setProfileID,
-  socialLinksUpdate
+  getProfileAction,
+  headlineEditMode, updateBio,
+  updateHeadline
 } from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-import {getProfileData, setProfile, updateBio, updateHeadline} from "./operations";
 
 const TopSection = (props) => {
   const theme = useTheme();
@@ -37,6 +31,8 @@ const TopSection = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const {userID} = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -44,20 +40,17 @@ const TopSection = (props) => {
       let scrollTop = window.scrollY;
       backToTop.style.display = scrollTop >= 80 ? "flex" : "none";
     });
-    getProfileData({id: props.userID}).then(data => {
-      setProfile(data, props);
-    });
+    userID && dispatch(getProfileAction(userID));
   }, [])
 
   const headlineHandler = useFormik({
     initialValues: {headline: props.headline},
     enableReinitialize: true,
     onSubmit: (values) => {
-      updateHeadline({
+      dispatch(updateHeadline({
         headline: values.headline,
-        setHeadline: props.setHeadline,
         profileID: props.profileID
-      });
+      }));
       props.setHeadlineMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the headline"});
     },
@@ -76,11 +69,10 @@ const TopSection = (props) => {
     initialValues: {bio: props.bio},
     enableReinitialize: true,
     onSubmit: values => {
-      updateBio({
+      dispatch(updateBio({
         bio: values.bio,
-        setBio: props.setBio,
         profileID: props.profileID
-      })
+      }));
       props.setBioMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the bio"});
     },
@@ -129,7 +121,6 @@ const TopSection = (props) => {
               <IntroExpertisesEdit
                 handleClose={modalClose}
                 fullName={`${props.firstName} ${props.lastName}`}
-                setIntro={props.setIntro}
                 profileID={props.profileID}
                 setToast={setToast}
               />
@@ -215,16 +206,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setProfileID: (value) => dispatch(setProfileID(value)),
-  setName: (values) => dispatch(setName(values)),
-  setAvatar: (values) => dispatch(setAvatar(values)),
   setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
-  setHeadline: (value) => dispatch(headlineText(value)),
-  setIntro: (editValue) => dispatch(introText(editValue)),
-  setExpertises: (expertisesValue) => dispatch(expertisesText(expertisesValue)),
   setBioMode: (boolean) => dispatch(bioEditMode(boolean)),
-  setBio: (editValue) => dispatch(bioText(editValue)),
-  setLinks: (values) => dispatch(socialLinksUpdate(values)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopSection);

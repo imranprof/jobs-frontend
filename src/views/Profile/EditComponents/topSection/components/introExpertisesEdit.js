@@ -1,17 +1,14 @@
 import Select from "react-select";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 
 import {TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import CustomButton from "../../../../../lib/profile/customButtons";
-import {expertisesText, introText} from "../../../../../store/actions/topSectionActions";
+import {updateIntroAndExpertises} from "../../../../../store/actions/topSectionActions";
 import {TopSectionEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import {useFormik} from "formik";
-import {updateIntroAndExpertises} from "../../../TopSection/operations";
-import {useState} from "react";
-import CustomSnackbar from "../../../../../lib/customSnackbar";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -25,8 +22,6 @@ const IntroExpertisesEdit = (props) => {
   const {
     fullName,
     handleClose,
-    setIntro,
-    setExpertises,
     profileID,
     intro,
     expertises,
@@ -34,6 +29,7 @@ const IntroExpertisesEdit = (props) => {
   } = props;
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
+  const dispatch = useDispatch();
 
   const filteredExpertise = (selectedExpertises) => {
     if (selectedExpertises !== undefined) {
@@ -76,13 +72,11 @@ const IntroExpertisesEdit = (props) => {
       const expertiseLabels = values.expertises.map(
         expertise => expertise.label
       )
-      updateIntroAndExpertises({
+      dispatch(updateIntroAndExpertises({
         intro: values.intro,
-        setIntro: setIntro,
         expertises: `{${expertiseLabels}}`,
-        setExpertises: setExpertises,
         profileID: profileID
-      });
+      }));
       setToast({show: true, severity: "success", text: "Successfully updated the intro and expertises"});
       handleClose();
     }
@@ -129,9 +123,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setIntro: (editValue) => dispatch(introText(editValue)),
-  setExpertises: (editValue) => dispatch(expertisesText(editValue)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(IntroExpertisesEdit);
+export default connect(mapStateToProps)(IntroExpertisesEdit);
