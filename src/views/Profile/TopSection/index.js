@@ -11,7 +11,6 @@ import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
 import {TopSectionStyle} from "./style";
-import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/profile/customButtons";
 import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
@@ -22,12 +21,12 @@ import {
   bioText,
   expertisesText,
   headlineEditMode,
-  headlineText,
-  introText, setAvatar,
+  headlineText, introText,
+  setAvatar,
   setName,
   setProfileID,
   socialLinksUpdate
-} from "../../../store/actions/editProfileActions";
+} from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {getProfileData, setProfile, updateBio, updateHeadline} from "./operations";
 
@@ -35,14 +34,9 @@ const TopSection = (props) => {
   const theme = useTheme();
   const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
-  // const {name, avatar} = ProfileData;
-
-  const [introEditValue, setIntroEditValue] = useState({intro: props.intro})
   const [openModal, setOpenModal] = useState(false);
   const [expertisesEditValue, setExpertisesEditValue] = useState({expertises: props.expertises})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {intro} = introEditValue;
-  const {expertises} = expertisesEditValue;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
   useEffect(() => {
@@ -102,23 +96,6 @@ const TopSection = (props) => {
     }
   })
 
-  const inputIntroChangeHandler = (e) => {
-    setIntroEditValue({
-      intro: e.target.value
-    })
-  }
-
-  const introEditHandler = () => {
-    if ((intro && intro.length <= 15) && expertises.length > 0) {
-      props.setIntro(introEditValue.intro);
-      props.setExpertises(expertisesEditValue.expertises);
-      setOpenModal(false);
-      setToast({show: true, severity: "success", text: "Successfully updated the intro"});
-    } else {
-      setOpenModal(true);
-    }
-  };
-
   const modalClose = () => {
     setOpenModal(false);
   };
@@ -155,11 +132,7 @@ const TopSection = (props) => {
                 fullName={`${props.firstName} ${props.lastName}`}
                 setIntro={props.setIntro}
                 profileID={props.profileID}
-                introEditValue={introEditValue}
-                inputIntroChangeHandler={inputIntroChangeHandler}
-                introEditHandler={introEditHandler}
-                expertisesEditValue={expertisesEditValue.expertises} // etao puraton
-                setExpertisesEditValue={setExpertisesEditValue}
+                setToast={setToast}
               />
             </EditCustomModal>
 
@@ -229,17 +202,17 @@ const TopSection = (props) => {
 const mapStateToProps = (state) => {
   return {
     userID: state.auth.userID,
-    profileID: state.editProfile.id,
-    firstName: state.editProfile.firstName,
-    lastName: state.editProfile.lastName,
-    headline: state.editProfile.headline,
-    headlineEditMode: state.editProfile.headlineMode,
-    intro: state.editProfile.intro,
-    bio: state.editProfile.bio,
-    avatar: state.editProfile.avatar,
-    bioEditMode: state.editProfile.bioMode,
-    expertises: state.editProfile.expertises,
-    features: state.editProfile.features
+    profileID: state.topSection.id,
+    firstName: state.topSection.firstName,
+    lastName: state.topSection.lastName,
+    headline: state.topSection.headline,
+    headlineEditMode: state.topSection.headlineMode,
+    intro: state.topSection.intro,
+    bio: state.topSection.bio,
+    avatar: state.topSection.avatar,
+    bioEditMode: state.topSection.bioMode,
+    expertises: state.topSection.expertises,
+    features: state.topSection.features
   }
 }
 

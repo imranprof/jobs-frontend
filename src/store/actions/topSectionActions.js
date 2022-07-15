@@ -9,7 +9,7 @@ import {
   SKILLS_VALUES,
   FEATURES_UPDATE,
   FEATURES_REMOVE, SET_PROFILE_ID, SET_NAME, SET_AVATAR,
-} from "../actionTypes/editProfileTypes";
+} from "../actionTypes/topSectionTypes";
 
 // ***TopSection***
 export const setProfileID = (id) => {

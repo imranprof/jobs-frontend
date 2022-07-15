@@ -7,7 +7,7 @@ import SocialLinksEditWrapper from "./socialLinksEditWrapper";
 import FontAwesomeIcons from "../../../../../../styles/FontAwesomeIcons";
 import CustomButton from "../../../../../lib/profile/customButtons";
 import {TopSectionEditStyle} from "../style";
-import {socialLinksUpdate} from "../../../../../store/actions/editProfileActions";
+import {socialLinksUpdate} from "../../../../../store/actions/topSectionActions";
 import ErrorMessage from "../../../../../lib/errorMessage";
 
 const SocialLinksEdit = (props) => {
@@ -72,7 +72,7 @@ const SocialLinksEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    links: state.editProfile.links,
+    links: state.topSection.links,
   }
 }
 

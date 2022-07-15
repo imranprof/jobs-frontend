@@ -10,7 +10,7 @@ import {
   SET_PROFILE_ID,
   FEATURES_UPDATE,
   FEATURES_REMOVE, SET_NAME, SET_AVATAR,
-} from "../actionTypes/editProfileTypes";
+} from "../actionTypes/topSectionTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const {headline, intro, bio, expertises, socialLinks, skills, features} = ProfileData;
@@ -33,7 +33,7 @@ const initialState = {
 }
 
 // ***TopSection***
-export const editProfileReducer = (state = initialState, action) => {
+export const topSectionReducer = (state = initialState, action) => {
   switch (action.type) {
     case HEADLINE_TEXT:
       return {

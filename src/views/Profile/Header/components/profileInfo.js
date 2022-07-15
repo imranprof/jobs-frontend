@@ -25,7 +25,7 @@ const ProfileInfo = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    profileInfo: state.editProfile
+    profileInfo: state.topSection
   }
 }
 

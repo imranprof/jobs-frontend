@@ -8,7 +8,7 @@ import {SkillsStyle} from "./style";
 import EditButton from "../../editButton";
 import SkillsEdit from "../../../views/Profile/EditComponents/topSection/components/skillsEdit";
 import EditCustomModal from "../editCustomModal";
-import {skillsUpdate} from "../../../store/actions/editProfileActions";
+import {skillsUpdate} from "../../../store/actions/topSectionActions";
 
 const Skills = (props) => {
   const theme = useTheme();
@@ -59,7 +59,7 @@ const Skills = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    skills: state.editProfile.skills
+    skills: state.topSection.skills
   }
 }
 

@@ -5,7 +5,7 @@ import {useTheme} from "@material-ui/core/styles";
 
 import {TopSectionEditStyle} from "../style";
 import CustomButton from "../../../../../lib/profile/customButtons";
-import {skillsUpdate} from "../../../../../store/actions/editProfileActions";
+import {skillsUpdate} from "../../../../../store/actions/topSectionActions";
 import ErrorMessage from "../../../../../lib/errorMessage";
 
 const skillsData = [
@@ -56,7 +56,7 @@ const SkillsEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    skills: state.editProfile.skills,
+    skills: state.topSection.skills,
   }
 }
 

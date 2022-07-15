@@ -43,7 +43,7 @@ const SocialLinks = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    links: state.editProfile.links
+    links: state.topSection.links
   }
 }
 
