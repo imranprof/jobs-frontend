@@ -7,7 +7,7 @@ const Editor = dynamic(
   () => import('react-draft-wysiwyg').then(mod => mod.Editor),
   { ssr: false })
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, convertToRaw, ContentState, convertFromHTML } from 'draft-js';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from "draftjs-to-html";
 
 import {Grid, IconButton, TextField} from "@material-ui/core";
@@ -18,6 +18,7 @@ import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
 import {updateBlogAction} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
+import htmlToDraft from 'html-to-draftjs'
 
 const BlogModal = (props) => {
 
@@ -28,7 +29,7 @@ const BlogModal = (props) => {
   const [mode, setMode] = useState(editMode);
   const readingTime = require('reading-time');
 
-  const blocksFromHtml = convertFromHTML(blog.body);
+  const blocksFromHtml = htmlToDraft(blog.body);
   const { contentBlocks, entityMap } = blocksFromHtml;
   const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
   const currentState = EditorState.createWithContent(contentState);
@@ -69,8 +70,8 @@ const BlogModal = (props) => {
     });
   };
 
-  const changeEditorState = (state) => {
-    setEditorState(state);
+  const changeEditorState = (editorState) => {
+    setEditorState(editorState);
   }
   let readTime = props.readTime;
   const descriptionHandler = () => {
