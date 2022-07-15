@@ -35,7 +35,6 @@ const TopSection = (props) => {
   const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
-  const [expertisesEditValue, setExpertisesEditValue] = useState({expertises: props.expertises})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
@@ -212,7 +211,6 @@ const mapStateToProps = (state) => {
     avatar: state.topSection.avatar,
     bioEditMode: state.topSection.bioMode,
     expertises: state.topSection.expertises,
-    features: state.topSection.features
   }
 }
 

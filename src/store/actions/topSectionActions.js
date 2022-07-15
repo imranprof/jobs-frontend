@@ -6,12 +6,9 @@ import {
   BIO_TEXT,
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
-  SKILLS_VALUES,
-  FEATURES_UPDATE,
-  FEATURES_REMOVE, SET_PROFILE_ID, SET_NAME, SET_AVATAR,
+  SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR,
 } from "../actionTypes/topSectionTypes";
 
-// ***TopSection***
 export const setProfileID = (id) => {
   return {
     type: SET_PROFILE_ID,
@@ -19,7 +16,6 @@ export const setProfileID = (id) => {
   }
 }
 
-// Headline
 export const headlineText = (headline) => {
   return {
     type: HEADLINE_TEXT,
@@ -34,7 +30,6 @@ export const headlineEditMode = (boolean) => {
   }
 }
 
-// Intro
 export const introText = (intro) => {
   return {
     type: INTRO_TEXT,
@@ -42,7 +37,6 @@ export const introText = (intro) => {
   }
 }
 
-// IntroExpertises
 export const expertisesText = (expertises) => {
   return {
     type: EXPERTISE_VALUES,
@@ -50,7 +44,6 @@ export const expertisesText = (expertises) => {
   }
 }
 
-// Bio
 export const bioText = (bio) => {
   return {
     type: BIO_TEXT,
@@ -65,7 +58,6 @@ export const bioEditMode = (boolean) => {
   }
 }
 
-// Social Links
 export const socialLinksUpdate = (links) => {
   return {
     type: SOCIAL_LINKS_UPDATE,
@@ -73,7 +65,6 @@ export const socialLinksUpdate = (links) => {
   }
 }
 
-// Skills
 export const skillsUpdate = (skills) => {
   return {
     type: SKILLS_VALUES,
@@ -81,7 +72,6 @@ export const skillsUpdate = (skills) => {
   }
 }
 
-// Name
 export const setName = (values) => {
   return {
     type: SET_NAME,
@@ -89,25 +79,9 @@ export const setName = (values) => {
   }
 }
 
-// Avatar
 export const setAvatar = (avatar) => {
   return {
     type: SET_AVATAR,
     payload: avatar
-  }
-}
-
-// ***TopSection***
-export const featuresUpdate = (features) => {
-  return {
-    type: FEATURES_UPDATE,
-    payload: features
-  }
-}
-
-export const featuresRemove = (features) => {
-  return {
-    type: FEATURES_REMOVE,
-    payload: features
   }
 }

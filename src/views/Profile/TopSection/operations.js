@@ -12,7 +12,7 @@ export function getProfileData(values) {
     .catch(err => err.data);
 }
 
-export const setProfile = ({profile, features},
+export const setProfile = ({profile},
                            {
                              setHeadline,
                              setBio,

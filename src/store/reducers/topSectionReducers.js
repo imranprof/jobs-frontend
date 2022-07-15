@@ -7,9 +7,7 @@ import {
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
   SKILLS_VALUES,
-  SET_PROFILE_ID,
-  FEATURES_UPDATE,
-  FEATURES_REMOVE, SET_NAME, SET_AVATAR,
+  SET_PROFILE_ID, SET_NAME, SET_AVATAR,
 } from "../actionTypes/topSectionTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
@@ -29,10 +27,8 @@ const initialState = {
   expertises: [],
   links: {},
   skills: [],
-  features: features
 }
 
-// ***TopSection***
 export const topSectionReducer = (state = initialState, action) => {
   switch (action.type) {
     case HEADLINE_TEXT:
@@ -74,16 +70,6 @@ export const topSectionReducer = (state = initialState, action) => {
       return {
         ...state,
         skills: action.payload,
-      }
-    case FEATURES_UPDATE:
-      return {
-        ...state,
-        features: action.payload,
-      }
-    case FEATURES_REMOVE:
-      return {
-        ...state,
-        features: action.payload,
       }
     case SET_PROFILE_ID:
       return {
