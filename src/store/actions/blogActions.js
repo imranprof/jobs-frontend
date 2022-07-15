@@ -42,10 +42,10 @@ export const updateBlog = (id, categories, title, description, readTime) => {
   }
 }
 
-export const getBlogs = (blogs) => {
+export const getBlogs = (values) => {
   return {
     type: GET_BLOGS,
-    payload: blogs
+    payload: values
   }
 }
 
@@ -57,7 +57,7 @@ export const getBlogsAction = (values) => {
         user_id: id
       }
     }).then(res => {
-      dispatch(getBlogs(res.data.blogs));
+      dispatch(getBlogs({blogs: res.data.blogs, categories: res.data.all_categories}));
     })
       .catch(err => err.response);
   }

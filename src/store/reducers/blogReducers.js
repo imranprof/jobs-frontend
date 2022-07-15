@@ -5,7 +5,8 @@ import {
 } from "../actionTypes/blogTypes";
 
 const initialState = {
-  allBlogs: []
+  allBlogs: [],
+  allCategories: []
 }
 
 export const blogReducer = (state = initialState, action) => {
@@ -29,9 +30,11 @@ export const blogReducer = (state = initialState, action) => {
       })
 
     case GET_BLOGS:
+      const {blogs, categories} = action.payload
       return {
         ...state,
-        allBlogs: action.payload
+        allBlogs: blogs,
+        allCategories: categories
       }
 
 

@@ -207,7 +207,7 @@ const BlogModal = (props) => {
 
 const mapStateToProps = (state) => {
   return{
-    categoriesData: state.profile.categoriesData
+    categoriesData: state.blogs.allCategories
   }
 }
 
