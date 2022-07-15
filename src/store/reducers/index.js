@@ -6,6 +6,7 @@ import {editProfileReducer} from "./editProfileReducers";
 import {resumeReducers} from "./resumeReducers";
 import {portfolioReducer} from "./portfolioReducers"
 import {blogReducer} from "./blogReducers";
+import {featureReducer} from "./featureReducers";
 
 const rootReducers = combineReducers({
     allProfiles: profilesReducer,
@@ -14,7 +15,8 @@ const rootReducers = combineReducers({
     editResume: resumeReducers,
     auth: authReducers,
     portfolios: portfolioReducer,
-    blogs: blogReducer
+    blogs: blogReducer,
+    features: featureReducer
 })
 
 export default rootReducers;

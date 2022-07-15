@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {connect} from "react-redux";
 
 import {Grid, Paper} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
@@ -9,8 +10,8 @@ import RemoveButton from "../../../../lib/removeButton";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import FeaturesEdit from "../../EditComponents/features/components/featuresEdit";
 
-const Feature = ({feature, classes, featureRemove, setToast}) => {
-  const {iconName, title, description} = feature;
+const Feature = ({feature, classes, featureRemove, toast, setToast}) => {
+  const {title, description} = feature;
   const [openModal, setOpenModal] = useState(false);
 
   const modalClose = () => {
@@ -26,11 +27,14 @@ const Feature = ({feature, classes, featureRemove, setToast}) => {
               <span onClick={() => setOpenModal(true)}>
                 <EditButton/>
               </span>
-              <span onClick={() => featureRemove(feature)}>
+              <span onClick={(e) => {
+                featureRemove(feature);
+                e.stopPropagation();
+              }}>
                 <RemoveButton/>
               </span>
             </div>
-            <Icon className={`${classes.featureWrapper}__feature__icon ${FontAwesomeIcons[iconName]}`}/>
+            <Icon className={`${classes.featureWrapper}__feature__icon ${FontAwesomeIcons.tools}`}/>
             <div className={`${classes.featureWrapper}__feature__content`}>
               <h1 className={`${classes.featureWrapper}__feature__content__title`}>{title}</h1>
               <p className={`${classes.featureWrapper}__feature__content__description`}>{description}</p>
@@ -40,7 +44,7 @@ const Feature = ({feature, classes, featureRemove, setToast}) => {
       </a>
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
-        <FeaturesEdit feature={feature} handleClose={modalClose} />
+        <FeaturesEdit feature={feature} handleClose={modalClose} toast={toast} setToast={setToast} />
       </EditCustomModal>
     </Grid>
   );
