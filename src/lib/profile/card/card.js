@@ -12,14 +12,13 @@ import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
 import {CardStyle} from "./style";
 import RemoveButton from "../../removeButton";
 import EditButton from "../../editButton";
-import {removePortfolio} from "../../../store/actions/portfolioActions";
-import {deletePortfolio} from "../../../views/Profile/Portfolio/operations";
+import {removePortfolioAction} from "../../../store/actions/portfolioActions";
 import {blogsRemoveAction} from "../../../store/actions/blogActions";
 
 const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
-  const {element, elementType, portfolios, setToast, blogs} = props;
+  const {element, elementType, portfolios, setToast, blogs, userID} = props;
   const {title, image, categories, reactCount, reading_time} = element;
 
   const isPortfolio = elementType === "portfolio";
@@ -33,7 +32,7 @@ const CustomCard = (props) => {
   const dispatch = useDispatch();
 
   const getCategories = () => {
-    if (categories?.length>0) {
+    if (categories?.length > 0) {
       let categoriesText = categories[0].title
       if (categories?.length === 2) categoriesText += " " + categories[1].title
       if (categories?.length > 2) categoriesText += ` ${categories[1].title}...`
@@ -54,17 +53,14 @@ const CustomCard = (props) => {
       if (portfolios.allPortfolios.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one portfolio!"});
       } else {
-        deletePortfolio(item.id, props.removePortfolio);
+        userID && dispatch(removePortfolioAction(item.id));
         setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
       }
-    }
-    else {
-      if(blogs.length < 2) {
+    } else {
+      if (blogs.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one blog!"});
-      }
-      else{
-        const {userID} = props
-        userID && dispatch(blogsRemoveAction({blogID:item.id, userID}))
+      } else {
+        userID && dispatch(blogsRemoveAction({blogID: item.id, userID}))
         setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
       }
     }
@@ -151,10 +147,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio))
-  }
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(CustomCard);
+export default connect(mapStateToProps, null)(CustomCard);

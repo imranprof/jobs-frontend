@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import Select from "react-select";
 import {useFormik} from "formik";
 
@@ -11,10 +11,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {PortfolioModalStyle} from "./portfolioModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
-import {updatePortfolio} from "../../../../store/actions/portfolioActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import ErrorMessage from "../../../../lib/errorMessage";
-import {update} from "../operations";
+import {updatePortfolioAction} from "../../../../store/actions/portfolioActions";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
@@ -24,6 +23,7 @@ const PortfolioModal = (props => {
   const {categoriesData, setTogglePortfolioModal, editMode} = props;
   const [mode, toggleMode] = useState(editMode)
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const dispatch = useDispatch();
 
   setTimeout(() => {
     SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
@@ -51,7 +51,7 @@ const PortfolioModal = (props => {
     portfolio.categories = mapCategoriesForState(selectedCategories);
     portfolio.title = title;
     portfolio.description = description;
-    update(oldPortfolio, portfolio, props.updatePortfolio);
+    dispatch(updatePortfolioAction(oldPortfolio, portfolio));
   }
 
   const filterCategories = (categories) => {
@@ -224,8 +224,4 @@ const mapStateToProps = (state) => ({
   categoriesData: state.portfolios.allCategories
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  updatePortfolio: (portfolio) => dispatch(updatePortfolio(portfolio)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PortfolioModal);
+export default connect(mapStateToProps, null)(PortfolioModal);

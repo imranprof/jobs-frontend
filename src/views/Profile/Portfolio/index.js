@@ -15,7 +15,7 @@ const Portfolio = (props) => {
   const classes = PortfolioStyle(theme);
   const {portfolios, userID} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
-  let dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(
     () => {
@@ -48,10 +48,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getPortfolios: (portfolios) => dispatch(getPortfolios(portfolios))
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
+export default connect(mapStateToProps, null)(Portfolio);
