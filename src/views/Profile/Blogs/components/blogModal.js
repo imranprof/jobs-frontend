@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import {useFormik} from "formik";
 import Select from 'react-select';
 import dynamic from 'next/dynamic'
@@ -17,7 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
 import {renderToString} from "react-dom/server";
-import {updateBlog} from "../../../../store/actions/blogActions";
+import {updateBlogAction} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 
 const BlogModal = (props) => {
@@ -41,23 +41,31 @@ const BlogModal = (props) => {
   const currentState = EditorState.createWithContent(contentState);
   const [editorState, setEditorState] = useState(currentState);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const dispatch = useDispatch()
 
   setTimeout(() => {
     setVisibilityClass(props.setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
 
+  const allCategories = props.categoriesData?.map((category) => ({
+    category_id: category.id,
+    title: category.title
+  }));
+
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
-    value: category.id,
+    id: category.id,
+    value: category.category_id,
     label: category.title
   }));
   const mapCategoriesForSave = (categories) => categories?.map((category) => ({
-    id: category.value,
+    id: category.id,
+    category_id: category.value,
     title: category.label
   }));
 
   const [selectedCategories, setSelectedCategories] = useState(mapCategoriesForMultiSelect(blog.categories));
   const filterCategories = (categories) => {
-    return mapCategoriesForMultiSelect(props.categoriesData).filter((category) => {
+    return mapCategoriesForMultiSelect(allCategories).filter((category) => {
       let flag = true;
       for (let i = 0; i < categories?.length; i++) {
         if (categories[i].value === category.value) {
@@ -84,7 +92,7 @@ const BlogModal = (props) => {
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
-      props.updateBlog(blog.id, mapCategoriesForSave(values.categories), values.title, descriptionHandler(), readTime)
+      dispatch(updateBlogAction({id: blog.id, categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}, props.blog))
       setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
       setMode(false);
     },
@@ -211,8 +219,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  updateBlog: (blog_id, categories, title, description, readTime) => dispatch(updateBlog(blog_id, categories, title, description, readTime))
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(BlogModal);
+export default connect(mapStateToProps)(BlogModal);
