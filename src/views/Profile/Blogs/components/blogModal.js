@@ -16,7 +16,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
-import {renderToString} from "react-dom/server";
 import {updateBlogAction} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 
@@ -28,12 +27,7 @@ const BlogModal = (props) => {
   const [visibilityClass, setVisibilityClass] = useState("");
   const [mode, setMode] = useState(editMode);
   let html;
-  if(typeof blog.body === 'string'){
-    html = blog.body;
-  }
-  else{
-    html = renderToString(blog.body);
-  }
+  html = blog.body
   const readingTime = require('reading-time');
   const blocksFromHtml = convertFromHTML(html);
   const { contentBlocks, entityMap } = blocksFromHtml;
