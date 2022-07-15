@@ -7,7 +7,7 @@ import {useTheme} from "@material-ui/core/styles";
 import CustomCard from "../../../lib/profile/card/card";
 import {PortfolioStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
-import {getPortfolios, getPortfoliosAction} from "../../../store/actions/portfolioActions"
+import {getPortfoliosAction} from "../../../store/actions/portfolioActions"
 
 
 const Portfolio = (props) => {
