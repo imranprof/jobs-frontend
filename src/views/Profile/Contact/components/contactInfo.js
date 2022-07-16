@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import {useState} from "react";
-import {connect} from "react-redux";
+import {useEffect, useState} from "react";
+import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 
 import {Card, CardMedia, Grid, TextField} from "@material-ui/core";
@@ -19,19 +19,29 @@ import {
   phoneUpdate,
   phoneEditMode
 } from "../../../../store/actions/contactActions";
+import {getContactAction} from "../../../../store/actions/contactActions";
 
 const ContactInfo = (props) => {
   const {
     classes,
+    userID,
+    firstName,
+    lastName,
     designation,
     designationMode,
     contactDescription,
     contactDescriptionMode,
     phone,
-    phoneMode
+    phoneMode,
+    email
   } = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
-  const {name, email} = ProfileData;
+  const fullName = `${firstName} ${lastName}`
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    userID && dispatch(getContactAction(userID));
+  }, [])
 
   const designationHandler = useFormik({
     initialValues: {
@@ -99,7 +109,7 @@ const ContactInfo = (props) => {
             />
           </div>
           <div className={`${classes}__contact-info__title-area`}>
-            <h1 className={`${classes}__contact-info__title-area__name`}>{name}</h1>
+            <h1 className={`${classes}__contact-info__title-area__name`}>{fullName}</h1>
 
             {designationMode ? (
               <div>
@@ -192,12 +202,17 @@ const ContactInfo = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    userID: state.auth.userID,
+    profileID: state.topSection.id,
+    firstName: state.topSection.firstName,
+    lastName: state.topSection.lastName,
     designation: state.contacts.designation,
     designationMode: state.contacts.designationMode,
     contactDescription: state.contacts.contactDescription,
     contactDescriptionMode: state.contacts.contactDescriptionMode,
     phone: state.contacts.phone,
     phoneMode: state.contacts.phoneMode,
+    email: state.contacts.contact_email
   }
 }
 

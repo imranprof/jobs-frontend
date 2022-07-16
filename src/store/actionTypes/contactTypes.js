@@ -9,3 +9,6 @@ export const CONTACT_DESCRIPTION_EDIT_MODE = 'CONTACT_DESCRIPTION_EDIT_MODE'
 // Phone
 export const PHONE_UPDATE = 'PHONE_UPDATE'
 export const PHONE_EDIT_MODE = 'PHONE_EDIT_MODE'
+
+// Email
+export const SET_EMAIL = 'SET_EMAIL'

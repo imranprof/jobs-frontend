@@ -4,7 +4,8 @@ import {
   CONTACT_DESCRIPTION_UPDATE,
   CONTACT_DESCRIPTION_EDIT_MODE,
   PHONE_UPDATE,
-  PHONE_EDIT_MODE
+  PHONE_EDIT_MODE,
+  SET_EMAIL
 } from "../actionTypes/contactTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
@@ -15,7 +16,8 @@ const initialState = {
   contactDescription: contactDescription,
   contactDescriptionMode: false,
   phone: phone,
-  phoneMode: false
+  phoneMode: false,
+  contact_email: null
 }
 
 export const contactReducer = (state = initialState, action) => {
@@ -49,6 +51,11 @@ export const contactReducer = (state = initialState, action) => {
       return {
         ...state,
         phoneMode: action.payload,
+      }
+    case SET_EMAIL:
+      return {
+        ...state,
+        contact_email: action.payload,
       }
     default:
       return state
