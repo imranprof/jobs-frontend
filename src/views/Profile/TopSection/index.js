@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {animateScroll as scroll} from 'react-scroll';
 
@@ -11,7 +11,6 @@ import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
 import {TopSectionStyle} from "./style";
-import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/profile/customButtons";
 import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
@@ -19,31 +18,21 @@ import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {
   bioEditMode,
-  bioText,
-  expertisesText,
-  headlineEditMode,
-  headlineText,
-  introText, setAvatar,
-  setName,
-  setProfileID,
-  socialLinksUpdate
-} from "../../../store/actions/editProfileActions";
+  getProfileAction,
+  headlineEditMode, updateBio,
+  updateHeadline
+} from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-import {getProfileData, setProfile, updateBio, updateHeadline} from "./operations";
 
 const TopSection = (props) => {
   const theme = useTheme();
   const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
-  // const {name, avatar} = ProfileData;
-
-  const [introEditValue, setIntroEditValue] = useState({intro: props.intro})
   const [openModal, setOpenModal] = useState(false);
-  const [expertisesEditValue, setExpertisesEditValue] = useState({expertises: props.expertises})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {intro} = introEditValue;
-  const {expertises} = expertisesEditValue;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const {userID} = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -51,20 +40,17 @@ const TopSection = (props) => {
       let scrollTop = window.scrollY;
       backToTop.style.display = scrollTop >= 80 ? "flex" : "none";
     });
-    getProfileData({id: props.userID}).then(data => {
-      setProfile(data, props);
-    });
+    userID && dispatch(getProfileAction(userID));
   }, [])
 
   const headlineHandler = useFormik({
     initialValues: {headline: props.headline},
     enableReinitialize: true,
     onSubmit: (values) => {
-      updateHeadline({
+      dispatch(updateHeadline({
         headline: values.headline,
-        setHeadline: props.setHeadline,
         profileID: props.profileID
-      });
+      }));
       props.setHeadlineMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the headline"});
     },
@@ -83,11 +69,10 @@ const TopSection = (props) => {
     initialValues: {bio: props.bio},
     enableReinitialize: true,
     onSubmit: values => {
-      updateBio({
+      dispatch(updateBio({
         bio: values.bio,
-        setBio: props.setBio,
         profileID: props.profileID
-      })
+      }));
       props.setBioMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the bio"});
     },
@@ -101,23 +86,6 @@ const TopSection = (props) => {
       return errors;
     }
   })
-
-  const inputIntroChangeHandler = (e) => {
-    setIntroEditValue({
-      intro: e.target.value
-    })
-  }
-
-  const introEditHandler = () => {
-    if ((intro && intro.length <= 15) && expertises.length > 0) {
-      props.setIntro(introEditValue.intro);
-      props.setExpertises(expertisesEditValue.expertises);
-      setOpenModal(false);
-      setToast({show: true, severity: "success", text: "Successfully updated the intro"});
-    } else {
-      setOpenModal(true);
-    }
-  };
 
   const modalClose = () => {
     setOpenModal(false);
@@ -153,11 +121,8 @@ const TopSection = (props) => {
               <IntroExpertisesEdit
                 handleClose={modalClose}
                 fullName={`${props.firstName} ${props.lastName}`}
-                introEditValue={introEditValue}
-                inputIntroChangeHandler={inputIntroChangeHandler}
-                introEditHandler={introEditHandler}
-                expertisesEditValue={expertisesEditValue.expertises} // etao puraton
-                setExpertisesEditValue={setExpertisesEditValue}
+                profileID={props.profileID}
+                setToast={setToast}
               />
             </EditCustomModal>
 
@@ -204,7 +169,8 @@ const TopSection = (props) => {
         </Grid>
         <Grid item xs={12} md={5}>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
-            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
+            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`}
+                 className={`${classes.topSectionWrapper}__thumbnail--img`}/>
           </div>
         </Grid>
 
@@ -226,31 +192,22 @@ const TopSection = (props) => {
 const mapStateToProps = (state) => {
   return {
     userID: state.auth.userID,
-    profileID: state.editProfile.id,
-    firstName: state.editProfile.firstName,
-    lastName: state.editProfile.lastName,
-    headline: state.editProfile.headline,
-    headlineEditMode: state.editProfile.headlineMode,
-    intro: state.editProfile.intro,
-    bio: state.editProfile.bio,
-    avatar: state.editProfile.avatar,
-    bioEditMode: state.editProfile.bioMode,
-    expertises: state.editProfile.expertises,
-    features: state.editProfile.features
+    profileID: state.topSection.id,
+    firstName: state.topSection.firstName,
+    lastName: state.topSection.lastName,
+    headline: state.topSection.headline,
+    headlineEditMode: state.topSection.headlineMode,
+    intro: state.topSection.intro,
+    bio: state.topSection.bio,
+    avatar: state.topSection.avatar,
+    bioEditMode: state.topSection.bioMode,
+    expertises: state.topSection.expertises,
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setProfileID: (value) => dispatch(setProfileID(value)),
-  setName: (values) => dispatch(setName(values)),
-  setAvatar: (values) => dispatch(setAvatar(values)),
   setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
-  setHeadline: (value) => dispatch(headlineText(value)),
-  setIntro: (editValue) => dispatch(introText(editValue)),
-  setExpertises: (expertisesValue) => dispatch(expertisesText(expertisesValue)),
   setBioMode: (boolean) => dispatch(bioEditMode(boolean)),
-  setBio: (editValue) => dispatch(bioText(editValue)),
-  setLinks: (values) => dispatch(socialLinksUpdate(values)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopSection);
