@@ -15,9 +15,9 @@ const ResumeEdit = (props) => {
   const {cardType, title, description, handleClose, cardContent} = props;
   const labelType = (cardType === "education") ? "Institution" : "Company"
   const keyType = (cardType === "education") ? "institution" : "title"
-  const {startDate, endDate} = cardContent
-  const splitStartDate = startDate.split(" ")
-  const splitEndDate = endDate.split(" ")
+  const {start_date, end_date} = cardContent
+  const splitStartDate = start_date.split(" ")
+  const splitEndDate = end_date.split(" ")
 
   const initialResumeValues = {
     id: cardContent.id,

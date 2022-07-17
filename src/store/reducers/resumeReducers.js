@@ -1,4 +1,4 @@
-import {RESUME_UPDATE, RESUME_ITEM_REMOVE} from "../actionTypes/resumeTypes";
+import {RESUME_UPDATE, RESUME_ITEM_REMOVE, GET_RESUME} from "../actionTypes/resumeTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const { resume } = ProfileData;
@@ -8,6 +8,11 @@ const initialState = {
 
 export const resumeReducers = (state = initialState, action) => {
   switch (action.type) {
+    case GET_RESUME:
+      return {
+        ...state,
+        ...action.payload,
+      }
     case RESUME_UPDATE:
       return {
         ...state,

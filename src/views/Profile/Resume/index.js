@@ -1,16 +1,23 @@
-import {useState} from 'react';
-import {connect} from "react-redux";
+import {useEffect, useState} from 'react';
+import {connect, useDispatch} from "react-redux";
 
 import {useTheme} from "@material-ui/core/styles";
 
 import {ResumeStyle} from "./style";
 import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
+import {getResumeAction} from "../../../store/actions/resumeActions";
 
 const Resume = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-  const {resume} = props;
+  const {resume, userID} = props;
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    userID && dispatch(getResumeAction({id: userID}))
+  },[])
 
   let resumeSections = [];
   for (let key in resume) {
@@ -38,7 +45,8 @@ const Resume = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    resume: state.editResume.resume
+    resume: state.resumeItems.resume,
+    userID: state.auth.userID,
   }
 }
 

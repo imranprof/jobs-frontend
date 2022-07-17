@@ -16,7 +16,8 @@ const rootReducers = combineReducers({
     auth: authReducers,
     portfolios: portfolioReducer,
     blogs: blogReducer,
-    features: featureReducer
+    features: featureReducer,
+    resumeItems: resumeReducers
 })
 
 export default rootReducers;

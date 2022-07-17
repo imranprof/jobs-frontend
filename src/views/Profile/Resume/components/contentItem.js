@@ -14,8 +14,8 @@ const ContentItem = (props) => {
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
   const {cardType, cardContent, resumeItemRemoveHandler} = props;
   const [openModal, setOpenModal] = useState(false);
-  const title = (cardType === "education") ? cardContent.institution : cardContent.title;
-  const subTitle = `${cardContent.startDate} - ${cardContent.endDate}`;
+  const title = (cardType === "educations") ? cardContent.institution : cardContent.title;
+  const subTitle = `${cardContent.start_date} - ${cardContent.end_date}`;
   const description = cardContent.description;
 
   const modalClose = () => {
