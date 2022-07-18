@@ -24,15 +24,11 @@ function withLayout(Component, type) {
         <ThemeProvider theme={{...customTheme}}>
           <CssBaseline/>
           {modalType && <CustomModal/>}
-          <Header type={type}/>
+          <Header type={type} themeMode={darkMode} setTheme={setDarkMode}/>
           <Container fixed>
             <Component {...props} />
           </Container>
           <Footer/>
-          <FormControlLabel
-            control={<Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>}
-            label="Theme Switch"
-          />
         </ThemeProvider>
     )
   }
