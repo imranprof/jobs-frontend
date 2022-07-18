@@ -266,7 +266,7 @@ export const useStyles = makeStyles({
 
     // Profiles Header Styles
     '&__profiles__theme-switch': {
-
+      marginLeft: "-15px"
     },
     '&__profiles__side-bar': {
       background: theme.palette.customBackground.sideBar,
