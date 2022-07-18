@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 
 import {Slider, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
-import {resumeUpdate} from "../../../../../store/actions/resumeActions";
+import {resumeUpdateAction} from "../../../../../store/actions/resumeActions";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import {ResumeEditStyle} from "../style";
@@ -14,6 +14,7 @@ const ResumeSkillsEdit = (props) => {
   const classes = ResumeEditStyle(theme);
   const {cardType, cardContent, handleClose} = props;
   const {id, name, rating} = cardContent;
+  const dispatch = useDispatch();
 
   const initialSkillValues = {
     id: id,
@@ -22,18 +23,18 @@ const ResumeSkillsEdit = (props) => {
   }
 
   const skillsUpdate = values => {
-    const skillIndex = props.resume[cardType].findIndex(type => type.id === values.id)
-    props.resume[cardType][skillIndex].name = values.name
-    props.resume[cardType][skillIndex].rating = values.rating
+    dispatch(resumeUpdateAction({
+      resumeItem: values,
+      cardType: cardType
+    }));
 
-    props.setResume(props.resume)
     props.setToast({show: true, severity: "success", text: "Successfully updated the skill"})
     handleClose()
   }
 
   const skillValidation = values => {
     let errors = {}
-    if(!values.name) {
+    if (!values.name) {
       errors.name = `Skill name can't be empty`
     }
     return errors;
@@ -61,7 +62,7 @@ const ResumeSkillsEdit = (props) => {
             value={formik.values.name}
             onChange={formik.handleChange}
           />
-          {formik.errors.name ? <ErrorMessage error={formik.errors.name} /> : null}
+          {formik.errors.name ? <ErrorMessage error={formik.errors.name}/> : null}
         </div>
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
           <h4>Select your rating</h4>
@@ -69,12 +70,12 @@ const ResumeSkillsEdit = (props) => {
             key={`slider-${formik.values.rating}`}
             valueLabelDisplay="on"
             defaultValue={formik.values.rating}
-            onChangeCommitted={ (e, val) => formik.values.rating = val }
+            onChangeCommitted={(e, val) => formik.values.rating = val}
           />
         </div>
       </div>
 
-      <CustomButtons handler={formik.handleSubmit} mode={handleClose} />
+      <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
     </div>
   );
 };
@@ -85,8 +86,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setResume: (values) => dispatch(resumeUpdate(values))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResumeSkillsEdit);
+export default connect(mapStateToProps)(ResumeSkillsEdit);

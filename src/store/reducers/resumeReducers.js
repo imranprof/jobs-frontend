@@ -1,7 +1,7 @@
 import {RESUME_UPDATE, RESUME_ITEM_REMOVE, GET_RESUME} from "../actionTypes/resumeTypes";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const { resume } = ProfileData;
+const {resume} = ProfileData;
 const initialState = {
   resume: resume
 }

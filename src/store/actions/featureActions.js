@@ -77,7 +77,7 @@ export const removeFeatureAction = (featureID) => {
   }
   return (dispatch) => {
     axios.patch(profileURL, data)
-         .then(res => dispatch(removeFeature(res.data.features)))
-         .catch(err => err.response)
+      .then(res => dispatch(removeFeature(res.data.features)))
+      .catch(err => err.response)
   }
 }

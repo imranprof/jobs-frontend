@@ -1,4 +1,5 @@
 import {useState} from "react";
+import Moment from "moment";
 
 import {Grid} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -15,7 +16,8 @@ const ContentItem = (props) => {
   const {cardType, cardContent, resumeItemRemoveHandler} = props;
   const [openModal, setOpenModal] = useState(false);
   const title = (cardType === "educations") ? cardContent.institution : cardContent.title;
-  const subTitle = `${cardContent.start_date} - ${cardContent.end_date}`;
+  const subTitle = `${Moment(cardContent.start_date).format('MMM, YYYY')}` +
+    ` - ${Moment(cardContent.end_date).format('MMM, YYYY')}`;
   const description = cardContent.description;
 
   const modalClose = () => {
