@@ -41,6 +41,9 @@ export const useStyles = makeStyles({
     '& .fa-moon': {
       color: "black"
     },
+    '&__light-theme__icon': {
+      fill: "#FFCC33"
+    },
     '&__profile': {
       display: 'flex',
       alignItems: 'center',

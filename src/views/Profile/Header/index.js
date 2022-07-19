@@ -30,7 +30,7 @@ const ProfileHeader = ({ classes, headerRef, themeMode, themeSet }) => {
                         <Tooltip title={mode} placement="bottom">
                             {themeMode ? (
                                 <div className={`${classes.headerWrapper}__nav__theme-switch`}>
-                                    <IconButton onClick={handleClick}> <WbSunnyIcon/> </IconButton>
+                                    <IconButton onClick={handleClick}> <WbSunnyIcon className={`${classes.headerWrapper}__light-theme__icon`}/> </IconButton>
                                 </div>
 
                             ) : (

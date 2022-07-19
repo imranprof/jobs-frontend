@@ -71,7 +71,7 @@ const ProfilesHeader = (props) => {
             <Tooltip title={mode} placement="bottom">
               {themeMode ? (
                   <div className={`${classes.headerWrapper}__profiles__theme-switch`}>
-                    <IconButton onClick={handleClick}> <WbSunnyIcon/> </IconButton>
+                    <IconButton onClick={handleClick}> <WbSunnyIcon className={`${classes.headerWrapper}__light-theme__icon`}/> </IconButton>
                   </div>
               ) : (
                   <div className={`${classes.headerWrapper}__profiles__theme-switch`}>
