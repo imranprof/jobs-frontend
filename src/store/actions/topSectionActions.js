@@ -71,9 +71,14 @@ export const socialLinksUpdate = (links) => {
 }
 
 export const skillsUpdate = (skills) => {
+  const topSkills = skills.sort(
+    (skill1, skill2) => {
+      return (skill2.rating - skill1.rating);
+    }
+  );
   return {
     type: SKILLS_VALUES,
-    payload: skills
+    payload: topSkills.slice(0, 3)
   }
 }
 
@@ -118,12 +123,7 @@ export function getProfileAction(userID) {
       dispatch(setAvatar(avatar));
       dispatch(expertisesText(expertises));
       dispatch(socialLinksUpdate(social_links));
-      const topSkills = skills.sort(
-        (skill1, skill2) => {
-          return (skill2.rating - skill1.rating);
-        }
-      );
-      dispatch(skillsUpdate(topSkills.slice(0, 3)));
+      dispatch(skillsUpdate(skills));
     })
       .catch(err => err.data);
   }
