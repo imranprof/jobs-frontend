@@ -102,7 +102,8 @@ export const useStyles = makeStyles({
     },
     '&__nav': {
       '&__theme-switch': {
-        marginLeft: 40
+        marginLeft: 40,
+        marginTop: "-6px"
       },
       '& a': {
         fontFamily: FONTS.primaryFont,
