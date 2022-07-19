@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useEffect, useState} from "react";
+import {connect, useDispatch} from "react-redux";
 
 import {Button, Box, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import {setAuthToken, signIn, signUp} from "../operations";
 import {authenticate, modalType} from "../../store/actions/authAction";
 import {AuthStyle} from "./style";
+import {useRouter} from "next/router";
 
 const validationSchema = yup.object({
   email: yup
@@ -33,10 +34,18 @@ const validationSchema = yup.object({
     ),
 });
 
-const SignUpForm = () => {
+const SignUpForm = ({isAuthenticated}) => {
   const theme = useTheme();
   const classes = AuthStyle(theme);
   const dispatch = useDispatch();
+
+  const router = useRouter();
+  useEffect(()=> {
+    if(isAuthenticated){
+      router.push('/profile')
+    }
+  }, [isAuthenticated])
+
   const [apiError, setApiError] = useState(undefined);
   const formik = useFormik({
     initialValues: {
@@ -53,7 +62,6 @@ const SignUpForm = () => {
         const response = await dispatch(signIn(values));
         setAuthToken(response.data.authToken);
         dispatch(authenticate(true))
-        dispatch(modalType(''))
       } else {
         setApiError(response.data.email);
       }
@@ -131,4 +139,10 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+  }
+}
+
+export default connect(mapStateToProps)(SignUpForm);

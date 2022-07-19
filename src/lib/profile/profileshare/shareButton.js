@@ -7,7 +7,7 @@ const ShareButton = ({classes}) => {
   const [openEl, setOpen] = React.useState(false);
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    setOpen(openEl ? null : event.currentTarget)
+    setOpen(openEl ? false : true)
   };
   const handleClose = () => {
     setOpen(false);

@@ -101,6 +101,10 @@ const darkTheme = createTheme({
       title: COLORS.white_6,
       percentText: COLORS.white_6,
       boxShadow: COLORS.boxShadow_8,
+    },
+    scrollBar: {
+      track: COLORS.gray_4,
+      thumb: COLORS.white_6
     }
   },
 });

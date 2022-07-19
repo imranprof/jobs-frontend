@@ -16,6 +16,7 @@ import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/profile/customButtons";
 import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
 import ErrorMessage from "../../../lib/errorMessage";
+import CustomSnackbar from "../../../lib/customSnackbar";
 import {
   headlineText,
   headlineEditMode,
@@ -38,6 +39,7 @@ const TopSection = (props) => {
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
   const {intro} = introEditValue;
   const {expertises} = expertisesEditValue;
+  const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -52,6 +54,7 @@ const TopSection = (props) => {
     onSubmit: values => {
       props.setHeadline(values.headline);
       props.setHeadlineMode(false);
+      setToast({show: true, severity: "success", text: "Successfully updated the headline"});
     },
     validate: values => {
       let errors = {}
@@ -69,6 +72,7 @@ const TopSection = (props) => {
     onSubmit: values => {
       props.setBio(values.bio);
       props.setBioMode(false);
+      setToast({show: true, severity: "success", text: "Successfully updated the bio"});
     },
     validate: values => {
       let errors = {}
@@ -92,6 +96,7 @@ const TopSection = (props) => {
       props.setIntro(introEditValue.intro);
       props.setExpertises(expertisesEditValue.expertises);
       setOpenModal(false);
+      setToast({show: true, severity: "success", text: "Successfully updated the intro"});
     } else {
       setOpenModal(true);
     }
@@ -102,30 +107,30 @@ const TopSection = (props) => {
   };
 
   return (
-    <Grid container className={classes.topSectionWrapper} id="topSection">
-      <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
-        <div className={`${classes.topSectionWrapper}__left-top`}>
-          {props.headlineEditMode ? (
-            <div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
-              <TextField
-                fullWidth
-                size="small"
-                variant="outlined"
-                name='headline'
-                value={headlineHandler.values.headline}
-                onChange={headlineHandler.handleChange}
-              />
-              {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
-              <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
-            </div>
-          ) : (
-            <div className={`${classes.topSectionWrapper}__left-top__headline`}>
-              <span className={`${classes.topSectionWrapper}__left-top__headline-text`}>{props.headline}</span>
-              <span onClick={() => props.setHeadlineMode(true)}>
+    <>
+      <Grid container className={classes.topSectionWrapper} id="topSection">
+        <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
+          <div className={`${classes.topSectionWrapper}__left-top`}>
+            {props.headlineEditMode ? (
+              <div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  name='headline'
+                  value={headlineHandler.values.headline}
+                  onChange={headlineHandler.handleChange}
+                />
+                {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline}/> : null}
+                <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
+              </div>
+            ) : (
+              <div className={`${classes.topSectionWrapper}__left-top__headline`}>
+                <span className={`${classes.topSectionWrapper}__left-top__headline-text`}>{props.headline}</span>
+                <span onClick={() => props.setHeadlineMode(true)}>
                 <EditButton/>
               </span>
-            </div>
-          )}
+              </div>
+            )}
 
           <EditCustomModal handleClose={modalClose} open={openModal}>
             <IntroExpertisesEdit
@@ -145,7 +150,7 @@ const TopSection = (props) => {
                   onClick={() => setOpenModal(true)}>
                 <EditButton/>
               </span>
-          </div>
+            </div>
 
           {props.bioEditMode ? (
             <div className={`${classes.topSectionWrapper}__left-top__bio-inputWrapper`}>
@@ -170,26 +175,33 @@ const TopSection = (props) => {
               >
               <EditButton/>
             </span>
-            </div>
-          )}
-        </div>
+              </div>
+            )}
+          </div>
 
-        <div className={`${classes.topSectionWrapper}__left-bottom`}>
-          <SocialLinks/>
-          <Skills/>
+          <div className={`${classes.topSectionWrapper}__left-bottom`}>
+            <SocialLinks setToast={setToast}/>
+            <Skills setToast={setToast}/>
+          </div>
+        </Grid>
+        <Grid item xs={12} md={5}>
+          <div className={`${classes.topSectionWrapper}__thumbnail`}>
+            <img src={avatar} alt={name} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
+          </div>
+        </Grid>
+
+        <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
+             onClick={() => scroll.scrollToTop()}>
+          <i className={`${FontAwesomeIcons.arrowUp}`}/>
         </div>
       </Grid>
-      <Grid item xs={12} md={5}>
-        <div className={`${classes.topSectionWrapper}__thumbnail`}>
-          <img src={avatar} alt={name} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
-        </div>
-      </Grid>
 
-      <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
-           onClick={() => scroll.scrollToTop()}>
-        <i className={`${FontAwesomeIcons.arrowUp}`}/>
-      </div>
-    </Grid>
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
+    </>
   );
 };
 
