@@ -22,7 +22,7 @@ export const useStyles = makeStyles({
       width: '100%',
       justifyContent: 'space-between',
       '&__right': {
-        width: 590,
+        width: 615,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
