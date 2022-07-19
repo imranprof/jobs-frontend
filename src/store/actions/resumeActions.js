@@ -1,5 +1,6 @@
 import axios from "axios";
 import {RESUME_UPDATE, RESUME_ITEM_REMOVE, GET_RESUME} from "../actionTypes/resumeTypes";
+import {skillsUpdate} from "./topSectionActions";
 
 const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
 
@@ -104,7 +105,10 @@ export const resumeUpdateAction = ({resumeItem, cardType}) => {
           }
         ]
       }
-    }).then(res => dispatch(resumeUpdate(res.data.resume_data)))
+    }).then(res => {
+      dispatch(resumeUpdate(res.data.resume_data));
+      dispatch(skillsUpdate(res.data.profile.skills));
+    })
       .catch(err => err.response)
   }
 }
