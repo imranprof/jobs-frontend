@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 
 import {ThemeProvider} from "@material-ui/styles";
-import {CssBaseline, Container, FormControlLabel, Switch} from "@material-ui/core";
+import {CssBaseline, Container} from "@material-ui/core";
 
 import darkTheme from "../../../styles/darkTheme";
 import lightTheme from "../../../styles/lightTheme";

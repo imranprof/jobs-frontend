@@ -5,7 +5,6 @@ import ProfileInfo from "./components/profileInfo";
 import ProfileSideBar from "./components/sideBar";
 import NavItems from "./components/navItems";
 import ShareButton from "../../../lib/profile/profileshare/shareButton";
-import React from "react";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 const ProfileHeader = ({ classes, headerRef, themeMode, themeSet }) => {
