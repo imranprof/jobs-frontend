@@ -1,15 +1,29 @@
-import {FEATURES_REMOVE, FEATURES_UPDATE} from "../actionTypes/featureTypes";
-import {ProfileData} from "../../../API/mock/profile/profileData";
+import {GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE} from "../actionTypes/featureTypes";
 
-const initialState = ProfileData.features
+const initialState = {
+  allFeatures: []
+};
 
-export const featureReducer = (features = initialState, action) => {
+export const featureReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FEATURES_UPDATE:
-      return action.payload;
-    case FEATURES_REMOVE:
-      return action.payload;
+    case GET_FEATURES:
+      return {
+        ...state,
+        ...action.payload
+      };
+    case UPDATE_FEATURE:
+      return {
+        ...state,
+        ...action.payload
+      };
+    case REMOVE_FEATURE:
+      return {
+        ...state,
+        ...action.payload
+      };
     default:
-      return features
+      return {
+        ...state
+      };
   }
 }
