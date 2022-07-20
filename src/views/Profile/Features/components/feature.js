@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {connect} from "react-redux";
 
 import {Grid, Paper} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";

@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {animateScroll as scroll} from 'react-scroll';
 
@@ -11,48 +11,46 @@ import SocialLinks from "../../../lib/profile/socialLinks";
 import Skills from "../../../lib/profile/skills";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
 import {TopSectionStyle} from "./style";
-import {ProfileData} from "../../../../API/mock/profile/profileData";
 import EditButton from "../../../lib/editButton";
 import CustomButton from "../../../lib/profile/customButtons";
 import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
 import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {
-  headlineText,
-  headlineEditMode,
-  introText,
-  bioText,
   bioEditMode,
-  expertisesText
-} from "../../../store/actions/editProfileActions";
+  getProfileAction,
+  headlineEditMode, updateBio,
+  updateHeadline
+} from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 const TopSection = (props) => {
   const theme = useTheme();
   const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
-  const {name, avatar} = ProfileData;
-
-  const [introEditValue, setIntroEditValue] = useState({intro: props.intro})
   const [openModal, setOpenModal] = useState(false);
-  const [expertisesEditValue, setExpertisesEditValue] = useState({expertises: props.expertises})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {intro} = introEditValue;
-  const {expertises} = expertisesEditValue;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const {userID} = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
       let backToTop = backToTopRef.current;
       let scrollTop = window.scrollY;
       backToTop.style.display = scrollTop >= 80 ? "flex" : "none";
-    })
+    });
+    userID && dispatch(getProfileAction(userID));
   }, [])
 
   const headlineHandler = useFormik({
     initialValues: {headline: props.headline},
-    onSubmit: values => {
-      props.setHeadline(values.headline);
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      dispatch(updateHeadline({
+        headline: values.headline,
+        profileID: props.profileID
+      }));
       props.setHeadlineMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the headline"});
     },
@@ -69,8 +67,12 @@ const TopSection = (props) => {
 
   const bioHandler = useFormik({
     initialValues: {bio: props.bio},
+    enableReinitialize: true,
     onSubmit: values => {
-      props.setBio(values.bio);
+      dispatch(updateBio({
+        bio: values.bio,
+        profileID: props.profileID
+      }));
       props.setBioMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the bio"});
     },
@@ -84,23 +86,6 @@ const TopSection = (props) => {
       return errors;
     }
   })
-
-  const inputIntroChangeHandler = (e) => {
-    setIntroEditValue({
-      intro: e.target.value
-    })
-  }
-
-  const introEditHandler = () => {
-    if ((intro && intro.length <= 15) && expertises.length > 0) {
-      props.setIntro(introEditValue.intro);
-      props.setExpertises(expertisesEditValue.expertises);
-      setOpenModal(false);
-      setToast({show: true, severity: "success", text: "Successfully updated the intro"});
-    } else {
-      setOpenModal(true);
-    }
-  };
 
   const modalClose = () => {
     setOpenModal(false);
@@ -120,7 +105,7 @@ const TopSection = (props) => {
                   value={headlineHandler.values.headline}
                   onChange={headlineHandler.handleChange}
                 />
-                {headlineHandler.errors.headline ? <ErrorMessages error={headlineHandler.errors.headline}/> : null}
+                {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
                 <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
               </div>
             ) : (
@@ -132,47 +117,45 @@ const TopSection = (props) => {
               </div>
             )}
 
-          <EditCustomModal handleClose={modalClose} open={openModal}>
-            <IntroExpertisesEdit
-              handleClose={modalClose}
-              fullName={name}
-              inputValue={introEditValue.intro}
-              inputIntroChangeHandler={inputIntroChangeHandler}
-              introEditHandler={introEditHandler}
-              expertisesEditValue={expertisesEditValue.expertises}
-              setExpertisesEditValue={setExpertisesEditValue}
-            />
-          </EditCustomModal>
+            <EditCustomModal handleClose={modalClose} open={openModal}>
+              <IntroExpertisesEdit
+                handleClose={modalClose}
+                fullName={`${props.firstName} ${props.lastName}`}
+                profileID={props.profileID}
+                setToast={setToast}
+              />
+            </EditCustomModal>
 
-          <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
-            <TypeWriter name={name} intro={props.intro} expertises={expertisesList} classes={classes}/>
-            <span className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
-                  onClick={() => setOpenModal(true)}>
+            <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
+              <TypeWriter name={`${props.firstName} ${props.lastName}`} intro={props.intro} expertises={expertisesList}
+                          classes={classes}/>
+              <span className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+                    onClick={() => setOpenModal(true)}>
                 <EditButton/>
               </span>
             </div>
 
-          {props.bioEditMode ? (
-            <div className={`${classes.topSectionWrapper}__left-top__bio-inputWrapper`}>
-              <TextField
-                fullWidth
-                multiline
-                rows={5}
-                variant="outlined"
-                name="bio"
-                value={bioHandler.values.bio}
-                onChange={bioHandler.handleChange}
-              />
-              {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
-              <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
-            </div>
-          ) : (
-            <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
-              <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{props.bio}</p>
-              <span
-                className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
-                onClick={() => props.setBioMode(true)}
-              >
+            {props.bioEditMode ? (
+              <div className={`${classes.topSectionWrapper}__left-top__bio-inputWrapper`}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={5}
+                  variant="outlined"
+                  name="bio"
+                  value={bioHandler.values.bio}
+                  onChange={bioHandler.handleChange}
+                />
+                {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
+                <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
+              </div>
+            ) : (
+              <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
+                <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{props.bio}</p>
+                <span
+                  className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+                  onClick={() => props.setBioMode(true)}
+                >
               <EditButton/>
             </span>
               </div>
@@ -186,7 +169,8 @@ const TopSection = (props) => {
         </Grid>
         <Grid item xs={12} md={5}>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
-            <img src={avatar} alt={name} className={`${classes.topSectionWrapper}__thumbnail--img`}/>
+            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`}
+                 className={`${classes.topSectionWrapper}__thumbnail--img`}/>
           </div>
         </Grid>
 
@@ -207,23 +191,23 @@ const TopSection = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.profile,
-    headline: state.editProfile.headline,
-    headlineEditMode: state.editProfile.headlineMode,
-    intro: state.editProfile.intro,
-    bio: state.editProfile.bio,
-    bioEditMode: state.editProfile.bioMode,
-    expertises: state.editProfile.expertises
+    userID: state.auth.userID,
+    profileID: state.topSection.id,
+    firstName: state.topSection.firstName,
+    lastName: state.topSection.lastName,
+    headline: state.topSection.headline,
+    headlineEditMode: state.topSection.headlineMode,
+    intro: state.topSection.intro,
+    bio: state.topSection.bio,
+    avatar: state.topSection.avatar,
+    bioEditMode: state.topSection.bioMode,
+    expertises: state.topSection.expertises,
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   setHeadlineMode: (boolean) => dispatch(headlineEditMode(boolean)),
-  setHeadline: (value) => dispatch(headlineText(value)),
-  setIntro: (editValue) => dispatch(introText(editValue)),
-  setExpertises: (expertisesValue) => dispatch(expertisesText(expertisesValue)),
   setBioMode: (boolean) => dispatch(bioEditMode(boolean)),
-  setBio: (editValue) => dispatch(bioText(editValue))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopSection);

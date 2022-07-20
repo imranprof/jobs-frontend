@@ -51,9 +51,6 @@ const useStyles = makeStyles({
           marginRight: 20,
         },
       },
-      '&__editBtnWrapper': {
-        height: "fit-content"
-      }
     },
   })
 });

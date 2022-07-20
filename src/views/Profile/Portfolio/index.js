@@ -9,7 +9,6 @@ import {PortfolioStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {getPortfoliosAction} from "../../../store/actions/portfolioActions"
 
-
 const Portfolio = (props) => {
   const theme = useTheme();
   const classes = PortfolioStyle(theme);
@@ -22,7 +21,6 @@ const Portfolio = (props) => {
       userID && dispatch(getPortfoliosAction({id: userID}))
     }, []
   )
-
 
   return (
     <>
@@ -47,6 +45,5 @@ const mapStateToProps = (state) => {
     portfolios: state.portfolios.allPortfolios
   }
 }
-
 
 export default connect(mapStateToProps, null)(Portfolio);
