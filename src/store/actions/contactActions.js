@@ -11,7 +11,6 @@ import {
 
 const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
 
-// Designation
 export const designationUpdate = (designation) => {
   return {
     type: DESIGNATION_UPDATE,
@@ -26,7 +25,6 @@ export const designationEditMode = (boolean) => {
   }
 }
 
-// Contact Description
 export const contactDescriptionUpdate = (description) => {
   return {
     type: CONTACT_DESCRIPTION_UPDATE,
@@ -41,7 +39,6 @@ export const contactDescriptionEditMode = (boolean) => {
   }
 }
 
-// Phone Number
 export const phoneUpdate = (phone) => {
   return {
     type: PHONE_UPDATE,
@@ -56,7 +53,6 @@ export const phoneEditMode = (boolean) => {
   }
 }
 
-// Email
 export const setEmail = (values) => {
   return {
     type: SET_EMAIL,
