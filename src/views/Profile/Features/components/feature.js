@@ -40,7 +40,7 @@ const Feature = ({feature, classes, featureRemove, setToast}) => {
       </a>
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
-        <FeaturesEdit feature={feature} handleClose={modalClose} />
+        <FeaturesEdit feature={feature} setToast={setToast} handleClose={modalClose}/>
       </EditCustomModal>
     </Grid>
   );

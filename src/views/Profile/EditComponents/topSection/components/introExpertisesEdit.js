@@ -1,14 +1,14 @@
-import {useState} from 'react';
 import Select from "react-select";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 
 import {TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import CustomButton from "../../../../../lib/profile/customButtons";
-import {expertisesText} from "../../../../../store/actions/editProfileActions";
+import {updateIntroAndExpertises} from "../../../../../store/actions/topSectionActions";
 import {TopSectionEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
+import {useFormik} from "formik";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -21,25 +21,19 @@ const expertisesData = [
 const IntroExpertisesEdit = (props) => {
   const {
     fullName,
-    inputIntroChangeHandler,
-    inputValue,
-    introEditHandler,
-    expertisesEditValue,
-    setExpertisesEditValue,
-    handleClose
+    handleClose,
+    profileID,
+    intro,
+    expertises,
+    setToast
   } = props;
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
-
-  const selectedExpertises = []
-  props.expertises.map((element) => {
-    selectedExpertises.push({label: element, value: element})
-  });
+  const dispatch = useDispatch();
 
   const filteredExpertise = (selectedExpertises) => {
     if (selectedExpertises !== undefined) {
-      let tempExpertises = expertisesData
-      return tempExpertises.filter((ex1) => {
+      return expertisesData.filter((ex1) => {
         return !selectedExpertises.find((ex2) => {
           return ex1.label === ex2.label
         })
@@ -47,13 +41,46 @@ const IntroExpertisesEdit = (props) => {
     }
   }
 
-  const [filteredExpertiseList, setFilteredExpertiseList] = useState(filteredExpertise(selectedExpertises))
-  const selectChangeHandler = (elements) => {
-    setExpertisesEditValue({
-      expertises: Array.isArray(elements) ? elements.map(obj => obj.label) : []
-    })
-    setFilteredExpertiseList(filteredExpertise(elements))
+  const selectChangeHandler = (expertises) => {
+    formHandler.setValues({
+      intro: formHandler.values.intro,
+      expertises: expertises
+    });
   }
+
+  const formHandler = useFormik({
+    initialValues: {
+      intro: intro,
+      expertises: expertises.map((element) => (
+        {value: element, label: element}))
+    },
+    enableReinitialize: true,
+    validate: values => {
+      let errors = {};
+      if (values.expertises.length === 0) {
+        errors.expertises = "Select at least one expertise";
+      }
+      if (values.intro.length > 15) {
+        errors.intro = "Intro must be within 15 characters"
+      }
+      if (values.intro.length === 0) {
+        errors.intro = "Intro can't be blank"
+      }
+      return errors;
+    },
+    onSubmit: values => {
+      const expertiseLabels = values.expertises.map(
+        expertise => expertise.label
+      )
+      dispatch(updateIntroAndExpertises({
+        intro: values.intro,
+        expertises: `{${expertiseLabels}}`,
+        profileID: profileID
+      }));
+      setToast({show: true, severity: "success", text: "Successfully updated the intro and expertises"});
+      handleClose();
+    }
+  });
 
   return (
     <>
@@ -62,13 +89,13 @@ const IntroExpertisesEdit = (props) => {
           <TextField
             size="small"
             variant="outlined"
-            value={inputValue}
-            onChange={inputIntroChangeHandler}
+            name={"intro"}
+            value={formHandler.values.intro}
+            onChange={formHandler.handleChange}
           />
           <span className={`${classes.topSectionEditWrapper}__introWrapper__fullName`}>{fullName}</span>
         </div>
-        {inputValue === "" && <ErrorMessage error="Intro can't be blank"/>}
-        {inputValue.length > 15 && <ErrorMessage error="Intro must have within 15 characters"/>}
+        {formHandler.errors.intro && <ErrorMessage error={formHandler.errors.intro}/>}
       </div>
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
@@ -76,14 +103,14 @@ const IntroExpertisesEdit = (props) => {
           <h4 className={`${classes.topSectionEditWrapper}__expertisesWrapper__label`}>Select your expertises</h4>
           <Select
             isMulti
-            options={filteredExpertiseList}
-            defaultValue={selectedExpertises}
+            options={filteredExpertise(formHandler.values.expertises)}
+            defaultValue={formHandler.values.expertises}
             onChange={selectChangeHandler}
             className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectDropdown`}
           />
-          {expertisesEditValue.length === 0 && <ErrorMessage error="Select at least one expertise"/>}
+          {formHandler.errors.expertises && <ErrorMessage error={formHandler.errors.expertises}/>}
         </div>
-        <CustomButton handler={introEditHandler} mode={handleClose}/>
+        <CustomButton handler={formHandler.handleSubmit} mode={handleClose}/>
       </div>
     </>
   )
@@ -91,12 +118,9 @@ const IntroExpertisesEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    expertises: state.editProfile.expertises
+    expertises: state.topSection.expertises,
+    intro: state.topSection.intro
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setExpertises: (editValue) => dispatch(expertisesText(editValue)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(IntroExpertisesEdit);
+export default connect(mapStateToProps)(IntroExpertisesEdit);
