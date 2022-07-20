@@ -18,7 +18,6 @@ export const blogReducer = (state = initialState, action) => {
       }
 
     case UPDATE_BLOG:
-      console.log(state.allBlogs)
       return state.allBlogs.map(blog=> {
         if(blog.id === action.payload.blog_id){
           blog.categories = action.payload.categories,
@@ -36,7 +35,6 @@ export const blogReducer = (state = initialState, action) => {
         allBlogs: blogs,
         allCategories: categories
       }
-
 
     default:
       return state
