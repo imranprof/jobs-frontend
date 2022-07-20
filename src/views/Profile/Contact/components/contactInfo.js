@@ -43,7 +43,6 @@ const ContactInfo = (props) => {
     userID && dispatch(getContactAction(userID));
   }, [])
 
-  console.log('phone', phone)
   const designationHandler = useFormik({
     initialValues: {
       designation: designation
