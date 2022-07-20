@@ -10,7 +10,6 @@ import EditButton from "../../../../lib/editButton";
 import ErrorMessage from "../../../../lib/errorMessage";
 import CustomButton from "../../../../lib/profile/customButtons";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import {ProfileData} from "../../../../../API/mock/profile/profileData";
 import {
   designationUpdate,
   designationEditMode,
@@ -188,7 +187,7 @@ const ContactInfo = (props) => {
 
             <span className={`${classes}__contact-info__email`}>Email: <Link href="#"><a>{email}</a></Link></span>
           </div>
-          <SocialLinks/>
+          <SocialLinks setToast={setToast}/>
         </Card>
       </Grid>
 
