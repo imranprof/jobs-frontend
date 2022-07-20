@@ -6,7 +6,7 @@ import {useTheme} from "@material-ui/core/styles";
 
 import {FeaturesEditStyle} from "../style";
 import CustomButtons from "../../../../../lib/profile/customButtons";
-import {featuresUpdate} from "../../../../../store/actions/editProfileActions";
+import {featuresUpdate} from "../../../../../store/actions/featureActions";
 import ErrorMessage from "../../../../../lib/errorMessage";
 
 const FeaturesEdit = (props) => {
@@ -94,7 +94,7 @@ const FeaturesEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    features: state.editProfile.features,
+    features: state.features,
   }
 }
 

@@ -5,7 +5,7 @@ import {useTheme} from "@material-ui/core/styles";
 
 import Feature from "./components/feature";
 import {FeatureStyle} from "./style";
-import {featuresRemove} from "../../../store/actions/editProfileActions";
+import {featuresRemove} from "../../../store/actions/featureActions";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {useState} from "react";
 
@@ -44,7 +44,7 @@ const Features = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    features: state.editProfile.features
+    features: state.features
   }
 }
 
