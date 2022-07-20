@@ -11,12 +11,9 @@ import ErrorMessage from "../../../../lib/errorMessage";
 import CustomButton from "../../../../lib/profile/customButtons";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import {
-  designationUpdate,
   designationEditMode,
-  contactDescriptionUpdate,
   contactDescriptionEditMode,
-  phoneUpdate,
-  phoneEditMode, phoneUpdateAction
+  phoneEditMode, phoneUpdateAction, designationUpdateAction, contactDescriptionUpdateAction
 } from "../../../../store/actions/contactActions";
 import {getContactAction} from "../../../../store/actions/contactActions";
 
@@ -24,6 +21,7 @@ const ContactInfo = (props) => {
   const {
     classes,
     userID,
+    profileID,
     firstName,
     lastName,
     designation,
@@ -47,11 +45,11 @@ const ContactInfo = (props) => {
       designation: designation
     },
     onSubmit: values => {
-      props.setDesignation(values.designation);
-
+      dispatch(designationUpdateAction(profileID,values.designation))
       props.setDesignationMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the designation"});
     },
+    enableReinitialize: true,
     validate: values => {
       let errors = {}
       if (!values.designation) {
@@ -65,8 +63,9 @@ const ContactInfo = (props) => {
     initialValues: {
       contactDescription: contactDescription
     },
+    enableReinitialize: true,
     onSubmit: values => {
-      props.setContactDescription(values.contactDescription);
+      dispatch(contactDescriptionUpdateAction(profileID, values.contactDescription));
       props.setContactDescriptionMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the description"});
     },
@@ -218,11 +217,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setDesignation: (value) => dispatch(designationUpdate(value)),
   setDesignationMode: (boolean) => dispatch(designationEditMode(boolean)),
-  setContactDescription: (value) => dispatch(contactDescriptionUpdate(value)),
   setContactDescriptionMode: (boolean) => dispatch(contactDescriptionEditMode(boolean)),
-  setPhone: (value) => dispatch(phoneUpdate(value)),
   setPhoneMode: (boolean) => dispatch(phoneEditMode(boolean)),
 });
 

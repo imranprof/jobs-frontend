@@ -7,9 +7,7 @@ import {
   PHONE_EDIT_MODE,
   SET_EMAIL
 } from "../actionTypes/contactTypes";
-import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const {designation, contactDescription, phone} = ProfileData
 const initialState = {
   designation: null,
   designationMode: false,

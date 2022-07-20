@@ -8,7 +8,6 @@ import {
   PHONE_EDIT_MODE,
   SET_EMAIL
 } from "../actionTypes/contactTypes";
-import {headlineText} from "./topSectionActions";
 
 const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
 
@@ -72,9 +71,11 @@ export const getContactAction = (userID) => {
         user_id: userID
       }
     }).then(res => {
-      const {contact_email, phone} = res.data.contacts_data;
+      const {contact_email, phone, designation, description} = res.data.contacts_data;
       dispatch(setEmail(contact_email));
       dispatch(phoneUpdate(phone));
+      dispatch(contactDescriptionUpdate(description));
+      dispatch(designationUpdate(designation))
     })
   }
 }
@@ -108,7 +109,7 @@ export const contactDescriptionUpdateAction = (profileID, contactInfo) => {
 
   return (dispatch) => {
     axios.patch(profileURL, data)
-        .then(res => dispatch(designationUpdate(res.data.contacts_data.contact_info)))
+        .then(res => dispatch(contactDescriptionUpdate(res.data.contacts_data.description)))
         .catch(err => err.response);
   }
 }
@@ -126,5 +127,3 @@ export const phoneUpdateAction = (phone) => {
         .catch(err => err.response);
   }
 }
-
-
