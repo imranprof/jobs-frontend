@@ -37,7 +37,6 @@ export const blogReducer = (state = initialState, action) => {
         allCategories: categories
       }
 
-
     default:
       return state
   }

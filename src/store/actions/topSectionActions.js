@@ -20,7 +20,6 @@ export const setProfileID = (id) => {
   }
 }
 
-
 export const headlineText = (headline) => {
   return {
     type: HEADLINE_TEXT,

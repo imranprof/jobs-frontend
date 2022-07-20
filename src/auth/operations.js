@@ -54,7 +54,6 @@ export function signIn(values) {
     const response = await axios.post(signInURL, auth)
       .then(data => data)
       .catch(err => err.response);
-
     return (response);
   }
 }
