@@ -11,14 +11,11 @@ const initialState = {
 
 export const blogReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case BLOGS_REMOVE:
       return {
         ...state
       }
-
     case UPDATE_BLOG:
-      console.log(state.allBlogs)
       return state.allBlogs.map(blog=> {
         if(blog.id === action.payload.blog_id){
           blog.categories = action.payload.categories,
@@ -28,7 +25,6 @@ export const blogReducer = (state = initialState, action) => {
         }
         return blog;
       })
-
     case GET_BLOGS:
       const {blogs, categories} = action.payload
       return {
@@ -36,8 +32,6 @@ export const blogReducer = (state = initialState, action) => {
         allBlogs: blogs,
         allCategories: categories
       }
-
-
     default:
       return state
   }

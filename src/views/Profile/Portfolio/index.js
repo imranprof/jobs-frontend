@@ -5,10 +5,9 @@ import {Grid} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import CustomCard from "../../../lib/profile/card/card";
-import {PortfolioStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {getPortfoliosAction} from "../../../store/actions/portfolioActions"
-
+import {PortfolioStyle} from "./style";
 
 const Portfolio = (props) => {
   const theme = useTheme();
@@ -22,7 +21,6 @@ const Portfolio = (props) => {
       userID && dispatch(getPortfoliosAction({id: userID}))
     }, []
   )
-
 
   return (
     <>
@@ -47,6 +45,5 @@ const mapStateToProps = (state) => {
     portfolios: state.portfolios.allPortfolios
   }
 }
-
 
 export default connect(mapStateToProps, null)(Portfolio);
