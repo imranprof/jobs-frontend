@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {authenticate, modalType, signInRejected} from "../store/actions/authAction";
+import {authenticate, signInRejected} from "../store/actions/authAction";
 
 const signUpURL = process.env.NEXT_PUBLIC_SIGNUP_URL
 const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL
@@ -54,7 +54,6 @@ export function signIn(values) {
     const response = await axios.post(signInURL, auth)
       .then(data => data)
       .catch(err => err.response);
-
     return (response);
   }
 }
