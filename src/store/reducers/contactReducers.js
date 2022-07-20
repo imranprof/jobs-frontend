@@ -11,11 +11,11 @@ import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const {designation, contactDescription, phone} = ProfileData
 const initialState = {
-  designation: designation,
+  designation: null,
   designationMode: false,
-  contactDescription: contactDescription,
+  contactDescription: null,
   contactDescriptionMode: false,
-  phone: phone,
+  phone: null,
   phoneMode: false,
   contact_email: null
 }

@@ -17,7 +17,7 @@ import {
   contactDescriptionUpdate,
   contactDescriptionEditMode,
   phoneUpdate,
-  phoneEditMode
+  phoneEditMode, phoneUpdateAction
 } from "../../../../store/actions/contactActions";
 import {getContactAction} from "../../../../store/actions/contactActions";
 
@@ -43,12 +43,14 @@ const ContactInfo = (props) => {
     userID && dispatch(getContactAction(userID));
   }, [])
 
+  console.log('phone', phone)
   const designationHandler = useFormik({
     initialValues: {
       designation: designation
     },
     onSubmit: values => {
       props.setDesignation(values.designation);
+
       props.setDesignationMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the designation"});
     },
@@ -83,8 +85,9 @@ const ContactInfo = (props) => {
     initialValues: {
       phone: phone
     },
+    enableReinitialize: true,
     onSubmit: values => {
-      props.setPhone(values.phone);
+      dispatch(phoneUpdateAction(values.phone));
       props.setPhoneMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the phone number"});
     },
