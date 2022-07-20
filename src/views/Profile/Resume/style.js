@@ -128,6 +128,8 @@ const useStyles = makeStyles({
             paddingLeft: "5%",
             borderLeft: `5px solid ${theme.palette.customBorder.beforeElement}`,
             '&__item': {
+              display: "flex",
+              flexDirection: "column",
               position: "relative",
               marginBottom: 50,
               padding: "30px 40px",
