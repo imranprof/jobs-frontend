@@ -15,7 +15,6 @@ export const blogsRemove = () => {
 
 export const blogsRemoveAction = (values) => {
   const {blogID, userID} = values
-  console.log(userID, blogID)
   return (dispatch) => {
     axios.patch(profileUrl, {
       "user": {
@@ -27,7 +26,6 @@ export const blogsRemoveAction = (values) => {
         ]
       }
     }).then(res => {
-      console.log(res)
       dispatch(blogsRemove());
       dispatch(getBlogsAction({id: userID}));
     })
@@ -35,10 +33,64 @@ export const blogsRemoveAction = (values) => {
   }
 }
 
-export const updateBlog = (id, categories, title, description, readTime) => {
+export const updateBlog = (blogs, categories) => {
   return {
     type: UPDATE_BLOG,
-    payload: {blog_id: id, categories: categories, title: title, description: description, readTime: readTime}
+    payload: {
+      allBlogs: blogs,
+      allCategories: categories
+    }
+  }
+}
+
+export const updateBlogAction = (currentBlog, previousBlog) => {
+  let deleteCategories = previousBlog.categories.map(
+      category => {
+        let flag = true;
+        for (let i = 0; i < currentBlog.categories.length; i++) {
+          if (currentBlog.categories[i].category_id === category.category_id) {
+            flag = false;
+          }
+        }
+        if (flag) return {
+          id: category.id,
+          _destroy: true
+        }
+      }
+  )
+
+  let addCategories = currentBlog.categories.map(
+      category => {
+        let flag = true;
+        for (let i = 0; i < previousBlog.categories.length; i++) {
+          if (previousBlog.categories[i].category_id === category.category_id) {
+            flag = false;
+          }
+        }
+        if (flag) return {
+          category_id: category.category_id
+        }
+      }
+  );
+
+  const data = {
+    "user": {
+      "blogs_attributes": [
+        {
+          "id": currentBlog.id,
+          "title": currentBlog.title,
+          "body": currentBlog.body,
+          "reading_time": currentBlog.readTime,
+          "categorizations_attributes": [...addCategories, ...deleteCategories]
+        }
+      ]
+    }
+  }
+
+  return (dispatch) => {
+    axios.patch(profileUrl, data)
+        .then(res => dispatch(updateBlog(res.data.blogs, res.data.all_categories)))
+        .catch(err => err.response)
   }
 }
 
@@ -57,7 +109,7 @@ export const getBlogsAction = (values) => {
         user_id: id
       }
     }).then(res => {
-      dispatch(getBlogs({blogs: res.data.blogs, categories: res.data.all_categories}));
+      dispatch(getBlogs({allBlogs: res.data.blogs, allCategories: res.data.all_categories}));
     })
       .catch(err => err.response);
   }
