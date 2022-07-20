@@ -14,12 +14,12 @@ export const portfolioReducer = (state = initialState, action) => {
     case REMOVE_PORTFOLIO:
       return {
         ...state,
-        allPortfolios: action.payload
+        ...action.payload
       };
     case UPDATE_PORTFOLIO:
       return {
         ...state,
-        allPortfolios: action.payload
+        ...action.payload
       };
     case GET_PORTFOLIOS:
       return {
