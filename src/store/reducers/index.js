@@ -6,6 +6,7 @@ import {topSectionReducer} from "./topSectionReducers";
 import {resumeReducers} from "./resumeReducers";
 import {portfolioReducer} from "./portfolioReducers"
 import {blogReducer} from "./blogReducers";
+import {contactReducer} from "./contactReducers";
 import {featureReducer} from "./featureReducers";
 
 const rootReducers = combineReducers({
@@ -15,6 +16,7 @@ const rootReducers = combineReducers({
     editResume: resumeReducers,
     auth: authReducers,
     portfolios: portfolioReducer,
+    contacts: contactReducer,
     blogs: blogReducer,
     features: featureReducer,
     resumeItems: resumeReducers

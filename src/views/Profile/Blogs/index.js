@@ -9,7 +9,6 @@ import {useEffect, useState} from "react";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {getBlogsAction} from "../../../store/actions/blogActions";
 
-
 const Blogs = (props) => {
     const theme = useTheme();
     const classes = BlogsStyle(theme);
@@ -24,10 +23,8 @@ const Blogs = (props) => {
         }, []
     )
 
-
     return (
       <>
-
         <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
             {blogs?.map(blog => (
               <div key = {blog.id} className={`${classes.blogsWrapper}__blog-card`}>
