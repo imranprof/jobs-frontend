@@ -15,13 +15,12 @@ const ResumeEdit = (props) => {
   const theme = useTheme();
   const classes = ResumeEditStyle(theme);
   const {cardType, title, description, handleClose, cardContent} = props;
-  const labelType = (cardType === "education") ? "Institution" : "Company"
-  const keyType = (cardType === "education") ? "institution" : "title"
+  const labelType = (cardType === "educations") ? "Institution" : "Company"
+  const keyType = (cardType === "educations") ? "institution" : "title"
   const {start_date, end_date} = cardContent
   const [startMonth, startYear] = `${Moment(start_date).format('MMM YYYY')}`.split(" ")
   const [endMonth, endYear] = `${Moment(end_date).format('MMM YYYY')}`.split(" ")
   const dispatch = useDispatch();
-
   const initialResumeValues = {
     id: cardContent.id,
     [keyType]: title,
@@ -208,8 +207,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setResume: (values) => dispatch(resumeUpdate(values))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResumeEdit);
+export default connect(mapStateToProps)(ResumeEdit);

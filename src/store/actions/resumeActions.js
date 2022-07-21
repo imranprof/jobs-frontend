@@ -70,7 +70,7 @@ export const resumeUpdateAction = ({resumeItem, cardType}) => {
       itemType = "education_histories_attributes";
       attributes = {
         id: resumeItem.id,
-        institution: resumeItem.title,
+        institution: resumeItem.institution,
         description: resumeItem.description,
         start_date: `${resumeItem.startYear}-${getMonthNumber(resumeItem.startMonth)}-01`,
         end_date: `${resumeItem.endYear}-${getMonthNumber(resumeItem.endMonth)}-01`
@@ -107,7 +107,7 @@ export const resumeUpdateAction = ({resumeItem, cardType}) => {
       }
     }).then(res => {
       dispatch(resumeUpdate(res.data.resume_data));
-      dispatch(skillsUpdate(res.data.profile.skills));
+      if (cardType === "skills") dispatch(skillsUpdate(res.data.profile.skills));
     })
       .catch(err => err.response)
   }
@@ -145,7 +145,10 @@ export const resumeItemRemoveAction = ({id, cardType}) => {
           }
         ]
       }
-    }).then(res => dispatch(resumeItemRemove(res.data.resume_data)))
+    }).then(res => {
+      dispatch(resumeItemRemove(res.data.resume_data));
+      dispatch(skillsUpdate(res.data.profile.skills));
+    })
       .catch(err => err.response)
   }
 }
