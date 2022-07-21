@@ -29,7 +29,6 @@ export const blogReducer = (state = initialState, action) => {
         ...action.payload
       }
 
-
     default:
       return state
   }
