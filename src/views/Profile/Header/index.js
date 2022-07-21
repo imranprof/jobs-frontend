@@ -31,7 +31,6 @@ const ProfileHeader = ({ classes, headerRef, themeMode, themeSet }) => {
                                 <div className={`${classes.headerWrapper}__nav__theme-switch`}>
                                     <IconButton onClick={handleClick}> <WbSunnyIcon className={`${classes.headerWrapper}__light-theme__icon`}/> </IconButton>
                                 </div>
-
                             ) : (
                                 <div className={`${classes.headerWrapper}__nav__theme-switch`}>
                                     <IconButton onClick={handleClick}><i className={`${FontAwesomeIcons.darkMode}`} /></IconButton>
