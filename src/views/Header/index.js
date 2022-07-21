@@ -31,7 +31,7 @@ const Header = (props) => {
     case 'profiles':
       return <ProfilesHeader classes={classes} headerRef={headerRef} themeMode={props.themeMode} themeSet={props.setTheme}/>;
     default:
-      return <div>default header</div>
+      return <ProfilesHeader classes={classes} headerRef={headerRef} themeMode={props.themeMode} themeSet={props.setTheme}/>;
   }
 }
 
