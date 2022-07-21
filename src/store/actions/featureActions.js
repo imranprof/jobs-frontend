@@ -1,9 +1,12 @@
 import axios from "axios";
-import {GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE} from "../actionTypes/featureTypes";
+import
+{
+  GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE
+}
+  from "../actionTypes/featureTypes";
 
 const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
 
-// Get Features
 export const getFeatures = (features) => {
   return {
     type: GET_FEATURES,
@@ -25,7 +28,6 @@ export const getFeaturesAction = (values) => {
   }
 }
 
-// Update Feature
 export const updateFeature = (features) => {
   return {
     type: UPDATE_FEATURE,
@@ -54,7 +56,6 @@ export const updateFeatureAction = (oldFeature, updatedFeature) => {
   }
 }
 
-// Remove Feature
 export const removeFeature = (features) => {
   return {
     type: REMOVE_FEATURE,
@@ -77,7 +78,7 @@ export const removeFeatureAction = (featureID) => {
   }
   return (dispatch) => {
     axios.patch(profileURL, data)
-         .then(res => dispatch(removeFeature(res.data.features)))
-         .catch(err => err.response)
+      .then(res => dispatch(removeFeature(res.data.features)))
+      .catch(err => err.response)
   }
 }

@@ -1,8 +1,8 @@
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 
 import SkillsItem from "./skillsItem";
 import ContentItem from "./contentItem";
-import {resumeItemRemove} from "../../../../store/actions/resumeActions";
+import {resumeItemRemoveAction} from "../../../../store/actions/resumeActions";
 
 const ColumnContent = (props) => {
   const {position, cardType, cardData} = props;
@@ -12,15 +12,14 @@ const ColumnContent = (props) => {
   const columnLimit = Math.floor((itemCount + 1) / 2); // take half the element plus 1 item if total item count is odd
   const startIndex = isLeftColumn() ? 0 : columnLimit;
   const endIndex = isLeftColumn() ? columnLimit : itemCount;
+  const dispatch = useDispatch();
 
   const resumeItemRemoveHandler = (item) => {
     if (props.resume[cardType].length > 1) {
-      props.resume[cardType] = props.resume[cardType].filter(content => content.id !== item.id)
-
-      props.setResumeItemRemove({...props.resume})
-      props.setToast({show: true, severity: "success", text: `Successfully deleted the ${cardType}!`})
+      dispatch(resumeItemRemoveAction({id: item.id, cardType: cardType}));
+      props.setToast({show: true, severity: "success", text: `Successfully deleted the ${cardType}!`});
     } else {
-      props.setToast({show: true, severity: "error", text: `You must have at least one ${cardType}!`})
+      props.setToast({show: true, severity: "error", text: `You must have at least one ${cardType}!`});
     }
   }
 
@@ -53,8 +52,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setResumeItemRemove: (values) => dispatch(resumeItemRemove(values))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ColumnContent);
+export default connect(mapStateToProps)(ColumnContent);

@@ -18,7 +18,8 @@ const rootReducers = combineReducers({
     portfolios: portfolioReducer,
     contacts: contactReducer,
     blogs: blogReducer,
-    features: featureReducer
+    features: featureReducer,
+    resumeItems: resumeReducers
 })
 
 export default rootReducers;

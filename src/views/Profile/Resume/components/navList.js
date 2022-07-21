@@ -2,7 +2,7 @@ import React from "react";
 
 import {List, ListItem} from "@material-ui/core";
 
-const NavList = ({ resumeSections, resumeClasses, selected, setSelected }) => {
+const NavList = ({resumeSections, resumeClasses, selected, setSelected}) => {
   return (
     <List className={`${resumeClasses}__nav-list`}>
       {resumeSections.map((section, idx) => (
