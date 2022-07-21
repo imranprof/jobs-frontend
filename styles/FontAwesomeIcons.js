@@ -16,7 +16,8 @@ const FontAwesomeIcons = {
     "angleRight": "fas fa-angle-right",
     "pencil": "fa-solid fa-pencil",
     "signIn": "fa-solid fa-right-to-bracket",
-    "trash": "fa-solid fa-trash"
+    "trash": "fa-solid fa-trash",
+    "darkMode": "fa-solid fa-moon"
 }
 
 export default FontAwesomeIcons;
