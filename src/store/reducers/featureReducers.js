@@ -1,27 +1,22 @@
-import {
-  REMOVE_PORTFOLIO,
-  UPDATE_PORTFOLIO,
-  GET_PORTFOLIOS
-} from "../actionTypes/portfolioTypes";
+import {GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE} from "../actionTypes/featureTypes";
 
 const initialState = {
-  allPortfolios: [],
-  allCategories: []
+  allFeatures: []
 };
 
-export const portfolioReducer = (state = initialState, action) => {
+export const featureReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REMOVE_PORTFOLIO:
+    case GET_FEATURES:
       return {
         ...state,
         ...action.payload
       };
-    case UPDATE_PORTFOLIO:
+    case UPDATE_FEATURE:
       return {
         ...state,
         ...action.payload
       };
-    case GET_PORTFOLIOS:
+    case REMOVE_FEATURE:
       return {
         ...state,
         ...action.payload

@@ -1,0 +1,3 @@
+export const GET_FEATURES = 'GET_FEATURES'
+export const UPDATE_FEATURE = 'UPDATE_FEATURE'
+export const REMOVE_FEATURE = 'REMOVE_FEATURE'

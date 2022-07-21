@@ -1,4 +1,4 @@
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
 
 import {TextField} from "@material-ui/core";
@@ -6,27 +6,27 @@ import {useTheme} from "@material-ui/core/styles";
 
 import {FeaturesEditStyle} from "../style";
 import CustomButtons from "../../../../../lib/profile/customButtons";
-import {featuresUpdate} from "../../../../../store/actions/editProfileActions";
 import ErrorMessage from "../../../../../lib/errorMessage";
+import {updateFeatureAction} from "../../../../../store/actions/featureActions";
+import CustomSnackbar from "../../../../../lib/customSnackbar";
 
 const FeaturesEdit = (props) => {
   const theme = useTheme();
   const classes = FeaturesEditStyle(theme);
-  const {feature, handleClose, setToast} = props;
-  const {id, title, description} = feature
+  const {feature, handleClose, toast, setToast} = props;
+  const {title, description} = feature
+  const dispatch = useDispatch();
 
   const initialFeatureValue = {
-    id: id,
     title: title,
     description: description
   }
 
-  const featureUpdate = (values) => {
-    const featureIndex = props.features.findIndex(feature => feature.id === values.id);
-    props.features[featureIndex].title = values.title
-    props.features[featureIndex].description = values.description
-
-    props.editFeatures(props.features);
+  const featureUpdate = ({feature, title, description}) => {
+    const oldFeature = {...feature};
+    feature.title = title;
+    feature.description = description;
+    dispatch(updateFeatureAction(oldFeature, feature));
     setToast({show: true, severity: "success", text: "Successfully updated the feature."});
     handleClose()
   }
@@ -50,7 +50,13 @@ const FeaturesEdit = (props) => {
 
   const formik = useFormik({
     initialValues: initialFeatureValue,
-    onSubmit: featureUpdate,
+    onSubmit: values => {
+      featureUpdate({
+        feature: props.feature,
+        title: values.title,
+        description: values.description
+      });
+    },
     validate: featureValidation
   })
 
@@ -88,18 +94,14 @@ const FeaturesEdit = (props) => {
         </div>
       </div>
       <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
+
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    features: state.editProfile.features,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  editFeatures: (values) => dispatch(featuresUpdate(values))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(FeaturesEdit);
+export default FeaturesEdit;

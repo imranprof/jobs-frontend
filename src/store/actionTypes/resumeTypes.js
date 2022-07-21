@@ -1,2 +1,4 @@
 export const RESUME_UPDATE = 'RESUME_UPDATE'
 export const RESUME_ITEM_REMOVE = 'RESUME_ITEM_REMOVE'
+
+export const GET_RESUME = 'GET_RESUME'

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 
 import {ThemeProvider} from "@material-ui/styles";
-import {CssBaseline, Container, FormControlLabel, Switch} from "@material-ui/core";
+import {CssBaseline, Container} from "@material-ui/core";
 
 import darkTheme from "../../../styles/darkTheme";
 import lightTheme from "../../../styles/lightTheme";
@@ -24,15 +24,11 @@ function withLayout(Component, type) {
         <ThemeProvider theme={{...customTheme}}>
           <CssBaseline/>
           {modalType && <CustomModal/>}
-          <Header type={type}/>
+          <Header type={type} themeMode={darkMode} setTheme={setDarkMode}/>
           <Container fixed>
             <Component {...props} />
           </Container>
           <Footer/>
-          <FormControlLabel
-            control={<Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)}/>}
-            label="Theme Switch"
-          />
         </ThemeProvider>
     )
   }

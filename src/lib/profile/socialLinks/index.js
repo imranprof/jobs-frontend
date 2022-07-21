@@ -13,7 +13,13 @@ const SocialLinks = (props) => {
   const theme = useTheme();
   const classes = SocialLinkStyle(theme);
   const [openModal, setOpenModal] = useState(false);
-  const {setToast} = props
+  const {setToast, links} = props
+
+  const socialLinks = {
+    facebook: links["facebook"],
+    github: links["github"],
+    linkedin: links["linkedin"],
+  }
 
   const modalClose = () => {
     setOpenModal(false)
@@ -22,19 +28,20 @@ const SocialLinks = (props) => {
   return (
     <div className={classes.socialLinksWrapper}>
       <div>
-        <span className={`${classes.socialLinksWrapper}__title`}>find with me</span>
+        <span className={`${classes.socialLinksWrapper}__title`}>find me</span>
         <div className={`${classes.socialLinksWrapper}__social-links`}>
-          {Object.entries(props.links).map(([iconName, url]) => (
+          {Object.entries(socialLinks).map(([iconName, url]) => (
             <SocialLink link={url} iconName={iconName} key={iconName} classes={classes}/>
           ))}
         </div>
       </div>
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
-        <SocialLinksEdit setToast={setToast} handleClose={modalClose} />
+        <SocialLinksEdit setToast={setToast} handleClose={modalClose}/>
       </EditCustomModal>
 
-      <span className={`${classes.socialLinksWrapper}__social-links__editBtnWrapper`} onClick={() => setOpenModal(true)}>
+      <span className={`${classes.socialLinksWrapper}__social-links__editBtnWrapper`}
+            onClick={() => setOpenModal(true)}>
         <EditButton/>
       </span>
     </div>
@@ -43,7 +50,7 @@ const SocialLinks = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    links: state.editProfile.links
+    links: state.topSection.links
   }
 }
 

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {useState} from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 
 import {Card, CardContent, CardMedia} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -12,25 +12,27 @@ import BlogModal from "../../../views/Profile/Blogs/components/blogModal";
 import {CardStyle} from "./style";
 import RemoveButton from "../../removeButton";
 import EditButton from "../../editButton";
-import {removePortfolio} from "../../../store/actions/portfolioActions";
-import {blogsRemove} from "../../../store/actions/blogActions";
+import {removePortfolioAction} from "../../../store/actions/portfolioActions";
+import {blogsRemoveAction} from "../../../store/actions/blogActions";
 
 const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
-  const {element, elementType, portfolios, setToast, blogs} = props;
-  const {title, image, categories, reactCount, readTime} = element;
+  const {element, elementType, portfolios, setToast, blogs, userID} = props;
+  const {title, image, categories, reactCount, reading_time} = element;
 
   const isPortfolio = elementType === "portfolio";
   const iconClass = isPortfolio ? "heart" : "clock";
-  const elementData = isPortfolio ? reactCount : `${readTime} read`;
+  const elementData = isPortfolio ? reactCount : `${reading_time} min read`;
 
   const [togglePortfolioModal, setTogglePortfolioModal] = useState(false);
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
+  const dispatch = useDispatch();
+
   const getCategories = () => {
-    if (categories) {
+    if (categories?.length > 0) {
       let categoriesText = categories[0].title
       if (categories?.length === 2) categoriesText += " " + categories[1].title
       if (categories?.length > 2) categoriesText += ` ${categories[1].title}...`
@@ -48,19 +50,17 @@ const CustomCard = (props) => {
 
   const removeHandler = (item) => {
     if (isPortfolio) {
-      if (portfolios.length < 2) {
+      if (portfolios.allPortfolios.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one portfolio!"});
       } else {
-        props.removePortfolio(portfolios.filter(portfolio => portfolio.id !== item.id))
+        userID && dispatch(removePortfolioAction(item.id));
         setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
       }
-    }
-    else {
-      if(blogs.length < 2) {
+    } else {
+      if (blogs.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one blog!"});
-      }
-      else{
-        props.blogsRemove(blogs.filter(blog => blog.id !== item.id))
+      } else {
+        userID && dispatch(blogsRemoveAction({blogID: item.id, userID}))
         setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
       }
     }
@@ -142,15 +142,9 @@ const CustomCard = (props) => {
 const mapStateToProps = (state) => {
   return {
     portfolios: state.portfolios,
-    blogs: state.blogs
+    blogs: state.blogs.allBlogs,
+    userID: state.auth.userID
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    removePortfolio: (portfolio) => dispatch(removePortfolio(portfolio)),
-    blogsRemove: (blog) => dispatch(blogsRemove(blog))
-  }
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(CustomCard);
+export default connect(mapStateToProps, null)(CustomCard);

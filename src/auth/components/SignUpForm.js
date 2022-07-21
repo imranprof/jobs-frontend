@@ -7,8 +7,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
-import {setAuthToken, signIn, signUp} from "../operations";
-import {authenticate, modalType} from "../../store/actions/authAction";
+import {handleApiResponse, signIn, signUp} from "../operations";
 import {AuthStyle} from "./style";
 import {useRouter} from "next/router";
 
@@ -60,8 +59,7 @@ const SignUpForm = ({isAuthenticated}) => {
       const response = await dispatch(signUp(values));
       if (response.statusText === 'Created') {
         const response = await dispatch(signIn(values));
-        setAuthToken(response.data.authToken);
-        dispatch(authenticate(true))
+        dispatch(handleApiResponse(await response));
       } else {
         setApiError(response.data.email);
       }

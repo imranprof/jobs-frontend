@@ -22,10 +22,10 @@ export const useStyles = makeStyles({
       width: '100%',
       justifyContent: 'space-between',
       '&__right': {
-        width: 590,
+        width: 615,
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
       },
       // Logo
       '&__logo': {
@@ -38,6 +38,12 @@ export const useStyles = makeStyles({
     },
 
     // Profile Header Styles
+    '& .fa-moon': {
+      color: "black"
+    },
+    '&__light-theme__icon': {
+      fill: "#FFCC33"
+    },
     '&__profile': {
       display: 'flex',
       alignItems: 'center',
@@ -98,6 +104,10 @@ export const useStyles = makeStyles({
       }
     },
     '&__nav': {
+      '&__theme-switch': {
+        marginLeft: 40,
+        marginTop: "-6px"
+      },
       '& a': {
         fontFamily: FONTS.primaryFont,
         fontWeight: 500,
@@ -259,6 +269,9 @@ export const useStyles = makeStyles({
     },
 
     // Profiles Header Styles
+    '&__profiles__theme-switch': {
+      marginLeft: "-15px"
+    },
     '&__profiles__side-bar': {
       background: theme.palette.customBackground.sideBar,
       padding: '10px 25px 20px 25px',

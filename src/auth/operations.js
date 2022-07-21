@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {authenticate, modalType, signInRejected} from "../store/actions/authAction";
+import {authenticate, signInRejected} from "../store/actions/authAction";
 
 const signUpURL = process.env.NEXT_PUBLIC_SIGNUP_URL
 const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL
@@ -16,11 +16,20 @@ export function setAuthToken(token) {
   }
 }
 
+export function setUserID(userID) {
+  if (userID) {
+    localStorage.setItem('userID', userID);
+  } else {
+    localStorage.removeItem('userID');
+  }
+}
+
 export function handleApiResponse(response) {
   return async (dispatch) => {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
-      await dispatch(authenticate(true))
+      setUserID(response.data.user_id);
+      await dispatch(authenticate({authenticate: true}))
     } else {
       await dispatch(signInRejected(response.data.message))
     }
@@ -54,6 +63,7 @@ export function SignOut() {
     await axios.delete(signOutURL)
       .then(async () => {
         await setAuthToken(false)
+        await setUserID(false)
         await dispatch(authenticate(false))
       })
       .catch(err => alert(err));
