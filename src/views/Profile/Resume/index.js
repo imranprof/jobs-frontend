@@ -17,7 +17,7 @@ const Resume = (props) => {
 
   useEffect(() => {
     userID && dispatch(getResumeAction({id: userID}))
-  },[])
+  }, [])
 
   let resumeSections = [];
   for (let key in resume) {
