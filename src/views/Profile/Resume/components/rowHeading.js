@@ -28,7 +28,7 @@ const RowHeading = ({cardType, cardData}) => {
     return (
         <div className={`${resumeWrapper}__nav-content__row__heading`}>
             {!isSkillCard && <span>{startDate} - {endDate}</span>}
-            <h4>{cardType} Quality</h4>
+            <h4>{cardType}</h4>
         </div>
     );
 }
