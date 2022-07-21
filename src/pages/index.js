@@ -1,6 +1,16 @@
-import React from "react";
+import {useTheme} from "@material-ui/core/styles";
+
+import withLayout from "../views/Layout";
+import {RootStyle} from "./style";
 
 const Root = () => {
-    return <h1>Root Page</h1>;
+  const theme = useTheme();
+  const classes = RootStyle(theme);
+
+  return (
+    <div className={`${classes.rootWrapper}__home`}>
+      <h1>Home Page</h1>
+    </div>
+  )
 }
-export default Root;
+export default withLayout(Root);
