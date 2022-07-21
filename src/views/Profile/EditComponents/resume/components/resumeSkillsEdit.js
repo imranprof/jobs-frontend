@@ -1,12 +1,11 @@
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 
-import {Slider, TextField} from "@material-ui/core";
+import {Slider} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import {resumeUpdateAction} from "../../../../../store/actions/resumeActions";
 import CustomButtons from "../../../../../lib/profile/customButtons";
-import ErrorMessage from "../../../../../lib/errorMessage";
 import {ResumeEditStyle} from "../style";
 
 const ResumeSkillsEdit = (props) => {
@@ -32,18 +31,9 @@ const ResumeSkillsEdit = (props) => {
     handleClose()
   }
 
-  const skillValidation = values => {
-    let errors = {}
-    if (!values.name) {
-      errors.name = `Skill name can't be empty`
-    }
-    return errors;
-  }
-
   const formik = useFormik({
     initialValues: initialSkillValues,
     onSubmit: skillsUpdate,
-    validate: skillValidation
   })
 
   return (
@@ -52,20 +42,7 @@ const ResumeSkillsEdit = (props) => {
 
       <div className={`${classes.resumeEditWrapper}__content-wrapper`}>
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
-          <TextField
-            required
-            fullWidth
-            size="small"
-            variant="outlined"
-            label="Skill name"
-            name="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-          />
-          {formik.errors.name ? <ErrorMessage error={formik.errors.name}/> : null}
-        </div>
-        <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
-          <h4>Select your rating</h4>
+          <h4>Rate your {name} skill</h4>
           <Slider
             key={`slider-${formik.values.rating}`}
             valueLabelDisplay="on"

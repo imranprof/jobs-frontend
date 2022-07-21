@@ -27,6 +27,7 @@ const SocialLinksEdit = (props) => {
 
   const validateLinks = values => {
     let errors = {}
+    delete values.id;
     let isEmpty = Object.values(values).every(x => x === null || x === "" || x === undefined);
     if (isEmpty) {
       errors.values = "please fill out at least one field"
