@@ -9,6 +9,11 @@ const useStyles = makeStyles({
         },
         '&__blog-card': {
             marginBottom: "75px"
+        },
+        '&__add-Button': {
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "10px"
         }
     })
 });

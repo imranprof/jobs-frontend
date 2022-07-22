@@ -8,12 +8,15 @@ import {BlogsStyle} from "./style";
 import {useEffect, useState} from "react";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {getBlogsAction} from "../../../store/actions/blogActions";
+import AddButton from "../../../lib/addButton";
+import BlogModal from "./components/blogModal";
 
 const Blogs = (props) => {
     const theme = useTheme();
     const classes = BlogsStyle(theme);
     const { blogs, userID} = props;
     const [toast, setToast] = useState({show: false, severity: "", text: ""})
+    const [toggleBlogModal, setToggleBlogModal] = useState(false);
 
     const dispatch = useDispatch()
 
@@ -23,8 +26,27 @@ const Blogs = (props) => {
         }, []
     )
 
+    const handleClick = () => {
+        console.log(blogs[0]);
+        return (
+          <BlogModal
+            setToggleBlogModal={true}
+            editMode={true}
+            blog={blogs[0]}/>
+
+        )
+
+
+    }
+
     return (
       <>
+        <div className={`${classes.blogsWrapper}__add-Button`} >
+            <span onClick={handleClick}>
+                <AddButton/>
+            </span>
+
+        </div>
         <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
             {blogs?.map(blog => (
               <div key = {blog.id} className={`${classes.blogsWrapper}__blog-card`}>
