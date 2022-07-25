@@ -142,6 +142,7 @@ const BlogModal = (props) => {
               <div className={`${blogModalWrapper}__modal-content__categories-edit`}>
               <Select
                 isMulti
+                placeholder={"Select Categories"}
                 options = {filterCategories(editHandler.values.categories)}
                 value = {editHandler.values.categories}
                 onChange ={categories => {
@@ -164,6 +165,7 @@ const BlogModal = (props) => {
                   multiline
                   variant = "outlined"
                   name = "title"
+                  placeholder={"Enter blog title"}
                   value={editHandler.values.title}
                   onChange={editHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__title__input`}
@@ -187,6 +189,7 @@ const BlogModal = (props) => {
                 <div >
                   <Editor
                     editorState = {editorState}
+                    placeholder={"Enter Description of blog"}
                     onEditorStateChange={changeEditorState}
                     toolbarClassName = {`${blogModalWrapper}__modal-content__description__toolbar`}
                     wrapperClassName = {`${blogModalWrapper}__modal-content__description__toolbar-editor-wrapper`}
