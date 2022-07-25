@@ -7,9 +7,6 @@ const useStyles = makeStyles({
             display : "flex",
             justifyContent: "flex-end"
         },
-        '&__blog-card': {
-            marginBottom: "75px"
-        },
         '&__add-Button': {
             display: "flex",
             justifyContent: "center",
