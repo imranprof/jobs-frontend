@@ -41,7 +41,7 @@ const Blogs = (props) => {
       <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
         {blogs?.map(blog => (
           <div key={blog.id} className={`${classes.blogsWrapper}__blog-card`}>
-            <CustomCard key={blog.id} element={blog} elementType="blog" setToast={setToast}/>
+            <CustomCard key={blog.id} element={blog} elementType="blog" toast = {toast} setToast={setToast}/>
           </div>
         ))}
       </Grid>
@@ -57,6 +57,8 @@ const Blogs = (props) => {
         editMode={true}
         blog={blogs[0]}
         addMode = {true}
+        toast={toast}
+        setToast={setToast}
       />
       }
     </>

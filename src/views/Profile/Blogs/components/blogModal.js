@@ -22,7 +22,7 @@ import htmlToDraft from 'html-to-draftjs'
 
 const BlogModal = (props) => {
 
-  const {blog, editMode, addMode} = props;
+  const {blog, editMode, addMode, toast, setToast} = props;
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
@@ -44,7 +44,6 @@ const BlogModal = (props) => {
     currentState = EditorState.createWithContent(contentState);
   }
   const [editorState, setEditorState] = useState(currentState);
-  const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch()
 
   setTimeout(() => {
@@ -98,6 +97,7 @@ const BlogModal = (props) => {
       setSelectedCategories(values.categories);
       if(addMode){
         dispatch(addBlogAction({ categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}))
+        setToast({show: true, severity: "success", text: "Blog Created successfully!"});
         props.setToggleBlogModal(false)
       }
       else{
@@ -221,7 +221,7 @@ const BlogModal = (props) => {
             <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset} actionText={buttonText}/>
             }
           </Grid>
-          {toast.show &&
+          {editMode && toast.show &&
           <CustomSnackbar
             toast={toast}
             setToast={setToast}/>
