@@ -1,17 +1,20 @@
-import {Paper} from "@material-ui/core";
+import {Paper, Tooltip} from "@material-ui/core";
+import Fade from "@material-ui/core/Fade";
 import {useTheme} from "@material-ui/core/styles";
 
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {AddButtonStyle} from "./style";
 
-const AddButton = () => {
+const AddButton = ({tooltipTitle}) => {
   const theme = useTheme();
   const classes = AddButtonStyle(theme);
 
   return (
-    <Paper className={classes.addButtonWrapper}>
-      <i className={`${FontAwesomeIcons.plus}`}/>
-    </Paper>
+    <Tooltip title={tooltipTitle} placement="top" TransitionComponent={Fade} TransitionProps={{ timeout: 600 }}>
+      <Paper className={classes.addButtonWrapper}>
+        <i className={`${FontAwesomeIcons.plus}`}/>
+      </Paper>
+    </Tooltip>
   );
 };
 

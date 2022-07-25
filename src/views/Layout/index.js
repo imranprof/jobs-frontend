@@ -9,6 +9,7 @@ import lightTheme from "../../../styles/lightTheme";
 import Header from "../Header"
 import Footer from "../Profile/Footer";
 import CustomModal from "../../lib/CustomModal";
+import ThemeButton from "../../lib/themeButton";
 
 function withLayout(Component, type) {
   return (props) => {
@@ -21,15 +22,16 @@ function withLayout(Component, type) {
     }, [darkMode]);
 
     return (
-        <ThemeProvider theme={{...customTheme}}>
-          <CssBaseline/>
-          {modalType && <CustomModal/>}
-          <Header type={type} themeMode={darkMode} setTheme={setDarkMode}/>
-          <Container fixed>
-            <Component {...props} />
-          </Container>
-          <Footer/>
-        </ThemeProvider>
+      <ThemeProvider theme={{...customTheme}}>
+        <CssBaseline/>
+        {modalType && <CustomModal/>}
+        <Header type={type}/>
+        <Container fixed>
+          <Component {...props} />
+          <ThemeButton themeMode={darkMode} setTheme={setDarkMode}/>
+        </Container>
+        <Footer/>
+      </ThemeProvider>
     )
   }
 }
