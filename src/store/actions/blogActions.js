@@ -116,7 +116,6 @@ export const getBlogsAction = (values) => {
 
 }
 
-
 export const addBlogAction = (blog) => {
   const data = {
     "user": {
