@@ -43,13 +43,14 @@ const Portfolio = (props) => {
             description: "",
             image: "portfolio-01.jpg"
           }}
+          toast={toast}
           setToast={setToast}/>
       }
 
       <Grid container spacing={4} className={classes.portfolioWrapper} id="portfolio">
         {portfolios?.map(portfolio => (
           <CustomCard key={portfolio.id} element={portfolio} elementType="portfolio"
-                      setToast={setToast}/>
+                      toast={toast} setToast={setToast}/>
         ))}
       </Grid>
 
@@ -60,8 +61,7 @@ const Portfolio = (props) => {
           setToast={setToast}/>
       }
     </>
-  )
-    ;
+  );
 }
 
 const mapStateToProps = (state) => {

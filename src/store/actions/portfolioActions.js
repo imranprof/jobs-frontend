@@ -72,7 +72,9 @@ export const addPortfolioAction = (portfolio) => {
     "projects_attributes": [
       {
         "title": portfolio.title,
-        "categorizations_attributes": portfolio.categories.map((category) => category.category_id),
+        "categorizations_attributes": portfolio.categories.map((category) => ({
+          category_id: category.category_id
+        })),
         "description": portfolio.description,
         "react_count": 0,
         "live_url": "#",

@@ -20,9 +20,8 @@ const PortfolioModal = (props => {
   const modalWrapper = PortfolioModalStyle(theme).modalWrapper;
   const [slidingClass, SetSlidingClass] = useState("");
   const {title, image, categories, description} = props.portfolio;
-  const {categoriesData, setTogglePortfolioModal, editMode, addMode} = props;
+  const {categoriesData, setTogglePortfolioModal, editMode, addMode, toast, setToast} = props;
   const [mode, toggleMode] = useState(editMode || addMode);
-  const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch();
 
   setTimeout(() => {
@@ -52,11 +51,13 @@ const PortfolioModal = (props => {
     portfolio.title = title;
     portfolio.description = description;
     dispatch(updatePortfolioAction(oldPortfolio, portfolio));
+    setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
   }
 
-  const addPortfolio = ({title, categories, description, image}) => {
-    dispatch(addPortfolioAction({title, categories, description, image}));
-    toggleMode(false);
+  const addPortfolio = ({title, categories, description}) => {
+    dispatch(addPortfolioAction({title, categories, description}));
+    setToast({show: true, severity: "success", text: "Successfully created the portfolio."});
+    setTogglePortfolioModal(false);
   }
 
   const filterCategories = (categories) => {
@@ -99,7 +100,6 @@ const PortfolioModal = (props => {
           title: values.title,
           description: values.description
         });
-        setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
       }
       toggleMode(false);
     },
@@ -177,7 +177,7 @@ const PortfolioModal = (props => {
                       value={formHandler.values.description}
                       name="description"
                       multiline
-                      maxRows={6}
+                      rows={5}
                       InputProps={{disableUnderline: true}}
                       onChange={formHandler.handleChange}
                       className={`${modalWrapper}__modal-content__text-content__description__input`}
