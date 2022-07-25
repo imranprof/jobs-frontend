@@ -107,7 +107,12 @@ const BlogModal = (props) => {
 
     },
     onReset: () => {
-      setMode(false);
+      if(addMode){
+        props.setToggleBlogModal(false)
+      }
+      else {
+        setMode(false);
+      }
     },
     validate: values => {
       let errors = {};
