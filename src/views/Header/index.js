@@ -14,6 +14,7 @@ const Header = (props) => {
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
+    isSticky();
     return () => {
       window.removeEventListener('scroll', isSticky);
     };
