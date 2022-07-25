@@ -29,12 +29,13 @@ const BlogModal = (props) => {
   const [mode, setMode] = useState(editMode);
   const readingTime = require('reading-time');
 
-
   let currentState;
+  let buttonText;
   if(addMode){
     currentState = EditorState.createEmpty();
     blog.categories = null;
     blog.title = '';
+    buttonText = 'Add';
   }
   else{
     const blocksFromHtml = htmlToDraft(blog.body);
@@ -217,7 +218,7 @@ const BlogModal = (props) => {
                 )}
             </Grid>
             { mode &&
-            <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset}/>
+            <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset} actionText={buttonText}/>
             }
           </Grid>
           {toast.show &&
