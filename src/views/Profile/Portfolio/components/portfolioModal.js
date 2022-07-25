@@ -228,7 +228,7 @@ const PortfolioModal = (props => {
           </Grid>
         </div>
       </div>
-      {toast.show &&
+      {editMode && toast.show &&
       <CustomSnackbar
         toast={toast}
         setToast={setToast}
@@ -243,4 +243,4 @@ const mapStateToProps = (state) => (
   }
 );
 
-export default connect(mapStateToProps, null)(PortfolioModal);
+export default connect(mapStateToProps)(PortfolioModal);
