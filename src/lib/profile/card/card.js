@@ -18,7 +18,7 @@ import {blogsRemoveAction} from "../../../store/actions/blogActions";
 const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
-  const {element, elementType, portfolios, setToast, blogs, userID} = props;
+  const {element, elementType, portfolios, toast, setToast, blogs, userID} = props;
   const {title, image, categories, reactCount, reading_time} = element;
 
   const isPortfolio = elementType === "portfolio";
@@ -127,6 +127,7 @@ const CustomCard = (props) => {
         setTogglePortfolioModal={setTogglePortfolioModal}
         editMode={editMode}
         portfolio={element}
+        toast={toast}
         setToast={setToast}/>
       }
 

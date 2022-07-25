@@ -7,7 +7,6 @@ const useStyles = makeStyles({
     position: "relative",
     background: theme.palette.customBackground.gradiant.light,
     maxWidth: 400,
-    height: "100%",
     borderRadius: 20,
     boxShadow: theme.palette.customShadow.paperCardShadow,
     padding: 30,
@@ -93,6 +92,7 @@ const useStyles = makeStyles({
         textDecoration: "none",
         lineHeight: "34px",
         transition: "all 0.4s ease",
+        wordBreak: "break-word",
         '&__arrow': {
           width: 30,
           color: theme.palette.customColor.highContrast,
