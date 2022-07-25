@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {UPDATE_PORTFOLIO, REMOVE_PORTFOLIO, GET_PORTFOLIOS} from "../actionTypes/portfolioTypes";
+import {GET_PORTFOLIOS, REMOVE_PORTFOLIO, UPDATE_PORTFOLIO} from "../actionTypes/portfolioTypes";
 
 const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
 
@@ -63,6 +63,26 @@ export const updatePortfolioAction = (oldPortfolio, updatedPortfolio) => {
   return (dispatch) => {
     axios.patch(profileURL, data)
       .then(res => dispatch(updatePortfolio(res.data.portfolio_data.projects, res.data.all_categories)))
+      .catch(err => err.response)
+  }
+}
+
+export const addPortfolioAction = (portfolio) => {
+  const data = {
+    "projects_attributes": [
+      {
+        "title": portfolio.title,
+        "categorizations_attributes": portfolio.categories.map((category) => category.category_id),
+        "description": portfolio.description,
+        "react_count": 0,
+        "live_url": "#",
+        "source_url": "#",
+      }
+    ]
+  }
+  return (dispatch) => {
+    axios.patch(profileURL, {user: data},
+    ).then(res => dispatch(getPortfolios(res.data.portfolio_data.projects, res.data.all_categories)))
       .catch(err => err.response)
   }
 }

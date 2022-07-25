@@ -13,16 +13,16 @@ import {PortfolioModalStyle} from "./portfolioModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import ErrorMessage from "../../../../lib/errorMessage";
-import {updatePortfolioAction} from "../../../../store/actions/portfolioActions";
+import {addPortfolioAction, updatePortfolioAction} from "../../../../store/actions/portfolioActions";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
   const modalWrapper = PortfolioModalStyle(theme).modalWrapper;
   const [slidingClass, SetSlidingClass] = useState("");
   const {title, image, categories, description} = props.portfolio;
-  const {categoriesData, setTogglePortfolioModal, editMode} = props;
-  const [mode, toggleMode] = useState(editMode)
-  const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const {categoriesData, setTogglePortfolioModal, editMode, addMode} = props;
+  const [mode, toggleMode] = useState(editMode || addMode);
+  const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch();
 
   setTimeout(() => {
@@ -54,6 +54,11 @@ const PortfolioModal = (props => {
     dispatch(updatePortfolioAction(oldPortfolio, portfolio));
   }
 
+  const addPortfolio = ({title, categories, description, image}) => {
+    dispatch(addPortfolioAction({title, categories, description, image}));
+    toggleMode(false);
+  }
+
   const filterCategories = (categories) => {
     return mapCategoriesForMultiSelect(allCategories)?.filter((category) => {
       let flag = true;
@@ -81,13 +86,21 @@ const PortfolioModal = (props => {
       description: description,
     },
     onSubmit: values => {
-      updateHandler({
-        portfolio: props.portfolio,
-        selectedCategories: values.categories,
-        title: values.title,
-        description: values.description
-      });
-      setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
+      if (addMode) {
+        addPortfolio({
+          title: values.title,
+          description: values.description,
+          categories: mapCategoriesForState(values.categories),
+        });
+      } else {
+        updateHandler({
+          portfolio: props.portfolio,
+          selectedCategories: values.categories,
+          title: values.title,
+          description: values.description
+        });
+        setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
+      }
       toggleMode(false);
     },
     onReset: () => {
