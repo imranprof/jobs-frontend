@@ -115,3 +115,27 @@ export const getBlogsAction = (values) => {
   }
 
 }
+
+
+export const addBlogAction = (blog) => {
+  const data = {
+    "user": {
+      "blogs_attributes": [
+        {
+          "title": blog.title,
+          "body": blog.body,
+          "reading_time": blog.readTime,
+          "categorizations_attributes": blog.categories.map((category) => ({
+            category_id: category.category_id
+          }))
+        }
+      ]
+    }
+  }
+  return (dispatch) => {
+    axios.patch(profileUrl, data)
+      .then(res => dispatch(updateBlog(res.data.blogs, res.data.all_categories)))
+      .catch(err => err.response)
+  }
+
+}
