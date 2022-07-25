@@ -16,23 +16,32 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
-import {updateBlogAction} from "../../../../store/actions/blogActions";
+import {addBlogAction, updateBlogAction} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import htmlToDraft from 'html-to-draftjs'
 
 const BlogModal = (props) => {
 
-  const {blog, editMode} = props;
+  const {blog, editMode, addMode} = props;
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [mode, setMode] = useState(editMode);
   const readingTime = require('reading-time');
 
-  const blocksFromHtml = htmlToDraft(blog.body);
-  const { contentBlocks, entityMap } = blocksFromHtml;
-  const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
-  const currentState = EditorState.createWithContent(contentState);
+
+  let currentState;
+  if(addMode){
+    currentState = EditorState.createEmpty();
+    blog.categories = null;
+    blog.title = '';
+  }
+  else{
+    const blocksFromHtml = htmlToDraft(blog.body);
+    const { contentBlocks, entityMap } = blocksFromHtml;
+    const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+    currentState = EditorState.createWithContent(contentState);
+  }
   const [editorState, setEditorState] = useState(currentState);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch()
@@ -86,9 +95,17 @@ const BlogModal = (props) => {
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
-      dispatch(updateBlogAction({id: blog.id, categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}, props.blog))
-      setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
-      setMode(false);
+      if(addMode){
+        dispatch(addBlogAction({ categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}))
+        setMode(false);
+        props.setToggleBlogModal(false);
+      }
+      else{
+        dispatch(updateBlogAction({id: blog.id, categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}, props.blog))
+        setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
+        setMode(false);
+      }
+
     },
     onReset: () => {
       setMode(false);

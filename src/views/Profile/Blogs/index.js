@@ -12,63 +12,62 @@ import AddButton from "../../../lib/addButton";
 import BlogModal from "./components/blogModal";
 
 const Blogs = (props) => {
-    const theme = useTheme();
-    const classes = BlogsStyle(theme);
-    const { blogs, userID} = props;
-    const [toast, setToast] = useState({show: false, severity: "", text: ""})
-    const [toggleBlogModal, setToggleBlogModal] = useState(false);
+  const theme = useTheme();
+  const classes = BlogsStyle(theme);
+  const {blogs, userID} = props;
+  const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const [toggleBlogModal, setToggleBlogModal] = useState(false);
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    useEffect(
-        () => {
-            userID && dispatch(getBlogsAction({id: userID}))
-        }, []
-    )
+  useEffect(
+    () => {
+      userID && dispatch(getBlogsAction({id: userID}))
+    }, []
+  )
 
-    const handleClick = () => {
-        console.log(blogs[0]);
-        return (
-          <BlogModal
-            setToggleBlogModal={true}
-            editMode={true}
-            blog={blogs[0]}/>
+  const handleClick = () => {
+    setToggleBlogModal(!toggleBlogModal);
+  }
 
-        )
-
-
-    }
-
-    return (
-      <>
-        <div className={`${classes.blogsWrapper}__add-Button`} >
+  return (
+    <>
+      <div className={`${classes.blogsWrapper}__add-Button`}>
             <span onClick={handleClick}>
                 <AddButton/>
             </span>
 
-        </div>
-        <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
-            {blogs?.map(blog => (
-              <div key = {blog.id} className={`${classes.blogsWrapper}__blog-card`}>
-                  <CustomCard key={blog.id} element={blog} elementType="blog" setToast={setToast}/>
-              </div>
-            ))}
-        </Grid>
+      </div>
+      <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
+        {blogs?.map(blog => (
+          <div key={blog.id} className={`${classes.blogsWrapper}__blog-card`}>
+            <CustomCard key={blog.id} element={blog} elementType="blog" setToast={setToast}/>
+          </div>
+        ))}
+      </Grid>
 
-        {toast.show &&
-          <CustomSnackbar
-            toast={toast}
-            setToast={setToast}/>
-          }
-      </>
-    );
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
+
+      {toggleBlogModal && <BlogModal
+        setToggleBlogModal={setToggleBlogModal}
+        editMode={true}
+        blog={blogs[0]}
+        addMode = {true}
+      />
+      }
+    </>
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        blogs: state.blogs.allBlogs,
-        userID: state.auth.userID
-    }
+  return {
+    blogs: state.blogs.allBlogs,
+    userID: state.auth.userID
+  }
 }
 
 export default connect(mapStateToProps)(Blogs);
