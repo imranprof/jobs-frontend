@@ -34,7 +34,7 @@ const Blogs = (props) => {
     <>
       <div className={`${classes.blogsWrapper}__add-Button`}>
             <span onClick={handleClick}>
-                <AddButton/>
+                <AddButton tooltipTitle={"Add blog"}/>
             </span>
 
       </div>
