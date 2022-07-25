@@ -14,22 +14,35 @@ import {resumeUpdateAction} from "../../../../../store/actions/resumeActions";
 const ResumeEdit = (props) => {
   const theme = useTheme();
   const classes = ResumeEditStyle(theme);
-  const {cardType, title, description, handleClose, cardContent} = props;
+  const {cardType, title, description, handleClose, cardContent = {}, addMode} = props;
   const labelType = (cardType === "educations") ? "Institution" : "Company"
   const keyType = (cardType === "educations") ? "institution" : "title"
   const {start_date, end_date} = cardContent
   const [startMonth, startYear] = `${Moment(start_date).format('MMM YYYY')}`.split(" ")
   const [endMonth, endYear] = `${Moment(end_date).format('MMM YYYY')}`.split(" ")
   const dispatch = useDispatch();
-  const initialResumeValues = {
-    id: cardContent.id,
-    [keyType]: title,
-    description: description,
-    startMonth: startMonth,
-    startYear: startYear,
-    endMonth: endMonth,
-    endYear: endYear,
-  }
+  const initialResumeValues = (() => {
+    if (addMode) {
+      return {
+        [keyType]: "",
+        description: "",
+        startMonth: "",
+        startYear: "",
+        endMonth: "",
+        endYear: "",
+      }
+    } else {
+      return {
+        id: cardContent.id,
+        [keyType]: title,
+        description: description,
+        startMonth: startMonth,
+        startYear: startYear,
+        endMonth: endMonth,
+        endYear: endYear,
+      }
+    }
+  })();
 
   const resumeUpdate = values => {
     dispatch(resumeUpdateAction({
