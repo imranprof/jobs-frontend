@@ -97,8 +97,7 @@ const BlogModal = (props) => {
       setSelectedCategories(values.categories);
       if(addMode){
         dispatch(addBlogAction({ categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}))
-        setMode(false);
-        props.setToggleBlogModal(false);
+        props.setToggleBlogModal(false)
       }
       else{
         dispatch(updateBlogAction({id: blog.id, categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}, props.blog))
