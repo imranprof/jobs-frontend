@@ -29,7 +29,7 @@ const Portfolio = (props) => {
     <>
       <div className={`${classes.portfolioWrapper}__addButton-container`}>
         <span onClick={() => setAddPortfolio(true)}>
-          <AddButton/>
+          <AddButton tooltipTitle="Add Portfolio"/>
         </span>
       </div>
 
@@ -71,4 +71,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Portfolio);
+export default connect(mapStateToProps)(Portfolio);

@@ -184,7 +184,11 @@ const PortfolioModal = (props => {
                     />
                     {formHandler.errors.description && <ErrorMessage error={formHandler.errors.description}/>}
                   </div>
-                  <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
+                  {addMode ?
+                    <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset} actionText="Add"/>
+                    :
+                    <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
+                  }
                 </> :
                 <>
                   <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper`}>
@@ -233,8 +237,10 @@ const PortfolioModal = (props => {
   );
 })
 
-const mapStateToProps = (state) => ({
-  categoriesData: state.portfolios.allCategories
-});
+const mapStateToProps = (state) => (
+  {
+    categoriesData: state.portfolios.allCategories
+  }
+);
 
 export default connect(mapStateToProps, null)(PortfolioModal);
