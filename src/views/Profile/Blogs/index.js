@@ -53,7 +53,12 @@ const Blogs = (props) => {
       {toggleBlogModal && <BlogModal
         setToggleBlogModal={setToggleBlogModal}
         editMode={true}
-        blog={blogs[0]}
+        blog={{
+          title: "",
+          categories: [],
+          description: "",
+          image: "blog-01.jpg"
+        }}
         addMode={true}
         toast={toast}
         setToast={setToast}

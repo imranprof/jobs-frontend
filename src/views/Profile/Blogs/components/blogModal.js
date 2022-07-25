@@ -33,9 +33,7 @@ const BlogModal = (props) => {
   let buttonText;
   if(addMode){
     currentState = EditorState.createEmpty();
-    blog.categories = null;
-    blog.title = '';
-    buttonText = 'Add';
+    buttonText = "Add";
   }
   else{
     const blocksFromHtml = htmlToDraft(blog.body);
