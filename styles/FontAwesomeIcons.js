@@ -18,7 +18,8 @@ const FontAwesomeIcons = {
     "signIn": "fa-solid fa-right-to-bracket",
     "trash": "fa-solid fa-trash",
     "darkMode": "fa-solid fa-moon",
-    "plus": "fa-solid fa-plus"
+    "plus": "fa-solid fa-plus",
+    "chevronLeft": "fa-solid fa-chevron-left",
 }
 
 export default FontAwesomeIcons;

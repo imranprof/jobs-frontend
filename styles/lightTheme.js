@@ -38,7 +38,8 @@ const lightTheme = createTheme({
       searchBtn: COLORS.pink,
       hourlyRate: COLORS.gray,
       shareBtn: COLORS.pink,
-      dangerColor: COLORS.danger
+      dangerColor: COLORS.danger,
+      backToHomeHover: COLORS.black_1
     },
     customShadow: {
       main: COLORS.boxShadow_2,

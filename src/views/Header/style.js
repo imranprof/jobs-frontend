@@ -21,6 +21,10 @@ export const useStyles = makeStyles({
     '&__toolbar': {
       width: '100%',
       justifyContent: 'space-between',
+      '&__navLeft': {
+        display: "flex",
+        alignItems: "center",
+      },
       '&__right': {
         width: 615,
         display: "flex",
@@ -119,10 +123,12 @@ export const useStyles = makeStyles({
       },
       '&__navShare': {
         display: "flex",
-        width: "660px"
+        // width: "660px"
+        // width: 740
       },
       '&__navItem': {
-         width: "550px"
+         // width: "550px"
+         width: 475
       },
       '&__share': {
         position: "relative",
@@ -130,7 +136,7 @@ export const useStyles = makeStyles({
         textTransform: "uppercase",
         background: theme.palette.customBackground.gradiant.light,
         boxShadow: theme.palette.customShadow.paperCardShadow,
-        width: "130%",
+        width: 95,
         height: 40,
         border: "none",
         borderRadius: 5,
@@ -362,13 +368,18 @@ export const useStyles = makeStyles({
     },
 
     // ========= Breakpoints =========
-    [theme.breakpoints.between('xs', "sm")]: {
+    [theme.breakpoints.down('xs')]: {
+      '&__toolbar': {
+        padding: "0 14px"
+      },
+    },
+    [theme.breakpoints.down("sm")]: {
       padding: "15px 25px",
       '&.isSticky': {
         padding: '10px 18px',
       },
       '&__toolbar': {
-        padding: 0
+        padding: "0 24px"
       },
     },
     [theme.breakpoints.between('sm', "md")]: {

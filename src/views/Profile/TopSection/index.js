@@ -3,7 +3,7 @@ import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {animateScroll as scroll} from 'react-scroll';
 
-import {Grid, TextField} from "@material-ui/core";
+import {Grid, TextField, Tooltip, Zoom} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import TypeWriter from "./typeWriter";
@@ -174,10 +174,12 @@ const TopSection = (props) => {
           </div>
         </Grid>
 
-        <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
-             onClick={() => scroll.scrollToTop()}>
-          <i className={`${FontAwesomeIcons.arrowUp}`}/>
-        </div>
+        <Tooltip TransitionComponent={Zoom} title="Back to top" placement="left">
+          <div className={`${classes.topSectionWrapper}__backto-top`} ref={backToTopRef}
+               onClick={() => scroll.scrollToTop()}>
+            <i className={`${FontAwesomeIcons.arrowUp}`}/>
+          </div>
+        </Tooltip>
       </Grid>
 
       {toast.show &&
