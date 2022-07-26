@@ -78,9 +78,10 @@ export const resumeUpdateAction = ({resumeItem, cardType}) => {
       break;
     case "experiences":
       itemType = "work_histories_attributes";
+      console.log(resumeItem, "From Update")
       attributes = {
         id: resumeItem.id,
-        title: resumeItem.title,
+        company_name: resumeItem.company_name,
         description: resumeItem.description,
         start_date: `${resumeItem.startYear}-${getMonthNumber(resumeItem.startMonth)}-01`,
         end_date: `${resumeItem.endYear}-${getMonthNumber(resumeItem.endMonth)}-01`
@@ -107,6 +108,64 @@ export const resumeUpdateAction = ({resumeItem, cardType}) => {
       }
     }).then(res => {
       dispatch(resumeUpdate(res.data.resume_data));
+      if (cardType === "skills") dispatch(skillsUpdate(res.data.profile.skills));
+    })
+      .catch(err => err.response)
+  }
+}
+
+export const addResumeItemAction = ({resumeItem, cardType}) => {
+  let itemType, attributes;
+  switch (cardType) {
+    case "educations":
+      itemType = "education_histories_attributes";
+      attributes = {
+        id: resumeItem.id,
+        institution: resumeItem.institution,
+        description: resumeItem.description,
+        start_date: `${resumeItem.startYear}-${getMonthNumber(resumeItem.startMonth)}-01`,
+        end_date: `${resumeItem.endYear}-${getMonthNumber(resumeItem.endMonth)}-01`,
+        degree: "None",
+        grade: "None",
+        currently_enrolled: false,
+        visibility: true
+      }
+      break;
+    case "experiences":
+      itemType = "work_histories_attributes";
+      console.log(resumeItem, "From Add")
+      attributes = {
+        company_name: resumeItem.company_name,
+        description: resumeItem.description,
+        start_date: `${resumeItem.startYear}-${getMonthNumber(resumeItem.startMonth)}-01`,
+        end_date: `${resumeItem.endYear}-${getMonthNumber(resumeItem.endMonth)}-01`,
+        title: "no title",
+        currently_employed: false,
+        visibility: true,
+        employment_type: 1
+      }
+      break;
+    case "skills":
+      itemType = "users_skills_attributes";
+      attributes = {
+        skill_id: resumeItem.skill_id,
+        rating: resumeItem.rating
+      }
+      break;
+    default:
+      return;
+  }
+  return (dispatch) => {
+    axios.patch(profileURL, {
+      "user": {
+        [itemType]: [
+          {
+            ...attributes
+          }
+        ]
+      }
+    }).then(res => {
+      dispatch(getResume(res.data.resume_data));
       if (cardType === "skills") dispatch(skillsUpdate(res.data.profile.skills));
     })
       .catch(err => err.response)

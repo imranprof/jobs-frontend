@@ -6,17 +6,16 @@ import {MenuItem, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import CustomButtons from "../../../../../lib/profile/customButtons";
-import {resumeUpdate} from "../../../../../store/actions/resumeActions";
 import {ResumeEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
-import {resumeUpdateAction} from "../../../../../store/actions/resumeActions";
+import {resumeUpdateAction, addResumeItemAction} from "../../../../../store/actions/resumeActions";
 
 const ResumeEdit = (props) => {
   const theme = useTheme();
   const classes = ResumeEditStyle(theme);
   const {cardType, title, description, handleClose, cardContent = {}, addMode} = props;
   const labelType = (cardType === "educations") ? "Institution" : "Company"
-  const keyType = (cardType === "educations") ? "institution" : "title"
+  const keyType = (cardType === "educations") ? "institution" : "company_name"
   const {start_date, end_date} = cardContent
   const [startMonth, startYear] = `${Moment(start_date).format('MMM YYYY')}`.split(" ")
   const [endMonth, endYear] = `${Moment(end_date).format('MMM YYYY')}`.split(" ")
@@ -44,12 +43,20 @@ const ResumeEdit = (props) => {
     }
   })();
 
-  const resumeUpdate = values => {
-    dispatch(resumeUpdateAction({
-      resumeItem: values,
-      cardType: cardType
-    }));
-    props.setToast({show: true, severity: "success", text: `Successfully updated the ${cardType}`})
+  const resumeHandler = values => {
+    if (addMode) {
+      dispatch(addResumeItemAction({
+        resumeItem: values,
+        cardType: cardType
+      }));
+      props.setToast({show: true, severity: "success", text: `Successfully added the ${cardType}`});
+    } else {
+      dispatch(resumeUpdateAction({
+        resumeItem: values,
+        cardType: cardType
+      }));
+      props.setToast({show: true, severity: "success", text: `Successfully updated the ${cardType}`})
+    }
     handleClose()
   }
 
@@ -71,7 +78,7 @@ const ResumeEdit = (props) => {
 
   const formik = useFormik({
     initialValues: initialResumeValues,
-    onSubmit: resumeUpdate,
+    onSubmit: resumeHandler,
     validate: resumeValidation
   })
 
@@ -209,7 +216,7 @@ const ResumeEdit = (props) => {
         </div>
 
       </div>
-      <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
+      <CustomButtons handler={formik.handleSubmit} mode={handleClose} actionText={addMode ? "Add" : "Save"}/>
     </div>
   );
 };

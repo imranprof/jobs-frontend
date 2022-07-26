@@ -15,7 +15,7 @@ const ContentItem = (props) => {
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
   const {cardType, cardContent, resumeItemRemoveHandler} = props;
   const [openModal, setOpenModal] = useState(false);
-  const title = (cardType === "educations") ? cardContent.institution : cardContent.title;
+  const title = (cardType === "educations") ? cardContent.institution : cardContent.company_name;
   const subTitle = `${Moment(cardContent.start_date).format('MMM, YYYY')}` +
     ` - ${Moment(cardContent.end_date).format('MMM, YYYY')}`;
   const description = cardContent.description;

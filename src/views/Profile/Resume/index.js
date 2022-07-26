@@ -10,11 +10,13 @@ import {getResumeAction} from "../../../store/actions/resumeActions";
 import AddButton from "../../../lib/addButton";
 import ResumeEdit from "../EditComponents/resume/components/resumeEdit";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
+import CustomSnackbar from "../../../lib/customSnackbar";
 
 const Resume = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
   const {resume, userID} = props;
+  const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [addResumeItem, setAddResumeItem] = useState(false);
   const dispatch = useDispatch()
 
@@ -31,8 +33,6 @@ const Resume = (props) => {
   const cardType = resumeSections[selected];
   const cardData = resume[cardType];
 
-  console.log("CardData", cardData[0]);
-
   const modalClose = () => {
     setAddResumeItem(false)
   }
@@ -48,12 +48,15 @@ const Resume = (props) => {
       {
         addResumeItem &&
         <EditCustomModal handleClose={modalClose} open={addResumeItem}>
-          <ResumeEdit
-            cardType={cardType}
-            addMode={true}
-            handleClose={modalClose}
-            setToast={props.setToast}
-          />
+          {cardType === "skills" ?
+           <></> :
+            <ResumeEdit
+              cardType={cardType}
+              addMode={true}
+              handleClose={setAddResumeItem}
+              setToast={setToast}
+            />
+          }
         </EditCustomModal>
       }
 
@@ -68,6 +71,12 @@ const Resume = (props) => {
           <ResumeCards cardData={cardData} cardType={cardType}/>
         </div>
       </div>
+
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
     </>
   );
 }
