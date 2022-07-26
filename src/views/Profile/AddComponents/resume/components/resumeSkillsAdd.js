@@ -45,6 +45,9 @@ const ResumeSkillsAdd = (props) => {
     initialValues: initialSkillValues,
     validate: values => {
       let errors = {};
+      if (values.rating === 0) {
+        errors.rating = "Skill rating can't be 0!"
+      }
       if (!values.skill) {
         errors.skill = "Please select a skill!"
       }
@@ -68,16 +71,17 @@ const ResumeSkillsAdd = (props) => {
             styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
             className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper__selectDropdown`}
           />
+          {formik.errors.skill && <ErrorMessage error={formik.errors.skill}/>}
         </div>
         <h4>Rate your skill</h4>
         <Slider
           key={`slider-${formik.values.rating}`}
           valueLabelDisplay="on"
           defaultValue={formik.values.rating}
-          onChangeCommitted={(e, val) => formik.values.rating = val}
+          onChangeCommitted={(e, val) => formik.setFieldValue("rating", val)}
         />
+        {formik.errors.rating && <ErrorMessage error={formik.errors.rating}/>}
       </div>
-      {formik.errors.skill && <ErrorMessage error={formik.errors.skill}/>}
       <CustomButtons handler={formik.handleSubmit} mode={handleClose} actionText="Add"/>
     </div>
   );

@@ -67,6 +67,18 @@ const ResumeEdit = (props) => {
     } else if (values[keyType].length > 100) {
       errors[keyType] = `${labelType} must have within 100 characters`
     }
+    if (!values.endYear) {
+      errors.date = "End year can't be empty"
+    }
+    if (!values.endMonth) {
+      errors.date = "End month can't be empty"
+    }
+    if (!values.startYear) {
+      errors.date = "Start year can't be empty"
+    }
+    if (!values.startMonth) {
+      errors.date = "Start month can't be empty"
+    }
 
     if (!values.description) {
       errors.description = "Description can't be empty"
@@ -152,6 +164,7 @@ const ResumeEdit = (props) => {
                   ))}
                 </TextField>
               </div>
+              {formik.errors.date ? <ErrorMessage error={formik.errors.date}/> : null}
             </div>
 
             <span className={`${classes.resumeEditWrapper}__content-wrapper__hyphen`}>_</span>
