@@ -1,5 +1,5 @@
 import axios from "axios";
-import {RESUME_UPDATE, RESUME_ITEM_REMOVE, GET_RESUME} from "../actionTypes/resumeTypes";
+import {RESUME_UPDATE, RESUME_ITEM_REMOVE, GET_RESUME, GET_ALL_SKILLS} from "../actionTypes/resumeTypes";
 import {skillsUpdate} from "./topSectionActions";
 
 const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
@@ -13,6 +13,13 @@ export const getResume = (resume) => {
   }
 }
 
+export const getAllSkills = (allSkills) => {
+  return {
+    type: GET_ALL_SKILLS,
+    payload: allSkills
+  }
+}
+
 export const getResumeAction = (values) => {
   const {id} = values
   return (dispatch) => {
@@ -20,7 +27,10 @@ export const getResumeAction = (values) => {
       params: {
         user_id: id
       }
-    }).then(res => dispatch(getResume(res.data.resume_data)))
+    }).then(res => {
+      dispatch(getResume(res.data.resume_data));
+      dispatch(getAllSkills(res.data.all_skills));
+    })
       .catch(err => err.response);
   }
 }
@@ -78,7 +88,6 @@ export const resumeUpdateAction = ({resumeItem, cardType}) => {
       break;
     case "experiences":
       itemType = "work_histories_attributes";
-      console.log(resumeItem, "From Update")
       attributes = {
         id: resumeItem.id,
         company_name: resumeItem.company_name,
@@ -133,7 +142,6 @@ export const addResumeItemAction = ({resumeItem, cardType}) => {
       break;
     case "experiences":
       itemType = "work_histories_attributes";
-      console.log(resumeItem, "From Add")
       attributes = {
         company_name: resumeItem.company_name,
         description: resumeItem.description,

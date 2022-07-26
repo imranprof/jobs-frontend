@@ -8,9 +8,10 @@ import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
 import {getResumeAction} from "../../../store/actions/resumeActions";
 import AddButton from "../../../lib/addButton";
-import ResumeEdit from "../EditComponents/resume/components/resumeEdit";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
 import CustomSnackbar from "../../../lib/customSnackbar";
+import ResumeEdit from "../EditComponents/resume/components/resumeEdit";
+import ResumeSkillsAdd from "../AddComponents/resume/components/resumeSkillsAdd";
 
 const Resume = (props) => {
   const theme = useTheme();
@@ -49,7 +50,11 @@ const Resume = (props) => {
         addResumeItem &&
         <EditCustomModal handleClose={modalClose} open={addResumeItem}>
           {cardType === "skills" ?
-           <></> :
+            <ResumeSkillsAdd
+              cardType={cardType}
+              addMode={true}
+              handleClose={setAddResumeItem}
+              setToast={setToast}/> :
             <ResumeEdit
               cardType={cardType}
               addMode={true}
