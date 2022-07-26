@@ -8,6 +8,9 @@ import Feature from "./components/feature";
 import {FeatureStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {getFeaturesAction, removeFeatureAction} from "../../../store/actions/featureActions";
+import AddButton from "../../../lib/addButton";
+import EditCustomModal from "../../../lib/profile/editCustomModal";
+import FeaturesAdd from "../AddComponents/features/components/featuresAdd";
 
 const Features = (props) => {
   const theme = useTheme();
@@ -15,6 +18,11 @@ const Features = (props) => {
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const {features, userID} = props;
   const dispatch = useDispatch()
+  const [openModal, setOpenModal] = useState(false);
+
+  const modalClose = () => {
+    setOpenModal(false)
+  }
 
   useEffect(() => {
     userID && dispatch(getFeaturesAction({id: userID}))
@@ -31,6 +39,9 @@ const Features = (props) => {
 
   return (
     <>
+      <div onClick={() => setOpenModal(true)} className={`${classes.featureWrapper}__btn`}>
+        <AddButton tooltipTitle="Add feature" />
+      </div>
       <Grid container spacing={3} className={classes.featureWrapper} id="features">
         {features.map(feature => (
             <Feature
@@ -49,6 +60,10 @@ const Features = (props) => {
         toast={toast}
         setToast={setToast}/>
       }
+
+      <EditCustomModal handleClose={modalClose} open={openModal}>
+        <FeaturesAdd handleClose={modalClose} toast={toast} setToast={setToast} />
+      </EditCustomModal>
     </>
   );
 }

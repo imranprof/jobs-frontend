@@ -5,6 +5,9 @@ import FONTS from "../../../../styles/fonts";
 const useStyles = makeStyles({
   featureWrapper: theme => ({
     display: "flex",
+    '&__btn': {
+      marginBottom: 25
+    },
     '&__item': {
       width: "100%",
       display: "flex",
