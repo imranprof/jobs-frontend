@@ -9,14 +9,15 @@ export const useStyles = makeStyles({
     marginBottom: 50,
     boxShadow: theme.palette.customShadow.light,
     position: "static",
+    transition: 'backdrop-filter 0.3s ease-in-out',
+    backdropFilter: 'blur(15px) opacity(0)',
     '&.isSticky': {
       position: "fixed",
       width: "100%",
       backgroundColor: `${theme.palette.customBackground.light}de`,
       boxShadow: theme.palette.customShadow.main,
-      backdropFilter: "blur(15px)",
-      transition: "ease 0.3s, fadein .3s",
-      padding: '14px 25px'
+      backdropFilter: "blur(15px) opacity(1)",
+      padding: "14px 50px",
     },
     '&__toolbar': {
       width: '100%',
@@ -108,7 +109,7 @@ export const useStyles = makeStyles({
       },
       '& a': {
         fontFamily: FONTS.primaryFont,
-        fontWeight: 500,
+        fontWeight: 400,
         fontSize: 13,
         color: theme.palette.customColor.main,
         textDecoration: 'none',
@@ -123,12 +124,9 @@ export const useStyles = makeStyles({
       },
       '&__navShare': {
         display: "flex",
-        // width: "660px"
-        // width: 740
       },
       '&__navItem': {
-         // width: "550px"
-         width: 475
+        width: 475
       },
       '&__share': {
         position: "relative",
