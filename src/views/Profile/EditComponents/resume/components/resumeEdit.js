@@ -6,37 +6,57 @@ import {MenuItem, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import CustomButtons from "../../../../../lib/profile/customButtons";
-import {resumeUpdate} from "../../../../../store/actions/resumeActions";
 import {ResumeEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
-import {resumeUpdateAction} from "../../../../../store/actions/resumeActions";
+import {resumeUpdateAction, addResumeItemAction} from "../../../../../store/actions/resumeActions";
 
 const ResumeEdit = (props) => {
   const theme = useTheme();
   const classes = ResumeEditStyle(theme);
-  const {cardType, title, description, handleClose, cardContent} = props;
+  const {cardType, title, description, handleClose, cardContent = {}, addMode} = props;
   const labelType = (cardType === "educations") ? "Institution" : "Company"
-  const keyType = (cardType === "educations") ? "institution" : "title"
+  const keyType = (cardType === "educations") ? "institution" : "company_name"
   const {start_date, end_date} = cardContent
   const [startMonth, startYear] = `${Moment(start_date).format('MMM YYYY')}`.split(" ")
   const [endMonth, endYear] = `${Moment(end_date).format('MMM YYYY')}`.split(" ")
   const dispatch = useDispatch();
-  const initialResumeValues = {
-    id: cardContent.id,
-    [keyType]: title,
-    description: description,
-    startMonth: startMonth,
-    startYear: startYear,
-    endMonth: endMonth,
-    endYear: endYear,
-  }
+  const initialResumeValues = (() => {
+    if (addMode) {
+      return {
+        [keyType]: "",
+        description: "",
+        startMonth: "",
+        startYear: "",
+        endMonth: "",
+        endYear: "",
+      }
+    } else {
+      return {
+        id: cardContent.id,
+        [keyType]: title,
+        description: description,
+        startMonth: startMonth,
+        startYear: startYear,
+        endMonth: endMonth,
+        endYear: endYear,
+      }
+    }
+  })();
 
-  const resumeUpdate = values => {
-    dispatch(resumeUpdateAction({
-      resumeItem: values,
-      cardType: cardType
-    }));
-    props.setToast({show: true, severity: "success", text: `Successfully updated the ${cardType}`})
+  const resumeHandler = values => {
+    if (addMode) {
+      dispatch(addResumeItemAction({
+        resumeItem: values,
+        cardType: cardType
+      }));
+      props.setToast({show: true, severity: "success", text: `Successfully added the ${cardType}`});
+    } else {
+      dispatch(resumeUpdateAction({
+        resumeItem: values,
+        cardType: cardType
+      }));
+      props.setToast({show: true, severity: "success", text: `Successfully updated the ${cardType}`})
+    }
     handleClose()
   }
 
@@ -46,6 +66,18 @@ const ResumeEdit = (props) => {
       errors[keyType] = `${labelType} can't be empty`
     } else if (values[keyType].length > 100) {
       errors[keyType] = `${labelType} must have within 100 characters`
+    }
+    if (!values.endYear) {
+      errors.date = "End year can't be empty"
+    }
+    if (!values.endMonth) {
+      errors.date = "End month can't be empty"
+    }
+    if (!values.startYear) {
+      errors.date = "Start year can't be empty"
+    }
+    if (!values.startMonth) {
+      errors.date = "Start month can't be empty"
     }
 
     if (!values.description) {
@@ -58,7 +90,7 @@ const ResumeEdit = (props) => {
 
   const formik = useFormik({
     initialValues: initialResumeValues,
-    onSubmit: resumeUpdate,
+    onSubmit: resumeHandler,
     validate: resumeValidation
   })
 
@@ -132,6 +164,7 @@ const ResumeEdit = (props) => {
                   ))}
                 </TextField>
               </div>
+              {formik.errors.date ? <ErrorMessage error={formik.errors.date}/> : null}
             </div>
 
             <span className={`${classes.resumeEditWrapper}__content-wrapper__hyphen`}>_</span>
@@ -196,7 +229,7 @@ const ResumeEdit = (props) => {
         </div>
 
       </div>
-      <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
+      <CustomButtons handler={formik.handleSubmit} mode={handleClose} actionText={addMode ? "Add" : "Save"}/>
     </div>
   );
 };
