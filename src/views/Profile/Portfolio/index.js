@@ -9,7 +9,7 @@ import {PortfolioStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import {getPortfoliosAction} from "../../../store/actions/portfolioActions"
 import AddButton from "../../../lib/addButton";
-import PortfolioModal from "./components/portfolioModal";
+import PortfolioAdd from "../AddComponents/portfolio/components/portfolioAdd";
 
 const Portfolio = (props) => {
   const theme = useTheme();
@@ -34,16 +34,8 @@ const Portfolio = (props) => {
       </div>
 
       {
-        addPortfolio && <PortfolioModal
+        addPortfolio && <PortfolioAdd
           setTogglePortfolioModal={setAddPortfolio}
-          addMode={true}
-          portfolio={{
-            title: "",
-            categories: [],
-            description: "",
-            image: "portfolio-01.jpg"
-          }}
-          toast={toast}
           setToast={setToast}/>
       }
 
