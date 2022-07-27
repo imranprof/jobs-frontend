@@ -184,11 +184,9 @@ const PortfolioModal = (props => {
                     />
                     {formHandler.errors.description && <ErrorMessage error={formHandler.errors.description}/>}
                   </div>
-                  {addMode ?
-                    <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset} actionText="Add"/>
-                    :
-                    <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
-                  }
+
+                  <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}
+                                actionText={addMode ? "Add" : "Save"}/>
                 </> :
                 <>
                   <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper`}>
