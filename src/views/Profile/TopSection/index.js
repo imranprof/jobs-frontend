@@ -28,17 +28,21 @@ const TopSection = (props) => {
   const theme = useTheme();
   const classes = TopSectionStyle(theme);
   const backToTopRef = useRef(null);
+  const topSectionRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
-  const expertisesList = props.expertises.map(expertise => `${expertise}.`);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const expertisesList = props.expertises.map(expertise => `${expertise}.`);
   const {userID} = props;
   const dispatch = useDispatch();
 
+  let scrollTop;
   useEffect(() => {
     window.addEventListener('scroll', () => {
       let backToTop = backToTopRef.current;
-      let scrollTop = window.scrollY;
-      backToTop.style.display = scrollTop >= 80 ? "flex" : "none";
+      scrollTop = window.scrollY;
+      backToTop.style.display = scrollTop >= 130 ? "flex" : "none";
+      const topSection = topSectionRef.current;
+      scrollTop >= 130 ? topSection.classList.add("addMargin") : topSection.classList.remove("addMargin");
     });
     userID && dispatch(getProfileAction(userID));
   }, [])
@@ -93,7 +97,7 @@ const TopSection = (props) => {
 
   return (
     <>
-      <Grid container className={classes.topSectionWrapper} id="topSection">
+      <Grid container className={classes.topSectionWrapper} id="topSection" ref={topSectionRef}>
         <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
           <div className={`${classes.topSectionWrapper}__left-top`}>
             {props.headlineEditMode ? (

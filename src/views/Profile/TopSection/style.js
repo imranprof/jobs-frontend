@@ -7,6 +7,9 @@ export const useStyles = makeStyles({
     width: "100%",
     display: "flex",
     flexWrap: "wrap-reverse",
+    '&.addMargin': {
+      marginTop: 180
+    },
     // topSection left side
     '&__left': {
       display: "flex",
