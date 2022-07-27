@@ -134,7 +134,10 @@ const CustomCard = (props) => {
       {toggleBlogModal && <BlogModal
         setToggleBlogModal={setToggleBlogModal}
         editMode={editMode}
-        blog={element}/>
+        blog={element}
+        toast={toast}
+        setToast={setToast}
+      />
       }
     </>
   );

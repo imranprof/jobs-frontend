@@ -16,25 +16,32 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {BlogModalStyle} from "./blogModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
-import {updateBlogAction} from "../../../../store/actions/blogActions";
+import {addBlogAction, updateBlogAction} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import htmlToDraft from 'html-to-draftjs'
 
 const BlogModal = (props) => {
 
-  const {blog, editMode} = props;
+  const {blog, editMode, addMode, toast, setToast} = props;
   const theme = useTheme();
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [mode, setMode] = useState(editMode);
   const readingTime = require('reading-time');
 
-  const blocksFromHtml = htmlToDraft(blog.body);
-  const { contentBlocks, entityMap } = blocksFromHtml;
-  const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
-  const currentState = EditorState.createWithContent(contentState);
+  let currentState;
+  let buttonText;
+  if(addMode){
+    currentState = EditorState.createEmpty();
+    buttonText = "Add";
+  }
+  else{
+    const blocksFromHtml = htmlToDraft(blog.body);
+    const { contentBlocks, entityMap } = blocksFromHtml;
+    const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+    currentState = EditorState.createWithContent(contentState);
+  }
   const [editorState, setEditorState] = useState(currentState);
-  const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch()
 
   setTimeout(() => {
@@ -86,12 +93,25 @@ const BlogModal = (props) => {
     validateOnChange: false,
     onSubmit: values => {
       setSelectedCategories(values.categories);
-      dispatch(updateBlogAction({id: blog.id, categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}, props.blog))
-      setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
-      setMode(false);
+      if(addMode){
+        dispatch(addBlogAction({ categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}))
+        setToast({show: true, severity: "success", text: "Blog Created successfully!"});
+        props.setToggleBlogModal(false)
+      }
+      else{
+        dispatch(updateBlogAction({id: blog.id, categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}, props.blog))
+        setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
+        setMode(false);
+      }
+
     },
     onReset: () => {
-      setMode(false);
+      if(addMode){
+        props.setToggleBlogModal(false)
+      }
+      else {
+        setMode(false);
+      }
     },
     validate: values => {
       let errors = {};
@@ -126,6 +146,7 @@ const BlogModal = (props) => {
               <div className={`${blogModalWrapper}__modal-content__categories-edit`}>
               <Select
                 isMulti
+                placeholder={"Select Categories"}
                 options = {filterCategories(editHandler.values.categories)}
                 value = {editHandler.values.categories}
                 onChange ={categories => {
@@ -148,6 +169,7 @@ const BlogModal = (props) => {
                   multiline
                   variant = "outlined"
                   name = "title"
+                  placeholder={"Enter blog title"}
                   value={editHandler.values.title}
                   onChange={editHandler.handleChange}
                   className={`${blogModalWrapper}__modal-content__title__input`}
@@ -171,6 +193,7 @@ const BlogModal = (props) => {
                 <div >
                   <Editor
                     editorState = {editorState}
+                    placeholder={"Enter Description of blog"}
                     onEditorStateChange={changeEditorState}
                     toolbarClassName = {`${blogModalWrapper}__modal-content__description__toolbar`}
                     wrapperClassName = {`${blogModalWrapper}__modal-content__description__toolbar-editor-wrapper`}
@@ -193,10 +216,10 @@ const BlogModal = (props) => {
                 )}
             </Grid>
             { mode &&
-            <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset}/>
+            <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset} actionText={buttonText}/>
             }
           </Grid>
-          {toast.show &&
+          {editMode && toast.show &&
           <CustomSnackbar
             toast={toast}
             setToast={setToast}/>

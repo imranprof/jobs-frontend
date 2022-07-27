@@ -9,6 +9,11 @@ const useStyles = makeStyles({
     marginTop: 45,
     marginRight: -15,
     marginLeft: -15,
+    '&__addButton-container': {
+      display: "flex",
+      justifyContent: "center",
+      marginBottom: 20
+    },
     // ========= Breakpoints =========
     [theme.breakpoints.between(960, 990)]: {
       maxWidth: "75%",
