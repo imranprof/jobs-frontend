@@ -13,16 +13,15 @@ import {PortfolioModalStyle} from "./portfolioModalStyle";
 import CustomButton from "../../../../lib/profile/customButtons";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import ErrorMessage from "../../../../lib/errorMessage";
-import {updatePortfolioAction} from "../../../../store/actions/portfolioActions";
+import {addPortfolioAction, updatePortfolioAction} from "../../../../store/actions/portfolioActions";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
   const modalWrapper = PortfolioModalStyle(theme).modalWrapper;
   const [slidingClass, SetSlidingClass] = useState("");
   const {title, image, categories, description} = props.portfolio;
-  const {categoriesData, setTogglePortfolioModal, editMode} = props;
-  const [mode, toggleMode] = useState(editMode)
-  const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const {categoriesData, setTogglePortfolioModal, editMode, addMode, toast, setToast} = props;
+  const [mode, toggleMode] = useState(editMode || addMode);
   const dispatch = useDispatch();
 
   setTimeout(() => {
@@ -52,6 +51,13 @@ const PortfolioModal = (props => {
     portfolio.title = title;
     portfolio.description = description;
     dispatch(updatePortfolioAction(oldPortfolio, portfolio));
+    setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
+  }
+
+  const addPortfolio = ({title, categories, description}) => {
+    dispatch(addPortfolioAction({title, categories, description}));
+    setToast({show: true, severity: "success", text: "Successfully created the portfolio."});
+    setTogglePortfolioModal(false);
   }
 
   const filterCategories = (categories) => {
@@ -81,13 +87,20 @@ const PortfolioModal = (props => {
       description: description,
     },
     onSubmit: values => {
-      updateHandler({
-        portfolio: props.portfolio,
-        selectedCategories: values.categories,
-        title: values.title,
-        description: values.description
-      });
-      setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
+      if (addMode) {
+        addPortfolio({
+          title: values.title,
+          description: values.description,
+          categories: mapCategoriesForState(values.categories),
+        });
+      } else {
+        updateHandler({
+          portfolio: props.portfolio,
+          selectedCategories: values.categories,
+          title: values.title,
+          description: values.description
+        });
+      }
       toggleMode(false);
     },
     onReset: () => {
@@ -164,14 +177,16 @@ const PortfolioModal = (props => {
                       value={formHandler.values.description}
                       name="description"
                       multiline
-                      maxRows={6}
+                      rows={5}
                       InputProps={{disableUnderline: true}}
                       onChange={formHandler.handleChange}
                       className={`${modalWrapper}__modal-content__text-content__description__input`}
                     />
                     {formHandler.errors.description && <ErrorMessage error={formHandler.errors.description}/>}
                   </div>
-                  <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}/>
+
+                  <CustomButton handler={formHandler.handleSubmit} mode={formHandler.handleReset}
+                                actionText={addMode ? "Add" : "Save"}/>
                 </> :
                 <>
                   <div className={`${modalWrapper}__modal-content__text-content__categoryWrapper`}>
@@ -211,7 +226,7 @@ const PortfolioModal = (props => {
           </Grid>
         </div>
       </div>
-      {toast.show &&
+      {editMode && toast.show &&
       <CustomSnackbar
         toast={toast}
         setToast={setToast}
@@ -220,8 +235,10 @@ const PortfolioModal = (props => {
   );
 })
 
-const mapStateToProps = (state) => ({
-  categoriesData: state.portfolios.allCategories
-});
+const mapStateToProps = (state) => (
+  {
+    categoriesData: state.portfolios.allCategories
+  }
+);
 
-export default connect(mapStateToProps, null)(PortfolioModal);
+export default connect(mapStateToProps)(PortfolioModal);
