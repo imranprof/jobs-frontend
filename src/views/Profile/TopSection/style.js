@@ -196,6 +196,10 @@ export const useStyles = makeStyles({
     },
 
     // topSection right side
+    '&__profilePhotoWrapper': {
+      display: "flex",
+      flexDirection: "row-reverse"
+    },
     '&__thumbnail': {
       position: "relative",
       zIndex: 2,

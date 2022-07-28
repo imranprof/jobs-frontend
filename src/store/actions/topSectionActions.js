@@ -128,6 +128,21 @@ export function getProfileAction(userID) {
   }
 }
 
+// Image Upload
+export const updateImage = ({avatar, profileID}) => {
+  const formData = new FormData();
+  formData.append('user[user_profile_attributes][avatar]', avatar);
+  formData.append('user[user_profile_attributes][id]', profileID);
+
+  return (dispatch) => {
+    axios.patch(profileURL, formData)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => err.response);
+  }
+}
+
 export const updateHeadline = ({headline, profileID}) => {
   const data = {
     "user": {

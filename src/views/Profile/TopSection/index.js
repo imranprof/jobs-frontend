@@ -16,6 +16,7 @@ import CustomButton from "../../../lib/profile/customButtons";
 import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
 import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
+import AvatarEdit from "../EditComponents/topSection/components/avatarEdit";
 import {
   bioEditMode,
   getProfileAction,
@@ -30,10 +31,19 @@ const TopSection = (props) => {
   const backToTopRef = useRef(null);
   const topSectionRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
+  const [openAvatarModal, setOpenAvatarModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {userID} = props;
+  const {userID, avatar, firstName, lastName} = props;
   const dispatch = useDispatch();
+
+  const modalClose = () => {
+    setOpenModal(false);
+  };
+
+  const avatarModalClose = () => {
+    setOpenAvatarModal(false);
+  };
 
   let scrollTop;
   useEffect(() => {
@@ -90,10 +100,6 @@ const TopSection = (props) => {
       return errors;
     }
   })
-
-  const modalClose = () => {
-    setOpenModal(false);
-  };
 
   return (
     <>
@@ -171,11 +177,22 @@ const TopSection = (props) => {
             <Skills setToast={setToast}/>
           </div>
         </Grid>
-        <Grid item xs={12} md={5}>
+
+        <Grid item xs={12} md={5} className={`${classes.topSectionWrapper}__profilePhotoWrapper`}>
+          <span onClick={() => setOpenAvatarModal(true)}>
+            <EditButton/>
+          </span>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
-            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`}
-                 className={`${classes.topSectionWrapper}__thumbnail--img`}/>
+            <img
+              src={avatar}
+              alt={`${firstName} ${lastName}`}
+              className={`${classes.topSectionWrapper}__thumbnail--img`}
+            />
           </div>
+
+          <EditCustomModal handleClose={avatarModalClose} open={openAvatarModal}>
+            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} />
+          </EditCustomModal>
         </Grid>
 
         <Tooltip TransitionComponent={Zoom} title="Back to top" placement="left">

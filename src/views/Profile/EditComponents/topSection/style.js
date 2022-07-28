@@ -96,6 +96,27 @@ const useStyles = makeStyles({
         color: COLORS.black,
       }
     },
+    '&__avatarWrapper': {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "auto",
+      margin: "30px auto",
+      '&__image': {
+        width: 250,
+        height: 250,
+        background: theme.palette.customColor.avatarBgEdit,
+        borderRadius: "50%",
+        padding: 8,
+        '&__upload': {
+          margin: theme.spacing(1),
+        },
+        '&__input': {
+          display: "none"
+        }
+      }
+    }
   }),
 })
 
