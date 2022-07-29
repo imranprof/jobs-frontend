@@ -54,7 +54,7 @@ const lightTheme = createTheme({
       editInputShadow: COLORS.boxShadow_5
     },
     customDivider: {
-      main: COLORS.gray_5
+      main: COLORS.gray_5,
     },
     customHoverColor: {
       main: COLORS.white,

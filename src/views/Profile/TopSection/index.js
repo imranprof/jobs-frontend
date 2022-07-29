@@ -139,8 +139,10 @@ const TopSection = (props) => {
             <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
               <TypeWriter name={`${props.firstName} ${props.lastName}`} intro={props.intro} expertises={expertisesList}
                           classes={classes}/>
-              <span className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
-                    onClick={() => setOpenModal(true)}>
+              <span
+                onClick={() => setOpenModal(true)}
+                className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+              >
                 <EditButton/>
               </span>
             </div>
@@ -179,7 +181,7 @@ const TopSection = (props) => {
         </Grid>
 
         <Grid item xs={12} md={5} className={`${classes.topSectionWrapper}__profilePhotoWrapper`}>
-          <span onClick={() => setOpenAvatarModal(true)}>
+          <span onClick={() => setOpenAvatarModal(true)} className={`${classes.topSectionWrapper}__profilePhotoWrapper__editBtn`} >
             <EditButton/>
           </span>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
@@ -191,7 +193,7 @@ const TopSection = (props) => {
           </div>
 
           <EditCustomModal handleClose={avatarModalClose} open={openAvatarModal}>
-            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} />
+            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} setToast={setToast} />
           </EditCustomModal>
         </Grid>
 

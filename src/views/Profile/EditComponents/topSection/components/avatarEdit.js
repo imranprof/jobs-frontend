@@ -1,18 +1,19 @@
 import {useState} from "react";
 import {connect, useDispatch} from "react-redux";
 
-import Button from "@material-ui/core/Button";
 import {useTheme} from "@material-ui/core/styles";
 
-import FontAwesomeIcons from "../../../../../../styles/FontAwesomeIcons";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import {TopSectionEditStyle} from "../style";
 import {uploadAvatar} from "../../../../../store/actions/topSectionActions";
+import SecondaryDivider from "../../../../../lib/profile/SecondaryDivider";
+import ModalTitle from "../../../../../lib/modalTitle";
+import CustomUploadImage from "../../../../../lib/profile/customUploadImage";
 
 const AvatarEdit = (props) => {
   const theme = useTheme();
   const classes = TopSectionEditStyle(theme);
-  const {avatar, firstName, lastName, handleClose, profileID} = props;
+  const {avatar, firstName, lastName, handleClose, profileID, setToast} = props;
   const [image, setImage] = useState('')
   const dispatch = useDispatch()
 
@@ -26,21 +27,31 @@ const AvatarEdit = (props) => {
     }));
   }
 
-  const handleChange = (e) => {
+  const handleImageChange = (e) => {
     setImage(e.target.files[0])
   }
 
   const handleImageUpload = async () => {
-    dispatch(uploadAvatar({
-      base64Image: await convertToBase64(image),
-      profileID: profileID
-    }));
-    handleClose();
+    if (image) {
+      dispatch(uploadAvatar({
+        base64Image: await convertToBase64(image),
+        profileID: profileID
+      }));
+      handleClose();
+      setToast({show: true, severity: "success", text: "Successfully updated the profile photo"});
+    } else {
+      setToast({show: true, severity: "error", text: "Please choose or upload a photo"});
+    }
   }
 
   return (
     <div>
-      <h3>Change profile photo</h3>
+      <ModalTitle title="Profile photo" />
+      <SecondaryDivider />
+
+      <p className={`${classes.topSectionEditWrapper}__avatarWrapper__message`}>
+        {`${firstName}, help others recognize you!`}
+      </p>
 
       <div className={`${classes.topSectionEditWrapper}__avatarWrapper`}>
         <img
@@ -50,30 +61,10 @@ const AvatarEdit = (props) => {
         />
       </div>
 
-      <div style={{display: "flex"}}>
-        <input
-          type="file"
-          accept="image/*"
-          id="upload-image-file"
-          onChange={handleChange}
-          className={`${classes.topSectionEditWrapper}__avatarWrapper__image__input`}
-        />
-        <label htmlFor="upload-image-file">
-          <Button
-            variant="outlined"
-            color="primary"
-            component="span"
-            startIcon={<i className={FontAwesomeIcons.camera}/>}
-            className={`${classes.topSectionEditWrapper}__avatarWrapper__image__upload`}
-          >
-            Upload
-          </Button>
-        </label>
-        <p>{image.name}</p>
+      <CustomUploadImage changeHandler={handleImageChange} selectedImage={image} />
 
-      </div>
+      <SecondaryDivider />
       <CustomButtons handler={handleImageUpload} mode={handleClose}/>
-
     </div>
   );
 };

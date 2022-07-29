@@ -54,9 +54,6 @@ export const useStyles = makeStyles({
         borderRadius: '50%',
         border: `3px solid ${theme.palette.customColor.dark}`,
         marginRight: 10,
-        '& img': {
-          objectFit: "contain",
-        }
       },
       '&__name': {
         fontSize: 18,
