@@ -129,15 +129,19 @@ export function getProfileAction(userID) {
 }
 
 // Image Upload
-export const updateImage = ({avatar, profileID}) => {
-  const formData = new FormData();
-  formData.append('user[user_profile_attributes][avatar]', avatar);
-  formData.append('user[user_profile_attributes][id]', profileID);
-
+export const uploadAvatar = ({base64Image, profileID}) => {
+  const data = {
+    "user": {
+      "user_profile_attributes": {
+        "id": profileID,
+        "avatar": {"data": base64Image}
+      }
+    }
+  }
   return (dispatch) => {
-    axios.patch(profileURL, formData)
+    axios.patch(profileURL, data)
       .then(res => {
-        console.log(res)
+        dispatch(setAvatar(res.data.profile.avatar))
       })
       .catch(err => err.response);
   }

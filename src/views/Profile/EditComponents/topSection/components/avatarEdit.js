@@ -7,7 +7,7 @@ import {useTheme} from "@material-ui/core/styles";
 import FontAwesomeIcons from "../../../../../../styles/FontAwesomeIcons";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import {TopSectionEditStyle} from "../style";
-import {updateImage} from "../../../../../store/actions/topSectionActions";
+import {uploadAvatar} from "../../../../../store/actions/topSectionActions";
 
 const AvatarEdit = (props) => {
   const theme = useTheme();
@@ -16,15 +16,26 @@ const AvatarEdit = (props) => {
   const [image, setImage] = useState('')
   const dispatch = useDispatch()
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+    }));
+  }
+
   const handleChange = (e) => {
     setImage(e.target.files[0])
   }
 
-  const handleImageUpload = () => {
-    dispatch(updateImage({
-      avatar: avatar,
+  const handleImageUpload = async () => {
+    dispatch(uploadAvatar({
+      base64Image: await convertToBase64(image),
       profileID: profileID
     }));
+    handleClose();
   }
 
   return (
@@ -61,7 +72,7 @@ const AvatarEdit = (props) => {
         <p>{image.name}</p>
 
       </div>
-      <CustomButtons handler={handleImageUpload} mode={handleClose} />
+      <CustomButtons handler={handleImageUpload} mode={handleClose}/>
 
     </div>
   );
