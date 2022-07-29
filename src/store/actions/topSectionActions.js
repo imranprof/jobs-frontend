@@ -128,6 +128,25 @@ export function getProfileAction(userID) {
   }
 }
 
+// Image Upload
+export const uploadAvatar = ({base64Image, profileID}) => {
+  const data = {
+    "user": {
+      "user_profile_attributes": {
+        "id": profileID,
+        "avatar": {"data": base64Image}
+      }
+    }
+  }
+  return (dispatch) => {
+    axios.patch(profileURL, data)
+      .then(res => {
+        dispatch(setAvatar(res.data.profile.avatar))
+      })
+      .catch(err => err.response);
+  }
+}
+
 export const updateHeadline = ({headline, profileID}) => {
   const data = {
     "user": {

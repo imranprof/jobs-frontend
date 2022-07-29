@@ -16,6 +16,7 @@ import CustomButton from "../../../lib/profile/customButtons";
 import IntroExpertisesEdit from "../EditComponents/topSection/components/introExpertisesEdit";
 import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
+import AvatarEdit from "../EditComponents/topSection/components/avatarEdit";
 import {
   bioEditMode,
   getProfileAction,
@@ -30,10 +31,19 @@ const TopSection = (props) => {
   const backToTopRef = useRef(null);
   const topSectionRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
+  const [openAvatarModal, setOpenAvatarModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {userID} = props;
+  const {userID, avatar, firstName, lastName} = props;
   const dispatch = useDispatch();
+
+  const modalClose = () => {
+    setOpenModal(false);
+  };
+
+  const avatarModalClose = () => {
+    setOpenAvatarModal(false);
+  };
 
   let scrollTop;
   useEffect(() => {
@@ -91,10 +101,6 @@ const TopSection = (props) => {
     }
   })
 
-  const modalClose = () => {
-    setOpenModal(false);
-  };
-
   return (
     <>
       <Grid container className={classes.topSectionWrapper} id="topSection" ref={topSectionRef}>
@@ -133,8 +139,10 @@ const TopSection = (props) => {
             <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
               <TypeWriter name={`${props.firstName} ${props.lastName}`} intro={props.intro} expertises={expertisesList}
                           classes={classes}/>
-              <span className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
-                    onClick={() => setOpenModal(true)}>
+              <span
+                onClick={() => setOpenModal(true)}
+                className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
+              >
                 <EditButton/>
               </span>
             </div>
@@ -171,11 +179,22 @@ const TopSection = (props) => {
             <Skills setToast={setToast}/>
           </div>
         </Grid>
-        <Grid item xs={12} md={5}>
+
+        <Grid item xs={12} md={5} className={`${classes.topSectionWrapper}__profilePhotoWrapper`}>
+          <span onClick={() => setOpenAvatarModal(true)} className={`${classes.topSectionWrapper}__profilePhotoWrapper__editBtn`} >
+            <EditButton/>
+          </span>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
-            <img src={props.avatar} alt={`${props.firstName} ${props.lastName}`}
-                 className={`${classes.topSectionWrapper}__thumbnail--img`}/>
+            <img
+              src={avatar}
+              alt={`${firstName} ${lastName}`}
+              className={`${classes.topSectionWrapper}__thumbnail--img`}
+            />
           </div>
+
+          <EditCustomModal handleClose={avatarModalClose} open={openAvatarModal}>
+            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} setToast={setToast} />
+          </EditCustomModal>
         </Grid>
 
         <Tooltip TransitionComponent={Zoom} title="Back to top" placement="left">
