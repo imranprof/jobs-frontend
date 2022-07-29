@@ -5,13 +5,12 @@ import {Card, Grid} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
-import {FormErrorsData} from "../../../../../API/elements/profile/formErrorsData";
 import InputWrapper from "./inputWrapper";
 import {useFormik} from "formik";
 import {sendMessageAction} from "../../../../store/actions/contactActions";
 
 const ContactForm = (props) => {
-  const {classes, userID} = props;
+  const {classes, profileID} = props;
   const dispatch = useDispatch();
   const initialInputValues = {
     name: "",
@@ -29,11 +28,10 @@ const ContactForm = (props) => {
   const contactHandler = useFormik({
     initialValues: initialInputValues,
     onSubmit: values => {
-      dispatch(sendMessageAction({name: values.name, phone: values.phone, email: values.email, subject: values.subject, message: values.message, userID: userID, messengerId: null}))
+      dispatch(sendMessageAction({name: values.name, phone: values.phone, email: values.email, subject: values.subject, message: values.message, userID: profileID, messengerId: null}))
       contactHandler.resetForm()
     }
   })
-
 
   return (
     <Grid item md={7}>
@@ -68,7 +66,7 @@ const ContactForm = (props) => {
 
 const mapStateToProps = (state) => {
   return{
-    userID: state.auth.userID
+    profileID: state.topSection.id
   }
 }
 
