@@ -48,11 +48,17 @@ const TopSection = (props) => {
   let scrollTop;
   useEffect(() => {
     window.addEventListener('scroll', () => {
-      let backToTop = backToTopRef.current;
       scrollTop = window.scrollY;
-      backToTop.style.display = scrollTop >= 130 ? "flex" : "none";
-      const topSection = topSectionRef.current;
-      scrollTop >= 130 ? topSection.classList.add("addMargin") : topSection.classList.remove("addMargin");
+      const backToTop = backToTopRef?.current;
+      const topSection = topSectionRef?.current;
+
+      if (scrollTop >= 130) {
+        if (backToTop) backToTop.style.display = "flex"
+        if (topSection) topSection.classList.add("addMargin")
+      } else if (scrollTop < 130) {
+        if (backToTop) backToTop.style.display = "none"
+        if (topSection) topSection.classList.remove("addMargin")
+      }
     });
     userID && dispatch(getProfileAction(userID));
   }, [])
