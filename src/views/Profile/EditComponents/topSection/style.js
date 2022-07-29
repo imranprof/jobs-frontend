@@ -101,8 +101,8 @@ const useStyles = makeStyles({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      width: "100%",
-      height: "auto",
+      width: 200,
+      height: 200,
       margin: "18px auto",
       '&__message': {
         fontSize: 20,
@@ -112,8 +112,9 @@ const useStyles = makeStyles({
         letterSpacing: "1px"
       },
       '&__image': {
-        width: 200,
-        height: 200,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
         background: theme.palette.customColor.avatarBgEdit,
         borderRadius: "50%",
         padding: 3,
