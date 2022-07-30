@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    width: 500,
+    width: 580,
     height: "auto",
     backgroundColor: theme.palette.customBackground.dark,
     borderRadius: 6,

@@ -6,8 +6,8 @@ import {useTheme} from "@material-ui/core/styles";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import {TopSectionEditStyle} from "../style";
 import {uploadAvatar} from "../../../../../store/actions/topSectionActions";
-import SecondaryDivider from "../../../../../lib/profile/SecondaryDivider";
-import ModalTitle from "../../../../../lib/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
 import CustomUploadImage from "../../../../../lib/profile/customUploadImage";
 
 const AvatarEdit = (props) => {
@@ -47,7 +47,7 @@ const AvatarEdit = (props) => {
   return (
     <div>
       <ModalTitle title="Profile photo" />
-      <SecondaryDivider />
+      <EditModalDivider />
 
       <p className={`${classes.topSectionEditWrapper}__avatarWrapper__message`}>
         {`${firstName}, help others recognize you!`}
@@ -63,7 +63,7 @@ const AvatarEdit = (props) => {
 
       <CustomUploadImage changeHandler={handleImageChange} selectedImage={image} />
 
-      <SecondaryDivider />
+      <EditModalDivider />
       <CustomButtons handler={handleImageUpload} mode={handleClose}/>
     </div>
   );

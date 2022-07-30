@@ -7,7 +7,7 @@ const ModalTitle = ({title}) => {
   const classes = ModalTitleStyle(theme);
 
   return (
-    <h2 className={classes.modalTitleWrapper}>{title}</h2>
+    <h1 className={classes.modalTitleWrapper}>{title}</h1>
   );
 };
 

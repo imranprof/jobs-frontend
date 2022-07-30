@@ -1,11 +1,11 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
-  secondaryDivider: theme => ({
+  editModalDivider: theme => ({
     background: theme.palette.customDivider.primary,
   })
 });
 
-export function SecondaryDividerStyle(theme) {
+export function EditModalDividerStyle(theme) {
   return useStyles(theme);
 }
