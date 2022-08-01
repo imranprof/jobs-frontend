@@ -14,6 +14,7 @@ import CustomButton from "../../../../lib/profile/customButtons";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import ErrorMessage from "../../../../lib/errorMessage";
 import {updatePortfolioAction} from "../../../../store/actions/portfolioActions";
+import CustomUploadImage from "../../../../lib/profile/customUploadImage";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
@@ -24,10 +25,15 @@ const PortfolioModal = (props => {
   const [mode, toggleMode] = useState(editMode)
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch();
+  const [newImage, setNewImage] = useState('');
 
   setTimeout(() => {
     SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
   }, 1);
+
+  const handleImageChange = (e) => {
+    setNewImage(e.target.files[0])
+  }
 
   const allCategories = categoriesData?.map((category) => ({
     category_id: category.id,
@@ -130,11 +136,24 @@ const PortfolioModal = (props => {
           </IconButton>
           <Grid container>
             <Grid item md={6} className={`${modalWrapper}__modal-content__image-container`}>
-              <img
-                className={`${modalWrapper}__modal-content__image-container__image`}
-                src={image}
-                alt="image"
-              />
+              {mode ? (
+                <div>
+                  <img
+                    className={`${modalWrapper}__modal-content__image-container__image`}
+                    src={(newImage === '') ? image : URL.createObjectURL(newImage)}
+                    alt="image"
+                  />
+                  <CustomUploadImage changeHandler={handleImageChange} selectedImage={newImage}/>
+                </div>
+              ) : (
+                <img
+                  className={`${modalWrapper}__modal-content__image-container__image`}
+                  src={image}
+                  alt="image"
+                />
+                )
+
+              }
             </Grid>
             <Grid item md={6} className={`${modalWrapper}__modal-content__text-content`}>
               {mode ?
