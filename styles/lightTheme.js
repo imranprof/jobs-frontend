@@ -39,7 +39,8 @@ const lightTheme = createTheme({
       hourlyRate: COLORS.gray,
       shareBtn: COLORS.pink,
       dangerColor: COLORS.danger,
-      backToHomeHover: COLORS.black_1
+      backToHomeHover: COLORS.black_1,
+      avatarBgEdit: COLORS.white_5
     },
     customShadow: {
       main: COLORS.boxShadow_2,
@@ -53,7 +54,7 @@ const lightTheme = createTheme({
       editInputShadow: COLORS.boxShadow_5
     },
     customDivider: {
-      main: COLORS.gray_5
+      main: COLORS.gray_5,
     },
     customHoverColor: {
       main: COLORS.white,

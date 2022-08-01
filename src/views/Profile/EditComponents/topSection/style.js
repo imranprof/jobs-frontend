@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import COLORS from "../../../../../styles/colors";
+import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   topSectionEditWrapper: theme => ({
@@ -96,6 +97,28 @@ const useStyles = makeStyles({
         color: COLORS.black,
       }
     },
+    '&__avatarWrapper': {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "auto",
+      margin: "18px auto",
+      '&__message': {
+        fontSize: 20,
+        textAlign: "center",
+        color: theme.palette.customColor.modalTitle,
+        fontFamily: FONTS.modalTitleFont,
+        letterSpacing: "1px"
+      },
+      '&__image': {
+        width: 200,
+        height: 200,
+        background: theme.palette.customColor.avatarBgEdit,
+        borderRadius: "50%",
+        padding: 3,
+      },
+    }
   }),
 })
 
