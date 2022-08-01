@@ -59,8 +59,8 @@ const PortfolioAdd = (props => {
 
   const addPortfolio = ({title, categories, description, image}) => {
     dispatch(addPortfolioAction({title, categories, description, image}));
-    setToast({show: true, severity: "success", text: "Successfully created the portfolio."});
     setTogglePortfolioModal(false);
+    setToast({show: true, severity: "success", text: "Successfully created the portfolio."});
   }
 
   const categoriesChangeHandler = categories => {
