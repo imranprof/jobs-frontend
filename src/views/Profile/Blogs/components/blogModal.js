@@ -61,9 +61,9 @@ const BlogModal = (props) => {
   const handleImageChange = (e) => {
     setImage(e.target.files[0])
   }
-  const handleImageUpload = () => {
-      let base64Image = convertToBase64(image);
-      return base64Image;
+  const handleImageUpload = async () => {
+    let base64Image = await convertToBase64(image);
+    return base64Image;
   }
 
   const allCategories = props.categoriesData?.map((category) => ({
@@ -109,7 +109,7 @@ const BlogModal = (props) => {
   const editHandler = useFormik({
     initialValues: {categories: selectedCategories, title: blog.title},
     validateOnChange: false,
-    onSubmit: values => {
+    onSubmit: async (values) => {
       setSelectedCategories(values.categories);
       if (addMode) {
         dispatch(addBlogAction({
@@ -117,7 +117,7 @@ const BlogModal = (props) => {
           title: values.title,
           body: descriptionHandler(),
           readTime: readTime,
-          image: handleImageUpload()
+          image: (!image) ? null : await handleImageUpload()
         }))
         setToast({show: true, severity: "success", text: "Blog Created successfully!"});
         props.setToggleBlogModal(false)
@@ -128,7 +128,7 @@ const BlogModal = (props) => {
           title: values.title,
           body: descriptionHandler(),
           readTime: readTime,
-          image: handleImageUpload()
+          image: (!image) ? null : await handleImageUpload()
         }, props.blog))
         setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
         setMode(false);
