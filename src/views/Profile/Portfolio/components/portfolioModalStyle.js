@@ -176,7 +176,7 @@ const useStyles = makeStyles({
               background: "transparent",
               fontSize: 34,
               [theme.breakpoints.down('xs')]: {
-                fontSize: 24,
+                fontSize: 16,
               },
             }
           }
