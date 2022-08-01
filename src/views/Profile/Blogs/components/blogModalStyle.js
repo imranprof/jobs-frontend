@@ -73,9 +73,9 @@ const useStyles = makeStyles({
                 width: "100%",
                 '& img': {
                     borderRadius: 10,
-                    height: "auto",
-                    width: "100%",
-                    marginBottom: 30
+                    height: "550px",
+                    marginBottom: 30,
+                    objectFit: "contain"
                 },
             },
             '&__title': {
@@ -140,7 +140,7 @@ const useStyles = makeStyles({
                '&__editor': {
                    borderStyle: "solid",
                    borderWidth: ".5px",
-                   maxHeight: 400,
+                   height: 400,
                    padding: 10,
                    borderColor: theme.palette.customColor.inputBorder
                },
