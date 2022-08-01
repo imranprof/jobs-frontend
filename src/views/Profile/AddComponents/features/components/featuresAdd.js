@@ -8,6 +8,8 @@ import {FeaturesAddStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import {addFeatureAction} from "../../../../../store/actions/featureActions";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const FeaturesAdd = (props) => {
   const theme = useTheme();
@@ -51,7 +53,8 @@ const FeaturesAdd = (props) => {
 
   return (
     <div>
-      <h3 className={`${classes.featuresAddWrapper}__top-label`}>Add feature</h3>
+      <ModalTitle title="Add feature"/>
+      <EditModalDivider />
 
       <div className={`${classes.featuresAddWrapper}__content-wrapper`}>
         <div className={`${classes.featuresAddWrapper}__content-wrapper__gap`}>
@@ -82,6 +85,8 @@ const FeaturesAdd = (props) => {
           {formik.errors.description ? <ErrorMessage error={formik.errors.description} /> : null}
         </div>
       </div>
+
+      <EditModalDivider />
       <CustomButtons handler={formik.handleSubmit} mode={handleClose} actionText="Add" />
     </div>
   );
