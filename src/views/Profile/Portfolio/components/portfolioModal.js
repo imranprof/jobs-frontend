@@ -31,6 +31,21 @@ const PortfolioModal = (props => {
     SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
   }, 1);
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+    }));
+  }
+
+  const handleImageUpload = async () => {
+    let base64Image = await convertToBase64(newImage);
+    return base64Image;
+  }
+
   const handleImageChange = (e) => {
     setNewImage(e.target.files[0])
   }
@@ -52,11 +67,12 @@ const PortfolioModal = (props => {
     title: category.label
   }));
 
-  const updateHandler = ({portfolio, selectedCategories, title, description}) => {
+  const updateHandler = ({portfolio, selectedCategories, title, description, image}) => {
     const oldPortfolio = {...portfolio};
     portfolio.categories = mapCategoriesForState(selectedCategories);
     portfolio.title = title;
     portfolio.description = description;
+    portfolio.image = image;
     dispatch(updatePortfolioAction(oldPortfolio, portfolio));
   }
 
@@ -86,12 +102,13 @@ const PortfolioModal = (props => {
       title: title,
       description: description,
     },
-    onSubmit: values => {
+    onSubmit: async (values) => {
       updateHandler({
         portfolio: props.portfolio,
         selectedCategories: values.categories,
         title: values.title,
-        description: values.description
+        description: values.description,
+        image: (!newImage) ? null : await handleImageUpload()
       });
       setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
       toggleMode(false);
