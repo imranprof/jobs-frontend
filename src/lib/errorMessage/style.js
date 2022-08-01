@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
   errorMessageWrapper: theme => ({
     display: "flex",
     alignItems: "start",
-    height: 35,
+    height: "auto",
     color: theme.palette.customColor.dangerColor,
     margin: "10px 0",
     '& .MuiSvgIcon-root': {
