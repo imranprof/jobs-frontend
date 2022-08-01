@@ -16,7 +16,7 @@ const Features = (props) => {
   const theme = useTheme();
   const classes = FeatureStyle(theme);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
-  const {features, userID} = props;
+  const {features, profileSlug} = props;
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false);
 
@@ -25,12 +25,12 @@ const Features = (props) => {
   }
 
   useEffect(() => {
-    userID && dispatch(getFeaturesAction({id: userID}))
+    profileSlug && dispatch(getFeaturesAction())
   }, [])
 
   const featureRemoveHandler = (item) => {
     if (props.features.length > 1) {
-      userID && dispatch(removeFeatureAction(item.id))
+      profileSlug && dispatch(removeFeatureAction(item.id))
       setToast({show: true, severity: "success", text: "Successfully deleted the feature!"});
     } else {
       setToast({show: true, severity: "error", text: "You must have at least one feature!"});
@@ -70,7 +70,7 @@ const Features = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
     features: state.features.allFeatures
   }
 }

@@ -34,7 +34,7 @@ const TopSection = (props) => {
   const [openAvatarModal, setOpenAvatarModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {userID, avatar, firstName, lastName} = props;
+  const {profileSlug, avatar, firstName, lastName} = props;
   const dispatch = useDispatch();
 
   const modalClose = () => {
@@ -60,7 +60,7 @@ const TopSection = (props) => {
         if (topSection) topSection.classList.remove("addMargin")
       }
     });
-    userID && dispatch(getProfileAction(userID));
+    profileSlug && dispatch(getProfileAction(profileSlug));
   }, [])
 
   const headlineHandler = useFormik({
@@ -187,7 +187,8 @@ const TopSection = (props) => {
         </Grid>
 
         <Grid item xs={12} md={5} className={`${classes.topSectionWrapper}__profilePhotoWrapper`}>
-          <span onClick={() => setOpenAvatarModal(true)} className={`${classes.topSectionWrapper}__profilePhotoWrapper__editBtn`} >
+          <span onClick={() => setOpenAvatarModal(true)}
+                className={`${classes.topSectionWrapper}__profilePhotoWrapper__editBtn`}>
             <EditButton/>
           </span>
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
@@ -199,7 +200,7 @@ const TopSection = (props) => {
           </div>
 
           <EditCustomModal handleClose={avatarModalClose} open={openAvatarModal}>
-            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} setToast={setToast} />
+            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} setToast={setToast}/>
           </EditCustomModal>
         </Grid>
 
@@ -222,7 +223,7 @@ const TopSection = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
     profileID: state.topSection.id,
     firstName: state.topSection.firstName,
     lastName: state.topSection.lastName,

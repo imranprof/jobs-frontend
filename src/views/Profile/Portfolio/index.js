@@ -14,14 +14,14 @@ import PortfolioAdd from "../AddComponents/portfolio/components/portfolioAdd";
 const Portfolio = (props) => {
   const theme = useTheme();
   const classes = PortfolioStyle(theme);
-  const {portfolios, userID} = props;
+  const {portfolios, profileSlug} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch()
   const [addPortfolio, setAddPortfolio] = useState(false);
 
   useEffect(
     () => {
-      userID && dispatch(getPortfoliosAction({id: userID}))
+      profileSlug && dispatch(getPortfoliosAction())
     }, []
   )
 
@@ -58,7 +58,7 @@ const Portfolio = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
     portfolios: state.portfolios.allPortfolios
   }
 }

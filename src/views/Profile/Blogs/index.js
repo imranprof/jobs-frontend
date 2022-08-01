@@ -14,7 +14,7 @@ import BlogModal from "./components/blogModal";
 const Blogs = (props) => {
   const theme = useTheme();
   const classes = BlogsStyle(theme);
-  const {blogs, userID} = props;
+  const {blogs, profileSlug} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
 
@@ -22,7 +22,7 @@ const Blogs = (props) => {
 
   useEffect(
     () => {
-      userID && dispatch(getBlogsAction({id: userID}))
+      profileSlug && dispatch(getBlogsAction())
     }, []
   )
 
@@ -71,7 +71,7 @@ const Blogs = (props) => {
 const mapStateToProps = (state) => {
   return {
     blogs: state.blogs.allBlogs,
-    userID: state.auth.userID
+    profileSlug: state.auth.profileSlug
   }
 }
 

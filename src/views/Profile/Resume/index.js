@@ -16,13 +16,13 @@ import ResumeSkillsAdd from "../AddComponents/resume/components/resumeSkillsAdd"
 const Resume = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-  const {resume, userID} = props;
+  const {resume, profileSlug} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [addResumeItem, setAddResumeItem] = useState(false);
   const dispatch = useDispatch()
 
   useEffect(() => {
-    userID && dispatch(getResumeAction({id: userID}))
+    profileSlug && dispatch(getResumeAction())
   }, [])
 
   let resumeSections = [];
@@ -89,7 +89,7 @@ const Resume = (props) => {
 const mapStateToProps = (state) => {
   return {
     resume: state.resumeItems.resume,
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
   }
 }
 

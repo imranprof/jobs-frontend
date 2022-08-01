@@ -8,8 +8,9 @@ import {
   PHONE_EDIT_MODE,
   SET_EMAIL
 } from "../actionTypes/contactTypes";
+import {getProfileSlug} from "../reducers/authReducers";
 
-const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
+const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
 export const designationUpdate = (designation) => {
   return {
@@ -60,13 +61,9 @@ export const setEmail = (values) => {
   }
 }
 
-export const getContactAction = (userID) => {
+export const getContactAction = () => {
   return (dispatch) => {
-    axios.get(profileURL, {
-      params: {
-        user_id: userID
-      }
-    }).then(res => {
+    axios.get(profileURL()).then(res => {
       const {contact_email, phone, designation, description} = res.data.contacts_data;
       dispatch(setEmail(contact_email));
       dispatch(phoneUpdate(phone));
@@ -87,9 +84,9 @@ export const designationUpdateAction = (profileID, designation) => {
   }
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
-        .then(res => dispatch(designationUpdate(res.data.contacts_data.designation)))
-        .catch(err => err.response);
+    axios.patch(profileURL(), data)
+      .then(res => dispatch(designationUpdate(res.data.contacts_data.designation)))
+      .catch(err => err.response);
   }
 }
 
@@ -104,9 +101,9 @@ export const contactDescriptionUpdateAction = (profileID, contactInfo) => {
   }
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
-        .then(res => dispatch(contactDescriptionUpdate(res.data.contacts_data.description)))
-        .catch(err => err.response);
+    axios.patch(profileURL(), data)
+      .then(res => dispatch(contactDescriptionUpdate(res.data.contacts_data.description)))
+      .catch(err => err.response);
   }
 }
 
@@ -118,8 +115,8 @@ export const phoneUpdateAction = (phone) => {
   }
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
-        .then(res => dispatch(phoneUpdate(res.data.contacts_data.phone)))
-        .catch(err => err.response);
+    axios.patch(profileURL(), data)
+      .then(res => dispatch(phoneUpdate(res.data.contacts_data.phone)))
+      .catch(err => err.response);
   }
 }

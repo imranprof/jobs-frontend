@@ -20,7 +20,7 @@ import {getContactAction} from "../../../../store/actions/contactActions";
 const ContactInfo = (props) => {
   const {
     classes,
-    userID,
+    profileSlug,
     profileID,
     firstName,
     lastName,
@@ -37,7 +37,7 @@ const ContactInfo = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    userID && dispatch(getContactAction(userID));
+    profileSlug && dispatch(getContactAction());
   }, [])
 
   const designationHandler = useFormik({
@@ -202,7 +202,7 @@ const ContactInfo = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
     profileID: state.topSection.id,
     firstName: state.topSection.firstName,
     lastName: state.topSection.lastName,
