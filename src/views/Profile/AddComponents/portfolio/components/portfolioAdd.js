@@ -27,8 +27,25 @@ const PortfolioAdd = (props => {
     SetSlidingClass(setTogglePortfolioModal ? `${portfolioAddWrapper}__modal-content--visible` : "")
   }, 1);
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+    }));
+  }
+
+  const handleImageUpload = async () => {
+    let base64Image = await convertToBase64(newImage);
+    return base64Image;
+  }
+
   const handleImageChange = (e) => {
-    setNewImage(e.target.files[0])
+    if(e.target.files[0]){
+      setNewImage(e.target.files[0])
+    }
   }
 
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
@@ -40,8 +57,8 @@ const PortfolioAdd = (props => {
     category_id: category.value,
   }));
 
-  const addPortfolio = ({title, categories, description}) => {
-    dispatch(addPortfolioAction({title, categories, description}));
+  const addPortfolio = ({title, categories, description, image}) => {
+    dispatch(addPortfolioAction({title, categories, description, image}));
     setToast({show: true, severity: "success", text: "Successfully created the portfolio."});
     setTogglePortfolioModal(false);
   }
@@ -60,11 +77,12 @@ const PortfolioAdd = (props => {
       title: "",
       description: "",
     },
-    onSubmit: values => {
+    onSubmit: async (values) => {
       addPortfolio({
         title: values.title,
         description: values.description,
         categories: mapCategoriesForState(values.categories),
+        image: (!newImage) ? null : await handleImageUpload()
       });
     },
     onReset: () => {

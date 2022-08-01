@@ -47,7 +47,9 @@ const PortfolioModal = (props => {
   }
 
   const handleImageChange = (e) => {
-    setNewImage(e.target.files[0])
+    if (e.target.files[0]) {
+      setNewImage(e.target.files[0])
+    }
   }
 
   const allCategories = categoriesData?.map((category) => ({
@@ -168,7 +170,7 @@ const PortfolioModal = (props => {
                   src={image}
                   alt="image"
                 />
-                )
+              )
 
               }
             </Grid>

@@ -70,7 +70,7 @@ export const updatePortfolioAction = (oldPortfolio, updatedPortfolio) => {
 }
 
 export const addPortfolioAction = (portfolio) => {
-  const data = {
+  let data = {
     "projects_attributes": [
       {
         "title": portfolio.title,
@@ -81,9 +81,12 @@ export const addPortfolioAction = (portfolio) => {
         "react_count": 0,
         "live_url": "#",
         "source_url": "#",
+        "image": {"data": portfolio.image}
       }
     ]
   }
+  if (!portfolio.image) delete data.projects_attributes[0].image;
+
   return (dispatch) => {
     axios.patch(profileURL, {user: data},
     ).then(res => dispatch(getPortfolios(res.data.portfolio_data.projects, res.data.all_categories)))
