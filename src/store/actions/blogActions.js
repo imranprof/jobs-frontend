@@ -87,7 +87,6 @@ export const updateBlogAction = (currentBlog, previousBlog) => {
       ]
     }
   }
-
   if (!currentBlog.image) delete data.user.blogs_attributes[0].image;
 
   return (dispatch) => {
