@@ -81,7 +81,8 @@ export const updateBlogAction = (currentBlog, previousBlog) => {
           "title": currentBlog.title,
           "body": currentBlog.body,
           "reading_time": currentBlog.readTime,
-          "categorizations_attributes": [...addCategories, ...deleteCategories]
+          "categorizations_attributes": [...addCategories, ...deleteCategories],
+          "image": currentBlog.image
         }
       ]
     }
@@ -126,7 +127,8 @@ export const addBlogAction = (blog) => {
           "reading_time": blog.readTime,
           "categorizations_attributes": blog.categories.map((category) => ({
             category_id: category.category_id
-          }))
+          })),
+          "image": blog.image
         }
       ]
     }

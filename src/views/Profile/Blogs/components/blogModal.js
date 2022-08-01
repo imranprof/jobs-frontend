@@ -30,7 +30,6 @@ const BlogModal = (props) => {
   const [mode, setMode] = useState(editMode);
   const [image, setImage] = useState('')
   const readingTime = require('reading-time');
-
   let currentState;
   let buttonText;
   if (addMode) {
@@ -49,8 +48,22 @@ const BlogModal = (props) => {
     setVisibilityClass(props.setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+    }));
+  }
+
   const handleImageChange = (e) => {
     setImage(e.target.files[0])
+  }
+  const handleImageUpload = () => {
+      let base64Image = convertToBase64(image);
+      return base64Image;
   }
 
   const allCategories = props.categoriesData?.map((category) => ({
@@ -103,7 +116,8 @@ const BlogModal = (props) => {
           categories: mapCategoriesForSave(values.categories),
           title: values.title,
           body: descriptionHandler(),
-          readTime: readTime
+          readTime: readTime,
+          image: handleImageUpload()
         }))
         setToast({show: true, severity: "success", text: "Blog Created successfully!"});
         props.setToggleBlogModal(false)
@@ -113,7 +127,8 @@ const BlogModal = (props) => {
           categories: mapCategoriesForSave(values.categories),
           title: values.title,
           body: descriptionHandler(),
-          readTime: readTime
+          readTime: readTime,
+          image: handleImageUpload()
         }, props.blog))
         setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
         setMode(false);
