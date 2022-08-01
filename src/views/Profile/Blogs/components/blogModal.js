@@ -3,6 +3,7 @@ import {connect, useDispatch} from 'react-redux';
 import {useFormik} from "formik";
 import Select from 'react-select';
 import dynamic from 'next/dynamic'
+
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then(mod => mod.Editor),
   {ssr: false})
@@ -59,8 +60,11 @@ const BlogModal = (props) => {
   }
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0])
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
   }
+
   const handleImageUpload = async () => {
     let base64Image = await convertToBase64(image);
     return base64Image;
