@@ -28,7 +28,9 @@ const AvatarEdit = (props) => {
   }
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0])
+    if(e.target.files[0]){
+      setImage(e.target.files[0])
+    }
   }
 
   const handleImageUpload = async () => {
