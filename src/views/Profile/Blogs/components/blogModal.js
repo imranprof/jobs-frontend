@@ -119,8 +119,8 @@ const BlogModal = (props) => {
           readTime: readTime,
           image: (!image) ? null : await handleImageUpload()
         }))
-        setToast({show: true, severity: "success", text: "Blog Created successfully!"});
         props.setToggleBlogModal(false)
+        setToast({show: true, severity: "success", text: "Blog Created successfully!"});
       } else {
         dispatch(updateBlogAction({
           id: blog.id,
