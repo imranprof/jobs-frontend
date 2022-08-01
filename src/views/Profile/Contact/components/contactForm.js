@@ -37,6 +37,8 @@ const ContactForm = (props) => {
       setToast({show: true, severity: "success", text: "Message sent successfully."});
       contactHandler.resetForm()
     },
+    validateOnChange: false,
+    validateOnBlur: false,
     validate: values => {
       let errors = {}
       if (!values.name) {
