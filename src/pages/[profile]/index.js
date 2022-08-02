@@ -9,9 +9,11 @@ import withLayout from "../../views/Layout";
 import {modalType} from "../../store/actions/authAction";
 import {setProfileSlug} from "../../store/actions/authAction";
 import {NoSsr} from "@material-ui/core";
+import CustomLoader from "../../lib/customLoader";
+import {getProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
-  const {isAuthenticated} = props;
+  const {isAuthenticated, profileSlug, loader} = props;
   const dispatch = useDispatch();
   const router = useRouter();
   const {profile} = router.query;
@@ -24,13 +26,16 @@ const Profile = (props) => {
 
   useEffect(() => {
     dispatch(setProfileSlug(profile));
-  }, [profile]);
+    profileSlug && dispatch(getProfileAction())
+  }, [profile, profileSlug]);
 
   return (
     <NoSsr>
-      <TopSection/>
-      <CustomDivider/>
-      <Sections/>
+      {loader ? <CustomLoader/> : <>
+        <TopSection/>
+        <CustomDivider/>
+        <Sections/>
+      </>}
     </NoSsr>
   );
 }
@@ -38,6 +43,8 @@ const Profile = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
+    loader: state.topSection.loader,
+    profileSlug: state.auth.profileSlug
   }
 }
 
