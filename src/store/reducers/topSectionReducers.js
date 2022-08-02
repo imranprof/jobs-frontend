@@ -14,13 +14,13 @@ import {
 
 const initialState = {
   id: null,
-  firstName: null,
-  lastName: null,
-  headline: null,
+  firstName: "",
+  lastName: "",
+  headline: "",
   headlineMode: false,
-  intro: null,
+  intro: "",
   introMode: false,
-  bio: null,
+  bio: "",
   bioMode: false,
   avatar: null,
   expertises: [],

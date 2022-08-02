@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 import {useEffect, useRef, useState} from 'react';
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
@@ -18,7 +19,7 @@ import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import AvatarEdit from "../EditComponents/topSection/components/avatarEdit";
 import {
-  bioEditMode,
+  bioEditMode, getDemoProfileAction,
   getProfileAction,
   headlineEditMode, updateBio,
   updateHeadline
@@ -34,8 +35,9 @@ const TopSection = (props) => {
   const [openAvatarModal, setOpenAvatarModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {userID, avatar, firstName, lastName} = props;
+  const {profileSlug, avatar, firstName, lastName, editPermission} = props;
   const dispatch = useDispatch();
+  const {profile} = useRouter().query;
 
   const modalClose = () => {
     setOpenModal(false);
@@ -60,8 +62,8 @@ const TopSection = (props) => {
         if (topSection) topSection.classList.remove("addMargin")
       }
     });
-    userID && dispatch(getProfileAction(userID));
-  }, [])
+    profile && profileSlug ? dispatch(getProfileAction()) : dispatch(getDemoProfileAction());
+  }, [profile, profileSlug])
 
   const headlineHandler = useFormik({
     initialValues: {headline: props.headline},
@@ -73,6 +75,9 @@ const TopSection = (props) => {
       }));
       props.setHeadlineMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the headline"});
+    },
+    onReset: () => {
+      props.setHeadlineMode(false);
     },
     validate: values => {
       let errors = {}
@@ -96,6 +101,9 @@ const TopSection = (props) => {
       props.setBioMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the bio"});
     },
+    onReset: () => {
+      props.setBioMode(false);
+    },
     validate: values => {
       let errors = {}
       if (!values.bio) {
@@ -107,13 +115,16 @@ const TopSection = (props) => {
     }
   })
 
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
+
   return (
     <>
       <Grid container className={classes.topSectionWrapper} id="topSection" ref={topSectionRef}>
         <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
           <div className={`${classes.topSectionWrapper}__left-top`}>
-            {props.headlineEditMode ? (
-              <div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
+            {props.headlineEditMode ? (<div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -122,14 +133,16 @@ const TopSection = (props) => {
                   onChange={headlineHandler.handleChange}
                 />
                 {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
-                <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
+                <CustomButton handler={headlineHandler.handleSubmit} mode={headlineHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__headline`}>
                 <span className={`${classes.topSectionWrapper}__left-top__headline-text`}>{props.headline}</span>
+                {getPermission() &&
                 <span onClick={() => props.setHeadlineMode(true)}>
                 <EditButton/>
               </span>
+                }
               </div>
             )}
 
@@ -145,12 +158,14 @@ const TopSection = (props) => {
             <div className={`${classes.topSectionWrapper}__left-top__greetings-expertise`}>
               <TypeWriter name={`${props.firstName} ${props.lastName}`} intro={props.intro} expertises={expertisesList}
                           classes={classes}/>
+              {getPermission() &&
               <span
                 onClick={() => setOpenModal(true)}
                 className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
               >
                 <EditButton/>
               </span>
+              }
             </div>
 
             {props.bioEditMode ? (
@@ -165,31 +180,35 @@ const TopSection = (props) => {
                   onChange={bioHandler.handleChange}
                 />
                 {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
-                <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
+                <CustomButton handler={bioHandler.handleSubmit} mode={bioHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
                 <p className={`${classes.topSectionWrapper}__left-top__bio-text`}>{props.bio}</p>
+                { getPermission() &&
                 <span
                   className={`${classes.topSectionWrapper}__left-top__editBtnWrapper`}
                   onClick={() => props.setBioMode(true)}
                 >
               <EditButton/>
-            </span>
+            </span> }
               </div>
             )}
           </div>
 
           <div className={`${classes.topSectionWrapper}__left-bottom`}>
-            <SocialLinks setToast={setToast}/>
+            <SocialLinks setToast={setToast} editPermission={getPermission()}/>
             <Skills setToast={setToast}/>
           </div>
         </Grid>
 
         <Grid item xs={12} md={5} className={`${classes.topSectionWrapper}__profilePhotoWrapper`}>
-          <span onClick={() => setOpenAvatarModal(true)} className={`${classes.topSectionWrapper}__profilePhotoWrapper__editBtn`} >
+          {getPermission() &&
+          <span onClick={() => setOpenAvatarModal(true)}
+                className={`${classes.topSectionWrapper}__profilePhotoWrapper__editBtn`}>
             <EditButton/>
           </span>
+          }
           <div className={`${classes.topSectionWrapper}__thumbnail`}>
             <img
               src={avatar}
@@ -199,7 +218,7 @@ const TopSection = (props) => {
           </div>
 
           <EditCustomModal handleClose={avatarModalClose} open={openAvatarModal}>
-            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} setToast={setToast} />
+            <AvatarEdit firstName={firstName} lastName={lastName} handleClose={avatarModalClose} setToast={setToast}/>
           </EditCustomModal>
         </Grid>
 
@@ -222,7 +241,9 @@ const TopSection = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
+    isAuthenticated: state.auth.isAuthenticated,
+    editPermission: state.auth.editPermission,
     profileID: state.topSection.id,
     firstName: state.topSection.firstName,
     lastName: state.topSection.lastName,

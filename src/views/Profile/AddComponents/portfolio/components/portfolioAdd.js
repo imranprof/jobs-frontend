@@ -13,6 +13,7 @@ import {PortfolioAddStyle} from "../style";
 import CustomButton from "../../../../../lib/profile/customButtons";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import {addPortfolioAction} from "../../../../../store/actions/portfolioActions";
+import CustomUploadImage from "../../../../../lib/profile/customUploadImage";
 
 const PortfolioAdd = (props => {
   const theme = useTheme();
@@ -20,10 +21,32 @@ const PortfolioAdd = (props => {
   const [slidingClass, SetSlidingClass] = useState("");
   const {categoriesData, setTogglePortfolioModal, setToast} = props;
   const dispatch = useDispatch();
+  const [newImage, setNewImage] = useState('');
 
   setTimeout(() => {
     SetSlidingClass(setTogglePortfolioModal ? `${portfolioAddWrapper}__modal-content--visible` : "")
   }, 1);
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+    }));
+  }
+
+  const handleImageUpload = async () => {
+    let base64Image = await convertToBase64(newImage);
+    return base64Image;
+  }
+
+  const handleImageChange = (e) => {
+    if(e.target.files[0]){
+      setNewImage(e.target.files[0])
+    }
+  }
 
   const mapCategoriesForMultiSelect = (categories) => categories?.map((category) => ({
     value: category.id,
@@ -34,10 +57,10 @@ const PortfolioAdd = (props => {
     category_id: category.value,
   }));
 
-  const addPortfolio = ({title, categories, description}) => {
-    dispatch(addPortfolioAction({title, categories, description}));
-    setToast({show: true, severity: "success", text: "Successfully created the portfolio."});
+  const addPortfolio = ({title, categories, description, image}) => {
+    dispatch(addPortfolioAction({title, categories, description, image}));
     setTogglePortfolioModal(false);
+    setToast({show: true, severity: "success", text: "Successfully created the portfolio."});
   }
 
   const categoriesChangeHandler = categories => {
@@ -54,11 +77,12 @@ const PortfolioAdd = (props => {
       title: "",
       description: "",
     },
-    onSubmit: values => {
+    onSubmit: async (values) => {
       addPortfolio({
         title: values.title,
         description: values.description,
         categories: mapCategoriesForState(values.categories),
+        image: (!newImage) ? null : await handleImageUpload()
       });
     },
     onReset: () => {
@@ -95,11 +119,15 @@ const PortfolioAdd = (props => {
           </IconButton>
           <Grid container>
             <Grid item md={6} className={`${portfolioAddWrapper}__modal-content__image-container`}>
-              <img
-                className={`${portfolioAddWrapper}__modal-content__image-container__image`}
-                src={"portfolio-01.jpg"}
-                alt="image"
-              />
+              <div>
+                <img
+                  className={`${portfolioAddWrapper}__modal-content__image-container__image`}
+                  src={(newImage === '') ? "portfolio-01.jpg" : URL.createObjectURL(newImage)}
+                  alt="image"
+                />
+                <CustomUploadImage  changeHandler={handleImageChange} selectedImage={newImage}/>
+              </div>
+
             </Grid>
             <Grid item md={6} className={`${portfolioAddWrapper}__modal-content__text-content`}>
               <div className={`${portfolioAddWrapper}__modal-content__text-content__category`}>

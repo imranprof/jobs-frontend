@@ -1,8 +1,11 @@
 import axios from "axios";
+
 import {RESUME_UPDATE, RESUME_ITEM_REMOVE, GET_RESUME, GET_ALL_SKILLS} from "../actionTypes/resumeTypes";
 import {skillsUpdate} from "./topSectionActions";
+import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
+const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
 export const getResume = (resume) => {
   return {
@@ -20,18 +23,21 @@ export const getAllSkills = (allSkills) => {
   }
 }
 
-export const getResumeAction = (values) => {
-  const {id} = values
+export const getResumeAction = () => {
   return (dispatch) => {
-    axios.get(profileURL, {
-      params: {
-        user_id: id
-      }
-    }).then(res => {
+    axios.get(profileURL()).then(res => {
       dispatch(getResume(res.data.resume_data));
       dispatch(getAllSkills(res.data.all_skills));
     })
       .catch(err => err.response);
+  }
+}
+
+export const getDemoResumeAction = () => {
+  const {resume, skills} = ProfileData;
+  return (dispatch) => {
+    dispatch(getResume(resume));
+    dispatch(getAllSkills(skills));
   }
 }
 
@@ -107,7 +113,7 @@ export const resumeUpdateAction = ({resumeItem, cardType}) => {
       return;
   }
   return (dispatch) => {
-    axios.patch(profileURL, {
+    axios.patch(profileURL(), {
       "user": {
         [itemType]: [
           {
@@ -164,7 +170,7 @@ export const addResumeItemAction = ({resumeItem, cardType}) => {
       return;
   }
   return (dispatch) => {
-    axios.patch(profileURL, {
+    axios.patch(profileURL(), {
       "user": {
         [itemType]: [
           {
@@ -203,7 +209,7 @@ export const resumeItemRemoveAction = ({id, cardType}) => {
       return;
   }
   return (dispatch) => {
-    axios.patch(profileURL, {
+    axios.patch(profileURL(), {
       "user": {
         [item]: [
           {

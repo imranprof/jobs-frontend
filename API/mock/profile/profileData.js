@@ -1,5 +1,6 @@
 export const ProfileData = {
-  name: "John Doe",
+  firstName: "John",
+  lastName: "Doe",
   headline: "Welcome to my world",
   intro: "Hi, I'm",
   title: "a Rails Developer.",
@@ -16,9 +17,9 @@ export const ProfileData = {
     "linkedin": "https://www.linkedin.com/",
   },
   skills: [
-    {id: 1, name: "Ruby", image: "ruby.png"},
-    {id: 2, name: "Javascript", image: "javascript.png"},
-    {id: 3, name: "Python", image: "python.png"},
+    {id: 1, name: "Ruby", icon: "ruby.png"},
+    {id: 2, name: "Javascript", icon: "javascript.png"},
+    {id: 3, name: "Python", icon: "python.png"},
   ],
   features: [
     {
@@ -126,8 +127,8 @@ export const ProfileData = {
       image: "blog-01.jpg",
       categories: [{id: 2, title: "mobile"}, {id: 3, title: "apps"}],
       title: "The services provide for design",
-      readTime: 2,
-      description: <div>
+      reading_time: 2,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -183,15 +184,15 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
     {
       id: 2,
       image: "blog-02.jpg",
       categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
       title: "Mobile app landing design & app maintain",
-      readTime: 2,
-      description: <div>
+      reading_time: 2,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -247,15 +248,15 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
     {
       id: 3,
       image: "blog-03.jpg",
       categories: [{id: 1, title: "development"}],
       title: "T-shirt design is the part of design",
-      readTime: 3,
-      description: <div>
+      reading_time: 3,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -311,15 +312,15 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
     {
       id: 4,
       image: "portfolio-05.jpg",
       categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
       title: "this is new blog",
-      readTime: 4,
-      description: <div>
+      reading_time: 4,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -375,11 +376,11 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
   ],
   resume: {
-    education: [
+    educations: [
       {
         id: 1,
         institution: "University of A",
@@ -432,10 +433,10 @@ export const ProfileData = {
       {id: 4, name: "figma", rating: 65},
       {id: 5, name: "adobe", rating: 56},
     ],
-    experience: [
+    experiences: [
       {
         id: 1,
-        title: "Diploma in Web Development",
+        company_name: "Company A",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "Contrary to popular belief. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
@@ -443,7 +444,7 @@ export const ProfileData = {
       },
       {
         id: 2,
-        title: "The Personal Portfolio Mystery",
+        company_name: "Company B",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "Contrary to popular belief. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in.",
@@ -451,7 +452,7 @@ export const ProfileData = {
       },
       {
         id: 3,
-        title: "Diploma in Computer Science",
+        company_name: "Company C",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
@@ -459,7 +460,7 @@ export const ProfileData = {
       },
       {
         id: 4,
-        title: "Tips For Personal Portfolio",
+        company_name: "Company D",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "If you are going to use a passage. Ut tincidunt est ac dolor aliquam sodales. laoreet sem in, lobortis mauris hendrerit ante.",

@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 
@@ -7,7 +8,7 @@ import {useTheme} from "@material-ui/core/styles";
 import Feature from "./components/feature";
 import {FeatureStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
-import {getFeaturesAction, removeFeatureAction} from "../../../store/actions/featureActions";
+import {getDemoFeaturesAction, getFeaturesAction, removeFeatureAction} from "../../../store/actions/featureActions";
 import AddButton from "../../../lib/addButton";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
 import FeaturesAdd from "../AddComponents/features/components/featuresAdd";
@@ -16,32 +17,39 @@ const Features = (props) => {
   const theme = useTheme();
   const classes = FeatureStyle(theme);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
-  const {features, userID} = props;
+  const {features, profileSlug, editPermission} = props;
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false);
+  const {profile} = useRouter().query;
 
   const modalClose = () => {
     setOpenModal(false)
   }
 
   useEffect(() => {
-    userID && dispatch(getFeaturesAction({id: userID}))
-  }, [])
+    profile && profileSlug ? dispatch(getFeaturesAction()) : dispatch(getDemoFeaturesAction());
+  }, [profile, profileSlug])
 
   const featureRemoveHandler = (item) => {
     if (props.features.length > 1) {
-      userID && dispatch(removeFeatureAction(item.id))
+      profileSlug && dispatch(removeFeatureAction(item.id))
       setToast({show: true, severity: "success", text: "Successfully deleted the feature!"});
     } else {
       setToast({show: true, severity: "error", text: "You must have at least one feature!"});
     }
   }
 
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
+
   return (
     <>
+      {getPermission() &&
       <div onClick={() => setOpenModal(true)} className={`${classes.featureWrapper}__btn`}>
-        <AddButton tooltipTitle="Add feature" />
+        <AddButton tooltipTitle="Add feature"/>
       </div>
+      }
       <Grid container spacing={3} className={classes.featureWrapper} id="features">
         {features.map(feature => (
             <Feature
@@ -51,6 +59,7 @@ const Features = (props) => {
               toast={toast}
               setToast={setToast}
               classes={classes}
+              editPermission={getPermission()}
             />
           )
         )}
@@ -62,7 +71,7 @@ const Features = (props) => {
       }
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
-        <FeaturesAdd handleClose={modalClose} toast={toast} setToast={setToast} />
+        <FeaturesAdd handleClose={modalClose} toast={toast} setToast={setToast}/>
       </EditCustomModal>
     </>
   );
@@ -70,7 +79,8 @@ const Features = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission,
     features: state.features.allFeatures
   }
 }

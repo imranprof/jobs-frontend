@@ -3,11 +3,12 @@ import {connect, useDispatch} from 'react-redux';
 import {useFormik} from "formik";
 import Select from 'react-select';
 import dynamic from 'next/dynamic'
+
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then(mod => mod.Editor),
-  { ssr: false })
+  {ssr: false})
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import draftToHtml from "draftjs-to-html";
 
 import {Grid, IconButton, TextField} from "@material-ui/core";
@@ -19,6 +20,7 @@ import CustomButton from "../../../../lib/profile/customButtons";
 import {addBlogAction, updateBlogAction} from "../../../../store/actions/blogActions";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import htmlToDraft from 'html-to-draftjs'
+import CustomUploadImage from "../../../../lib/profile/customUploadImage";
 
 const BlogModal = (props) => {
 
@@ -27,17 +29,16 @@ const BlogModal = (props) => {
   const blogModalWrapper = BlogModalStyle(theme).blogModalWrapper;
   const [visibilityClass, setVisibilityClass] = useState("");
   const [mode, setMode] = useState(editMode);
+  const [image, setImage] = useState('')
   const readingTime = require('reading-time');
-
   let currentState;
   let buttonText;
-  if(addMode){
+  if (addMode) {
     currentState = EditorState.createEmpty();
     buttonText = "Add";
-  }
-  else{
+  } else {
     const blocksFromHtml = htmlToDraft(blog.body);
-    const { contentBlocks, entityMap } = blocksFromHtml;
+    const {contentBlocks, entityMap} = blocksFromHtml;
     const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
     currentState = EditorState.createWithContent(contentState);
   }
@@ -47,6 +48,27 @@ const BlogModal = (props) => {
   setTimeout(() => {
     setVisibilityClass(props.setToggleBlogModal ? `${blogModalWrapper}__modal-content--visible` : "")
   }, 1);
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+    }));
+  }
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
+  }
+
+  const handleImageUpload = async () => {
+    let base64Image = await convertToBase64(image);
+    return base64Image;
+  }
 
   const allCategories = props.categoriesData?.map((category) => ({
     category_id: category.id,
@@ -88,28 +110,39 @@ const BlogModal = (props) => {
     return tempDescription;
   }
 
-  const editHandler = useFormik( {
+  const editHandler = useFormik({
     initialValues: {categories: selectedCategories, title: blog.title},
     validateOnChange: false,
-    onSubmit: values => {
+    onSubmit: async (values) => {
       setSelectedCategories(values.categories);
-      if(addMode){
-        dispatch(addBlogAction({ categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}))
-        setToast({show: true, severity: "success", text: "Blog Created successfully!"});
+      if (addMode) {
+        dispatch(addBlogAction({
+          categories: mapCategoriesForSave(values.categories),
+          title: values.title,
+          body: descriptionHandler(),
+          readTime: readTime,
+          image: (!image) ? null : await handleImageUpload()
+        }))
         props.setToggleBlogModal(false)
-      }
-      else{
-        dispatch(updateBlogAction({id: blog.id, categories: mapCategoriesForSave(values.categories), title: values.title, body: descriptionHandler(), readTime: readTime}, props.blog))
+        setToast({show: true, severity: "success", text: "Blog Created successfully!"});
+      } else {
+        dispatch(updateBlogAction({
+          id: blog.id,
+          categories: mapCategoriesForSave(values.categories),
+          title: values.title,
+          body: descriptionHandler(),
+          readTime: readTime,
+          image: (!image) ? null : await handleImageUpload()
+        }, props.blog))
         setToast({show: true, severity: "success", text: "Successfully updated the blog!"});
         setMode(false);
       }
 
     },
     onReset: () => {
-      if(addMode){
+      if (addMode) {
         props.setToggleBlogModal(false)
-      }
-      else {
+      } else {
         setMode(false);
       }
     },
@@ -119,11 +152,11 @@ const BlogModal = (props) => {
         errors.categories = "Required Categories must not be blank";
         setToast({show: true, severity: "error", text: errors.categories});
       }
-      if( !values.title){
+      if (!values.title) {
         errors.title = "Required title field must not be blank";
         setToast({show: true, severity: "error", text: errors.title});
       }
-      if(descriptionHandler().length<=8){
+      if (descriptionHandler().length <= 8) {
         errors.description = "Required description field must not be blank";
         setToast({show: true, severity: "error", text: errors.description});
       }
@@ -144,31 +177,31 @@ const BlogModal = (props) => {
           <Grid container>
             {mode ? (
               <div className={`${blogModalWrapper}__modal-content__categories-edit`}>
-              <Select
-                isMulti
-                placeholder={"Select Categories"}
-                options = {filterCategories(editHandler.values.categories)}
-                value = {editHandler.values.categories}
-                onChange ={categories => {
-                  editHandler.setValues({categories: categories, title: editHandler.values.title})
-                }}
-                className={`${blogModalWrapper}__modal-content__categories-edit__selectDropdown`}
-              />
+                <Select
+                  isMulti
+                  placeholder={"Select Categories"}
+                  options={filterCategories(editHandler.values.categories)}
+                  value={editHandler.values.categories}
+                  onChange={categories => {
+                    editHandler.setValues({categories: categories, title: editHandler.values.title})
+                  }}
+                  className={`${blogModalWrapper}__modal-content__categories-edit__selectDropdown`}
+                />
               </div>
             ) : (
-                <div className={`${blogModalWrapper}__modal-content__categories-wrapper`}>
-                  {(selectedCategories?.map((category,index) => (
-                    <div key = {index} className={`${blogModalWrapper}__modal-content__category`}>{category.label}</div>
-                  )))}
-                </div>
-              )}
+              <div className={`${blogModalWrapper}__modal-content__categories-wrapper`}>
+                {(selectedCategories?.map((category, index) => (
+                  <div key={index} className={`${blogModalWrapper}__modal-content__category`}>{category.label}</div>
+                )))}
+              </div>
+            )}
 
             {mode ? (
               <div className={`${blogModalWrapper}__modal-content__title__edit`}>
                 <TextField
                   multiline
-                  variant = "outlined"
-                  name = "title"
+                  variant="outlined"
+                  name="title"
                   placeholder={"Enter blog title"}
                   value={editHandler.values.title}
                   onChange={editHandler.handleChange}
@@ -177,45 +210,56 @@ const BlogModal = (props) => {
               </div>
             ) : (
               <div className={`${blogModalWrapper}__modal-content__title__editButton`}>
-              <Grid item className={`${blogModalWrapper}__modal-content__title`}>{blog.title}</Grid>
+                <Grid item className={`${blogModalWrapper}__modal-content__title`}>{blog.title}</Grid>
               </div>
             )}
-
-            <Grid className={`${blogModalWrapper}__modal-content__image-container`}>
-              <img
-                src={blog.image}
-                alt="modal image"
-              />
-            </Grid>
+            {(mode || addMode) ? (
+              <>
+                <div className={`${blogModalWrapper}__modal-content__image-container`}>
+                  <img
+                    src={(image === '') ? blog.image : URL.createObjectURL(image)}
+                  />
+                </div>
+                <CustomUploadImage changeHandler={handleImageChange} selectedImage={image}/>
+              </>
+            ) : (
+              <Grid className={`${blogModalWrapper}__modal-content__image-container`}>
+                <img
+                  src={blog.image}
+                  alt="modal image"
+                />
+              </Grid>
+            )
+            }
 
             <Grid item className={`${blogModalWrapper}__modal-content__text-content`}>
-              {mode? (
-                <div >
+              {mode ? (
+                <div>
                   <Editor
-                    editorState = {editorState}
+                    editorState={editorState}
                     placeholder={"Enter Description of blog"}
                     onEditorStateChange={changeEditorState}
-                    toolbarClassName = {`${blogModalWrapper}__modal-content__description__toolbar`}
-                    wrapperClassName = {`${blogModalWrapper}__modal-content__description__toolbar-editor-wrapper`}
+                    toolbarClassName={`${blogModalWrapper}__modal-content__description__toolbar`}
+                    wrapperClassName={`${blogModalWrapper}__modal-content__description__toolbar-editor-wrapper`}
                     editorClassName={`${blogModalWrapper}__modal-content__description__editor`}
                   />
                 </div>
               ) : (
-                  <div className={`${blogModalWrapper}__modal-content__description`}>
-                    <div>
-                      {typeof blog.body === 'string' ? (
-                          <div  dangerouslySetInnerHTML={{__html: blog.body}} />
+                <div className={`${blogModalWrapper}__modal-content__description`}>
+                  <div>
+                    {typeof blog.body === 'string' ? (
+                        <div dangerouslySetInnerHTML={{__html: blog.body}}/>
                       ) :
-                        (
-                          <div>
-                            {blog.body}
-                          </div>
-                        ) }
-                    </div>
+                      (
+                        <div>
+                          {blog.body}
+                        </div>
+                      )}
                   </div>
-                )}
+                </div>
+              )}
             </Grid>
-            { mode &&
+            {mode &&
             <CustomButton handler={editHandler.handleSubmit} mode={editHandler.handleReset} actionText={buttonText}/>
             }
           </Grid>
@@ -231,7 +275,7 @@ const BlogModal = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  return{
+  return {
     categoriesData: state.blogs.allCategories
   }
 }

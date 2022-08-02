@@ -74,7 +74,7 @@ const useStyles = makeStyles({
         fontFamily: FONTS.secondaryFont,
         lineHeight: "30px",
         display: "inline-block",
-        margin: "0 0 20px 0",
+        margin: "0 10px 20px 0",
         [theme.breakpoints.down('xs')]: {
           fontSize: 16,
           lineHeight: "24px"

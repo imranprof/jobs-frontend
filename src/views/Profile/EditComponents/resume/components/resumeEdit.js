@@ -9,6 +9,8 @@ import CustomButtons from "../../../../../lib/profile/customButtons";
 import {ResumeEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import {resumeUpdateAction, addResumeItemAction} from "../../../../../store/actions/resumeActions";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const ResumeEdit = (props) => {
   const theme = useTheme();
@@ -105,7 +107,8 @@ const ResumeEdit = (props) => {
 
   return (
     <div>
-      <h3 className={`${classes.resumeEditWrapper}__top-label`}>Edit {cardType}</h3>
+      <ModalTitle title={`Edit ${cardType}`} />
+      <EditModalDivider />
 
       <div className={`${classes.resumeEditWrapper}__content-wrapper`}>
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
@@ -125,7 +128,7 @@ const ResumeEdit = (props) => {
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
           <div className={`${classes.resumeEditWrapper}__content-wrapper__fullDateWrapper`}>
             <div className={`${classes.resumeEditWrapper}__content-wrapper__mainDateWrapper`}>
-              <span>Start date</span>
+              <span className={`${classes.resumeEditWrapper}__content-wrapper__mainDateWrapper-title`}>Start date</span>
               <div className={`${classes.resumeEditWrapper}__content-wrapper__dateWrapper`}>
                 <TextField
                   required
@@ -164,13 +167,12 @@ const ResumeEdit = (props) => {
                   ))}
                 </TextField>
               </div>
-              {formik.errors.date ? <ErrorMessage error={formik.errors.date}/> : null}
             </div>
 
             <span className={`${classes.resumeEditWrapper}__content-wrapper__hyphen`}>_</span>
 
             <div className={`${classes.resumeEditWrapper}__content-wrapper__mainDateWrapper`}>
-              <span>End date (or expected)</span>
+              <span className={`${classes.resumeEditWrapper}__content-wrapper__mainDateWrapper-title`}>End date (or expected)</span>
               <div className={`${classes.resumeEditWrapper}__content-wrapper__dateWrapper`}>
                 <TextField
                   required
@@ -211,6 +213,8 @@ const ResumeEdit = (props) => {
               </div>
             </div>
           </div>
+
+          {formik.errors.date ? <ErrorMessage error={formik.errors.date}/> : null}
         </div>
 
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
@@ -227,8 +231,9 @@ const ResumeEdit = (props) => {
           />
           {formik.errors.description ? <ErrorMessage error={formik.errors.description}/> : null}
         </div>
-
       </div>
+
+      <EditModalDivider />
       <CustomButtons handler={formik.handleSubmit} mode={handleClose} actionText={addMode ? "Add" : "Save"}/>
     </div>
   );
