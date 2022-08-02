@@ -18,7 +18,7 @@ import {blogsRemoveAction} from "../../../store/actions/blogActions";
 const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
-  const {element, elementType, portfolios, toast, setToast, blogs, profileSlug} = props;
+  const {element, elementType, portfolios, toast, setToast, blogs, profileSlug, editPermission} = props;
   const {title, image, categories, reactCount, reading_time} = element;
 
   const isPortfolio = elementType === "portfolio";
@@ -75,6 +75,7 @@ const CustomCard = (props) => {
               if (isPortfolio) setTogglePortfolioModal(true)
               else setToggleBlogModal(true)
             }}>
+        {editPermission &&
         <span className={`${classes.cardWrapper}__buttons`}>
           <span onClick={(e) => {
             setEditMode(true);
@@ -91,6 +92,7 @@ const CustomCard = (props) => {
             <RemoveButton/>
           </span>
         </span>
+        }
 
         <div className={`${classes.cardWrapper}__image-wrapper`}>
           <CardMedia

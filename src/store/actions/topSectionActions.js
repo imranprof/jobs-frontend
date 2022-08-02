@@ -12,6 +12,7 @@ import {
 } from "../actionTypes/topSectionTypes";
 
 import {getProfileSlug} from "../reducers/authReducers";
+import {setEditPermission} from "./authAction";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
@@ -112,6 +113,7 @@ export function getProfileAction() {
         social_links,
         skills
       } = res.data.profile
+      dispatch(setEditPermission(res.data.edit_permission));
       dispatch(setProfileID(id));
       dispatch(headlineText(headline));
       dispatch(setName({firstName: first_name, lastName: last_name}));

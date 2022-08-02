@@ -20,7 +20,6 @@ import {getContactAction} from "../../../../store/actions/contactActions";
 const ContactInfo = (props) => {
   const {
     classes,
-    profileSlug,
     profileID,
     firstName,
     lastName,
@@ -30,7 +29,9 @@ const ContactInfo = (props) => {
     contactDescriptionMode,
     phone,
     phoneMode,
-    email
+    email,
+    editPermission,
+    profileSlug
   } = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const fullName = `${firstName} ${lastName}`
@@ -38,14 +39,14 @@ const ContactInfo = (props) => {
 
   useEffect(() => {
     profileSlug && dispatch(getContactAction());
-  }, [])
+  }, [profileSlug])
 
   const designationHandler = useFormik({
     initialValues: {
       designation: designation
     },
     onSubmit: values => {
-      dispatch(designationUpdateAction(profileID,values.designation))
+      dispatch(designationUpdateAction(profileID, values.designation))
       props.setDesignationMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the designation"});
     },
@@ -97,6 +98,10 @@ const ContactInfo = (props) => {
     }
   })
 
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
+
   return (
     <>
       <Grid item md={5}>
@@ -128,9 +133,11 @@ const ContactInfo = (props) => {
             ) : (
               <div className={`${classes}__contact-info__title-area__designationWrapper`}>
                 <p className={`${classes}__contact-info__title-area__designation`}>{designation}</p>
+                {getPermission() &&
                 <span onClick={() => props.setDesignationMode(true)}>
                   <EditButton/>
                 </span>
+                }
               </div>
             )}
           </div>
@@ -153,9 +160,11 @@ const ContactInfo = (props) => {
             ) : (
               <div className={`${classes}__contact-info__descriptionWrapper`}>
                 <p className={`${classes}__contact-info__description`}>{contactDescription}</p>
+                {getPermission() &&
                 <span onClick={() => props.setContactDescriptionMode(true)}>
                   <EditButton/>
                 </span>
+                }
               </div>
             )}
 
@@ -178,15 +187,17 @@ const ContactInfo = (props) => {
               <span className={`${classes}__contact-info__phone`}>
                 Phone: <Link href="#"><a>{phone}</a></Link>
               </span>
+                {getPermission() &&
                 <span onClick={() => props.setPhoneMode(true)}>
                 <EditButton/>
               </span>
+                }
               </div>
             )}
 
             <span className={`${classes}__contact-info__email`}>Email: <Link href="#"><a>{email}</a></Link></span>
           </div>
-          <SocialLinks setToast={setToast}/>
+          <SocialLinks setToast={setToast} editPermission={getPermission()}/>
         </Card>
       </Grid>
 
@@ -203,6 +214,7 @@ const ContactInfo = (props) => {
 const mapStateToProps = (state) => {
   return {
     profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission,
     profileID: state.topSection.id,
     firstName: state.topSection.firstName,
     lastName: state.topSection.lastName,

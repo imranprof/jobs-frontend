@@ -16,14 +16,14 @@ import ResumeSkillsAdd from "../AddComponents/resume/components/resumeSkillsAdd"
 const Resume = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-  const {resume, profileSlug} = props;
+  const {resume, profileSlug, editPermission} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [addResumeItem, setAddResumeItem] = useState(false);
   const dispatch = useDispatch()
 
   useEffect(() => {
     profileSlug && dispatch(getResumeAction())
-  }, [])
+  }, [profileSlug])
 
   let resumeSections = [];
   for (let key in resume) {
@@ -38,13 +38,19 @@ const Resume = (props) => {
     setAddResumeItem(false)
   }
 
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
+
   return (
     <>
+      {getPermission() &&
       <div className={`${resumeWrapper}__addButton-container`}>
         <span onClick={() => setAddResumeItem(true)}>
           <AddButton tooltipTitle={`Add ${cardType}`}/>
         </span>
       </div>
+      }
 
       {
         addResumeItem &&
@@ -90,6 +96,7 @@ const mapStateToProps = (state) => {
   return {
     resume: state.resumeItems.resume,
     profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission
   }
 }
 

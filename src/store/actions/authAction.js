@@ -4,7 +4,7 @@ import {
   SIGN_IN_RECEIVED,
   SIGN_IN_REQUESTED,
   SIGN_IN_REJECTED,
-  SET_PROFILE_SLUG
+  SET_PROFILE_SLUG, SET_EDIT_PERMISSION
 } from "../actionTypes/authTypes";
 
 export const authenticate = ({authenticate}) => {
@@ -25,6 +25,13 @@ export const setProfileSlug = (profileSlug) => {
   return {
     type: SET_PROFILE_SLUG,
     payload: profileSlug
+  }
+}
+
+export const setEditPermission = (boolean) => {
+  return {
+    type: SET_EDIT_PERMISSION,
+    payload: boolean
   }
 }
 

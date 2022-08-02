@@ -7,18 +7,32 @@ import {
   PHONE_EDIT_MODE,
   SET_EMAIL
 } from "../actionTypes/contactTypes";
+import {getProfileSlug} from "./authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const initialState = {
-  designation: null,
-  designationMode: false,
-  contactDescription: null,
-  contactDescriptionMode: false,
-  phone: null,
-  phoneMode: false,
-  contact_email: null
+const initialState = () => {
+  if (getProfileSlug())
+    return {
+      designation: null,
+      designationMode: false,
+      contactDescription: null,
+      contactDescriptionMode: false,
+      phone: null,
+      phoneMode: false,
+      contact_email: null
+    }
+  else return {
+    designation: ProfileData.designation,
+    designationMode: false,
+    contactDescription: ProfileData.contactDescription,
+    contactDescriptionMode: false,
+    phone: ProfileData.phone,
+    phoneMode: false,
+    contact_email: ProfileData.email
+  }
 }
 
-export const contactReducer = (state = initialState, action) => {
+export const contactReducer = (state = initialState(), action) => {
   switch (action.type) {
     case DESIGNATION_UPDATE:
       return {

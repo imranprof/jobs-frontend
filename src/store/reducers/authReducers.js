@@ -4,7 +4,7 @@ import {
   MODAL_TYPE,
   SIGN_IN_REQUESTED,
   SIGN_IN_RECEIVED,
-  SIGN_IN_REJECTED, SET_PROFILE_SLUG
+  SIGN_IN_REJECTED, SET_PROFILE_SLUG, SET_EDIT_PERMISSION
 } from "../actionTypes/authTypes";
 import {setProfileSlug} from "../../auth/operations";
 
@@ -34,6 +34,7 @@ const initialState = {
   modalType: '',
   loading: false,
   error: '',
+  editPermission: false,
 }
 
 export const authReducers = (state = initialState, action) => {
@@ -50,10 +51,15 @@ export const authReducers = (state = initialState, action) => {
         modalType: action.payload
       }
     case SET_PROFILE_SLUG:
-      setProfileSlug(action.payload)
+      setProfileSlug(action.payload);
       return {
         ...state,
-        profileSlug: action.payload
+        profileSlug: getProfileSlug()
+      }
+    case SET_EDIT_PERMISSION:
+      return {
+        ...state,
+        editPermission: action.payload
       }
     case SIGN_IN_REQUESTED:
       return {...state, loading: true};

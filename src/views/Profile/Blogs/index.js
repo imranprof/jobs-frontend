@@ -14,7 +14,7 @@ import BlogModal from "./components/blogModal";
 const Blogs = (props) => {
   const theme = useTheme();
   const classes = BlogsStyle(theme);
-  const {blogs, profileSlug} = props;
+  const {blogs, profileSlug, editPermission} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
 
@@ -23,24 +23,29 @@ const Blogs = (props) => {
   useEffect(
     () => {
       profileSlug && dispatch(getBlogsAction())
-    }, []
+    }, [profileSlug]
   )
 
   const handleClick = () => {
     setToggleBlogModal(!toggleBlogModal);
   }
 
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
+
   return (
     <>
+      {getPermission() &&
       <div className={`${classes.blogsWrapper}__add-Button`}>
             <span onClick={handleClick}>
                 <AddButton tooltipTitle={"Add blog"}/>
             </span>
-
       </div>
+      }
       <Grid container spacing={4} className={classes.blogsWrapper} id="blog">
         {blogs?.map(blog => (
-          <CustomCard key={blog.id} element={blog} elementType="blog" toast={toast} setToast={setToast}/>
+          <CustomCard key={blog.id} element={blog} elementType="blog" toast={toast} setToast={setToast} editPermission={getPermission()}/>
         ))}
       </Grid>
 
@@ -68,10 +73,12 @@ const Blogs = (props) => {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>
+{
   return {
     blogs: state.blogs.allBlogs,
-    profileSlug: state.auth.profileSlug
+    profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission
   }
 }
 

@@ -14,7 +14,7 @@ import PortfolioAdd from "../AddComponents/portfolio/components/portfolioAdd";
 const Portfolio = (props) => {
   const theme = useTheme();
   const classes = PortfolioStyle(theme);
-  const {portfolios, profileSlug} = props;
+  const {portfolios, profileSlug, editPermission} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch()
   const [addPortfolio, setAddPortfolio] = useState(false);
@@ -22,15 +22,21 @@ const Portfolio = (props) => {
   useEffect(
     () => {
       profileSlug && dispatch(getPortfoliosAction())
-    }, []
+    }, [profileSlug]
   )
+
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
 
   return (
     <>
       <div className={`${classes.portfolioWrapper}__addButton-container`}>
+        {getPermission() &&
         <span onClick={() => setAddPortfolio(true)}>
           <AddButton tooltipTitle="Add Portfolio"/>
         </span>
+        }
       </div>
 
       {
@@ -42,7 +48,7 @@ const Portfolio = (props) => {
       <Grid container spacing={4} className={classes.portfolioWrapper} id="portfolio">
         {portfolios?.map(portfolio => (
           <CustomCard key={portfolio.id} element={portfolio} elementType="portfolio"
-                      toast={toast} setToast={setToast}/>
+                      toast={toast} setToast={setToast} editPermission={getPermission()}/>
         ))}
       </Grid>
 
@@ -59,6 +65,7 @@ const Portfolio = (props) => {
 const mapStateToProps = (state) => {
   return {
     profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission,
     portfolios: state.portfolios.allPortfolios
   }
 }

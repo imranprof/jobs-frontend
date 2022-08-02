@@ -8,6 +8,7 @@ import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
 import {modalType} from "../../store/actions/authAction";
 import {setProfileSlug} from "../../store/actions/authAction";
+import {NoSsr} from "@material-ui/core";
 
 const Profile = (props) => {
   const {isAuthenticated} = props;
@@ -26,11 +27,11 @@ const Profile = (props) => {
   }, [profile]);
 
   return (
-    <>
+    <NoSsr>
       <TopSection/>
       <CustomDivider/>
       <Sections/>
-    </>
+    </NoSsr>
   );
 }
 

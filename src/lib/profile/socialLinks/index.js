@@ -13,7 +13,7 @@ const SocialLinks = (props) => {
   const theme = useTheme();
   const classes = SocialLinkStyle(theme);
   const [openModal, setOpenModal] = useState(false);
-  const {setToast, links} = props
+  const {setToast, links, editPermission} = props
 
   const socialLinks = {
     facebook: links["facebook"],
@@ -39,11 +39,12 @@ const SocialLinks = (props) => {
       <EditCustomModal handleClose={modalClose} open={openModal}>
         <SocialLinksEdit setToast={setToast} handleClose={modalClose}/>
       </EditCustomModal>
-
+      {editPermission &&
       <span className={`${classes.socialLinksWrapper}__social-links__editBtnWrapper`}
             onClick={() => setOpenModal(true)}>
         <EditButton/>
       </span>
+      }
     </div>
   );
 }

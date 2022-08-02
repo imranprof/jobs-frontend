@@ -1,5 +1,6 @@
 export const ProfileData = {
-  name: "John Doe",
+  firstName: "John",
+  lastName: "Doe",
   headline: "Welcome to my world",
   intro: "Hi, I'm",
   title: "a Rails Developer.",
@@ -16,9 +17,9 @@ export const ProfileData = {
     "linkedin": "https://www.linkedin.com/",
   },
   skills: [
-    {id: 1, name: "Ruby", image: "ruby.png"},
-    {id: 2, name: "Javascript", image: "javascript.png"},
-    {id: 3, name: "Python", image: "python.png"},
+    {id: 1, name: "Ruby", icon: "ruby.png"},
+    {id: 2, name: "Javascript", icon: "javascript.png"},
+    {id: 3, name: "Python", icon: "python.png"},
   ],
   features: [
     {
@@ -435,7 +436,7 @@ export const ProfileData = {
     experience: [
       {
         id: 1,
-        title: "Diploma in Web Development",
+        company_name: "Company A",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "Contrary to popular belief. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
@@ -443,7 +444,7 @@ export const ProfileData = {
       },
       {
         id: 2,
-        title: "The Personal Portfolio Mystery",
+        company_name: "Company B",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "Contrary to popular belief. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in.",
@@ -451,7 +452,7 @@ export const ProfileData = {
       },
       {
         id: 3,
-        title: "Diploma in Computer Science",
+        company_name: "Company C",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.",
@@ -459,7 +460,7 @@ export const ProfileData = {
       },
       {
         id: 4,
-        title: "Tips For Personal Portfolio",
+        company_name: "Company D",
         startDate: "Jan 2018",
         endDate: "Jan 2022",
         description: "If you are going to use a passage. Ut tincidunt est ac dolor aliquam sodales. laoreet sem in, lobortis mauris hendrerit ante.",
