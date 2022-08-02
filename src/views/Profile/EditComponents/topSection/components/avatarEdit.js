@@ -28,7 +28,9 @@ const AvatarEdit = (props) => {
   }
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0])
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
   }
 
   const handleImageUpload = async () => {
@@ -46,8 +48,8 @@ const AvatarEdit = (props) => {
 
   return (
     <div>
-      <ModalTitle title="Profile photo" />
-      <SecondaryDivider />
+      <ModalTitle title="Profile photo"/>
+      <SecondaryDivider/>
 
       <p className={`${classes.topSectionEditWrapper}__avatarWrapper__message`}>
         {`${firstName}, help others recognize you!`}
@@ -61,9 +63,9 @@ const AvatarEdit = (props) => {
         />
       </div>
 
-      <CustomUploadImage changeHandler={handleImageChange} selectedImage={image} />
+      <CustomUploadImage changeHandler={handleImageChange} selectedImage={image}/>
 
-      <SecondaryDivider />
+      <SecondaryDivider/>
       <CustomButtons handler={handleImageUpload} mode={handleClose}/>
     </div>
   );

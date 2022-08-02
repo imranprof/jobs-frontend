@@ -98,7 +98,7 @@ const useStyles = makeStyles({
         alignItems: "center",
         '&__image': {
           borderRadius: 10,
-          height: "auto",
+          maxHeight: 700,
           width: "100%",
         },
       },
