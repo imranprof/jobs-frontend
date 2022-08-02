@@ -75,7 +75,12 @@ const useStyles = makeStyles({
                     borderRadius: 10,
                     height: "550px",
                     marginBottom: 30,
-                    objectFit: "contain"
+                    width: "100%",
+                    objectFit: "contain",
+                    [theme.breakpoints.down('xs')]: {
+                        height: "300px",
+                        marginBottom: 10
+                    }
                 },
             },
             '&__title': {
