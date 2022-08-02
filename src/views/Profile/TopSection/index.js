@@ -74,6 +74,9 @@ const TopSection = (props) => {
       props.setHeadlineMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the headline"});
     },
+    onReset: () => {
+      props.setHeadlineMode(false);
+    },
     validate: values => {
       let errors = {}
       if (!values.headline) {
@@ -84,11 +87,6 @@ const TopSection = (props) => {
       return errors;
     }
   })
-
-  const headlineResetHandler = () => {
-    headlineHandler.resetForm();
-    props.setHeadlineMode(false);
-  }
 
   const bioHandler = useFormik({
     initialValues: {bio: props.bio},
@@ -101,6 +99,9 @@ const TopSection = (props) => {
       props.setBioMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the bio"});
     },
+    onReset: () => {
+      props.setBioMode(false);
+    },
     validate: values => {
       let errors = {}
       if (!values.bio) {
@@ -112,10 +113,6 @@ const TopSection = (props) => {
     }
   })
 
-  const bioResetHandler = () => {
-    bioHandler.resetForm();
-    props.setBioMode(false);
-  }
 
   return (
     <>
@@ -132,7 +129,7 @@ const TopSection = (props) => {
                   onChange={headlineHandler.handleChange}
                 />
                 {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
-                <CustomButton handler={headlineHandler.handleSubmit} mode={headlineResetHandler}/>
+                <CustomButton handler={headlineHandler.handleSubmit} mode={headlineHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__headline`}>
@@ -175,7 +172,7 @@ const TopSection = (props) => {
                   onChange={bioHandler.handleChange}
                 />
                 {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
-                <CustomButton handler={bioHandler.handleSubmit} mode={bioResetHandler}/>
+                <CustomButton handler={bioHandler.handleSubmit} mode={bioHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>

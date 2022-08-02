@@ -49,6 +49,9 @@ const ContactInfo = (props) => {
       props.setDesignationMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the designation"});
     },
+    onReset: () => {
+      props.setDesignationMode(false);
+    },
     enableReinitialize: true,
     validate: values => {
       let errors = {}
@@ -69,6 +72,9 @@ const ContactInfo = (props) => {
       props.setContactDescriptionMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the description"});
     },
+    onReset: () => {
+      props.setContactDescriptionMode(false);
+    },
     validate: values => {
       let errors = {}
       if (!values.contactDescription) {
@@ -87,6 +93,9 @@ const ContactInfo = (props) => {
       dispatch(phoneUpdateAction(values.phone));
       props.setPhoneMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the phone number"});
+    },
+    onReset: () => {
+      props.setPhoneMode(false);
     },
     validate: values => {
       let errors = {}
@@ -123,7 +132,7 @@ const ContactInfo = (props) => {
                 />
                 {designationHandler.errors.designation ?
                   <ErrorMessage error={designationHandler.errors.designation}/> : null}
-                <CustomButton handler={designationHandler.handleSubmit} mode={props.setDesignationMode}/>
+                <CustomButton handler={designationHandler.handleSubmit} mode={designationHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes}__contact-info__title-area__designationWrapper`}>
@@ -148,7 +157,7 @@ const ContactInfo = (props) => {
                 />
                 {contactDescriptionHandler.errors.contactDescription ?
                   <ErrorMessage error={contactDescriptionHandler.errors.contactDescription}/> : null}
-                <CustomButton handler={contactDescriptionHandler.handleSubmit} mode={props.setContactDescriptionMode}/>
+                <CustomButton handler={contactDescriptionHandler.handleSubmit} mode={contactDescriptionHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes}__contact-info__descriptionWrapper`}>
@@ -171,7 +180,7 @@ const ContactInfo = (props) => {
                 />
                 {phoneHandler.errors.phone ?
                   <ErrorMessage error={phoneHandler.errors.phone}/> : null}
-                <CustomButton handler={phoneHandler.handleSubmit} mode={props.setPhoneMode}/>
+                <CustomButton handler={phoneHandler.handleSubmit} mode={phoneHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes}__contact-info__phoneWrapper`}>
