@@ -7,7 +7,7 @@ import {
 const initialState = {
   allPortfolios: [],
   allCategories: []
-};
+}
 
 export const portfolioReducer = (state = initialState, action) => {
   switch (action.type) {

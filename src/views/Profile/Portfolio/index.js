@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 import {useState, useEffect} from "react";
 import {connect, useDispatch} from "react-redux";
 
@@ -7,30 +8,37 @@ import {useTheme} from "@material-ui/core/styles";
 import CustomCard from "../../../lib/profile/card/card";
 import {PortfolioStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
-import {getPortfoliosAction} from "../../../store/actions/portfolioActions"
+import {getDemoPortfoliosAction, getPortfoliosAction} from "../../../store/actions/portfolioActions"
 import AddButton from "../../../lib/addButton";
 import PortfolioAdd from "../AddComponents/portfolio/components/portfolioAdd";
 
 const Portfolio = (props) => {
   const theme = useTheme();
   const classes = PortfolioStyle(theme);
-  const {portfolios, userID} = props;
+  const {portfolios, profileSlug, editPermission} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch()
   const [addPortfolio, setAddPortfolio] = useState(false);
+  const {profile} = useRouter().query;
 
   useEffect(
     () => {
-      userID && dispatch(getPortfoliosAction({id: userID}))
-    }, []
+      profile && profileSlug ? dispatch(getPortfoliosAction()) : dispatch(getDemoPortfoliosAction());
+    }, [profile, profileSlug]
   )
+
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
 
   return (
     <>
       <div className={`${classes.portfolioWrapper}__addButton-container`}>
+        {getPermission() &&
         <span onClick={() => setAddPortfolio(true)}>
           <AddButton tooltipTitle="Add Portfolio"/>
         </span>
+        }
       </div>
 
       {
@@ -42,7 +50,7 @@ const Portfolio = (props) => {
       <Grid container spacing={4} className={classes.portfolioWrapper} id="portfolio">
         {portfolios?.map(portfolio => (
           <CustomCard key={portfolio.id} element={portfolio} elementType="portfolio"
-                      toast={toast} setToast={setToast}/>
+                      toast={toast} setToast={setToast} editPermission={getPermission()}/>
         ))}
       </Grid>
 
@@ -58,7 +66,8 @@ const Portfolio = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission,
     portfolios: state.portfolios.allPortfolios
   }
 }

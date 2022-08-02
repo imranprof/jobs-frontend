@@ -1,8 +1,10 @@
 import axios from "axios";
 
 import {GET_PORTFOLIOS, REMOVE_PORTFOLIO, UPDATE_PORTFOLIO} from "../actionTypes/portfolioTypes";
+import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
+const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
 export const updatePortfolio = (portfolios, allCategories) => {
   return {
@@ -44,7 +46,7 @@ export const updatePortfolioAction = (oldPortfolio, updatedPortfolio) => {
     }
   );
 
-  const data = {
+  let data = {
     "user": {
       "projects_attributes": [
         {
@@ -54,21 +56,23 @@ export const updatePortfolioAction = (oldPortfolio, updatedPortfolio) => {
           "react_count": updatedPortfolio.react_count,
           "live_url": updatedPortfolio.live_url,
           "source_url": updatedPortfolio.source_url,
-          "categorizations_attributes": [...addCategories, ...deleteCategories]
+          "categorizations_attributes": [...addCategories, ...deleteCategories],
+          "image": {"data": updatedPortfolio.image}
         }
       ]
     }
   }
+  if (!updatedPortfolio.image) delete data.user.projects_attributes[0].image;
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => dispatch(updatePortfolio(res.data.portfolio_data.projects, res.data.all_categories)))
       .catch(err => err.response)
   }
 }
 
 export const addPortfolioAction = (portfolio) => {
-  const data = {
+  let data = {
     "projects_attributes": [
       {
         "title": portfolio.title,
@@ -79,11 +83,14 @@ export const addPortfolioAction = (portfolio) => {
         "react_count": 0,
         "live_url": "#",
         "source_url": "#",
+        "image": {"data": portfolio.image}
       }
     ]
   }
+  if (!portfolio.image) delete data.projects_attributes[0].image;
+
   return (dispatch) => {
-    axios.patch(profileURL, {user: data},
+    axios.patch(profileURL(), {user: data},
     ).then(res => dispatch(getPortfolios(res.data.portfolio_data.projects, res.data.all_categories)))
       .catch(err => err.response)
   }
@@ -101,7 +108,7 @@ export const removePortfolio = (portfolios, allCategories) => {
 
 export const removePortfolioAction = (portfolioID) => {
   return (dispatch) => {
-    axios.patch(profileURL, {
+    axios.patch(profileURL(), {
       "user": {
         "projects_attributes": [
           {
@@ -125,14 +132,16 @@ export const getPortfolios = (portfolios, allCategories) => {
   }
 }
 
-export const getPortfoliosAction = (values) => {
-  const {id} = values
+export const getPortfoliosAction = () => {
   return (dispatch) => {
-    axios.get(profileURL, {
-      params: {
-        user_id: id
-      }
-    }).then(res => dispatch(getPortfolios(res.data.portfolio_data.projects, res.data.all_categories)))
+    axios.get(profileURL(), ).then(res => dispatch(getPortfolios(res.data.portfolio_data.projects, res.data.all_categories)))
       .catch(err => err.response);
+  }
+}
+
+export const getDemoPortfoliosAction = () => {
+  const {portfolios, categoriesData} = ProfileData;
+  return (dispatch) => {
+    dispatch(getPortfolios(portfolios, categoriesData))
   }
 }

@@ -10,8 +10,11 @@ import {
   SOCIAL_LINKS_UPDATE,
   SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR,
 } from "../actionTypes/topSectionTypes";
+import {getProfileSlug} from "../reducers/authReducers";
+import {setEditPermission} from "./authAction";
+import {ProfileData} from "../../../API/mock/profile/profileData"
 
-const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
+const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
 export const setProfileID = (id) => {
   return {
@@ -95,13 +98,9 @@ export const setAvatar = (avatar) => {
   }
 }
 
-export function getProfileAction(userID) {
+export function getProfileAction() {
   return (dispatch) => {
-    axios.get(profileURL, {
-      params: {
-        user_id: userID
-      }
-    }).then(res => {
+    axios.get(profileURL()).then(res => {
       const {
         id,
         first_name,
@@ -114,6 +113,7 @@ export function getProfileAction(userID) {
         social_links,
         skills
       } = res.data.profile
+      dispatch(setEditPermission(res.data.edit_permission));
       dispatch(setProfileID(id));
       dispatch(headlineText(headline));
       dispatch(setName({firstName: first_name, lastName: last_name}));
@@ -128,7 +128,23 @@ export function getProfileAction(userID) {
   }
 }
 
-// Image Upload
+const {firstName, lastName, headline, intro, bio, expertises, socialLinks, skills, avatar} = ProfileData;
+
+export function getDemoProfileAction() {
+  return (dispatch) => {
+    dispatch(setEditPermission(false));
+    dispatch(setProfileID(null));
+    dispatch(headlineText(headline));
+    dispatch(setName({firstName: firstName, lastName: lastName}));
+    dispatch(introText(intro));
+    dispatch(bioText(bio));
+    dispatch(setAvatar(avatar));
+    dispatch(expertisesText(expertises));
+    dispatch(socialLinksUpdate(socialLinks));
+    dispatch(skillsUpdate(skills));
+  }
+}
+
 export const uploadAvatar = ({base64Image, profileID}) => {
   const data = {
     "user": {
@@ -139,7 +155,7 @@ export const uploadAvatar = ({base64Image, profileID}) => {
     }
   }
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => {
         dispatch(setAvatar(res.data.profile.avatar))
       })
@@ -158,7 +174,7 @@ export const updateHeadline = ({headline, profileID}) => {
   }
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => dispatch(headlineText(res.data.profile.headline)))
       .catch(err => err.response);
   }
@@ -175,7 +191,7 @@ export const updateBio = ({bio, profileID}) => {
   }
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => dispatch(bioText(res.data.profile.bio)))
       .catch(err => err.response);
   }
@@ -193,7 +209,7 @@ export const updateIntroAndExpertises = ({intro, expertises, profileID}) => {
   }
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => {
         dispatch(introText(res.data.profile.title));
         dispatch(expertisesText(res.data.profile.expertises));
@@ -225,7 +241,7 @@ export const socialLinksUpdateAction = ({socialLinks, profileID}) => {
   }
 
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => {
         dispatch(socialLinksUpdate(res.data.profile.social_links));
       })

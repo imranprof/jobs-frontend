@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 import {useEffect, useState} from 'react';
 import {connect, useDispatch} from "react-redux";
 
@@ -6,7 +7,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {ResumeStyle} from "./style";
 import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
-import {getResumeAction} from "../../../store/actions/resumeActions";
+import {getDemoResumeAction, getResumeAction} from "../../../store/actions/resumeActions";
 import AddButton from "../../../lib/addButton";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
 import CustomSnackbar from "../../../lib/customSnackbar";
@@ -16,14 +17,15 @@ import ResumeSkillsAdd from "../AddComponents/resume/components/resumeSkillsAdd"
 const Resume = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-  const {resume, userID} = props;
+  const {resume, profileSlug, editPermission} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [addResumeItem, setAddResumeItem] = useState(false);
   const dispatch = useDispatch()
+  const {profile} = useRouter().query;
 
   useEffect(() => {
-    userID && dispatch(getResumeAction({id: userID}))
-  }, [])
+    profile && profileSlug ? dispatch(getResumeAction()) : dispatch(getDemoResumeAction());
+  }, [profile, profileSlug])
 
   let resumeSections = [];
   for (let key in resume) {
@@ -38,13 +40,19 @@ const Resume = (props) => {
     setAddResumeItem(false)
   }
 
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
+
   return (
     <>
+      {getPermission() &&
       <div className={`${resumeWrapper}__addButton-container`}>
         <span onClick={() => setAddResumeItem(true)}>
           <AddButton tooltipTitle={`Add ${cardType}`}/>
         </span>
       </div>
+      }
 
       {
         addResumeItem &&
@@ -89,7 +97,8 @@ const Resume = (props) => {
 const mapStateToProps = (state) => {
   return {
     resume: state.resumeItems.resume,
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission
   }
 }
 
