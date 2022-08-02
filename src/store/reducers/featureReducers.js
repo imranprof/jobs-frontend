@@ -1,8 +1,8 @@
 import {GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE} from "../actionTypes/featureTypes";
 
 const initialState = {
-  allFeatures: []
-};
+      allFeatures: []
+}
 
 export const featureReducer = (state = initialState, action) => {
   switch (action.type) {

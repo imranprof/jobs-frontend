@@ -4,8 +4,9 @@ import {
   MODAL_TYPE,
   SIGN_IN_REQUESTED,
   SIGN_IN_RECEIVED,
-  SIGN_IN_REJECTED
+  SIGN_IN_REJECTED, SET_PROFILE_SLUG, SET_EDIT_PERMISSION
 } from "../actionTypes/authTypes";
+import {setProfileSlug} from "../../auth/operations";
 
 const getToken = () => {
   if (typeof window !== 'undefined') {
@@ -17,22 +18,23 @@ const getToken = () => {
   }
 }
 
-const getUserID = () => {
+export const getProfileSlug = () => {
   if (typeof window !== 'undefined') {
-    const userID = localStorage.getItem('userID')
-    if (userID) {
-      return userID;
+    const profileSlug = localStorage.getItem('profileSlug')
+    if (profileSlug) {
+      return profileSlug;
     }
     return null;
   }
 }
 
 const initialState = {
-  userID: getUserID(),
+  profileSlug: getProfileSlug(),
   isAuthenticated: getToken(),
   modalType: '',
   loading: false,
   error: '',
+  editPermission: false
 }
 
 export const authReducers = (state = initialState, action) => {
@@ -41,12 +43,23 @@ export const authReducers = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: getToken(),
-        userID: getUserID()
+        profileSlug: getProfileSlug()
       }
     case MODAL_TYPE:
       return {
         ...state,
         modalType: action.payload
+      }
+    case SET_PROFILE_SLUG:
+      setProfileSlug(action.payload);
+      return {
+        ...state,
+        profileSlug: action.payload
+      }
+    case SET_EDIT_PERMISSION:
+      return {
+        ...state,
+        editPermission: action.payload
       }
     case SIGN_IN_REQUESTED:
       return {...state, loading: true};

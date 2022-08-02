@@ -9,13 +9,13 @@ import {
 } from "../actionTypes/contactTypes";
 
 const initialState = {
-  designation: null,
+  designation: "",
   designationMode: false,
-  contactDescription: null,
+  contactDescription: "",
   contactDescriptionMode: false,
-  phone: null,
+  phone: "",
   phoneMode: false,
-  contact_email: null
+  contact_email: ""
 }
 
 export const contactReducer = (state = initialState, action) => {
