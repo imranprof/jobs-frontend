@@ -76,6 +76,9 @@ const TopSection = (props) => {
       props.setHeadlineMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the headline"});
     },
+    onReset: () => {
+      props.setHeadlineMode(false);
+    },
     validate: values => {
       let errors = {}
       if (!values.headline) {
@@ -97,6 +100,9 @@ const TopSection = (props) => {
       }));
       props.setBioMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the bio"});
+    },
+    onReset: () => {
+      props.setBioMode(false);
     },
     validate: values => {
       let errors = {}
@@ -127,7 +133,7 @@ const TopSection = (props) => {
                   onChange={headlineHandler.handleChange}
                 />
                 {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
-                <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
+                <CustomButton handler={headlineHandler.handleSubmit} mode={headlineHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__headline`}>
@@ -174,7 +180,7 @@ const TopSection = (props) => {
                   onChange={bioHandler.handleChange}
                 />
                 {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
-                <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
+                <CustomButton handler={bioHandler.handleSubmit} mode={bioHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>

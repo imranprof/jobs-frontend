@@ -6,9 +6,11 @@ import {Slider} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import {addResumeItemAction} from "../../../../../store/actions/resumeActions";
-import {ResumeAddStyle} from "../style";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import ErrorMessage from "../../../../../lib/errorMessage";
+import {ResumeAddStyle} from "../style";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const ResumeSkillsAdd = (props) => {
   const theme = useTheme();
@@ -46,7 +48,7 @@ const ResumeSkillsAdd = (props) => {
     validate: values => {
       let errors = {};
       if (values.rating === 0) {
-        errors.rating = "Skill rating can't be 0!"
+        errors.rating = "Skill rating can't be zero!"
       }
       if (!values.skill) {
         errors.skill = "Please select a skill!"
@@ -58,10 +60,12 @@ const ResumeSkillsAdd = (props) => {
 
   return (
     <div>
-      <h3>Add skill</h3>
+      <ModalTitle title="Add skill" />
+      <EditModalDivider />
+
       <div className={`${classes.resumeAddWrapper}__content-wrapper`}>
         <div className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper`}>
-          <h4>Select a skill</h4>
+          <h4 className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper__title`}>Select your skill</h4>
           <Select
             name="skill"
             options={options()}
@@ -73,7 +77,7 @@ const ResumeSkillsAdd = (props) => {
           />
           {formik.errors.skill && <ErrorMessage error={formik.errors.skill}/>}
         </div>
-        <h4>Rate your skill</h4>
+        <h4 className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper__title`}>Rate your skill</h4>
         <Slider
           key={`slider-${formik.values.rating}`}
           valueLabelDisplay="on"
@@ -82,6 +86,8 @@ const ResumeSkillsAdd = (props) => {
         />
         {formik.errors.rating && <ErrorMessage error={formik.errors.rating}/>}
       </div>
+
+      <EditModalDivider />
       <CustomButtons handler={formik.handleSubmit} mode={handleClose} actionText="Add"/>
     </div>
   );

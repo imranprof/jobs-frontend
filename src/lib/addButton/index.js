@@ -10,7 +10,7 @@ const AddButton = ({tooltipTitle}) => {
   const classes = AddButtonStyle(theme);
 
   return (
-    <Tooltip title={tooltipTitle} placement="top" TransitionComponent={Fade} TransitionProps={{ timeout: 600 }}>
+    <Tooltip title={tooltipTitle} placement="right" TransitionComponent={Fade} TransitionProps={{ timeout: 600 }}>
       <Paper className={classes.addButtonWrapper}>
         <i className={`${FontAwesomeIcons.plus}`}/>
       </Paper>

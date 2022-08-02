@@ -6,8 +6,10 @@ import {useTheme} from "@material-ui/core/styles";
 
 import {resumeUpdateAction} from "../../../../../store/actions/resumeActions";
 import CustomButtons from "../../../../../lib/profile/customButtons";
-import {ResumeEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
+import {ResumeEditStyle} from "../style";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const ResumeSkillsEdit = (props) => {
   const theme = useTheme();
@@ -38,7 +40,7 @@ const ResumeSkillsEdit = (props) => {
     validate: values => {
       let errors = {};
       if (values.rating === 0) {
-        errors.rating = "Skill rating can't be 0!"
+        errors.rating = "Skill rating can't be zero!"
       }
       return errors;
     }
@@ -46,11 +48,12 @@ const ResumeSkillsEdit = (props) => {
 
   return (
     <div>
-      <h3>Edit skill</h3>
+      <ModalTitle title="Edit skill"/>
+      <EditModalDivider />
 
       <div className={`${classes.resumeEditWrapper}__content-wrapper`}>
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
-          <h4>Rate your {name} skill</h4>
+          <h4 className={`${classes.resumeEditWrapper}__content-wrapper__edit-skill`}>Rate your {name} skill</h4>
           <Slider
             key={`slider-${formik.values.rating}`}
             valueLabelDisplay="on"
@@ -61,6 +64,7 @@ const ResumeSkillsEdit = (props) => {
         </div>
       </div>
 
+      <EditModalDivider />
       <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
     </div>
   );

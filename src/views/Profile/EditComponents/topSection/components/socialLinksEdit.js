@@ -9,6 +9,8 @@ import CustomButton from "../../../../../lib/profile/customButtons";
 import {TopSectionEditStyle} from "../style";
 import {socialLinksUpdateAction} from "../../../../../store/actions/topSectionActions";
 import ErrorMessage from "../../../../../lib/errorMessage";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const SocialLinksEdit = (props) => {
   const theme = useTheme();
@@ -43,7 +45,9 @@ const SocialLinksEdit = (props) => {
 
   return (
     <div>
-      <h3>Edit social links</h3>
+      <ModalTitle title="Edit social links" />
+      <EditModalDivider />
+
       <form className={`${classes.topSectionEditWrapper}__socialLinks`}>
         <SocialLinksEditWrapper
           name="facebook"
@@ -65,6 +69,8 @@ const SocialLinksEdit = (props) => {
         />
         {formik.errors.values ? <ErrorMessage error={formik.errors.values}/> : null}
       </form>
+
+      <EditModalDivider />
       <CustomButton handler={formik.handleSubmit} mode={handleClose}/>
     </div>
   );

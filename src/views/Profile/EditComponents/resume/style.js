@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   resumeEditWrapper: theme => ({
@@ -33,13 +34,23 @@ const useStyles = makeStyles({
       '&__gap': {
         margin: "18px 0",
       },
+      '&__edit-skill': {
+        color: theme.palette.customColor.modalTitle,
+        fontFamily: FONTS.modalTitleFont,
+        fontWeight: 400,
+        letterSpacing: "1px"
+      },
       '&__fullDateWrapper': {
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
       },
       '&__mainDateWrapper': {
-        width: "46%"
+        width: "46%",
+        '&-title': {
+          color: theme.palette.customColor.modalTitle,
+          fontFamily: FONTS.modalTitleFont,
+        }
       },
       '&__dateWrapper': {
         width: "100%",

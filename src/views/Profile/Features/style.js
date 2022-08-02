@@ -6,7 +6,11 @@ const useStyles = makeStyles({
   featureWrapper: theme => ({
     display: "flex",
     '&__btn': {
-      marginBottom: 25
+      marginBottom: 25,
+      [theme.breakpoints.down('xs')]: {
+        display: "flex",
+        justifyContent: "center"
+      }
     },
     '&__item': {
       width: "100%",

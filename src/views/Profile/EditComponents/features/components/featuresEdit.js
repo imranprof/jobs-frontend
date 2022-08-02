@@ -9,6 +9,8 @@ import CustomButtons from "../../../../../lib/profile/customButtons";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import {updateFeatureAction} from "../../../../../store/actions/featureActions";
 import CustomSnackbar from "../../../../../lib/customSnackbar";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const FeaturesEdit = (props) => {
   const theme = useTheme();
@@ -62,7 +64,8 @@ const FeaturesEdit = (props) => {
 
   return (
     <div>
-      <h3 className={`${classes.featuresEditWrapper}__top-label`}>Edit feature</h3>
+      <ModalTitle title="Edit feature"/>
+      <EditModalDivider />
 
       <div className={`${classes.featuresEditWrapper}__content-wrapper`}>
         <div className={`${classes.featuresEditWrapper}__content-wrapper__gap`}>
@@ -93,6 +96,8 @@ const FeaturesEdit = (props) => {
           {formik.errors.description ? <ErrorMessage error={formik.errors.description} /> : null}
         </div>
       </div>
+
+      <EditModalDivider />
       <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
 
       {toast.show &&

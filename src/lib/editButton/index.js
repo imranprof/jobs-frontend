@@ -1,4 +1,5 @@
-import {Paper} from "@material-ui/core";
+import {Paper, Tooltip} from "@material-ui/core";
+import Fade from "@material-ui/core/Fade";
 import {useTheme} from "@material-ui/core/styles";
 
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
@@ -9,9 +10,11 @@ const EditButton = () => {
   const classes = EditButtonStyle(theme);
 
   return (
-    <Paper elevation={3} className={classes.editButtonWrapper}>
-      <i className={`${FontAwesomeIcons.pencil}`} />
-    </Paper>
+    <Tooltip title="Edit" placement="top" TransitionComponent={Fade} TransitionProps={{ timeout: 600 }}>
+      <Paper elevation={3} className={classes.editButtonWrapper}>
+        <i className={`${FontAwesomeIcons.pencil}`} />
+      </Paper>
+    </Tooltip>
   )
 }
 

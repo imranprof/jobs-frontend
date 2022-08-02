@@ -1,5 +1,6 @@
 import Select from "react-select";
 import {connect, useDispatch} from "react-redux";
+import {useFormik} from "formik";
 
 import {TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -8,7 +9,8 @@ import CustomButton from "../../../../../lib/profile/customButtons";
 import {updateIntroAndExpertises} from "../../../../../store/actions/topSectionActions";
 import {TopSectionEditStyle} from "../style";
 import ErrorMessage from "../../../../../lib/errorMessage";
-import {useFormik} from "formik";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const expertisesData = [
   {value: 1, label: "Developer"},
@@ -84,6 +86,9 @@ const IntroExpertisesEdit = (props) => {
 
   return (
     <>
+      <ModalTitle title="Select your expertises" />
+      <EditModalDivider />
+
       <div className={`${classes.topSectionEditWrapper}__introWrapper`}>
         <div className={`${classes.topSectionEditWrapper}__introWrapper-child`}>
           <TextField
@@ -99,8 +104,7 @@ const IntroExpertisesEdit = (props) => {
       </div>
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
-        <div>
-          <h4 className={`${classes.topSectionEditWrapper}__expertisesWrapper__label`}>Select your expertises</h4>
+        <div className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectWrapper`}>
           <Select
             isMulti
             options={filteredExpertise(formHandler.values.expertises)}
@@ -110,6 +114,8 @@ const IntroExpertisesEdit = (props) => {
           />
           {formHandler.errors.expertises && <ErrorMessage error={formHandler.errors.expertises}/>}
         </div>
+
+        <EditModalDivider />
         <CustomButton handler={formHandler.handleSubmit} mode={handleClose}/>
       </div>
     </>
