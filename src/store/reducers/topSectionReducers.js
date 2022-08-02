@@ -11,47 +11,24 @@ import {
   SET_NAME,
   SET_AVATAR
 } from "../actionTypes/topSectionTypes";
-import {getProfileSlug} from "./authReducers";
-import {ProfileData} from "../../../API/mock/profile/profileData"
 
-const {firstName, lastName, headline, intro, bio, expertises, socialLinks, skills, avatar} = ProfileData;
-const initialState = () => {
-  if (getProfileSlug()) {
-    return {
-      id: null,
-      firstName: "",
-      lastName: "",
-      headline: "",
-      headlineMode: false,
-      intro: "",
-      introMode: false,
-      bio: "",
-      bioMode: false,
-      avatar: null,
-      expertises: [],
-      links: {},
-      skills: [],
-    }
-  } else {
-    return {
-      id: null,
-      firstName: firstName,
-      lastName: lastName,
-      headline: headline,
-      headlineMode: false,
-      intro: intro,
-      introMode: false,
-      bio: bio,
-      bioMode: false,
-      avatar: avatar,
-      expertises: expertises,
-      links: socialLinks,
-      skills: skills,
-    }
-  }
+const initialState = {
+  id: null,
+  firstName: "",
+  lastName: "",
+  headline: "",
+  headlineMode: false,
+  intro: "",
+  introMode: false,
+  bio: "",
+  bioMode: false,
+  avatar: null,
+  expertises: [],
+  links: {},
+  skills: [],
 }
 
-export const topSectionReducer = (state = initialState(), action) => {
+export const topSectionReducer = (state = initialState, action) => {
   switch (action.type) {
     case HEADLINE_TEXT:
       return {

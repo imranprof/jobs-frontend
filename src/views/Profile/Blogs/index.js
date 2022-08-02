@@ -1,3 +1,5 @@
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 
 import CustomCard from "../../../lib/profile/card/card";
@@ -5,9 +7,8 @@ import {Grid} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import {BlogsStyle} from "./style";
-import {useEffect, useState} from "react";
 import CustomSnackbar from "../../../lib/customSnackbar";
-import {getBlogsAction} from "../../../store/actions/blogActions";
+import {getBlogsAction, getDemoBlogsAction} from "../../../store/actions/blogActions";
 import AddButton from "../../../lib/addButton";
 import BlogModal from "./components/blogModal";
 
@@ -17,13 +18,13 @@ const Blogs = (props) => {
   const {blogs, profileSlug, editPermission} = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [toggleBlogModal, setToggleBlogModal] = useState(false);
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const {profile} = useRouter().query;
 
   useEffect(
     () => {
-      profileSlug && dispatch(getBlogsAction())
-    }, [profileSlug]
+      profile && profileSlug ? dispatch(getBlogsAction()) : dispatch(getDemoBlogsAction());
+    }, [profile, profileSlug]
   )
 
   const handleClick = () => {

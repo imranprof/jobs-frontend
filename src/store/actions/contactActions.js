@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   DESIGNATION_UPDATE,
   DESIGNATION_EDIT_MODE,
@@ -9,6 +10,7 @@ import {
   SET_EMAIL
 } from "../actionTypes/contactTypes";
 import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
@@ -70,6 +72,16 @@ export const getContactAction = () => {
       dispatch(contactDescriptionUpdate(description));
       dispatch(designationUpdate(designation))
     })
+  }
+}
+
+export const getDemoContactAction = () => {
+  return (dispatch) => {
+    const {email, phone, designation, contactDescription} = ProfileData;
+    dispatch(setEmail(email));
+    dispatch(phoneUpdate(phone));
+    dispatch(contactDescriptionUpdate(contactDescription));
+    dispatch(designationUpdate(designation))
   }
 }
 

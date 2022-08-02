@@ -2,6 +2,7 @@ import axios from "axios";
 
 import {GET_PORTFOLIOS, REMOVE_PORTFOLIO, UPDATE_PORTFOLIO} from "../actionTypes/portfolioTypes";
 import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
@@ -130,5 +131,12 @@ export const getPortfoliosAction = () => {
   return (dispatch) => {
     axios.get(profileURL(), ).then(res => dispatch(getPortfolios(res.data.portfolio_data.projects, res.data.all_categories)))
       .catch(err => err.response);
+  }
+}
+
+export const getDemoPortfoliosAction = () => {
+  const {portfolios, categoriesData} = ProfileData;
+  return (dispatch) => {
+    dispatch(getPortfolios(portfolios, categoriesData))
   }
 }

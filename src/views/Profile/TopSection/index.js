@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 import {useEffect, useRef, useState} from 'react';
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
@@ -18,7 +19,7 @@ import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import AvatarEdit from "../EditComponents/topSection/components/avatarEdit";
 import {
-  bioEditMode,
+  bioEditMode, getDemoProfileAction,
   getProfileAction,
   headlineEditMode, updateBio,
   updateHeadline
@@ -34,8 +35,9 @@ const TopSection = (props) => {
   const [openAvatarModal, setOpenAvatarModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {profileSlug, isAuthenticated, avatar, firstName, lastName, editPermission} = props;
+  const {profileSlug, avatar, firstName, lastName, editPermission} = props;
   const dispatch = useDispatch();
+  const {profile} = useRouter().query;
 
   const modalClose = () => {
     setOpenModal(false);
@@ -60,8 +62,8 @@ const TopSection = (props) => {
         if (topSection) topSection.classList.remove("addMargin")
       }
     });
-    profileSlug && dispatch(getProfileAction());
-  }, [profileSlug])
+    profile && profileSlug ? dispatch(getProfileAction()) : dispatch(getDemoProfileAction());
+  }, [profile, profileSlug])
 
   const headlineHandler = useFormik({
     initialValues: {headline: props.headline},

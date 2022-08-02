@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 
@@ -7,7 +8,7 @@ import {useTheme} from "@material-ui/core/styles";
 import Feature from "./components/feature";
 import {FeatureStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
-import {getFeaturesAction, removeFeatureAction} from "../../../store/actions/featureActions";
+import {getDemoFeaturesAction, getFeaturesAction, removeFeatureAction} from "../../../store/actions/featureActions";
 import AddButton from "../../../lib/addButton";
 import EditCustomModal from "../../../lib/profile/editCustomModal";
 import FeaturesAdd from "../AddComponents/features/components/featuresAdd";
@@ -19,14 +20,15 @@ const Features = (props) => {
   const {features, profileSlug, editPermission} = props;
   const dispatch = useDispatch()
   const [openModal, setOpenModal] = useState(false);
+  const {profile} = useRouter().query;
 
   const modalClose = () => {
     setOpenModal(false)
   }
 
   useEffect(() => {
-    profileSlug && dispatch(getFeaturesAction())
-  }, [profileSlug])
+    profile && profileSlug ? dispatch(getFeaturesAction()) : dispatch(getDemoFeaturesAction());
+  }, [profile, profileSlug])
 
   const featureRemoveHandler = (item) => {
     if (props.features.length > 1) {

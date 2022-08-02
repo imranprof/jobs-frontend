@@ -34,7 +34,7 @@ const initialState = {
   modalType: '',
   loading: false,
   error: '',
-  editPermission: false,
+  editPermission: false
 }
 
 export const authReducers = (state = initialState, action) => {
@@ -54,7 +54,7 @@ export const authReducers = (state = initialState, action) => {
       setProfileSlug(action.payload);
       return {
         ...state,
-        profileSlug: getProfileSlug()
+        profileSlug: action.payload
       }
     case SET_EDIT_PERMISSION:
       return {

@@ -10,9 +10,9 @@ import {
   SOCIAL_LINKS_UPDATE,
   SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR,
 } from "../actionTypes/topSectionTypes";
-
 import {getProfileSlug} from "../reducers/authReducers";
 import {setEditPermission} from "./authAction";
+import {ProfileData} from "../../../API/mock/profile/profileData"
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
@@ -125,6 +125,23 @@ export function getProfileAction() {
       dispatch(skillsUpdate(skills));
     })
       .catch(err => err.data);
+  }
+}
+
+const {firstName, lastName, headline, intro, bio, expertises, socialLinks, skills, avatar} = ProfileData;
+
+export function getDemoProfileAction() {
+  return (dispatch) => {
+    dispatch(setEditPermission(false));
+    dispatch(setProfileID(null));
+    dispatch(headlineText(headline));
+    dispatch(setName({firstName: firstName, lastName: lastName}));
+    dispatch(introText(intro));
+    dispatch(bioText(bio));
+    dispatch(setAvatar(avatar));
+    dispatch(expertisesText(expertises));
+    dispatch(socialLinksUpdate(socialLinks));
+    dispatch(skillsUpdate(skills));
   }
 }
 

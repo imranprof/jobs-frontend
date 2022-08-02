@@ -3,21 +3,13 @@ import {
   UPDATE_PORTFOLIO,
   GET_PORTFOLIOS
 } from "../actionTypes/portfolioTypes";
-import {getProfileSlug} from "./authReducers";
-import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const initialState = () => {
-  if(getProfileSlug()) return {
-    allPortfolios: [],
-    allCategories: []
-  }
-  else return {
-    allPortfolios: ProfileData.portfolios,
-    allCategories: ProfileData.categoriesData
-  }
-};
+const initialState = {
+  allPortfolios: [],
+  allCategories: []
+}
 
-export const portfolioReducer = (state = initialState(), action) => {
+export const portfolioReducer = (state = initialState, action) => {
   switch (action.type) {
     case REMOVE_PORTFOLIO:
       return {

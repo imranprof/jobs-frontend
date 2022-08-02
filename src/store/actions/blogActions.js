@@ -1,10 +1,12 @@
 import axios from "axios";
+
 import {
   BLOGS_REMOVE,
   UPDATE_BLOG,
   GET_BLOGS
 } from "../actionTypes/blogTypes";
 import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
@@ -108,7 +110,13 @@ export const getBlogsAction = () => {
     })
       .catch(err => err.response);
   }
+}
 
+export const getDemoBlogsAction = () => {
+  const {blogs, categoriesData} = ProfileData;
+  return (dispatch) => {
+    dispatch(getBlogs({allBlogs: blogs, allCategories: categoriesData}));
+  }
 }
 
 export const addBlogAction = (blog) => {

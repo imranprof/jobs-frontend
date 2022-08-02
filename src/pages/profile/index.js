@@ -7,18 +7,17 @@ import CustomDivider from "../../lib/profile/divider/divider";
 import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
-import {modalType, setProfileSlug} from "../../store/actions/authAction";
+import {modalType} from "../../store/actions/authAction";
 
 const Profile = (props) => {
-  const {isAuthenticated, profileSlug} = props;
+  const {isAuthenticated} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(modalType(''));
-      dispatch(setProfileSlug(null));
     }
-  }, [isAuthenticated, profileSlug]);
+  }, [isAuthenticated]);
 
   return (
     <NoSsr>
@@ -31,7 +30,6 @@ const Profile = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    profileSlug: state.auth.profileSlug,
     isAuthenticated: state.auth.isAuthenticated,
   }
 }

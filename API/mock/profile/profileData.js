@@ -127,8 +127,8 @@ export const ProfileData = {
       image: "blog-01.jpg",
       categories: [{id: 2, title: "mobile"}, {id: 3, title: "apps"}],
       title: "The services provide for design",
-      readTime: 2,
-      description: <div>
+      reading_time: 2,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -184,15 +184,15 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
     {
       id: 2,
       image: "blog-02.jpg",
       categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
       title: "Mobile app landing design & app maintain",
-      readTime: 2,
-      description: <div>
+      reading_time: 2,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -248,15 +248,15 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
     {
       id: 3,
       image: "blog-03.jpg",
       categories: [{id: 1, title: "development"}],
       title: "T-shirt design is the part of design",
-      readTime: 3,
-      description: <div>
+      reading_time: 3,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -312,15 +312,15 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
     {
       id: 4,
       image: "portfolio-05.jpg",
       categories: [{id: 2, title: "mobile"}, {id: 1, title: "development"}, {id: 3, title: "apps"}],
       title: "this is new blog",
-      readTime: 4,
-      description: <div>
+      reading_time: 4,
+      body: `<div>
         <span>2 May, 2021</span>
         <h2>Digital Marketo to Their New Office.</h2>
         <p>Nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
@@ -376,11 +376,11 @@ export const ProfileData = {
           auctor.
           Quisque nec imperdiet purus, in ornare odio. Quisque odio felis, vestibulum
           et.</p>
-      </div>
+      </div>`
     },
   ],
   resume: {
-    education: [
+    educations: [
       {
         id: 1,
         institution: "University of A",
@@ -433,7 +433,7 @@ export const ProfileData = {
       {id: 4, name: "figma", rating: 65},
       {id: 5, name: "adobe", rating: 56},
     ],
-    experience: [
+    experiences: [
       {
         id: 1,
         company_name: "Company A",

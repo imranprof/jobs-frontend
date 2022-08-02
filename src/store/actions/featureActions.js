@@ -1,6 +1,8 @@
 import axios from "axios";
+
 import {GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE} from "../actionTypes/featureTypes";
 import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
@@ -19,6 +21,14 @@ export const getFeaturesAction = () => {
       .catch(err => err.response);
   }
 }
+
+export const getDemoFeaturesAction = () => {
+  const {features} = ProfileData;
+  return (dispatch) => {
+    dispatch(getFeatures(features));
+  }
+}
+
 
 export const addFeatureAction = (feature) => {
   const data = {

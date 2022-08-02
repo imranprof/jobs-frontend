@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
@@ -13,7 +14,7 @@ import CustomSnackbar from "../../../../lib/customSnackbar";
 import {
   designationEditMode,
   contactDescriptionEditMode,
-  phoneEditMode, phoneUpdateAction, designationUpdateAction, contactDescriptionUpdateAction
+  phoneEditMode, phoneUpdateAction, designationUpdateAction, contactDescriptionUpdateAction, getDemoContactAction
 } from "../../../../store/actions/contactActions";
 import {getContactAction} from "../../../../store/actions/contactActions";
 
@@ -36,10 +37,11 @@ const ContactInfo = (props) => {
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const fullName = `${firstName} ${lastName}`
   const dispatch = useDispatch()
+  const {profile} = useRouter().query;
 
   useEffect(() => {
-    profileSlug && dispatch(getContactAction());
-  }, [profileSlug])
+    profile && profileSlug ? dispatch(getContactAction()) : dispatch(getDemoContactAction());
+  }, [profile, profileSlug])
 
   const designationHandler = useFormik({
     initialValues: {

@@ -1,3 +1,4 @@
+import {useRouter} from "next/router";
 import {useState, useEffect} from "react";
 import {connect, useDispatch} from "react-redux";
 
@@ -7,7 +8,7 @@ import {useTheme} from "@material-ui/core/styles";
 import CustomCard from "../../../lib/profile/card/card";
 import {PortfolioStyle} from "./style";
 import CustomSnackbar from "../../../lib/customSnackbar";
-import {getPortfoliosAction} from "../../../store/actions/portfolioActions"
+import {getDemoPortfoliosAction, getPortfoliosAction} from "../../../store/actions/portfolioActions"
 import AddButton from "../../../lib/addButton";
 import PortfolioAdd from "../AddComponents/portfolio/components/portfolioAdd";
 
@@ -18,11 +19,12 @@ const Portfolio = (props) => {
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch()
   const [addPortfolio, setAddPortfolio] = useState(false);
+  const {profile} = useRouter().query;
 
   useEffect(
     () => {
-      profileSlug && dispatch(getPortfoliosAction())
-    }, [profileSlug]
+      profile && profileSlug ? dispatch(getPortfoliosAction()) : dispatch(getDemoPortfoliosAction());
+    }, [profile, profileSlug]
   )
 
   const getPermission = () => {
