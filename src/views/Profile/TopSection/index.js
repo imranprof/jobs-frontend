@@ -85,6 +85,11 @@ const TopSection = (props) => {
     }
   })
 
+  const headlineResetHandler = () => {
+    headlineHandler.resetForm();
+    props.setHeadlineMode(false);
+  }
+
   const bioHandler = useFormik({
     initialValues: {bio: props.bio},
     enableReinitialize: true,
@@ -107,6 +112,11 @@ const TopSection = (props) => {
     }
   })
 
+  const bioResetHandler = () => {
+    bioHandler.resetForm();
+    props.setBioMode(false);
+  }
+
   return (
     <>
       <Grid container className={classes.topSectionWrapper} id="topSection" ref={topSectionRef}>
@@ -122,7 +132,7 @@ const TopSection = (props) => {
                   onChange={headlineHandler.handleChange}
                 />
                 {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
-                <CustomButton handler={headlineHandler.handleSubmit} mode={props.setHeadlineMode}/>
+                <CustomButton handler={headlineHandler.handleSubmit} mode={headlineResetHandler}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__headline`}>
@@ -165,7 +175,7 @@ const TopSection = (props) => {
                   onChange={bioHandler.handleChange}
                 />
                 {bioHandler.errors.bio ? <ErrorMessage error={bioHandler.errors.bio}/> : null}
-                <CustomButton handler={bioHandler.handleSubmit} mode={props.setBioMode}/>
+                <CustomButton handler={bioHandler.handleSubmit} mode={bioResetHandler}/>
               </div>
             ) : (
               <div className={`${classes.topSectionWrapper}__left-top__bio-wrapper`}>
