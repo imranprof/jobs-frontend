@@ -71,7 +71,7 @@ export const getContactAction = () => {
       dispatch(setEmail(contact_email));
       dispatch(phoneUpdate(phone));
       dispatch(contactDescriptionUpdate(description));
-      dispatch(designationUpdate(designation))
+      dispatch(designationUpdate(designation));
     })
   }
 }

@@ -8,7 +8,7 @@ import {
   BIO_TEXT,
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
-  SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR,
+  SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR, SET_LOADER,
 } from "../actionTypes/topSectionTypes";
 import {getProfileSlug} from "../reducers/authReducers";
 import {setEditPermission} from "./authAction";
@@ -123,6 +123,7 @@ export function getProfileAction() {
       dispatch(expertisesText(expertises));
       dispatch(socialLinksUpdate(social_links));
       dispatch(skillsUpdate(skills));
+      dispatch(setLoader(false));
     })
       .catch(err => err.data);
   }
@@ -246,5 +247,12 @@ export const socialLinksUpdateAction = ({socialLinks, profileID}) => {
         dispatch(socialLinksUpdate(res.data.profile.social_links));
       })
       .catch(err => err.response);
+  }
+}
+
+export const setLoader = (boolean) => {
+  return {
+    type: SET_LOADER,
+    payload: boolean
   }
 }

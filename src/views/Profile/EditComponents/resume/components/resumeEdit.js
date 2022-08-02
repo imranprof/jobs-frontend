@@ -241,7 +241,7 @@ const ResumeEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    resume: state.editResume.resume
+    resume: state.resumeItems.resume
   }
 }
 

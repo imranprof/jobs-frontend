@@ -8,22 +8,27 @@ import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
 import {modalType} from "../../store/actions/authAction";
+import CustomLoader from "../../lib/customLoader";
+import {getProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
-  const {isAuthenticated} = props;
+  const {isAuthenticated, profileSlug, loader} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(modalType(''));
     }
-  }, [isAuthenticated]);
+    profileSlug && dispatch(getProfileAction())
+  }, [isAuthenticated, profileSlug]);
 
   return (
     <NoSsr>
-      <TopSection/>
-      <CustomDivider/>
-      <Sections/>
+      {loader ? <CustomLoader/> : <>
+        <TopSection/>
+        <CustomDivider/>
+        <Sections/>
+      </>}
     </NoSsr>
   );
 }
@@ -31,6 +36,8 @@ const Profile = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
+    loader: state.topSection.loader,
+    profileSlug: state.auth.profileSlug
   }
 }
 

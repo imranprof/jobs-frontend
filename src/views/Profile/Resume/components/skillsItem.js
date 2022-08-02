@@ -64,7 +64,7 @@ const SkillsItem = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    resume: state.editResume.resume,
+    resume: state.resumeItems.resume,
     profileSlug: state.auth.profileSlug,
     editPermission: state.auth.editPermission
   }
