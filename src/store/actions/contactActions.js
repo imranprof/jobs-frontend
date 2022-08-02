@@ -13,6 +13,7 @@ import {getProfileSlug} from "../reducers/authReducers";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
+const contactURL = process.env.NEXT_PUBLIC_CONTACT_URL;
 
 export const designationUpdate = (designation) => {
   return {
@@ -131,4 +132,24 @@ export const phoneUpdateAction = (phone) => {
       .then(res => dispatch(phoneUpdate(res.data.contacts_data.phone)))
       .catch(err => err.response);
   }
+}
+
+export const sendMessageAction = (values) => {
+  const data = {
+    user_contact: {
+        name: values.name,
+        phone_number: values.phone,
+        email: values.email,
+        subject: values.subject,
+        message: values.message,
+        user_id: values.userID,
+        messenger_id: values.messengerId
+    }
+  }
+  return (dispatch) => {
+    axios.post(contactURL, data)
+      .then(res => res)
+      .catch(err => err.response);
+  }
+
 }

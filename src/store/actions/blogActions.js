@@ -75,7 +75,7 @@ export const updateBlogAction = (currentBlog, previousBlog) => {
     }
   );
 
-  const data = {
+  let data = {
     "user": {
       "blogs_attributes": [
         {
@@ -83,11 +83,13 @@ export const updateBlogAction = (currentBlog, previousBlog) => {
           "title": currentBlog.title,
           "body": currentBlog.body,
           "reading_time": currentBlog.readTime,
-          "categorizations_attributes": [...addCategories, ...deleteCategories]
+          "categorizations_attributes": [...addCategories, ...deleteCategories],
+          "image": {"data": currentBlog.image}
         }
       ]
     }
   }
+  if (!currentBlog.image) delete data.user.blogs_attributes[0].image;
 
   return (dispatch) => {
     axios.patch(profileURL(), data)
@@ -120,7 +122,7 @@ export const getDemoBlogsAction = () => {
 }
 
 export const addBlogAction = (blog) => {
-  const data = {
+  let data = {
     "user": {
       "blogs_attributes": [
         {
@@ -129,15 +131,17 @@ export const addBlogAction = (blog) => {
           "reading_time": blog.readTime,
           "categorizations_attributes": blog.categories.map((category) => ({
             category_id: category.category_id
-          }))
+          })),
+          "image": {"data": blog.image}
         }
       ]
     }
   }
+  if (!blog.image) delete data.user.blogs_attributes[0].image;
+
   return (dispatch) => {
     axios.patch(profileURL(), data)
       .then(res => dispatch(updateBlog(res.data.blogs, res.data.all_categories)))
       .catch(err => err.response)
   }
-
 }
