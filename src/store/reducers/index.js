@@ -11,9 +11,7 @@ import {featureReducer} from "./featureReducers";
 
 const rootReducers = combineReducers({
     allProfiles: profilesReducer,
-    profile: profileReducer,
     topSection: topSectionReducer,
-    editResume: resumeReducers,
     auth: authReducers,
     portfolios: portfolioReducer,
     contacts: contactReducer,

@@ -38,7 +38,10 @@ const darkTheme = createTheme({
       searchBtn: COLORS.white_4,
       hourlyRate: COLORS.white_4,
       shareBtn: COLORS.black_6,
-      dangerColor: COLORS.danger
+      dangerColor: COLORS.danger,
+      backToHomeHover: COLORS.white_4,
+      avatarBgEdit: COLORS.white_5,
+      modalTitle: COLORS.white_5
     },
     customShadow: {
       main: COLORS.boxShadow_1,
@@ -46,13 +49,15 @@ const darkTheme = createTheme({
       dark: COLORS.boxShadow_7,
       default: COLORS.boxShadow_3,
       backToTop: COLORS.boxShadow_3,
+      themeButton: COLORS.boxShadow_3,
       paperCardShadow: COLORS.boxShadow_3,
       buttonShadow: COLORS.boxShadow_11,
       editInputShadow: COLORS.boxShadow_3
     },
     customDivider: {
       main: COLORS.black_3,
-      secondary: COLORS.black_10
+      primary: COLORS.gray_1,
+      secondary: COLORS.black_10,
     },
     customHoverColor: {
       main: COLORS.pink,

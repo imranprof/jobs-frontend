@@ -6,7 +6,10 @@ import {useTheme} from "@material-ui/core/styles";
 
 import {resumeUpdateAction} from "../../../../../store/actions/resumeActions";
 import CustomButtons from "../../../../../lib/profile/customButtons";
+import ErrorMessage from "../../../../../lib/errorMessage";
 import {ResumeEditStyle} from "../style";
+import ModalTitle from "../../../../../lib/profile/modalTitle";
+import EditModalDivider from "../../../../../lib/profile/editModalDivider";
 
 const ResumeSkillsEdit = (props) => {
   const theme = useTheme();
@@ -26,32 +29,42 @@ const ResumeSkillsEdit = (props) => {
       resumeItem: values,
       cardType: cardType
     }));
-
     props.setToast({show: true, severity: "success", text: "Successfully updated the skill"})
     handleClose()
   }
 
   const formik = useFormik({
     initialValues: initialSkillValues,
+    validateOnChange: true,
     onSubmit: skillsUpdate,
+    validate: values => {
+      let errors = {};
+      if (values.rating === 0) {
+        errors.rating = "Skill rating can't be zero!"
+      }
+      return errors;
+    }
   })
 
   return (
     <div>
-      <h3>Edit skill</h3>
+      <ModalTitle title="Edit skill"/>
+      <EditModalDivider />
 
       <div className={`${classes.resumeEditWrapper}__content-wrapper`}>
         <div className={`${classes.resumeEditWrapper}__content-wrapper__gap`}>
-          <h4>Rate your {name} skill</h4>
+          <h4 className={`${classes.resumeEditWrapper}__content-wrapper__edit-skill`}>Rate your {name} skill</h4>
           <Slider
             key={`slider-${formik.values.rating}`}
             valueLabelDisplay="on"
             defaultValue={formik.values.rating}
-            onChangeCommitted={(e, val) => formik.values.rating = val}
+            onChangeCommitted={(e, val) => formik.setFieldValue("rating", val)}
           />
+          {formik.errors.rating && <ErrorMessage error={formik.errors.rating}/>}
         </div>
       </div>
 
+      <EditModalDivider />
       <CustomButtons handler={formik.handleSubmit} mode={handleClose}/>
     </div>
   );
@@ -59,7 +72,7 @@ const ResumeSkillsEdit = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    resume: state.editResume.resume
+    resume: state.resumeItems.resume
   }
 }
 

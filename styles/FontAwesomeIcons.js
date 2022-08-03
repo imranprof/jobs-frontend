@@ -17,7 +17,10 @@ const FontAwesomeIcons = {
     "pencil": "fa-solid fa-pencil",
     "signIn": "fa-solid fa-right-to-bracket",
     "trash": "fa-solid fa-trash",
-    "darkMode": "fa-solid fa-moon"
+    "darkMode": "fa-solid fa-moon",
+    "plus": "fa-solid fa-plus",
+    "chevronLeft": "fa-solid fa-chevron-left",
+    "camera": "fa-solid fa-camera"
 }
 
 export default FontAwesomeIcons;

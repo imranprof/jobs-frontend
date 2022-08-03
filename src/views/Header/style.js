@@ -9,18 +9,23 @@ export const useStyles = makeStyles({
     marginBottom: 50,
     boxShadow: theme.palette.customShadow.light,
     position: "static",
+    transition: 'backdrop-filter 0.3s ease-in-out',
+    backdropFilter: 'blur(15px) opacity(0)',
     '&.isSticky': {
       position: "fixed",
       width: "100%",
       backgroundColor: `${theme.palette.customBackground.light}de`,
       boxShadow: theme.palette.customShadow.main,
-      backdropFilter: "blur(15px)",
-      transition: "ease 0.3s, fadein .3s",
-      padding: '14px 25px'
+      backdropFilter: "blur(15px) opacity(1)",
+      padding: "14px 50px",
     },
     '&__toolbar': {
       width: '100%',
       justifyContent: 'space-between',
+      '&__navLeft': {
+        display: "flex",
+        alignItems: "center",
+      },
       '&__right': {
         width: 615,
         display: "flex",
@@ -38,12 +43,6 @@ export const useStyles = makeStyles({
     },
 
     // Profile Header Styles
-    '& .fa-moon': {
-      color: "black"
-    },
-    '&__light-theme__icon': {
-      fill: "#FFCC33"
-    },
     '&__profile': {
       display: 'flex',
       alignItems: 'center',
@@ -55,9 +54,6 @@ export const useStyles = makeStyles({
         borderRadius: '50%',
         border: `3px solid ${theme.palette.customColor.dark}`,
         marginRight: 10,
-        '& img': {
-          objectFit: "contain",
-        }
       },
       '&__name': {
         fontSize: 18,
@@ -110,7 +106,7 @@ export const useStyles = makeStyles({
       },
       '& a': {
         fontFamily: FONTS.primaryFont,
-        fontWeight: 500,
+        fontWeight: 400,
         fontSize: 13,
         color: theme.palette.customColor.main,
         textDecoration: 'none',
@@ -125,10 +121,9 @@ export const useStyles = makeStyles({
       },
       '&__navShare': {
         display: "flex",
-        width: "660px"
       },
       '&__navItem': {
-         width: "550px"
+        width: 475
       },
       '&__share': {
         position: "relative",
@@ -136,7 +131,7 @@ export const useStyles = makeStyles({
         textTransform: "uppercase",
         background: theme.palette.customBackground.gradiant.light,
         boxShadow: theme.palette.customShadow.paperCardShadow,
-        width: "130%",
+        width: 95,
         height: 40,
         border: "none",
         borderRadius: 5,
@@ -269,9 +264,6 @@ export const useStyles = makeStyles({
     },
 
     // Profiles Header Styles
-    '&__profiles__theme-switch': {
-      marginLeft: "-15px"
-    },
     '&__profiles__side-bar': {
       background: theme.palette.customBackground.sideBar,
       padding: '10px 25px 20px 25px',
@@ -371,13 +363,18 @@ export const useStyles = makeStyles({
     },
 
     // ========= Breakpoints =========
-    [theme.breakpoints.between('xs', "sm")]: {
+    [theme.breakpoints.down('xs')]: {
+      '&__toolbar': {
+        padding: "0 14px"
+      },
+    },
+    [theme.breakpoints.down("sm")]: {
       padding: "15px 25px",
       '&.isSticky': {
         padding: '10px 18px',
       },
       '&__toolbar': {
-        padding: 0
+        padding: "0 24px"
       },
     },
     [theme.breakpoints.between('sm', "md")]: {

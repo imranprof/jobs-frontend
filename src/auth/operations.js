@@ -16,11 +16,11 @@ export function setAuthToken(token) {
   }
 }
 
-export function setUserID(userID) {
-  if (userID) {
-    localStorage.setItem('userID', userID);
+export function setProfileSlug(profileSlug) {
+  if (profileSlug) {
+    localStorage.setItem('profileSlug', profileSlug);
   } else {
-    localStorage.removeItem('userID');
+    localStorage.removeItem('profileSlug');
   }
 }
 
@@ -28,7 +28,7 @@ export function handleApiResponse(response) {
   return async (dispatch) => {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
-      setUserID(response.data.user_id);
+      setProfileSlug(response.data.profile_slug);
       await dispatch(authenticate({authenticate: true}))
     } else {
       await dispatch(signInRejected(response.data.message))
@@ -63,7 +63,7 @@ export function SignOut() {
     await axios.delete(signOutURL)
       .then(async () => {
         await setAuthToken(false)
-        await setUserID(false)
+        await setProfileSlug(false)
         await dispatch(authenticate(false))
       })
       .catch(err => alert(err));

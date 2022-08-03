@@ -18,3 +18,4 @@ export const BIO_EDIT_MODE = 'BIO_EDIT_MODE'
 export const SOCIAL_LINKS_UPDATE = 'SOCIAL_LINKS_UPDATE'
 // Skills
 export const SKILLS_VALUES = 'SKILLS_VALUES'
+export const SET_LOADER = 'SET_LOADER'

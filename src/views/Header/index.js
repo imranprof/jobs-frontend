@@ -10,10 +10,11 @@ const Header = (props) => {
   const theme = useTheme();
   const classes = HeaderStyle(theme);
   const headerRef = useRef(null);
-  const { type } = props;
+  const {type} = props;
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
+    isSticky();
     return () => {
       window.removeEventListener('scroll', isSticky);
     };
@@ -22,16 +23,16 @@ const Header = (props) => {
   const isSticky = () => {
     const header = headerRef.current;
     const scrollTop = window.scrollY;
-    scrollTop >= 80 ? header.classList.add("isSticky") : header.classList.remove("isSticky");
+    scrollTop >= 130 ? header.classList.add("isSticky") : header.classList.remove("isSticky");
   };
 
   switch (type) {
     case 'profile':
-      return <ProfileHeader classes={classes} headerRef={headerRef} themeMode={props.themeMode} themeSet={props.setTheme}/>;
+      return <ProfileHeader classes={classes} headerRef={headerRef}/>;
     case 'profiles':
-      return <ProfilesHeader classes={classes} headerRef={headerRef} themeMode={props.themeMode} themeSet={props.setTheme}/>;
+      return <ProfilesHeader classes={classes} headerRef={headerRef}/>;
     default:
-      return <ProfilesHeader classes={classes} headerRef={headerRef} themeMode={props.themeMode} themeSet={props.setTheme}/>;
+      return <ProfilesHeader classes={classes} headerRef={headerRef}/>;
   }
 }
 

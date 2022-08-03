@@ -7,26 +7,26 @@ import {
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
   SKILLS_VALUES,
-  SET_PROFILE_ID, SET_NAME, SET_AVATAR,
+  SET_PROFILE_ID,
+  SET_NAME,
+  SET_AVATAR, SET_LOADER
 } from "../actionTypes/topSectionTypes";
-import {ProfileData} from "../../../API/mock/profile/profileData";
-
-const {headline, intro, bio, expertises, socialLinks, skills, features} = ProfileData;
 
 const initialState = {
   id: null,
-  firstName: null,
-  lastName: null,
-  headline: null,
+  firstName: "",
+  lastName: "",
+  headline: "",
   headlineMode: false,
-  intro: null,
+  intro: "",
   introMode: false,
-  bio: null,
+  bio: "",
   bioMode: false,
   avatar: null,
   expertises: [],
   links: {},
   skills: [],
+  loader: true
 }
 
 export const topSectionReducer = (state = initialState, action) => {
@@ -86,6 +86,11 @@ export const topSectionReducer = (state = initialState, action) => {
       return {
         ...state,
         avatar: action.payload
+      }
+    case SET_LOADER:
+      return {
+        ...state,
+        loader: action.payload
       }
     default:
       return state

@@ -1,11 +1,10 @@
 import axios from "axios";
-import
-{
-  GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE
-}
-  from "../actionTypes/featureTypes";
 
-const profileURL = process.env.NEXT_PUBLIC_PROFILE_URL;
+import {GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE} from "../actionTypes/featureTypes";
+import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
+
+const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
 export const getFeatures = (features) => {
   return {
@@ -16,15 +15,34 @@ export const getFeatures = (features) => {
   }
 }
 
-export const getFeaturesAction = (values) => {
-  const {id} = values
+export const getFeaturesAction = () => {
   return (dispatch) => {
-    axios.get(profileURL, {
-      params: {
-        user_id: id
-      }
-    }).then(res => dispatch(getFeatures(res.data.features)))
+    axios.get(profileURL()).then(res => dispatch(getFeatures(res.data.features)))
       .catch(err => err.response);
+  }
+}
+
+export const getDemoFeaturesAction = () => {
+  const {features} = ProfileData;
+  return (dispatch) => {
+    dispatch(getFeatures(features));
+  }
+}
+
+
+export const addFeatureAction = (feature) => {
+  const data = {
+    "features_attributes": [
+      {
+        "title": feature.title,
+        "description": feature.description,
+      }
+    ]
+  }
+  return (dispatch) => {
+    axios.patch(profileURL(), {user: data})
+         .then(res => dispatch(getFeatures(res.data.features)))
+         .catch(err => err.response)
   }
 }
 
@@ -50,7 +68,7 @@ export const updateFeatureAction = (oldFeature, updatedFeature) => {
     }
   }
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => dispatch(updateFeature(res.data.features)))
       .catch(err => err.response)
   }
@@ -77,7 +95,7 @@ export const removeFeatureAction = (featureID) => {
     }
   }
   return (dispatch) => {
-    axios.patch(profileURL, data)
+    axios.patch(profileURL(), data)
       .then(res => dispatch(removeFeature(res.data.features)))
       .catch(err => err.response)
   }

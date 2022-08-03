@@ -14,6 +14,7 @@ import CustomButton from "../../../../lib/profile/customButtons";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import ErrorMessage from "../../../../lib/errorMessage";
 import {updatePortfolioAction} from "../../../../store/actions/portfolioActions";
+import CustomUploadImage from "../../../../lib/profile/customUploadImage";
 
 const PortfolioModal = (props => {
   const theme = useTheme();
@@ -24,10 +25,32 @@ const PortfolioModal = (props => {
   const [mode, toggleMode] = useState(editMode)
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const dispatch = useDispatch();
+  const [newImage, setNewImage] = useState('');
 
   setTimeout(() => {
     SetSlidingClass(setTogglePortfolioModal ? `${modalWrapper}__modal-content--visible` : "")
   }, 1);
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+    }));
+  }
+
+  const handleImageUpload = async () => {
+    let base64Image = await convertToBase64(newImage);
+    return base64Image;
+  }
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setNewImage(e.target.files[0])
+    }
+  }
 
   const allCategories = categoriesData?.map((category) => ({
     category_id: category.id,
@@ -46,11 +69,12 @@ const PortfolioModal = (props => {
     title: category.label
   }));
 
-  const updateHandler = ({portfolio, selectedCategories, title, description}) => {
+  const updateHandler = ({portfolio, selectedCategories, title, description, image}) => {
     const oldPortfolio = {...portfolio};
     portfolio.categories = mapCategoriesForState(selectedCategories);
     portfolio.title = title;
     portfolio.description = description;
+    portfolio.image = image;
     dispatch(updatePortfolioAction(oldPortfolio, portfolio));
   }
 
@@ -80,12 +104,13 @@ const PortfolioModal = (props => {
       title: title,
       description: description,
     },
-    onSubmit: values => {
+    onSubmit: async (values) => {
       updateHandler({
         portfolio: props.portfolio,
         selectedCategories: values.categories,
         title: values.title,
-        description: values.description
+        description: values.description,
+        image: (!newImage) ? null : await handleImageUpload()
       });
       setToast({show: true, severity: "success", text: "Successfully updated the portfolio."});
       toggleMode(false);
@@ -130,11 +155,24 @@ const PortfolioModal = (props => {
           </IconButton>
           <Grid container>
             <Grid item md={6} className={`${modalWrapper}__modal-content__image-container`}>
-              <img
-                className={`${modalWrapper}__modal-content__image-container__image`}
-                src={image}
-                alt="image"
-              />
+              {mode ? (
+                <div>
+                  <img
+                    className={`${modalWrapper}__modal-content__image-container__image`}
+                    src={(newImage === '') ? image : URL.createObjectURL(newImage)}
+                    alt="image"
+                  />
+                  <CustomUploadImage changeHandler={handleImageChange} selectedImage={newImage}/>
+                </div>
+              ) : (
+                <img
+                  className={`${modalWrapper}__modal-content__image-container__image`}
+                  src={image}
+                  alt="image"
+                />
+              )
+
+              }
             </Grid>
             <Grid item md={6} className={`${modalWrapper}__modal-content__text-content`}>
               {mode ?
@@ -164,7 +202,7 @@ const PortfolioModal = (props => {
                       value={formHandler.values.description}
                       name="description"
                       multiline
-                      maxRows={6}
+                      rows={5}
                       InputProps={{disableUnderline: true}}
                       onChange={formHandler.handleChange}
                       className={`${modalWrapper}__modal-content__text-content__description__input`}
@@ -224,4 +262,4 @@ const mapStateToProps = (state) => ({
   categoriesData: state.portfolios.allCategories
 });
 
-export default connect(mapStateToProps, null)(PortfolioModal);
+export default connect(mapStateToProps)(PortfolioModal);

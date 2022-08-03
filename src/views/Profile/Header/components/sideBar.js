@@ -67,7 +67,7 @@ const ProfileSideBar = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        profileInfo: state.profile
+        profileInfo: state.topSection
     }
 }
 

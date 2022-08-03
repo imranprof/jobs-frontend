@@ -1,6 +1,5 @@
 import {useDispatch, connect} from "react-redux";
 import {useRouter} from "next/router";
-
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
@@ -9,6 +8,7 @@ import {Button, Icon, Box, TextField} from "@material-ui/core";
 import {signIn, handleApiResponse} from "../operations";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {useEffect} from "react";
+import {getProfileSlug} from "../../store/reducers/authReducers";
 
 const validationSchema = yup.object({
   email: yup
@@ -23,12 +23,11 @@ const validationSchema = yup.object({
 
 const SignInForm = ({error, isAuthenticated}) => {
   const dispatch = useDispatch()
-
   const router = useRouter();
 
   useEffect(()=> {
     if(isAuthenticated){
-      router.push('/profile')
+      router.push(`/${getProfileSlug()}`)
     }
   }, [isAuthenticated])
 

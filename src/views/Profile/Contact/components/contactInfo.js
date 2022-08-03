@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
@@ -13,14 +14,13 @@ import CustomSnackbar from "../../../../lib/customSnackbar";
 import {
   designationEditMode,
   contactDescriptionEditMode,
-  phoneEditMode, phoneUpdateAction, designationUpdateAction, contactDescriptionUpdateAction
+  phoneEditMode, phoneUpdateAction, designationUpdateAction, contactDescriptionUpdateAction, getDemoContactAction
 } from "../../../../store/actions/contactActions";
 import {getContactAction} from "../../../../store/actions/contactActions";
 
 const ContactInfo = (props) => {
   const {
     classes,
-    userID,
     profileID,
     firstName,
     lastName,
@@ -30,24 +30,30 @@ const ContactInfo = (props) => {
     contactDescriptionMode,
     phone,
     phoneMode,
-    email
+    email,
+    editPermission,
+    profileSlug
   } = props;
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const fullName = `${firstName} ${lastName}`
   const dispatch = useDispatch()
+  const {profile} = useRouter().query;
 
   useEffect(() => {
-    userID && dispatch(getContactAction(userID));
-  }, [])
+    profile && profileSlug ? dispatch(getContactAction()) : dispatch(getDemoContactAction());
+  }, [profile, profileSlug])
 
   const designationHandler = useFormik({
     initialValues: {
       designation: designation
     },
     onSubmit: values => {
-      dispatch(designationUpdateAction(profileID,values.designation))
+      dispatch(designationUpdateAction(profileID, values.designation))
       props.setDesignationMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the designation"});
+    },
+    onReset: () => {
+      props.setDesignationMode(false);
     },
     enableReinitialize: true,
     validate: values => {
@@ -69,6 +75,9 @@ const ContactInfo = (props) => {
       props.setContactDescriptionMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the description"});
     },
+    onReset: () => {
+      props.setContactDescriptionMode(false);
+    },
     validate: values => {
       let errors = {}
       if (!values.contactDescription) {
@@ -88,6 +97,9 @@ const ContactInfo = (props) => {
       props.setPhoneMode(false);
       setToast({show: true, severity: "success", text: "Successfully updated the phone number"});
     },
+    onReset: () => {
+      props.setPhoneMode(false);
+    },
     validate: values => {
       let errors = {}
       if (!values.phone) {
@@ -96,6 +108,10 @@ const ContactInfo = (props) => {
       return errors;
     }
   })
+
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
 
   return (
     <>
@@ -123,14 +139,16 @@ const ContactInfo = (props) => {
                 />
                 {designationHandler.errors.designation ?
                   <ErrorMessage error={designationHandler.errors.designation}/> : null}
-                <CustomButton handler={designationHandler.handleSubmit} mode={props.setDesignationMode}/>
+                <CustomButton handler={designationHandler.handleSubmit} mode={designationHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes}__contact-info__title-area__designationWrapper`}>
                 <p className={`${classes}__contact-info__title-area__designation`}>{designation}</p>
+                {getPermission() &&
                 <span onClick={() => props.setDesignationMode(true)}>
                   <EditButton/>
                 </span>
+                }
               </div>
             )}
           </div>
@@ -148,14 +166,16 @@ const ContactInfo = (props) => {
                 />
                 {contactDescriptionHandler.errors.contactDescription ?
                   <ErrorMessage error={contactDescriptionHandler.errors.contactDescription}/> : null}
-                <CustomButton handler={contactDescriptionHandler.handleSubmit} mode={props.setContactDescriptionMode}/>
+                <CustomButton handler={contactDescriptionHandler.handleSubmit} mode={contactDescriptionHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes}__contact-info__descriptionWrapper`}>
                 <p className={`${classes}__contact-info__description`}>{contactDescription}</p>
+                {getPermission() &&
                 <span onClick={() => props.setContactDescriptionMode(true)}>
                   <EditButton/>
                 </span>
+                }
               </div>
             )}
 
@@ -171,22 +191,24 @@ const ContactInfo = (props) => {
                 />
                 {phoneHandler.errors.phone ?
                   <ErrorMessage error={phoneHandler.errors.phone}/> : null}
-                <CustomButton handler={phoneHandler.handleSubmit} mode={props.setPhoneMode}/>
+                <CustomButton handler={phoneHandler.handleSubmit} mode={phoneHandler.handleReset}/>
               </div>
             ) : (
               <div className={`${classes}__contact-info__phoneWrapper`}>
               <span className={`${classes}__contact-info__phone`}>
                 Phone: <Link href="#"><a>{phone}</a></Link>
               </span>
+                {getPermission() &&
                 <span onClick={() => props.setPhoneMode(true)}>
                 <EditButton/>
               </span>
+                }
               </div>
             )}
 
             <span className={`${classes}__contact-info__email`}>Email: <Link href="#"><a>{email}</a></Link></span>
           </div>
-          <SocialLinks setToast={setToast}/>
+          <SocialLinks setToast={setToast} editPermission={getPermission()}/>
         </Card>
       </Grid>
 
@@ -202,7 +224,8 @@ const ContactInfo = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.auth.userID,
+    profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission,
     profileID: state.topSection.id,
     firstName: state.topSection.firstName,
     lastName: state.topSection.lastName,

@@ -1,33 +1,43 @@
+import {useEffect} from "react";
+import {connect, useDispatch} from "react-redux";
+
+import {NoSsr} from "@material-ui/core";
+
 import CustomDivider from "../../lib/profile/divider/divider";
 import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
-import {connect, useDispatch} from "react-redux";
 import {modalType} from "../../store/actions/authAction";
-import {useEffect} from "react";
+import CustomLoader from "../../lib/customLoader";
+import {getProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
-  const {isAuthenticated} = props;
+  const {isAuthenticated, profileSlug, loader} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(isAuthenticated){
-      dispatch(modalType(''))
+    if (isAuthenticated) {
+      dispatch(modalType(''));
     }
-  }, [isAuthenticated]);
+    profileSlug && dispatch(getProfileAction())
+  }, [isAuthenticated, profileSlug]);
 
-    return (
-        <>
-            <TopSection/>
-            <CustomDivider/>
-            <Sections/>
-        </>
-    );
+  return (
+    <NoSsr>
+      {loader ? <CustomLoader/> : <>
+        <TopSection/>
+        <CustomDivider/>
+        <Sections/>
+      </>}
+    </NoSsr>
+  );
 }
 
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
+    loader: state.topSection.loader,
+    profileSlug: state.auth.profileSlug
   }
 }
 

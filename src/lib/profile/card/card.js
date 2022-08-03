@@ -18,7 +18,7 @@ import {blogsRemoveAction} from "../../../store/actions/blogActions";
 const CustomCard = (props) => {
   const theme = useTheme();
   const classes = CardStyle(theme);
-  const {element, elementType, portfolios, setToast, blogs, userID} = props;
+  const {element, elementType, portfolios, toast, setToast, blogs, profileSlug, editPermission} = props;
   const {title, image, categories, reactCount, reading_time} = element;
 
   const isPortfolio = elementType === "portfolio";
@@ -53,14 +53,14 @@ const CustomCard = (props) => {
       if (portfolios.allPortfolios.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one portfolio!"});
       } else {
-        userID && dispatch(removePortfolioAction(item.id));
+        profileSlug && dispatch(removePortfolioAction(item.id));
         setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
       }
     } else {
       if (blogs.length < 2) {
         setToast({show: true, severity: "error", text: "You must have at least one blog!"});
       } else {
-        userID && dispatch(blogsRemoveAction({blogID: item.id, userID}))
+        profileSlug && dispatch(blogsRemoveAction(item.id))
         setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
       }
     }
@@ -75,6 +75,7 @@ const CustomCard = (props) => {
               if (isPortfolio) setTogglePortfolioModal(true)
               else setToggleBlogModal(true)
             }}>
+        {editPermission &&
         <span className={`${classes.cardWrapper}__buttons`}>
           <span onClick={(e) => {
             setEditMode(true);
@@ -91,6 +92,7 @@ const CustomCard = (props) => {
             <RemoveButton/>
           </span>
         </span>
+        }
 
         <div className={`${classes.cardWrapper}__image-wrapper`}>
           <CardMedia
@@ -127,13 +129,17 @@ const CustomCard = (props) => {
         setTogglePortfolioModal={setTogglePortfolioModal}
         editMode={editMode}
         portfolio={element}
+        toast={toast}
         setToast={setToast}/>
       }
 
       {toggleBlogModal && <BlogModal
         setToggleBlogModal={setToggleBlogModal}
         editMode={editMode}
-        blog={element}/>
+        blog={element}
+        toast={toast}
+        setToast={setToast}
+      />
       }
     </>
   );
@@ -143,7 +149,7 @@ const mapStateToProps = (state) => {
   return {
     portfolios: state.portfolios,
     blogs: state.blogs.allBlogs,
-    userID: state.auth.userID
+    profileSlug: state.auth.profileSlug
   }
 }
 

@@ -1,11 +1,14 @@
 import axios from "axios";
+
 import {
   BLOGS_REMOVE,
   UPDATE_BLOG,
   GET_BLOGS
 } from "../actionTypes/blogTypes";
+import {getProfileSlug} from "../reducers/authReducers";
+import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const profileUrl = process.env.NEXT_PUBLIC_PROFILE_URL;
+const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
 export const blogsRemove = () => {
   return {
@@ -13,10 +16,9 @@ export const blogsRemove = () => {
   }
 }
 
-export const blogsRemoveAction = (values) => {
-  const {blogID, userID} = values
+export const blogsRemoveAction = (blogID) => {
   return (dispatch) => {
-    axios.patch(profileUrl, {
+    axios.patch(profileURL(), {
       "user": {
         "blogs_attributes": [
           {
@@ -27,9 +29,9 @@ export const blogsRemoveAction = (values) => {
       }
     }).then(res => {
       dispatch(blogsRemove());
-      dispatch(getBlogsAction({id: userID}));
+      dispatch(getBlogsAction());
     })
-        .catch(err => err.response);
+      .catch(err => err.response);
   }
 }
 
@@ -45,35 +47,35 @@ export const updateBlog = (blogs, categories) => {
 
 export const updateBlogAction = (currentBlog, previousBlog) => {
   let deleteCategories = previousBlog.categories.map(
-      category => {
-        let flag = true;
-        for (let i = 0; i < currentBlog.categories.length; i++) {
-          if (currentBlog.categories[i].category_id === category.category_id) {
-            flag = false;
-          }
-        }
-        if (flag) return {
-          id: category.id,
-          _destroy: true
+    category => {
+      let flag = true;
+      for (let i = 0; i < currentBlog.categories.length; i++) {
+        if (currentBlog.categories[i].category_id === category.category_id) {
+          flag = false;
         }
       }
+      if (flag) return {
+        id: category.id,
+        _destroy: true
+      }
+    }
   )
 
   let addCategories = currentBlog.categories.map(
-      category => {
-        let flag = true;
-        for (let i = 0; i < previousBlog.categories.length; i++) {
-          if (previousBlog.categories[i].category_id === category.category_id) {
-            flag = false;
-          }
-        }
-        if (flag) return {
-          category_id: category.category_id
+    category => {
+      let flag = true;
+      for (let i = 0; i < previousBlog.categories.length; i++) {
+        if (previousBlog.categories[i].category_id === category.category_id) {
+          flag = false;
         }
       }
+      if (flag) return {
+        category_id: category.category_id
+      }
+    }
   );
 
-  const data = {
+  let data = {
     "user": {
       "blogs_attributes": [
         {
@@ -81,16 +83,18 @@ export const updateBlogAction = (currentBlog, previousBlog) => {
           "title": currentBlog.title,
           "body": currentBlog.body,
           "reading_time": currentBlog.readTime,
-          "categorizations_attributes": [...addCategories, ...deleteCategories]
+          "categorizations_attributes": [...addCategories, ...deleteCategories],
+          "image": {"data": currentBlog.image}
         }
       ]
     }
   }
+  if (!currentBlog.image) delete data.user.blogs_attributes[0].image;
 
   return (dispatch) => {
-    axios.patch(profileUrl, data)
-        .then(res => dispatch(updateBlog(res.data.blogs, res.data.all_categories)))
-        .catch(err => err.response)
+    axios.patch(profileURL(), data)
+      .then(res => dispatch(updateBlog(res.data.blogs, res.data.all_categories)))
+      .catch(err => err.response)
   }
 }
 
@@ -101,17 +105,43 @@ export const getBlogs = (values) => {
   }
 }
 
-export const getBlogsAction = (values) => {
-  const {id} = values
+export const getBlogsAction = () => {
   return (dispatch) => {
-    axios.get(profileUrl, {
-      params: {
-        user_id: id
-      }
-    }).then(res => {
+    axios.get(profileURL()).then(res => {
       dispatch(getBlogs({allBlogs: res.data.blogs, allCategories: res.data.all_categories}));
     })
       .catch(err => err.response);
   }
+}
 
+export const getDemoBlogsAction = () => {
+  const {blogs, categoriesData} = ProfileData;
+  return (dispatch) => {
+    dispatch(getBlogs({allBlogs: blogs, allCategories: categoriesData}));
+  }
+}
+
+export const addBlogAction = (blog) => {
+  let data = {
+    "user": {
+      "blogs_attributes": [
+        {
+          "title": blog.title,
+          "body": blog.body,
+          "reading_time": blog.readTime,
+          "categorizations_attributes": blog.categories.map((category) => ({
+            category_id: category.category_id
+          })),
+          "image": {"data": blog.image}
+        }
+      ]
+    }
+  }
+  if (!blog.image) delete data.user.blogs_attributes[0].image;
+
+  return (dispatch) => {
+    axios.patch(profileURL(), data)
+      .then(res => dispatch(updateBlog(res.data.blogs, res.data.all_categories)))
+      .catch(err => err.response)
+  }
 }

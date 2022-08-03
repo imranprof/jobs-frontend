@@ -1,11 +1,12 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import COLORS from "../../../../../styles/colors";
+import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   topSectionEditWrapper: theme => ({
     '&__introWrapper': {
-      height: 70,
+      margin: "20px auto",
       '& label.Mui-focused': {
         color: theme.palette.customBorder.customInputBorder
       },
@@ -42,16 +43,17 @@ const useStyles = makeStyles({
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      '&__label': {
-        marginBottom: 10
+      '&__selectWrapper': {
+        margin: "10px 0 100px 0"
       },
       '&__selectDropdown': {
         color: COLORS.black,
       }
     },
     '&__socialLinks': {
-      width: "100%",
-      height: 220,
+      width: "90%",
+      height: "100%",
+      margin: "40px 0",
       '&-wrapper': {
         display: "flex",
         alignItems: "center",
@@ -96,6 +98,29 @@ const useStyles = makeStyles({
         color: COLORS.black,
       }
     },
+    '&__avatarWrapper': {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: 200,
+      height: 200,
+      margin: "18px auto",
+      '&__message': {
+        fontSize: 20,
+        textAlign: "center",
+        color: theme.palette.customColor.modalTitle,
+        fontFamily: FONTS.modalTitleFont,
+        letterSpacing: "1px"
+      },
+      '&__image': {
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        background: theme.palette.customColor.avatarBgEdit,
+        borderRadius: "50%",
+        padding: 3,
+      },
+    }
   }),
 })
 

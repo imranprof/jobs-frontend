@@ -7,6 +7,9 @@ export const useStyles = makeStyles({
     width: "100%",
     display: "flex",
     flexWrap: "wrap-reverse",
+    '&.addMargin': {
+      marginTop: 180
+    },
     // topSection left side
     '&__left': {
       display: "flex",
@@ -193,11 +196,22 @@ export const useStyles = makeStyles({
     },
 
     // topSection right side
+    '&__profilePhotoWrapper': {
+      display: "flex",
+      flexDirection: "row-reverse",
+      '&__editBtn': {
+        height: "fit-content",
+        marginLeft: 8
+      }
+    },
     '&__thumbnail': {
       position: "relative",
       zIndex: 2,
       '&--img': {
-        width: "100%"
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        borderRadius: 6
       },
       '&::before': {
         content: '""',

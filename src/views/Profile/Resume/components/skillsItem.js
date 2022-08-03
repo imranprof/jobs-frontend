@@ -12,7 +12,7 @@ import {ResumeStyle} from "../style";
 const SkillsItem = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-  const {cardType, cardContent, resumeItemRemoveHandler} = props;
+  const {cardType, cardContent, resumeItemRemoveHandler, profileSlug, editPermission} = props;
   const [openModal, setOpenModal] = useState(false);
   const [width, setWidth] = useState("");
 
@@ -24,9 +24,14 @@ const SkillsItem = (props) => {
     setOpenModal(false)
   }
 
+  const getPermission = () => {
+    return !!(profileSlug && editPermission);
+  }
+
   return (
     <>
       <div className={`${resumeWrapper}__nav-content__row__column__skills__wrapper`}>
+        {getPermission() &&
         <div className={`${resumeWrapper}__nav-content__row__column__content__item__action-buttons`}>
           <span onClick={() => setOpenModal(true)}>
             <EditButton/>
@@ -35,6 +40,7 @@ const SkillsItem = (props) => {
             <RemoveButton/>
           </span>
         </div>
+        }
 
         <h2 className={`${resumeWrapper}__nav-content__row__column__skills__wrapper__title`}>
           {cardContent.name}
@@ -58,7 +64,9 @@ const SkillsItem = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    resume: state.editResume.resume
+    resume: state.resumeItems.resume,
+    profileSlug: state.auth.profileSlug,
+    editPermission: state.auth.editPermission
   }
 }
 
