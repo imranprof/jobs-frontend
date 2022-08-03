@@ -1,6 +1,6 @@
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
-import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 import {Slider} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
@@ -66,7 +66,7 @@ const ResumeSkillsAdd = (props) => {
       <div className={`${classes.resumeAddWrapper}__content-wrapper`}>
         <div className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper`}>
           <h4 className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper__title`}>Select your skill</h4>
-          <Select
+          <CreatableSelect
             name="skill"
             options={options()}
             onChange={skill => formik.setFieldValue("skill", skill)}
