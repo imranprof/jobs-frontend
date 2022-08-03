@@ -1,4 +1,4 @@
-import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 
@@ -105,7 +105,7 @@ const IntroExpertisesEdit = (props) => {
 
       <div className={`${classes.topSectionEditWrapper}__expertisesWrapper`}>
         <div className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectWrapper`}>
-          <Select
+          <CreatableSelect
             isMulti
             options={filteredExpertise(formHandler.values.expertises)}
             defaultValue={formHandler.values.expertises}
