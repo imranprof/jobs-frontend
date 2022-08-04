@@ -15,12 +15,8 @@ const ColumnContent = (props) => {
   const dispatch = useDispatch();
 
   const resumeItemRemoveHandler = (item) => {
-    if (props.resume[cardType].length > 1) {
-      dispatch(resumeItemRemoveAction({id: item.id, cardType: cardType}));
-      props.setToast({show: true, severity: "success", text: `Successfully deleted the ${cardType}!`});
-    } else {
-      props.setToast({show: true, severity: "error", text: `You must have at least one ${cardType}!`});
-    }
+    dispatch(resumeItemRemoveAction({id: item.id, cardType: cardType}));
+    props.setToast({show: true, severity: "success", text: `Successfully deleted the ${cardType}!`});
   }
 
   let content = [];
