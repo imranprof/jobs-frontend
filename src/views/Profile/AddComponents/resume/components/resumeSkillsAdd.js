@@ -5,7 +5,7 @@ import CreatableSelect from "react-select/creatable";
 import {Slider} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
-import {addResumeItemAction} from "../../../../../store/actions/resumeActions";
+import {addNewSkillAction, addResumeItemAction} from "../../../../../store/actions/resumeActions";
 import CustomButtons from "../../../../../lib/profile/customButtons";
 import ErrorMessage from "../../../../../lib/errorMessage";
 import {ResumeAddStyle} from "../style";
@@ -35,10 +35,15 @@ const ResumeSkillsAdd = (props) => {
   }
 
   const skillsAdd = values => {
-    dispatch(addResumeItemAction({
-      resumeItem: {skill_id: values.skill.value, rating: values.rating},
-      cardType: cardType
-    }));
+    let length = Object.keys(values.skill).length;
+    if (length === 3) {
+      dispatch(addNewSkillAction(values.skill.value, values.rating));
+    } else {
+      dispatch(addResumeItemAction({
+        resumeItem: {skill_id: values.skill.value, rating: values.rating},
+        cardType: cardType
+      }));
+    }
     setToast({show: true, severity: "success", text: "Successfully added the skill!"})
     handleClose()
   }
@@ -60,8 +65,8 @@ const ResumeSkillsAdd = (props) => {
 
   return (
     <div>
-      <ModalTitle title="Add skill" />
-      <EditModalDivider />
+      <ModalTitle title="Add skill"/>
+      <EditModalDivider/>
 
       <div className={`${classes.resumeAddWrapper}__content-wrapper`}>
         <div className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper`}>
@@ -87,7 +92,7 @@ const ResumeSkillsAdd = (props) => {
         {formik.errors.rating && <ErrorMessage error={formik.errors.rating}/>}
       </div>
 
-      <EditModalDivider />
+      <EditModalDivider/>
       <CustomButtons handler={formik.handleSubmit} mode={handleClose} actionText="Add"/>
     </div>
   );
