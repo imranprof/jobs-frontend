@@ -9,11 +9,6 @@ const useStyles = makeStyles({
     marginTop: 45,
     marginRight: -15,
     marginLeft: -15,
-    '&__addButton-container': {
-      display: "flex",
-      justifyContent: "center",
-      marginBottom: 20
-    },
     // ========= Breakpoints =========
     [theme.breakpoints.between(960, 990)]: {
       maxWidth: "75%",
@@ -108,6 +103,9 @@ const useStyles = makeStyles({
           },
         },
         '&__heading': {
+          '&__button_container': {
+            display: "flex"
+          },
           '& span': {
             fontFamily: FONTS.secondaryFont,
             color: theme.palette.resume.subTitle,
@@ -116,7 +114,10 @@ const useStyles = makeStyles({
             letterSpacing: 2,
           },
           '& h4': {
-            margin: 0,
+            marginRight: 20,
+            marginTop: 0,
+            marginBottom: 0,
+            marginLeft: 0,
             fontFamily: FONTS.primaryFont,
             color: theme.palette.resume.mainTitle,
             fontSize: 36,
