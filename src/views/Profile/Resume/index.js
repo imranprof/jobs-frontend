@@ -1,31 +1,16 @@
-import {useRouter} from "next/router";
-import {useEffect, useState} from 'react';
-import {connect, useDispatch} from "react-redux";
+import { useState} from 'react';
+import {connect} from "react-redux";
 
 import {useTheme} from "@material-ui/core/styles";
 
 import {ResumeStyle} from "./style";
 import ResumeCards from "./components/resumeCards";
 import NavList from "./components/navList";
-import {getDemoResumeAction, getResumeAction} from "../../../store/actions/resumeActions";
-import AddButton from "../../../lib/addButton";
-import EditCustomModal from "../../../lib/profile/editCustomModal";
-import CustomSnackbar from "../../../lib/customSnackbar";
-import ResumeEdit from "../EditComponents/resume/components/resumeEdit";
-import ResumeSkillsAdd from "../AddComponents/resume/components/resumeSkillsAdd";
 
 const Resume = (props) => {
   const theme = useTheme();
   const resumeWrapper = ResumeStyle(theme).resumeWrapper;
-  const {resume, profileSlug, editPermission} = props;
-  const [toast, setToast] = useState({show: false, severity: "", text: ""})
-  const [addResumeItem, setAddResumeItem] = useState(false);
-  const dispatch = useDispatch()
-  const {profile} = useRouter().query;
-
-  useEffect(() => {
-    profile && profileSlug ? dispatch(getResumeAction()) : dispatch(getDemoResumeAction());
-  }, [profile, profileSlug])
+  const {resume} = props;
 
   let resumeSections = [];
   for (let key in resume) {
@@ -36,43 +21,8 @@ const Resume = (props) => {
   const cardType = resumeSections[selected];
   const cardData = resume[cardType];
 
-  const modalClose = () => {
-    setAddResumeItem(false)
-  }
-
-  const getPermission = () => {
-    return !!(profileSlug && editPermission);
-  }
-
   return (
     <>
-      {getPermission() &&
-      <div className={`${resumeWrapper}__addButton-container`}>
-        <span onClick={() => setAddResumeItem(true)}>
-          <AddButton tooltipTitle={`Add ${cardType}`}/>
-        </span>
-      </div>
-      }
-
-      {
-        addResumeItem &&
-        <EditCustomModal handleClose={modalClose} open={addResumeItem}>
-          {cardType === "skills" ?
-            <ResumeSkillsAdd
-              cardType={cardType}
-              addMode={true}
-              handleClose={setAddResumeItem}
-              setToast={setToast}/> :
-            <ResumeEdit
-              cardType={cardType}
-              addMode={true}
-              handleClose={setAddResumeItem}
-              setToast={setToast}
-            />
-          }
-        </EditCustomModal>
-      }
-
       <div className={resumeWrapper} id="resume">
         <div className={`${resumeWrapper}__body`}>
           <NavList
@@ -84,12 +34,6 @@ const Resume = (props) => {
           <ResumeCards cardData={cardData} cardType={cardType}/>
         </div>
       </div>
-
-      {toast.show &&
-      <CustomSnackbar
-        toast={toast}
-        setToast={setToast}/>
-      }
     </>
   );
 }
@@ -97,8 +41,6 @@ const Resume = (props) => {
 const mapStateToProps = (state) => {
   return {
     resume: state.resumeItems.resume,
-    profileSlug: state.auth.profileSlug,
-    editPermission: state.auth.editPermission
   }
 }
 
