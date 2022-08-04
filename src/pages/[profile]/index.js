@@ -25,7 +25,7 @@ const Profile = (props) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    dispatch(setProfileSlug(profile));
+    profile && dispatch(setProfileSlug(profile));
     profileSlug && dispatch(getProfileAction())
   }, [profile, profileSlug]);
 
