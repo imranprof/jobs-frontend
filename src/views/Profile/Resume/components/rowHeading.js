@@ -10,6 +10,10 @@ const RowHeading = ({cardType, cardData}) => {
   const isSkillCard = cardType === "skills";
 
   let startDate = 6000, endDate = -1;
+  if(cardData.length === 0){
+    startDate = '0000';
+    endDate = '0000';
+  }
   if (!isSkillCard) {
     for (let i = 0; i < cardData.length; i++) {
       let tempSDate = parseInt(moment(cardData[i].start_date).format('YYYY'), 10);
