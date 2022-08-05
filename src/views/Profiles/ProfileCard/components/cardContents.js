@@ -1,20 +1,12 @@
-import {connect} from "react-redux";
-
 import {CardContent, Divider, Typography} from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
 
 const CardContents = (props) => {
   const {profile, classes} = props;
-  const {name, designation, hourlyRate, ratings, totalJob} = profile;
+  const {first_name, last_name, designation, hourly_rate, rating, completed_jobs} = profile;
 
-  const shortNameGenerator = (name) => {
-    if (name.length > 18) {
-      const splitNameArray = name.split(" ");
-      const firstName = splitNameArray[0];
-      const secondName = splitNameArray[1].split("")[0];
-      return `${firstName} ${secondName}.`;
-    }
-    return name;
+  const shortNameGenerator = () => {
+    return `${first_name} ${last_name}.`;
   }
 
   return (
@@ -22,22 +14,23 @@ const CardContents = (props) => {
       <CardContent>
         <div className={`${classes}__info`}>
           <Typography gutterBottom variant="h5" component="h2" className={`${classes}__info__name`}>
-            {shortNameGenerator(name)}
+            {shortNameGenerator()}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p" className={`${classes}__info__designation`}>
             {designation}
           </Typography>
         </div>
       </CardContent>
-      <Divider />
-      <CardContent>
+      <Divider/>
+      <CardContent className={`${classes}__visibilityHidden`}>
         <div className={`${classes}__rate-info`}>
           <Typography variant="h5" component="h4" className={`${classes}__rate-info__hourly`}>
-            ${hourlyRate}/hr
+            ${hourly_rate}/hr
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p" className={`${classes}__rate-info__ratings`}>
-            <StarIcon />
-            <span className={`${classes}__rate-info__rate`}>{`${ratings.toFixed(1)}/5`}</span><span>{`(${totalJob} jobs)`}</span>
+            <StarIcon/>
+            <span
+              className={`${classes}__rate-info__rate`}>{`1/5`}</span><span>{`(${completed_jobs} jobs)`}</span>
           </Typography>
         </div>
       </CardContent>
@@ -45,10 +38,4 @@ const CardContents = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    profile: state.allProfiles.profiles[ownProps.profileId]
-  }
-}
-
-export default connect(mapStateToProps)(CardContents);
+export default CardContents;

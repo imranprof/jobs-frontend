@@ -219,13 +219,6 @@ export const updateIntroAndExpertises = ({intro, expertises, profileID}) => {
   }
 }
 
-const validateSocialLink = (link) => {
-  link = link.trim();
-  if (!link.includes("http") && link.length > 0) {
-    return `https://www.${link}`
-  } else return link
-}
-
 export const socialLinksUpdateAction = ({socialLinks, profileID}) => {
   const data = {
     "user": {
@@ -233,9 +226,9 @@ export const socialLinksUpdateAction = ({socialLinks, profileID}) => {
         "id": profileID,
         "social_link_attributes": {
           "id": socialLinks.id,
-          "facebook": validateSocialLink(socialLinks.facebook),
-          "github": validateSocialLink(socialLinks.github),
-          "linkedin": validateSocialLink(socialLinks.linkedin)
+          "facebook": socialLinks.facebook,
+          "github": socialLinks.github,
+          "linkedin": socialLinks.linkedin
         }
       }
     }

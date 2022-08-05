@@ -13,6 +13,8 @@ const SocialLinksEditWrapper = ({iconName, urlValue, name, changeHandler}) => {
         <i className={iconName} />
       </div>
       <TextField
+        label="username"
+        placeholder="john-doe"
         fullWidth
         size="small"
         variant="outlined"

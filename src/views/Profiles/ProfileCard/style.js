@@ -91,6 +91,9 @@ const useStyles = makeStyles({
       margin: "10px auto",
       textAlign: "center",
       overflowY: "hidden"
+    },
+    '&__visibilityHidden': {
+      visibility: "hidden"
     }
   })
 });

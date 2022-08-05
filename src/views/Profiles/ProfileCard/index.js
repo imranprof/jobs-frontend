@@ -17,20 +17,20 @@ function ProfileCard(props) {
     <>
       {
         profileList && profileList.map((profile) => (
-          <Card key={profile.id} xs={12} sm={6} md={4} lg={3} className={classes.profileCardWrapper}>
+          <Card key={profile.profile_slug} xs={12} sm={6} md={4} lg={3} className={classes.profileCardWrapper}>
             <div className={`${classes.profileCardWrapper}__image-wrapper`}>
               <CardMedia
                 className={`${classes.profileCardWrapper}__image`}
                 image={profile.image}
-                title={profile.name}
+                title={profile.first_name}
               />
             </div>
 
-            <CardContents classes={classes.profileCardWrapper} profileId={profile.id} />
+            <CardContents classes={classes.profileCardWrapper} profile={profile}/>
 
-            <SkillSet classes={classes.profileCardWrapper} skills={profile.skills} />
+            <SkillSet classes={classes.profileCardWrapper} skills={profile.skills}/>
 
-            <Link href="#">
+            <Link href={profile.profile_slug}>
               <Button size="small" className={`${classes.profileCardWrapper}__button-wrapper`}>
                 See More
               </Button>
@@ -44,7 +44,7 @@ function ProfileCard(props) {
 
 const mapStateToProps = (state) => {
   return {
-    profileList: state.allProfiles.profiles
+    profileList: state.allProfiles.profiles,
   }
 }
 
