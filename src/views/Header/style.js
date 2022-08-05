@@ -275,6 +275,17 @@ export const useStyles = makeStyles({
         justifyContent: "flex-end",
         marginBottom: 16
       },
+      '&__links': {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+        margin: "30px 0",
+        '&-link': {
+          margin: "5px 0",
+          padding: 10
+        }
+      },
       '&__top': {
         display: 'flex',
         justifyContent: 'space-between',
@@ -282,10 +293,13 @@ export const useStyles = makeStyles({
         marginBottom: 15
       },
       '&__bottom': {
-        height: "90%",
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between"
+        justifyContent: "center",
+        '& a': {
+          width: "80%",
+          position: "absolute",
+          bottom: 20
+        }
       },
       [theme.breakpoints.down('md')]: {
         width: 300,
@@ -312,72 +326,50 @@ export const useStyles = makeStyles({
         color: theme.palette.customColor.navLinkActive,
       },
     },
-    '&__authentication': {
-      width: 180,
+    '&-signup, &-sign-out': {
+      position: "relative",
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "center",
       alignItems: "center",
-      '&-signin': {
-        fontFamily: FONTS.secondaryFont,
-        fontWeight: 400,
-        fontSize: 14,
-        letterSpacing: "1px",
-        color: theme.palette.customColor.main,
-        textDecoration: 'none',
-        cursor: "pointer",
-        opacity: .8,
-        transition: "all .4s ease 0s",
-        '&:hover': {
-          opacity: 1,
-          color: theme.palette.customColor.navLinkActive,
-        },
+      fontFamily: FONTS.secondaryFont,
+      fontWeight: 400,
+      fontSize: 14,
+      letterSpacing: "1px",
+      textAlign: "center",
+      textDecoration: 'none',
+      background: theme.palette.customBackground.gradiant.light,
+      boxShadow: theme.palette.customShadow.buttonShadow,
+      width: 100,
+      height: 48,
+      border: "none",
+      borderRadius: 6,
+      color: theme.palette.customColor.highContrast,
+      zIndex: 1,
+      transition: "all 0.4s ease",
+      '&::before': {
+        position: "absolute",
+        content: '""',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: -1,
+        transition: "opacity 0.4s ease-in-out",
+        opacity: 0,
+        background: theme.palette.customBackground.gradiant.dark,
+        borderRadius: 6
       },
-      '&-signup, &-sign-out': {
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: FONTS.secondaryFont,
-        fontWeight: 400,
-        fontSize: 14,
-        letterSpacing: "1px",
-        textAlign: "center",
-        textDecoration: 'none',
-        background: theme.palette.customBackground.gradiant.light,
-        boxShadow: theme.palette.customShadow.buttonShadow,
-        width: 100,
-        height: 48,
-        border: "none",
+      '&:hover::before': {
+        opacity: 1,
         borderRadius: 6,
-        color: theme.palette.customColor.highContrast,
-        zIndex: 1,
-        transition: "all 0.4s ease",
-        '&::before': {
-          position: "absolute",
-          content: '""',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: -1,
-          transition: "opacity 0.4s ease-in-out",
-          opacity: 0,
-          background: theme.palette.customBackground.gradiant.dark,
-          borderRadius: 6
-        },
-        '&:hover::before': {
-          opacity: 1,
-          borderRadius: 6,
-        },
-        '&:hover': {
-          color: theme.palette.customColor.sendMessageBtn,
-        },
-        [theme.breakpoints.down('md')]: {
-          width: "100%",
-        }
+      },
+      '&:hover': {
+        color: theme.palette.customColor.sendMessageBtn,
+      },
+      [theme.breakpoints.down('md')]: {
+        width: "100%",
       }
     },
-
     // ========= Breakpoints =========
     [theme.breakpoints.down('xs')]: {
       '&__toolbar': {

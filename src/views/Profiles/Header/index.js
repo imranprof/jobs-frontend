@@ -36,48 +36,45 @@ const ProfilesHeader = (props) => {
         <Hidden mdDown>
           <div className={`${classes.headerWrapper}__toolbar__right`}>
             <SearchBar/>
-            {props.isAuthenticated ? (
+            <Link href={"/profiles"}>
+              <a className={`${classes.headerWrapper}__button`}>
+                All Profiles
+              </a>
+            </Link>
+            <Link href={"/profile"}>
+              <a className={`${classes.headerWrapper}__button`}>
+                Template Profile
+              </a>
+            </Link>
+            {props.isAuthenticated ?
               <>
                 <Link href={`${getProfileSlug()}`}>
                   <a className={`${classes.headerWrapper}__button`}>
                     My Profile
                   </a>
                 </Link>
-                <Link href="#">
-                  <a className={`${classes.headerWrapper}__authentication-sign-out`}
+                <Link href="">
+                  <a className={`${classes.headerWrapper}-sign-out`}
                      onClick={handleSignOutClick}>
                     Sign out
                   </a>
                 </Link>
-              </>
-            ) : (
+              </> :
               <>
-                <Link href={"/profiles"}>
-                  <a className={`${classes.headerWrapper}__button`}>
-                    All Profiles
+                <Link href="">
+                  <a className={`${classes.headerWrapper}__button`}
+                     onClick={handleSignInClick}>
+                    Sign In
                   </a>
                 </Link>
-                <Link href={"/profile"}>
-                  <a className={`${classes.headerWrapper}__button`}>
-                    Profile Template
+                <Link href="">
+                  <a className={`${classes.headerWrapper}-signup`}
+                     onClick={handleSignUpClick}>
+                    Sign Up
                   </a>
                 </Link>
-                <div className={`${classes.headerWrapper}__authentication`}>
-                  <Link href="#">
-                    <a className={`${classes.headerWrapper}__authentication-signin`}
-                       onClick={handleSignInClick}>
-                      Sign In
-                    </a>
-                  </Link>
-                  <Link href="#">
-                    <a className={`${classes.headerWrapper}__authentication-signup`}
-                       onClick={handleSignUpClick}>
-                      Sign Up
-                    </a>
-                  </Link>
-                </div>
               </>
-            )}
+            }
           </div>
         </Hidden>
       </Toolbar>

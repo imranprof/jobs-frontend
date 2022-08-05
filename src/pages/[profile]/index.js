@@ -31,11 +31,13 @@ const Profile = (props) => {
 
   return (
     <NoSsr>
-      {loader ? <CustomLoader/> : <>
-        <TopSection/>
-        <CustomDivider/>
-        <Sections/>
-      </>}
+      {
+        loader ? <CustomLoader/> : <>
+          <TopSection/>
+          <CustomDivider/>
+          <Sections/>
+        </>
+      }
     </NoSsr>
   );
 }
