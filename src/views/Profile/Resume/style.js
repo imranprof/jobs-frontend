@@ -114,10 +114,7 @@ const useStyles = makeStyles({
             letterSpacing: 2,
           },
           '& h4': {
-            marginRight: 20,
-            marginTop: 0,
-            marginBottom: 0,
-            marginLeft: 0,
+            margin: "0px 20px 0px 0px",
             fontFamily: FONTS.primaryFont,
             color: theme.palette.resume.mainTitle,
             fontSize: 36,
