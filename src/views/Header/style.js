@@ -27,7 +27,8 @@ export const useStyles = makeStyles({
         alignItems: "center",
       },
       '&__right': {
-        width: 615,
+        justifySelf: "flex-end",
+        flexGrow: .2,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -137,7 +138,7 @@ export const useStyles = makeStyles({
         borderRadius: 5,
         transition: "all .5s ease",
         color: theme.palette.customColor.highContrast,
-        '&:hover':{
+        '&:hover': {
           opacity: 1,
           borderRadius: 6,
           background: theme.palette.customColor.shareBtn,
@@ -147,18 +148,18 @@ export const useStyles = makeStyles({
         '&__popUp': {
           zIndex: 999999999
         },
-        '&__shareBar':{
+        '&__shareBar': {
           width: 150,
           display: "flex",
           justifyContent: "space-between",
           padding: 9,
           background: theme.palette.customBackground.shareBar,
           borderRadius: 7,
-          '&__arrow':{
+          '&__arrow': {
             marginTop: "9px",
             position: "relative",
             boxShadow: "none",
-            '&::before':{
+            '&::before': {
               background: theme.palette.customBackground.shareBar,
               content: '""',
               display: "block",
@@ -170,7 +171,7 @@ export const useStyles = makeStyles({
               left: "calc(50% - 6px)"
             }
           },
-          '&__icon':{
+          '&__icon': {
             borderRadius: 10,
             height: 30,
             width: 30
@@ -221,7 +222,7 @@ export const useStyles = makeStyles({
         background: "transparent",
         width: 190,
         height: 60,
-        '&__title':{
+        '&__title': {
           color: theme.palette.customColor.main,
           fontSize: "14px",
           fontWeight: 300,
@@ -295,6 +296,21 @@ export const useStyles = makeStyles({
       color: theme.palette.customColor.highContrast,
       width: 35,
       height: 35,
+    },
+    '&__button': {
+      fontFamily: FONTS.secondaryFont,
+      fontWeight: 400,
+      fontSize: 14,
+      letterSpacing: "1px",
+      color: theme.palette.customColor.main,
+      textDecoration: 'none',
+      cursor: "pointer",
+      opacity: .8,
+      transition: "all .4s ease 0s",
+      '&:hover': {
+        opacity: 1,
+        color: theme.palette.customColor.navLinkActive,
+      },
     },
     '&__authentication': {
       width: 180,
