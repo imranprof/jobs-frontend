@@ -31,12 +31,8 @@ const Features = (props) => {
   }, [profile, profileSlug])
 
   const featureRemoveHandler = (item) => {
-    if (props.features.length > 1) {
-      profileSlug && dispatch(removeFeatureAction(item.id))
-      setToast({show: true, severity: "success", text: "Successfully deleted the feature!"});
-    } else {
-      setToast({show: true, severity: "error", text: "You must have at least one feature!"});
-    }
+    profileSlug && dispatch(removeFeatureAction(item.id))
+    setToast({show: true, severity: "success", text: "Successfully deleted the feature!"});
   }
 
   const getPermission = () => {
