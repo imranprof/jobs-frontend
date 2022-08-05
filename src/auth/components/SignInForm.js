@@ -25,11 +25,13 @@ const SignInForm = ({error, isAuthenticated}) => {
   const dispatch = useDispatch()
   const router = useRouter();
 
-  useEffect(async () => {
-    if (isAuthenticated) {
-      await router.push("/");
-      dispatch(modalType(""));
-    }
+  useEffect(() => {
+    (async () => {
+      if (isAuthenticated) {
+        await router.push("/");
+        dispatch(modalType(''));
+      }
+    })()
   }, [isAuthenticated])
 
   const formik = useFormik({

@@ -10,6 +10,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {handleApiResponse, signIn, signUp} from "../operations";
 import {AuthStyle} from "./style";
 import {getProfileSlug} from "../../store/reducers/authReducers";
+import {modalType} from "../../store/actions/authAction";
 
 const validationSchema = yup.object({
   email: yup
@@ -39,10 +40,13 @@ const SignUpForm = ({isAuthenticated}) => {
   const dispatch = useDispatch();
 
   const router = useRouter();
-  useEffect(()=> {
-    if(isAuthenticated){
-      router.push(`/${getProfileSlug()}`)
-    }
+  useEffect(() => {
+    (async () => {
+      if (isAuthenticated) {
+        await router.push(`/${getProfileSlug()}`)
+        dispatch(modalType(''));
+      }
+    })()
   }, [isAuthenticated])
 
   const [apiError, setApiError] = useState(undefined);
