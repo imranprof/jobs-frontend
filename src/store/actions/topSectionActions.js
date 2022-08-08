@@ -143,6 +143,7 @@ export function getDemoProfileAction() {
     dispatch(expertisesText(expertises));
     dispatch(socialLinksUpdate(socialLinks));
     dispatch(skillsUpdate(skills));
+    dispatch(setLoader(false));
   }
 }
 

@@ -9,7 +9,7 @@ import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
 import {modalType} from "../../store/actions/authAction";
 import CustomLoader from "../../lib/customLoader";
-import {getProfileAction} from "../../store/actions/topSectionActions";
+import {getDemoProfileAction, getProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
   const {isAuthenticated, profileSlug, loader} = props;
@@ -19,16 +19,18 @@ const Profile = (props) => {
     if (isAuthenticated) {
       dispatch(modalType(''));
     }
-    profileSlug && dispatch(getProfileAction())
+    profileSlug ? dispatch(getProfileAction()) : dispatch(getDemoProfileAction());
   }, [isAuthenticated, profileSlug]);
 
   return (
     <NoSsr>
-      {loader ? <CustomLoader/> : <>
-        <TopSection/>
-        <CustomDivider/>
-        <Sections/>
-      </>}
+      {
+        loader ? <CustomLoader/> : <>
+          <TopSection/>
+          <CustomDivider/>
+          <Sections/>
+        </>
+      }
     </NoSsr>
   );
 }
