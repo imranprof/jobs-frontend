@@ -8,7 +8,7 @@ import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
 import CustomLoader from "../../lib/customLoader";
-import {getDemoProfileAction, getProfileAction} from "../../store/actions/topSectionActions";
+import {getDemoProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
   const {loader} = props;
@@ -33,7 +33,7 @@ const Profile = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loader: state.topSection.loader,
+    loader: state.topSection.loader
   }
 }
 
