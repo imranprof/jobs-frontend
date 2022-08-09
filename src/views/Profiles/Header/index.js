@@ -5,10 +5,9 @@ import {AppBar, Hidden, IconButton, Toolbar, Tooltip} from "@material-ui/core";
 
 import Logo from "../../../lib/logo";
 import SearchBar from "../../../lib/searchBar";
-import {SignOut} from "../../../auth/operations";
+import {getPrivateSlug, SignOut} from "../../../auth/operations";
 import ProfilesSideBar from "./components/profilesSideBar";
 import {modalType} from "../../../store/actions/authAction";
-import {getProfileSlug} from "../../../store/reducers/authReducers";
 
 const ProfilesHeader = (props) => {
   const {classes, headerRef} = props;
@@ -48,7 +47,7 @@ const ProfilesHeader = (props) => {
             </Link>
             {props.isAuthenticated ?
               <>
-                <Link href={`${getProfileSlug()}`}>
+                <Link href={`${getPrivateSlug()}`}>
                   <a className={`${classes.headerWrapper}__button`}>
                     My Profile
                   </a>

@@ -24,11 +24,30 @@ export function setProfileSlug(profileSlug) {
   }
 }
 
+export const getPrivateSlug = () => {
+  if (typeof window !== 'undefined') {
+    const privateSlug = localStorage.getItem('privateSlug')
+    if (privateSlug) {
+      return privateSlug;
+    }
+    return null;
+  }
+}
+
+export function setPrivateSlug(slug){
+  if (slug) {
+    localStorage.setItem('privateSlug', slug);
+  } else {
+    localStorage.removeItem('privateSlug');
+  }
+}
+
 export function handleApiResponse(response) {
   return async (dispatch) => {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
       setProfileSlug(response.data.profile_slug);
+      setPrivateSlug(response.data.profile_slug)
       await dispatch(authenticate({authenticate: true}))
     } else {
       await dispatch(signInRejected(response.data.message))
