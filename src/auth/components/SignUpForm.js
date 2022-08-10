@@ -7,43 +7,44 @@ import * as yup from 'yup';
 import {Button, Box, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
+import {getProfileSlug} from "../../store/reducers/authReducers";
 import {handleApiResponse, signIn, signUp} from "../operations";
 import {AuthStyle} from "./style";
-import {getProfileSlug} from "../../store/reducers/authReducers";
 
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string()
-    .min(6, 'Password should be of minimum 6 characters length')
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-      'Password must contain 6 characters, one uppercase, one lowercase, one number and one special case Character'
-    )
-    .required('Password is required'),
-  passwordConfirmation: yup
-    .string()
-    .required('this field is required')
-    .oneOf(
-      [yup.ref('password'), null],
-      "passwords didn't match!"
-    ),
-});
-
-const SignUpForm = ({isAuthenticated}) => {
+const SignUpForm = (props) => {
   const theme = useTheme();
   const classes = AuthStyle(theme);
   const dispatch = useDispatch();
-
+  const {isAuthenticated, selectedValue} = props;
   const router = useRouter();
-  useEffect(()=> {
-    if(isAuthenticated){
+
+  useEffect(() => {
+    if (isAuthenticated) {
       router.push(`/${getProfileSlug()}`)
     }
   }, [isAuthenticated])
+
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string()
+      .min(6, 'Password should be of minimum 6 characters length')
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+        'Password must contain 6 characters, one uppercase, one lowercase, one number and one special case Character'
+      )
+      .required('Password is required'),
+    passwordConfirmation: yup
+      .string()
+      .required('this field is required')
+      .oneOf(
+        [yup.ref('password'), null],
+        "passwords didn't match!"
+      ),
+  });
 
   const [apiError, setApiError] = useState(undefined);
   const formik = useFormik({
@@ -51,6 +52,7 @@ const SignUpForm = ({isAuthenticated}) => {
       first_name: '',
       last_name: '',
       email: '',
+      companyName: '',
       password: '',
       passwordConfirmation: '',
     },
@@ -106,6 +108,18 @@ const SignUpForm = ({isAuthenticated}) => {
         error={Boolean(apiError) || formik.touched.email && Boolean(formik.errors.email)}
         helperText={apiError || formik.touched.email && formik.errors.email}
       />
+      {selectedValue === 'employer' && (
+        <TextField
+          fullWidth
+          variant="outlined"
+          required
+          id="companyName"
+          name="companyName"
+          label="Company Name"
+          value={formik.values.companyName}
+          onChange={formik.handleChange}
+        />
+      )}
       <TextField
         fullWidth
         variant="outlined"

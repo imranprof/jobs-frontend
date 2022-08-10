@@ -17,6 +17,28 @@ const useStyles = makeStyles({
       outline: 0,
       padding: "60px 15px",
       zIndex: 99999999,
+      '&__top': {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginBottom: 40,
+        '&-title': {
+          color: theme.palette.customColor.modalTitle,
+          fontSize: 24,
+          fontFamily: FONTS.modalTitleFont,
+          letterSpacing: "2px"
+        },
+        '&-select': {
+          width: 440,
+          justifyContent: "space-between",
+          flexDirection: "row",
+          '& .MuiTypography-body1': {
+            color: theme.palette.customColor.modalTitle,
+            fontFamily: FONTS.modalTitleFont,
+            letterSpacing: "1px"
+          }
+        }
+      }
     },
     '&__dialog': {
       display: "flex",
@@ -25,7 +47,7 @@ const useStyles = makeStyles({
       margin: "auto",
       width: "100%",
       maxWidth: 1000,
-      minHeight: "calc(100% - 3.5rem)",
+      minHeight: "calc(100% - 18.5rem)",
     },
     '&__modal-content': {
       position: "relative",
