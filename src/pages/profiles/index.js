@@ -29,7 +29,7 @@ const Profiles = (props) => {
   }, []);
 
   const fetchProfiles = () => {
-    if ((profileList.length % 8 > 0)) {
+    if (profileList.length % 8 > 0) {
       setHasMore(false);
     } else {
       dispatch(getProfiles(profileList, page));
