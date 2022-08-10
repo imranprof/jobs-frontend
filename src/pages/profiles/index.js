@@ -10,7 +10,7 @@ import ProfileCard from "../../views/Profiles/ProfileCard";
 import SectionHeader from "../../lib/sectionHeader";
 import CustomLoader from "../../lib/customLoader";
 import EndMessage from "../../lib/endMessage";
-import {getProfiles} from "../../store/actions/profilesAction";
+import {getProfiles, setPage, showProfiles} from "../../store/actions/profilesAction";
 import {ProfilesStyle} from "./style";
 
 const Profiles = (props) => {
@@ -22,6 +22,10 @@ const Profiles = (props) => {
 
   useEffect(() => {
     fetchProfiles();
+    return () => {
+      dispatch(showProfiles([]));
+      dispatch(setPage(0));
+    }
   }, []);
 
   const fetchProfiles = () => {
@@ -42,7 +46,8 @@ const Profiles = (props) => {
           className={classes.profilesWrapper}
           dataLength={profileList.length}
           next={fetchProfiles}
-          loader={!initialLoader && <CustomLoader/>}
+          loader={((profileList.length % 8 !== 0) || (profileList.length === 0) || (page > 1 && profileList.length % 8 === 0)) ?
+            <EndMessage title="Yay! You have seen it all"/> : (<CustomLoader/>)}
           hasMore={hasMore}
           endMessage={<EndMessage title="Yay! You have seen it all"/>}
         >
