@@ -34,7 +34,7 @@ export const getPrivateSlug = () => {
   }
 }
 
-export function setPrivateSlug(slug){
+export function setPrivateSlug(slug) {
   if (slug) {
     localStorage.setItem('privateSlug', slug);
   } else {
@@ -47,7 +47,7 @@ export function handleApiResponse(response) {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
       setProfileSlug(response.data.profile_slug);
-      setPrivateSlug(response.data.profile_slug)
+      setPrivateSlug(response.data.profile_slug);
       await dispatch(authenticate({authenticate: true}))
     } else {
       await dispatch(signInRejected(response.data.message))
@@ -57,8 +57,20 @@ export function handleApiResponse(response) {
 
 export function signUp(values) {
   return async () => {
-    const {first_name, last_name, email, password, password_confirmation} = values
-    const data = {user: {first_name, last_name, email, password, password_confirmation}}
+    const {first_name, last_name, email, password, passwordConfirmation, companyName} = values
+    const data = {
+      user: {
+        first_name,
+        last_name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation
+      }
+    }
+    if (companyName !== "") {
+      data.user["company_name"] = companyName;
+      data.user["role"] = "employer";
+    }
     const response = await axios.post(signUpURL, data)
       .then(data => data)
       .catch(err => err.response);

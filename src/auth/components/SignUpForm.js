@@ -18,9 +18,9 @@ const SignUpForm = (props) => {
   const {isAuthenticated, selectedValue} = props;
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect(async () => {
     if (isAuthenticated) {
-      router.push(`/${getProfileSlug()}`)
+      await router.push(`/${getProfileSlug()}`)
     }
   }, [isAuthenticated])
 
