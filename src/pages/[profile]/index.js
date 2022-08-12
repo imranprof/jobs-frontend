@@ -12,12 +12,14 @@ import {modalType} from "../../store/actions/authAction";
 import {setProfileSlug} from "../../store/actions/authAction";
 import CustomLoader from "../../lib/customLoader";
 import {getProfileAction} from "../../store/actions/topSectionActions";
+import {getRole} from "../../auth/operations";
 
 const Profile = (props) => {
-  const {isAuthenticated, profileSlug, loader, role} = props;
+  const {isAuthenticated, profileSlug, loader} = props;
   const dispatch = useDispatch();
   const router = useRouter();
   const {profile} = router.query;
+  const role = getRole()
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -49,7 +51,6 @@ const mapStateToProps = (state) =>
     isAuthenticated: state.auth.isAuthenticated,
     loader: state.topSection.loader,
     profileSlug: state.auth.profileSlug,
-    role: state.topSection.role
   }
 }
 

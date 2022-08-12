@@ -8,10 +8,12 @@ import SearchBar from "../../../lib/searchBar";
 import {getPrivateSlug, SignOut} from "../../../auth/operations";
 import ProfilesSideBar from "./components/profilesSideBar";
 import {modalType} from "../../../store/actions/authAction";
+import {getRole} from "../../../auth/operations";
 
 const ProfilesHeader = (props) => {
   const {classes, headerRef} = props;
   const dispatch = useDispatch()
+  const role = getRole()
 
   const handleSignInClick = () => {
     dispatch(modalType('SignIn'))
@@ -30,21 +32,23 @@ const ProfilesHeader = (props) => {
       <Toolbar className={`${classes.headerWrapper}__toolbar`}>
         <Logo/>
 
-        <ProfilesSideBar classes={classes}/>
+        <ProfilesSideBar classes={classes} role={role} />
 
         <Hidden mdDown>
           <div className={`${classes.headerWrapper}__toolbar__right`}>
             <SearchBar/>
+
             <Link href={"/profiles"}>
               <a className={`${classes.headerWrapper}__button`}>
-                All Profiles
+                Find Talents
               </a>
             </Link>
-            <Link href={"/profile"}>
+            <Link href={"#"}>
               <a className={`${classes.headerWrapper}__button`}>
-                Template Profile
+                Find Jobs
               </a>
             </Link>
+
             {props.isAuthenticated ?
               <>
                 <Link href={`${getPrivateSlug()}`}>
@@ -52,6 +56,14 @@ const ProfilesHeader = (props) => {
                     My Profile
                   </a>
                 </Link>
+
+                {role === 'employee' ?
+                (<Link href={"/profile"}>
+                  <a className={`${classes.headerWrapper}__button`}>
+                    Template Profile
+                  </a>
+                </Link>) : ""}
+
                 <Link href="">
                   <a className={`${classes.headerWrapper}-sign-out`}
                      onClick={handleSignOutClick}>
