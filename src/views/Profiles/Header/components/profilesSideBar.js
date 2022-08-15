@@ -15,7 +15,7 @@ import {modalType} from "../../../../store/actions/authAction";
 import {getProfileSlug} from "../../../../store/reducers/authReducers";
 
 const ProfilesSideBar = (props) => {
-  const {classes} = props;
+  const {classes, role} = props;
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -86,15 +86,25 @@ const ProfilesSideBar = (props) => {
             <Link href={"/profiles"}>
               <a
                 className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
-                All Profiles
+                Find Talents
               </a>
             </Link>
-            <Link href={"/profile"}>
+            <Link href={"#"}>
               <a
                 className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
-                Template Profile
+                Find Jobs
               </a>
             </Link>
+
+            {props.isAuthenticated &&
+            role === 'employee' &&
+            (<Link href={"/profile"}>
+              <a className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
+                Template Profile
+              </a>
+            </Link>)
+            }
+
           </div>
 
           <div className={`${classes.headerWrapper}__profiles__side-bar__bottom`}>

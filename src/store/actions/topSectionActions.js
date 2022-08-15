@@ -8,7 +8,7 @@ import {
   BIO_TEXT,
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
-  SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR, SET_LOADER,
+  SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR, SET_LOADER, SET_ROLE,
 } from "../actionTypes/topSectionTypes";
 import {getProfileSlug} from "../reducers/authReducers";
 import {setEditPermission} from "./authAction";

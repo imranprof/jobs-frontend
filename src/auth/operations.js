@@ -24,6 +24,14 @@ export function setProfileSlug(profileSlug) {
   }
 }
 
+export function setPrivateSlug(slug) {
+  if (slug) {
+    localStorage.setItem('privateSlug', slug);
+  } else {
+    localStorage.removeItem('privateSlug');
+  }
+}
+
 export const getPrivateSlug = () => {
   if (typeof window !== 'undefined') {
     const privateSlug = localStorage.getItem('privateSlug')
@@ -34,11 +42,21 @@ export const getPrivateSlug = () => {
   }
 }
 
-export function setPrivateSlug(slug){
-  if (slug) {
-    localStorage.setItem('privateSlug', slug);
+export function getRole() {
+  if (typeof window !== 'undefined') {
+    const role = localStorage.getItem('role')
+    if (role) {
+      return role;
+    }
+    return null;
+  }
+}
+
+export function setRole(role) {
+  if (role) {
+    localStorage.setItem('role', role);
   } else {
-    localStorage.removeItem('privateSlug');
+    localStorage.removeItem('role');
   }
 }
 
@@ -47,7 +65,8 @@ export function handleApiResponse(response) {
     if (response.statusText === 'OK') {
       setAuthToken(response.data.authToken);
       setProfileSlug(response.data.profile_slug);
-      setPrivateSlug(response.data.profile_slug)
+      setPrivateSlug(response.data.profile_slug);
+      setRole(response.data.role)
       await dispatch(authenticate({authenticate: true}))
     } else {
       await dispatch(signInRejected(response.data.message))
@@ -57,8 +76,20 @@ export function handleApiResponse(response) {
 
 export function signUp(values) {
   return async () => {
-    const {first_name, last_name, email, password, password_confirmation} = values
-    const data = {user: {first_name, last_name, email, password, password_confirmation}}
+    const {first_name, last_name, email, password, passwordConfirmation, companyName} = values
+    const data = {
+      user: {
+        first_name,
+        last_name,
+        email,
+        password,
+        password_confirmation: passwordConfirmation
+      }
+    }
+    if (companyName !== "") {
+      data.user["company_name"] = companyName;
+      data.user["role"] = "employer";
+    }
     const response = await axios.post(signUpURL, data)
       .then(data => data)
       .catch(err => err.response);

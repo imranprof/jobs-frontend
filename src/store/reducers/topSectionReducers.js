@@ -9,7 +9,8 @@ import {
   SKILLS_VALUES,
   SET_PROFILE_ID,
   SET_NAME,
-  SET_AVATAR, SET_LOADER
+  SET_AVATAR,
+  SET_LOADER
 } from "../actionTypes/topSectionTypes";
 
 const initialState = {
