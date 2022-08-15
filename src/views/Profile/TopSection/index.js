@@ -25,6 +25,7 @@ import {
   updateHeadline
 } from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
+import {getRole} from "../../../auth/operations";
 
 const TopSection = (props) => {
   const theme = useTheme();
@@ -38,6 +39,7 @@ const TopSection = (props) => {
   const {profileSlug, avatar, firstName, lastName, editPermission} = props;
   const dispatch = useDispatch();
   const {profile} = useRouter().query;
+  const role = getRole()
 
   const modalClose = () => {
     setOpenModal(false);
@@ -196,10 +198,12 @@ const TopSection = (props) => {
             )}
           </div>
 
-          <div className={`${classes.topSectionWrapper}__left-bottom`}>
-            <SocialLinks setToast={setToast} editPermission={getPermission()}/>
-            <Skills setToast={setToast}/>
-          </div>
+          {role === 'employee' && (
+            <div className={`${classes.topSectionWrapper}__left-bottom`}>
+              <SocialLinks setToast={setToast} editPermission={getPermission()}/>
+              <Skills setToast={setToast}/>
+            </div>
+          )}
         </Grid>
 
         <Grid item xs={12} md={5} className={`${classes.topSectionWrapper}__profilePhotoWrapper`}>
