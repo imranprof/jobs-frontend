@@ -124,7 +124,7 @@ export const useStyles = makeStyles({
         display: "flex",
       },
       '&__navItem': {
-        width: 475
+        width: "100%"
       },
       '&__share': {
         position: "relative",
