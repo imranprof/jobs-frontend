@@ -11,12 +11,17 @@ import {ProfileCardStyle} from "./style";
 function ProfileCard(props) {
   const theme = useTheme();
   const classes = ProfileCardStyle(theme);
-  const {profileList} = props;
+  const {profileList, searchProfiles, set} = props;
+
+  let profilesData = profileList;
+  if(!set){
+    profilesData = searchProfiles;
+  }
 
   return (
     <>
       {
-        profileList && profileList.map((profile) => (
+        profilesData && profilesData.map((profile) => (
           <Card key={profile.profile_slug} xs={12} sm={6} md={4} lg={3} className={classes.profileCardWrapper}>
             <div className={`${classes.profileCardWrapper}__image-wrapper`}>
               <CardMedia
@@ -45,6 +50,8 @@ function ProfileCard(props) {
 const mapStateToProps = (state) => {
   return {
     profileList: state.allProfiles.profiles,
+    searchProfiles: state.allProfiles.searchProfiles,
+    set: state.allProfiles.set
   }
 }
 

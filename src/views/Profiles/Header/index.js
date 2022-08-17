@@ -9,6 +9,7 @@ import {getPrivateSlug, SignOut} from "../../../auth/operations";
 import ProfilesSideBar from "./components/profilesSideBar";
 import {modalType} from "../../../store/actions/authAction";
 import {getRole} from "../../../auth/operations";
+import {resetProfiles} from "../../../store/actions/searchAction";
 
 const ProfilesHeader = (props) => {
   const {classes, headerRef} = props;
@@ -27,6 +28,10 @@ const ProfilesHeader = (props) => {
     await dispatch(SignOut())
   }
 
+  const handleClick = () => {
+    dispatch(resetProfiles(true))
+  }
+
   return (
     <AppBar className={classes.headerWrapper} ref={headerRef}>
       <Toolbar className={`${classes.headerWrapper}__toolbar`}>
@@ -39,7 +44,7 @@ const ProfilesHeader = (props) => {
             <SearchBar/>
 
             <Link href={"/profiles"}>
-              <a className={`${classes.headerWrapper}__button`}>
+              <a className={`${classes.headerWrapper}__button`} onClick={handleClick}>
                 Find Talents
               </a>
             </Link>
