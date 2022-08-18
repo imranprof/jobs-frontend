@@ -34,14 +34,16 @@ const JobPostForm = (props) => {
     location: ''
   }
 
-  const jobPostHandler = values => {
+  const jobPostHandler = async (values) => {
     const {title, description, location} = values
     let skills = values.skills.map(
       skill => skill.label
     )
-    dispatch(addJobAction({title: title, description: description, location: location, skills: skills}))
-    setToast({show: true, severity: "success", text: "Posted new job successfully!"});
-    formik.resetForm()
+    const response = await dispatch(addJobAction({title: title, description: description, location: location, skills: skills}))
+    if(response.statusText==="OK"){
+      formik.resetForm()
+      setToast({show: true, severity: "success", text: "Posted new job successfully!"});
+    }
   }
 
   const jobPostValidation = values => {

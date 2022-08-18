@@ -14,9 +14,10 @@ export const addJobAction = (job) => {
     }
   }
 
-  return (dispatch) => {
-    axios.post(jobPostUrl, data)
-      .then(res => {})
+  return async (dispatch) => {
+    const response = axios.post(jobPostUrl, data)
+      .then(res => res)
       .catch(err => err.response)
+    return (response);
   }
 }
