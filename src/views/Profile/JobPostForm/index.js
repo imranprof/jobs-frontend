@@ -40,7 +40,8 @@ const JobPostForm = (props) => {
       skill => skill.label
     )
     dispatch(addJobAction({title: title, description: description, location: location, skills: skills}))
-    setToast({show: true, severity: "success", text: "Job Created successfully!"});
+    setToast({show: true, severity: "success", text: "Posted new job successfully!"});
+    formik.resetForm()
   }
 
   const jobPostValidation = values => {
