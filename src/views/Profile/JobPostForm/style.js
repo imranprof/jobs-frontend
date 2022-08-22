@@ -21,6 +21,9 @@ const useStyles = makeStyles({
       '&__selectDropdown': {
         color: COLORS.black,
       }
+    },
+    '&__button': {
+      backgroundColor: theme.palette.customColor.highContrast
     }
   }),
 })

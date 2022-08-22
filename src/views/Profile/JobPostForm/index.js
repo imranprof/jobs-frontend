@@ -12,12 +12,15 @@ import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {addJobAction} from "../../../store/actions/jobAction";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import React, {useState} from "react";
+import JobShow from "./JobShow";
 
 const JobPostForm = (props) => {
   const theme = useTheme();
   const classes = JobPostFormStyle(theme);
   const dispatch = useDispatch()
   const [toast,setToast] = useState({show: false, severity: "", text: ""});
+  const [mode, setMode] = useState(false);
+  const [jobData, setJobData] = useState({});
 
   const jobSkillsData = [
     {value: 1, label: "Ruby"},
@@ -41,8 +44,10 @@ const JobPostForm = (props) => {
     )
     const response = await dispatch(addJobAction({title: title, description: description, location: location, skills: skills}))
     if(response.statusText==="OK"){
+      setJobData(response.data.job)
       formik.resetForm()
       setToast({show: true, severity: "success", text: "Posted new job successfully!"});
+      setMode(true);
     }
   }
 
@@ -72,72 +77,81 @@ const JobPostForm = (props) => {
 
   return (
     <>
-      <div className={classes.jobPostFormWrapper}>
-        <ModalTitle title="Post New Job"/>
+      {
+        mode ? (
+          <JobShow data={jobData}/>
+        ):(
+          <div className={classes.jobPostFormWrapper}>
+            <ModalTitle title="Post New Job"/>
 
-        <div className={`${classes.jobPostFormWrapper}__contentWrapper`}>
+            <div className={`${classes.jobPostFormWrapper}__contentWrapper`}>
 
-          <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
-            <TextField
-              required
-              fullWidth
-              variant="outlined"
-              label="Job title"
-              name="title"
-              value={formik.values.title}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.title ? <ErrorMessage error={formik.errors.title}/> : null}
+              <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
+                <TextField
+                  required
+                  fullWidth
+                  variant="outlined"
+                  label="Job title"
+                  name="title"
+                  value={formik.values.title}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.title ? <ErrorMessage error={formik.errors.title}/> : null}
+              </div>
+
+              <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
+                <TextField
+                  required
+                  fullWidth
+                  multiline
+                  rows={8}
+                  variant="outlined"
+                  label="Job description"
+                  name="description"
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.description ? <ErrorMessage error={formik.errors.description}/> : null}
+              </div>
+
+              <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
+                <CreatableSelect
+                  isMulti
+                  name="skills"
+                  options={jobSkillsData}
+                  value={formik.values.skills}
+                  onChange={skills => formik.setFieldValue("skills", skills)}
+                  menuPosition="fixed"
+                  styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
+                  placeholder="Select skills"
+                  className={`${classes.jobPostFormWrapper}__contentWrapper__selectDropdown`}
+                />
+                {formik.errors.skills && <ErrorMessage error={formik.errors.skills}/>}
+              </div>
+
+              <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
+                <TextField
+                  required
+                  fullWidth
+                  variant="outlined"
+                  label="Location"
+                  name="location"
+                  value={formik.values.location}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.location ? <ErrorMessage error={formik.errors.location}/> : null}
+              </div>
+            </div>
+
+            <Button fullWidth onClick={formik.handleSubmit} endIcon={<Icon className={FontAwesomeIcons.signIn}/>}
+                    className={`${classes.jobPostFormWrapper}__button`}
+            >
+              post
+            </Button>
           </div>
+        )
+      }
 
-          <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
-            <TextField
-              required
-              fullWidth
-              multiline
-              rows={8}
-              variant="outlined"
-              label="Job description"
-              name="description"
-              value={formik.values.description}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.description ? <ErrorMessage error={formik.errors.description}/> : null}
-          </div>
-
-          <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
-            <CreatableSelect
-              isMulti
-              name="skills"
-              options={jobSkillsData}
-              value={formik.values.skills}
-              onChange={skills => formik.setFieldValue("skills", skills)}
-              menuPosition="fixed"
-              styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
-              placeholder="Select skills"
-              className={`${classes.jobPostFormWrapper}__contentWrapper__selectDropdown`}
-            />
-            {formik.errors.skills && <ErrorMessage error={formik.errors.skills}/>}
-          </div>
-
-          <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
-            <TextField
-              required
-              fullWidth
-              variant="outlined"
-              label="Location"
-              name="location"
-              value={formik.values.location}
-              onChange={formik.handleChange}
-            />
-            {formik.errors.location ? <ErrorMessage error={formik.errors.location}/> : null}
-          </div>
-        </div>
-
-        <Button fullWidth onClick={formik.handleSubmit} endIcon={<Icon className={FontAwesomeIcons.signIn}/>}>
-          post
-        </Button>
-      </div>
       {toast.show &&
       <CustomSnackbar
         toast={toast}
