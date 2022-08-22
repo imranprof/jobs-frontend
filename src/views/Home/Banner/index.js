@@ -30,8 +30,8 @@ const Banner = () => {
               find talent
             </Button>
           </Link>
-          <Link href={""}>
-            <Button variant="outlined" size="large" disabled>find work</Button>
+          <Link href={"/jobs"}>
+            <Button variant="outlined" size="large">find job</Button>
           </Link>
         </div>
       </div>
