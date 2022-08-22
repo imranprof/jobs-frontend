@@ -35,7 +35,7 @@ const useStyles = makeStyles({
       marginBottom:"20px"
     },
     '&__skills-wrapper': {
-      width: "250px",
+      width: "40%",
       display:"flex",
       flexWrap:"wrap",
       alignItems:"center",
@@ -52,6 +52,9 @@ const useStyles = makeStyles({
       },
       '&__divider': {
         marginTop:30
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: "80%"
       }
     },
     '&__about-header': {
