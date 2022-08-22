@@ -12,7 +12,6 @@ import {ModalStyle} from "./style";
 import SignInForm from "../../auth/components/SignInForm";
 import SignUpForm from "../../auth/components/SignUpForm";
 import {modalType} from "../../store/actions/authAction";
-import JobPostForm from "../../views/Profile/JobPostForm";
 
 const CustomModal = (props) => {
   const dispatch = useDispatch()
@@ -77,7 +76,6 @@ const CustomModal = (props) => {
               </IconButton>
               {props.modalType === "SignIn" && <SignInForm/>}
               {props.modalType === "SignUp" && <SignUpForm selectedValue={selectedValue} />}
-              {props.modalType === "JobPostForm" && <JobPostForm /> }
             </div>
           </div>
         </div>

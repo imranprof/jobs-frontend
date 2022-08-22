@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from 'react-scroll'
 import {connect, useDispatch} from "react-redux";
 
@@ -7,14 +7,19 @@ import ListItem from "@material-ui/core/ListItem";
 
 import {JobSeekerNavLinksData} from "../../../../../API/elements/profile/jobSeekerNavLinksData";
 import {getRole} from "../../../../auth/operations";
-import {modalType} from "../../../../store/actions/authAction";
+import EditCustomModal from "../../../../lib/profile/editCustomModal";
+import JobPostForm from "../../JobPostForm";
 
 const NavItems = ({classes, variant}) => {
   const role = getRole()
-  const dispatch = useDispatch()
+  const [openModal, setOpenModal] = useState(false);
+
+  const modalClose = () => {
+    setOpenModal(false)
+  }
 
   const handleJobPostClick = () => {
-    dispatch(modalType('JobPostForm'))
+    setOpenModal(true);
   }
 
   return (
@@ -42,6 +47,10 @@ const NavItems = ({classes, variant}) => {
             </ListItem>
           </>
         )}
+      {openModal && <EditCustomModal open={true} handleClose={modalClose}>
+        <JobPostForm/>
+      </EditCustomModal>
+      }
     </List>
   );
 }
