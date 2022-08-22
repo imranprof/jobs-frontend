@@ -27,7 +27,7 @@ const JobShow = (props) => {
           Skills & Expertise
         </h3>
         <div className={`${classes.jobShowWrapper}__skills-wrapper`}>
-          {skills.map(skill => <span id={skill.id} className={`${classes.jobShowWrapper}__skills-wrapper__skill`}>
+          {skills.map(skill => <span key={skill} className={`${classes.jobShowWrapper}__skills-wrapper__skill`}>
           {skill}
         </span>)}
         </div>
