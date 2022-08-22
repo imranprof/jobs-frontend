@@ -2,9 +2,10 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: 'flex',
+    display: 'grid',
     alignItems: 'center',
     justifyContent: 'center',
+    overflowY: 'auto'
   },
   paper: {
     width: 700,
