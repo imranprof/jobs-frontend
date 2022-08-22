@@ -23,7 +23,14 @@ const useStyles = makeStyles({
       }
     },
     '&__button': {
-      backgroundColor: theme.palette.customColor.highContrast
+      background: theme.palette.customBackground.gradiant.light,
+      color: theme.palette.customColor.highContrast,
+      transition: "all .5s ease",
+      '&:hover': {
+        opacity: 1,
+        background: theme.palette.customColor.highContrast,
+        color: theme.palette.customColor.light
+      }
     }
   }),
 })
