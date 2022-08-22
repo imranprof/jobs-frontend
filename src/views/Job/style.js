@@ -34,10 +34,11 @@ const useStyles = makeStyles({
       color: theme.palette.customColor.featuresHover
     },
     '&__title': {
-      color: theme.palette.customColor.main,
+      color: theme.palette.customColor.highContrast,
       fontSize: 20,
       fontFamily: FONTS.modalTitleFont,
       fontWeight: 500,
+      marginBottom: 30,
       letterSpacing: "1px"
     },
     '&__description, &__location': {
@@ -50,7 +51,11 @@ const useStyles = makeStyles({
       WebkitLineClamp: 3,
       WebkitBoxOrient: "vertical",
       overflow: "hidden",
-      textOverflow: "ellipsis"
+      textOverflow: "ellipsis",
+      marginBottom: 30,
+    },
+    '&__location': {
+      marginTop: 30
     }
   })
 });

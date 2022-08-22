@@ -1,13 +1,18 @@
 import {useEffect} from "react";
 import {connect, useDispatch} from "react-redux";
 
+import {useTheme} from "@material-ui/core/styles";
+
 import SectionHeader from "../../lib/sectionHeader";
 import withLayout from "../../views/Layout";
 import {getJobs} from "../../store/actions/jobsActions";
 import CustomLoader from "../../lib/customLoader";
 import Job from "../../views/Job";
+import {JobsStyle} from "./style";
 
 const Jobs = (props) => {
+  const theme = useTheme();
+  const classes = JobsStyle(theme);
   const dispatch = useDispatch()
   const {jobList, initialLoader} = props
 
@@ -20,7 +25,9 @@ const Jobs = (props) => {
       <SectionHeader title="find the best jobs on SeekRightJobs"/>
       {initialLoader && <CustomLoader/>}
 
-      {jobList.map((job) => <Job key={job.id} job={job} />)}
+      <div className={classes.jobsWrapper}>
+        {jobList.map((job) => <Job key={job.id} job={job}/>)}
+      </div>
     </div>
   );
 };
