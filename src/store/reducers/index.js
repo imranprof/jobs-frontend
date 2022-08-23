@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import {profilesReducer} from "./profilesReducers";
-import {profileReducer} from "./profileReducers";
 import {authReducers} from "./authReducers";
 import {topSectionReducer} from "./topSectionReducers";
 import {resumeReducers} from "./resumeReducers";
@@ -17,7 +16,7 @@ const rootReducers = combineReducers({
     contacts: contactReducer,
     blogs: blogReducer,
     features: featureReducer,
-    resumeItems: resumeReducers
+    resumeItems: resumeReducers,
 })
 
 export default rootReducers;
