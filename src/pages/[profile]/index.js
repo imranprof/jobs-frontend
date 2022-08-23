@@ -19,7 +19,7 @@ const Profile = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const {profile} = router.query;
-  const role = getRole()
+  const {role} = props
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -51,6 +51,7 @@ const mapStateToProps = (state) =>
     isAuthenticated: state.auth.isAuthenticated,
     loader: state.topSection.loader,
     profileSlug: state.auth.profileSlug,
+    role: state.topSection.role
   }
 }
 
