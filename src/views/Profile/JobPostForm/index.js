@@ -43,7 +43,7 @@ const JobPostForm = (props) => {
       skill => skill.label
     )
     const response = await dispatch(addJobAction({title: title, description: description, location: location, skills: skills}))
-    if(response.statusText==="OK"){
+    if(response && response.status === 201){
       setJobData(response.data.job)
       formik.resetForm()
       setToast({show: true, severity: "success", text: "Posted new job successfully!"});
