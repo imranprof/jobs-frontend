@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link} from 'react-scroll'
-import {connect, useDispatch} from "react-redux";
+import {connect} from "react-redux";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -36,19 +36,19 @@ const NavItems = ({classes, variant}) => {
         : (
           <>
             <ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}>
-              <Link to="#" spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
+              <a>
                 my jobs
-              </Link>
+              </a>
             </ListItem>
             <ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}>
-              <Link onClick={handleJobPostClick} spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
+              <a onClick={handleJobPostClick}>
                 post a job
-              </Link>
+              </a>
             </ListItem>
           </>
         )}
       {openModal && <EditCustomModal open={true} handleClose={modalClose}>
-        <JobPostForm/>
+        <JobPostForm handleClose={modalClose}/>
       </EditCustomModal>
       }
     </List>

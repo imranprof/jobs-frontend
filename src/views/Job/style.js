@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     padding: 30,
     marginBottom: 30,
     zIndex: 1,
+    cursor: "pointer",
     '&::before': {
       position: "absolute",
       content: '""',

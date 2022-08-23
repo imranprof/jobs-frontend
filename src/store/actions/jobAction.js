@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const jobPostUrl = process.env.NEXT_PUBLIC_JOB_POST_URL
+const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
 
 
 export const addJobAction = (job) => {
