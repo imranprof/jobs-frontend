@@ -38,7 +38,7 @@ const Profile = (props) => {
         loader ? <CustomLoader/> : <>
           <TopSection/>
           <CustomDivider/>
-          {role === "employee" ? <Sections/> : null}
+          {<Sections />}
         </>
       }
     </NoSsr>
