@@ -1,5 +1,6 @@
-import {useDispatch, connect} from "react-redux";
 import {useRouter} from "next/router";
+import {useEffect} from "react";
+import {useDispatch, connect} from "react-redux";
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
@@ -7,8 +8,7 @@ import {Button, Icon, Box, TextField} from "@material-ui/core";
 
 import {signIn, handleApiResponse} from "../operations";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
-import {useEffect} from "react";
-import {getProfileSlug} from "../../store/reducers/authReducers";
+import {modalType} from "../../store/actions/authAction";
 
 const validationSchema = yup.object({
   email: yup
@@ -25,9 +25,10 @@ const SignInForm = ({error, isAuthenticated}) => {
   const dispatch = useDispatch()
   const router = useRouter();
 
-  useEffect(()=> {
-    if(isAuthenticated){
-      router.push(`/${getProfileSlug()}`)
+  useEffect(async () => {
+    if (isAuthenticated) {
+      await router.push("/");
+      dispatch(modalType(""));
     }
   }, [isAuthenticated])
 
@@ -38,7 +39,7 @@ const SignInForm = ({error, isAuthenticated}) => {
     },
     validationSchema: validationSchema,
     onSubmit: async values => {
-      await router.prefetch('/profile');
+      await router.prefetch('/');
       const response = await dispatch(signIn(values));
       dispatch(handleApiResponse(await response));
     }
@@ -47,15 +48,15 @@ const SignInForm = ({error, isAuthenticated}) => {
   return (
     <Box component="form" onSubmit={formik.handleSubmit}>
       {error &&
-        <Box
-          display="flex"
-          justifyContent="center"
-          color="red"
-          marginTop={-3}
-          marginBottom={2}
-        >
-          {error}
-        </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        color="red"
+        marginTop={-3}
+        marginBottom={2}
+      >
+        {error}
+      </Box>
       }
       <TextField
         fullWidth
@@ -81,7 +82,7 @@ const SignInForm = ({error, isAuthenticated}) => {
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={formik.touched.password && formik.errors.password}
       />
-      <Button fullWidth type="submit" endIcon={<Icon className={FontAwesomeIcons.signIn}/>} >
+      <Button fullWidth type="submit" endIcon={<Icon className={FontAwesomeIcons.signIn}/>}>
         Sign In
       </Button>
     </Box>

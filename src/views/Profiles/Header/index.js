@@ -5,13 +5,16 @@ import {AppBar, Hidden, IconButton, Toolbar, Tooltip} from "@material-ui/core";
 
 import Logo from "../../../lib/logo";
 import SearchBar from "../../../lib/searchBar";
-import {SignOut} from "../../../auth/operations";
+import {getPrivateSlug, SignOut} from "../../../auth/operations";
 import ProfilesSideBar from "./components/profilesSideBar";
 import {modalType} from "../../../store/actions/authAction";
+import {getRole} from "../../../auth/operations";
+import {resetProfiles} from "../../../store/actions/searchAction";
 
 const ProfilesHeader = (props) => {
   const {classes, headerRef} = props;
   const dispatch = useDispatch()
+  const role = getRole()
 
   const handleSignInClick = () => {
     dispatch(modalType('SignIn'))
@@ -25,39 +28,69 @@ const ProfilesHeader = (props) => {
     await dispatch(SignOut())
   }
 
+  const handleClick = () => {
+    dispatch(resetProfiles(true))
+  }
+
   return (
     <AppBar className={classes.headerWrapper} ref={headerRef}>
       <Toolbar className={`${classes.headerWrapper}__toolbar`}>
         <Logo/>
 
-        <ProfilesSideBar classes={classes}/>
+        <ProfilesSideBar classes={classes} role={role} />
 
         <Hidden mdDown>
           <div className={`${classes.headerWrapper}__toolbar__right`}>
             <SearchBar/>
-            {props.isAuthenticated ? (
-              <Link href="#">
-                <a className={`${classes.headerWrapper}__authentication-sign-out`}
-                   onClick={handleSignOutClick}>
-                  Sign out
-                </a>
-              </Link>
-            ) : (
-              <div className={`${classes.headerWrapper}__authentication`}>
-                <Link href="#">
-                  <a className={`${classes.headerWrapper}__authentication-signin`}
+
+            <Link href={"/profiles"}>
+              <a className={`${classes.headerWrapper}__button`} onClick={handleClick}>
+                Find Talents
+              </a>
+            </Link>
+            <Link href={"/jobs"}>
+              <a className={`${classes.headerWrapper}__button`}>
+                Find Jobs
+              </a>
+            </Link>
+
+            {props.isAuthenticated ?
+              <>
+                <Link href={`${getPrivateSlug()}`}>
+                  <a className={`${classes.headerWrapper}__button`}>
+                    My Profile
+                  </a>
+                </Link>
+
+                {role === 'employee' ?
+                (<Link href={"/profile"}>
+                  <a className={`${classes.headerWrapper}__button`}>
+                    Template Profile
+                  </a>
+                </Link>) : ""}
+
+                <Link href="">
+                  <a className={`${classes.headerWrapper}-sign-out`}
+                     onClick={handleSignOutClick}>
+                    Sign out
+                  </a>
+                </Link>
+              </> :
+              <>
+                <Link href="">
+                  <a className={`${classes.headerWrapper}__button`}
                      onClick={handleSignInClick}>
                     Sign In
                   </a>
                 </Link>
-                <Link href="#">
-                  <a className={`${classes.headerWrapper}__authentication-signup`}
+                <Link href="">
+                  <a className={`${classes.headerWrapper}-signup`}
                      onClick={handleSignUpClick}>
                     Sign Up
                   </a>
                 </Link>
-              </div>
-            )}
+              </>
+            }
           </div>
         </Hidden>
       </Toolbar>

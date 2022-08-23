@@ -9,7 +9,9 @@ import {
   SKILLS_VALUES,
   SET_PROFILE_ID,
   SET_NAME,
-  SET_AVATAR, SET_LOADER
+  SET_AVATAR,
+  SET_LOADER,
+  SET_ROLE
 } from "../actionTypes/topSectionTypes";
 
 const initialState = {
@@ -26,7 +28,8 @@ const initialState = {
   expertises: [],
   links: {},
   skills: [],
-  loader: true
+  loader: true,
+  role: ''
 }
 
 export const topSectionReducer = (state = initialState, action) => {
@@ -91,6 +94,11 @@ export const topSectionReducer = (state = initialState, action) => {
       return {
         ...state,
         loader: action.payload
+      }
+    case SET_ROLE:
+      return {
+        ...state,
+        role: action.payload
       }
     default:
       return state

@@ -7,37 +7,33 @@ import CustomDivider from "../../lib/profile/divider/divider";
 import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
-import {modalType} from "../../store/actions/authAction";
 import CustomLoader from "../../lib/customLoader";
-import {getProfileAction} from "../../store/actions/topSectionActions";
+import {getDemoProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
-  const {isAuthenticated, profileSlug, loader} = props;
+  const {loader} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(modalType(''));
-    }
-    profileSlug && dispatch(getProfileAction())
-  }, [isAuthenticated, profileSlug]);
+    dispatch(getDemoProfileAction());
+  }, []);
 
   return (
     <NoSsr>
-      {loader ? <CustomLoader/> : <>
-        <TopSection/>
-        <CustomDivider/>
-        <Sections/>
-      </>}
+      {
+        loader ? <CustomLoader/> : <>
+          <TopSection/>
+          <CustomDivider/>
+          <Sections/>
+        </>
+      }
     </NoSsr>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
-    loader: state.topSection.loader,
-    profileSlug: state.auth.profileSlug
+    loader: state.topSection.loader
   }
 }
 

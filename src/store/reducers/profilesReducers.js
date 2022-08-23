@@ -1,20 +1,37 @@
-import {SHOW_PROFILES} from "../actionTypes/profilesTypes";
-import {ProfileCardData} from "../../../API/mock/profiles/profileCardData";
-
-const chunkedData = ProfileCardData.slice(0, 8)
+import {SHOW_PROFILES, SET_PAGE, RESET, SET_PROFILES} from "../actionTypes/profilesTypes";
 
 const initialState = {
-    profiles: chunkedData,
+  initialLoader: true,
+  page: 0,
+  profiles: [],
+  set: true,
+  searchProfiles: []
 }
 
 export const profilesReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SHOW_PROFILES:
-            return {
-                ...state,
-                profiles: action.payload,
-            }
-        default:
-            return state
-    }
+  switch (action.type) {
+    case SHOW_PROFILES:
+      return {
+        ...state,
+        profiles: action.payload,
+        initialLoader: false,
+      }
+    case SET_PAGE:
+      return {
+        ...state,
+        page: action.payload,
+      }
+    case RESET:
+      return {
+        ...state,
+        set: action.payload
+      }
+    case SET_PROFILES:
+      return {
+        ...state,
+        searchProfiles: action.payload
+      }
+    default:
+      return state
+  }
 }

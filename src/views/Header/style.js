@@ -27,7 +27,8 @@ export const useStyles = makeStyles({
         alignItems: "center",
       },
       '&__right': {
-        width: 615,
+        justifySelf: "flex-end",
+        flexGrow: .2,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -123,7 +124,7 @@ export const useStyles = makeStyles({
         display: "flex",
       },
       '&__navItem': {
-        width: 475
+        width: "100%"
       },
       '&__share': {
         position: "relative",
@@ -137,7 +138,7 @@ export const useStyles = makeStyles({
         borderRadius: 5,
         transition: "all .5s ease",
         color: theme.palette.customColor.highContrast,
-        '&:hover':{
+        '&:hover': {
           opacity: 1,
           borderRadius: 6,
           background: theme.palette.customColor.shareBtn,
@@ -147,18 +148,18 @@ export const useStyles = makeStyles({
         '&__popUp': {
           zIndex: 999999999
         },
-        '&__shareBar':{
+        '&__shareBar': {
           width: 150,
           display: "flex",
           justifyContent: "space-between",
           padding: 9,
           background: theme.palette.customBackground.shareBar,
           borderRadius: 7,
-          '&__arrow':{
+          '&__arrow': {
             marginTop: "9px",
             position: "relative",
             boxShadow: "none",
-            '&::before':{
+            '&::before': {
               background: theme.palette.customBackground.shareBar,
               content: '""',
               display: "block",
@@ -170,7 +171,7 @@ export const useStyles = makeStyles({
               left: "calc(50% - 6px)"
             }
           },
-          '&__icon':{
+          '&__icon': {
             borderRadius: 10,
             height: 30,
             width: 30
@@ -221,7 +222,7 @@ export const useStyles = makeStyles({
         background: "transparent",
         width: 190,
         height: 60,
-        '&__title':{
+        '&__title': {
           color: theme.palette.customColor.main,
           fontSize: "14px",
           fontWeight: 300,
@@ -274,6 +275,17 @@ export const useStyles = makeStyles({
         justifyContent: "flex-end",
         marginBottom: 16
       },
+      '&__links': {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+        margin: "30px 0",
+        '&-link': {
+          margin: "5px 0",
+          padding: 10
+        }
+      },
       '&__top': {
         display: 'flex',
         justifyContent: 'space-between',
@@ -281,10 +293,13 @@ export const useStyles = makeStyles({
         marginBottom: 15
       },
       '&__bottom': {
-        height: "90%",
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between"
+        justifyContent: "center",
+        '& a': {
+          width: "80%",
+          position: "absolute",
+          bottom: 20
+        }
       },
       [theme.breakpoints.down('md')]: {
         width: 300,
@@ -296,72 +311,65 @@ export const useStyles = makeStyles({
       width: 35,
       height: 35,
     },
-    '&__authentication': {
-      width: 180,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      '&-signin': {
-        fontFamily: FONTS.secondaryFont,
-        fontWeight: 400,
-        fontSize: 14,
-        letterSpacing: "1px",
-        color: theme.palette.customColor.main,
-        textDecoration: 'none',
-        cursor: "pointer",
-        opacity: .8,
-        transition: "all .4s ease 0s",
-        '&:hover': {
-          opacity: 1,
-          color: theme.palette.customColor.navLinkActive,
-        },
+    '&__button': {
+      fontFamily: FONTS.secondaryFont,
+      fontWeight: 400,
+      fontSize: 14,
+      letterSpacing: "1px",
+      color: theme.palette.customColor.main,
+      textDecoration: 'none',
+      cursor: "pointer",
+      opacity: .8,
+      transition: "all .4s ease 0s",
+      '&:hover': {
+        opacity: 1,
+        color: theme.palette.customColor.navLinkActive,
       },
-      '&-signup, &-sign-out': {
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: FONTS.secondaryFont,
-        fontWeight: 400,
-        fontSize: 14,
-        letterSpacing: "1px",
-        textAlign: "center",
-        textDecoration: 'none',
-        background: theme.palette.customBackground.gradiant.light,
-        boxShadow: theme.palette.customShadow.buttonShadow,
-        width: 100,
-        height: 48,
-        border: "none",
+    },
+    '&-signup, &-sign-out': {
+      position: "relative",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontFamily: FONTS.secondaryFont,
+      fontWeight: 400,
+      fontSize: 14,
+      letterSpacing: "1px",
+      textAlign: "center",
+      textDecoration: 'none',
+      background: theme.palette.customBackground.gradiant.light,
+      boxShadow: theme.palette.customShadow.buttonShadow,
+      width: 100,
+      height: 48,
+      border: "none",
+      borderRadius: 6,
+      color: theme.palette.customColor.highContrast,
+      zIndex: 1,
+      transition: "all 0.4s ease",
+      '&::before': {
+        position: "absolute",
+        content: '""',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: -1,
+        transition: "opacity 0.4s ease-in-out",
+        opacity: 0,
+        background: theme.palette.customBackground.gradiant.dark,
+        borderRadius: 6
+      },
+      '&:hover::before': {
+        opacity: 1,
         borderRadius: 6,
-        color: theme.palette.customColor.highContrast,
-        zIndex: 1,
-        transition: "all 0.4s ease",
-        '&::before': {
-          position: "absolute",
-          content: '""',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: -1,
-          transition: "opacity 0.4s ease-in-out",
-          opacity: 0,
-          background: theme.palette.customBackground.gradiant.dark,
-          borderRadius: 6
-        },
-        '&:hover::before': {
-          opacity: 1,
-          borderRadius: 6,
-        },
-        '&:hover': {
-          color: theme.palette.customColor.sendMessageBtn,
-        },
-        [theme.breakpoints.down('md')]: {
-          width: "100%",
-        }
+      },
+      '&:hover': {
+        color: theme.palette.customColor.sendMessageBtn,
+      },
+      [theme.breakpoints.down('md')]: {
+        width: "100%",
       }
     },
-
     // ========= Breakpoints =========
     [theme.breakpoints.down('xs')]: {
       '&__toolbar': {

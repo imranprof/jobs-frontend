@@ -225,3 +225,23 @@ export const resumeItemRemoveAction = ({id, cardType}) => {
       .catch(err => err.response)
   }
 }
+
+export const addNewSkillAction = (title, rating) => {
+  let data = {
+    "user": {
+      "users_skills_attributes": [
+        {
+          "skill_title": title,
+          "rating": rating
+        }
+      ]
+    }
+  }
+  return (dispatch) => {
+    axios.patch(profileURL(), data).then(res => {
+      dispatch(getResume(res.data.resume_data));
+      dispatch(skillsUpdate(res.data.profile.skills));
+    })
+      .catch(err => err.response)
+  }
+}

@@ -50,19 +50,11 @@ const CustomCard = (props) => {
 
   const removeHandler = (item) => {
     if (isPortfolio) {
-      if (portfolios.allPortfolios.length < 2) {
-        setToast({show: true, severity: "error", text: "You must have at least one portfolio!"});
-      } else {
-        profileSlug && dispatch(removePortfolioAction(item.id));
-        setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
-      }
+      profileSlug && dispatch(removePortfolioAction(item.id));
+      setToast({show: true, severity: "success", text: "Successfully deleted the portfolio!"});
     } else {
-      if (blogs.length < 2) {
-        setToast({show: true, severity: "error", text: "You must have at least one blog!"});
-      } else {
-        profileSlug && dispatch(blogsRemoveAction(item.id))
-        setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
-      }
+      profileSlug && dispatch(blogsRemoveAction(item.id))
+      setToast({show: true, severity: "success", text: "Successfully deleted the blog!"});
     }
   }
 
