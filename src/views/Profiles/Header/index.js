@@ -48,7 +48,7 @@ const ProfilesHeader = (props) => {
                 Find Talents
               </a>
             </Link>
-            <Link href={"#"}>
+            <Link href={"/jobs"}>
               <a className={`${classes.headerWrapper}__button`}>
                 Find Jobs
               </a>

@@ -21,6 +21,7 @@ const JobPostForm = (props) => {
   const [toast,setToast] = useState({show: false, severity: "", text: ""});
   const [mode, setMode] = useState(false);
   const [jobData, setJobData] = useState({});
+  const {handleClose} = props
 
   const jobSkillsData = [
     {value: 1, label: "Ruby"},
@@ -79,7 +80,7 @@ const JobPostForm = (props) => {
     <>
       {
         mode ? (
-          <JobShow data={jobData}/>
+          <JobShow data={jobData} handleClose={handleClose} />
         ):(
           <div className={classes.jobPostFormWrapper}>
             <ModalTitle title="Post New Job"/>
@@ -146,7 +147,7 @@ const JobPostForm = (props) => {
             <Button fullWidth onClick={formik.handleSubmit} endIcon={<Icon className={FontAwesomeIcons.signIn}/>}
                     className={`${classes.jobPostFormWrapper}__button`}
             >
-              post
+              job post
             </Button>
           </div>
         )
@@ -161,8 +162,4 @@ const JobPostForm = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {}
-}
-
-export default connect(mapStateToProps)(JobPostForm);
+export default JobPostForm;

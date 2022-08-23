@@ -89,7 +89,7 @@ const ProfilesSideBar = (props) => {
                 Find Talents
               </a>
             </Link>
-            <Link href={"#"}>
+            <Link href={"/jobs"}>
               <a
                 className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
                 Find Jobs
