@@ -18,7 +18,7 @@ const Profiles = (props) => {
   const classes = ProfilesStyle(theme);
   const dispatch = useDispatch();
   const [hasMore, setHasMore] = useState(true)
-  const {profileList, page, initialLoader} = props;
+  const {profileList, page, initialLoader, set} = props;
 
   useEffect(() => {
     fetchProfiles();
@@ -46,7 +46,7 @@ const Profiles = (props) => {
           className={classes.profilesWrapper}
           dataLength={profileList.length}
           next={fetchProfiles}
-          loader={((profileList.length % 8 !== 0) || (profileList.length === 0) || (page > 1 && profileList.length % 8 === 0)) ?
+          loader={((profileList.length % 8 !== 0) || (profileList.length === 0) || (page > 1 && profileList.length % 8 === 0) || !set) ?
             <EndMessage title="Yay! You have seen it all"/> : (<CustomLoader/>)}
           hasMore={hasMore}
           endMessage={<EndMessage title="Yay! You have seen it all"/>}
@@ -62,7 +62,8 @@ const mapStateToProps = (state) => {
   return {
     profileList: state.allProfiles.profiles,
     page: state.allProfiles.page,
-    initialLoader: state.allProfiles.initialLoader
+    initialLoader: state.allProfiles.initialLoader,
+    set: state.allProfiles.set
   }
 }
 
