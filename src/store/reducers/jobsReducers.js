@@ -17,7 +17,8 @@ export const jobsReducer = (state = initialState, action) => {
     case SET_JOBS:
       return {
         ...state,
-        individualJobs: action.payload
+        individualJobs: action.payload,
+        initialLoader: false
       }
     default:
       return state
