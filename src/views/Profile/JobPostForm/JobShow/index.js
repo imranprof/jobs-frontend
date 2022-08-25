@@ -29,7 +29,7 @@ const JobShow = (props) => {
       isDisabled=true
       setToast({show: true, severity: "success", text: "Applied Job successfully!"});
     } else {
-      setToast({show: true, severity: "error", text: "You already applied or something wrong!"});
+      setToast({show: true, severity: "error", text: "You are not Eligible or something wrong!"});
     }
   }
 
