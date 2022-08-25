@@ -8,6 +8,7 @@ import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import {getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
+import {getRole} from "../../../../auth/operations";
 
 const JobShow = (props) => {
   const theme = useTheme();
@@ -16,6 +17,7 @@ const JobShow = (props) => {
   const {title, description, location, skills, id} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
+  const role = getRole()
 
   useEffect(async () => {
     await dispatch(getIndividualJobs())
@@ -67,7 +69,7 @@ const JobShow = (props) => {
         <h3 className={`${classes.jobShowWrapper}__content-header`}>Client location</h3>
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
       </div>
-      <div>
+      {role === 'employee' && <div>
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <span onClick={handleClick}>
           <Button
@@ -88,7 +90,7 @@ const JobShow = (props) => {
           Cancel
           </Button>
       </span>
-      </div>
+      </div>}
       {toast.show &&
       <CustomSnackbar
         toast={toast}
