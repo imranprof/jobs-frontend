@@ -37,7 +37,7 @@ const MyJobs = (props) => {
   }
 
   return (
-    <div>
+    <div id="myJobs">
       {initialLoader && <CustomLoader/>}
       <InfiniteScroll
         dataLength={jobs.length}
