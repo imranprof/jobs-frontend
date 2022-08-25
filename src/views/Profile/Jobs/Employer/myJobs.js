@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {connect} from "react-redux";
 
 import Job from "../../../Job";
-import {getIndividualJobs} from "../../../../store/actions/jobAction";
+import {getIndividualJobs, setIndividualJobs} from "../../../../store/actions/jobAction";
 import CustomLoader from "../../../../lib/customLoader";
 import EndMessage from "../../../../lib/endMessage";
 
@@ -17,6 +17,9 @@ const MyJobs = (props) => {
   useEffect(() => {
     setJobs(jobList.slice(0, jobs.length + 8))
     dispatch(getIndividualJobs())
+    return () => {
+      dispatch(setIndividualJobs([]))
+    }
   }, [])
 
   if ((jobList.length > jobs.length && hasMore === false) || (jobs.length === 0 && jobList.length > jobs.length)) {

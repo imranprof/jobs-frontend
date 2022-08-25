@@ -31,7 +31,6 @@ const Profile = (props) => {
   useEffect(() => {
     profile && dispatch(setProfileSlug(profile));
     profileSlug && dispatch(getProfileAction())
-    profileSlug && dispatch(getIndividualJobs())
   }, [profile, profileSlug]);
 
   return (
