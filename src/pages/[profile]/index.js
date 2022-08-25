@@ -13,6 +13,7 @@ import {setProfileSlug} from "../../store/actions/authAction";
 import CustomLoader from "../../lib/customLoader";
 import {getProfileAction} from "../../store/actions/topSectionActions";
 import {getRole} from "../../auth/operations";
+import {getIndividualJobs} from "../../store/actions/jobAction";
 
 const Profile = (props) => {
   const {isAuthenticated, profileSlug, loader} = props;

@@ -9,7 +9,7 @@ import ModalTitle from "../../../lib/profile/modalTitle";
 import ErrorMessage from "../../../lib/errorMessage";
 import {JobPostFormStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-import {addJobAction} from "../../../store/actions/jobAction";
+import {addJobAction, getIndividualJobs} from "../../../store/actions/jobAction";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import React, {useState} from "react";
 import JobShow from "./JobShow";
@@ -46,6 +46,7 @@ const JobPostForm = (props) => {
     const response = await dispatch(addJobAction({title: title, description: description, location: location, skills: skills}))
     if(response && response.status === 201){
       setJobData(response.data.job)
+      dispatch(getIndividualJobs())
       formik.resetForm()
       setToast({show: true, severity: "success", text: "Posted new job successfully!"});
       setMode(true);

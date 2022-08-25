@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import COLORS from "../../../../../styles/colors";
 
 const useStyles = makeStyles({
   jobEditWrapper: theme => ({
@@ -26,6 +27,9 @@ const useStyles = makeStyles({
       },
       '&__gap': {
         margin: "30px 0"
+      },
+      '&__selectDropdown': {
+        color: COLORS.black,
       }
     }
   }),
