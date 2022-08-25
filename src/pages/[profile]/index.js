@@ -13,6 +13,7 @@ import {setProfileSlug} from "../../store/actions/authAction";
 import CustomLoader from "../../lib/customLoader";
 import {getProfileAction} from "../../store/actions/topSectionActions";
 import {getRole} from "../../auth/operations";
+import {getIndividualJobs} from "../../store/actions/jobAction";
 
 const Profile = (props) => {
   const {isAuthenticated, profileSlug, loader} = props;
@@ -38,7 +39,7 @@ const Profile = (props) => {
         loader ? <CustomLoader/> : <>
           <TopSection/>
           <CustomDivider/>
-          {role === "employee" ? <Sections/> : null}
+          {<Sections />}
         </>
       }
     </NoSsr>

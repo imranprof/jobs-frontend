@@ -9,10 +9,12 @@ import {JobSeekerNavLinksData} from "../../../../../API/elements/profile/jobSeek
 import {getRole} from "../../../../auth/operations";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import JobPostForm from "../../JobPostForm";
+import {EmployerNavLinksData} from "../../../../../API/elements/profile/employerNavLinksData";
 
 const NavItems = ({classes, variant}) => {
   const role = getRole()
   const [openModal, setOpenModal] = useState(false);
+  const {href} = EmployerNavLinksData[0];
 
   const modalClose = () => {
     setOpenModal(false)
@@ -36,9 +38,9 @@ const NavItems = ({classes, variant}) => {
         : (
           <>
             <ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}>
-              <a>
+              <Link to={href} spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
                 my jobs
-              </a>
+              </Link>
             </ListItem>
             <ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}>
               <a onClick={handleJobPostClick}>
