@@ -1,8 +1,9 @@
 import axios from "axios";
-import {SET_JOBS} from "../actionTypes/jobsTypes";
+import {SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
 const jobsUrl = process.env.NEXT_PUBLIC_My_JOB_URL
+const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills} = job;
@@ -37,5 +38,46 @@ export const getIndividualJobs = () => {
       .then(res => dispatch(setIndividualJobs(res.data.jobs)))
       .catch(err => err.response)
     return (response);
+  }
+}
+
+export const updateJob = () => {
+  return {
+    type: UPDATE_JOB,
+  }
+}
+
+export const updateJobAction = (oldJob, updatedJob) => {
+  const data = {
+    "job": {
+      "id": updatedJob.id,
+      "title": updatedJob.title,
+      "description": updatedJob.description,
+      "location": updatedJob.location,
+      "skills": `{${updatedJob.skills}}`
+    }
+  }
+  return (dispatch) => {
+    axios.patch(jobEditUrl, data)
+      .then(res => {
+        dispatch(getIndividualJobs())
+        dispatch(updateJob())
+      })
+      .catch(err => err.response)
+  }
+}
+
+export const removeJobAction = (id) => {
+  const data = {
+    "job": {
+      "id": id
+    }
+  }
+  return (dispatch) => {
+    axios.delete(jobEditUrl, {data})
+      .then(res => {
+        dispatch(getIndividualJobs())
+      })
+      .catch(err => err.response)
   }
 }
