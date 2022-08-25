@@ -3,12 +3,28 @@ import {useTheme} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 import {JobShowStyle} from "./style";
+import {useDispatch} from "react-redux";
+import {jobApplyAction} from "../../../../store/actions/jobAction";
+import React, {useState} from "react";
+import CustomSnackbar from "../../../../lib/customSnackbar";
 
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
   const {data, handleClose} = props
-  const {title, description, location, skills} = data
+  const {title, description, location, skills, id} = data
+  const [toast,setToast] = useState({show: false, severity: "", text: ""});
+  const dispatch = useDispatch()
+
+  const handleClick = async () => {
+    const response = await dispatch(jobApplyAction(id));
+    if(response && response.status===200){
+      setToast({show: true, severity: "success", text: "Applied Job successfully!"});
+    }
+    else {
+      setToast({show: true, severity: "error", text: "You already applied or something wrong!"});
+    }
+  }
 
   return (
     <>
@@ -36,7 +52,7 @@ const JobShow = (props) => {
       </div>
       <div>
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <span>
+        <span onClick={handleClick}>
           <Button
             variant="contained"
             size="small"
@@ -55,6 +71,11 @@ const JobShow = (props) => {
           </Button>
       </span>
       </div>
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
     </>
   )
 }
