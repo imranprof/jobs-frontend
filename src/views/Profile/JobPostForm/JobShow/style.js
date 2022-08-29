@@ -47,6 +47,18 @@ const useStyles = makeStyles({
     },
     '&__button': {
       marginLeft: 10
+    },
+    '&__applicant-list': {
+      '&__table-header': {
+        backgroundColor: theme.palette.customDivider.main,
+      },
+      '&__table-cell': {
+        backgroundColor: theme.palette.customBackground.skillBackground,
+        '& a':{
+          color: theme.palette.customColor.highContrast,
+          textDecoration: "none"
+        }
+      }
     }
   }),
 })

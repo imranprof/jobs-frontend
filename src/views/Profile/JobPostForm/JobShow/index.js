@@ -111,8 +111,8 @@ const JobShow = (props) => {
               <Table aria-label={"customized table"}>
                 <TableHead>
                   <TableRow>
-                    <TableCell style={{backgroundColor:"#000000"}}>Name</TableCell>
-                    <TableCell style={{backgroundColor:"#000000"}}>Profile</TableCell>
+                    <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Name</TableCell>
+                    <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Profile</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -120,8 +120,8 @@ const JobShow = (props) => {
                     const fullName = applicant.profile_slug.split("-")
                     return (
                       <TableRow key={applicant.profile_slug}>
-                        <TableCell style={{backgroundColor: "#242424"}}>{fullName[0]} {fullName[1]}</TableCell>
-                        <TableCell style={{backgroundColor: "#242424"}}><Link href={`${applicant.profile_slug}`} target="_blank"><a target="_blank" style={{color:"#686de0", textDecoration: "none"}}>More</a></Link></TableCell>
+                        <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>{fullName[0]} {fullName[1]}</TableCell>
+                        <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link href={`${applicant.profile_slug}`} ><a target="_blank">More</a></Link></TableCell>
                       </TableRow>
                       )
                   })
