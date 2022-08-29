@@ -26,7 +26,7 @@ const Jobs = (props) => {
       {initialLoader && <CustomLoader/>}
 
       <div className={classes.jobsWrapper}>
-        {jobList.map((job) => <Job key={job.id} job={job}/>)}
+        {jobList.map((job) => <Job key={job.id} job={job} type = {'findJob'}/>)}
       </div>
     </div>
   );

@@ -11,12 +11,12 @@ import EditCustomModal from "../../lib/profile/editCustomModal";
 import {JobStyle} from "./style";
 import EditButton from "../../lib/editButton";
 import RemoveButton from "../../lib/removeButton";
-import {removeJobAction} from "../../store/actions/jobAction";
+import {getIndividualJobs, removeJobAction} from "../../store/actions/jobAction";
 
 const Job = (props) => {
   const theme = useTheme();
   const classes = JobStyle(theme);
-  const {setToast, job} = props
+  const {setToast, job, setIsDelete, isDelete, type} = props
   const {title, description, skills, location, id} = job
   const [openModal, setOpenModal] = useState(false)
   const [editMode, setEditMode] = useState(false)
@@ -37,23 +37,29 @@ const Job = (props) => {
     setOpenModal(true)
     e.stopPropagation();
   }
-  const removeHandler = (e) => {
-    dispatch(removeJobAction(id))
-    setToast({show: true, severity: "success", text: "Successfully deleted the job."});
+
+  const removeHandler = async (e) => {
     e.stopPropagation();
+    const response = await dispatch(removeJobAction(id))
+    if (response.status === 204) {
+      await dispatch(getIndividualJobs())
+      await setIsDelete(!isDelete);
+    }
+    setToast({show: true, severity: "success", text: "Successfully deleted the job."});
   }
 
   return (
     <>
       <Paper onClick={openModalHandler} elevation={3} className={classes.jobWrapper}>
-        <span className={`${classes.jobWrapper}__action-btn`}>
+        {type === 'myJob' &&
+        (<span className={`${classes.jobWrapper}__action-btn`}>
           <span onClick={openEditModalHandler}>
             <EditButton/>
           </span>
           <span onClick={removeHandler}>
             <RemoveButton/>
           </span>
-        </span>
+        </span>)}
 
         <h1 className={`${classes.jobWrapper}__title`}>{title}</h1>
         <p className={`${classes.jobWrapper}__description`}>{description}</p>
@@ -65,7 +71,8 @@ const Job = (props) => {
       </Paper>
 
       <EditCustomModal open={openModal} handleClose={handleClose}>
-        {editMode ? <JobEdit job={job} handleClose={handleClose} setToast={setToast} /> : <JobShow data={job} handleClose={handleClose} />}
+        {editMode ? <JobEdit job={job} handleClose={handleClose} setToast={setToast}/> :
+          <JobShow data={job} handleClose={handleClose}/>}
       </EditCustomModal>
     </>
   );

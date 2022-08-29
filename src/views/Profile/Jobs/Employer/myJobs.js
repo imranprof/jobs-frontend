@@ -15,6 +15,7 @@ const MyJobs = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [jobs, setJobs] = useState([]);
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
+  const [isDelete, setIsDelete] = useState(false);
 
   useEffect(() => {
     setJobs(jobList.slice(0, jobs.length + 8))
@@ -22,7 +23,7 @@ const MyJobs = (props) => {
     return () => {
       dispatch(setIndividualJobs([]))
     }
-  }, [])
+  }, [isDelete])
 
   if ((jobList.length > jobs.length && hasMore === false) || (jobs.length === 0 && jobList.length > jobs.length)) {
     setJobs(jobList.slice(0, jobs.length + 8))
@@ -49,7 +50,7 @@ const MyJobs = (props) => {
           loader={jobList.length === 0 ? (<EndMessage title="Yay! You have seen it all"/>) : (<CustomLoader/>)}
           endMessage={<EndMessage title="Yay! You have seen it all"/>}
         >
-          {jobs?.map((job) => <Job key={job.id} job={job} setToast={setToast}/>)}
+          {jobs?.map((job) => <Job key={job.id} job={job} setToast={setToast} setIsDelete={setIsDelete} isDelete={isDelete} type={'myJob'}/>)}
         </InfiniteScroll>
       </div>
       {toast.show &&

@@ -74,10 +74,9 @@ export const removeJobAction = (id) => {
     }
   }
   return (dispatch) => {
-    axios.delete(jobEditUrl, {data})
-      .then(res => {
-        dispatch(getIndividualJobs())
-      })
+    const response = axios.delete(jobEditUrl, {data})
+      .then(res => res)
       .catch(err => err.response)
+    return (response);
   }
 }
