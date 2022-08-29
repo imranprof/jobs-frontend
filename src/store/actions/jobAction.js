@@ -2,6 +2,7 @@ import axios from "axios";
 import {SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
+const jobApplyUrl = process.env.NEXT_PUBLIC_JOB_APPLY_URL
 const jobsUrl = process.env.NEXT_PUBLIC_My_JOB_URL
 const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 
@@ -36,6 +37,21 @@ export const getIndividualJobs = () => {
   return async (dispatch) => {
     const response = axios.post(jobsUrl)
       .then(res => dispatch(setIndividualJobs(res.data.jobs)))
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export const  jobApplyAction = (id) => {
+  let data = {
+    "job": {
+      "id": id
+    }
+  }
+
+  return async (dispatch) => {
+    const response = axios.post(jobApplyUrl, data)
+      .then(res => res)
       .catch(err => err.response)
     return (response);
   }
