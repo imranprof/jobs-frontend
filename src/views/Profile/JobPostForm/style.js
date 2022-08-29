@@ -6,11 +6,25 @@ const useStyles = makeStyles({
     width: "100%",
     height: "auto",
     '&__contentWrapper': {
+      '& label.Mui-focused': {
+        color: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiFilledInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
       '& .MuiOutlinedInput-multiline': {
         padding: 0
       },
       '& .MuiOutlinedInput-inputMultiline': {
         padding: 12
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: theme.palette.customBorder.customInputBorder,
+        }
       },
       '& .MuiTextField-root': {
         marginBottom: 0

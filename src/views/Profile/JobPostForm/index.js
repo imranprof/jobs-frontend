@@ -90,6 +90,7 @@ const JobPostForm = (props) => {
 
               <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
                 <TextField
+                  size="small"
                   required
                   fullWidth
                   variant="outlined"
@@ -133,6 +134,7 @@ const JobPostForm = (props) => {
 
               <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
                 <TextField
+                  size="small"
                   required
                   fullWidth
                   variant="outlined"
