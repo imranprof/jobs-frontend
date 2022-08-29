@@ -3,12 +3,47 @@ import {useTheme} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 import {JobShowStyle} from "./style";
+import {useDispatch} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
+import CustomSnackbar from "../../../../lib/customSnackbar";
+import {getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
+import {getRole} from "../../../../auth/operations";
 
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose} = props
-  const {title, description, location, skills} = data
+  const {data, handleClose, jobList} = props
+  const {title, description, location, skills, id} = data
+  const [toast, setToast] = useState({show: false, severity: "", text: ""});
+  const dispatch = useDispatch()
+  const role = getRole()
+
+  useEffect(async () => {
+    await dispatch(getIndividualJobs())
+  }, [])
+
+  let btnTitle = 'Apply', isId, isDisabled=false;
+  const handleClick = async () => {
+    const response = await dispatch(jobApplyAction(id));
+    if (response && response.status === 200) {
+      dispatch(getIndividualJobs())
+      isDisabled=true
+      setToast({show: true, severity: "success", text: "Applied Job successfully!"});
+    } else {
+      setToast({show: true, severity: "error", text: "You are not Eligible or something wrong!"});
+    }
+  }
+
+  if (jobList.length !== 0) {
+    isId = jobList.find((item) => {
+      return item.id === id;
+    })
+  }
+  if (isId) {
+    btnTitle = 'Applied'
+    isDisabled=true
+  }
 
   return (
     <>
@@ -34,15 +69,16 @@ const JobShow = (props) => {
         <h3 className={`${classes.jobShowWrapper}__content-header`}>Client location</h3>
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
       </div>
-      <div>
+      {role === 'employee' && <div>
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <span>
+        <span onClick={handleClick}>
           <Button
             variant="contained"
             size="small"
             color="primary"
+            disabled={isDisabled}
           >
-          Apply
+          {btnTitle}
           </Button>
         </span>
         <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
@@ -54,9 +90,20 @@ const JobShow = (props) => {
           Cancel
           </Button>
       </span>
-      </div>
+      </div>}
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
     </>
   )
 }
 
-export default JobShow;
+const mapStateToProps = (state) => {
+  return {
+    jobList: state.allJobs.individualJobs,
+  }
+}
+
+export default connect(mapStateToProps)(JobShow);
