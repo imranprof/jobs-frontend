@@ -9,6 +9,10 @@ import {connect} from "react-redux";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import {getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
+import {IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import Paper from '@material-ui/core/Paper'
+import Link from "next/link";
+import CloseIcon from "@material-ui/icons/Close";
 
 const JobShow = (props) => {
   const theme = useTheme();
@@ -23,12 +27,20 @@ const JobShow = (props) => {
     await dispatch(getIndividualJobs())
   }, [])
 
-  let btnTitle = 'Apply', isId, isDisabled=false;
+  const hasApplicantsKey = data.hasOwnProperty('applicants')
+  let hasApplicants = false;
+  if (hasApplicantsKey) {
+    if (data.applicants.length !== 0) {
+      hasApplicants = true;
+    }
+  }
+
+  let btnTitle = 'Apply', isId, isDisabled = false;
   const handleClick = async () => {
     const response = await dispatch(jobApplyAction(id));
     if (response && response.status === 200) {
       dispatch(getIndividualJobs())
-      isDisabled=true
+      isDisabled = true
       setToast({show: true, severity: "success", text: "Applied Job successfully!"});
     } else {
       setToast({show: true, severity: "error", text: "You are not Eligible or something wrong!"});
@@ -42,12 +54,19 @@ const JobShow = (props) => {
   }
   if (isId) {
     btnTitle = 'Applied'
-    isDisabled=true
+    isDisabled = true
   }
 
   return (
     <>
       <div className={classes.jobShowWrapper}>
+        {role === 'employer' &&
+        (<div className={`${classes.jobShowWrapper}__close-button`}>
+            <span onClick={handleClose}>
+              <IconButton><CloseIcon/></IconButton>
+            </span>
+          </div>
+        )}
         <h1 className={`${classes.jobShowWrapper}__title`}>
           {title}
         </h1>
@@ -69,7 +88,7 @@ const JobShow = (props) => {
         <h3 className={`${classes.jobShowWrapper}__content-header`}>Client location</h3>
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
       </div>
-      {role === 'employee' && <div>
+      {role === 'employee' ? (<div>
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <span onClick={handleClick}>
           <Button
@@ -90,7 +109,40 @@ const JobShow = (props) => {
           Cancel
           </Button>
       </span>
-      </div>}
+      </div>) : (
+        hasApplicantsKey && hasApplicants && <>
+          <Divider className={`${classes.jobShowWrapper}__divider`}/>
+          <h3 className={`${classes.jobShowWrapper}__content-header`}>
+            Applicant List
+          </h3>
+          <TableContainer component={Paper}>
+            <Table aria-label={"customized table"}>
+              <TableHead>
+                <TableRow>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Name</TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Profile</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.applicants.map((applicant) => {
+                  const fullName = applicant.profile_slug.split("-")
+                  return (
+                    <TableRow key={applicant.profile_slug}>
+                      <TableCell
+                        className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>{fullName[0]} {fullName[1]}</TableCell>
+                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link
+                        href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link></TableCell>
+                    </TableRow>
+                  )
+                })
+
+                }
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      )
+      }
       {toast.show &&
       <CustomSnackbar
         toast={toast}
