@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     },
     '&__title': {
       color: theme.palette.customColor.highContrast,
+      marginTop: 0
     },
     '&__description': {
       color: theme.palette.customColor.main,
@@ -59,6 +60,10 @@ const useStyles = makeStyles({
           textDecoration: "none"
         }
       }
+    },
+    '&__close-button': {
+      display: "flex",
+      justifyContent: "flex-end"
     }
   }),
 })
