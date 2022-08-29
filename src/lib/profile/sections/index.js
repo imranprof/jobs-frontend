@@ -1,16 +1,34 @@
-import {SectionsData} from "../../../../API/elements/profile/sectionsData";
+import {JobSeekerSectionData} from "../../../../API/elements/profile/jobSeekerSectionData";
 import Section from "./section";
+import {EmployerSectionData} from "../../../../API/elements/profile/employerSectionData";
+import {connect} from "react-redux";
 
-const Sections = () => {
-    const sections = SectionsData();
+const Sections = (props) => {
+  const jobSeekerSections = JobSeekerSectionData();
+  const employerSections = EmployerSectionData();
+  const {role} = props;
 
-    return (
-        <>
-            {sections.map(section =>
-                <Section section={section} key={section.id}/>
-            )}
-        </>
-    );
+  let sections;
+  if(role === 'employer'){
+    sections = employerSections;
+  }
+  else {
+    sections = jobSeekerSections;
+  }
+
+  return (
+    <>
+      {sections.map(section =>
+        <Section section={section} key={section.id}/>
+      )}
+    </>
+  );
 }
 
-export default Sections;
+const mapStateToProps = (state) => {
+  return {
+    role: state.topSection.role
+  }
+}
+
+export default connect(mapStateToProps)(Sections);
