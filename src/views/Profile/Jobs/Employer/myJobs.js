@@ -10,17 +10,22 @@ import EndMessage from "../../../../lib/endMessage";
 
 const MyJobs = (props) => {
   const dispatch = useDispatch()
-  const {jobList, initialLoader} = props
+  const {jobList} = props
   const [hasMore, setHasMore] = useState(true);
   const [jobs, setJobs] = useState([]);
+  const [hasData, setHasData] = useState(true);
 
   useEffect(() => {
+    dispatch(getIndividualJobs()).then(()=> {
+      if(jobList.length===0){
+        setHasData(false)
+      }
+    })
     setJobs(jobList.slice(0, jobs.length + 8))
-    dispatch(getIndividualJobs())
     return () => {
       dispatch(setIndividualJobs([]))
     }
-  }, [])
+  }, [hasData])
 
   if ((jobList.length > jobs.length && hasMore === false) || (jobs.length === 0 && jobList.length > jobs.length)) {
     setJobs(jobList.slice(0, jobs.length + 8))
@@ -38,12 +43,11 @@ const MyJobs = (props) => {
 
   return (
     <div id="myJobs">
-      {initialLoader && <CustomLoader/>}
       <InfiniteScroll
         dataLength={jobs.length}
         next={fetchMoreData}
         hasMore={hasMore}
-        loader={jobList.length===0 ? (<EndMessage title="Yay! You have seen it all"/> ) : (<CustomLoader/>)}
+        loader={!hasData ? (<EndMessage title="Yay! You have seen it all"/> ) : (<CustomLoader/>)}
         endMessage={<EndMessage title="Yay! You have seen it all"/>}
       >
         {jobs.map((job) => <Job key={job.id} job={job} />)}
