@@ -9,7 +9,7 @@ import SectionHeader from "../../lib/sectionHeader";
 
 const EmployeeJobs = (props) => {
   const dispatch = useDispatch()
-  const {jobList} = props
+  const {jobList, isAuthenticated} = props
   const role = getRole()
   useEffect(() => {
     if (role === "employee") {
@@ -21,7 +21,7 @@ const EmployeeJobs = (props) => {
 
   return (
     <NoSsr>
-      {(role && role === "employee") ? (
+      {(role && role === "employee" && isAuthenticated) ? (
           <div>
             <SectionHeader title="My Jobs"/>
             {jobList.map((job) => <Job key={job.id} job={job}/>)}
@@ -37,7 +37,8 @@ const EmployeeJobs = (props) => {
 const mapStateToProps = (state) => {
   return {
     jobList: state.allJobs.individualJobs,
-    initialLoader: state.allJobs.initialLoader
+    initialLoader: state.allJobs.initialLoader,
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
