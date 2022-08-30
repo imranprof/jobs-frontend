@@ -5,28 +5,33 @@ import {getIndividualJobs} from "../../store/actions/jobAction";
 import Job from "../../views/Job";
 import {getRole} from "../../auth/operations";
 import {NoSsr} from "@material-ui/core";
+import SectionHeader from "../../lib/sectionHeader";
 
 const EmployeeJobs = (props) => {
   const dispatch = useDispatch()
   const {jobList} = props
   const role = getRole()
+  useEffect(() => {
+    if (role === "employee") {
+      dispatch(getIndividualJobs());
+    }
+  }, [])
 
-  useEffect(()=>{
-    dispatch(getIndividualJobs())
-  },[])
+  const authTitle = 'You are not authorized to view this page!'
 
-  if (role && role === "employee") {
-    return (
-      <>
-        {jobList.map((job) => <Job key={job.id} job={job} />)}
-      </>
-    )
-  } else {
-    return (
-      <NoSsr><h1>You are not authorized to view this page!</h1></NoSsr>
-    )
-  }
-
+  return (
+    <NoSsr>
+      {(role && role === "employee") ? (
+          <div>
+            <SectionHeader title="find the best jobs on SeekRightJobs"/>
+            {jobList.map((job) => <Job key={job.id} job={job}/>)}
+          </div>) :
+        (
+          <div><SectionHeader title={authTitle}/></div>
+        )
+      }
+    </NoSsr>
+  );
 };
 
 const mapStateToProps = (state) => {
