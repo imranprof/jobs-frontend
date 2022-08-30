@@ -13,6 +13,7 @@ import {
 import {getProfileSlug} from "../reducers/authReducers";
 import {setEditPermission} from "./authAction";
 import {ProfileData} from "../../../API/mock/profile/profileData"
+import {getContactAction} from "./contactActions";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
 
@@ -132,6 +133,7 @@ export function getProfileAction() {
       dispatch(skillsUpdate(skills));
       dispatch(setLoader(false));
       dispatch(setRole(res.data.role))
+      dispatch(getContactAction())
     })
       .catch(err => err.data);
   }
