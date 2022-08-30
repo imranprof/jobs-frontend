@@ -57,7 +57,15 @@ const useStyles = makeStyles({
     },
     '&__location': {
       marginTop: 30
-    }
+    },
+    '&__action-btn': {
+      width: 85,
+      position: "absolute",
+      top: 15,
+      right: 15,
+      display: "flex",
+      justifyContent: "space-between"
+    },
   })
 });
 

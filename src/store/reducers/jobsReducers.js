@@ -1,4 +1,4 @@
-import {SET_JOBS, SHOW_JOBS} from "../actionTypes/jobsTypes";
+import {SET_JOBS, SHOW_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
 
 const initialState = {
   initialLoader: true,
@@ -20,6 +20,10 @@ export const jobsReducer = (state = initialState, action) => {
         individualJobs: action.payload,
         initialLoader: false
       }
+    case UPDATE_JOB:
+      return {
+        ...state,
+      };
     default:
       return state
   }

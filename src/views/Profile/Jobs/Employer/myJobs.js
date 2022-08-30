@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import Job from "../../../Job";
 import {getIndividualJobs, setIndividualJobs} from "../../../../store/actions/jobAction";
 import CustomLoader from "../../../../lib/customLoader";
+import CustomSnackbar from "../../../../lib/customSnackbar";
 import EndMessage from "../../../../lib/endMessage";
 
 const MyJobs = (props) => {
@@ -13,6 +14,8 @@ const MyJobs = (props) => {
   const {jobList, initialLoader} = props
   const [hasMore, setHasMore] = useState(true);
   const [jobs, setJobs] = useState([]);
+  const [toast, setToast] = useState({show: false, severity: "", text: ""});
+  const [isDelete, setIsDelete] = useState(false);
 
   useEffect(() => {
     setJobs(jobList.slice(0, jobs.length + 8))
@@ -20,7 +23,7 @@ const MyJobs = (props) => {
     return () => {
       dispatch(setIndividualJobs([]))
     }
-  }, [])
+  }, [isDelete])
 
   if ((jobList.length > jobs.length && hasMore === false) || (jobs.length === 0 && jobList.length > jobs.length)) {
     setJobs(jobList.slice(0, jobs.length + 8))
@@ -37,18 +40,25 @@ const MyJobs = (props) => {
   }
 
   return (
-    <div id="myJobs">
-      {initialLoader && <CustomLoader/>}
-      <InfiniteScroll
-        dataLength={jobs.length}
-        next={fetchMoreData}
-        hasMore={hasMore}
-        loader={jobList.length===0 ? (<EndMessage title="Yay! You have seen it all"/> ) : (<CustomLoader/>)}
-        endMessage={<EndMessage title="Yay! You have seen it all"/>}
-      >
-        {jobs.map((job) => <Job key={job.id} job={job} />)}
-      </InfiniteScroll>
-    </div>
+    <>
+      <div id="myJobs">
+        {initialLoader && <CustomLoader/>}
+        <InfiniteScroll
+          dataLength={jobs.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          loader={jobList.length === 0 ? (<EndMessage title="Yay! You have seen it all"/>) : (<CustomLoader/>)}
+          endMessage={<EndMessage title="Yay! You have seen it all"/>}
+        >
+          {jobs?.map((job) => <Job key={job.id} job={job} setToast={setToast} setIsDelete={setIsDelete} isDelete={isDelete} type={'myJob'}/>)}
+        </InfiniteScroll>
+      </div>
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
+    </>
   );
 };
 
