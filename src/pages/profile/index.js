@@ -11,12 +11,12 @@ import CustomLoader from "../../lib/customLoader";
 import {getDemoProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
-  const {loader} = props;
+  const {loader, role} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getDemoProfileAction());
-  }, []);
+  }, [role]);
 
   return (
     <NoSsr>
@@ -33,7 +33,8 @@ const Profile = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loader: state.topSection.loader
+    loader: state.topSection.loader,
+    role: state.topSection.role
   }
 }
 
