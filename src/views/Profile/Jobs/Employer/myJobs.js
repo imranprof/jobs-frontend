@@ -47,7 +47,7 @@ const MyJobs = (props) => {
         dataLength={jobs.length}
         next={fetchMoreData}
         hasMore={hasMore}
-        loader={!hasData ? (<EndMessage title="Yay! You have seen it all"/> ) : (<CustomLoader/>)}
+        loader={(!hasData && jobList.length===0) ? (<EndMessage title="Yay! You have seen it all"/> ) : (<CustomLoader/>)}
         endMessage={<EndMessage title="Yay! You have seen it all"/>}
       >
         {jobs.map((job) => <Job key={job.id} job={job} />)}
