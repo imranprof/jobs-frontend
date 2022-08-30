@@ -23,7 +23,7 @@ const EmployeeJobs = (props) => {
     <NoSsr>
       {(role && role === "employee") ? (
           <div>
-            <SectionHeader title="find the best jobs on SeekRightJobs"/>
+            <SectionHeader title="My Jobs"/>
             {jobList.map((job) => <Job key={job.id} job={job}/>)}
           </div>) :
         (

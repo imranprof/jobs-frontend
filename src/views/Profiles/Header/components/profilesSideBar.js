@@ -96,8 +96,7 @@ const ProfilesSideBar = (props) => {
               </a>
             </Link>
 
-            {props.isAuthenticated &&
-            role === 'employee' &&
+            {!props.isAuthenticated &&
             (<Link href={"/profile"}>
               <a className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
                 Template Profile

@@ -43,6 +43,11 @@ const ProfilesHeader = (props) => {
           <div className={`${classes.headerWrapper}__toolbar__right`}>
             <SearchBar/>
 
+            {!props.isAuthenticated && <Link href={"/profile"}>
+              <a className={`${classes.headerWrapper}__button`}>
+                Template Profile
+              </a>
+            </Link>}
             <Link href={"/profiles"}>
               <a className={`${classes.headerWrapper}__button`} onClick={handleClick}>
                 Find Talents
@@ -63,9 +68,9 @@ const ProfilesHeader = (props) => {
                 </Link>
 
                 {role === 'employee' ?
-                (<Link href={"/profile"}>
+                (<Link href={"/myJobs"}>
                   <a className={`${classes.headerWrapper}__button`}>
-                    Template Profile
+                    My Jobs
                   </a>
                 </Link>) : ""}
 
