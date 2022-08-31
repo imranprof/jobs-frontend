@@ -26,7 +26,7 @@ const NavItems = ({classes, variant}) => {
 
   return (
     <List className={`${classes.headerWrapper}__nav__navItem`}>
-      {role === 'employee' ?
+      {(role === 'employee' || role === null) ?
         JobSeekerNavLinksData.map((link) =>
           (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}
                      key={link.id}>
