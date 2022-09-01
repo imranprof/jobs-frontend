@@ -23,10 +23,6 @@ const JobShow = (props) => {
   const dispatch = useDispatch()
   const role = getRole()
 
-  useEffect(async () => {
-    await dispatch(getIndividualJobs())
-  }, [])
-
   const hasApplicantsKey = data.hasOwnProperty('applicants')
   let hasApplicants = false;
   if (hasApplicantsKey) {

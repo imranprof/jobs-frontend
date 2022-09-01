@@ -25,9 +25,6 @@ const MyJobs = (props) => {
       }
     })
     setJobs(jobList.slice(0, jobs.length + 8))
-    return () => {
-      dispatch(setIndividualJobs([]))
-    }
   }, [isDelete, hasData])
 
   if ((jobList.length > jobs.length && hasMore === false) || (jobs.length === 0 && jobList.length > jobs.length)) {
