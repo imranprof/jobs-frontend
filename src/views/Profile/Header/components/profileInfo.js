@@ -1,37 +1,49 @@
-import {connect} from "react-redux";
+import {useEffect} from "react";
+import {connect, useDispatch} from "react-redux";
 
 import {NoSsr, Avatar} from "@material-ui/core";
 
+import {getPrivateProfileAction} from "../../../../store/actions/topSectionActions";
+
 const ProfileInfo = (props) => {
-  const {profileInfo, showName, classes} = props;
-  const {firstName, lastName, avatar} = profileInfo;
+  const {profileInfo, showName, classes, isAuthenticated} = props;
+  const {first_name, last_name, avatar} = profileInfo;
+  const dispatch = useDispatch()
+  const fullName = `${first_name} ${last_name}`
+
+  useEffect(() => {
+    isAuthenticated && dispatch(getPrivateProfileAction())
+  }, [])
 
   return (
     <div className={`${classes.headerWrapper}__profile`}>
-      <NoSsr>
-        <Avatar
-          alt={`${firstName} ${lastName}`}
-          src={avatar}
-          className={`${classes.headerWrapper}__profile__pic`}
-        />
-      </NoSsr>
+      {isAuthenticated && (
+        <>
+          <NoSsr>
+            <Avatar
+              alt={fullName}
+              src={avatar}
+              className={`${classes.headerWrapper}__profile__pic`}
+            />
+          </NoSsr>
 
-      {showName &&
-      <NoSsr>
-      <span className={`${classes.headerWrapper}__profile__name`}>
-                 {`${firstName} ${lastName}`}
-                </span>
-      </NoSsr>
-      }
+          {showName &&
+          <NoSsr>
+            <span className={`${classes.headerWrapper}__profile__name`}>
+              {fullName}
+            </span>
+          </NoSsr>
+          }
+        </>
+      )}
     </div>
   );
 }
-;
 
-const mapStateToProps = (state) =>
-{
+const mapStateToProps = (state) => {
   return {
-    profileInfo: state.topSection
+    profileInfo: state.topSection.profileInfo,
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
