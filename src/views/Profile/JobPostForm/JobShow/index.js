@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import {getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
-import {IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {Avatar, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper'
 import Link from "next/link";
 import CloseIcon from "@material-ui/icons/Close";
@@ -52,6 +52,7 @@ const JobShow = (props) => {
     btnTitle = 'Applied'
     isDisabled = true
   }
+  console.log('data --------------', data)
 
   return (
     <>
@@ -125,7 +126,15 @@ const JobShow = (props) => {
                   return (
                     <TableRow key={applicant.profile_slug}>
                       <TableCell
-                        className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>{fullName[0]} {fullName[1]}</TableCell>
+                        className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
+                        <div className={`${classes.jobShowWrapper}__applicant-list__name-avatar-wrapper`}>
+                          <Avatar
+                            className={`${classes.jobShowWrapper}__applicant-list__avatar`}
+                            src={applicant.avatar}
+                            alt="Employee avatar"
+                          />{fullName[0].charAt(0).toUpperCase()+fullName[0].slice(1)} {fullName[1]}
+                        </div>
+                      </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link
                         href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link></TableCell>
                     </TableRow>

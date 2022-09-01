@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles({
   jobShowWrapper: theme => ({
     display: 'block',
-    '&__divider':{
+    '&__divider': {
       margin: "30px 0"
     },
     '&__title': {
@@ -12,9 +12,9 @@ const useStyles = makeStyles({
     },
     '&__description': {
       color: theme.palette.customColor.main,
-      fontSize:"15px",
+      fontSize: "15px",
       fontFamily: "Helvetica Neue",
-      lineHeight:"1.5",
+      lineHeight: "1.5",
       whiteSpace: "pre-wrap",
     },
     '&__content-header': {
@@ -23,9 +23,9 @@ const useStyles = makeStyles({
     },
     '&__skills-wrapper': {
       width: "40%",
-      display:"flex",
-      flexWrap:"wrap",
-      alignItems:"center",
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
       overflow: "hidden",
       '&__skill': {
         display: "inline-table",
@@ -55,10 +55,18 @@ const useStyles = makeStyles({
       },
       '&__table-cell': {
         backgroundColor: theme.palette.customBackground.skillBackground,
-        '& a':{
+        '& a': {
           color: theme.palette.customColor.highContrast,
           textDecoration: "none"
         }
+      },
+      '&__name-avatar-wrapper': {
+        display: "flex",
+        alignItems: "center"
+      },
+      '&__avatar': {
+        border: "3px solid",
+        marginRight: "10px"
       }
     },
     '&__close-button': {
