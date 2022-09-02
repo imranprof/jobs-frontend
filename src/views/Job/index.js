@@ -16,7 +16,7 @@ import {getIndividualJobs, removeJobAction} from "../../store/actions/jobAction"
 const Job = (props) => {
   const theme = useTheme();
   const classes = JobStyle(theme);
-  const {setToast, job, setIsDelete, isDelete, type} = props
+  const {setToast, job, setIsDelete, isDelete, type, setJobs} = props
   const {title, description, skills, location, id} = job
   const [openModal, setOpenModal] = useState(false)
   const [editMode, setEditMode] = useState(false)
@@ -72,7 +72,7 @@ const Job = (props) => {
 
       <EditCustomModal open={openModal} handleClose={handleClose}>
         {editMode ? <JobEdit job={job} handleClose={handleClose} setToast={setToast}/> :
-          <JobShow data={job} handleClose={handleClose}/>}
+          <JobShow data={job} setJobs={setJobs} handleClose={handleClose}/>}
       </EditCustomModal>
     </>
   );

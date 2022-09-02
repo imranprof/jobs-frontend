@@ -7,9 +7,18 @@ import {useDispatch} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import {getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
+import {employeeSelectionAction, getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
-import {Avatar, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {
+  Avatar, Checkbox,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper'
 import Link from "next/link";
 import CloseIcon from "@material-ui/icons/Close";
@@ -17,11 +26,12 @@ import CloseIcon from "@material-ui/icons/Close";
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList} = props
+  const {data, handleClose, jobList, setJobs} = props
   const {title, description, location, skills, id} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
   const role = getRole()
+  const [checked, setChecked] = useState(false);
 
   const hasApplicantsKey = data.hasOwnProperty('applicants')
   let hasApplicants = false;
@@ -52,7 +62,19 @@ const JobShow = (props) => {
     btnTitle = 'Applied'
     isDisabled = true
   }
-  console.log('data --------------', data)
+
+  const handleSelection = (e) => {
+    const isChecked = e.target.checked
+    const id = parseInt(e.target.value)
+    dispatch(employeeSelectionAction(id, isChecked)).then(
+      setJobs([])
+    ).then(getIndividualJobs()).then(async () => {
+      await setJobs([])
+      await setChecked(!checked)
+    })
+
+  }
+  console.log('applicants = -------------', data.applicants)
 
   return (
     <>
@@ -87,16 +109,15 @@ const JobShow = (props) => {
       </div>
       {role === 'employee' ? (<div>
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <span onClick={handleClick}>
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            disabled={isDisabled}
-          >
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          size="small"
+          color="primary"
+          disabled={isDisabled}
+        >
           {btnTitle}
-          </Button>
-        </span>
+        </Button>
         <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
           <Button
             variant="outlined"
@@ -118,6 +139,7 @@ const JobShow = (props) => {
                 <TableRow>
                   <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Name</TableCell>
                   <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Profile</TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Shortlist</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -132,11 +154,20 @@ const JobShow = (props) => {
                             className={`${classes.jobShowWrapper}__applicant-list__avatar`}
                             src={applicant.avatar}
                             alt="Employee avatar"
-                          />{fullName[0].charAt(0).toUpperCase()+fullName[0].slice(1)} {fullName[1]}
+                          />{fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
                         </div>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link
                         href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link></TableCell>
+                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
+                        <Checkbox
+                          name={applicant.profile_slug}
+                          checked={applicant.short_list}
+                          style={{color: "#009432"}}
+                          onChange={handleSelection}
+                          value={applicant.application_id}
+                        />
+                      </TableCell>
                     </TableRow>
                   )
                 })

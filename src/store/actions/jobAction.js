@@ -5,6 +5,7 @@ const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
 const jobApplyUrl = process.env.NEXT_PUBLIC_JOB_APPLY_URL
 const jobsUrl = process.env.NEXT_PUBLIC_My_JOB_URL
 const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
+const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills} = job;
@@ -42,7 +43,7 @@ export const getIndividualJobs = () => {
   }
 }
 
-export const  jobApplyAction = (id) => {
+export const jobApplyAction = (id) => {
   let data = {
     "job": {
       "id": id
@@ -96,3 +97,20 @@ export const removeJobAction = (id) => {
     return (response);
   }
 }
+
+export const employeeSelectionAction = (id, value) => {
+  console.log('value ----------------, ', value)
+  const data = {
+    "job_application": {
+      "id": id,
+      "selection": value
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(employeeSelectionUrl, data)
+      .then(res => dispatch(getIndividualJobs()))
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
