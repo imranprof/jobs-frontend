@@ -109,28 +109,32 @@ const JobShow = (props) => {
       </div>
       {role === 'employee' ? (<div>
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <Button
-          onClick={handleClick}
-          variant="contained"
-          size="small"
-          color="primary"
-          disabled={isDisabled}
-        >
-          {btnTitle}
-        </Button>
-        <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
-          <Button
-            variant="outlined"
-            size="small"
-            color="default"
-          >
-          Cancel
-          </Button>
-      </span>
-        {data.short_list &&
-        <span className={`${classes.jobShowWrapper}__selected-icon-wrapper`}>
+        <div className={`${classes.jobShowWrapper}__btn-icon-wrapper`}>
+          <div>
+            <Button
+              onClick={handleClick}
+              variant="contained"
+              size="small"
+              color="primary"
+              disabled={isDisabled}
+            >
+              {btnTitle}
+            </Button>
+            <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
+              <Button
+                variant="outlined"
+                size="small"
+                color="default"
+              >
+              Cancel
+              </Button>
+            </span>
+          </div>
+          {data.short_list &&
+          <span className={`${classes.jobShowWrapper}__selected-icon-wrapper`}>
           <i className={FontAwesomeIcons.selected}></i><span> Selected</span>
         </span>}
+        </div>
       </div>) : (
         hasApplicantsKey && hasApplicants && <>
           <Divider className={`${classes.jobShowWrapper}__divider`}/>

@@ -49,12 +49,13 @@ const useStyles = makeStyles({
     '&__button': {
       marginLeft: 10
     },
+    '&__btn-icon-wrapper': {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    },
     '&__selected-icon-wrapper': {
       color: "#009432",
-      marginLeft: "60%",
-      [theme.breakpoints.down('xs')]: {
-        marginLeft: "20%"
-      }
     },
     '&__applicant-list': {
       '&__table-header': {
