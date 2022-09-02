@@ -22,6 +22,7 @@ import {
 import Paper from '@material-ui/core/Paper'
 import Link from "next/link";
 import CloseIcon from "@material-ui/icons/Close";
+import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 
 const JobShow = (props) => {
   const theme = useTheme();
@@ -126,6 +127,10 @@ const JobShow = (props) => {
           Cancel
           </Button>
       </span>
+        {data.short_list &&
+        <span className={`${classes.jobShowWrapper}__selected-icon-wrapper`}>
+          <i className={FontAwesomeIcons.selected}></i><span> Selected</span>
+        </span>}
       </div>) : (
         hasApplicantsKey && hasApplicants && <>
           <Divider className={`${classes.jobShowWrapper}__divider`}/>
