@@ -99,7 +99,6 @@ export const removeJobAction = (id) => {
 }
 
 export const employeeSelectionAction = (id, value) => {
-  console.log('value ----------------, ', value)
   const data = {
     "job_application": {
       "id": id,

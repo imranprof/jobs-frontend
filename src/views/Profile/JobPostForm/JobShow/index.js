@@ -74,7 +74,6 @@ const JobShow = (props) => {
     })
 
   }
-  console.log('applicants = -------------', data.applicants)
 
   return (
     <>
