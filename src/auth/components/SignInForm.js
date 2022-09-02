@@ -9,6 +9,7 @@ import {Button, Icon, Box, TextField} from "@material-ui/core";
 import {signIn, handleApiResponse} from "../operations";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {modalType} from "../../store/actions/authAction";
+import {setIndividualJobs} from "../../store/actions/jobAction";
 
 const validationSchema = yup.object({
   email: yup
@@ -25,13 +26,12 @@ const SignInForm = ({error, isAuthenticated}) => {
   const dispatch = useDispatch()
   const router = useRouter();
 
-  useEffect(() => {
-    (async () => {
-      if (isAuthenticated) {
-        await router.push("/");
-        dispatch(modalType(''));
-      }
-    })()
+  useEffect(async () => {
+    if (isAuthenticated) {
+      await router.push("/");
+      dispatch(setIndividualJobs([]));
+      dispatch(modalType(""));
+    }
   }, [isAuthenticated])
 
   const formik = useFormik({

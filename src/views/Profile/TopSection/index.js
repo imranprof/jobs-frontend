@@ -19,10 +19,12 @@ import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import AvatarEdit from "../EditComponents/topSection/components/avatarEdit";
 import {
-  bioEditMode, getDemoProfileAction,
+  bioEditMode,
+  getDemoProfileAction,
   getProfileAction,
-  headlineEditMode, updateBio,
-  updateHeadline
+  headlineEditMode,
+  updateBio,
+  updateHeadline,
 } from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
@@ -35,7 +37,7 @@ const TopSection = (props) => {
   const [openAvatarModal, setOpenAvatarModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {profileSlug, avatar, firstName, lastName, editPermission} = props;
+  const {profileSlug, avatar, firstName, lastName, editPermission, publicRole} = props;
   const dispatch = useDispatch();
   const {profile} = useRouter().query;
 
@@ -196,10 +198,12 @@ const TopSection = (props) => {
             )}
           </div>
 
-          <div className={`${classes.topSectionWrapper}__left-bottom`}>
-            <SocialLinks setToast={setToast} editPermission={getPermission()}/>
-            <Skills setToast={setToast}/>
-          </div>
+          {(publicRole && publicRole === 'employee') && (
+            <div className={`${classes.topSectionWrapper}__left-bottom`}>
+              <SocialLinks setToast={setToast} editPermission={getPermission()}/>
+              <Skills setToast={setToast}/>
+            </div>
+          )}
         </Grid>
 
         <Grid item xs={12} md={5} className={`${classes.topSectionWrapper}__profilePhotoWrapper`}>
@@ -254,6 +258,7 @@ const mapStateToProps = (state) => {
     avatar: state.topSection.avatar,
     bioEditMode: state.topSection.bioMode,
     expertises: state.topSection.expertises,
+    publicRole: state.topSection.role
   }
 }
 

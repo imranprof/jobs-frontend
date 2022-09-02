@@ -1,4 +1,4 @@
-export const NavigationLinksData = [
+export const JobSeekerNavLinksData = [
     {
         "id": 1,
         "name": "Features",

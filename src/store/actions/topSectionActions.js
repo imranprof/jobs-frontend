@@ -8,13 +8,22 @@ import {
   BIO_TEXT,
   BIO_EDIT_MODE,
   SOCIAL_LINKS_UPDATE,
-  SKILLS_VALUES, SET_PROFILE_ID, SET_NAME, SET_AVATAR, SET_LOADER,
+  SKILLS_VALUES,
+  SET_PROFILE_ID,
+  SET_NAME,
+  SET_AVATAR,
+  SET_LOADER,
+  SET_ROLE,
+  SET_PRIVATE_INFO,
 } from "../actionTypes/topSectionTypes";
 import {getProfileSlug} from "../reducers/authReducers";
 import {setEditPermission} from "./authAction";
 import {ProfileData} from "../../../API/mock/profile/profileData"
+import {getContactAction} from "./contactActions";
+import {getPrivateSlug} from "../../auth/operations";
 
 const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
+const privateProfileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getPrivateSlug()}`;
 
 export const setProfileID = (id) => {
   return {
@@ -98,6 +107,28 @@ export const setAvatar = (avatar) => {
   }
 }
 
+export const setRole = (role) =>{
+  return {
+    type: SET_ROLE,
+    payload: role
+  }
+}
+
+export const setPrivateProfileInfo = (info) =>{
+  return {
+    type: SET_PRIVATE_INFO,
+    payload: info
+  }
+}
+
+export const getPrivateProfileAction = () => {
+  return (dispatch) => {
+    axios.get(privateProfileURL()).then(res => {
+      dispatch(setPrivateProfileInfo(res.data.profile));
+    })
+  }
+}
+
 export function getProfileAction() {
   return (dispatch) => {
     axios.get(profileURL()).then(res => {
@@ -124,6 +155,8 @@ export function getProfileAction() {
       dispatch(socialLinksUpdate(social_links));
       dispatch(skillsUpdate(skills));
       dispatch(setLoader(false));
+      dispatch(setRole(res.data.role))
+      dispatch(getContactAction())
     })
       .catch(err => err.data);
   }
@@ -143,6 +176,7 @@ export function getDemoProfileAction() {
     dispatch(expertisesText(expertises));
     dispatch(socialLinksUpdate(socialLinks));
     dispatch(skillsUpdate(skills));
+    dispatch(setLoader(false));
   }
 }
 

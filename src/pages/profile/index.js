@@ -8,23 +8,25 @@ import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
 import CustomLoader from "../../lib/customLoader";
-import {getProfileAction} from "../../store/actions/topSectionActions";
+import {getDemoProfileAction} from "../../store/actions/topSectionActions";
 
 const Profile = (props) => {
-  const {profileSlug, loader} = props;
+  const {loader, role} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    profileSlug && dispatch(getProfileAction())
-  }, [profileSlug]);
+    dispatch(getDemoProfileAction());
+  }, [role]);
 
   return (
     <NoSsr>
-      {loader ? <CustomLoader/> : <>
-        <TopSection/>
-        <CustomDivider/>
-        <Sections/>
-      </>}
+      {
+        loader ? <CustomLoader/> : <>
+          <TopSection/>
+          <CustomDivider/>
+          <Sections/>
+        </>
+      }
     </NoSsr>
   );
 }
@@ -32,7 +34,7 @@ const Profile = (props) => {
 const mapStateToProps = (state) => {
   return {
     loader: state.topSection.loader,
-    profileSlug: state.auth.profileSlug
+    role: state.topSection.role
   }
 }
 
