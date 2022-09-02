@@ -14,10 +14,11 @@ const ProfileInfo = (props) => {
   useEffect(() => {
     isAuthenticated && dispatch(getPrivateProfileAction())
   }, [])
+  const isEmpty = Object.keys(profileInfo).length===0;
 
   return (
     <div className={`${classes.headerWrapper}__profile`}>
-      {isAuthenticated && (
+      {(isAuthenticated && !isEmpty) && (
         <>
           <NoSsr>
             <Avatar
