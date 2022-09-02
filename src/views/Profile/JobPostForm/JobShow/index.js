@@ -136,9 +136,15 @@ const JobShow = (props) => {
             <Table aria-label={"customized table"}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Name</TableCell>
-                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Profile</TableCell>
-                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Shortlist</TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
+                    <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Name</span>
+                  </TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
+                    <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Profile</span>
+                  </TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
+                    <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Shortlist</span>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -153,7 +159,10 @@ const JobShow = (props) => {
                             className={`${classes.jobShowWrapper}__applicant-list__avatar`}
                             src={applicant.avatar}
                             alt="Employee avatar"
-                          />{fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
+                          />
+                          <span className={`${classes.jobShowWrapper}__applicant-list__name`}>
+                            {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
+                          </span>
                         </div>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link
@@ -162,10 +171,11 @@ const JobShow = (props) => {
                         <Checkbox
                           name={applicant.profile_slug}
                           checked={applicant.short_list}
-                          style={{color: "#009432"}}
+                          className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox`}
                           onChange={handleSelection}
                           value={applicant.application_id}
                         />
+                        {applicant.short_list ? "Selected" : "Select"}
                       </TableCell>
                     </TableRow>
                   )

@@ -52,12 +52,23 @@ const useStyles = makeStyles({
     '&__applicant-list': {
       '&__table-header': {
         backgroundColor: theme.palette.customDivider.main,
+        '&__title': {
+          fontSize: 15,
+          fontWeight: 600,
+          color: theme.palette.customColor.main
+        }
       },
       '&__table-cell': {
         backgroundColor: theme.palette.customBackground.skillBackground,
         '& a': {
           color: theme.palette.customColor.highContrast,
           textDecoration: "none"
+        },
+        '&__checkbox': {
+          color: "#009432",
+          '& .MuiSvgIcon-root': {
+            color: "#009432"
+          }
         }
       },
       '&__name-avatar-wrapper': {
@@ -67,6 +78,10 @@ const useStyles = makeStyles({
       '&__avatar': {
         border: "3px solid",
         marginRight: "10px"
+      },
+      '&__name': {
+        fontWeight: 600,
+        fontSize: 15
       }
     },
     '&__close-button': {
