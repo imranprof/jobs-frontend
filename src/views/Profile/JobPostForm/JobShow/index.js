@@ -7,25 +7,32 @@ import {useDispatch} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import {getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
+import {employeeSelectionAction, getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
-import {IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {
+  Avatar, Checkbox,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from "@material-ui/core";
 import Paper from '@material-ui/core/Paper'
 import Link from "next/link";
 import CloseIcon from "@material-ui/icons/Close";
+import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList} = props
+  const {data, handleClose, jobList, setJobs} = props
   const {title, description, location, skills, id} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
   const role = getRole()
-
-  useEffect(async () => {
-    await dispatch(getIndividualJobs())
-  }, [])
+  const [checked, setChecked] = useState(false);
 
   const hasApplicantsKey = data.hasOwnProperty('applicants')
   let hasApplicants = false;
@@ -55,6 +62,18 @@ const JobShow = (props) => {
   if (isId) {
     btnTitle = 'Applied'
     isDisabled = true
+  }
+
+  const handleSelection = (e) => {
+    const isChecked = e.target.checked
+    const id = parseInt(e.target.value)
+    dispatch(employeeSelectionAction(id, isChecked)).then(
+      setJobs([])
+    ).then(getIndividualJobs()).then(async () => {
+      await setJobs([])
+      await setChecked(!checked)
+    })
+
   }
 
   return (
@@ -90,25 +109,32 @@ const JobShow = (props) => {
       </div>
       {role === 'employee' ? (<div>
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <span onClick={handleClick}>
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            disabled={isDisabled}
-          >
-          {btnTitle}
-          </Button>
-        </span>
-        <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
-          <Button
-            variant="outlined"
-            size="small"
-            color="default"
-          >
-          Cancel
-          </Button>
-      </span>
+        <div className={`${classes.jobShowWrapper}__btn-icon-wrapper`}>
+          <div>
+            <Button
+              onClick={handleClick}
+              variant="contained"
+              size="small"
+              color="primary"
+              disabled={isDisabled}
+            >
+              {btnTitle}
+            </Button>
+            <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
+              <Button
+                variant="outlined"
+                size="small"
+                color="default"
+              >
+              Cancel
+              </Button>
+            </span>
+          </div>
+          {data.short_list &&
+          <span className={`${classes.jobShowWrapper}__selected-icon-wrapper`}>
+          <i className={FontAwesomeIcons.selected}></i><span> Selected</span>
+        </span>}
+        </div>
       </div>) : (
         hasApplicantsKey && hasApplicants && <>
           <Divider className={`${classes.jobShowWrapper}__divider`}/>
@@ -119,8 +145,15 @@ const JobShow = (props) => {
             <Table aria-label={"customized table"}>
               <TableHead>
                 <TableRow>
-                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Name</TableCell>
-                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>Profile</TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
+                    <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Name</span>
+                  </TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
+                    <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Profile</span>
+                  </TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
+                    <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Shortlist</span>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -129,9 +162,30 @@ const JobShow = (props) => {
                   return (
                     <TableRow key={applicant.profile_slug}>
                       <TableCell
-                        className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>{fullName[0]} {fullName[1]}</TableCell>
+                        className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
+                        <div className={`${classes.jobShowWrapper}__applicant-list__name-avatar-wrapper`}>
+                          <Avatar
+                            className={`${classes.jobShowWrapper}__applicant-list__avatar`}
+                            src={applicant.avatar}
+                            alt="Employee avatar"
+                          />
+                          <span className={`${classes.jobShowWrapper}__applicant-list__name`}>
+                            {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
+                          </span>
+                        </div>
+                      </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link
                         href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link></TableCell>
+                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
+                        <Checkbox
+                          name={applicant.profile_slug}
+                          checked={applicant.short_list}
+                          className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox`}
+                          onChange={handleSelection}
+                          value={applicant.application_id}
+                        />
+                        {applicant.short_list ? "Selected" : "Select"}
+                      </TableCell>
                     </TableRow>
                   )
                 })

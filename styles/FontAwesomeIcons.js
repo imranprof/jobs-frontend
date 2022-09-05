@@ -20,7 +20,8 @@ const FontAwesomeIcons = {
     "darkMode": "fa-solid fa-moon",
     "plus": "fa-solid fa-plus",
     "chevronLeft": "fa-solid fa-chevron-left",
-    "camera": "fa-solid fa-camera"
+    "camera": "fa-solid fa-camera",
+    "selected": "fa-solid fa-circle-check"
 }
 
 export default FontAwesomeIcons;

@@ -56,7 +56,7 @@ const MyJobs = (props) => {
           endMessage={<EndMessage title="Yay! You have seen it all"/>}
         >
           {jobs?.map((job) => <Job key={job.id} job={job} setToast={setToast} setIsDelete={setIsDelete}
-                                   isDelete={isDelete} type={'myJob'}/>)}
+                                   isDelete={isDelete} setJobs={setJobs} type={'myJob'}/>)}
         </InfiniteScroll>
       </div>
       {toast.show &&
