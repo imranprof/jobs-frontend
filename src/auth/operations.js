@@ -115,7 +115,7 @@ export function SignOut() {
         await setAuthToken(false)
         await setProfileSlug(false)
         await dispatch(authenticate(false))
-        setRole()
+        await setRole('')
       })
       .catch(err => alert(err));
   }

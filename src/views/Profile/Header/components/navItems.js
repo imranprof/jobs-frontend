@@ -6,13 +6,14 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
 import {JobSeekerNavLinksData} from "../../../../../API/elements/profile/jobSeekerNavLinksData";
-import {getRole} from "../../../../auth/operations";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import JobPostForm from "../../JobPostForm";
+import {EmployerNavLinksData} from "../../../../../API/elements/profile/employerNavLinksData";
 
-const NavItems = ({classes, variant}) => {
-  const role = getRole()
+const NavItems = (props) => {
+  const {classes, variant, publicRole} = props
   const [openModal, setOpenModal] = useState(false);
+  const {href} = EmployerNavLinksData[0];
 
   const modalClose = () => {
     setOpenModal(false)
@@ -24,7 +25,7 @@ const NavItems = ({classes, variant}) => {
 
   return (
     <List className={`${classes.headerWrapper}__nav__navItem`}>
-      {role === 'employee' ?
+      {(publicRole === 'employee') ?
         JobSeekerNavLinksData.map((link) =>
           (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}
                      key={link.id}>
@@ -36,9 +37,9 @@ const NavItems = ({classes, variant}) => {
         : (
           <>
             <ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}>
-              <a>
+              <Link to={href} spy={true} smooth={true} duration={1000} delay={200} offset={-300}>
                 my jobs
-              </a>
+              </Link>
             </ListItem>
             <ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}>
               <a onClick={handleJobPostClick}>
@@ -57,7 +58,8 @@ const NavItems = ({classes, variant}) => {
 
 const mapStateToProps = (state) => {
   return {
-    modalType: state.auth.modalType
+    modalType: state.auth.modalType,
+    publicRole: state.topSection.role
   }
 }
 

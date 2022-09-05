@@ -19,13 +19,14 @@ import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import AvatarEdit from "../EditComponents/topSection/components/avatarEdit";
 import {
-  bioEditMode, getDemoProfileAction,
+  bioEditMode,
+  getDemoProfileAction,
   getProfileAction,
-  headlineEditMode, updateBio,
-  updateHeadline
+  headlineEditMode,
+  updateBio,
+  updateHeadline,
 } from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
-import {getRole} from "../../../auth/operations";
 
 const TopSection = (props) => {
   const theme = useTheme();
@@ -36,10 +37,9 @@ const TopSection = (props) => {
   const [openAvatarModal, setOpenAvatarModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const expertisesList = props.expertises.map(expertise => `${expertise}.`);
-  const {profileSlug, avatar, firstName, lastName, editPermission} = props;
+  const {profileSlug, avatar, firstName, lastName, editPermission, publicRole} = props;
   const dispatch = useDispatch();
   const {profile} = useRouter().query;
-  const role = getRole()
 
   const modalClose = () => {
     setOpenModal(false);
@@ -198,7 +198,7 @@ const TopSection = (props) => {
             )}
           </div>
 
-          {role === 'employee' && (
+          {(publicRole && publicRole === 'employee') && (
             <div className={`${classes.topSectionWrapper}__left-bottom`}>
               <SocialLinks setToast={setToast} editPermission={getPermission()}/>
               <Skills setToast={setToast}/>
@@ -258,6 +258,7 @@ const mapStateToProps = (state) => {
     avatar: state.topSection.avatar,
     bioEditMode: state.topSection.bioMode,
     expertises: state.topSection.expertises,
+    publicRole: state.topSection.role
   }
 }
 

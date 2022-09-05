@@ -10,6 +10,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {getProfileSlug} from "../../store/reducers/authReducers";
 import {handleApiResponse, signIn, signUp} from "../operations";
 import {AuthStyle} from "./style";
+import {modalType} from "../../store/actions/authAction";
 
 const SignUpForm = (props) => {
   const theme = useTheme();
@@ -18,9 +19,12 @@ const SignUpForm = (props) => {
   const {isAuthenticated, selectedValue} = props;
   const router = useRouter();
 
-  useEffect(async () => {
+  useEffect( async () => {
+
     if (isAuthenticated) {
-      await router.push(`/${getProfileSlug()}`)
+      await router.push(`/${getProfileSlug()}`).then( setTimeout(()=>{
+        dispatch(modalType(""))
+      },500))
     }
   }, [isAuthenticated])
 
