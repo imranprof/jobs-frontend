@@ -8,7 +8,6 @@ import CustomDivider from "../../lib/profile/divider/divider";
 import Sections from "../../lib/profile/sections";
 import TopSection from "../../views/Profile/TopSection";
 import withLayout from "../../views/Layout";
-import {modalType} from "../../store/actions/authAction";
 import {setProfileSlug} from "../../store/actions/authAction";
 import CustomLoader from "../../lib/customLoader";
 import {getProfileAction} from "../../store/actions/topSectionActions";
@@ -16,17 +15,11 @@ import {getRole} from "../../auth/operations";
 import {getIndividualJobs} from "../../store/actions/jobAction";
 
 const Profile = (props) => {
-  const {isAuthenticated, profileSlug, loader} = props;
+  const {profileSlug, loader} = props;
   const dispatch = useDispatch();
   const router = useRouter();
   const {profile} = router.query;
   const {role} = props
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(modalType(''))
-    }
-  }, [isAuthenticated]);
 
   useEffect(() => {
     profile && dispatch(setProfileSlug(profile));
@@ -49,7 +42,6 @@ const Profile = (props) => {
 const mapStateToProps = (state) =>
 {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
     loader: state.topSection.loader,
     profileSlug: state.auth.profileSlug,
     role: state.topSection.role

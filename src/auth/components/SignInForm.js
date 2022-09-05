@@ -26,9 +26,9 @@ const SignInForm = ({error, isAuthenticated}) => {
   const dispatch = useDispatch()
   const router = useRouter();
 
-  useEffect(async () => {
+  useEffect( () => {
     if (isAuthenticated) {
-      await router.push("/");
+      router.push("/");
       dispatch(setIndividualJobs([]));
       dispatch(modalType(""));
     }
