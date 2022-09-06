@@ -43,10 +43,13 @@ export const getIndividualJobs = () => {
   }
 }
 
-export const jobApplyAction = (id) => {
+export const jobApplyAction = (id, cover_letter) => {
   let data = {
     "job": {
       "id": id
+    },
+    "job_application": {
+      "cover_letter": cover_letter
     }
   }
 

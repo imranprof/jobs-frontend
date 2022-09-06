@@ -1,28 +1,33 @@
+import {useState} from "react";
+import Link from "next/link";
+import {connect, useDispatch} from "react-redux";
+import {useFormik} from "formik";
+
 import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-
-import {JobShowStyle} from "./style";
-import {useDispatch} from "react-redux";
-import React, {useEffect, useState} from "react";
-import {connect} from "react-redux";
-import CustomSnackbar from "../../../../lib/customSnackbar";
-import {employeeSelectionAction, getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
-import {getRole} from "../../../../auth/operations";
 import {
-  Avatar, Checkbox,
+  Avatar,
+  Checkbox,
   IconButton,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
+  TextField,
+  Tooltip
 } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper'
-import Link from "next/link";
 import CloseIcon from "@material-ui/icons/Close";
+
+import {JobShowStyle} from "./style";
+import CustomSnackbar from "../../../../lib/customSnackbar";
+import {employeeSelectionAction, getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
+import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
+import ErrorMessage from "../../../../lib/errorMessage";
 
 const JobShow = (props) => {
   const theme = useTheme();
@@ -33,24 +38,42 @@ const JobShow = (props) => {
   const dispatch = useDispatch()
   const role = getRole()
   const [checked, setChecked] = useState(false);
+  const [showField, setShowField] = useState(false);
+
+  let btnTitle = 'Apply', isId, isDisabled = false;
+
+  const formik = useFormik({
+    initialValues: {
+      coverLetter: ""
+    },
+    validate: values => {
+      let errors = {}
+      if (!values.coverLetter || !values.coverLetter.trim()) {
+        errors.coverLetter = "A cover letter is required!"
+      }
+      if (values.coverLetter.length >= 800) {
+        errors.coverLetter = "Cover letter must have within 800 characters!"
+      }
+      return errors;
+    },
+    onSubmit: async (values) => {
+      const response = await dispatch(jobApplyAction(id, values.coverLetter));
+      if (response && response.status === 200) {
+        dispatch(getIndividualJobs())
+        isDisabled = true
+        setShowField(true)
+        setToast({show: true, severity: "success", text: "Applied Job successfully!"});
+      } else {
+        setToast({show: true, severity: "error", text: "You are not Eligible or something wrong!"});
+      }
+    }
+  })
 
   const hasApplicantsKey = data.hasOwnProperty('applicants')
   let hasApplicants = false;
   if (hasApplicantsKey) {
     if (data.applicants.length !== 0) {
       hasApplicants = true;
-    }
-  }
-
-  let btnTitle = 'Apply', isId, isDisabled = false;
-  const handleClick = async () => {
-    const response = await dispatch(jobApplyAction(id));
-    if (response && response.status === 200) {
-      dispatch(getIndividualJobs())
-      isDisabled = true
-      setToast({show: true, severity: "success", text: "Applied Job successfully!"});
-    } else {
-      setToast({show: true, severity: "error", text: "You are not Eligible or something wrong!"});
     }
   }
 
@@ -107,20 +130,42 @@ const JobShow = (props) => {
         <h3 className={`${classes.jobShowWrapper}__content-header`}>Client location</h3>
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
       </div>
-      {role === 'employee' ? (<div>
-        <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <div className={`${classes.jobShowWrapper}__btn-icon-wrapper`}>
-          <div>
-            <Button
-              onClick={handleClick}
-              variant="contained"
-              size="small"
-              color="primary"
-              disabled={isDisabled}
-            >
-              {btnTitle}
-            </Button>
-            <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
+
+      {role === 'employee' ? (
+        <div>
+          {(!showField && !isDisabled) && (
+            <>
+              <Divider className={`${classes.jobShowWrapper}__divider`}/>
+              <div>
+                <TextField
+                  required
+                  fullWidth
+                  multiline
+                  rows={8}
+                  variant="outlined"
+                  label="Write your cover letter"
+                  name="coverLetter"
+                  value={formik.values.coverLetter}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.coverLetter ? <ErrorMessage error={formik.errors.coverLetter}/> : null}
+              </div>
+            </>
+          )}
+
+          <Divider className={`${classes.jobShowWrapper}__divider`}/>
+          <div className={`${classes.jobShowWrapper}__btn-icon-wrapper`}>
+            <div>
+              <Button
+                onClick={formik.handleSubmit}
+                variant="contained"
+                size="small"
+                color="primary"
+                disabled={isDisabled}
+              >
+                {btnTitle}
+              </Button>
+              <span onClick={handleClose} className={`${classes.jobShowWrapper}__button`}>
               <Button
                 variant="outlined"
                 size="small"
@@ -129,13 +174,13 @@ const JobShow = (props) => {
               Cancel
               </Button>
             </span>
-          </div>
-          {data.short_list &&
-          <span className={`${classes.jobShowWrapper}__selected-icon-wrapper`}>
-          <i className={FontAwesomeIcons.selected}></i><span> Selected</span>
+            </div>
+            {data.short_list &&
+            <span className={`${classes.jobShowWrapper}__selected-icon-wrapper`}>
+          <i className={FontAwesomeIcons.selected}/><span> Selected</span>
         </span>}
-        </div>
-      </div>) : (
+          </div>
+        </div>) : (
         hasApplicantsKey && hasApplicants && <>
           <Divider className={`${classes.jobShowWrapper}__divider`}/>
           <h3 className={`${classes.jobShowWrapper}__content-header`}>
@@ -159,6 +204,7 @@ const JobShow = (props) => {
               <TableBody>
                 {data.applicants.map((applicant) => {
                   const fullName = applicant.profile_slug.split("-")
+
                   return (
                     <TableRow key={applicant.profile_slug}>
                       <TableCell
@@ -169,9 +215,15 @@ const JobShow = (props) => {
                             src={applicant.avatar}
                             alt="Employee avatar"
                           />
-                          <span className={`${classes.jobShowWrapper}__applicant-list__name`}>
-                            {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
-                          </span>
+                          <Tooltip
+                            title={applicant.cover_letter}
+                            placement="top"
+                            arrow classes={{tooltip: `${classes.jobShowWrapper}__tooltip`}}
+                          >
+                            <span className={`${classes.jobShowWrapper}__applicant-list__name`}>
+                              {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
+                            </span>
+                          </Tooltip>
                         </div>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link

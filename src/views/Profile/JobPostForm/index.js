@@ -1,6 +1,6 @@
 import {useFormik} from "formik";
 import CreatableSelect from "react-select/creatable";
-import {connect, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 
 import {Button, Icon, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
