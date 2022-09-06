@@ -73,9 +73,9 @@ const useStyles = makeStyles({
           textDecoration: "none"
         },
         '&__checkbox': {
-          color: "#009432",
+          color: theme.palette.customColor.success,
           '& .MuiSvgIcon-root': {
-            color: "#009432"
+            color: theme.palette.customColor.success,
           }
         }
       },
@@ -84,7 +84,7 @@ const useStyles = makeStyles({
         alignItems: "center"
       },
       '&__avatar': {
-        border: "3px solid",
+        border: "2px solid",
         marginRight: "10px"
       },
       '&__name': {
@@ -95,6 +95,13 @@ const useStyles = makeStyles({
     '&__close-button': {
       display: "flex",
       justifyContent: "flex-end"
+    },
+    '&__tooltip': {
+      maxWidth: 800,
+      maxHeight: "auto",
+      fontSize: 16,
+      padding: 20,
+      whiteSpace: "pre-wrap",
     }
   }),
 })
