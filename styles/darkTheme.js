@@ -41,7 +41,8 @@ const darkTheme = createTheme({
       dangerColor: COLORS.danger,
       backToHomeHover: COLORS.white_4,
       avatarBgEdit: COLORS.white_5,
-      modalTitle: COLORS.white_5
+      modalTitle: COLORS.white_5,
+      success: COLORS.success
     },
     customShadow: {
       main: COLORS.boxShadow_1,

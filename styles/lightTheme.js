@@ -40,7 +40,8 @@ const lightTheme = createTheme({
       shareBtn: COLORS.pink,
       dangerColor: COLORS.danger,
       backToHomeHover: COLORS.black_1,
-      avatarBgEdit: COLORS.white_5
+      avatarBgEdit: COLORS.white_5,
+      success: COLORS.success
     },
     customShadow: {
       main: COLORS.boxShadow_2,
