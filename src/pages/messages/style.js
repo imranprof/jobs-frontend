@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
     },
     '&__parent-messages-wrapper': {
       width: "30%",
-      overflowY: "scroll",
+      overflowY: "auto",
       '&::-webkit-scrollbar': {
         width: "10px", /* width of the entire scrollbar */
         background: "#F5F5F5",
@@ -20,6 +20,9 @@ export const useStyles = makeStyles({
         borderRadius: 5, /* roundness of the scroll thumb */
         border: '2px solid rgba(0,0,0,0.2)'
       }
+    },
+    '&__divider': {
+      marginRight: "10px"
     }
   })
 });
