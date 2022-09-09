@@ -68,15 +68,21 @@ const useStyles = makeStyles({
       },
       '&__table-cell': {
         backgroundColor: theme.palette.customBackground.skillBackground,
+        padding: 10,
         '& a': {
           color: theme.palette.customColor.highContrast,
           textDecoration: "none"
         },
         '&__checkbox': {
           color: theme.palette.customColor.success,
+          paddingLeft: 0,
           '& .MuiSvgIcon-root': {
             color: theme.palette.customColor.success,
           }
+        },
+        '&__shortlist': {
+          width: "25%",
+          paddingTop: 0
         }
       },
       '&__name-avatar-wrapper': {
