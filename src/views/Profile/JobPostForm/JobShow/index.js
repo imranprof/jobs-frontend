@@ -5,9 +5,9 @@ import {useFormik} from "formik";
 
 import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import {
   Avatar,
+  Button,
   Checkbox,
   IconButton,
   Table,
@@ -24,7 +24,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {JobShowStyle} from "./style";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import {employeeSelectionAction, getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
+import {employeeSelectionAction, getIndividualJobs, jobApplyAction, sendMailJobSeekerAction} from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import ErrorMessage from "../../../../lib/errorMessage";
@@ -96,7 +96,10 @@ const JobShow = (props) => {
       await setJobs([])
       await setChecked(!checked)
     })
+  }
 
+  const sendMailToJobSeeker = (id) => {
+    dispatch(sendMailJobSeekerAction(id))
   }
 
   return (
@@ -226,9 +229,10 @@ const JobShow = (props) => {
                           </Tooltip>
                         </div>
                       </TableCell>
-                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link
-                        href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link></TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
+                        <Link href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link>
+                      </TableCell>
+                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell__shortlist`}>
                         <Checkbox
                           name={applicant.profile_slug}
                           checked={applicant.short_list}
@@ -237,6 +241,16 @@ const JobShow = (props) => {
                           value={applicant.application_id}
                         />
                         {applicant.short_list ? "Selected" : "Select"}
+
+                        {applicant.short_list &&
+                          <Button
+                            size="small"
+                            variant="outlined"
+                            onClick={() => sendMailToJobSeeker(applicant.application_id)}
+                          >
+                            Send email
+                          </Button>
+                        }
                       </TableCell>
                     </TableRow>
                   )

@@ -116,3 +116,17 @@ export const employeeSelectionAction = (id, value) => {
   }
 }
 
+export const sendMailJobSeekerAction = (id) => {
+  const data = {
+    "job_application": {
+      "id": id,
+      "email": true
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(employeeSelectionUrl, data)
+      .then(res => dispatch(getIndividualJobs()))
+      .catch(err => err.response)
+    return (response);
+  }
+}
