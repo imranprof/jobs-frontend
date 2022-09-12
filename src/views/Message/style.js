@@ -6,6 +6,7 @@ export const useStyles = makeStyles({
     borderRadius: 10,
     padding: 10,
     marginBottom: 5,
+    cursor: "pointer",
     '&__avatar-name-Wrapper': {
       display: "flex",
       alignItems: "center"

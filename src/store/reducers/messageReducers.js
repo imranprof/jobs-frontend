@@ -1,7 +1,8 @@
 
 const initialState = {
   initialLoader: true,
-  parentMessageList: []
+  parentMessageList: [],
+  privateMessageList: []
 }
 
 export const messageReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ export const messageReducer = (state = initialState, action) => {
         ...state,
         initialLoader: false,
         parentMessageList: action.payload
+      }
+    case 'SET_PRIVATE_MESSAGES':
+      return {
+        ...state,
+        privateMessageList: action.payload
       }
     default:
       return state

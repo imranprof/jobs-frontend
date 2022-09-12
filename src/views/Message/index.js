@@ -1,20 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Avatar, Paper} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import {MessageStyle} from "./style";
+import {getPrivateConversations} from "../../store/actions/messageAction";
+import {useDispatch} from "react-redux";
 
 const Message = (props) => {
   const theme = useTheme();
   const classes = MessageStyle(theme)
+  const dispatch = useDispatch()
 
-
-  const {data} = props
+  const {data, openChat, setOpenChat} = props
 
   const {id, sender_name, recipient_name, body, sender_id, logged_in_user_id, sender_avatar, recipient_avatar} = data
 
+  const handleOpenChat = () => {
+    dispatch(getPrivateConversations(id)).then(setOpenChat(true))
+  }
+
   return (
     <>
-      <Paper className={classes.messageWrapper}>
+      <Paper onClick={handleOpenChat} className={classes.messageWrapper}>
         {logged_in_user_id === sender_id ? (
           <div className={`${classes.messageWrapper}__avatar-name-Wrapper`}>
               <Avatar
@@ -38,6 +44,7 @@ const Message = (props) => {
         }
         <span className={`${classes.messageWrapper}__message-body`}>{body}</span>
       </Paper>
+
     </>
   );
 };
