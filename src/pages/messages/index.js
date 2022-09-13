@@ -18,18 +18,25 @@ const MessageList = (props) => {
   const classes = MessagesStyle(theme)
   const dispatch = useDispatch();
   const {allMessage, initialLoader, conversations, sendMessageData} = props
+  const {parent_id, recipient_id} = sendMessageData
   const [openChat, setOpenChat] = useState(false)
-  const [toggleMessage, setToggleMessage] = useState(false);
 
   useEffect(() => {
     dispatch(getAllParentMessage())
   }, [])
 
+  // console.log('parent message id------- ', parent_id)
+
+  // useEffect(()=> {
+  //   const interval = setInterval(() => {
+  //     if(parent_id) dispatch(getPrivateConversations(parent_id))
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // },[])
+
 
   const sendMessageHandler = (values) => {
-    const {parent_id, recipient_id} = sendMessageData
     dispatch(sendMessageAction({body: values.body, recipient_id: recipient_id, parent_message_id: parent_id}))
-      .then(dispatch(getPrivateConversations(parent_id))).then(setToggleMessage(!toggleMessage))
     formik.resetForm()
   }
 
@@ -54,7 +61,7 @@ const MessageList = (props) => {
           <Divider orientation="vertical" className={`${classes.messagesWrapper}__divider`}/>
           <div style={{width: "70%", minHeight: "700px"}}>
             <div style={{height: "80%", overflowY: "auto"}}>
-              {(openChat || toggleMessage) && conversations.map((message) => <ShowMessage key={message.id} data={message}/>)}
+              {(openChat) && conversations.map((message) => <ShowMessage key={message.id} data={message}/>)}
             </div>
             <div style={{height: "20%", marginBottom: "20px"}}>
               <TextField
