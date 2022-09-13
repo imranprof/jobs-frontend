@@ -68,7 +68,7 @@ export const sendMessageAction = (messageData) => {
 
   return async (dispatch) => {
     const response = axios.post(sendMessageUrl, data)
-      .then(res => res)
+      .then(res => dispatch(getPrivateConversations(parent_message_id)))
       .catch(err => err.response)
     return (response);
   }
