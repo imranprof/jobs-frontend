@@ -8,12 +8,13 @@ const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 
 export const addJobAction = (job) => {
-  const {title, description, location, skills} = job;
+  const {title, description, location, skills, payType} = job;
   let data = {
     "job": {
       "title": title,
       "description": description,
       "skills": `{${skills}}`,
+      "pay_type": payType,
       "location": location
     }
   }
@@ -74,6 +75,7 @@ export const updateJobAction = (oldJob, updatedJob) => {
       "title": updatedJob.title,
       "description": updatedJob.description,
       "location": updatedJob.location,
+      "payType": updatedJob.payType,
       "skills": `{${updatedJob.skills}}`
     }
   }
