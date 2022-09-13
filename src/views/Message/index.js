@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Avatar, Paper} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import {MessageStyle} from "./style";
-import {getPrivateConversations} from "../../store/actions/messageAction";
+import {getPrivateConversations, setSendMessageData} from "../../store/actions/messageAction";
 import {useDispatch} from "react-redux";
 
 const Message = (props) => {
@@ -12,11 +12,19 @@ const Message = (props) => {
 
   const {data, openChat, setOpenChat} = props
 
-  const {id, sender_name, recipient_name, body, sender_id, logged_in_user_id, sender_avatar, recipient_avatar} = data
+  const {id, sender_name, recipient_name, body, sender_id, logged_in_user_id, sender_avatar, recipient_avatar, recipient_id} = data
 
   const handleOpenChat = () => {
     dispatch(getPrivateConversations(id)).then(setOpenChat(true))
+
+    if(logged_in_user_id === sender_id) {
+      dispatch(setSendMessageData({parent_id: id, recipient_id: recipient_id}))
+    }
+    else{
+      dispatch(setSendMessageData({parent_id: id, recipient_id: sender_id}))
+    }
   }
+
 
   return (
     <>
