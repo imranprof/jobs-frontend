@@ -25,14 +25,12 @@ const MessageList = (props) => {
     dispatch(getAllParentMessage())
   }, [])
 
-  // console.log('parent message id------- ', parent_id)
-
-  // useEffect(()=> {
-  //   const interval = setInterval(() => {
-  //     if(parent_id) dispatch(getPrivateConversations(parent_id))
-  //   }, 5000);
-  //   return () => clearInterval(interval);
-  // },[])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (parent_id) dispatch(getPrivateConversations(parent_id))
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [parent_id])
 
 
   const sendMessageHandler = (values) => {
@@ -60,7 +58,7 @@ const MessageList = (props) => {
           </div>
           <Divider orientation="vertical" className={`${classes.messagesWrapper}__divider`}/>
           <div style={{width: "70%", minHeight: "700px"}}>
-            <div style={{height: "80%", overflowY: "auto"}}>
+            <div style={{height: "80%", overflowY: "auto", display: "flex", flexDirection:"column-reverse", marginBottom: "15px"}}>
               {(openChat) && conversations.map((message) => <ShowMessage key={message.id} data={message}/>)}
             </div>
             <div style={{height: "20%", marginBottom: "20px"}}>
