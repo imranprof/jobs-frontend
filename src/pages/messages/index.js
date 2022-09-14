@@ -61,7 +61,7 @@ const MessageList = (props) => {
   }
   
   return (
-    <>
+    <div className={classes.messagesWrapper}>
       <div className={`${classes.messagesWrapper}__header-receiver-wrapper`}>
         <h1>Messages</h1>
         {
@@ -116,7 +116,7 @@ const MessageList = (props) => {
         </div>
 
       </div>
-    </>
+    </div>
   );
 };
 

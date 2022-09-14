@@ -2,7 +2,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
   messagesWrapper: theme => ({
-    maxHeight: 700,
+    marginBottom: 170,
     '&__parent-child-message-wrapper': {
       display: "flex",
       width: "100%",
