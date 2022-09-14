@@ -66,7 +66,7 @@ const MessageList = (props) => {
       <div style={{display: "flex", justifyContent: "space-between"}}>
         <h1>Messages</h1>
         {
-          select && <div style={{display: "flex", alignItems: "center", width: "70%"}}>
+          (select && openChat) && <div style={{display: "flex", alignItems: "center", width: "70%"}}>
             <Avatar
               src={clickedUserAvatar}
               alt="recipient avatar"
@@ -96,7 +96,7 @@ const MessageList = (props) => {
             }}>
               {(openChat) && conversations.map((message) => <ShowMessage key={message.id} data={message}/>)}
             </div>
-            <div style={{height: "20%", marginBottom: "20px"}}>
+            {openChat && <div style={{height: "20%", marginBottom: "20px"}}>
               <TextField
                 multiline
                 fullWidth
@@ -116,8 +116,7 @@ const MessageList = (props) => {
                 >Send
                 </Button>
               </div>
-            </div>
-
+            </div>}
           </div>
         </div>
 
