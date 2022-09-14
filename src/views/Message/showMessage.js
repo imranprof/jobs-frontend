@@ -17,6 +17,7 @@ const ShowMessage = (props) => {
               padding: "10px",
               marginRight:"10px",
               backgroundColor:"#0084FF",
+              color: "#F9F9FD",
               borderRadius:"20px"
             }}>
               <span style={{whiteSpace: "pre-wrap", margin: 0}}>{body}</span>
@@ -33,6 +34,7 @@ const ShowMessage = (props) => {
               marginBottom: "5px",
               padding: "10px",
               backgroundColor: "#3E4042",
+              color: "#F9F9FD",
               marginLeft: "10px",
               borderRadius:"20px"}}>
               <span style={{whiteSpace: "pre-wrap", margin: 0}}>{body}</span>

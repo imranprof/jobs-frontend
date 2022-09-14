@@ -28,7 +28,7 @@ const MessageList = (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (parent_id) dispatch(getPrivateConversations(parent_id))
-    }, 5000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [parent_id])
 
