@@ -74,6 +74,12 @@ const useStyles = makeStyles({
       color: theme.palette.customColor.dark,
       marginTop: 30
     },
+    '&__total-applied': {
+      fontSize: 13,
+      fontFamily: FONTS.secondaryFont,
+      color: theme.palette.customColor.dark,
+      letterSpacing: "1px",
+    },
     '&__action-btn': {
       width: 85,
       position: "absolute",

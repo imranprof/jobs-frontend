@@ -18,7 +18,7 @@ const Job = (props) => {
   const theme = useTheme();
   const classes = JobStyle(theme);
   const {setToast, job, setIsDelete, isDelete, type, setJobs} = props
-  const {title, description, skills, location, id, pay_type, created_at} = job
+  const {title, description, skills, location, id, pay_type, created_at, total_applied} = job
   const [openModal, setOpenModal] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const dispatch = useDispatch()
@@ -77,11 +77,20 @@ const Job = (props) => {
         ))}
 
         <p className={`${classes.jobWrapper}__location`}>Location: {location}</p>
+
+        <p className={`${classes.jobWrapper}__total-applied`}>{`Total applied: ${total_applied}`}</p>
       </Paper>
 
       <EditCustomModal open={openModal} handleClose={handleClose}>
         {editMode ? <JobEdit job={job} handleClose={handleClose} setToast={setToast}/> :
-          <JobShow data={job} setJobs={setJobs} handleClose={handleClose} payTypeText={payTypeText} jobPostedTime={jobPostedTime} />}
+          <JobShow
+            data={job}
+            setJobs={setJobs}
+            handleClose={handleClose}
+            payTypeText={payTypeText}
+            jobPostedTime={jobPostedTime}
+            totalApplied={total_applied}
+          />}
       </EditCustomModal>
     </>
   );

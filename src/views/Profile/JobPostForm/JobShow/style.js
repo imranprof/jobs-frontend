@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   jobShowWrapper: theme => ({
@@ -57,6 +58,12 @@ const useStyles = makeStyles({
       color: theme.palette.customColor.main,
       fontFamily: "Helvetica Neue",
       fontSize: 15,
+    },
+    '&__total-applied': {
+      fontSize: 15,
+      fontFamily: FONTS.secondaryFont,
+      color: theme.palette.customColor.main,
+      letterSpacing: "1px",
     },
     '&__button': {
       marginLeft: 10

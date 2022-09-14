@@ -37,7 +37,7 @@ import ErrorMessage from "../../../../lib/errorMessage";
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime} = props
+  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime, totalApplied} = props
   const {title, description, location, skills, id} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
@@ -143,6 +143,9 @@ const JobShow = (props) => {
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <h3 className={`${classes.jobShowWrapper}__content-header`}>Client location</h3>
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
+
+        <Divider className={`${classes.jobShowWrapper}__divider`}/>
+        <p className={`${classes.jobShowWrapper}__total-applied`}>{`Total applied: ${totalApplied}`}</p>
       </div>
 
       {role === 'employee' ? (
