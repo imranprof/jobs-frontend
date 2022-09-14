@@ -59,19 +59,20 @@ const MessageList = (props) => {
       clickedUserAvatar = sender_avatar;
     }
   }
-
-
+  
   return (
     <>
-      <div style={{display: "flex", justifyContent: "space-between"}}>
+      <div className={`${classes.messagesWrapper}__header-receiver-wrapper`}>
         <h1>Messages</h1>
         {
-          (select && openChat) && <div style={{display: "flex", alignItems: "center", width: "70%"}}>
+          (select && openChat) &&
+          <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details`}>
             <Avatar
               src={clickedUserAvatar}
               alt="recipient avatar"
             />
-            <span style={{marginLeft: "15px"}}>{clickedUserName}</span>
+            <span className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__name`}>
+              {clickedUserName}</span>
           </div>
         }
       </div>
@@ -86,17 +87,11 @@ const MessageList = (props) => {
                                                   setOpenChat={setOpenChat}/>)}
           </div>
           <Divider orientation="vertical" flexItem className={`${classes.messagesWrapper}__divider`}/>
-          <div style={{width: "70%", minHeight: "700px"}}>
-            <div style={{
-              height: "80%",
-              overflowY: "auto",
-              display: "flex",
-              flexDirection: "column-reverse",
-              marginBottom: "15px"
-            }}>
+          <div className={`${classes.messagesWrapper}__chat-box-field-btn-wrapper`}>
+            <div className={`${classes.messagesWrapper}__chat-wrapper`}>
               {(openChat) && conversations.map((message) => <ShowMessage key={message.id} data={message}/>)}
             </div>
-            {openChat && <div style={{height: "20%", marginBottom: "20px"}}>
+            {openChat && <div className={`${classes.messagesWrapper}__text-field-btn-wrapper`}>
               <TextField
                 multiline
                 fullWidth
@@ -107,7 +102,7 @@ const MessageList = (props) => {
                 value={formik.values.body}
                 onChange={formik.handleChange}
               />
-              <div style={{display: "flex", justifyContent: "flex-end", marginTop: "10px"}}>
+              <div className={`${classes.messagesWrapper}__send-btn-wrapper`}>
                 <Button
                   size={"small"}
                   color={"primary"}

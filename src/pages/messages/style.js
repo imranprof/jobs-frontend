@@ -23,7 +23,40 @@ export const useStyles = makeStyles({
     },
     '&__divider': {
       marginRight: "10px"
+    },
+    '&__header-receiver-wrapper': {
+      display: "flex",
+      justifyContent: "space-between",
+      '&__receiver-details': {
+        display: "flex",
+        alignItems: "center",
+        width: "70%",
+        '&__name': {
+          marginLeft: "15px"
+        }
+      }
+    },
+    '&__chat-box-field-btn-wrapper':{
+      width: "70%",
+      minHeight: "700px"
+    },
+    '&__chat-wrapper': {
+      height: "80%",
+      overflowY: "auto",
+      display: "flex",
+      flexDirection: "column-reverse",
+      marginBottom: "15px"
+    },
+    '&__text-field-btn-wrapper': {
+      height: "20%",
+      marginBottom: "20px"
+    },
+    '&__send-btn-wrapper':{
+      display: "flex",
+      justifyContent: "flex-end",
+      marginTop: "10px"
     }
+
   })
 });
 
