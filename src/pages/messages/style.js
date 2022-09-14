@@ -45,7 +45,16 @@ export const useStyles = makeStyles({
       overflowY: "auto",
       display: "flex",
       flexDirection: "column-reverse",
-      marginBottom: "15px"
+      marginBottom: "15px",
+      '&::-webkit-scrollbar': {
+        width: "10px", /* width of the entire scrollbar */
+        background: "#F5F5F5",
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: "#3C3E41", /* color of the scroll thumb */
+        borderRadius: 5, /* roundness of the scroll thumb */
+        border: '2px solid rgba(0,0,0,0.2)'
+      }
     },
     '&__text-field-btn-wrapper': {
       height: "20%",
