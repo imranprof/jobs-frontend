@@ -68,6 +68,7 @@ const MessageList = (props) => {
           (select && openChat) &&
           <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details`}>
             <Avatar
+              className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__avatar`}
               src={clickedUserAvatar}
               alt="recipient avatar"
             />

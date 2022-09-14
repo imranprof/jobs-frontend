@@ -14,15 +14,26 @@ export const useStyles = makeStyles({
     '&__avatar': {
       marginRight: "10px",
       height: "32px",
-      width: "32px"
+      width: "32px",
+      [theme.breakpoints.down('xs')]: {
+        height: "12px",
+        width: "12px"
+      }
     },
     '&__name': {
       fontWeight: 700,
-      color: theme.palette.customColor.main
+      color: theme.palette.customColor.main,
+      [theme.breakpoints.down('xs')]: {
+        fontWeight: 500,
+        fontSize: 12
+      }
     },
     '&__message-body': {
       marginLeft: "42px",
-      color: theme.palette.customColor.main
+      color: theme.palette.customColor.main,
+      [theme.breakpoints.down('xs')]: {
+        display: "none"
+      }
     }
   })
 });
