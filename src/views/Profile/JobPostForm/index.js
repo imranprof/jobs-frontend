@@ -1,5 +1,6 @@
 import {useFormik} from "formik";
 import CreatableSelect from "react-select/creatable";
+import Select from "react-select";
 import {useDispatch} from "react-redux";
 
 import {Button, Icon, TextField} from "@material-ui/core";
@@ -18,7 +19,7 @@ const JobPostForm = (props) => {
   const theme = useTheme();
   const classes = JobPostFormStyle(theme);
   const dispatch = useDispatch()
-  const [toast,setToast] = useState({show: false, severity: "", text: ""});
+  const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const [mode, setMode] = useState(false);
   const [jobData, setJobData] = useState({});
   const {handleClose} = props
@@ -31,20 +32,32 @@ const JobPostForm = (props) => {
     {value: 5, label: "Golang"}
   ]
 
+  const payTypeData = [
+    {value: 1, label: "Pay by the hour"},
+    {value: 2, label: "Pay a fixed price"}
+  ]
+
   const initialJobPostValues = {
     title: '',
     description: '',
     skills: [],
+    payType: '',
     location: ''
   }
 
   const jobPostHandler = async (values) => {
-    const {title, description, location} = values
+    const {title, description, location, payType} = values
     let skills = values.skills.map(
       skill => skill.label
     )
-    const response = await dispatch(addJobAction({title: title, description: description, location: location, skills: skills}))
-    if(response && response.status === 201){
+    const response = await dispatch(addJobAction({
+      title: title,
+      description: description,
+      location: location,
+      skills: skills,
+      payType: payType.label
+    }))
+    if (response && response.status === 201) {
       setJobData(response.data.job)
       dispatch(getIndividualJobs())
       formik.resetForm()
@@ -63,6 +76,9 @@ const JobPostForm = (props) => {
     }
     if (values.skills.length === 0) {
       errors.skills = "Please select a skill!"
+    }
+    if (values.payType === "") {
+      errors.payType = "Please select a pay type!"
     }
     if (!values.location) {
       errors.location = "Location can't be empty"
@@ -130,6 +146,21 @@ const JobPostForm = (props) => {
                   className={`${classes.jobPostFormWrapper}__contentWrapper__selectDropdown`}
                 />
                 {formik.errors.skills && <ErrorMessage error={formik.errors.skills}/>}
+              </div>
+
+              <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
+                <h4>How would you like to pay?</h4>
+                <Select
+                  name="payType"
+                  options={payTypeData}
+                  value={formik.values.payType}
+                  onChange={payType => formik.setFieldValue("payType", payType)}
+                  placeholder="Select type"
+                  menuPosition="fixed"
+                  styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
+                  className={`${classes.jobPostFormWrapper}__contentWrapper__selectDropdown`}
+                />
+                {formik.errors.payType && <ErrorMessage error={formik.errors.payType}/>}
               </div>
 
               <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
