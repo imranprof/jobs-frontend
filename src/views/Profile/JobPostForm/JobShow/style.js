@@ -8,7 +8,19 @@ const useStyles = makeStyles({
     },
     '&__title': {
       color: theme.palette.customColor.highContrast,
-      marginTop: 0
+      margin: "0 0 5px 0"
+    },
+    '&__pay-type': {
+      fontSize: 12,
+      fontWeight: 600,
+      color: theme.palette.customColor.dark,
+      letterSpacing: "1px",
+      transition: "all 0.3s ease-in-out",
+      '&-icon': {
+        fontSize: 16,
+        color: theme.palette.customColor.dark,
+        marginRight: 5
+      }
     },
     '&__description': {
       color: theme.palette.customColor.main,

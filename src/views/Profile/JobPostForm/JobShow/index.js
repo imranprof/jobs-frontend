@@ -24,7 +24,12 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {JobShowStyle} from "./style";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import {employeeSelectionAction, getIndividualJobs, jobApplyAction, sendMailJobSeekerAction} from "../../../../store/actions/jobAction";
+import {
+  employeeSelectionAction,
+  getIndividualJobs,
+  jobApplyAction,
+  sendMailJobSeekerAction
+} from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import ErrorMessage from "../../../../lib/errorMessage";
@@ -32,7 +37,7 @@ import ErrorMessage from "../../../../lib/errorMessage";
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList, setJobs} = props
+  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime} = props
   const {title, description, location, skills, id} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
@@ -115,11 +120,17 @@ const JobShow = (props) => {
         <h1 className={`${classes.jobShowWrapper}__title`}>
           {title}
         </h1>
+        <span className={`${classes.jobShowWrapper}__pay-type`}>{`Posted ${jobPostedTime}`}</span>
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <pre className={`${classes.jobShowWrapper}__description`}>
         {description}
       </pre>
+
+        <Divider className={`${classes.jobShowWrapper}__divider`}/>
+        <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
+        <span className={`${classes.jobShowWrapper}__pay-type`}>{payTypeText}</span>
+
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <h3 className={`${classes.jobShowWrapper}__content-header`}>
           Skills & Expertise
@@ -243,13 +254,13 @@ const JobShow = (props) => {
                         {applicant.short_list ? "Selected" : "Select"}
 
                         {applicant.short_list &&
-                          <Button
-                            size="small"
-                            variant="outlined"
-                            onClick={() => sendMailToJobSeeker(applicant.application_id)}
-                          >
-                            Send email
-                          </Button>
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() => sendMailToJobSeeker(applicant.application_id)}
+                        >
+                          Send email
+                        </Button>
                         }
                       </TableCell>
                     </TableRow>
