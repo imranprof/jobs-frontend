@@ -31,6 +31,11 @@ export const useStyles = makeStyles({
     '&__message-body': {
       marginLeft: "42px",
       color: theme.palette.customColor.main,
+      display: "-webkit-box",
+      WebkitLineClamp: 1,
+      WebkitBoxOrient: "vertical",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
       [theme.breakpoints.down('xs')]: {
         display: "none"
       }
