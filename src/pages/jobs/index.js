@@ -17,7 +17,7 @@ const Jobs = (props) => {
   const theme = useTheme();
   const classes = JobsStyle(theme);
   const dispatch = useDispatch()
-  const {jobList, initialLoader} = props
+  const {jobList, initialLoader, isAuthenticated} = props
 
   const [hasMore, setHasMore] = useState(true);
   const [jobs, setJobs] = useState([]);
@@ -25,7 +25,7 @@ const Jobs = (props) => {
   useEffect(() => {
     setJobs(jobList.slice(0, jobs.length + 8))
     dispatch(getJobs())
-    dispatch(getIndividualJobs())
+    isAuthenticated && dispatch(getIndividualJobs())
   }, [])
 
   if ((jobList.length > jobs.length && hasMore === false) || (jobs.length === 0 && jobList.length > jobs.length)) {
@@ -65,7 +65,8 @@ const Jobs = (props) => {
 const mapStateToProps = (state) => {
   return {
     jobList: state.allJobs.jobs,
-    initialLoader: state.allJobs.initialLoader
+    initialLoader: state.allJobs.initialLoader,
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
