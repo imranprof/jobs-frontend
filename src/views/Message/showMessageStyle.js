@@ -15,8 +15,8 @@ export const useStyles = makeStyles({
       marginBottom: "5px",
       padding: "10px",
       marginRight: "10px",
-      backgroundColor: "#0084FF",
-      color: "#F9F9FD",
+      backgroundColor: theme.palette.customColor.sendMessageBody,
+      color: theme.palette.customColor.sendMessageText,
       borderRadius: "20px"
     },
     '&__received-message-wrapper': {
@@ -31,8 +31,8 @@ export const useStyles = makeStyles({
       minWidth: "10%",
       marginBottom: "5px",
       padding: "10px",
-      backgroundColor: "#3E4042",
-      color: "#F9F9FD",
+      backgroundColor: theme.palette.customColor.receivedMessageBody,
+      color: theme.palette.customColor.receivedMessageText,
       marginLeft: "10px",
       borderRadius: "20px",
     },
