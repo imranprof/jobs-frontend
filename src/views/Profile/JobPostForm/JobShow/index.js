@@ -33,11 +33,12 @@ import {
 import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import ErrorMessage from "../../../../lib/errorMessage";
+import {getAllParentMessage} from "../../../../store/actions/messageAction";
 
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime, totalApplied} = props
+  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime, totalApplied, allParentMessage} = props
   const {title, description, location, skills, id} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
@@ -103,8 +104,17 @@ const JobShow = (props) => {
     })
   }
 
-  const sendMailToJobSeeker = (id) => {
-    dispatch(sendMailJobSeekerAction(id))
+  const sendMailToJobSeeker = async (id, applicantId) => {
+    await dispatch(getAllParentMessage()).then(
+      () => {
+        let found = allParentMessage.find(msg => msg.recipient_id === applicantId)
+        if (found) {
+          dispatch(sendMailJobSeekerAction(id))
+        } else {
+          dispatch(sendMailJobSeekerAction(id, applicantId))
+        }
+      }
+    )
   }
 
   return (
@@ -260,7 +270,7 @@ const JobShow = (props) => {
                         <Button
                           size="small"
                           variant="outlined"
-                          onClick={() => sendMailToJobSeeker(applicant.application_id)}
+                          onClick={() => sendMailToJobSeeker(applicant.application_id, applicant.applicant_id)}
                         >
                           Send email
                         </Button>
@@ -289,6 +299,7 @@ const JobShow = (props) => {
 const mapStateToProps = (state) => {
   return {
     jobList: state.allJobs.individualJobs,
+    allParentMessage: state.messageList.parentMessageList
   }
 }
 
