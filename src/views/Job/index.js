@@ -24,7 +24,6 @@ const Job = (props) => {
   const dispatch = useDispatch()
 
   const payTypeText = pay_type === 'Pay by the hour' ? 'Hourly' : 'Fixed-price'
-
   const jobPostedTime = moment(created_at).fromNow();
 
   const openModalHandler = (e) => {
@@ -87,9 +86,6 @@ const Job = (props) => {
             data={job}
             setJobs={setJobs}
             handleClose={handleClose}
-            payTypeText={payTypeText}
-            jobPostedTime={jobPostedTime}
-            totalApplied={total_applied}
           />}
       </EditCustomModal>
     </>

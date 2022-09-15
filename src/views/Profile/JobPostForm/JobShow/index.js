@@ -2,6 +2,7 @@ import {useState} from "react";
 import Link from "next/link";
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
+import moment from "moment";
 
 import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
@@ -37,13 +38,16 @@ import ErrorMessage from "../../../../lib/errorMessage";
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime, totalApplied} = props
-  const {title, description, location, skills, id} = data
+  const {data, handleClose, jobList, setJobs} = props
+  const {title, description, location, skills, id, pay_type, created_at, total_applied} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
   const role = getRole()
   const [checked, setChecked] = useState(false);
   const [showField, setShowField] = useState(false);
+
+  const payTypeText = pay_type === 'Pay by the hour' ? 'Hourly' : 'Fixed-price'
+  const jobPostedTime = moment(created_at).fromNow();
 
   let btnTitle = 'Apply', isId, isDisabled = false;
 
@@ -145,7 +149,7 @@ const JobShow = (props) => {
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <p className={`${classes.jobShowWrapper}__total-applied`}>{`Total applied: ${totalApplied}`}</p>
+        <p className={`${classes.jobShowWrapper}__total-applied`}>{`Total applied: ${total_applied}`}</p>
       </div>
 
       {role === 'employee' ? (
