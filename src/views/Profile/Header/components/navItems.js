@@ -25,7 +25,7 @@ const NavItems = (props) => {
 
   return (
     <List className={`${classes.headerWrapper}__nav__navItem`}>
-      {(publicRole === 'employee') ?
+      {(publicRole === 'employee' || publicRole === '') ?
         JobSeekerNavLinksData.map((link) =>
           (<ListItem className={`${classes.headerWrapper}__nav ${classes.headerWrapper}__nav--${variant} active`}
                      key={link.id}>
