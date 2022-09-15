@@ -17,7 +17,8 @@ export const useStyles = makeStyles({
       marginRight: "10px",
       backgroundColor: theme.palette.customColor.sendMessageBody,
       color: theme.palette.customColor.sendMessageText,
-      borderRadius: "20px"
+      borderRadius: "20px",
+      flexDirection: "column"
     },
     '&__received-message-wrapper': {
       display: "flex",
@@ -35,10 +36,14 @@ export const useStyles = makeStyles({
       color: theme.palette.customColor.receivedMessageText,
       marginLeft: "10px",
       borderRadius: "20px",
+      flexDirection: "column"
     },
     '&__body-text': {
       whiteSpace: "pre-wrap",
       margin: 0
+    },
+    '&__message-time': {
+      marginBottom: 10, fontSize: "10px"
     }
   })
 });
