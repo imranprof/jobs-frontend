@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   jobShowWrapper: theme => ({
@@ -8,7 +9,19 @@ const useStyles = makeStyles({
     },
     '&__title': {
       color: theme.palette.customColor.highContrast,
-      marginTop: 0
+      margin: "0 0 5px 0"
+    },
+    '&__pay-type': {
+      fontSize: 12,
+      fontWeight: 600,
+      color: theme.palette.customColor.dark,
+      letterSpacing: "1px",
+      transition: "all 0.3s ease-in-out",
+      '&-icon': {
+        fontSize: 16,
+        color: theme.palette.customColor.dark,
+        marginRight: 5
+      }
     },
     '&__description': {
       color: theme.palette.customColor.main,
@@ -46,6 +59,12 @@ const useStyles = makeStyles({
       fontFamily: "Helvetica Neue",
       fontSize: 15,
     },
+    '&__total-applied': {
+      fontSize: 15,
+      fontFamily: FONTS.secondaryFont,
+      color: theme.palette.customColor.main,
+      letterSpacing: "1px",
+    },
     '&__button': {
       marginLeft: 10
     },
@@ -68,15 +87,21 @@ const useStyles = makeStyles({
       },
       '&__table-cell': {
         backgroundColor: theme.palette.customBackground.skillBackground,
+        padding: 10,
         '& a': {
           color: theme.palette.customColor.highContrast,
           textDecoration: "none"
         },
         '&__checkbox': {
           color: theme.palette.customColor.success,
+          paddingLeft: 0,
           '& .MuiSvgIcon-root': {
             color: theme.palette.customColor.success,
           }
+        },
+        '&__shortlist': {
+          width: "25%",
+          paddingTop: 0
         }
       },
       '&__name-avatar-wrapper': {

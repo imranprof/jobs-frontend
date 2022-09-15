@@ -31,7 +31,7 @@ const useStyles = makeStyles({
       opacity: 1,
       background: theme.palette.customBackground.gradiant.dark,
     },
-    '&:hover &__title, &:hover &__description, &:hover &__location': {
+    '&:hover &__title, &:hover &__description, &:hover &__pay-type, &:hover &__hyphen': {
       color: theme.palette.customColor.featuresHover
     },
     '&__title': {
@@ -40,7 +40,21 @@ const useStyles = makeStyles({
       fontFamily: FONTS.modalTitleFont,
       fontWeight: 500,
       marginBottom: 30,
-      letterSpacing: "1px"
+      letterSpacing: "1px",
+      transition: "all 0.3s ease-in-out",
+    },
+    '&__pay-type': {
+      fontSize: 12,
+      fontFamily: FONTS.primaryFont,
+      fontWeight: 600,
+      color: theme.palette.customColor.dark,
+      letterSpacing: "1px",
+      transition: "all 0.3s ease-in-out",
+    },
+    '&__hyphen': {
+      color: theme.palette.customColor.dark,
+      margin: "0 10px",
+      transition: "all 0.3s ease-in-out",
     },
     '&__description, &__location': {
       color: theme.palette.customColor.main,
@@ -54,9 +68,17 @@ const useStyles = makeStyles({
       overflow: "hidden",
       textOverflow: "ellipsis",
       marginBottom: 30,
+      transition: "all 0.3s ease-in-out",
     },
     '&__location': {
+      color: theme.palette.customColor.dark,
       marginTop: 30
+    },
+    '&__total-applied': {
+      fontSize: 13,
+      fontFamily: FONTS.secondaryFont,
+      color: theme.palette.customColor.dark,
+      letterSpacing: "1px",
     },
     '&__action-btn': {
       width: 85,

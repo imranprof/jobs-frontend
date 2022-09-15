@@ -8,12 +8,13 @@ const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 
 export const addJobAction = (job) => {
-  const {title, description, location, skills} = job;
+  const {title, description, location, skills, payType} = job;
   let data = {
     "job": {
       "title": title,
       "description": description,
       "skills": `{${skills}}`,
+      "pay_type": payType,
       "location": location
     }
   }
@@ -74,6 +75,7 @@ export const updateJobAction = (oldJob, updatedJob) => {
       "title": updatedJob.title,
       "description": updatedJob.description,
       "location": updatedJob.location,
+      "pay_type": updatedJob.pay_type,
       "skills": `{${updatedJob.skills}}`
     }
   }
@@ -116,3 +118,17 @@ export const employeeSelectionAction = (id, value) => {
   }
 }
 
+export const sendMailJobSeekerAction = (id) => {
+  const data = {
+    "job_application": {
+      "id": id,
+      "email": true
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(employeeSelectionUrl, data)
+      .then(res => dispatch(getIndividualJobs()))
+      .catch(err => err.response)
+    return (response);
+  }
+}

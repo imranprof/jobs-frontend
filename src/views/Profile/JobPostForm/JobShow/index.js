@@ -5,9 +5,9 @@ import {useFormik} from "formik";
 
 import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import {
   Avatar,
+  Button,
   Checkbox,
   IconButton,
   Table,
@@ -24,7 +24,12 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {JobShowStyle} from "./style";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import {employeeSelectionAction, getIndividualJobs, jobApplyAction} from "../../../../store/actions/jobAction";
+import {
+  employeeSelectionAction,
+  getIndividualJobs,
+  jobApplyAction,
+  sendMailJobSeekerAction
+} from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import ErrorMessage from "../../../../lib/errorMessage";
@@ -32,7 +37,7 @@ import ErrorMessage from "../../../../lib/errorMessage";
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList, setJobs} = props
+  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime, totalApplied} = props
   const {title, description, location, skills, id} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
@@ -96,7 +101,10 @@ const JobShow = (props) => {
       await setJobs([])
       await setChecked(!checked)
     })
+  }
 
+  const sendMailToJobSeeker = (id) => {
+    dispatch(sendMailJobSeekerAction(id))
   }
 
   return (
@@ -112,11 +120,17 @@ const JobShow = (props) => {
         <h1 className={`${classes.jobShowWrapper}__title`}>
           {title}
         </h1>
+        <span className={`${classes.jobShowWrapper}__pay-type`}>{`Posted ${jobPostedTime}`}</span>
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <pre className={`${classes.jobShowWrapper}__description`}>
         {description}
       </pre>
+
+        <Divider className={`${classes.jobShowWrapper}__divider`}/>
+        <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
+        <span className={`${classes.jobShowWrapper}__pay-type`}>{payTypeText}</span>
+
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <h3 className={`${classes.jobShowWrapper}__content-header`}>
           Skills & Expertise
@@ -129,6 +143,9 @@ const JobShow = (props) => {
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <h3 className={`${classes.jobShowWrapper}__content-header`}>Client location</h3>
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
+
+        <Divider className={`${classes.jobShowWrapper}__divider`}/>
+        <p className={`${classes.jobShowWrapper}__total-applied`}>{`Total applied: ${totalApplied}`}</p>
       </div>
 
       {role === 'employee' ? (
@@ -226,9 +243,10 @@ const JobShow = (props) => {
                           </Tooltip>
                         </div>
                       </TableCell>
-                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}><Link
-                        href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link></TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
+                        <Link href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link>
+                      </TableCell>
+                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell__shortlist`}>
                         <Checkbox
                           name={applicant.profile_slug}
                           checked={applicant.short_list}
@@ -237,6 +255,16 @@ const JobShow = (props) => {
                           value={applicant.application_id}
                         />
                         {applicant.short_list ? "Selected" : "Select"}
+
+                        {applicant.short_list &&
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() => sendMailToJobSeeker(applicant.application_id)}
+                        >
+                          Send email
+                        </Button>
+                        }
                       </TableCell>
                     </TableRow>
                   )
