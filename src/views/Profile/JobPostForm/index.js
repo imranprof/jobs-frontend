@@ -86,11 +86,18 @@ const JobPostForm = (props) => {
     if (values.payType === "") {
       errors.payType = "Please select a pay type!"
     }
-    if (values.minRate === "") {
-      errors.minRate = "Budget can't be empty"
+    if (values.payType.label === 'Pay by the hour') {
+      if (values.minRate === "") {
+        errors.minRate = "Budget can't be empty"
+      }
+      if (values.maxRate === "") {
+        errors.maxRate = "Budget can't be empty"
+      }
     }
-    if (values.maxRate === "") {
-      errors.maxRate = "Budget can't be empty"
+    if (values.payType.label === 'Pay a fixed price') {
+      if (values.maxRate === "") {
+        errors.maxRate = "Budget can't be empty"
+      }
     }
     if (!values.location) {
       errors.location = "Location can't be empty"

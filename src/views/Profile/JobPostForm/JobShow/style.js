@@ -21,7 +21,26 @@ const useStyles = makeStyles({
         fontSize: 16,
         color: theme.palette.customColor.dark,
         marginRight: 5
+      },
+      '&__text': {
+        fontSize: 11,
+        fontWeight: 600,
+        color: theme.palette.customColor.dark,
+        letterSpacing: "1px",
+        transition: "all 0.3s ease-in-out",
+        marginLeft: 22
       }
+    },
+    '&__budgetWrapper': {
+      display: "flex",
+      alignItems: "center"
+    },
+    '&__budget': {
+      fontSize: 14,
+      fontWeight: 600,
+      color: theme.palette.customColor.dark,
+      letterSpacing: "1px",
+      transition: "all 0.3s ease-in-out",
     },
     '&__description': {
       color: theme.palette.customColor.main,

@@ -39,7 +39,7 @@ const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
   const {data, handleClose, jobList, setJobs} = props
-  const {title, description, location, skills, id, pay_type, created_at, total_applied} = data
+  const {title, description, location, skills, id, pay_type, created_at, total_applied, budget} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
   const role = getRole()
@@ -48,6 +48,7 @@ const JobShow = (props) => {
 
   const payTypeText = pay_type === 'Pay by the hour' ? 'Hourly' : 'Fixed-price'
   const jobPostedTime = moment(created_at).fromNow();
+  const budgetRange = pay_type === 'Pay by the hour' ? `$${budget[0].toFixed(2)}-$${budget[1].toFixed(2)}` : `$${budget[0].toFixed(2)}`
 
   let btnTitle = 'Apply', isId, isDisabled = false;
 
@@ -132,8 +133,11 @@ const JobShow = (props) => {
       </pre>
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
-        <span className={`${classes.jobShowWrapper}__pay-type`}>{payTypeText}</span>
+        <div className={`${classes.jobShowWrapper}__budgetWrapper`}>
+          <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
+          <span className={`${classes.jobShowWrapper}__budget`}>{budgetRange}</span>
+        </div>
+        <span className={`${classes.jobShowWrapper}__pay-type__text`}>{payTypeText}</span>
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <h3 className={`${classes.jobShowWrapper}__content-header`}>
