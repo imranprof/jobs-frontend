@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import {useFormik} from "formik";
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
@@ -12,7 +13,6 @@ import {JobPostFormStyle} from "./style";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {addJobAction, getIndividualJobs} from "../../../store/actions/jobAction";
 import CustomSnackbar from "../../../lib/customSnackbar";
-import React, {useState} from "react";
 import JobShow from "./JobShow";
 
 const JobPostForm = (props) => {
@@ -42,20 +42,26 @@ const JobPostForm = (props) => {
     description: '',
     skills: [],
     payType: '',
-    location: ''
+    location: '',
+    minRate: '',
+    maxRate: '',
   }
 
   const jobPostHandler = async (values) => {
-    const {title, description, location, payType} = values
+    const {title, description, location, payType, minRate, maxRate} = values
     let skills = values.skills.map(
       skill => skill.label
     )
+
+    const budget = minRate === '' ? [maxRate] : [minRate, maxRate]
+
     const response = await dispatch(addJobAction({
       title: title,
       description: description,
       location: location,
       skills: skills,
-      payType: payType.label
+      payType: payType.label,
+      budget: budget
     }))
     if (response && response.status === 201) {
       setJobData(response.data.job)
@@ -79,6 +85,12 @@ const JobPostForm = (props) => {
     }
     if (values.payType === "") {
       errors.payType = "Please select a pay type!"
+    }
+    if (values.minRate === "") {
+      errors.minRate = "Budget can't be empty"
+    }
+    if (values.maxRate === "") {
+      errors.maxRate = "Budget can't be empty"
     }
     if (!values.location) {
       errors.location = "Location can't be empty"
@@ -162,6 +174,64 @@ const JobPostForm = (props) => {
                 />
                 {formik.errors.payType && <ErrorMessage error={formik.errors.payType}/>}
               </div>
+
+              {formik.values.payType.label === 'Pay by the hour' && (
+                <>
+                  <h4>Set your own hourly range *</h4>
+                  <div className={`${classes.jobPostFormWrapper}__rate-wrapper`}>
+                    <div className={`${classes.jobPostFormWrapper}__job-rate`}>
+                      <TextField
+                        type="number"
+                        size="small"
+                        variant="outlined"
+                        label="$"
+                        name="minRate"
+                        value={formik.values.minRate}
+                        onChange={formik.handleChange}
+                        placeholder="0.00"
+                        className={`${classes.jobPostFormWrapper}__job-rate__field`}
+                      />
+                      <span>/hr</span>
+                    </div>
+                    <span className={`${classes.jobPostFormWrapper}__job-rate__to`}>_</span>
+                    <div className={`${classes.jobPostFormWrapper}__job-rate`}>
+                      <TextField
+                        type="number"
+                        size="small"
+                        variant="outlined"
+                        label="$"
+                        name="maxRate"
+                        value={formik.values.maxRate}
+                        onChange={formik.handleChange}
+                        placeholder="0.00"
+                        className={`${classes.jobPostFormWrapper}__job-rate__field`}
+                      />
+                      <span>/hr</span>
+                    </div>
+                  </div>
+                  {formik.errors.maxRate && <ErrorMessage error={formik.errors.maxRate}/>}
+                </>
+              )}
+
+              {formik.values.payType.label === 'Pay a fixed price' && (
+                <>
+                  <h4>Do you have a specific budget? *</h4>
+                  <div className={`${classes.jobPostFormWrapper}__job-rate`}>
+                    <TextField
+                      type="number"
+                      size="small"
+                      variant="outlined"
+                      label="$"
+                      name="maxRate"
+                      value={formik.values.maxRate}
+                      onChange={formik.handleChange}
+                      placeholder="0.00"
+                      className={`${classes.jobPostFormWrapper}__job-rate__field`}
+                    />
+                  </div>
+                  {formik.errors.maxRate && <ErrorMessage error={formik.errors.maxRate}/>}
+                </>
+              )}
 
               <div className={`${classes.jobPostFormWrapper}__contentWrapper__gap`}>
                 <TextField

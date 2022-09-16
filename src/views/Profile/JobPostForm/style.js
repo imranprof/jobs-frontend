@@ -45,6 +45,20 @@ const useStyles = makeStyles({
         background: theme.palette.customColor.highContrast,
         color: theme.palette.customColor.light
       }
+    },
+    '&__rate-wrapper': {
+      width: "80%",
+      display: "flex"
+    },
+    '&__job-rate': {
+      display: "flex",
+      alignItems: "center",
+      '&__field': {
+        marginRight: 5
+      },
+      '&__to': {
+        margin: "0 30px"
+      }
     }
   }),
 })

@@ -8,13 +8,14 @@ const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 
 export const addJobAction = (job) => {
-  const {title, description, location, skills, payType} = job;
+  const {title, description, location, skills, payType, budget} = job;
   let data = {
     "job": {
       "title": title,
       "description": description,
       "skills": `{${skills}}`,
       "pay_type": payType,
+      "budget": `{${budget}}`,
       "location": location
     }
   }
