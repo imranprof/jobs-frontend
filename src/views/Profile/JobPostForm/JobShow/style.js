@@ -160,6 +160,17 @@ const useStyles = makeStyles({
       fontSize: 16,
       padding: 20,
       whiteSpace: "pre-wrap",
+      '&-coverLetter': {
+        display: "-webkit-box",
+        WebkitLineClamp: 3,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
+      '&-bidRate': {
+        fontSize: 16,
+        fontWeight: 600
+      }
     }
   }),
 })

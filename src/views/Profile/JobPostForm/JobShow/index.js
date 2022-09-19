@@ -34,6 +34,7 @@ import {
 import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import ErrorMessage from "../../../../lib/errorMessage";
+import JobTooltip from "./jobTooltip";
 
 const JobShow = (props) => {
   const theme = useTheme();
@@ -263,9 +264,10 @@ const JobShow = (props) => {
                             alt="Employee avatar"
                           />
                           <Tooltip
-                            title={applicant.cover_letter}
+                            arrow
+                            title={<JobTooltip coverLetter={applicant.cover_letter} bidRate={applicant.bid_rate} payType={pay_type} />}
                             placement="top"
-                            arrow classes={{tooltip: `${classes.jobShowWrapper}__tooltip`}}
+                            classes={{tooltip: `${classes.jobShowWrapper}__tooltip`}}
                           >
                             <span className={`${classes.jobShowWrapper}__applicant-list__name`}>
                               {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
