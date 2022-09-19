@@ -43,10 +43,12 @@ const SearchBar = () => {
                     styles={selectStyles}
                     getOptionLabel={e => (
                       <div style={{display: 'flex', alignItems: 'center'}}>
-                        <i className={e.icon}/>
+                        <span style={{marginRight: 10}}>
+                          <i className={e.icon}/>
+                        </span>
                         <div style={{display: "flex", flexDirection: "column"}}>
                           <span style={{marginLeft: 5}}>{e.label}</span>
-                          <span style={{marginLeft: 5, fontSize: 12}}>{e.text}</span>
+                          <span style={{marginLeft: 5, fontSize: 11}}>{e.text}</span>
                         </div>
                       </div>
                     )}
