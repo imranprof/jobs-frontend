@@ -54,7 +54,8 @@ const JobShow = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      coverLetter: ""
+      coverLetter: "",
+      bidRate: ""
     },
     validate: values => {
       let errors = {}
@@ -64,10 +65,13 @@ const JobShow = (props) => {
       if (values.coverLetter.length >= 800) {
         errors.coverLetter = "Cover letter must have within 800 characters!"
       }
+      if (!values.bidRate) {
+        errors.bidRate = "Bid rate can't be blank"
+      }
       return errors;
     },
     onSubmit: async (values) => {
-      const response = await dispatch(jobApplyAction(id, values.coverLetter));
+      const response = await dispatch(jobApplyAction(id, values.bidRate, values.coverLetter));
       if (response && response.status === 200) {
         dispatch(getIndividualJobs())
         isDisabled = true
@@ -160,6 +164,24 @@ const JobShow = (props) => {
         <div>
           {(!showField && !isDisabled) && (
             <>
+              <Divider className={`${classes.jobShowWrapper}__divider`}/>
+              <h4 className={`${classes.jobShowWrapper}__bid-rate__title`}>What is the full amount you'd like to bid for this job?</h4>
+              <div className={`${classes.jobShowWrapper}__bid-rate`}>
+                <span className={`${classes.jobShowWrapper}__bid-rate__text`}>
+                  {pay_type === 'Pay by the hour' ? 'Hourly Rate:' : 'Bid:'}
+                </span>
+                <TextField
+                  type="number"
+                  size="small"
+                  variant="outlined"
+                  label="$"
+                  name="bidRate"
+                  value={formik.values.bidRate}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              {formik.errors.bidRate ? <ErrorMessage error={formik.errors.bidRate}/> : null}
+
               <Divider className={`${classes.jobShowWrapper}__divider`}/>
               <div>
                 <TextField

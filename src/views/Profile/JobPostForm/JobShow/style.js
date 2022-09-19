@@ -84,6 +84,20 @@ const useStyles = makeStyles({
       color: theme.palette.customColor.main,
       letterSpacing: "1px",
     },
+    '&__bid-rate': {
+      display: "flex",
+      alignItems: "center",
+      fontFamily: FONTS.primaryFont,
+      '&__title': {
+        color: theme.palette.customColor.main,
+      },
+      '&__text': {
+        color: theme.palette.customColor.main,
+        fontSize: 15,
+        fontWeight: 600,
+        marginRight: 20
+      }
+    },
     '&__button': {
       marginLeft: 10
     },
