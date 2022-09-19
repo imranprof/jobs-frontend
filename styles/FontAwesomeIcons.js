@@ -21,7 +21,9 @@ const FontAwesomeIcons = {
     "plus": "fa-solid fa-plus",
     "chevronLeft": "fa-solid fa-chevron-left",
     "camera": "fa-solid fa-camera",
-    "selected": "fa-solid fa-circle-check"
+    "selected": "fa-solid fa-circle-check",
+    "users": "fa-solid fa-user-group",
+    "briefcase": "fa-solid fa-briefcase"
 }
 
 export default FontAwesomeIcons;
