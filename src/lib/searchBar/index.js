@@ -22,7 +22,10 @@ const SearchBar = () => {
     {value: 'Talents', label: 'Talents', text: 'Hire professionals', icon: FontAwesomeIcons.users}
   ]
   const formik = useFormik({
-    initialValues: {searchValue: ''},
+    initialValues: {
+      searchValue: '',
+      selectType: {value: 'Jobs', label: 'Jobs'}
+    },
     onSubmit: values => {
       dispatch(getSearchProfiles(values.searchValue))
     }
@@ -33,25 +36,29 @@ const SearchBar = () => {
       <InputBase
         name="searchValue"
         type="text"
-        placeholder="Search..."
+        placeholder={`Search ${formik.values.selectType.label}`}
         value={formik.values.searchValue}
         onChange={formik.handleChange}
         className={`${classes.searchBarWrapper}__search`}
         endAdornment={
           <InputAdornment position="end">
-            <Select options={options}
-                    styles={selectStyles}
-                    getOptionLabel={e => (
-                      <div style={{display: 'flex', alignItems: 'center'}}>
+            <Select
+              options={options}
+              name = "selectType"
+              defaultValue={formik.values.selectType}
+              onChange = {selectType => formik.setFieldValue("selectType", selectType)}
+              styles={selectStyles}
+              getOptionLabel={e => (
+                <div style={{display: 'flex', alignItems: 'center'}}>
                         <span style={{marginRight: 10}}>
                           <i className={e.icon}/>
                         </span>
-                        <div style={{display: "flex", flexDirection: "column"}}>
-                          <span style={{marginLeft: 5}}>{e.label}</span>
-                          <span style={{marginLeft: 5, fontSize: 11}}>{e.text}</span>
-                        </div>
-                      </div>
-                    )}
+                  <div style={{display: "flex", flexDirection: "column"}}>
+                    <span style={{marginLeft: 5}}>{e.label}</span>
+                    <span style={{marginLeft: 5, fontSize: 11}}>{e.text}</span>
+                  </div>
+                </div>
+              )}
             />
             <button type="submit" className={`${classes.searchBarWrapper}__search__icon`}>
               <SearchIcon/>
