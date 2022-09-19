@@ -1,10 +1,14 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import FONTS from "../../../styles/fonts";
+let selectTheme;
 
 export const useStyles = makeStyles({
-  searchBarWrapper: theme => ({
+  searchBarWrapper: theme => (
+    selectTheme = theme,
+    {
     '&__search': {
+      position: "relative",
       width: 350,
       height: 48,
       color: theme.palette.customColor.main,
@@ -43,6 +47,38 @@ export const useStyles = makeStyles({
     }
   }),
 });
+
+export const selectStyles = {
+  control: (styles)=> ({
+    ...styles,
+    background: "transparent",
+    border: 0
+  }),
+  valueContainer: (styles)=> ({
+    ...styles,
+    display: "none"
+  }),
+  indicatorSeparator: (styles)=> ({
+    ...styles,
+    display: "none"
+  }),
+  container: (styles) => ({
+    ...styles,
+    position: "unset"
+  }),
+  menu: (styles) => ({
+    ...styles,
+    left: 0,
+    backgroundColor: selectTheme.palette.customBackground.dark
+  }),
+  option: (styles) => ({
+    ...styles,
+    backgroundColor: selectTheme.palette.customBackground.dark,
+    '&:hover': {
+      background: "green",
+    }
+  })
+};
 
 export function SearchBarStyle(theme) {
   return useStyles(theme);
