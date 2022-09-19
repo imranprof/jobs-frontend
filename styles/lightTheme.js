@@ -64,6 +64,7 @@ const lightTheme = createTheme({
     customHoverBackground: {
       main: COLORS.pink_1,
       closeIcon: COLORS.pink_1,
+      searchHover: COLORS.searchHover
     },
     beforeBackground: {
       main: COLORS.gray_5

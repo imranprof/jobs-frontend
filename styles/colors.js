@@ -36,6 +36,7 @@ const COLORS = {
     pink_orange: "linear-gradient(145deg, rgb(240, 41, 129) 0%, rgb(200, 25, 1) 100%)",
     danger: "#EB3830",
     success: "#198754",
+    searchHover: "#E4EBE4",
 
     boxShadow_1: "rgb(28 30 34) 10px 10px 19px, rgb(38 42 46) -10px -10px 19px",
     boxShadow_2: "10px 10px 19px rgb(0 0 0 / 10%)",

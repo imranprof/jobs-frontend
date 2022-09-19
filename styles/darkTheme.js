@@ -67,7 +67,8 @@ const darkTheme = createTheme({
     customHoverBackground: {
       main: COLORS.black_5,
       closeIcon: COLORS.black_4,
-      resumeCard: COLORS.black_1
+      resumeCard: COLORS.black_1,
+      searchHover: COLORS.gray_1
     },
     beforeBackground: {
       main: COLORS.black_7,
