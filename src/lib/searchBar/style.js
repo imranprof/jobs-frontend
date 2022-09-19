@@ -74,6 +74,7 @@ export const selectStyles = {
   option: (styles) => ({
     ...styles,
     backgroundColor: selectTheme.palette.customBackground.dark,
+    color: selectTheme.palette.customColor.dark,
     '&:hover': {
       background: selectTheme.palette.customHoverBackground.searchHover,
     }
