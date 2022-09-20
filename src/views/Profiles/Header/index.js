@@ -61,7 +61,7 @@ const ProfilesHeader = (props) => {
 
             {props.isAuthenticated ?
               <>
-                <Link href={`${getPrivateSlug()}`}>
+                <Link href={`/${getPrivateSlug()}`}>
                   <a className={`${classes.headerWrapper}__button`}>
                     My Profile
                   </a>
