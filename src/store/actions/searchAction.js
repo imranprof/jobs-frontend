@@ -23,6 +23,25 @@ const setSearchValue = (value) =>{
   }
 }
 
+export const getSearchType = () => {
+  if (typeof window !== 'undefined') {
+    const searchType = localStorage.getItem('searchType')
+    if (searchType) {
+      return searchType;
+    }
+    return null;
+  }
+}
+
+export const setSearchType = (value) => {
+  if(value) {
+    localStorage.setItem('searchType',value)
+  }
+  else{
+    localStorage.removeItem('searchType')
+  }
+}
+
 export const setProfiles = (profiles) => {
   return {
     type: SET_PROFILES,

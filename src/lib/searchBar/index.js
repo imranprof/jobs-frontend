@@ -8,7 +8,7 @@ import {useTheme} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
 import {SearchBarStyle} from "./style";
-import {getSearchJobs, getSearchProfiles} from "../../store/actions/searchAction";
+import {getSearchJobs, getSearchProfiles, getSearchType, setSearchType} from "../../store/actions/searchAction";
 import Select from "react-select";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {selectStyles} from './style'
@@ -25,11 +25,12 @@ const SearchBar = () => {
   ]
 
   const handleSearchSubmit = (values) => {
-    if (values.selectType.value ==='Talents'){
+    if (values.selectType.value === 'Talents') {
+      setSearchType('Talents')
       dispatch(getSearchProfiles(values.searchValue))
       router.push("/search/talents")
-    }
-    else {
+    } else {
+      setSearchType('Jobs')
       dispatch(getSearchJobs(values.searchValue))
       router.push("/search/jobs")
     }
@@ -38,18 +39,24 @@ const SearchBar = () => {
   const formik = useFormik({
     initialValues: {
       searchValue: '',
-      selectType: {value: 'Jobs', label: 'Jobs'}
+      selectType: {value: getSearchType(), label: getSearchType()}
     },
+    enableReinitialize: true,
     onSubmit: handleSearchSubmit
 
   })
+
+  let inputPlaceHolder = 'Jobs'
+  if (formik.values.selectType.label) {
+    inputPlaceHolder = formik.values.selectType.label;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <InputBase
         name="searchValue"
         type="text"
-        placeholder={`Search ${formik.values.selectType.label}`}
+        placeholder={`Search ${inputPlaceHolder}`}
         value={formik.values.searchValue}
         onChange={formik.handleChange}
         className={`${classes.searchBarWrapper}__search`}
@@ -57,9 +64,9 @@ const SearchBar = () => {
           <InputAdornment position="end">
             <Select
               options={options}
-              name = "selectType"
+              name="selectType"
               defaultValue={formik.values.selectType}
-              onChange = {selectType => formik.setFieldValue("selectType", selectType)}
+              onChange={selectType => formik.setFieldValue("selectType", selectType)}
               styles={selectStyles}
               getOptionLabel={e => (
                 <div style={{display: 'flex', alignItems: 'center'}}>
