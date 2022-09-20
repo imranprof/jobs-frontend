@@ -15,7 +15,7 @@ const Footer = () => {
       <Link href={company.url}>
         <a className={`${classes.footerWrapper}__logo`} target="_blank" rel="noopener"
            aria-label="will redirect to company's website">
-          <img className={`${classes.footerWrapper}__logo-img`} alt={company.name} src={company.logo}/>
+          <img className={`${classes.footerWrapper}__logo-img`} alt={company.name} src={"/"+company.logo}/>
         </a>
       </Link>
 
