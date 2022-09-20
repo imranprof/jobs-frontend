@@ -9,11 +9,6 @@ export const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     marginBottom: 50,
-    '&__search-profile': {
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "space-around"
-    },
     '&__left': {
       width: "85%",
       '&__headline': {
