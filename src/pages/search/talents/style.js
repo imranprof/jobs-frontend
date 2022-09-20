@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
+    marginBottom: 250,
     '&__search-title': {
       color: theme.palette.customColor.dark,
       fontFamily: FONTS.modalTitleFont,
