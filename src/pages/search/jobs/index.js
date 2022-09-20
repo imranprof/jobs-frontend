@@ -6,9 +6,10 @@ import {getSearchValue} from "../../../store/actions/searchAction";
 import {JobsStyle} from "../../jobs/style";
 import {useTheme} from "@material-ui/core/styles";
 import {NoSsr} from "@material-ui/core";
+import CustomLoader from "../../../lib/customLoader";
 
 const JobSearch = (props) => {
-  const {searchJobList} = props
+  const {searchJobList, initialLoader} = props
   const theme = useTheme();
   const classes = JobsStyle(theme);
 
@@ -17,6 +18,7 @@ const JobSearch = (props) => {
       <h2 className={`${classes.jobsWrapper}__job-search-title`}>
         Results for "{getSearchValue()}"
       </h2>
+      {initialLoader && <CustomLoader/>}
       <div className={classes.jobsWrapper}>
         {searchJobList?.map((job) => <Job key={job.id} job={job} type={'searchJob'}/>)}
       </div>

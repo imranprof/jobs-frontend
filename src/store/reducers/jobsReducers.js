@@ -24,7 +24,8 @@ export const jobsReducer = (state = initialState, action) => {
     case SET_SEARCH_JOB:
       return {
         ...state,
-        searchJobs: action.payload
+        searchJobs: action.payload,
+        initialLoader: false
       }
     case UPDATE_JOB:
       return {
