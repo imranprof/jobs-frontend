@@ -45,6 +45,24 @@ export const useStyles = makeStyles({
             width: "100%",
             marginTop: 25,
           }
+        },
+        '&__select-menu': {
+          display: 'flex',
+          alignItems: 'center',
+          '&__icon': {
+            marginRight: 10
+          },
+          '&__list': {
+            display: "flex",
+            flexDirection: "column",
+            '&__label': {
+              marginLeft: 5
+            },
+            '&__text': {
+              marginLeft: 5,
+              fontSize: 11
+            }
+          }
         }
       }),
 });

@@ -69,13 +69,13 @@ const SearchBar = () => {
               onChange={selectType => formik.setFieldValue("selectType", selectType)}
               styles={selectStyles}
               getOptionLabel={e => (
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                        <span style={{marginRight: 10}}>
+                <div className={`${classes.searchBarWrapper}__select-menu`}>
+                        <span className={`${classes.searchBarWrapper}__select-menu__icon`}>
                           <i className={e.icon}/>
                         </span>
-                  <div style={{display: "flex", flexDirection: "column"}}>
-                    <span style={{marginLeft: 5}}>{e.label}</span>
-                    <span style={{marginLeft: 5, fontSize: 11}}>{e.text}</span>
+                  <div className={`${classes.searchBarWrapper}__select-menu__list`}>
+                    <span className={`${classes.searchBarWrapper}__select-menu__list__label`}>{e.label}</span>
+                    <span className={`${classes.searchBarWrapper}__select-menu__list__text`}>{e.text}</span>
                   </div>
                 </div>
               )}
