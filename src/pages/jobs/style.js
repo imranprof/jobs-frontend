@@ -10,7 +10,8 @@ const useStyles = makeStyles({
     '&__job-search-title': {
       color: theme.palette.customColor.dark,
       fontFamily: FONTS.modalTitleFont,
-      fontWeight: 500
+      fontWeight: 500,
+      marginLeft: 30
     }
   })
 });
