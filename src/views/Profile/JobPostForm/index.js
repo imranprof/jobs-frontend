@@ -53,12 +53,12 @@ const JobPostForm = (props) => {
       skill => skill.label
     )
 
-    const budget = minRate === '' ? [maxRate] : [minRate, maxRate]
+    const budget = payType.label === 'Pay by the hour' ? [minRate, maxRate] : [minRate]
 
     const response = await dispatch(addJobAction({
-      title: title,
-      description: description,
-      location: location,
+      title: title.trim(),
+      description: description.trim(),
+      location: location.trim(),
       skills: skills,
       payType: payType.label,
       budget: budget
@@ -95,8 +95,8 @@ const JobPostForm = (props) => {
       }
     }
     if (values.payType.label === 'Pay a fixed price') {
-      if (values.maxRate === "") {
-        errors.maxRate = "Budget can't be empty"
+      if (values.minRate === "") {
+        errors.minRate = "Budget can't be empty"
       }
     }
     if (!values.location) {
@@ -195,7 +195,6 @@ const JobPostForm = (props) => {
                         name="minRate"
                         value={formik.values.minRate}
                         onChange={formik.handleChange}
-                        placeholder="0.00"
                         className={`${classes.jobPostFormWrapper}__job-rate__field`}
                       />
                       <span>/hr</span>
@@ -210,7 +209,6 @@ const JobPostForm = (props) => {
                         name="maxRate"
                         value={formik.values.maxRate}
                         onChange={formik.handleChange}
-                        placeholder="0.00"
                         className={`${classes.jobPostFormWrapper}__job-rate__field`}
                       />
                       <span>/hr</span>
@@ -229,10 +227,9 @@ const JobPostForm = (props) => {
                       size="small"
                       variant="outlined"
                       label="$"
-                      name="maxRate"
-                      value={formik.values.maxRate}
+                      name="minRate"
+                      value={formik.values.minRate}
                       onChange={formik.handleChange}
-                      placeholder="0.00"
                       className={`${classes.jobPostFormWrapper}__job-rate__field`}
                     />
                   </div>

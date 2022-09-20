@@ -154,6 +154,28 @@ const useStyles = makeStyles({
       display: "flex",
       justifyContent: "flex-end"
     },
+    '&__fieldsWrapper': {
+      '& label.Mui-focused': {
+        color: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiFilledInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiOutlinedInput-multiline': {
+        padding: 0
+      },
+      '& .MuiOutlinedInput-inputMultiline': {
+        padding: 12
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: theme.palette.customBorder.customInputBorder,
+        }
+      },
+    },
     '&__tooltip': {
       maxWidth: 800,
       maxHeight: "auto",
