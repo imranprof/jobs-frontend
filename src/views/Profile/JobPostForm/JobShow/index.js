@@ -49,7 +49,7 @@ const JobShow = (props) => {
 
   const payTypeText = pay_type === 'Pay by the hour' ? 'Hourly' : 'Fixed-price'
   const jobPostedTime = moment(created_at).fromNow();
-  const budgetRange = pay_type === 'Pay by the hour' ? `$${budget[0].toFixed(2)}-$${budget[1].toFixed(2)}` : `$${budget[0].toFixed(2)}`
+  const budgetRange = pay_type === 'Pay by the hour' ? `$${budget[0]}-$${budget[1]}` : `$${budget[0]}`
 
   let btnTitle = 'Apply', isId, isDisabled = false;
 
@@ -72,7 +72,7 @@ const JobShow = (props) => {
       return errors;
     },
     onSubmit: async (values) => {
-      const response = await dispatch(jobApplyAction(id, values.bidRate, values.coverLetter));
+      const response = await dispatch(jobApplyAction(id, values.bidRate, values.coverLetter.trim()));
       if (response && response.status === 200) {
         dispatch(getIndividualJobs())
         isDisabled = true
@@ -162,7 +162,7 @@ const JobShow = (props) => {
       </div>
 
       {role === 'employee' ? (
-        <div>
+        <div className={`${classes.jobShowWrapper}__fieldsWrapper`}>
           {(!showField && !isDisabled) && (
             <>
               <Divider className={`${classes.jobShowWrapper}__divider`}/>
