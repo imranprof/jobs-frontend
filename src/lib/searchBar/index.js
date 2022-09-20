@@ -1,4 +1,5 @@
 import {useDispatch} from "react-redux";
+import {useRouter} from "next/router";
 
 import {useFormik} from "formik";
 
@@ -16,19 +17,30 @@ const SearchBar = () => {
   const theme = useTheme();
   const classes = SearchBarStyle(theme);
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const options = [
     {value: 'Jobs', label: 'Jobs', text: 'Apply to jobs posted by clients', icon: FontAwesomeIcons.briefcase},
     {value: 'Talents', label: 'Talents', text: 'Hire professionals', icon: FontAwesomeIcons.users}
   ]
+
+  const handleSearchSubmit = (values) => {
+    dispatch(getSearchProfiles(values.searchValue))
+    if (values.selectType.value ==='Talents'){
+      router.push("/search/talents")
+    }
+    else {
+      router.push("/search/jobs")
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       searchValue: '',
       selectType: {value: 'Jobs', label: 'Jobs'}
     },
-    onSubmit: values => {
-      dispatch(getSearchProfiles(values.searchValue))
-    }
+    onSubmit: handleSearchSubmit
+
   })
 
   return (
