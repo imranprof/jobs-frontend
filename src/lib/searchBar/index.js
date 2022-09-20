@@ -8,7 +8,7 @@ import {useTheme} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
 import {SearchBarStyle} from "./style";
-import {getSearchProfiles} from "../../store/actions/searchAction";
+import {getSearchJobs, getSearchProfiles} from "../../store/actions/searchAction";
 import Select from "react-select";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {selectStyles} from './style'
@@ -25,11 +25,12 @@ const SearchBar = () => {
   ]
 
   const handleSearchSubmit = (values) => {
-    dispatch(getSearchProfiles(values.searchValue))
     if (values.selectType.value ==='Talents'){
+      dispatch(getSearchProfiles(values.searchValue))
       router.push("/search/talents")
     }
     else {
+      dispatch(getSearchJobs(values.searchValue))
       router.push("/search/jobs")
     }
   }
