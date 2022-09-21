@@ -9,13 +9,14 @@ const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 
 export const addJobAction = (job) => {
-  const {title, description, location, skills, payType} = job;
+  const {title, description, location, skills, payType, budget} = job;
   let data = {
     "job": {
       "title": title,
       "description": description,
       "skills": `{${skills}}`,
       "pay_type": payType,
+      "budget": `{${budget}}`,
       "location": location
     }
   }
@@ -45,12 +46,13 @@ export const getIndividualJobs = () => {
   }
 }
 
-export const jobApplyAction = (id, cover_letter) => {
+export const jobApplyAction = (id, bid_rate, cover_letter) => {
   let data = {
     "job": {
       "id": id
     },
     "job_application": {
+      "bid_rate": bid_rate,
       "cover_letter": cover_letter
     }
   }
@@ -77,7 +79,8 @@ export const updateJobAction = (oldJob, updatedJob) => {
       "description": updatedJob.description,
       "location": updatedJob.location,
       "pay_type": updatedJob.pay_type,
-      "skills": `{${updatedJob.skills}}`
+      "skills": `{${updatedJob.skills}}`,
+      "budget": `{${updatedJob.budget}}`,
     }
   }
   return (dispatch) => {

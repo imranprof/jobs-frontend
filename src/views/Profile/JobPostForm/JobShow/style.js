@@ -19,9 +19,28 @@ const useStyles = makeStyles({
       transition: "all 0.3s ease-in-out",
       '&-icon': {
         fontSize: 16,
-        color: theme.palette.customColor.dark,
+        color: theme.palette.customColor.main,
         marginRight: 5
+      },
+      '&__text': {
+        fontSize: 11,
+        fontWeight: 600,
+        color: theme.palette.customColor.main,
+        letterSpacing: "1px",
+        transition: "all 0.3s ease-in-out",
+        marginLeft: 22
       }
+    },
+    '&__budgetWrapper': {
+      display: "flex",
+      alignItems: "center"
+    },
+    '&__budget': {
+      fontSize: 14,
+      fontWeight: 600,
+      color: theme.palette.customColor.main,
+      letterSpacing: "1px",
+      transition: "all 0.3s ease-in-out",
     },
     '&__description': {
       color: theme.palette.customColor.main,
@@ -33,6 +52,21 @@ const useStyles = makeStyles({
     '&__content-header': {
       color: theme.palette.customColor.main,
       margin: "20px 0"
+    },
+    '&__bidding-wrapper': {
+      display: "flex",
+      alignItems: "center",
+      '& h4': {
+        color: theme.palette.customColor.main,
+        letterSpacing: "1px",
+      }
+    },
+    '&__bidding-text, &__bidding-subtext': {
+      color: theme.palette.customColor.main,
+      marginBottom: 5
+    },
+    '&__bidding-subtext': {
+      letterSpacing: "1px"
     },
     '&__skills-wrapper': {
       width: "40%",
@@ -64,6 +98,20 @@ const useStyles = makeStyles({
       fontFamily: FONTS.secondaryFont,
       color: theme.palette.customColor.main,
       letterSpacing: "1px",
+    },
+    '&__bid-rate': {
+      display: "flex",
+      alignItems: "center",
+      fontFamily: FONTS.primaryFont,
+      '&__title': {
+        color: theme.palette.customColor.main,
+      },
+      '&__text': {
+        color: theme.palette.customColor.main,
+        fontSize: 15,
+        fontWeight: 600,
+        marginRight: 20
+      }
     },
     '&__button': {
       marginLeft: 10
@@ -121,12 +169,45 @@ const useStyles = makeStyles({
       display: "flex",
       justifyContent: "flex-end"
     },
+    '&__fieldsWrapper': {
+      '& label.Mui-focused': {
+        color: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiFilledInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiOutlinedInput-multiline': {
+        padding: 0
+      },
+      '& .MuiOutlinedInput-inputMultiline': {
+        padding: 12
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: theme.palette.customBorder.customInputBorder,
+        }
+      },
+    },
     '&__tooltip': {
       maxWidth: 800,
       maxHeight: "auto",
       fontSize: 16,
       padding: 20,
       whiteSpace: "pre-wrap",
+      '&-coverLetter': {
+        display: "-webkit-box",
+        WebkitLineClamp: 3,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+      },
+      '&-bidRate': {
+        fontSize: 16,
+        fontWeight: 600
+      }
     }
   }),
 })
