@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Avatar, Paper} from "@material-ui/core";
+import {Avatar, Badge, Paper} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 import {MessageStyle} from "./style";
 import {getPrivateConversations, setSendMessageData} from "../../store/actions/messageAction";
@@ -12,15 +12,25 @@ const Message = (props) => {
 
   const {data, openChat, setOpenChat} = props
 
-  const {id, sender_name, recipient_name, body, sender_id, logged_in_user_id, sender_avatar, recipient_avatar, recipient_id} = data
+  const {
+    id,
+    sender_name,
+    recipient_name,
+    body,
+    sender_id,
+    logged_in_user_id,
+    sender_avatar,
+    recipient_avatar,
+    recipient_id,
+    unread_count
+  } = data
 
   const handleOpenChat = () => {
     dispatch(getPrivateConversations(id)).then(setOpenChat(true))
 
-    if(logged_in_user_id === sender_id) {
+    if (logged_in_user_id === sender_id) {
       dispatch(setSendMessageData({parent_id: id, recipient_id: recipient_id}))
-    }
-    else{
+    } else {
       dispatch(setSendMessageData({parent_id: id, recipient_id: sender_id}))
     }
   }
@@ -30,23 +40,34 @@ const Message = (props) => {
     <>
       <Paper onClick={handleOpenChat} className={classes.messageWrapper}>
         {logged_in_user_id === sender_id ? (
-          <div className={`${classes.messageWrapper}__avatar-name-Wrapper`}>
+
+            <div className={`${classes.messageWrapper}__avatar-name-Wrapper`}>
               <Avatar
                 className={`${classes.messageWrapper}__avatar`}
                 src={recipient_avatar}
                 alt="recipient avatar"
               />
-            <span className={`${classes.messageWrapper}__name`}>{recipient_name}</span>
-          </div>
+              <Badge badgeContent={unread_count} color="primary" anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}>
+                <span className={`${classes.messageWrapper}__name`}>{recipient_name}</span>
+              </Badge>
+            </div>
           )
           : (
             <div className={`${classes.messageWrapper}__avatar-name-Wrapper`}>
-                <Avatar
-                  className={`${classes.messageWrapper}__avatar`}
-                  src={sender_avatar}
-                  alt="sender avatar"
-                />
-              <span className={`${classes.messageWrapper}__name`}>{sender_name}</span>
+              <Avatar
+                className={`${classes.messageWrapper}__avatar`}
+                src={sender_avatar}
+                alt="sender avatar"
+              />
+              <Badge badgeContent={unread_count} color="primary" anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}>
+                <span className={`${classes.messageWrapper}__name`}>{sender_name}</span>
+              </Badge>
             </div>
           )
         }
