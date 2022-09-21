@@ -41,7 +41,11 @@ const lightTheme = createTheme({
       dangerColor: COLORS.danger,
       backToHomeHover: COLORS.black_1,
       avatarBgEdit: COLORS.white_5,
-      success: COLORS.success
+      success: COLORS.success,
+      sendMessageText: COLORS.white_8,
+      sendMessageBody: COLORS.light_blue,
+      receivedMessageBody: COLORS.grey_7,
+      receivedMessageText: COLORS.black_11
     },
     customShadow: {
       main: COLORS.boxShadow_2,

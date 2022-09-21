@@ -74,6 +74,12 @@ const ProfilesHeader = (props) => {
                   </a>
                 </Link>) : ""}
 
+                <Link href={"/messages"}>
+                  <a className={`${classes.headerWrapper}__button`}>
+                    Messages
+                  </a>
+                </Link>
+
                 <Link href="">
                   <a className={`${classes.headerWrapper}-sign-out`}
                      onClick={handleSignOutClick}>

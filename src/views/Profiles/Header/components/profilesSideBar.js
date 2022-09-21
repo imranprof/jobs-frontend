@@ -111,6 +111,13 @@ const ProfilesSideBar = (props) => {
               </a>
             </Link>)
             }
+            {props.isAuthenticated &&
+            (<Link href={"/messages"}>
+              <a className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
+                Messages
+              </a>
+            </Link>)
+            }
 
           </div>
 

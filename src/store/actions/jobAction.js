@@ -1,5 +1,6 @@
 import axios from "axios";
 import {SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
+import {sendMessageAction} from "./messageAction";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
 const jobApplyUrl = process.env.NEXT_PUBLIC_JOB_APPLY_URL
@@ -118,7 +119,7 @@ export const employeeSelectionAction = (id, value) => {
   }
 }
 
-export const sendMailJobSeekerAction = (id) => {
+export const sendMailJobSeekerAction = (id, applicantId) => {
   const data = {
     "job_application": {
       "id": id,
@@ -127,7 +128,17 @@ export const sendMailJobSeekerAction = (id) => {
   }
   return (dispatch) => {
     const response = axios.patch(employeeSelectionUrl, data)
-      .then(res => dispatch(getIndividualJobs()))
+      .then(res => {
+        dispatch(getIndividualJobs())
+        let text = "Hi\n" +
+          "This is to let you know that we have received your application. We appreciate your interest  for which you have applied for. You are shortlisted. If you have further query, please let us know at any time. We love to hear from you\n"
+        if (applicantId) {
+          dispatch(sendMessageAction({
+            body: text,
+            recipient_id: applicantId,
+          }))
+        }
+      })
       .catch(err => err.response)
     return (response);
   }
