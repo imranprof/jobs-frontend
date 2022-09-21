@@ -7,6 +7,7 @@ const COLORS = {
     white_5: "#dce1e4",
     white_6: "#c3cedd",
     white_7: "#e3e9ed",
+    white_8: "#F9F9FD",
 
     gray: "#3C3E41",
     gray_1: "#2E3237",
@@ -15,6 +16,8 @@ const COLORS = {
     gray_4: "#7c838e",
     gray_5: "#d9dee2",
     gray_6: "#dadada",
+    grey_7: "#E4E6EB",
+    grey_8: "#3E4042",
 
     black: "#1e2125",
     black_1: "#212428",
@@ -26,6 +29,7 @@ const COLORS = {
     black_7: "#1b1c1d",
     black_8: "#222529",
     black_10: "#1a1d23",
+    black_11: "#2E2E2F",
 
     pink: "#FF014F",
     pink_1: "linear-gradient(145deg, #ff014f, #d11414)",
@@ -37,6 +41,8 @@ const COLORS = {
     danger: "#EB3830",
     success: "#198754",
     searchHover: "#E4EBE4",
+
+    light_blue: "#0084FF",
 
     boxShadow_1: "rgb(28 30 34) 10px 10px 19px, rgb(38 42 46) -10px -10px 19px",
     boxShadow_2: "10px 10px 19px rgb(0 0 0 / 10%)",
