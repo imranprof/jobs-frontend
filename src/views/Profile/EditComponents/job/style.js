@@ -31,6 +31,20 @@ const useStyles = makeStyles({
       '&__selectDropdown': {
         color: COLORS.black,
       }
+    },
+    '&__rate-wrapper': {
+      width: "80%",
+      display: "flex"
+    },
+    '&__job-rate': {
+      display: "flex",
+      alignItems: "center",
+      '&__field': {
+        marginRight: 5
+      },
+      '&__to': {
+        margin: "0 30px"
+      }
     }
   }),
 })

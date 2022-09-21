@@ -18,14 +18,14 @@ const Job = (props) => {
   const theme = useTheme();
   const classes = JobStyle(theme);
   const {setToast, job, setIsDelete, isDelete, type, setJobs} = props
-  const {title, description, skills, location, id, pay_type, created_at, total_applied} = job
+  const {title, description, skills, location, id, pay_type, created_at, total_applied, budget} = job
   const [openModal, setOpenModal] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const dispatch = useDispatch()
 
   const payTypeText = pay_type === 'Pay by the hour' ? 'Hourly' : 'Fixed-price'
-
   const jobPostedTime = moment(created_at).fromNow();
+  const budgetRange = pay_type === 'Pay by the hour' ? `$${budget[0]}-$${budget[1]}` : `$${budget[0]}`
 
   const openModalHandler = (e) => {
     setEditMode(false)
@@ -67,7 +67,7 @@ const Job = (props) => {
 
         <h1 className={`${classes.jobWrapper}__title`}>{title}</h1>
         <div>
-          <span className={`${classes.jobWrapper}__pay-type`}>{payTypeText}</span>
+          <span className={`${classes.jobWrapper}__pay-type`}>{`${payTypeText}: ${budgetRange}`}</span>
           <span className={`${classes.jobWrapper}__hyphen`}>-</span>
           <span className={`${classes.jobWrapper}__pay-type`}>{`Posted ${jobPostedTime}`}</span>
         </div>
@@ -87,9 +87,6 @@ const Job = (props) => {
             data={job}
             setJobs={setJobs}
             handleClose={handleClose}
-            payTypeText={payTypeText}
-            jobPostedTime={jobPostedTime}
-            totalApplied={total_applied}
           />}
       </EditCustomModal>
     </>

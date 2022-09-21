@@ -2,6 +2,7 @@ import {useState} from "react";
 import Link from "next/link";
 import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
+import moment from "moment";
 
 import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
@@ -33,24 +34,30 @@ import {
 import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import ErrorMessage from "../../../../lib/errorMessage";
+import JobTooltip from "./jobTooltip";
 import {getAllParentMessage} from "../../../../store/actions/messageAction";
 
 const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
-  const {data, handleClose, jobList, setJobs, payTypeText, jobPostedTime, totalApplied, allParentMessage} = props
-  const {title, description, location, skills, id} = data
+  const {data, handleClose, jobList, setJobs, allParentMessage} = props
+  const {title, description, location, skills, id, pay_type, created_at, total_applied, budget, bid_rate} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
   const role = getRole()
   const [checked, setChecked] = useState(false);
   const [showField, setShowField] = useState(false);
 
+  const payTypeText = pay_type === 'Pay by the hour' ? 'Hourly' : 'Fixed-price'
+  const jobPostedTime = moment(created_at).fromNow();
+  const budgetRange = pay_type === 'Pay by the hour' ? `$${budget[0]}-$${budget[1]}` : `$${budget[0]}`
+
   let btnTitle = 'Apply', isId, isDisabled = false;
 
   const formik = useFormik({
     initialValues: {
-      coverLetter: ""
+      coverLetter: "",
+      bidRate: ""
     },
     validate: values => {
       let errors = {}
@@ -60,10 +67,13 @@ const JobShow = (props) => {
       if (values.coverLetter.length >= 800) {
         errors.coverLetter = "Cover letter must have within 800 characters!"
       }
+      if (!values.bidRate) {
+        errors.bidRate = "Bid rate can't be blank"
+      }
       return errors;
     },
     onSubmit: async (values) => {
-      const response = await dispatch(jobApplyAction(id, values.coverLetter));
+      const response = await dispatch(jobApplyAction(id, values.bidRate, values.coverLetter.trim()));
       if (response && response.status === 200) {
         dispatch(getIndividualJobs())
         isDisabled = true
@@ -138,8 +148,23 @@ const JobShow = (props) => {
       </pre>
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
-        <span className={`${classes.jobShowWrapper}__pay-type`}>{payTypeText}</span>
+        <div className={`${classes.jobShowWrapper}__budgetWrapper`}>
+          <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
+          <span className={`${classes.jobShowWrapper}__budget`}>{budgetRange}</span>
+        </div>
+        <span className={`${classes.jobShowWrapper}__pay-type__text`}>{payTypeText}</span>
+
+        {(role === 'employee' && bid_rate) && (
+          <>
+            <Divider className={`${classes.jobShowWrapper}__divider`}/>
+            <h3 className={`${classes.jobShowWrapper}__bidding-text`}>{pay_type === 'Pay by the hour' ? 'Your hourly rate' : 'Your bidding rate'}</h3>
+            <span className={`${classes.jobShowWrapper}__bidding-subtext`}>Total amount the employer will see on your proposal</span>
+            <div className={`${classes.jobShowWrapper}__bidding-wrapper`}>
+              <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
+              <h4>{`$${bid_rate}${pay_type === 'Pay by the hour' ? '/hr' : ''}`}</h4>
+            </div>
+          </>
+        )}
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <h3 className={`${classes.jobShowWrapper}__content-header`}>
@@ -155,13 +180,31 @@ const JobShow = (props) => {
         <p className={`${classes.jobShowWrapper}__location`}>{location}</p>
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
-        <p className={`${classes.jobShowWrapper}__total-applied`}>{`Total applied: ${totalApplied}`}</p>
+        <p className={`${classes.jobShowWrapper}__total-applied`}>{`Total applied: ${total_applied}`}</p>
       </div>
 
       {role === 'employee' ? (
-        <div>
+        <div className={`${classes.jobShowWrapper}__fieldsWrapper`}>
           {(!showField && !isDisabled) && (
             <>
+              <Divider className={`${classes.jobShowWrapper}__divider`}/>
+              <h4 className={`${classes.jobShowWrapper}__bid-rate__title`}>What is the full amount you'd like to bid for this job?</h4>
+              <div className={`${classes.jobShowWrapper}__bid-rate`}>
+                <span className={`${classes.jobShowWrapper}__bid-rate__text`}>
+                  {pay_type === 'Pay by the hour' ? 'Hourly Rate:' : 'Bid:'}
+                </span>
+                <TextField
+                  type="number"
+                  size="small"
+                  variant="outlined"
+                  label="$"
+                  name="bidRate"
+                  value={formik.values.bidRate}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              {formik.errors.bidRate ? <ErrorMessage error={formik.errors.bidRate}/> : null}
+
               <Divider className={`${classes.jobShowWrapper}__divider`}/>
               <div>
                 <TextField
@@ -243,9 +286,10 @@ const JobShow = (props) => {
                             alt="Employee avatar"
                           />
                           <Tooltip
-                            title={applicant.cover_letter}
+                            arrow
+                            title={<JobTooltip coverLetter={applicant.cover_letter} bidRate={applicant.bid_rate} payType={pay_type} />}
                             placement="top"
-                            arrow classes={{tooltip: `${classes.jobShowWrapper}__tooltip`}}
+                            classes={{tooltip: `${classes.jobShowWrapper}__tooltip`}}
                           >
                             <span className={`${classes.jobShowWrapper}__applicant-list__name`}>
                               {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
