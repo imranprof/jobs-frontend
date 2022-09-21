@@ -35,7 +35,7 @@ function ProfileCard(props) {
 
             <SkillSet classes={classes.profileCardWrapper} skills={profile.skills}/>
 
-            <Link href={profile.profile_slug}>
+            <Link href={`/${profile.profile_slug}`}>
               <Button size="small" className={`${classes.profileCardWrapper}__button-wrapper`}>
                 See More
               </Button>

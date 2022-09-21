@@ -87,7 +87,7 @@ const useStyles = makeStyles({
         },
         '& .MuiInputBase-input': {
           '&:-webkit-autofill': {
-            WebkitBoxShadow: '0 0 0 100px #266798 inset',
+            WebkitBoxShadow: `0 0 0 100px ${theme.palette.customBackground.skillBackground} inset`,
           },
           backgroundColor: theme.palette.customBackground.dark,
           color: theme.palette.customColor.main,
