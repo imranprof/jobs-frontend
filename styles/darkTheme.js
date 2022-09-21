@@ -42,7 +42,11 @@ const darkTheme = createTheme({
       backToHomeHover: COLORS.white_4,
       avatarBgEdit: COLORS.white_5,
       modalTitle: COLORS.white_5,
-      success: COLORS.success
+      success: COLORS.success,
+      sendMessageText: COLORS.white_8,
+      sendMessageBody: COLORS.light_blue,
+      receivedMessageBody: COLORS.grey_8,
+      receivedMessageText: COLORS.white_8
     },
     customShadow: {
       main: COLORS.boxShadow_1,
