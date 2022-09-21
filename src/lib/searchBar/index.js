@@ -60,6 +60,7 @@ const SearchBar = () => {
         value={formik.values.searchValue}
         onChange={formik.handleChange}
         className={`${classes.searchBarWrapper}__search`}
+        autoComplete='off'
         endAdornment={
           <InputAdornment position="end">
             <Select
