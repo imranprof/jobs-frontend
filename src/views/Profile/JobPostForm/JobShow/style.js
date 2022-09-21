@@ -19,13 +19,13 @@ const useStyles = makeStyles({
       transition: "all 0.3s ease-in-out",
       '&-icon': {
         fontSize: 16,
-        color: theme.palette.customColor.dark,
+        color: theme.palette.customColor.main,
         marginRight: 5
       },
       '&__text': {
         fontSize: 11,
         fontWeight: 600,
-        color: theme.palette.customColor.dark,
+        color: theme.palette.customColor.main,
         letterSpacing: "1px",
         transition: "all 0.3s ease-in-out",
         marginLeft: 22
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     '&__budget': {
       fontSize: 14,
       fontWeight: 600,
-      color: theme.palette.customColor.dark,
+      color: theme.palette.customColor.main,
       letterSpacing: "1px",
       transition: "all 0.3s ease-in-out",
     },
@@ -52,6 +52,21 @@ const useStyles = makeStyles({
     '&__content-header': {
       color: theme.palette.customColor.main,
       margin: "20px 0"
+    },
+    '&__bidding-wrapper': {
+      display: "flex",
+      alignItems: "center",
+      '& h4': {
+        color: theme.palette.customColor.main,
+        letterSpacing: "1px",
+      }
+    },
+    '&__bidding-text, &__bidding-subtext': {
+      color: theme.palette.customColor.main,
+      marginBottom: 5
+    },
+    '&__bidding-subtext': {
+      letterSpacing: "1px"
     },
     '&__skills-wrapper': {
       width: "40%",

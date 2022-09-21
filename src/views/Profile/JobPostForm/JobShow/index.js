@@ -40,7 +40,7 @@ const JobShow = (props) => {
   const theme = useTheme();
   const classes = JobShowStyle(theme);
   const {data, handleClose, jobList, setJobs} = props
-  const {title, description, location, skills, id, pay_type, created_at, total_applied, budget} = data
+  const {title, description, location, skills, id, pay_type, created_at, total_applied, budget, bid_rate} = data
   const [toast, setToast] = useState({show: false, severity: "", text: ""});
   const dispatch = useDispatch()
   const role = getRole()
@@ -143,6 +143,18 @@ const JobShow = (props) => {
           <span className={`${classes.jobShowWrapper}__budget`}>{budgetRange}</span>
         </div>
         <span className={`${classes.jobShowWrapper}__pay-type__text`}>{payTypeText}</span>
+
+        {(role === 'employee' && bid_rate) && (
+          <>
+            <Divider className={`${classes.jobShowWrapper}__divider`}/>
+            <h3 className={`${classes.jobShowWrapper}__bidding-text`}>{pay_type === 'Pay by the hour' ? 'Your hourly rate' : 'Your bidding rate'}</h3>
+            <span className={`${classes.jobShowWrapper}__bidding-subtext`}>Total amount the employer will see on your proposal</span>
+            <div className={`${classes.jobShowWrapper}__bidding-wrapper`}>
+              <i className={`${classes.jobShowWrapper}__pay-type-icon ${payTypeText === 'Hourly' ? 'fa-regular fa-clock' : 'fa-solid fa-money-check-dollar'}`}/>
+              <h4>{`$${bid_rate}${pay_type === 'Pay by the hour' ? '/hr' : ''}`}</h4>
+            </div>
+          </>
+        )}
 
         <Divider className={`${classes.jobShowWrapper}__divider`}/>
         <h3 className={`${classes.jobShowWrapper}__content-header`}>
