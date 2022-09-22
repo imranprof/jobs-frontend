@@ -47,12 +47,10 @@ const Message = (props) => {
                 src={recipient_avatar}
                 alt="recipient avatar"
               />
-              <Badge badgeContent={unread_count} color="primary" anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}>
+              <div className={`${classes.messageWrapper}__name-badge-wrapper`}>
                 <span className={`${classes.messageWrapper}__name`}>{recipient_name}</span>
-              </Badge>
+                <Badge badgeContent={unread_count} color="primary"/>
+              </div>
             </div>
           )
           : (
@@ -62,12 +60,10 @@ const Message = (props) => {
                 src={sender_avatar}
                 alt="sender avatar"
               />
-              <Badge badgeContent={unread_count} color="primary" anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}>
+              <div className={`${classes.messageWrapper}__name-badge-wrapper`}>
                 <span className={`${classes.messageWrapper}__name`}>{sender_name}</span>
-              </Badge>
+                <Badge badgeContent={unread_count} color="primary"/>
+              </div>
             </div>
           )
         }
