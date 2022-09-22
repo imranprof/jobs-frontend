@@ -49,7 +49,7 @@ const Message = (props) => {
               />
               <div className={`${classes.messageWrapper}__name-badge-wrapper`}>
                 <span className={`${classes.messageWrapper}__name`}>{recipient_name}</span>
-                <Badge badgeContent={unread_count} color="primary"/>
+                <Badge badgeContent={unread_count} color="secondary"/>
               </div>
             </div>
           )
@@ -62,7 +62,7 @@ const Message = (props) => {
               />
               <div className={`${classes.messageWrapper}__name-badge-wrapper`}>
                 <span className={`${classes.messageWrapper}__name`}>{sender_name}</span>
-                <Badge badgeContent={unread_count} color="primary"/>
+                <Badge badgeContent={unread_count} color="secondary"/>
               </div>
             </div>
           )
