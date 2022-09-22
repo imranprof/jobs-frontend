@@ -3,7 +3,8 @@ const initialState = {
   initialLoader: true,
   parentMessageList: [],
   privateMessageList: [],
-  sendMessageData: {}
+  sendMessageData: {},
+  total_notification_count: ''
 }
 
 export const messageReducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ export const messageReducer = (state = initialState, action) => {
       return {
         ...state,
         sendMessageData: action.payload
+      }
+    case 'SET_TOTAL_NOTIFICATION_COUNT':
+      return {
+        ...state,
+        total_notification_count: action.payload
       }
     default:
       return state
