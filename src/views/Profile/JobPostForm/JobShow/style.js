@@ -149,7 +149,10 @@ const useStyles = makeStyles({
         },
         '&__shortlist': {
           width: "25%",
-          paddingTop: 0
+          paddingTop: 0,
+          '& .MuiButton-root': {
+            textTransform: "capitalize"
+          }
         }
       },
       '&__name-avatar-wrapper': {

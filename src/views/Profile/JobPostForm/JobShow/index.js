@@ -267,6 +267,9 @@ const JobShow = (props) => {
                     <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Profile</span>
                   </TableCell>
                   <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
+                    <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Application</span>
+                  </TableCell>
+                  <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-header`}>
                     <span className={`${classes.jobShowWrapper}__applicant-list__table-header__title`}>Shortlist</span>
                   </TableCell>
                 </TableRow>
@@ -300,6 +303,9 @@ const JobShow = (props) => {
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
                         <Link href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link>
                       </TableCell>
+                      <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
+                        <Link href={'/application/details'}><a target="_blank">Details</a></Link>
+                      </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell__shortlist`}>
                         <Checkbox
                           name={applicant.profile_slug}
@@ -316,7 +322,7 @@ const JobShow = (props) => {
                           variant="outlined"
                           onClick={() => sendMailToJobSeeker(applicant.application_id, applicant.applicant_id)}
                         >
-                          Send email
+                          Send message
                         </Button>
                         }
                       </TableCell>
