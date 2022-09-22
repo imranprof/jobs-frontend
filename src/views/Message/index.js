@@ -22,7 +22,8 @@ const Message = (props) => {
     sender_avatar,
     recipient_avatar,
     recipient_id,
-    unread_count
+    unread_count,
+    last_message_body
   } = data
 
   const handleOpenChat = () => {
@@ -68,7 +69,7 @@ const Message = (props) => {
             </div>
           )
         }
-        <span className={`${classes.messageWrapper}__message-body`}>{body}</span>
+        <span className={`${classes.messageWrapper}__message-body`}>{last_message_body}</span>
       </Paper>
 
     </>
