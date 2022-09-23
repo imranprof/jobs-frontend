@@ -17,12 +17,12 @@ const MessageList = (props) => {
   const theme = useTheme();
   const classes = MessagesStyle(theme)
   const dispatch = useDispatch();
-  const {allMessage, initialLoader, conversations, sendMessageData} = props
+  const {allMessage, initialLoader, conversations, sendMessageData, isAuthenticated} = props
   const {parent_id, recipient_id} = sendMessageData
   const [openChat, setOpenChat] = useState(false)
 
   useEffect(() => {
-    dispatch(getAllParentMessage())
+    isAuthenticated && dispatch(getAllParentMessage())
   }, [])
 
   useEffect(() => {
@@ -129,7 +129,8 @@ const mapStateToProps = (state) => {
     initialLoader: state.messageList.initialLoader,
     allMessage: state.messageList.parentMessageList,
     conversations: state.messageList.privateMessageList,
-    sendMessageData: state.messageList.sendMessageData
+    sendMessageData: state.messageList.sendMessageData,
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
