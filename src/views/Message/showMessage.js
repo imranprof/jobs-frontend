@@ -2,7 +2,8 @@ import React from 'react';
 import {useTheme} from "@material-ui/core/styles";
 import {ShowMessageStyle} from "./showMessageStyle";
 import moment from "moment";
-import {Avatar} from "@material-ui/core";
+import {Avatar, Icon} from "@material-ui/core";
+import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 
 const ShowMessage = (props) => {
   const theme = useTheme();
@@ -23,13 +24,14 @@ const ShowMessage = (props) => {
                 <span className={`${classes.showMessageWrapper}__body-text`}>{body}</span>
               </div>
             </div>
-            {last && (has_read ? <div className={`${classes.showMessageWrapper}__message-status`}>
+            {last && (has_read ? <span className={`${classes.showMessageWrapper}__message-status`}>
                 <Avatar
                   className={`${classes.showMessageWrapper}__seen-message-avatar`}
                   src={recipient_avatar}
                 />
-              </div> :
-              <div className={`${classes.showMessageWrapper}__message-status`}>Delivered</div>)}
+              </span> :
+              <span className={`${classes.showMessageWrapper}__message-status`}><Icon
+                className={`${classes.showMessageWrapper}__delivered-icon ${FontAwesomeIcons.selected}`}/></span>)}
           </div>
         ) :
         (
