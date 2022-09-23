@@ -2,7 +2,7 @@ import React from 'react';
 import {useTheme} from "@material-ui/core/styles";
 import {ShowMessageStyle} from "./showMessageStyle";
 import moment from "moment";
-import {Avatar, Icon} from "@material-ui/core";
+import {Avatar, Icon, Tooltip} from "@material-ui/core";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 
 const ShowMessage = (props) => {
@@ -25,13 +25,18 @@ const ShowMessage = (props) => {
               </div>
             </div>
             {last && (has_read ? <span className={`${classes.showMessageWrapper}__message-status`}>
-                <Avatar
-                  className={`${classes.showMessageWrapper}__seen-message-avatar`}
-                  src={recipient_avatar}
-                />
+                <Tooltip title="Seen" placement="top-end">
+                  <Avatar
+                    className={`${classes.showMessageWrapper}__seen-message-avatar`}
+                    src={recipient_avatar}
+                  />
+                </Tooltip>
               </span> :
-              <span className={`${classes.showMessageWrapper}__message-status`}><Icon
-                className={`${classes.showMessageWrapper}__delivered-icon ${FontAwesomeIcons.selected}`}/></span>)}
+              <span className={`${classes.showMessageWrapper}__message-status`}>
+                <Tooltip title="Delivered" placement="top-end">
+                  <Icon className={`${classes.showMessageWrapper}__delivered-icon ${FontAwesomeIcons.selected}`}/>
+                </Tooltip>
+              </span>)}
           </div>
         ) :
         (
