@@ -59,7 +59,7 @@ const MessageList = (props) => {
       clickedUserAvatar = sender_avatar;
     }
   }
-  
+
   return (
     <div className={classes.messagesWrapper}>
       <div className={`${classes.messagesWrapper}__header-receiver-wrapper`}>
@@ -90,7 +90,10 @@ const MessageList = (props) => {
           <Divider orientation="vertical" flexItem className={`${classes.messagesWrapper}__divider`}/>
           <div className={`${classes.messagesWrapper}__chat-box-field-btn-wrapper`}>
             <div className={`${classes.messagesWrapper}__chat-wrapper`}>
-              {(openChat) && conversations.map((message) => <ShowMessage key={message.id} data={message}/>)}
+              {(openChat) && conversations.map((message, i) => {
+                return i === 0 ? <ShowMessage key={message.id} data={message} last={true}/> :
+                  <ShowMessage key={message.id} data={message} last={false}/>
+              })}
             </div>
             {openChat && <div className={`${classes.messagesWrapper}__text-field-btn-wrapper`}>
               <TextField
