@@ -39,7 +39,7 @@ const SearchBar = () => {
   const formik = useFormik({
     initialValues: {
       searchValue: '',
-      selectType: {value: getSearchType(), label: getSearchType()}
+      selectType: getSearchType() ? {value: getSearchType(), label: getSearchType()} : {value: 'Jobs', label: 'Jobs'}
     },
     enableReinitialize: true,
     onSubmit: handleSearchSubmit

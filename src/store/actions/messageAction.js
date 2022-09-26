@@ -1,10 +1,16 @@
 import axios from "axios";
 
-import {SET_PARENT_MESSAGES, SET_PRIVATE_MESSAGES, SET_SEND_MESSAGE_DATA} from "../actionTypes/messageTypes";
+import {
+  SET_PARENT_MESSAGES,
+  SET_PRIVATE_MESSAGES,
+  SET_SEND_MESSAGE_DATA,
+  SET_TOTAL_NOTIFICATION_COUNT
+} from "../actionTypes/messageTypes";
 
 const parentMessageUrl = process.env.NEXT_PUBLIC_SHOW_ALL_MESSAGE_URL
 const privateConversationUrl = process.env.NEXT_PUBLIC_PRIVATE_CONVERSATION_URL
 const sendMessageUrl = process.env.NEXT_PUBLIC_SEND_MESSAGE_URL
+const messageStatusUrl = process.env.NEXT_PUBLIC_UPDATE_MESSAGE_STATUS_URL
 
 
 export const setParentMessages = (messages) => {
@@ -18,7 +24,10 @@ export const getAllParentMessage = () => {
 
   return async (dispatch) => {
     const response = axios.post(parentMessageUrl)
-      .then(res => dispatch(setParentMessages(res.data.all_threads)) )
+      .then(res => {
+        dispatch(setParentMessages(res.data.all_threads))
+        dispatch(setNotificationCount(res.data.total_notification_count))
+      })
       .catch(err => err.response)
     return (response);
   }
@@ -75,6 +84,28 @@ export const sendMessageAction = (messageData) => {
       })
       .catch(err => err.response)
     return (response);
+  }
+}
+
+export const setNotificationCount = (count)=> {
+  return {
+    type: SET_TOTAL_NOTIFICATION_COUNT,
+    payload: count
+  }
+}
+
+export const updateMessageStatus = (parent_id) => {
+  const data = {
+    "message": {
+      "id": parent_id
+    }
+  }
+  return (dispatch) => {
+    axios.patch(messageStatusUrl, data)
+      .then(res => {
+        dispatch(getAllParentMessage())
+      })
+      .catch(err => err.response)
   }
 }
 

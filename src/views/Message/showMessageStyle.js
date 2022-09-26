@@ -12,9 +12,8 @@ export const useStyles = makeStyles({
       justifyContent: "center",
       maxWidth: "70%",
       minWidth: "10%",
-      marginBottom: "5px",
       padding: "10px",
-      marginRight: "10px",
+      marginRight: "15px",
       backgroundColor: theme.palette.customColor.sendMessageBody,
       color: theme.palette.customColor.sendMessageText,
       borderRadius: "20px",
@@ -44,6 +43,20 @@ export const useStyles = makeStyles({
     },
     '&__message-time': {
       marginBottom: 10, fontSize: "10px"
+    },
+    '&__message-status': {
+      display: "flex",
+      justifyContent: "flex-end",
+      margin: "0px 10px 7px 0px",
+      color: theme.palette.customColor.main,
+      fontSize: 12
+    },
+    '&__seen-message-avatar': {
+      height: 14,
+      width: 14
+    },
+    '&__delivered-icon':{
+      fontSize: 14
     }
   })
 });

@@ -7,25 +7,34 @@ export const useStyles = makeStyles({
     padding: 10,
     marginBottom: 5,
     cursor: "pointer",
+    '&__name-badge-wrapper': {
+      display: "flex"
+    },
     '&__avatar-name-Wrapper': {
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
+      '& .MuiBadge-anchorOriginTopRightRectangle': {
+        marginRight: 7,
+        marginTop: 5
+      }
     },
     '&__avatar': {
       marginRight: "10px",
       height: "32px",
       width: "32px",
       [theme.breakpoints.down('xs')]: {
-        height: "12px",
-        width: "12px"
+        height: "15px",
+        width: "15px"
       }
     },
     '&__name': {
       fontWeight: 700,
       color: theme.palette.customColor.main,
+      marginRight: 20,
       [theme.breakpoints.down('xs')]: {
         fontWeight: 500,
-        fontSize: 12
+        fontSize: 12,
+        marginRight: 18
       }
     },
     '&__message-body': {
