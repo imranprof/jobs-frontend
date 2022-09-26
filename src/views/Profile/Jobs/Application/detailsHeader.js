@@ -18,7 +18,7 @@ const DetailsHeader = ({applicationData}) => {
 
         <div className={`${classes.jobApplicationWrapper}__header-wrapper__left`}>
           <Avatar className={`${classes.jobApplicationWrapper}__header-wrapper__avatar`} src={avatar}/>
-          <div>
+          <div className={`${classes.jobApplicationWrapper}__header-wrapper__personal-info`}>
             <h2 className={`${classes.jobApplicationWrapper}__header-wrapper__name`}>{fullName}</h2>
             <span className={`${classes.jobApplicationWrapper}__header-wrapper__email`}>{email}</span>
 

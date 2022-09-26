@@ -46,6 +46,7 @@ const useStyles = makeStyles({
           letterSpacing: "1px"
         },
         '& .MuiButton-outlined': {
+          padding: "4px 15px",
           border: `1px solid ${theme.palette.customColor.highContrast}`
         },
         '&-shortlisted': {
@@ -60,8 +61,43 @@ const useStyles = makeStyles({
           color: theme.palette.customColor.highContrast,
           fontSize: 14,
           marginRight: 5
+        },
+        [theme.breakpoints.down('sm')]: {
+          height: "auto",
+          flexDirection: "column",
+          alignItems: "end",
+          '&-shortlisted': {
+            width: 148,
+            marginBottom: 12
+          },
+        },
+        [theme.breakpoints.down('xs')]: {
+          alignItems: "start",
+          '&-hire': {
+            marginLeft: 0
+          }
+        },
+      },
+      [theme.breakpoints.down('xs')]: {
+        flexDirection: "column",
+        alignItems: "start",
+        '&__left': {
+          width: 230
+        },
+        '&__avatar': {
+          width: 55,
+          height: 55
+        },
+        '&__personal-info': {
+          marginLeft: 10
+        },
+        '&__name': {
+          fontSize: 20
+        },
+        '&__email': {
+          wordBreak: "break-word"
         }
-      }
+      },
     },
     '&__wrapper': {
       display: "flex",
@@ -73,17 +109,29 @@ const useStyles = makeStyles({
         fontFamily: FONTS.secondaryFont,
         '&-rate': {
           fontSize: 20,
-          margin: "0 0 4px 0"
+          margin: "0 0 4px 0",
+          [theme.breakpoints.down('xs')]: {
+            fontSize: 18,
+            margin: 0
+          }
         },
         '& span': {
           fontSize: 13
         }
+      },
+      [theme.breakpoints.down('xs')]: {
+        '& h2': {
+          fontSize: 18
+        },
       }
     },
     '&__cover-letter': {
       fontSize: 15,
       fontFamily: FONTS.secondaryFont,
-      whiteSpace: "pre-wrap"
+      whiteSpace: "pre-wrap",
+      [theme.breakpoints.down('xs')]: {
+        fontSize: 14
+      }
     }
   }),
 })

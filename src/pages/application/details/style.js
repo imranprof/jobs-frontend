@@ -20,7 +20,9 @@ const useStyles = makeStyles({
         fontStyle: "italic"
       }
     },
-
+    [theme.breakpoints.down('xs')]: {
+      padding: 24
+    }
   }),
 })
 
