@@ -140,11 +140,23 @@ const useStyles = makeStyles({
           color: theme.palette.customColor.highContrast,
           textDecoration: "none"
         },
+        '&__checkbox-wrapper': {
+          display: "flex",
+          alignItems: "center"
+        },
         '&__checkbox': {
           color: theme.palette.customColor.success,
           paddingLeft: 0,
           '& .MuiSvgIcon-root': {
             color: theme.palette.customColor.success,
+            [theme.breakpoints.down('sm')]: {
+              fontSize: 20
+            },
+          },
+          [theme.breakpoints.down('sm')]: {
+            '&-label': {
+              fontSize: 14
+            }
           }
         },
         '&__shortlist': {

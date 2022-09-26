@@ -321,14 +321,18 @@ const JobShow = (props) => {
                         </a>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell__shortlist`}>
-                        <Checkbox
-                          name={applicant.profile_slug}
-                          checked={applicant.short_list}
-                          className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox`}
-                          onChange={handleSelection}
-                          value={applicant.application_id}
-                        />
-                        {applicant.short_list ? "Selected" : "Select"}
+                        <div className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox-wrapper`}>
+                          <Checkbox
+                            name={applicant.profile_slug}
+                            checked={applicant.short_list}
+                            className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox`}
+                            onChange={handleSelection}
+                            value={applicant.application_id}
+                          />
+                          <span className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox-label`}>
+                          {applicant.short_list ? "Selected" : "Select"}
+                        </span>
+                        </div>
 
                         {applicant.short_list &&
                         <Button
