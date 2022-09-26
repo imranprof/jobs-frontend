@@ -166,6 +166,9 @@ const useStyles = makeStyles({
       '&__name': {
         fontWeight: 600,
         fontSize: 15
+      },
+      '&__details-link': {
+        cursor: "pointer"
       }
     },
     '&__close-button': {

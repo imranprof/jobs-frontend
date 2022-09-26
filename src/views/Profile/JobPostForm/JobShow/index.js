@@ -29,7 +29,8 @@ import {
   employeeSelectionAction,
   getIndividualJobs,
   jobApplyAction,
-  sendMailJobSeekerAction
+  sendMailJobSeekerAction,
+  setApplicationDetails
 } from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
@@ -125,6 +126,14 @@ const JobShow = (props) => {
         }
       }
     )
+  }
+
+  const detailsHandler = (applicant) => {
+    const Details = applicant;
+    Details['jobTitle'] = title;
+    Details['jobPayType'] = pay_type;
+    setApplicationDetails(Details)
+    window.open('/application/details', '_blank');
   }
 
   return (
@@ -304,7 +313,12 @@ const JobShow = (props) => {
                         <Link href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
-                        <Link href={'/application/details'}><a target="_blank">Details</a></Link>
+                        <a
+                          onClick={()=>detailsHandler(applicant)}
+                          className={`${classes.jobShowWrapper}__applicant-list__details-link`}
+                        >
+                           Details
+                        </a>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell__shortlist`}>
                         <Checkbox
