@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
@@ -146,3 +147,22 @@ export const sendMailJobSeekerAction = (id, applicantId) => {
     return (response);
   }
 }
+
+export function setApplicationDetails(details) {
+  if (details) {
+    localStorage.setItem('details', JSON.stringify(details));
+  } else {
+    localStorage.removeItem('details');
+  }
+}
+
+export const getApplicationDetails = () => {
+  if (typeof window !== 'undefined') {
+    const details = localStorage.getItem('details')
+    if (details) {
+      return details;
+    }
+    return null;
+  }
+}
+
