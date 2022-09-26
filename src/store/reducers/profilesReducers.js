@@ -29,7 +29,8 @@ export const profilesReducer = (state = initialState, action) => {
     case SET_PROFILES:
       return {
         ...state,
-        searchProfiles: action.payload
+        searchProfiles: action.payload,
+        initialLoader: false
       }
     default:
       return state

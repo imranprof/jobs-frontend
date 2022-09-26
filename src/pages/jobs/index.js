@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import {useTheme} from "@material-ui/core/styles";
 
@@ -10,13 +11,13 @@ import CustomLoader from "../../lib/customLoader";
 import Job from "../../views/Job";
 import {JobsStyle} from "./style";
 import EndMessage from "../../lib/endMessage";
-import InfiniteScroll from "react-infinite-scroll-component";
+import {getIndividualJobs} from "../../store/actions/jobAction";
 
 const Jobs = (props) => {
   const theme = useTheme();
   const classes = JobsStyle(theme);
   const dispatch = useDispatch()
-  const {jobList, initialLoader} = props
+  const {jobList, initialLoader, isAuthenticated} = props
 
   const [hasMore, setHasMore] = useState(true);
   const [jobs, setJobs] = useState([]);
@@ -24,6 +25,7 @@ const Jobs = (props) => {
   useEffect(() => {
     setJobs(jobList.slice(0, jobs.length + 8))
     dispatch(getJobs())
+    isAuthenticated && dispatch(getIndividualJobs())
   }, [])
 
   if ((jobList.length > jobs.length && hasMore === false) || (jobs.length === 0 && jobList.length > jobs.length)) {
@@ -63,7 +65,8 @@ const Jobs = (props) => {
 const mapStateToProps = (state) => {
   return {
     jobList: state.allJobs.jobs,
-    initialLoader: state.allJobs.initialLoader
+    initialLoader: state.allJobs.initialLoader,
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 

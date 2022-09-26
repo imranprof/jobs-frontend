@@ -1,5 +1,6 @@
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
+import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 
 import {TextField} from "@material-ui/core";
@@ -16,7 +17,7 @@ const JobEdit = (props) => {
   const theme = useTheme();
   const classes = JobEditStyle(theme);
   const {job, handleClose, setToast} = props
-  const {title, description, skills, location} = job
+  const {title, description, skills, location, pay_type, budget} = job
   const dispatch = useDispatch()
 
   const jobSkillsData = [
@@ -27,11 +28,16 @@ const JobEdit = (props) => {
     {value: 5, label: "Golang"}
   ]
 
+  const payTypeData = [
+    {value: 1, label: "Pay by the hour"},
+    {value: 2, label: "Pay a fixed price"}
+  ]
+
   const filteredSkills = (selectedSkills) => {
     if (selectedSkills !== undefined) {
-      return jobSkillsData.filter((ex1) => {
-        return !selectedSkills.find((ex2) => {
-          return ex1.label === ex2.label
+      return jobSkillsData.filter((item1) => {
+        return !selectedSkills.find((item2) => {
+          return item1.label === item2.label
         })
       })
     }
@@ -42,18 +48,26 @@ const JobEdit = (props) => {
     description: description,
     skills: skills.map((skill) => (
       {value: skill, label: skill})),
-    location: location
+    payType: {value: 3, label: pay_type},
+    location: location,
+    minRate: budget[0],
+    maxRate: budget.length === 2 ? budget[1] : '',
   }
 
-  const jobUpdate = ({job, title, description, skills, location}) => {
+  const jobUpdate = ({job, title, description, skills, location, pay_type, minRate, maxRate}) => {
     const oldJob = {...job};
     const skillsLabel = skills.map(
       skill => skill.label
     );
-    job.title = title;
-    job.description = description;
+
+    const budget = pay_type.label === 'Pay by the hour' ? [minRate, maxRate] : [minRate]
+
+    job.title = title.trim();
+    job.description = description.trim();
     job.skills = skillsLabel
-    job.location = location;
+    job.location = location.trim();
+    job.budget = budget
+    job.pay_type = pay_type.label
     dispatch(updateJobAction(oldJob, job));
     setToast({show: true, severity: "success", text: "Successfully updated the job."});
     handleClose()
@@ -70,6 +84,22 @@ const JobEdit = (props) => {
     if (!values.skills) {
       errors.skills = "Skills can't be empty"
     }
+    if (values.payType === "") {
+      errors.payType = "Please select a pay type!"
+    }
+    if (values.payType.label === 'Pay by the hour') {
+      if (values.minRate === "") {
+        errors.minRate = "Budget can't be empty"
+      }
+      if (values.maxRate === "") {
+        errors.maxRate = "Budget can't be empty"
+      }
+    }
+    if (values.payType.label === 'Pay a fixed price') {
+      if (values.minRate === "") {
+        errors.minRate = "Budget can't be empty"
+      }
+    }
     if (!values.location) {
       errors.location = "Location can't be empty"
     }
@@ -85,6 +115,9 @@ const JobEdit = (props) => {
         description: values.description,
         skills: values.skills,
         location: values.location,
+        pay_type: values.payType,
+        minRate: values.minRate,
+        maxRate: values.maxRate,
       });
     },
     validate: jobValidation
@@ -138,6 +171,76 @@ const JobEdit = (props) => {
             />
             {formik.errors.skills && <ErrorMessage error={formik.errors.skills}/>}
           </div>
+
+          <div className={`${classes.jobEditWrapper}__content-wrapper__gap`}>
+            <h4>How would you like to pay?</h4>
+            <Select
+              name="payType"
+              options={payTypeData}
+              defaultValue={formik.values.payType}
+              onChange={payType => formik.setFieldValue("payType", payType)}
+              placeholder="Select type"
+              menuPosition="fixed"
+              styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
+              className={`${classes.jobEditWrapper}__content-wrapper__selectDropdown`}
+            />
+            {formik.errors.payType && <ErrorMessage error={formik.errors.payType}/>}
+          </div>
+
+          {formik.values.payType.label === 'Pay by the hour' && (
+            <>
+              <h4>Set your own hourly range *</h4>
+              <div className={`${classes.jobEditWrapper}__rate-wrapper`}>
+                <div className={`${classes.jobEditWrapper}__job-rate`}>
+                  <TextField
+                    type="number"
+                    size="small"
+                    variant="outlined"
+                    label="$"
+                    name="minRate"
+                    value={formik.values.minRate}
+                    onChange={formik.handleChange}
+                    className={`${classes.jobEditWrapper}__job-rate__field`}
+                  />
+                  <span>/hr</span>
+                </div>
+                <span className={`${classes.jobEditWrapper}__job-rate__to`}>_</span>
+                <div className={`${classes.jobEditWrapper}__job-rate`}>
+                  <TextField
+                    type="number"
+                    size="small"
+                    variant="outlined"
+                    label="$"
+                    name="maxRate"
+                    value={formik.values.maxRate}
+                    onChange={formik.handleChange}
+                    className={`${classes.jobEditWrapper}__job-rate__field`}
+                  />
+                  <span>/hr</span>
+                </div>
+              </div>
+              {formik.errors.maxRate && <ErrorMessage error={formik.errors.maxRate}/>}
+            </>
+          )}
+
+          {formik.values.payType.label === 'Pay a fixed price' && (
+            <>
+              <h4>Do you have a specific budget? *</h4>
+              <div className={`${classes.jobEditWrapper}__job-rate`}>
+                <TextField
+                  type="number"
+                  size="small"
+                  variant="outlined"
+                  label="$"
+                  name="minRate"
+                  value={formik.values.minRate}
+                  onChange={formik.handleChange}
+                  className={`${classes.jobEditWrapper}__job-rate__field`}
+                />
+              </div>
+              {formik.errors.maxRate && <ErrorMessage error={formik.errors.maxRate}/>}
+            </>
+          )}
 
           <div className={`${classes.jobEditWrapper}__content-wrapper__gap`}>
             <TextField

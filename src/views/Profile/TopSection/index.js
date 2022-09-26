@@ -198,7 +198,7 @@ const TopSection = (props) => {
             )}
           </div>
 
-          {(publicRole && publicRole === 'employee') && (
+          {(publicRole && publicRole === 'employee' || publicRole === '') && (
             <div className={`${classes.topSectionWrapper}__left-bottom`}>
               <SocialLinks setToast={setToast} editPermission={getPermission()}/>
               <Skills setToast={setToast}/>

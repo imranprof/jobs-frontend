@@ -41,7 +41,12 @@ const darkTheme = createTheme({
       dangerColor: COLORS.danger,
       backToHomeHover: COLORS.white_4,
       avatarBgEdit: COLORS.white_5,
-      modalTitle: COLORS.white_5
+      modalTitle: COLORS.white_5,
+      success: COLORS.success,
+      sendMessageText: COLORS.white_8,
+      sendMessageBody: COLORS.light_blue,
+      receivedMessageBody: COLORS.grey_8,
+      receivedMessageText: COLORS.white_8
     },
     customShadow: {
       main: COLORS.boxShadow_1,
@@ -66,7 +71,8 @@ const darkTheme = createTheme({
     customHoverBackground: {
       main: COLORS.black_5,
       closeIcon: COLORS.black_4,
-      resumeCard: COLORS.black_1
+      resumeCard: COLORS.black_1,
+      searchHover: COLORS.gray_1
     },
     beforeBackground: {
       main: COLORS.black_7,

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Link from "next/link";
 import {connect, useDispatch} from "react-redux";
 
-import {Hidden, IconButton} from "@material-ui/core";
+import {Badge, Hidden, IconButton} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
@@ -15,7 +15,7 @@ import {modalType} from "../../../../store/actions/authAction";
 import {getProfileSlug} from "../../../../store/reducers/authReducers";
 
 const ProfilesSideBar = (props) => {
-  const {classes, role} = props;
+  const {classes, role, notificationCount} = props;
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -98,7 +98,8 @@ const ProfilesSideBar = (props) => {
 
             {!props.isAuthenticated &&
             (<Link href={"/profile"}>
-              <a className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
+              <a
+                className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
                 Template Profile
               </a>
             </Link>)
@@ -106,9 +107,20 @@ const ProfilesSideBar = (props) => {
             {props.isAuthenticated &&
             role === 'employee' &&
             (<Link href={"/myJobs"}>
-              <a className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
+              <a
+                className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
                 My Jobs
               </a>
+            </Link>)
+            }
+            {props.isAuthenticated &&
+            (<Link href={"/messages"}>
+              <Badge badgeContent={notificationCount} color="secondary">
+                <a
+                  className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
+                  Messages
+                </a>
+              </Badge>
             </Link>)
             }
 
@@ -137,7 +149,8 @@ const ProfilesSideBar = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    modalType: state.auth.modalType
+    modalType: state.auth.modalType,
+    notificationCount: state.messageList.total_notification_count
   }
 }
 

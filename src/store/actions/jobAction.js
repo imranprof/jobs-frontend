@@ -1,5 +1,7 @@
 import axios from "axios";
+
 import {SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
+import {sendMessageAction} from "./messageAction";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
 const jobApplyUrl = process.env.NEXT_PUBLIC_JOB_APPLY_URL
@@ -8,12 +10,14 @@ const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 
 export const addJobAction = (job) => {
-  const {title, description, location, skills} = job;
+  const {title, description, location, skills, payType, budget} = job;
   let data = {
     "job": {
       "title": title,
       "description": description,
       "skills": `{${skills}}`,
+      "pay_type": payType,
+      "budget": `{${budget}}`,
       "location": location
     }
   }
@@ -43,10 +47,14 @@ export const getIndividualJobs = () => {
   }
 }
 
-export const jobApplyAction = (id) => {
+export const jobApplyAction = (id, bid_rate, cover_letter) => {
   let data = {
     "job": {
       "id": id
+    },
+    "job_application": {
+      "bid_rate": bid_rate,
+      "cover_letter": cover_letter
     }
   }
 
@@ -71,7 +79,9 @@ export const updateJobAction = (oldJob, updatedJob) => {
       "title": updatedJob.title,
       "description": updatedJob.description,
       "location": updatedJob.location,
-      "skills": `{${updatedJob.skills}}`
+      "pay_type": updatedJob.pay_type,
+      "skills": `{${updatedJob.skills}}`,
+      "budget": `{${updatedJob.budget}}`,
     }
   }
   return (dispatch) => {
@@ -110,6 +120,49 @@ export const employeeSelectionAction = (id, value) => {
       .then(res => dispatch(getIndividualJobs()))
       .catch(err => err.response)
     return (response);
+  }
+}
+
+export const sendMailJobSeekerAction = (id, applicantId) => {
+  const data = {
+    "job_application": {
+      "id": id,
+      "email": true
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(employeeSelectionUrl, data)
+      .then(res => {
+        dispatch(getIndividualJobs())
+        let text = "Hi\n" +
+          "This is to let you know that we have received your application. We appreciate your interest  for which you have applied for. You are shortlisted. If you have further query, please let us know at any time. We love to hear from you\n"
+        if (applicantId) {
+          dispatch(sendMessageAction({
+            body: text,
+            recipient_id: applicantId,
+          }))
+        }
+      })
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export function setApplicationDetails(details) {
+  if (details) {
+    localStorage.setItem('details', JSON.stringify(details));
+  } else {
+    localStorage.removeItem('details');
+  }
+}
+
+export const getApplicationDetails = () => {
+  if (typeof window !== 'undefined') {
+    const details = localStorage.getItem('details')
+    if (details) {
+      return details;
+    }
+    return null;
   }
 }
 

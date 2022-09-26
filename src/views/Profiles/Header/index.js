@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {connect, useDispatch} from "react-redux";
 
-import {AppBar, Hidden, IconButton, Toolbar, Tooltip} from "@material-ui/core";
+import {AppBar, Badge, Hidden, IconButton, Toolbar, Tooltip} from "@material-ui/core";
 
 import Logo from "../../../lib/logo";
 import SearchBar from "../../../lib/searchBar";
@@ -10,11 +10,17 @@ import ProfilesSideBar from "./components/profilesSideBar";
 import {modalType} from "../../../store/actions/authAction";
 import {getRole} from "../../../auth/operations";
 import {resetProfiles} from "../../../store/actions/searchAction";
+import {useEffect} from "react";
+import {getAllParentMessage} from "../../../store/actions/messageAction";
 
 const ProfilesHeader = (props) => {
-  const {classes, headerRef} = props;
+  const {classes, headerRef, notificationCount} = props;
   const dispatch = useDispatch()
   const role = getRole()
+
+  useEffect(()=> {
+    props.isAuthenticated && dispatch(getAllParentMessage())
+  },[props.isAuthenticated])
 
   const handleSignInClick = () => {
     dispatch(modalType('SignIn'))
@@ -61,7 +67,7 @@ const ProfilesHeader = (props) => {
 
             {props.isAuthenticated ?
               <>
-                <Link href={`${getPrivateSlug()}`}>
+                <Link href={`/${getPrivateSlug()}`}>
                   <a className={`${classes.headerWrapper}__button`}>
                     My Profile
                   </a>
@@ -73,6 +79,14 @@ const ProfilesHeader = (props) => {
                     My Jobs
                   </a>
                 </Link>) : ""}
+
+                <Link href={"/messages"}>
+                  <Badge badgeContent={notificationCount} color="secondary">
+                    <a className={`${classes.headerWrapper}__button`}>
+                      Messages
+                    </a>
+                  </Badge>
+                </Link>
 
                 <Link href="">
                   <a className={`${classes.headerWrapper}-sign-out`}
@@ -106,7 +120,8 @@ const ProfilesHeader = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    modalType: state.auth.modalType
+    modalType: state.auth.modalType,
+    notificationCount: state.messageList.total_notification_count
   }
 }
 

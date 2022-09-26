@@ -8,6 +8,8 @@ const useStyles = makeStyles((theme) => ({
     overflowY: 'auto'
   },
   paper: {
+    position: "absolute",
+    top: "10%",
     width: "80%",
     maxWidth: 700,
     height: "auto",
