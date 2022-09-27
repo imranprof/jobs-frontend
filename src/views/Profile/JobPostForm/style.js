@@ -43,7 +43,7 @@ const useStyles = makeStyles({
       '&:hover': {
         opacity: 1,
         background: theme.palette.customColor.highContrast,
-        color: theme.palette.customColor.light
+        color: theme.palette.customColor.socialLinkHover
       }
     },
     '&__rate-wrapper': {
@@ -59,6 +59,10 @@ const useStyles = makeStyles({
       '&__to': {
         margin: "0 30px"
       }
+    },
+    '&__close-button': {
+      display: "flex",
+      justifyContent: "flex-end"
     }
   }),
 })

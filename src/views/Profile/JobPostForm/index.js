@@ -4,8 +4,9 @@ import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
 import {useDispatch} from "react-redux";
 
-import {Button, Icon, TextField} from "@material-ui/core";
+import {Button, Icon, IconButton, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
+import CloseIcon from "@material-ui/icons/Close";
 
 import ModalTitle from "../../../lib/profile/modalTitle";
 import ErrorMessage from "../../../lib/errorMessage";
@@ -119,6 +120,12 @@ const JobPostForm = (props) => {
           <JobShow data={jobData} handleClose={handleClose} />
         ):(
           <div className={classes.jobPostFormWrapper}>
+            <div className={`${classes.jobPostFormWrapper}__close-button`}>
+            <span onClick={handleClose}>
+              <IconButton><CloseIcon/></IconButton>
+            </span>
+            </div>
+
             <ModalTitle title="Post New Job"/>
 
             <div className={`${classes.jobPostFormWrapper}__contentWrapper`}>
