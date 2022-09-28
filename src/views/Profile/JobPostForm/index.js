@@ -184,7 +184,6 @@ const JobPostForm = (props) => {
                   placeholder="Select type"
                   menuPosition="fixed"
                   styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
-                  className={`${classes.jobPostFormWrapper}__contentWrapper__selectDropdown`}
                 />
                 {formik.errors.payType && <ErrorMessage error={formik.errors.payType}/>}
               </div>
