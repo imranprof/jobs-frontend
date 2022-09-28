@@ -78,7 +78,6 @@ const ResumeSkillsAdd = (props) => {
             values={formik.values.skill}
             menuPosition="fixed"
             styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
-            className={`${classes.resumeAddWrapper}__content-wrapper__addSkill-wrapper__selectDropdown`}
           />
           {formik.errors.skill && <ErrorMessage error={formik.errors.skill}/>}
         </div>

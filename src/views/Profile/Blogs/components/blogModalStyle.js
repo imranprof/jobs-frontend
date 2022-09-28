@@ -132,9 +132,20 @@ const useStyles = makeStyles({
                 flexDirection: "column",
                 justifyContent: "space-between",
                 width: "100%",
-                '&__selectDropdown': {
-                    color: COLORS.black,
-                }
+                // =========== override react-select ==========
+                '& .css-1s2u09g-control, & .css-1pahdxg-control': {
+                    backgroundColor: "transparent",
+                },
+                '& #react-select-2-listbox, & .css-26l3qy-menu': {
+                    backgroundColor: theme.palette.customBackground.light,
+                },
+                '& .css-1rhbuit-multiValue, & .css-1n7v3ny-option': {
+                    backgroundColor: theme.palette.customBackground.skillBackground,
+                },
+                '& .css-12jo7m5, & .css-1pndypt-Input, & .css-qc6sy-singleValue': {
+                    color: theme.palette.customColor.light,
+                },
+                // =========== End override react-select =========
             },
             '&__description': {
                 width: "100%",

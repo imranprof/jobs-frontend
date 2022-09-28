@@ -110,7 +110,6 @@ const IntroExpertisesEdit = (props) => {
             options={filteredExpertise(formHandler.values.expertises)}
             defaultValue={formHandler.values.expertises}
             onChange={selectChangeHandler}
-            className={`${classes.topSectionEditWrapper}__expertisesWrapper__selectDropdown`}
           />
           {formHandler.errors.expertises && <ErrorMessage error={formHandler.errors.expertises}/>}
         </div>
