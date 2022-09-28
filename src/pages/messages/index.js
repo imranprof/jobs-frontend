@@ -21,16 +21,31 @@ const MessageList = (props) => {
   const {parent_id, recipient_id} = sendMessageData
   const [openChat, setOpenChat] = useState(false)
 
+  const createSubscriptions = async () => {
+    const { createConsumer } = await import('@rails/actioncable')
+    const consumer = createConsumer('ws://localhost:3000/cable')
+    consumer.subscriptions.create(
+      {channel: 'PrivatechatChannel'},
+      {
+        connected: () => console.log('connected'),
+        received: message => {
+          dispatch(getPrivateConversations(message.parent_message_id))
+        }
+      }
+    )
+  }
+
+  useEffect(()=> {
+    createSubscriptions()
+  },[])
+
   useEffect(() => {
     isAuthenticated && dispatch(getAllParentMessage())
   }, [])
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (parent_id) dispatch(getPrivateConversations(parent_id))
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [parent_id])
+  // useEffect(() => {
+  //   if (parent_id) dispatch(getPrivateConversations(parent_id))
+  // }, [])
 
   const sendMessageHandler = (values) => {
     dispatch(sendMessageAction({body: values.body, recipient_id: recipient_id, parent_message_id: parent_id}))
@@ -39,6 +54,7 @@ const MessageList = (props) => {
 
   const formik = useFormik({
     initialValues: {body: ''},
+    validateOnChange: false,
     onSubmit: sendMessageHandler
   });
 
