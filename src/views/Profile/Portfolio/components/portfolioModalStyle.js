@@ -120,12 +120,21 @@ const useStyles = makeStyles({
           fontFamily: FONTS.primaryFont,
           marginTop: 9,
           width: "100%",
-          '&__selectDropdown': {
-            fontSize: 14,
-            fontWeight: 500,
-            color: COLORS.black,
-            zIndex: 2,
+          // =========== override react-select ==========
+          '& .css-1s2u09g-control, & .css-1pahdxg-control': {
+            backgroundColor: "transparent",
           },
+          '& #react-select-2-listbox, & .css-26l3qy-menu': {
+            backgroundColor: theme.palette.customBackground.light,
+          },
+          '& .css-1rhbuit-multiValue, & .css-1n7v3ny-option': {
+            backgroundColor: theme.palette.customBackground.skillBackground,
+          },
+          '& .css-12jo7m5, & .css-1pndypt-Input, & .css-qc6sy-singleValue': {
+            color: theme.palette.customColor.light,
+          },
+          // =========== End override react-select =========
+
           '&__text': {
             marginRight: 10,
             color: theme.palette.customColor.dark,

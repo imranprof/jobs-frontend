@@ -167,7 +167,6 @@ const JobEdit = (props) => {
               menuPosition="fixed"
               styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
               placeholder="Select skills"
-              className={`${classes.jobEditWrapper}__content-wrapper__selectDropdown`}
             />
             {formik.errors.skills && <ErrorMessage error={formik.errors.skills}/>}
           </div>
@@ -182,7 +181,6 @@ const JobEdit = (props) => {
               placeholder="Select type"
               menuPosition="fixed"
               styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
-              className={`${classes.jobEditWrapper}__content-wrapper__selectDropdown`}
             />
             {formik.errors.payType && <ErrorMessage error={formik.errors.payType}/>}
           </div>

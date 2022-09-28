@@ -139,13 +139,12 @@ const JobShow = (props) => {
   return (
     <>
       <div className={classes.jobShowWrapper}>
-        {role === 'employer' &&
-        (<div className={`${classes.jobShowWrapper}__close-button`}>
+        <div className={`${classes.jobShowWrapper}__close-button`}>
             <span onClick={handleClose}>
               <IconButton><CloseIcon/></IconButton>
             </span>
-          </div>
-        )}
+        </div>
+
         <h1 className={`${classes.jobShowWrapper}__title`}>
           {title}
         </h1>

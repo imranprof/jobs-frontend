@@ -138,7 +138,6 @@ const PortfolioAdd = (props => {
                   options={mapCategoriesForMultiSelect(categoriesData)}
                   value={formHandler.values.categories}
                   onChange={categoriesChangeHandler}
-                  className={`${portfolioAddWrapper}__modal-content__text-content__category__selectDropdown`}
                 />
                 {formHandler.errors.categories && <ErrorMessage error={formHandler.errors.categories}/>}
               </div>

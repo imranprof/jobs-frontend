@@ -44,11 +44,22 @@ const useStyles = makeStyles({
       flexDirection: "column",
       justifyContent: "space-between",
       '&__selectWrapper': {
-        margin: "10px 0 100px 0"
+        margin: "10px 0 100px 0",
+        // =========== override react-select ==========
+        '& .css-1s2u09g-control, & .css-1pahdxg-control': {
+          backgroundColor: "transparent",
+        },
+        '& #react-select-2-listbox, & .css-26l3qy-menu': {
+          backgroundColor: theme.palette.customBackground.light,
+        },
+        '& .css-1rhbuit-multiValue, & .css-1n7v3ny-option': {
+          backgroundColor: theme.palette.customBackground.skillBackground,
+        },
+        '& .css-12jo7m5, & .css-1pndypt-Input, & .css-qc6sy-singleValue': {
+          color: theme.palette.customColor.light,
+        },
+        // =========== End override react-select =========
       },
-      '&__selectDropdown': {
-        color: COLORS.black,
-      }
     },
     '&__socialLinks': {
       width: "90%",
@@ -94,9 +105,6 @@ const useStyles = makeStyles({
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      '&__selectDropdown': {
-        color: COLORS.black,
-      }
     },
     '&__avatarWrapper': {
       display: "flex",

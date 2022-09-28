@@ -26,15 +26,28 @@ const useStyles = makeStyles({
           borderColor: theme.palette.customBorder.customInputBorder,
         }
       },
+
+      // =========== override react-select ==========
+      '& .css-1s2u09g-control, & .css-1pahdxg-control': {
+        backgroundColor: "transparent",
+      },
+      '& #react-select-2-listbox, & .css-26l3qy-menu': {
+        backgroundColor: theme.palette.customBackground.light,
+      },
+      '& .css-1rhbuit-multiValue, & .css-1n7v3ny-option': {
+        backgroundColor: theme.palette.customBackground.skillBackground,
+      },
+      '& .css-12jo7m5, & .css-1pndypt-Input, & .css-qc6sy-singleValue': {
+        color: theme.palette.customColor.light,
+      },
+      // =========== End override react-select =========
+
       '& .MuiTextField-root': {
         marginBottom: 0
       },
       '&__gap': {
         margin: "30px 0"
       },
-      '&__selectDropdown': {
-        color: COLORS.black,
-      }
     },
     '&__button': {
       background: theme.palette.customBackground.gradiant.light,
@@ -43,7 +56,7 @@ const useStyles = makeStyles({
       '&:hover': {
         opacity: 1,
         background: theme.palette.customColor.highContrast,
-        color: theme.palette.customColor.light
+        color: theme.palette.customColor.socialLinkHover
       }
     },
     '&__rate-wrapper': {
@@ -59,6 +72,10 @@ const useStyles = makeStyles({
       '&__to': {
         margin: "0 30px"
       }
+    },
+    '&__close-button': {
+      display: "flex",
+      justifyContent: "flex-end"
     }
   }),
 })
