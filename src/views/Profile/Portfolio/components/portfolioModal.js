@@ -179,14 +179,13 @@ const PortfolioModal = (props => {
                 <>
                   <div className={`${modalWrapper}__modal-content__text-content__category`}>
                     <h4>Select categories</h4>
-                    <Select
-                      isMulti
-                      name="categories"
-                      options={filterCategories(formHandler.values.categories)}
-                      value={formHandler.values.categories}
-                      onChange={categoriesChangeHandler}
-                      className={`${modalWrapper}__modal-content__text-content__category__selectDropdown`}
-                    />
+                      <Select
+                        isMulti
+                        name="categories"
+                        options={filterCategories(formHandler.values.categories)}
+                        value={formHandler.values.categories}
+                        onChange={categoriesChangeHandler}
+                      />
                     {formHandler.errors.categories && <ErrorMessage error={formHandler.errors.categories}/>}
                   </div>
                   <TextField
