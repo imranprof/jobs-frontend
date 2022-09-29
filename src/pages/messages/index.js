@@ -21,31 +21,35 @@ const MessageList = (props) => {
   const {parent_id, recipient_id} = sendMessageData
   const [openChat, setOpenChat] = useState(false)
 
+  useEffect(() => {
+    isAuthenticated && dispatch(getAllParentMessage())
+  }, [])
+
+  let consumer;
   const createSubscriptions = async () => {
-    const { createConsumer } = await import('@rails/actioncable')
-    const consumer = createConsumer('ws://localhost:3000/cable')
+    const {createConsumer} = await import('@rails/actioncable')
+    consumer = createConsumer('ws://localhost:3000/cable')
     consumer.subscriptions.create(
-      {channel: 'PrivatechatChannel'},
       {
-        connected: () => console.log('connected'),
+        channel: 'PrivatechatChannel'
+      },
+      {
         received: message => {
-          dispatch(getPrivateConversations(message.parent_message_id))
+          if(parent_id === message.parent_message_id){
+            dispatch(getPrivateConversations(parent_id))
+          }
         }
       }
     )
   }
 
-  useEffect(()=> {
-    createSubscriptions()
-  },[])
 
   useEffect(() => {
-    isAuthenticated && dispatch(getAllParentMessage())
-  }, [])
-
-  // useEffect(() => {
-  //   if (parent_id) dispatch(getPrivateConversations(parent_id))
-  // }, [])
+    createSubscriptions()
+    return () => {
+      consumer?.disconnect()
+    }
+  }, [parent_id])
 
   const sendMessageHandler = (values) => {
     dispatch(sendMessageAction({body: values.body, recipient_id: recipient_id, parent_message_id: parent_id}))
