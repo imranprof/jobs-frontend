@@ -26,9 +26,10 @@ const MessageList = (props) => {
   }, [])
 
   let consumer;
+  const liveMessageUrl = process.env.NEXT_PUBLIC_WEB_SOCKET_URL
   const createSubscriptions = async () => {
     const {createConsumer} = await import('@rails/actioncable')
-    consumer = createConsumer('ws://localhost:3000/cable')
+    consumer = createConsumer(liveMessageUrl)
     consumer.subscriptions.create(
       {
         channel: 'PrivatechatChannel'
