@@ -25,11 +25,31 @@ const MessageList = (props) => {
     isAuthenticated && dispatch(getAllParentMessage())
   }, [])
 
+  let consumer;
+  const liveMessageUrl = process.env.NEXT_PUBLIC_WEB_SOCKET_URL
+  const createSubscriptions = async () => {
+    const {createConsumer} = await import('@rails/actioncable')
+    consumer = createConsumer(liveMessageUrl)
+    consumer.subscriptions.create(
+      {
+        channel: 'PrivatechatChannel'
+      },
+      {
+        received: message => {
+          if(parent_id === message.parent_message_id){
+            dispatch(getPrivateConversations(parent_id))
+          }
+        }
+      }
+    )
+  }
+
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (parent_id) dispatch(getPrivateConversations(parent_id))
-    }, 10000);
-    return () => clearInterval(interval);
+    createSubscriptions()
+    return () => {
+      consumer?.disconnect()
+    }
   }, [parent_id])
 
   const sendMessageHandler = (values) => {
@@ -39,6 +59,7 @@ const MessageList = (props) => {
 
   const formik = useFormik({
     initialValues: {body: ''},
+    validateOnChange: false,
     onSubmit: sendMessageHandler
   });
 

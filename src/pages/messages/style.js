@@ -19,6 +19,9 @@ export const useStyles = makeStyles({
         background: "#3C3E41", /* color of the scroll thumb */
         borderRadius: 5, /* roundness of the scroll thumb */
         border: '2px solid rgba(0,0,0,0.2)'
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: "40%"
       }
     },
     '&__divider': {
