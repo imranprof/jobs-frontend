@@ -37,9 +37,13 @@ const DetailsHeader = ({applicationData}) => {
               Shortlisted
             </Button>
           ) : ""}
-          <Button variant="contained" color="secondary" className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-hire`}>
-            Hire Job Seeker
-          </Button>
+          <Link href={{pathname:"/hire/job-seeker",
+            query: { avatar: avatar, name: fullName }}}>
+            <Button variant="contained" color="secondary"
+                    className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-hire`}>
+              Hire Job Seeker
+            </Button>
+          </Link>
         </div>
 
       </div>
