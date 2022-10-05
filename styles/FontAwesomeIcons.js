@@ -23,7 +23,8 @@ const FontAwesomeIcons = {
     "camera": "fa-solid fa-camera",
     "selected": "fa-solid fa-circle-check",
     "users": "fa-solid fa-user-group",
-    "briefcase": "fa-solid fa-briefcase"
+    "briefcase": "fa-solid fa-briefcase",
+    "location": "fa-solid fa-location-dot"
 }
 
 export default FontAwesomeIcons;
