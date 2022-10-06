@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
+import {SET_JOB_APPLICATION, SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
@@ -135,7 +135,7 @@ export const sendMailJobSeekerAction = (id, applicantId) => {
       .then(res => {
         dispatch(getIndividualJobs())
         let text = "Hi\n" +
-          "This is to let you know that we have received your application. We appreciate your interest  for which you have applied for. You are shortlisted. If you have further query, please let us know at any time. We love to hear from you\n"
+          "This is to let you know that we have received your job-application. We appreciate your interest  for which you have applied for. You are shortlisted. If you have further query, please let us know at any time. We love to hear from you\n"
         if (applicantId) {
           dispatch(sendMessageAction({
             body: text,
@@ -165,4 +165,26 @@ export const getApplicationDetails = () => {
     return null;
   }
 }
+
+export const setJobApplication = (details) => {
+  return {
+    type: SET_JOB_APPLICATION,
+    payload: details
+  }
+}
+
+export const getJobApplication = (id) => {
+  const jobApplicationUrl = `${process.env.NEXT_PUBLIC_JOB_APPLICATION_URL}/${id}`;
+
+  return (dispatch) => {
+    axios.get(jobApplicationUrl)
+      .then(res => {
+        console.log('data-------- ', res.data.job_application_details)
+        dispatch(setJobApplication(res.data.job_application_details))
+      })
+      .catch(err => err.response);
+  }
+
+}
+
 
