@@ -2,14 +2,25 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
   messagesWrapper: theme => ({
-    marginBottom: 170,
+    backgroundColor: theme.palette.customBackground.dark,
+    border: `2px solid ${theme.palette.customColor.inputBorder}`,
+    borderRadius: 24,
+    boxShadow: theme.palette.customShadow.dark,
+    '&__current-user-avatar': {
+      width: 40,
+      height: 40,
+      borderRadius: '50%',
+      marginRight: 20,
+    },
     '&__parent-child-message-wrapper': {
       display: "flex",
       width: "100%",
-      maxHeight: "700px"
+      maxHeight: "770px"
     },
     '&__parent-messages-wrapper': {
       width: "30%",
+      margin: "0 10px",
+      paddingTop: 14,
       overflowY: "auto",
       '&::-webkit-scrollbar': {
         width: "10px", /* width of the entire scrollbar */
@@ -24,35 +35,49 @@ export const useStyles = makeStyles({
         width: "40%"
       }
     },
-    '&__divider': {
-      marginRight: "10px"
-    },
     '&__header-receiver-wrapper': {
+      height: 90,
       display: "flex",
       justifyContent: "space-between",
-      '&__receiver-details': {
+      alignItems: "center",
+      '&__title': {
         display: "flex",
         alignItems: "center",
-        width: "70%",
+        marginLeft: 24,
+        '& h2': {
+          marginLeft: 10
+        }
+      },
+      '&__receiver-details': {
+        height: 80,
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: `${theme.palette.customBackground.light}de`,
+        boxShadow: "0 4px 4px rgba(0, 0, 0, 0.4)",
+        borderTopRightRadius: 24,
+        paddingLeft: 20,
         '&__name': {
-          marginLeft: "15px",
-          fontWeight: 700,
-          color: theme.palette.customColor.main
+          color: theme.palette.customColor.main,
+          fontSize: 18,
+          fontWeight: 600,
+          marginLeft: 15
         },
         '&__avatar': {
+          width: 50,
+          height: 50,
           [theme.breakpoints.down('xs')]: {
-            height: "28px",
-            width: "28px"
+            width: 28,
+            height: 28,
           }
         }
       }
     },
     '&__chat-box-field-btn-wrapper':{
       width: "70%",
-      minHeight: "700px"
+      minHeight: "770px"
     },
     '&__chat-wrapper': {
-      height: "80%",
+      height: "70%",
       overflowY: "auto",
       display: "flex",
       flexDirection: "column-reverse",

@@ -1,28 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import withLayout from "../../views/Layout";
-import Divider from '@material-ui/core/Divider';
-import Message from "../../views/Message";
-import {useTheme} from "@material-ui/core/styles";
-import {MessagesStyle} from "./style";
-import {Avatar, Grid, TextField} from "@material-ui/core";
-import {getAllParentMessage, getPrivateConversations, sendMessageAction} from "../../store/actions/messageAction";
-import {useDispatch} from "react-redux";
-import {connect} from "react-redux";
-import CustomLoader from "../../lib/customLoader";
-import Button from "@material-ui/core/Button";
-import ShowMessage from "../../views/Message/showMessage";
+import {useDispatch, connect} from "react-redux";
 import {useFormik} from "formik";
+
+import Divider from '@material-ui/core/Divider';
+import {useTheme} from "@material-ui/core/styles";
+import {Avatar, Grid, TextField} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Message from "../../views/Message";
+
+import withLayout from "../../views/Layout";
+import {getAllParentMessage, getPrivateConversations, sendMessageAction} from "../../store/actions/messageAction";
+import {getProfileAction} from "../../store/actions/topSectionActions";
+import CustomLoader from "../../lib/customLoader";
+import ShowMessage from "../../views/Message/showMessage";
+import {MessagesStyle} from "./style";
 
 const MessageList = (props) => {
   const theme = useTheme();
   const classes = MessagesStyle(theme)
   const dispatch = useDispatch();
-  const {allMessage, initialLoader, conversations, sendMessageData, isAuthenticated} = props
+  const {allMessage, initialLoader, conversations, sendMessageData, isAuthenticated, avatar, firstName, lastName} = props
   const {parent_id, recipient_id} = sendMessageData
   const [openChat, setOpenChat] = useState(false)
 
   useEffect(() => {
     isAuthenticated && dispatch(getAllParentMessage())
+    isAuthenticated && dispatch(getProfileAction())
   }, [])
 
   let consumer;
@@ -84,22 +87,20 @@ const MessageList = (props) => {
   return (
     <div className={classes.messagesWrapper}>
       <div className={`${classes.messagesWrapper}__header-receiver-wrapper`}>
-        <h1>Messages</h1>
-        {
-          (select && openChat) &&
-          <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details`}>
-            <Avatar
-              className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__avatar`}
-              src={clickedUserAvatar}
-              alt="recipient avatar"
-            />
-            <span className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__name`}>
-              {clickedUserName}</span>
-          </div>
-        }
+
+        <div className={`${classes.messagesWrapper}__header-receiver-wrapper__title`}>
+          <i className="fa-solid fa-comment-dots fa-2x"/>
+          <h2>All messages</h2>
+        </div>
+
+        <Avatar
+          className={`${classes.messagesWrapper}__current-user-avatar`}
+          src={avatar}
+          alt={`${firstName} ${lastName}`}
+        />
+
       </div>
 
-      <Divider/>
       {initialLoader && <CustomLoader/>}
 
       <div className={classes.messagesWrapper}>
@@ -108,8 +109,20 @@ const MessageList = (props) => {
             {allMessage.map((message) => <Message key={message.id} data={message} openChat={openChat}
                                                   setOpenChat={setOpenChat}/>)}
           </div>
-          <Divider orientation="vertical" flexItem className={`${classes.messagesWrapper}__divider`}/>
+          <Divider orientation="vertical" flexItem />
           <div className={`${classes.messagesWrapper}__chat-box-field-btn-wrapper`}>
+
+            {(select && openChat) &&
+              <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details`}>
+                <Avatar
+                  className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__avatar`}
+                  src={clickedUserAvatar}
+                  alt="recipient avatar"
+                />
+                <span className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__name`}>
+              {clickedUserName}</span>
+              </div>}
+
             <div className={`${classes.messagesWrapper}__chat-wrapper`}>
               {(openChat) && conversations.map((message, i) => {
                 return i === 0 ? <ShowMessage key={message.id} data={message} last={true}/> :
@@ -151,7 +164,10 @@ const mapStateToProps = (state) => {
     allMessage: state.messageList.parentMessageList,
     conversations: state.messageList.privateMessageList,
     sendMessageData: state.messageList.sendMessageData,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    avatar: state.topSection.avatar,
+    firstName: state.topSection.firstName,
+    lastName: state.topSection.lastName,
   }
 }
 
