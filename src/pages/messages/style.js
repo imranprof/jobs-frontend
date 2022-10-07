@@ -62,10 +62,16 @@ export const useStyles = makeStyles({
         height: 80,
         display: "flex",
         alignItems: "center",
+        justifyContent: "space-between",
         backgroundColor: `${theme.palette.customBackground.light}de`,
         boxShadow: "0 4px 4px rgba(0, 0, 0, 0.4)",
         borderTopRightRadius: 24,
-        paddingLeft: 20,
+        padding: "0 20px",
+        '&__left': {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        },
         '&__name': {
           color: theme.palette.customColor.main,
           fontSize: 18,
@@ -80,6 +86,9 @@ export const useStyles = makeStyles({
             width: 28,
             height: 28,
           }
+        },
+        '&__profile': {
+          textDecoration: "none",
         }
       }
     },

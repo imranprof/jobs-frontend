@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Link from "next/link";
 import {useDispatch, connect} from "react-redux";
 import {useFormik} from "formik";
 
@@ -6,8 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import {useTheme} from "@material-ui/core/styles";
 import {Avatar, Badge, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Message from "../../views/Message";
 
+import Message from "../../views/Message";
 import withLayout from "../../views/Layout";
 import {getAllParentMessage, getPrivateConversations, sendMessageAction} from "../../store/actions/messageAction";
 import {getProfileAction} from "../../store/actions/topSectionActions";
@@ -95,6 +96,8 @@ const MessageList = (props) => {
     }
   }
 
+  const profileSlug = clickedUserName.split(" ").join("-").toLowerCase()
+
   return (
     <div className={classes.messagesWrapper}>
       <div className={`${classes.messagesWrapper}__header-receiver-wrapper`}>
@@ -129,13 +132,27 @@ const MessageList = (props) => {
 
             {(select && openChat) &&
             <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details`}>
-              <Avatar
-                className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__avatar`}
-                src={clickedUserAvatar}
-                alt="recipient avatar"
-              />
-              <span className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__name`}>
-              {clickedUserName}</span>
+              <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__left`}>
+                <Avatar
+                  className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__avatar`}
+                  src={clickedUserAvatar}
+                  alt="recipient avatar"
+                />
+                <span className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__name`}>
+                {clickedUserName}
+              </span>
+              </div>
+
+              <Link href={`/${profileSlug}`} >
+                <Button size="small" variant="outlined" color="primary">
+                  <a className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__profile`}
+                     target="_blank"
+                     rel="noreferrer"
+                  >
+                    View Profile
+                  </a>
+                </Button>
+              </Link>
             </div>}
 
             <div className={`${classes.messagesWrapper}__chat-wrapper`}>
