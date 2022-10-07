@@ -13,9 +13,13 @@ import {getJobApplication} from "../../../../store/actions/jobAction";
 import {useDispatch} from "react-redux";
 import {connect} from "react-redux";
 import CustomLoader from "../../../../lib/customLoader";
+import {useTheme} from "@material-ui/styles";
+import {HireStyle} from "./style";
 
 
 const HireJobSeeker = (props) => {
+  const theme = useTheme()
+  const classes = HireStyle(theme);
   const [checked, setChecked] = useState(false)
   const dispatch = useDispatch()
 
@@ -41,27 +45,27 @@ const HireJobSeeker = (props) => {
           <JobSeekerHireForm applicationDetails={applicationDetails}/>
           <JobDetails details={related_job}/>
           <Paper>
-            <div style={{display: "flex", alignItems: "center"}}>
+            <div className={`${classes.hireWrapper}__checkbox-title-wrapper`}>
               <span>
                 <Checkbox
                   checked={checked}
                   onChange={handleCheck}
-                  color="primary"
+                  className={`${classes.hireWrapper}__checkbox`}
                 />
               </span>
-              <h4>Yes, I Agree</h4>
+              <h4>Yes, I understand and agree</h4>
             </div>
 
-            <div style={{padding: 15, display: "flex"}}>
-          <span style={{marginRight: 10}}>
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={!checked}
-            >
-              Confirm
-            </Button>
-          </span>
+            <div className={`${classes.hireWrapper}__buttons-wrapper`}>
+              <span className={`${classes.hireWrapper}__confirm-button-wrapper`}>
+                <Button
+                  variant="contained"
+                  className={`${classes.hireWrapper}__button`}
+                  disabled={!checked}
+                >
+                  Confirm
+                </Button>
+              </span>
               <Link href={`/job-application/${applicationDetails.id}/details`}>
                 <Button
                   variant="contained"
