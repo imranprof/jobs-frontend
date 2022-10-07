@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     '&__checkbox-title-wrapper': {
       display: "flex",
       alignItems: "center",
+      paddingLeft: 15,
       '& .MuiSvgIcon-root': {
         fill: theme.palette.customColor.confirmButton
       }
