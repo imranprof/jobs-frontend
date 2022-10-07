@@ -48,7 +48,8 @@ const darkTheme = createTheme({
       sendMessageBody: COLORS.light_blue,
       receivedMessageBody: COLORS.grey_8,
       receivedMessageText: COLORS.white_8,
-      confirmButton: COLORS.light_blue
+      confirmButton: COLORS.light_blue,
+      radioButton: COLORS.pink
     },
     customShadow: {
       main: COLORS.boxShadow_1,

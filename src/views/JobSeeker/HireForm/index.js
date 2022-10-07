@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {Divider, Paper, Radio, TextField} from "@material-ui/core";
-import EditButton from "../../../lib/editButton";
 import {useFormik} from "formik";
 import Icon from "@material-ui/core/Icon";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
+import {useTheme} from "@material-ui/styles";
+import {HireFormStyle} from "./style";
 
 const JobSeekerHireForm = ({applicationDetails}) => {
+  const theme = useTheme()
+  const classes = HireFormStyle(theme);
   const [rateEditMode, setRateEditMode] = useState(false)
   const {bid_rate, related_job} = applicationDetails
   const {pay_type} = related_job
@@ -31,38 +34,38 @@ const JobSeekerHireForm = ({applicationDetails}) => {
 
   return (
     <>
-      <Paper style={{marginTop: 20}}>
-        <h1 style={{marginLeft: 40, paddingTop: 20}}>Terms</h1>
-        <Divider style={{marginBottom: 10}}/>
-        <div style={{marginLeft: 20}}>
+      <Paper className={classes.hireFormWrapper}>
+        <h1 className={`${classes.hireFormWrapper}__heading`}>Terms</h1>
+        <Divider className={`${classes.hireFormWrapper}__divider`}/>
+        <div className={`${classes.hireFormWrapper}__payment-option-rate-wrapper`}>
           <h3>Payment Option</h3>
-          <div style={{width: "50%", display: "flex"}}>
-            <div style={{display: "flex", border: "1px solid", padding: 5, borderRadius: 10, marginRight: 10}}>
-              <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+          <div className={`${classes.hireFormWrapper}__payment-option-wrapper`}>
+            <div className={`${classes.hireFormWrapper}__payment-type-box-wrapper`}>
+              <div className={`${classes.hireFormWrapper}__payment-type-icon-wrapper`}>
                 <Icon className={FontAwesomeIcons.clock}/>
                 <h4>Pay By The Hour</h4>
               </div>
               <span>
                   <Radio
                     checked={selectedValue === 'payByHour'}
-                    color="primary"
                     value="payByHour"
                     onChange={handleTypeChange}
+                    className={`${classes.hireFormWrapper}__radio-button`}
                   />
                 </span>
             </div>
 
-            <div style={{display: "flex", border: "1px solid", padding: 5, borderRadius: 10}}>
-              <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <div className={`${classes.hireFormWrapper}__payment-type-box-wrapper`}>
+              <div className={`${classes.hireFormWrapper}__payment-type-icon-wrapper`}>
                 <Icon className={FontAwesomeIcons.dollar}/>
                 <h4>Pay A Fixed Price</h4>
               </div>
               <span>
                   <Radio
                     checked={selectedValue === 'payFixedPrice'}
-                    color="primary"
                     value="payFixedPrice"
                     onChange={handleTypeChange}
+                    className={`${classes.hireFormWrapper}__radio-button`}
                   />
                 </span>
             </div>
@@ -74,9 +77,9 @@ const JobSeekerHireForm = ({applicationDetails}) => {
             <h3>Pay a Fixed Price</h3>
           )}
 
-          {rateEditMode ? (
-            <div style={{paddingBottom: 20}}>
-              <h4>Hire Rate</h4>
+          <div className={`${classes.hireFormWrapper}__hire-rate-wrapper`}>
+            <h4 className={`${classes.hireFormWrapper}__hire-rate-title`}>Hire Rate</h4>
+            {rateEditMode ? (
               <TextField
                 type="number"
                 size="small"
@@ -86,15 +89,16 @@ const JobSeekerHireForm = ({applicationDetails}) => {
                 value={formik.values.hireRate}
                 onChange={formik.handleChange}
               />
-            </div>
-          ) : (
-            <div style={{display: "flex", alignItems: "center"}}>
-              <h4 style={{marginRight: 20}}>$ {formik.values.hireRate}</h4>
-              <span onClick={handleRateMode}>
-                <EditButton/>
-              </span>
-            </div>
-          )}
+
+            ) : (
+              <div className={`${classes.hireFormWrapper}__hire-rate-button-wrapper`}>
+                <h4 className={`${classes.hireFormWrapper}__hire-rate`}>$ {formik.values.hireRate}.00</h4>
+                <span onClick={handleRateMode} className={`${classes.hireFormWrapper}__edit-button`}>
+                  <i className={`${FontAwesomeIcons.pencil}`} />
+                </span>
+              </div>
+            )}
+          </div>
 
         </div>
       </Paper>
