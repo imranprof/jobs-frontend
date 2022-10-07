@@ -1,5 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
+import FONTS from "../../../styles/fonts";
+
 export const useStyles = makeStyles({
   messagesWrapper: theme => ({
     backgroundColor: theme.palette.customBackground.dark,
@@ -45,8 +47,16 @@ export const useStyles = makeStyles({
         alignItems: "center",
         marginLeft: 24,
         '& h2': {
-          marginLeft: 10
+          marginLeft: 10,
+          fontFamily: FONTS.modalTitleFont,
+          letterSpacing: "1px"
         }
+      },
+      '&__right': {
+        width: 115,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
       },
       '&__receiver-details': {
         height: 80,
@@ -60,6 +70,7 @@ export const useStyles = makeStyles({
           color: theme.palette.customColor.main,
           fontSize: 18,
           fontWeight: 600,
+          fontFamily: FONTS.primaryFont,
           marginLeft: 15
         },
         '&__avatar': {

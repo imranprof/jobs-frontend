@@ -4,7 +4,7 @@ import {useFormik} from "formik";
 
 import Divider from '@material-ui/core/Divider';
 import {useTheme} from "@material-ui/core/styles";
-import {Avatar, Grid, TextField} from "@material-ui/core";
+import {Avatar, Badge, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Message from "../../views/Message";
 
@@ -14,12 +14,23 @@ import {getProfileAction} from "../../store/actions/topSectionActions";
 import CustomLoader from "../../lib/customLoader";
 import ShowMessage from "../../views/Message/showMessage";
 import {MessagesStyle} from "./style";
+import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 
 const MessageList = (props) => {
   const theme = useTheme();
   const classes = MessagesStyle(theme)
   const dispatch = useDispatch();
-  const {allMessage, initialLoader, conversations, sendMessageData, isAuthenticated, avatar, firstName, lastName} = props
+  const {
+    allMessage,
+    initialLoader,
+    conversations,
+    sendMessageData,
+    isAuthenticated,
+    avatar,
+    firstName,
+    lastName,
+    notificationCount
+  } = props
   const {parent_id, recipient_id} = sendMessageData
   const [openChat, setOpenChat] = useState(false)
 
@@ -39,7 +50,7 @@ const MessageList = (props) => {
       },
       {
         received: message => {
-          if(parent_id === message.parent_message_id){
+          if (parent_id === message.parent_message_id) {
             dispatch(getPrivateConversations(parent_id))
           }
         }
@@ -87,18 +98,22 @@ const MessageList = (props) => {
   return (
     <div className={classes.messagesWrapper}>
       <div className={`${classes.messagesWrapper}__header-receiver-wrapper`}>
-
         <div className={`${classes.messagesWrapper}__header-receiver-wrapper__title`}>
-          <i className="fa-solid fa-comment-dots fa-2x"/>
+          <i className={`${FontAwesomeIcons.message} fa-2x`}/>
           <h2>All messages</h2>
         </div>
 
-        <Avatar
-          className={`${classes.messagesWrapper}__current-user-avatar`}
-          src={avatar}
-          alt={`${firstName} ${lastName}`}
-        />
+        <div className={`${classes.messagesWrapper}__header-receiver-wrapper__right`}>
+          <Badge badgeContent={notificationCount} color="secondary">
+            <i className={`${FontAwesomeIcons.bell} fa-2x`}/>
+          </Badge>
 
+          <Avatar
+            className={`${classes.messagesWrapper}__current-user-avatar`}
+            src={avatar}
+            alt={`${firstName} ${lastName}`}
+          />
+        </div>
       </div>
 
       {initialLoader && <CustomLoader/>}
@@ -109,19 +124,19 @@ const MessageList = (props) => {
             {allMessage.map((message) => <Message key={message.id} data={message} openChat={openChat}
                                                   setOpenChat={setOpenChat}/>)}
           </div>
-          <Divider orientation="vertical" flexItem />
+          <Divider orientation="vertical" flexItem/>
           <div className={`${classes.messagesWrapper}__chat-box-field-btn-wrapper`}>
 
             {(select && openChat) &&
-              <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details`}>
-                <Avatar
-                  className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__avatar`}
-                  src={clickedUserAvatar}
-                  alt="recipient avatar"
-                />
-                <span className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__name`}>
+            <div className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details`}>
+              <Avatar
+                className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__avatar`}
+                src={clickedUserAvatar}
+                alt="recipient avatar"
+              />
+              <span className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__name`}>
               {clickedUserName}</span>
-              </div>}
+            </div>}
 
             <div className={`${classes.messagesWrapper}__chat-wrapper`}>
               {(openChat) && conversations.map((message, i) => {
@@ -168,6 +183,7 @@ const mapStateToProps = (state) => {
     avatar: state.topSection.avatar,
     firstName: state.topSection.firstName,
     lastName: state.topSection.lastName,
+    notificationCount: state.messageList.total_notification_count
   }
 }
 
