@@ -4,7 +4,7 @@ const useStyles = makeStyles({
   hireFormWrapper: theme => ({
     marginTop: 20,
     '&__heading': {
-      marginLeft: 40,
+      marginLeft: 30,
       paddingTop: 20
     },
     '&__divider': {

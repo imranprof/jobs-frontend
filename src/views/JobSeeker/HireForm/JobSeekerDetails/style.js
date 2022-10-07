@@ -4,7 +4,7 @@ import FONTS from "../../../../../styles/fonts";
 const useStyles = makeStyles({
   jobSeekerDetailsWrapper: theme => ({
     '&__title': {
-      marginLeft: 40,
+      marginLeft: 30,
       marginBottom: 35,
       fontFamily: FONTS.secondaryFont
     },
