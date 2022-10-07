@@ -15,30 +15,59 @@ const useStyles = makeStyles({
       width: "90%"
     },
     '&__payment-option-wrapper': {
-      display: "flex"
+      display: "flex",
+      marginBottom: 40
     },
     '&__payment-type-box-wrapper': {
-      display: "flex",
+      position: "relative",
       border: "1px solid",
       padding: 5,
       borderRadius: 5,
-      marginRight: 10,
+      marginRight: 30,
       minHeight: 125,
+      width: 190
 
     },
     '&__payment-type-icon-wrapper': {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      marginTop: 40
     },
     '&__radio-button': {
       '&.Mui-checked':{
         color: theme.palette.customColor.radioButton
       }
     },
+    '&__radio-button-wrapper': {
+      position: "absolute",
+      right: 0,
+      top: 0
+    },
     '&__hire-rate-wrapper': {
-      paddingBottom: 25
+      paddingBottom: 25,
+      '& label.Mui-focused': {
+        color: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiFilledInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiOutlinedInput-multiline': {
+        padding: 0
+      },
+      '& .MuiOutlinedInput-inputMultiline': {
+        padding: 12
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: theme.palette.customBorder.customInputBorder,
+        }
+      },
+
     },
     '&__hire-rate-title': {
       marginBottom: 5
@@ -46,12 +75,16 @@ const useStyles = makeStyles({
     '&__hire-rate-button-wrapper': {
       display: "flex",
       alignItems: "center",
+
     },
     '&__hire-rate': {
       marginRight: 10
     },
     '&__edit-button': {
       cursor: "pointer"
+    },
+    '&__pay-type-text': {
+      textAlign: "center"
     }
   }),
 })

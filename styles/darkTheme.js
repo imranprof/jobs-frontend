@@ -22,7 +22,7 @@ const darkTheme = createTheme({
       seeMoreBtnHover: COLORS.gray_1,
       skillBackground: COLORS.gray,
       shareBar: COLORS.gray_1,
-      buttonHover: COLORS.blue_1
+      buttonHover: COLORS.green_1
     },
     customColor: {
       main: COLORS.white_4,
@@ -48,7 +48,7 @@ const darkTheme = createTheme({
       sendMessageBody: COLORS.light_blue,
       receivedMessageBody: COLORS.grey_8,
       receivedMessageText: COLORS.white_8,
-      confirmButton: COLORS.light_blue,
+      confirmButton: COLORS.success,
       radioButton: COLORS.pink
     },
     customShadow: {

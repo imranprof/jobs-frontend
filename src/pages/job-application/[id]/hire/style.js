@@ -12,7 +12,7 @@ const useStyles = makeStyles({
       }
     },
     '&__buttons-wrapper': {
-      padding: 15,
+      padding: "0px 0px 30px 26px",
       display: "flex"
     },
     '&__confirm-button-wrapper': {

@@ -43,9 +43,9 @@ const JobSeekerHireForm = ({applicationDetails}) => {
             <div className={`${classes.hireFormWrapper}__payment-type-box-wrapper`}>
               <div className={`${classes.hireFormWrapper}__payment-type-icon-wrapper`}>
                 <Icon className={FontAwesomeIcons.clock}/>
-                <h4>Pay By The Hour</h4>
+                <h4 className={`${classes.hireFormWrapper}__pay-type-text`}>Pay By The Hour</h4>
               </div>
-              <span>
+              <span  className={`${classes.hireFormWrapper}__radio-button-wrapper`}>
                   <Radio
                     checked={selectedValue === 'payByHour'}
                     value="payByHour"
@@ -58,9 +58,9 @@ const JobSeekerHireForm = ({applicationDetails}) => {
             <div className={`${classes.hireFormWrapper}__payment-type-box-wrapper`}>
               <div className={`${classes.hireFormWrapper}__payment-type-icon-wrapper`}>
                 <Icon className={FontAwesomeIcons.dollar}/>
-                <h4>Pay A Fixed Price</h4>
+                <h4 className={`${classes.hireFormWrapper}__pay-type-text`}>Pay A Fixed Price</h4>
               </div>
-              <span>
+              <span className={`${classes.hireFormWrapper}__radio-button-wrapper`}>
                   <Radio
                     checked={selectedValue === 'payFixedPrice'}
                     value="payFixedPrice"
