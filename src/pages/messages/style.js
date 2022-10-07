@@ -17,7 +17,7 @@ export const useStyles = makeStyles({
     '&__parent-child-message-wrapper': {
       display: "flex",
       width: "100%",
-      maxHeight: "770px"
+      maxHeight: 850
     },
     '&__parent-messages-wrapper': {
       width: "30%",
@@ -113,13 +113,37 @@ export const useStyles = makeStyles({
       }
     },
     '&__text-field-btn-wrapper': {
-      height: "20%",
-      marginBottom: "20px"
+      margin: "20px 20px 20px 10px",
+      // Override TextField
+      '& label.Mui-focused': {
+        color: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiFilledInput-underline:after': {
+        borderBottomColor: theme.palette.customBorder.customInputBorder
+      },
+      '& .MuiOutlinedInput-multiline': {
+        padding: 0
+      },
+      '& .MuiOutlinedInput-inputMultiline': {
+        padding: 12
+      },
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: theme.palette.customBorder.customInputBorder,
+        }
+      },
     },
     '&__send-btn-wrapper':{
       display: "flex",
       justifyContent: "flex-end",
-      marginTop: "10px"
+      marginTop: "10px",
+      '&__icon': {
+        fontSize: 16,
+        marginLeft: 5
+      }
     },
     '& h1': {
       color: theme.palette.customColor.main,

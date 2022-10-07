@@ -7,6 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import {useTheme} from "@material-ui/core/styles";
 import {Avatar, Badge, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import SendIcon from '@material-ui/icons/Send';
 
 import Message from "../../views/Message";
 import withLayout from "../../views/Layout";
@@ -163,24 +164,30 @@ const MessageList = (props) => {
             </div>
             {openChat && <div className={`${classes.messagesWrapper}__text-field-btn-wrapper`}>
               <TextField
+                size="medium"
                 multiline
                 fullWidth
                 name="body"
-                placeholder={"Type a message..."}
+                placeholder={"Write a message..."}
                 rows={3}
                 variant="outlined"
                 value={formik.values.body}
                 onChange={formik.handleChange}
               />
+
               <div className={`${classes.messagesWrapper}__send-btn-wrapper`}>
                 <Button
                   size={"small"}
                   color={"primary"}
                   variant={"contained"}
                   onClick={formik.handleSubmit}
-                >Send
+                  disabled={!formik.values.body}
+                >
+                  <span>Send</span>
+                  <SendIcon className={`${classes.messagesWrapper}__send-btn-wrapper__icon`} />
                 </Button>
               </div>
+
             </div>}
           </div>
         </div>
