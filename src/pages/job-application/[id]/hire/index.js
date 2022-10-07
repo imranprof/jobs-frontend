@@ -3,11 +3,11 @@ import Link from "next/link";
 
 import withLayout from "../../../../views/Layout";
 import JobSeekerHireForm from "../../../../views/JobSeeker/HireForm";
-import JobDetails from "../../../../views/JobSeeker/HireForm/jobDetails";
+import JobDetails from "../../../../views/JobSeeker/HireForm/JobDetails/jobDetails";
 import {NoSsr, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {useRouter} from "next/router";
-import JobSeekerDetails from "../../../../views/JobSeeker/HireForm/JobSeekerDetails";
+import JobSeekerDetails from "../../../../views/JobSeeker/HireForm/JobSeekerDetails/JobSeekerDetails";
 import {Checkbox} from "@material-ui/core";
 import {getJobApplication} from "../../../../store/actions/jobAction";
 import {useDispatch} from "react-redux";
@@ -41,7 +41,7 @@ const HireJobSeeker = (props) => {
     <NoSsr>
       {initialLoader ? <CustomLoader/> :
         <>
-          <JobSeekerDetails avatar={applicant_details.avatar} name={applicant_details.name}/>
+          <JobSeekerDetails avatar={applicant_details.avatar} name={applicant_details.name} email={applicant_details.email}/>
           <JobSeekerHireForm applicationDetails={applicationDetails}/>
           <JobDetails details={related_job}/>
           <Paper>
