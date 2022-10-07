@@ -38,17 +38,17 @@ const HireJobSeeker = (props) => {
       {initialLoader ? <CustomLoader/> :
         <>
           <JobSeekerDetails avatar={applicant_details.avatar} name={applicant_details.name}/>
-          <JobSeekerHireForm/>
+          <JobSeekerHireForm applicationDetails={applicationDetails}/>
           <JobDetails details={related_job}/>
           <Paper>
             <div style={{display: "flex", alignItems: "center"}}>
-          <span>
-          <Checkbox
-            checked={checked}
-            onChange={handleCheck}
-            color="primary"
-          />
-        </span>
+              <span>
+                <Checkbox
+                  checked={checked}
+                  onChange={handleCheck}
+                  color="primary"
+                />
+              </span>
               <h4>Yes, I Agree</h4>
             </div>
 
@@ -62,7 +62,7 @@ const HireJobSeeker = (props) => {
               Confirm
             </Button>
           </span>
-              <Link href={'/application/details'}>
+              <Link href={`/job-application/${applicationDetails.id}/details`}>
                 <Button
                   variant="contained"
                 >

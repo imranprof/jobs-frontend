@@ -5,26 +5,26 @@ import {useFormik} from "formik";
 import Icon from "@material-ui/core/Icon";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
-const JobSeekerHireForm = () => {
-  const [payTypeEditMode, setPayTypeEditMode] = useState(true)
-  const [rateEditMode, setRateEditMode] = useState(true)
-  const [selectedValue, setSetSelectedValue] = useState('payByHour')
+const JobSeekerHireForm = ({applicationDetails}) => {
+  const [rateEditMode, setRateEditMode] = useState(false)
+  const {bid_rate, related_job} = applicationDetails
+  const {pay_type} = related_job
+
+  const [selectedValue, setSetSelectedValue] = useState(pay_type === 'Pay a fixed price' ? 'payFixedPrice' : 'payByHour')
 
   const handleTypeChange = (e) => {
     setSetSelectedValue(e.target.value)
     formik.values.payTypeValue = selectedValue
   }
-  // const handlePayTypeMode = () => {
-  //   setPayTypeEditMode(!payTypeEditMode)
-  // }
-  // const handleRateMode = () => {
-  //   setRateEditMode(!rateEditMode)
-  // }
+
+  const handleRateMode = () => {
+    setRateEditMode(!rateEditMode)
+  }
 
   const formik = useFormik({
     initialValues: {
       payTypeValue: selectedValue,
-      hireRate: ''
+      hireRate: bid_rate ? bid_rate : ''
     },
     onSubmit: values => console.log(values)
   })
@@ -74,19 +74,27 @@ const JobSeekerHireForm = () => {
             <h3>Pay a Fixed Price</h3>
           )}
 
-          <div style={{paddingBottom: 20}}>
-            <h4>Hire Rate</h4>
-            <h4>${formik.values.hireRate}</h4>
-            <TextField
-              type="number"
-              size="small"
-              variant="outlined"
-              label="$"
-              name="hireRate"
-              value={formik.values.hireRate}
-              onChange={formik.handleChange}
-            />
-          </div>
+          {rateEditMode ? (
+            <div style={{paddingBottom: 20}}>
+              <h4>Hire Rate</h4>
+              <TextField
+                type="number"
+                size="small"
+                variant="outlined"
+                label="$"
+                name="hireRate"
+                value={formik.values.hireRate}
+                onChange={formik.handleChange}
+              />
+            </div>
+          ) : (
+            <div style={{display: "flex", alignItems: "center"}}>
+              <h4 style={{marginRight: 20}}>$ {formik.values.hireRate}</h4>
+              <span onClick={handleRateMode}>
+                <EditButton/>
+              </span>
+            </div>
+          )}
 
         </div>
       </Paper>

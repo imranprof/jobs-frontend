@@ -21,7 +21,7 @@ const JobSeekerDetails = (props) => {
             <h3 style={{margin: "0px 0px 15px 0px"}}>{name}</h3>
             <div style={{display: "flex"}}>
               <Icon className={FontAwesomeIcons.location}/>
-              <p style={{margin:0}}>Job location</p>
+              <p style={{margin:0}}>location</p>
             </div>
           </div>
         </div>

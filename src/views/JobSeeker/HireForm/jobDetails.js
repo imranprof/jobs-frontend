@@ -13,7 +13,13 @@ const JobDetails = ({details}) => {
           <h3>Job Title</h3>
           <h4>{title}</h4>
           <h3>Job Details</h3>
-          <pre style={{whiteSpace: "pre-wrap", marginBottom: 25}}>
+          <pre style={{
+            whiteSpace: "pre-wrap",
+            marginBottom: 25,
+            fontSize: "15px",
+            fontFamily: "Helvetica Neue",
+            lineHeight: "1.5"
+          }}>
             {description}
           </pre>
           <Divider/>

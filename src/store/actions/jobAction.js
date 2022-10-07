@@ -179,7 +179,6 @@ export const getJobApplication = (id) => {
   return (dispatch) => {
     axios.get(jobApplicationUrl)
       .then(res => {
-        console.log('data-------- ', res.data.job_application_details)
         dispatch(setJobApplication(res.data.job_application_details))
       })
       .catch(err => err.response);
