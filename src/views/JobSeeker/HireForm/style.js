@@ -85,6 +85,11 @@ const useStyles = makeStyles({
     },
     '&__pay-type-text': {
       textAlign: "center"
+    },
+    '&__hired-wrapper': {
+      display: "flex",
+      justifyContent: "center",
+      height: "70vh"
     }
   }),
 })
