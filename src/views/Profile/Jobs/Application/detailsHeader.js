@@ -9,7 +9,7 @@ import {JobApplicationStyle} from "./style";
 const DetailsHeader = (props) => {
   const theme = useTheme();
   const classes = JobApplicationStyle(theme);
-  const {applicant_details, selection}=props.applicationData
+  const {applicant_details, selection, hire}=props.applicationData
   const {name, avatar, profile_slug, email} = applicant_details
 
   return (
@@ -39,6 +39,7 @@ const DetailsHeader = (props) => {
           ) : ""}
           <Link href={`/job-application/${props.applicationData.id}/hire`}>
             <Button variant="contained" color="secondary"
+                    disabled={hire}
                     className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-hire`}>
               Hire Job Seeker
             </Button>
