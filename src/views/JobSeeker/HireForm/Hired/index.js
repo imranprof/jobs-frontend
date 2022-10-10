@@ -15,7 +15,7 @@ const Hired = ({applicantName}) => {
             src="/hire-email.gif"
             alt="hire image"
           />
-        <h3 className={`${classes.hiredWrapper}__text`}>Offer sent to {applicantName}</h3>
+        <h2 className={`${classes.hiredWrapper}__text`}>Offer sent to {applicantName}</h2>
         <h3 className={`${classes.hiredWrapper}__text`}>We'll notify you when {applicantName} responds to your Offer</h3>
       </div>
     </Paper>
