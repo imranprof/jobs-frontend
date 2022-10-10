@@ -19,7 +19,8 @@ const useStyles = makeStyles({
     },
     '&__name': {
       fontSize: 20,
-      margin: "0px 0px 15px 15px"
+      margin: "0px 0px 15px 15px",
+      textTransform: "capitalize"
     }
   }),
 })
