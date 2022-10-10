@@ -305,7 +305,6 @@ const JobShow = (props) => {
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
                         <Link href={`/job-application/${applicant.application_id}/details`} >
                           <a target={"_blank"}
-                            // onClick={()=>detailsHandler(applicant)}
                             className={`${classes.jobShowWrapper}__applicant-list__details-link`}
                           >
                             Details
