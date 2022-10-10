@@ -3,7 +3,7 @@ import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   hiredWrapper: theme => ({
-    display:"flex",
+    display: "flex",
     justifyContent: "center",
     maxHeight: 400,
     '&__content-wrapper': {
@@ -11,7 +11,10 @@ const useStyles = makeStyles({
       flexDirection: "column",
       alignItems: "center",
       margin: 10,
-      padding: 40
+      padding: 40,
+      [theme.breakpoints.down('xs')]: {
+        padding: 10
+      }
     },
     '&__image': {
       height: 169,
