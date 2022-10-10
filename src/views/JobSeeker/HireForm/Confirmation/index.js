@@ -9,7 +9,7 @@ const Confirmation = (props) => {
   const theme = useTheme()
   const classes = HireStyle(theme);
   const [checked, setChecked] = useState(false)
-  const {applicationDetails} = props
+  const {applicationDetails, handleHireFormSubmit} = props
 
   const handleCheck = (e) => {
     setChecked(e.target.checked)
@@ -32,6 +32,7 @@ const Confirmation = (props) => {
         <div className={`${classes.hireWrapper}__buttons-wrapper`}>
               <span className={`${classes.hireWrapper}__confirm-button-wrapper`}>
                 <Button
+                  onClick={handleHireFormSubmit}
                   variant="contained"
                   className={`${classes.hireWrapper}__button`}
                   disabled={!checked}

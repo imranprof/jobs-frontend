@@ -5,6 +5,10 @@ import Icon from "@material-ui/core/Icon";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {useTheme} from "@material-ui/styles";
 import {HireFormStyle} from "./style";
+import JobDetails from "./JobDetails/jobDetails";
+import Confirmation from "./Confirmation";
+import {useDispatch} from "react-redux";
+import {hireJobSeeker} from "../../../store/actions/jobAction";
 
 const JobSeekerHireForm = ({applicationDetails}) => {
   const theme = useTheme()
@@ -12,6 +16,7 @@ const JobSeekerHireForm = ({applicationDetails}) => {
   const [rateEditMode, setRateEditMode] = useState(false)
   const {bid_rate, related_job} = applicationDetails
   const {pay_type} = related_job
+  const dispatch = useDispatch()
 
   const [selectedValue, setSetSelectedValue] = useState(pay_type === 'Pay a fixed price' ? 'payFixedPrice' : 'payByHour')
 
@@ -24,12 +29,17 @@ const JobSeekerHireForm = ({applicationDetails}) => {
     setRateEditMode(!rateEditMode)
   }
 
+  const handleHireFormSubmit =()=> {
+    const {hireRate} = formik.values
+    let payType = selectedValue === 'payFixedPrice' ? 'Pay a fixed price' : 'Pay by the hour'
+    dispatch(hireJobSeeker({id: applicationDetails.id, rate: hireRate, payType: payType}))
+  }
+
   const formik = useFormik({
     initialValues: {
       payTypeValue: selectedValue,
       hireRate: bid_rate ? bid_rate : ''
-    },
-    onSubmit: values => console.log(values)
+    }
   })
 
   return (
@@ -102,6 +112,8 @@ const JobSeekerHireForm = ({applicationDetails}) => {
 
         </div>
       </Paper>
+      <JobDetails details={related_job}/>
+      <Confirmation applicationDetails={applicationDetails} handleHireFormSubmit={handleHireFormSubmit}/>
     </>
   );
 };

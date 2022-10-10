@@ -8,6 +8,7 @@ const jobApplyUrl = process.env.NEXT_PUBLIC_JOB_APPLY_URL
 const jobsUrl = process.env.NEXT_PUBLIC_My_JOB_URL
 const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
+const hireJobSeekerUrl = process.env.NEXT_PUBLIC_HIRE_JOB_SEEKER_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget} = job;
@@ -184,6 +185,23 @@ export const getJobApplication = (id) => {
       .catch(err => err.response);
   }
 
+}
+
+export const hireJobSeeker = (hireDetails) => {
+  const {id, rate, payType} = hireDetails
+  const data = {
+    "job_application": {
+      "id": id,
+      "hire_rate": `{${rate}}`,
+      "pay_type": payType
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(hireJobSeekerUrl, data)
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
 }
 
 
