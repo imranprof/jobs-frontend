@@ -7,6 +7,14 @@ export const useStyles = makeStyles({
     padding: 10,
     marginBottom: 5,
     cursor: "pointer",
+    '&__full': {
+      display: "flex",
+    },
+    '& .selected-border': {
+      height: "auto",
+      borderLeft: `4px solid ${theme.palette.customColor.sendMessageBody}`,
+      marginRight: 10
+    },
     '&__name-badge-wrapper': {
       display: "flex"
     },

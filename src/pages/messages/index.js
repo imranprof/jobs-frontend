@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Link from "next/link";
 import {useDispatch, connect} from "react-redux";
 import {useFormik} from "formik";
 
@@ -144,16 +143,15 @@ const MessageList = (props) => {
               </span>
               </div>
 
-              <Link href={`/${profileSlug}`} >
-                <Button size="small" variant="outlined" color="primary">
-                  <a className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__profile`}
-                     target="_blank"
-                     rel="noreferrer"
-                  >
-                    View Profile
-                  </a>
-                </Button>
-              </Link>
+              <Button size="small" variant="outlined" color="primary">
+                <a href={`/${profileSlug}`}
+                   className={`${classes.messagesWrapper}__header-receiver-wrapper__receiver-details__profile`}
+                   target="_blank"
+                   rel="noreferrer"
+                >
+                  View Profile
+                </a>
+              </Button>
             </div>}
 
             <div className={`${classes.messagesWrapper}__chat-wrapper`}>

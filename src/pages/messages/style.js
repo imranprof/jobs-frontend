@@ -88,6 +88,7 @@ export const useStyles = makeStyles({
           }
         },
         '&__profile': {
+          color: "inherit",
           textDecoration: "none",
         }
       }
