@@ -22,7 +22,8 @@ const useStyles = makeStyles({
     },
     '&__text': {
       textAlign: "center",
-      fontFamily: FONTS.jobDescriptionFont
+      fontFamily: FONTS.jobDescriptionFont,
+      color: theme.palette.customColor.main
     }
   }),
 })
