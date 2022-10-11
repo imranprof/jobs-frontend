@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import Link from "next/link";
+
 import {Checkbox, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Link from "next/link";
 import {useTheme} from "@material-ui/styles";
+
 import {HireStyle} from "../../../../pages/job-application/[id]/hire/style";
 
 const Confirmation = (props) => {

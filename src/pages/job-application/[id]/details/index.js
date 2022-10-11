@@ -1,3 +1,8 @@
+import {useEffect} from "react";
+import {useRouter} from "next/router";
+import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
+
 import {capitalize, NoSsr, Paper} from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
@@ -7,10 +12,6 @@ import {DetailsStyle} from "./style";
 import DetailsHeader from "../../../../views/Profile/Jobs/Application/detailsHeader";
 import CoverLetterWrapper from "../../../../views/Profile/Jobs/Application/coverLetterWrapper";
 import {getJobApplication} from "../../../../store/actions/jobAction";
-import {useRouter} from "next/router";
-import {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {connect} from "react-redux";
 import CustomLoader from "../../../../lib/customLoader";
 
 const Details = (props) => {

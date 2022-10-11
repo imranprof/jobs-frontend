@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
-import {Divider, NoSsr, Paper, Radio, TextField} from "@material-ui/core";
+import {useDispatch} from "react-redux";
+
 import {useFormik} from "formik";
+
+import {Divider, NoSsr, Paper, Radio, TextField} from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
-import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {useTheme} from "@material-ui/styles";
+
+import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {HireFormStyle} from "./style";
 import JobDetails from "./JobDetails/jobDetails";
 import Confirmation from "./Confirmation";
-import {useDispatch} from "react-redux";
 import {hireJobSeeker} from "../../../store/actions/jobAction";
 import Hired from "./Hired";
 import JobSeekerDetails from "./JobSeekerDetails/JobSeekerDetails";

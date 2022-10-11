@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
+import {useRouter} from "next/router";
+import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
+
+import {NoSsr} from "@material-ui/core";
 
 import withLayout from "../../../../views/Layout";
 import JobSeekerHireForm from "../../../../views/JobSeeker/HireForm";
-import {NoSsr} from "@material-ui/core";
-import {useRouter} from "next/router";
 import {getJobApplication} from "../../../../store/actions/jobAction";
-import {useDispatch} from "react-redux";
-import {connect} from "react-redux";
 import CustomLoader from "../../../../lib/customLoader";
 
 
