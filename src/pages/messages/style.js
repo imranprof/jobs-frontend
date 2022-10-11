@@ -13,11 +13,24 @@ export const useStyles = makeStyles({
       height: 40,
       borderRadius: '50%',
       marginRight: 20,
+      [theme.breakpoints.down('sm')]: {
+        width: 34,
+        height: 34,
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: 30,
+        height: 30,
+      }
     },
     '&__parent-child-message-wrapper': {
       display: "flex",
       width: "100%",
-      maxHeight: 850
+      maxHeight: 850,
+      [theme.breakpoints.down('xs')]: {
+        height: 960,
+        minHeight: 0,
+        flexDirection: "column"
+      }
     },
     '&__parent-messages-wrapper': {
       width: "30%",
@@ -34,7 +47,9 @@ export const useStyles = makeStyles({
         border: '2px solid rgba(0,0,0,0.2)'
       },
       [theme.breakpoints.down('xs')]: {
-        width: "40%"
+        width: "96%",
+        height: 170,
+        marginBottom: 15
       }
     },
     '&__header-receiver-wrapper': {
@@ -46,17 +61,40 @@ export const useStyles = makeStyles({
         display: "flex",
         alignItems: "center",
         marginLeft: 24,
+        '& i': {
+          fontSize: 30
+        },
         '& h2': {
           marginLeft: 10,
           fontFamily: FONTS.modalTitleFont,
-          letterSpacing: "1px"
-        }
+          letterSpacing: "1px",
+        },
+        [theme.breakpoints.down('sm')]: {
+          '& i': {
+            fontSize: 24
+          },
+          '& h2': {
+            fontSize: 18
+          }
+        },
       },
       '&__right': {
         width: 115,
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        [theme.breakpoints.down('sm')]: {
+          width: 100,
+          '& i': {
+            fontSize: 26
+          }
+        },
+        [theme.breakpoints.down('xs')]: {
+          width: 90,
+          '& i': {
+            fontSize: 22
+          }
+        }
       },
       '&__receiver-details': {
         height: 80,
@@ -90,12 +128,42 @@ export const useStyles = makeStyles({
         '&__profile': {
           color: "inherit",
           textDecoration: "none",
-        }
+        },
+        [theme.breakpoints.down('sm')]: {
+          '&__name': {
+            fontSize: 16
+          },
+          '&__avatar': {
+            width: 36,
+            height: 36,
+          }
+        },
+        [theme.breakpoints.down('xs')]: {
+          height: 65,
+          borderTopRightRadius: 24,
+          borderTopLeftRadius: 24,
+          padding: "0 10px",
+          '&__name': {
+            fontSize: 14,
+            marginLeft: 10
+          },
+          '&__profile': {
+            fontSize: 11
+          }
+        },
+      },
+      [theme.breakpoints.down('sm')]: {
+        height: 75
       }
     },
     '&__chat-box-field-btn-wrapper':{
       width: "70%",
-      minHeight: "770px"
+      minHeight: 770,
+      [theme.breakpoints.down('xs')]: {
+        width: "100%",
+        height: "80%",
+        minHeight: 0
+      }
     },
     '&__chat-wrapper': {
       height: "70%",
@@ -111,6 +179,9 @@ export const useStyles = makeStyles({
         background: "#3C3E41", /* color of the scroll thumb */
         borderRadius: 5, /* roundness of the scroll thumb */
         border: '2px solid rgba(0,0,0,0.2)'
+      },
+      [theme.breakpoints.down('xs')]: {
+        height: "68%"
       }
     },
     '&__text-field-btn-wrapper': {
@@ -136,6 +207,9 @@ export const useStyles = makeStyles({
           borderColor: theme.palette.customBorder.customInputBorder,
         }
       },
+      [theme.breakpoints.down('xs')]: {
+        margin: "15px 20px 20px 10px",
+      }
     },
     '&__send-btn-wrapper':{
       display: "flex",

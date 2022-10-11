@@ -31,19 +31,14 @@ export const useStyles = makeStyles({
       height: "32px",
       width: "32px",
       [theme.breakpoints.down('xs')]: {
-        height: "15px",
-        width: "15px"
+        width: 28,
+        height: 28,
       }
     },
     '&__name': {
       fontWeight: 700,
       color: theme.palette.customColor.main,
       marginRight: 20,
-      [theme.breakpoints.down('xs')]: {
-        fontWeight: 500,
-        fontSize: 12,
-        marginRight: 18
-      }
     },
     '&__message-body': {
       marginLeft: "42px",
@@ -53,8 +48,16 @@ export const useStyles = makeStyles({
       WebkitBoxOrient: "vertical",
       overflow: "hidden",
       textOverflow: "ellipsis",
-      [theme.breakpoints.down('xs')]: {
-        display: "none"
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: "97%",
+      '&__avatar': {
+        width: 28,
+        height: 28,
+      },
+      '&__message-body': {
+        marginLeft: 38,
+        fontSize: 12
       }
     }
   })
