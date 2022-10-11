@@ -6,11 +6,11 @@ import {Avatar, Button, Icon} from "@material-ui/core";
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {JobApplicationStyle} from "./style";
 
-const DetailsHeader = ({applicationData}) => {
+const DetailsHeader = (props) => {
   const theme = useTheme();
   const classes = JobApplicationStyle(theme);
-  const {avatar, profile_slug, email, short_list} = applicationData
-  const fullName = profile_slug.split("-").join(" ")
+  const {applicant_details, selection, hire}=props.applicationData
+  const {name, avatar, profile_slug, email} = applicant_details
 
   return (
     <div>
@@ -19,7 +19,7 @@ const DetailsHeader = ({applicationData}) => {
         <div className={`${classes.jobApplicationWrapper}__header-wrapper__left`}>
           <Avatar className={`${classes.jobApplicationWrapper}__header-wrapper__avatar`} src={avatar}/>
           <div className={`${classes.jobApplicationWrapper}__header-wrapper__personal-info`}>
-            <h2 className={`${classes.jobApplicationWrapper}__header-wrapper__name`}>{fullName}</h2>
+            <h2 className={`${classes.jobApplicationWrapper}__header-wrapper__name`}>{name}</h2>
             <span className={`${classes.jobApplicationWrapper}__header-wrapper__email`}>{email}</span>
 
             <div className={`${classes.jobApplicationWrapper}__header-wrapper__link-wrapper`}>
@@ -31,15 +31,19 @@ const DetailsHeader = ({applicationData}) => {
         </div>
 
         <div className={`${classes.jobApplicationWrapper}__header-wrapper__buttons`}>
-          {short_list ? (
+          {selection ? (
             <Button variant="outlined" className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-shortlisted`} disabled>
               <Icon className={`${classes.jobApplicationWrapper}__header-wrapper__buttons__icon ${FontAwesomeIcons.selected}`} />
               Shortlisted
             </Button>
           ) : ""}
-          <Button variant="contained" color="secondary" className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-hire`}>
-            Hire Job Seeker
-          </Button>
+          <Link href={`/job-application/${props.applicationData.id}/hire`}>
+            <Button variant="contained" color="secondary"
+                    disabled={hire}
+                    className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-hire`}>
+              Hire Job Seeker
+            </Button>
+          </Link>
         </div>
 
       </div>

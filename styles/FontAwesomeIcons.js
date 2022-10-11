@@ -24,6 +24,8 @@ const FontAwesomeIcons = {
     "selected": "fa-solid fa-circle-check",
     "users": "fa-solid fa-user-group",
     "briefcase": "fa-solid fa-briefcase",
+    "location": "fa-solid fa-location-dot",
+    "dollar": 'fa-solid fa-money-check-dollar',
     "message": "fa-solid fa-comment-dots",
     "bell": "fa-regular fa-bell"
 }
