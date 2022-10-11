@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect, useDispatch} from "react-redux";
 import withLayout from "../../views/Layout";
 import {getIndividualJobs} from "../../store/actions/jobAction";
@@ -10,6 +10,7 @@ import SectionHeader from "../../lib/sectionHeader";
 const EmployeeJobs = (props) => {
   const dispatch = useDispatch()
   const {jobList, isAuthenticated} = props
+  const [cardType, setCardType] = useState('applied')
   const role = getRole()
   useEffect(() => {
     if (role === "employee") {
@@ -17,15 +18,34 @@ const EmployeeJobs = (props) => {
     }
   }, [])
 
+  const handleCardType = (type) => {
+    setCardType(type)
+  }
+
   const authTitle = 'You are not authorized to view this page!'
 
   return (
     <NoSsr>
       {(role && role === "employee" && isAuthenticated) ? (
-          <div>
-            <SectionHeader title="My Jobs"/>
-            {jobList.map((job) => <Job key={job.id} job={job}/>)}
-          </div>) :
+          <>
+            <SectionHeader title={'My Jobs'}/>
+            <div style={{display: "flex", marginBottom: 20, width: 210, justifyContent: "space-between"}}>
+              <div>
+                <span onClick={() => handleCardType('applied')}
+                      style={{cursor: "pointer"}}><h3 style={{marginBottom: 5}}>Applied({jobList.length})</h3></span>
+                {cardType === 'applied' && <hr style={{border: "2px solid #2264C4", borderRadius: 5}}/>}
+              </div>
+              <div style={{marginLeft: 20}}>
+                <span onClick={() => handleCardType('offer')}
+                      style={{cursor: "pointer"}}><h3 style={{marginBottom: 5}}>Offer(0)</h3></span>
+                {cardType === 'offer' && <hr style={{border: "2px solid #2264C4", borderRadius: 5}}/>}
+              </div>
+            </div>
+            {
+              cardType === 'offer' ? <h1>Offer list here</h1> :
+                jobList.map((job) => <Job key={job.id} job={job}/>)
+            }
+          </>) :
         (
           <div><SectionHeader title={authTitle}/></div>
         )
