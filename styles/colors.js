@@ -41,6 +41,8 @@ const COLORS = {
     danger: "#EB3830",
     success: "#198754",
     green_1: "#005523",
+    dark_purple: "#4D38A2",
+    light_purple: "#7F56DA",
     searchHover: "#E4EBE4",
 
     light_blue: "#0084FF",

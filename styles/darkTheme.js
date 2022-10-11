@@ -45,7 +45,7 @@ const darkTheme = createTheme({
       modalTitle: COLORS.white_5,
       success: COLORS.success,
       sendMessageText: COLORS.white_8,
-      sendMessageBody: COLORS.light_blue,
+      sendMessageBody: COLORS.dark_purple,
       receivedMessageBody: COLORS.grey_8,
       receivedMessageText: COLORS.white_8,
       confirmButton: COLORS.success,
