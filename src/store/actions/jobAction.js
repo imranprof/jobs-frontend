@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
+import {SET_JOB_APPLICATION, SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
@@ -8,6 +8,7 @@ const jobApplyUrl = process.env.NEXT_PUBLIC_JOB_APPLY_URL
 const jobsUrl = process.env.NEXT_PUBLIC_My_JOB_URL
 const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
+const hireJobSeekerUrl = process.env.NEXT_PUBLIC_HIRE_JOB_SEEKER_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget} = job;
@@ -135,7 +136,7 @@ export const sendMailJobSeekerAction = (id, applicantId) => {
       .then(res => {
         dispatch(getIndividualJobs())
         let text = "Hi\n" +
-          "This is to let you know that we have received your application. We appreciate your interest  for which you have applied for. You are shortlisted. If you have further query, please let us know at any time. We love to hear from you\n"
+          "This is to let you know that we have received your job-application. We appreciate your interest  for which you have applied for. You are shortlisted. If you have further query, please let us know at any time. We love to hear from you\n"
         if (applicantId) {
           dispatch(sendMessageAction({
             body: text,
@@ -165,4 +166,42 @@ export const getApplicationDetails = () => {
     return null;
   }
 }
+
+export const setJobApplication = (details) => {
+  return {
+    type: SET_JOB_APPLICATION,
+    payload: details
+  }
+}
+
+export const getJobApplication = (id) => {
+  const jobApplicationUrl = `${process.env.NEXT_PUBLIC_JOB_APPLICATION_URL}/${id}`;
+
+  return (dispatch) => {
+    axios.get(jobApplicationUrl)
+      .then(res => {
+        dispatch(setJobApplication(res.data.job_application_details))
+      })
+      .catch(err => err.response);
+  }
+
+}
+
+export const hireJobSeeker = (hireDetails) => {
+  const {id, rate, payType} = hireDetails
+  const data = {
+    "job_application": {
+      "id": id,
+      "hire_rate": `{${rate}}`,
+      "pay_type": payType
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(hireJobSeekerUrl, data)
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
 
