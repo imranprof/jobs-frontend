@@ -48,7 +48,8 @@ const lightTheme = createTheme({
       receivedMessageBody: COLORS.grey_7,
       receivedMessageText: COLORS.black_11,
       confirmButton: COLORS.light_blue,
-      radioButton: COLORS.light_blue
+      radioButton: COLORS.light_blue,
+      jobPostBtn: COLORS.white
     },
     customShadow: {
       main: COLORS.boxShadow_2,
@@ -66,7 +67,7 @@ const lightTheme = createTheme({
     },
     customHoverColor: {
       main: COLORS.white,
-      light: COLORS.white
+      light: COLORS.black_1
     },
     customHoverBackground: {
       main: COLORS.blue_1,

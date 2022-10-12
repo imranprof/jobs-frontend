@@ -13,6 +13,7 @@ import SearchBar from "../../../../lib/searchBar";
 import {SignOut} from "../../../../auth/operations";
 import {modalType} from "../../../../store/actions/authAction";
 import {getProfileSlug} from "../../../../store/reducers/authReducers";
+import {getTheme} from "../../../Layout";
 
 const ProfilesSideBar = (props) => {
   const {classes, role, notificationCount} = props;
@@ -115,7 +116,7 @@ const ProfilesSideBar = (props) => {
             }
             {props.isAuthenticated &&
             (<Link href={"/messages"}>
-              <Badge badgeContent={notificationCount} color="secondary">
+              <Badge badgeContent={notificationCount} color={getTheme() ? "secondary" : "primary"}>
                 <a
                   className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
                   Messages
