@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 
 import {BannerStyle} from "./style";
 import {resetProfiles} from "../../../store/actions/searchAction";
+import {getTheme} from '../../Layout'
 
 const Banner = (props) => {
   const theme = useTheme();
@@ -32,7 +33,7 @@ const Banner = (props) => {
               <Button
                 variant="contained"
                 size="large"
-                color="secondary"
+                color={getTheme() ? "secondary" : "primary"}
                 className={`${classes.bannerWrapper}__left__buttonWrapper-btn`}
                 onClick={handleClick}
               >
@@ -54,7 +55,6 @@ const Banner = (props) => {
           </div>
         </div>
       </div>
-
     </>
   );
 };

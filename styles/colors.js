@@ -47,6 +47,10 @@ const COLORS = {
 
     light_blue: "#0084FF",
     blue_1: "#2264C4",
+    blue_2: "#ACCFFF",
+    bluish: "linear-gradient(to left, #BEDAFF, #D1E5FF)",
+    bluish_2: "linear-gradient(to right, #BEDAFF, #D1E5FF)",
+    bluish_3: "linear-gradient(to right, #236DD0, #2A87FE)",
 
     boxShadow_1: "rgb(28 30 34) 10px 10px 19px, rgb(38 42 46) -10px -10px 19px",
     boxShadow_2: "10px 10px 19px rgb(0 0 0 / 10%)",

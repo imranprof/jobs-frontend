@@ -11,19 +11,18 @@ import Footer from "../Profile/Footer";
 import CustomModal from "../../lib/CustomModal";
 import ThemeButton from "../../lib/themeButton";
 
-const withLayout = (Component, type) => {
-
-  // LocalStorage
-  const getTheme = () => {
-    if (typeof window !== 'undefined') {
-      const theme = localStorage.getItem('theme')
-      if (theme) {
-        return theme === 'true';
-      }
-      return null;
+// LocalStorage
+export const getTheme = () => {
+  if (typeof window !== 'undefined') {
+    const theme = localStorage.getItem('theme')
+    if (theme) {
+      return theme === 'true';
     }
+    return null;
   }
+}
 
+const withLayout = (Component, type) => {
   return (props) => {
     const [darkMode, setDarkMode] = useState(getTheme() === null ? true: getTheme());
     const [customTheme, setCustomTheme] = useState(darkTheme)
