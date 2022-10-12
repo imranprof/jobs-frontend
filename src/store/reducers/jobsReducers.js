@@ -53,12 +53,14 @@ export const jobsReducer = (state = initialState, action) => {
     case SET_All_JOB_OFFER:
       return {
         ...state,
-        jobOfferList: action.payload
+        jobOfferList: action.payload,
+        initialLoader: false
       }
     case SET_JOB_OFFER:
       return {
         ...state,
-        jobOffer: action.payload
+        jobOffer: action.payload,
+        initialLoader: false
       }
     case UPDATE_JOB:
       return {
