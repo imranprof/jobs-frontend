@@ -19,7 +19,7 @@ const Confirmation = (props) => {
 
   return (
     <>
-      <Paper>
+      <Paper className={classes.hireWrapper}>
         <div className={`${classes.hireWrapper}__checkbox-title-wrapper`}>
               <span>
                 <Checkbox

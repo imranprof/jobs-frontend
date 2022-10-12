@@ -3,6 +3,7 @@ import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   hireWrapper: theme => ({
+    backgroundColor: theme.palette.customBackground.hirePaperBg,
     '&__checkbox-title-wrapper': {
       display: "flex",
       alignItems: "center",

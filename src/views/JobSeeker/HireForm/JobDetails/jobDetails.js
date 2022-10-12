@@ -10,7 +10,7 @@ const JobDetails = ({details}) => {
 
   return (
     <>
-      <Paper>
+      <Paper elevation={3} className={classes.jobDetailsWrapper}>
         <h1 className={`${classes.jobDetailsWrapper}__heading`}>Job Description</h1>
         <Divider/>
         <div className={`${classes.jobDetailsWrapper}__title-description-wrapper`}>

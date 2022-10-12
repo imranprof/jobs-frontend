@@ -22,7 +22,8 @@ const lightTheme = createTheme({
       seeMoreBtnHover: COLORS.gray_6,
       skillBackground: COLORS.blue_2,
       shareBar: COLORS.white_2,
-      buttonHover: COLORS.blue_1
+      buttonHover: COLORS.blue_1,
+      hirePaperBg: COLORS.white
     },
     customColor: {
       main: COLORS.gray,

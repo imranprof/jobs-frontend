@@ -53,8 +53,6 @@ const useStyles = makeStyles({
           color: theme.palette.customColor.highContrast,
         },
         '&-hire': {
-          color: theme.palette.customColor.socialLinkHover,
-          backgroundColor: theme.palette.customBackground.gradiant.highContrast,
           marginLeft: 20
         },
         '&__icon': {
