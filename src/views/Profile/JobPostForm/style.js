@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     width: "100%",
     height: "auto",
     '&__contentWrapper': {
+      // Override TextField
       '& label.Mui-focused': {
         color: theme.palette.customBorder.customInputBorder
       },

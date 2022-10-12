@@ -127,15 +127,6 @@ const JobShow = (props) => {
       }
     )
   }
-
-  const detailsHandler = (applicant) => {
-    const Details = applicant;
-    Details['jobTitle'] = title;
-    Details['jobPayType'] = pay_type;
-    setApplicationDetails(Details)
-    window.open('/application/details', '_blank');
-  }
-
   return (
     <>
       <div className={classes.jobShowWrapper}>
@@ -312,12 +303,13 @@ const JobShow = (props) => {
                         <Link href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
-                        <a
-                          onClick={()=>detailsHandler(applicant)}
-                          className={`${classes.jobShowWrapper}__applicant-list__details-link`}
-                        >
-                           Details
-                        </a>
+                        <Link href={`/job-application/${applicant.application_id}/details`} >
+                          <a target={"_blank"}
+                            className={`${classes.jobShowWrapper}__applicant-list__details-link`}
+                          >
+                            Details
+                          </a>
+                        </Link>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell__shortlist`}>
                         <div className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox-wrapper`}>

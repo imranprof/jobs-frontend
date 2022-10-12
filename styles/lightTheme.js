@@ -21,7 +21,8 @@ const lightTheme = createTheme({
       seeMoreBtn: COLORS.white_2,
       seeMoreBtnHover: COLORS.gray_6,
       skillBackground: COLORS.white_6,
-      shareBar: COLORS.white_2
+      shareBar: COLORS.white_2,
+      buttonHover: COLORS.blue_1
     },
     customColor: {
       main: COLORS.gray,
@@ -43,9 +44,11 @@ const lightTheme = createTheme({
       avatarBgEdit: COLORS.white_5,
       success: COLORS.success,
       sendMessageText: COLORS.white_8,
-      sendMessageBody: COLORS.light_blue,
+      sendMessageBody: COLORS.light_purple,
       receivedMessageBody: COLORS.grey_7,
-      receivedMessageText: COLORS.black_11
+      receivedMessageText: COLORS.black_11,
+      confirmButton: COLORS.light_blue,
+      radioButton: COLORS.light_blue
     },
     customShadow: {
       main: COLORS.boxShadow_2,
