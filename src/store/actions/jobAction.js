@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {SET_All_JOB_OFFER, SET_JOB_APPLICATION, SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
+import {SET_All_JOB_OFFER, SET_JOB_APPLICATION, SET_JOB_OFFER, SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
@@ -218,6 +218,26 @@ export const getAllJobOffer = () => {
     axios.get(allJobOfferUrl)
       .then(res => {
         dispatch(setAllJobOffer(res.data.job_offers))
+      })
+      .catch(err => err.response);
+  }
+
+}
+
+const setJobOffer = (details) => {
+  return {
+    type: SET_JOB_OFFER,
+    payload: details
+  }
+}
+
+export const getJobOffer = (id) => {
+  const jobOfferShowUrl = `${process.env.NEXT_PUBLIC_JOB_OFFER_SHOW_URL}/${id}`;
+
+  return (dispatch) => {
+    axios.get(jobOfferShowUrl)
+      .then(res => {
+        dispatch(setJobOffer(res.data.offer_details))
       })
       .catch(err => err.response);
   }
