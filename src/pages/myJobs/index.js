@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {connect, useDispatch} from "react-redux";
 import withLayout from "../../views/Layout";
-import {getIndividualJobs} from "../../store/actions/jobAction";
+import {getAllJobOffer, getIndividualJobs} from "../../store/actions/jobAction";
 import Job from "../../views/Job";
 import {getRole} from "../../auth/operations";
 import {NoSsr} from "@material-ui/core";
 import SectionHeader from "../../lib/sectionHeader";
+import JobOffer from "../../views/Job/Offer";
 
 const EmployeeJobs = (props) => {
   const dispatch = useDispatch()
-  const {jobList, isAuthenticated} = props
+  const {jobList, isAuthenticated, jobOfferList} = props
   const [cardType, setCardType] = useState('applied')
   const role = getRole()
   useEffect(() => {
     if (role === "employee") {
       dispatch(getIndividualJobs());
+      dispatch(getAllJobOffer());
     }
   }, [])
 
@@ -37,12 +39,13 @@ const EmployeeJobs = (props) => {
               </div>
               <div style={{marginLeft: 20}}>
                 <span onClick={() => handleCardType('offer')}
-                      style={{cursor: "pointer"}}><h3 style={{marginBottom: 5}}>Offer(0)</h3></span>
+                      style={{cursor: "pointer"}}><h3 style={{marginBottom: 5}}>Offer({jobOfferList.length})</h3></span>
                 {cardType === 'offer' && <hr style={{border: "2px solid #2264C4", borderRadius: 5}}/>}
               </div>
             </div>
             {
-              cardType === 'offer' ? <h1>Offer list here</h1> :
+              cardType === 'offer' ? jobOfferList.map((offer) => <JobOffer key={offer.id} offer={offer}/>)
+                :
                 jobList.map((job) => <Job key={job.id} job={job}/>)
             }
           </>) :
@@ -58,7 +61,8 @@ const mapStateToProps = (state) => {
   return {
     jobList: state.allJobs.individualJobs,
     initialLoader: state.allJobs.initialLoader,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    jobOfferList: state.allJobs.jobOfferList
   }
 }
 
