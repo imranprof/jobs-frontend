@@ -36,6 +36,7 @@ const COLORS = {
     pink_2: "#f9004d",
     pink_3: "linear-gradient(145deg, #fff 0%, #ff014f 100%)",
     pink_4: "#ce6e6e",
+    pink_5: "#C51162",
     yellow: "#FFAB1A",
     pink_orange: "linear-gradient(145deg, rgb(240, 41, 129) 0%, rgb(200, 25, 1) 100%)",
     danger: "#EB3830",

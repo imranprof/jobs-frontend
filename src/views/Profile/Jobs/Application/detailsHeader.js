@@ -5,7 +5,6 @@ import {Avatar, Button, Icon} from "@material-ui/core";
 
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {JobApplicationStyle} from "./style";
-import {getTheme} from "../../../Layout";
 
 const DetailsHeader = (props) => {
   const theme = useTheme();
@@ -39,7 +38,7 @@ const DetailsHeader = (props) => {
             </Button>
           ) : ""}
           <Link href={`/job-application/${props.applicationData.id}/hire`}>
-            <Button variant="contained" color={getTheme() ? "secondary" : "primary"}
+            <Button variant="contained"
                     disabled={hire}
                     className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-hire`}>
               Hire Job Seeker

@@ -23,7 +23,9 @@ const darkTheme = createTheme({
       skillBackground: COLORS.gray,
       shareBar: COLORS.gray_1,
       buttonHover: COLORS.green_1,
-      hirePaperBg: COLORS.black_2
+      hirePaperBg: COLORS.black_2,
+      buttonBg: COLORS.pink,
+      buttonHoverBg: COLORS.pink_5
     },
     customColor: {
       main: COLORS.white_4,

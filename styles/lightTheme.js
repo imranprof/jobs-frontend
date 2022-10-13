@@ -23,7 +23,9 @@ const lightTheme = createTheme({
       skillBackground: COLORS.blue_2,
       shareBar: COLORS.white_2,
       buttonHover: COLORS.blue_1,
-      hirePaperBg: COLORS.white
+      hirePaperBg: COLORS.white,
+      buttonBg: COLORS.light_blue,
+      buttonHoverBg: COLORS.blue_1
     },
     customColor: {
       main: COLORS.gray,

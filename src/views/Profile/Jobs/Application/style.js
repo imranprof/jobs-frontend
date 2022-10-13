@@ -53,7 +53,12 @@ const useStyles = makeStyles({
           color: theme.palette.customColor.highContrast,
         },
         '&-hire': {
-          marginLeft: 20
+          backgroundColor: theme.palette.customBackground.buttonBg,
+          color: theme.palette.customColor.jobPostBtn,
+          marginLeft: 20,
+          '&:hover': {
+            backgroundColor: theme.palette.customBackground.buttonHoverBg,
+          }
         },
         '&__icon': {
           color: theme.palette.customColor.highContrast,
