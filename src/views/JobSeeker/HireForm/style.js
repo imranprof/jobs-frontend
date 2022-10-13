@@ -3,6 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles({
   hireFormWrapper: theme => ({
     marginTop: 20,
+    backgroundColor: theme.palette.customBackground.hirePaperBg,
     '&__heading': {
       marginLeft: 30,
       paddingTop: 20
@@ -25,8 +26,8 @@ const useStyles = makeStyles({
       borderRadius: 5,
       marginRight: 30,
       minHeight: 125,
-      width: 190
-
+      width: 190,
+      boxShadow: theme.palette.customShadow.paperCardShadow
     },
     '&__payment-type-icon-wrapper': {
       display: "flex",

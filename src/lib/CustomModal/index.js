@@ -12,6 +12,7 @@ import {ModalStyle} from "./style";
 import SignInForm from "../../auth/components/SignInForm";
 import SignUpForm from "../../auth/components/SignUpForm";
 import {modalType} from "../../store/actions/authAction";
+import {getTheme} from "../../views/Layout";
 
 const CustomModal = (props) => {
   const dispatch = useDispatch()
@@ -58,8 +59,8 @@ const CustomModal = (props) => {
                     onChange={handleChange}
                     className={`${modalWrapper}__body__top-select`}
                   >
-                    <FormControlLabel value="jobSeeker" control={<Radio color="secondary"/>} label="Join as a job seeker"/>
-                    <FormControlLabel value="employer" control={<Radio color="secondary"/>} label="Join as an employer"/>
+                    <FormControlLabel value="jobSeeker" control={<Radio color={getTheme() ? "secondary" : "primary"} />} label="Join as a job seeker"/>
+                    <FormControlLabel value="employer" control={<Radio color={getTheme() ? "secondary" : "primary"} />} label="Join as an employer"/>
                   </RadioGroup>
                 </FormControl>
               </div>

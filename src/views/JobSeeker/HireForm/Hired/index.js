@@ -8,7 +8,7 @@ const Hired = ({applicantName}) => {
   const classes = HiredStyle(theme);
 
   return (
-    <Paper className={classes.hiredWrapper}>
+    <Paper elevation={3} className={classes.hiredWrapper}>
       <div className={`${classes.hiredWrapper}__content-wrapper`}>
           <img
             className={`${classes.hiredWrapper}__image`}

@@ -5,6 +5,7 @@ import {useTheme} from "@material-ui/core/styles";
 
 import {MessageStyle} from "./style";
 import {getPrivateConversations, setSendMessageData, updateMessageStatus} from "../../store/actions/messageAction";
+import {getTheme} from "../Layout";
 
 const Message = (props) => {
   const theme = useTheme();
@@ -64,7 +65,7 @@ const Message = (props) => {
                     />
                     <div className={`${classes.messageWrapper}__name-badge-wrapper`}>
                       <span className={`${classes.messageWrapper}__name`}>{recipient_name}</span>
-                      <Badge badgeContent={unread_count} color="secondary"/>
+                      <Badge badgeContent={unread_count} color={getTheme() ? "secondary" : "primary"}/>
                     </div>
                   </div>
                 </>
@@ -78,7 +79,7 @@ const Message = (props) => {
                   />
                   <div className={`${classes.messageWrapper}__name-badge-wrapper`}>
                     <span className={`${classes.messageWrapper}__name`}>{sender_name}</span>
-                    <Badge badgeContent={unread_count} color="secondary"/>
+                    <Badge badgeContent={unread_count} color={getTheme() ? "secondary" : "primary"}/>
                   </div>
                 </div>
               )

@@ -45,9 +45,12 @@ export const useStyles = makeStyles({
         display: "flex",
         margin: "50px 0 30px 0",
         '&-btn': {
-          backgroundColor: theme.palette.customColor.highContrast,
-          color: "#fff",
+          backgroundColor: theme.palette.customBackground.buttonBg,
+          color: theme.palette.customColor.jobPostBtn,
           marginRight: 20,
+          '&:hover': {
+            backgroundColor: theme.palette.customBackground.buttonHoverBg,
+          }
         }
       },
     },

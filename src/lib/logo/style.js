@@ -17,12 +17,14 @@ export const useStyles = makeStyles({
         fontSize: 24,
         margin: 0,
         letterSpacing: "1px",
-        fontFamily: FONTS.logoFont
+        fontFamily: FONTS.logoFont,
+        fontWeight: 400
+      },
+      '& span': {
+        fontSize: 30
       },
       '&:hover': {
         color: theme.palette.customColor.highContrast,
-        backgroundPosition: "0 100%",
-        backgroundSize: "100% 1px"
       }
     }
   }),

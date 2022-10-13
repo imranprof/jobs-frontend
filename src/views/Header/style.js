@@ -344,6 +344,7 @@ export const useStyles = makeStyles({
       border: "none",
       borderRadius: 6,
       color: theme.palette.customColor.highContrast,
+      marginLeft: 15,
       zIndex: 1,
       transition: "all 0.4s ease",
       '&::before': {

@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import SendIcon from '@material-ui/icons/Send';
 
 import Message from "../../views/Message";
-import withLayout from "../../views/Layout";
+import withLayout, {getTheme} from "../../views/Layout";
 import {getAllParentMessage, getPrivateConversations, sendMessageAction} from "../../store/actions/messageAction";
 import {getProfileAction} from "../../store/actions/topSectionActions";
 import CustomLoader from "../../lib/customLoader";
@@ -107,7 +107,7 @@ const MessageList = (props) => {
         </div>
 
         <div className={`${classes.messagesWrapper}__header-receiver-wrapper__right`}>
-          <Badge badgeContent={notificationCount} color="secondary">
+          <Badge badgeContent={notificationCount} color={getTheme() ? "secondary" : "primary"}>
             <i className={`${FontAwesomeIcons.bell} fa-2x`}/>
           </Badge>
 
