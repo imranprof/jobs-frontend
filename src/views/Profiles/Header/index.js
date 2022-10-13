@@ -13,6 +13,7 @@ import {getRole} from "../../../auth/operations";
 import {resetProfiles} from "../../../store/actions/searchAction";
 import {getAllParentMessage} from "../../../store/actions/messageAction";
 import {getTheme} from "../../Layout";
+import AvatarDropDown from "../../Profile/Header/components/avatarDropdown/avatarDropDown";
 
 const ProfilesHeader = (props) => {
   const {classes, headerRef, notificationCount} = props;
@@ -89,12 +90,7 @@ const ProfilesHeader = (props) => {
                   </Badge>
                 </Link>
 
-                <Link href="">
-                  <a className={`${classes.headerWrapper}-sign-out`}
-                     onClick={handleSignOutClick}>
-                    Sign out
-                  </a>
-                </Link>
+                <AvatarDropDown />
               </> :
               <>
                 <Link href="">
