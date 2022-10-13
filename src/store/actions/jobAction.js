@@ -10,6 +10,7 @@ const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
 const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 const hireJobSeekerUrl = process.env.NEXT_PUBLIC_HIRE_JOB_SEEKER_URL
 const allJobOfferUrl = process.env.NEXT_PUBLIC_ALL_JOB_OFFER_URL
+const acceptHireUrl = process.env.NEXT_PUBLIC_HIRE_OFFER_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget} = job;
@@ -244,3 +245,18 @@ export const getJobOffer = (id) => {
 
 }
 
+export const acceptHireAction = (id, choice) => {
+
+  const data = {
+    "job_offer": {
+      "id": id,
+      "hire_confirmation": choice
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(acceptHireUrl, data)
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
+}
