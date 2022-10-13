@@ -24,8 +24,8 @@ export const getTheme = () => {
 
 const withLayout = (Component, type) => {
   return (props) => {
-    const [darkMode, setDarkMode] = useState(getTheme() === null ? true: getTheme());
-    const [customTheme, setCustomTheme] = useState(darkTheme)
+    const [darkMode, setDarkMode] = useState(getTheme() === null ? false : getTheme());
+    const [customTheme, setCustomTheme] = useState(lightTheme)
     const modalType = useSelector(state => state.auth.modalType)
 
     let getThemeMode = '';
