@@ -3,6 +3,7 @@ import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
   jobDetailsWrapper: theme => ({
+    backgroundColor: theme.palette.customBackground.hirePaperBg,
     '&__heading': {
       marginLeft: 30,
       paddingTop: 20

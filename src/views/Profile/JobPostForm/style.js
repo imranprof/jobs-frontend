@@ -1,5 +1,4 @@
 import {makeStyles} from "@material-ui/core/styles";
-import COLORS from "../../../../styles/colors";
 
 const useStyles = makeStyles({
   jobPostFormWrapper: theme => ({
@@ -57,7 +56,7 @@ const useStyles = makeStyles({
       '&:hover': {
         opacity: 1,
         background: theme.palette.customColor.highContrast,
-        color: theme.palette.customColor.socialLinkHover
+        color: theme.palette.customColor.jobPostBtn
       }
     },
     '&__rate-wrapper': {

@@ -11,7 +11,7 @@ const JobSeekerDetails = (props) => {
   return (
     <>
       <h1 className={`${classes.jobSeekerDetailsWrapper}__title`}>Hire</h1>
-      <Paper>
+      <Paper elevation={3} className={classes.jobSeekerDetailsWrapper}>
         <div className={`${classes.jobSeekerDetailsWrapper}__avatar-name-wrapper`}>
           <Avatar
             src={avatar}

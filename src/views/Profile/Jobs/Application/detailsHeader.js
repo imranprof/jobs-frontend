@@ -38,7 +38,7 @@ const DetailsHeader = (props) => {
             </Button>
           ) : ""}
           <Link href={`/job-application/${props.applicationData.id}/hire`}>
-            <Button variant="contained" color="secondary"
+            <Button variant="contained"
                     disabled={hire}
                     className={`${classes.jobApplicationWrapper}__header-wrapper__buttons-hire`}>
               Hire Job Seeker

@@ -32,7 +32,6 @@ const Banner = (props) => {
               <Button
                 variant="contained"
                 size="large"
-                color="secondary"
                 className={`${classes.bannerWrapper}__left__buttonWrapper-btn`}
                 onClick={handleClick}
               >
@@ -54,7 +53,6 @@ const Banner = (props) => {
           </div>
         </div>
       </div>
-
     </>
   );
 };

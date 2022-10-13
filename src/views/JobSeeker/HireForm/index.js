@@ -56,7 +56,7 @@ const JobSeekerHireForm = ({applicationDetails}) => {
         <>
           <JobSeekerDetails avatar={applicant_details.avatar} name={applicant_details.name}
                             email={applicant_details.email}/>
-          <Paper className={classes.hireFormWrapper}>
+          <Paper elevation={3} className={classes.hireFormWrapper}>
             <h1 className={`${classes.hireFormWrapper}__heading`}>Terms</h1>
             <Divider className={`${classes.hireFormWrapper}__divider`}/>
             <div className={`${classes.hireFormWrapper}__payment-option-rate-wrapper`}>

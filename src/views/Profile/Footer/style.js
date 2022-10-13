@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     padding: '26px 56px',
-    marginTop: 100,
+    marginTop: 200,
     '&__logo': {
       width: 60,
       height: 60,
