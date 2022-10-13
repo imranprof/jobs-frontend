@@ -23,7 +23,7 @@ const ProfileInfo = (props) => {
           <NoSsr>
             <Avatar
               alt={fullName}
-              src={avatar}
+              src={profileInfo.avatar}
               className={`${classes.headerWrapper}__profile__pic`}
             />
           </NoSsr>
