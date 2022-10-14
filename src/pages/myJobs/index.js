@@ -7,9 +7,13 @@ import {getRole} from "../../auth/operations";
 import {NoSsr} from "@material-ui/core";
 import SectionHeader from "../../lib/sectionHeader";
 import JobOffer from "../../views/Job/Offer";
+import {useTheme} from "@material-ui/core/styles";
+import {MyJobsStyle} from "./style";
 
 const EmployeeJobs = (props) => {
   const dispatch = useDispatch()
+  const theme = useTheme();
+  const classes = MyJobsStyle(theme);
   const {jobList, isAuthenticated, jobOfferList} = props
   const [cardType, setCardType] = useState('applied')
   const role = getRole()
@@ -31,16 +35,18 @@ const EmployeeJobs = (props) => {
       {(role && role === "employee" && isAuthenticated) ? (
           <>
             <SectionHeader title={'My Jobs'}/>
-            <div style={{display: "flex", marginBottom: 20, width: 210, justifyContent: "space-between"}}>
+            <div className={`${classes.myJobsWrapper}__applied-offer-wrapper`}>
               <div>
                 <span onClick={() => handleCardType('applied')}
-                      style={{cursor: "pointer"}}><h3 style={{marginBottom: 5}}>Applied({jobList.length})</h3></span>
-                {cardType === 'applied' && <hr style={{border: "2px solid #2264C4", borderRadius: 5}}/>}
+                      className={`${classes.myJobsWrapper}__title-wrapper`}><h3
+                  className={`${classes.myJobsWrapper}__title`}>Applied({jobList.length})</h3></span>
+                {cardType === 'applied' && <hr className={`${classes.myJobsWrapper}__select-line`}/>}
               </div>
-              <div style={{marginLeft: 20}}>
+              <div>
                 <span onClick={() => handleCardType('offer')}
-                      style={{cursor: "pointer"}}><h3 style={{marginBottom: 5}}>Offer({jobOfferList.length})</h3></span>
-                {cardType === 'offer' && <hr style={{border: "2px solid #2264C4", borderRadius: 5}}/>}
+                      className={`${classes.myJobsWrapper}__title-wrapper`}><h3
+                  className={`${classes.myJobsWrapper}__title`}>Offer({jobOfferList.length})</h3></span>
+                {cardType === 'offer' && <hr className={`${classes.myJobsWrapper}__select-line`}/>}
               </div>
             </div>
             {
