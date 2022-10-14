@@ -83,8 +83,11 @@ const JobOfferShow = (props) => {
                 </span>
               </div>
             </div>
-
             <hr/>
+            <div className={`${classes.jobOfferShowWrapper}__title-description-wrapper`}>
+              <h4 className={`${classes.jobOfferShowWrapper}__title`}>Proposed Rate: </h4>
+              <h4>${hire_rate}</h4>
+            </div>
             <div className={`${classes.jobOfferShowWrapper}__title-description-wrapper`}>
               <h4 className={`${classes.jobOfferShowWrapper}__title`}>Service Fee: </h4>
               <h4>${service_fee}</h4>
@@ -92,10 +95,6 @@ const JobOfferShow = (props) => {
             <div className={`${classes.jobOfferShowWrapper}__title-description-wrapper`}>
               <h4 className={`${classes.jobOfferShowWrapper}__title`}>You'll Receive: </h4>
               <h4>${receive_fee}</h4>
-            </div>
-            <div className={`${classes.jobOfferShowWrapper}__title-description-wrapper`}>
-              <h4 className={`${classes.jobOfferShowWrapper}__title`}>Proposed Rate: </h4>
-              <h4>${hire_rate}</h4>
             </div>
           </div>
         </Paper>
