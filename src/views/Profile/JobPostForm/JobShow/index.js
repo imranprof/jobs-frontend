@@ -33,7 +33,7 @@ import {
   setApplicationDetails
 } from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
-import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
+import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons"
 import ErrorMessage from "../../../../lib/errorMessage";
 import JobTooltip from "./jobTooltip";
 import {getAllParentMessage} from "../../../../store/actions/messageAction";
@@ -297,6 +297,7 @@ const JobShow = (props) => {
                               {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
                             </span>
                           </Tooltip>
+                          {applicant.hire_confirmation && <span className={`${classes.jobShowWrapper}__hired-icon`}> <i className={`${FontAwesomeIcons.achievement}`} /></span>}
                         </div>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>

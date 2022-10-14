@@ -226,6 +226,9 @@ const useStyles = makeStyles({
         fontSize: 16,
         fontWeight: 600
       }
+    },
+    '&__hired-icon': {
+      marginLeft: 5
     }
   }),
 })
