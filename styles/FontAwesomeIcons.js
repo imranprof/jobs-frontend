@@ -27,7 +27,8 @@ const FontAwesomeIcons = {
     "location": "fa-solid fa-location-dot",
     "dollar": 'fa-solid fa-money-check-dollar',
     "message": "fa-solid fa-comment-dots",
-    "bell": "fa-regular fa-bell"
+    "bell": "fa-regular fa-bell",
+    "achievement": "fa-solid fa-trophy"
 }
 
 export default FontAwesomeIcons;
