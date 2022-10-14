@@ -255,7 +255,7 @@ export const acceptHireAction = (id, choice) => {
   }
   return (dispatch) => {
     const response = axios.patch(acceptHireUrl, data)
-      .then(res => res)
+      .then(res => dispatch(getJobOffer(id)))
       .catch(err => err.response)
     return (response);
   }

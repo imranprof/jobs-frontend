@@ -23,7 +23,7 @@ const JobOfferShow = (props) => {
   }, [id])
 
   const handleAcceptHire = (choice) => {
-    dispatch(acceptHireAction(id, choice)).then(dispatch(getJobOffer(id)))
+    dispatch(acceptHireAction(id, choice))
   }
 
   let status;
