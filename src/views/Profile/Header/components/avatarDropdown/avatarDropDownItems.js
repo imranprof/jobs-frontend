@@ -1,12 +1,19 @@
 import Link from "next/link";
+import {useDispatch} from "react-redux";
 
 import {Avatar, Box, Popper} from "@material-ui/core";
 
-import {getPrivateSlug, getRole} from "../../../../../auth/operations";
+import {getPrivateSlug, getRole, SignOut} from "../../../../../auth/operations";
+import FontAwesomeIcons from "../../../../../../styles/FontAwesomeIcons";
 
 const AvatarDropDownItems = (props) => {
   const {fullName, avatar, classes, openEl, anchorEl} = props
-  const role = getRole() === 'employee' ? 'Job Seeker' : 'Employer'
+  const role = getRole() === 'employee' ? 'Job Seeker' : 'Employer';
+  const dispatch = useDispatch()
+
+  const handleSignOutClick = async () => {
+    await dispatch(SignOut())
+  }
 
   return (
     <div>
@@ -39,6 +46,13 @@ const AvatarDropDownItems = (props) => {
                 </>
               </li>
             </Link>
+
+            <a onClick={handleSignOutClick}>
+              <li className={`${classes}__popper-list`}>
+                <i className={FontAwesomeIcons.signOut} />
+                <span className={`${classes}__popper-list__signout`}>Sign out</span>
+              </li>
+            </a>
           </ul>
         </Box>
       </Popper>

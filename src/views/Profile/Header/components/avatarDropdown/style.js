@@ -1,4 +1,5 @@
 import {makeStyles} from "@material-ui/core/styles";
+import FONTS from "../../../../../../styles/fonts";
 
 export const useStyles = makeStyles({
   avatarDropdownWrapper: theme => ({
@@ -32,7 +33,7 @@ export const useStyles = makeStyles({
     },
     '&__dropdown': {
       width: 250,
-      height: 200,
+      height: "auto",
       padding: "10px 0",
       background: theme.palette.customBackground.shareBar,
       borderRadius: 7,
@@ -42,30 +43,43 @@ export const useStyles = makeStyles({
       margin: 0,
       padding: 0,
       '&-list': {
+        height: 50,
         display: "flex",
         alignItems: "center",
         padding: "10px 10px 10px 20px",
         '&:hover': {
           backgroundColor: theme.palette.customBackground.light,
           cursor: "pointer"
+        },
+        '& i': {
+          color: theme.palette.customColor.main,
+          fontSize: 20,
+          margin: "0px 15px 0px 6px"
+        },
+        '&__signout': {
+          color: theme.palette.customColor.main,
+          fontSize: 15,
+          fontFamily: FONTS.secondaryFont,
         }
       }
     },
     '&__popper-avatar': {
-      width: 36,
-      height: 36,
+      width: 30,
+      height: 30,
       backgroundColor: theme.palette.customColor.main,
       borderRadius: '50%',
       '&__name': {
         color: theme.palette.customColor.highContrast,
-        fontSize: 15,
+        fontSize: 14,
+        fontFamily: FONTS.primaryFont,
         fontWeight: 600,
-        margin: "0 0 0 10px"
+        margin: "0 0 0 12px"
       },
       '&__type': {
         color: theme.palette.customColor.dark,
         fontSize: 12,
-        margin: "0 0 0 10px"
+        fontFamily: FONTS.secondaryFont,
+        margin: "0 0 0 12px"
       }
     }
   }),
