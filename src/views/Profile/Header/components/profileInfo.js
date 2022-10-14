@@ -6,8 +6,8 @@ import {NoSsr, Avatar} from "@material-ui/core";
 import {getPrivateProfileAction} from "../../../../store/actions/topSectionActions";
 
 const ProfileInfo = (props) => {
-  const {profileInfo, showName, classes, isAuthenticated, avatar} = props;
-  const {first_name, last_name} = profileInfo;
+  const {profileInfo, showName, classes, isAuthenticated} = props;
+  const {first_name, last_name, avatar} = profileInfo;
   const dispatch = useDispatch()
   const fullName = `${first_name} ${last_name}`
 

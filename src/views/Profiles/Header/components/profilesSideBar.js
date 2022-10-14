@@ -14,9 +14,10 @@ import {SignOut} from "../../../../auth/operations";
 import {modalType} from "../../../../store/actions/authAction";
 import {getProfileSlug} from "../../../../store/reducers/authReducers";
 import {getTheme} from "../../../Layout";
+import AvatarProfileInfo from "../../../../lib/profile/avatarProfileInfo";
 
 const ProfilesSideBar = (props) => {
-  const {classes, role, notificationCount} = props;
+  const {classes, role, notificationCount, isAuthenticated} = props;
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -63,25 +64,25 @@ const ProfilesSideBar = (props) => {
 
           <div className={`${classes.headerWrapper}__profiles__side-bar__top`}>
             <Logo/>
-            {props.isAuthenticated ?
-              <Link href={`${getProfileSlug()}`}>
-                <a className={`${classes.headerWrapper}__button`}>
-                  My Profile
-                </a>
-              </Link> :
-              <Link href="">
-                <a className={`${classes.headerWrapper}__button`}
-                   onClick={handleSignInClick}>Sign In
-                </a>
-              </Link>
+            {!isAuthenticated &&
+            <Link href="">
+              <a className={`${classes.headerWrapper}__button`}
+                 onClick={handleSignInClick}>Sign In
+              </a>
+            </Link>
             }
           </div>
 
-          <Divider/>
+          <Divider style={{marginBottom: 15}}/>
+          {isAuthenticated && (
+            <>
+              <AvatarProfileInfo/>
+              <Divider style={{marginTop: 15}}/>
+            </>
+          )}
 
           <SearchBar/>
-
-          <Divider style={{marginTop: 25}}/>
+          <Divider style={{marginTop: 15}}/>
 
           <div className={`${classes.headerWrapper}__profiles__side-bar__links`}>
             <Link href={"/profiles"}>
@@ -97,7 +98,7 @@ const ProfilesSideBar = (props) => {
               </a>
             </Link>
 
-            {!props.isAuthenticated &&
+            {!isAuthenticated &&
             (<Link href={"/profile"}>
               <a
                 className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
@@ -105,7 +106,7 @@ const ProfilesSideBar = (props) => {
               </a>
             </Link>)
             }
-            {props.isAuthenticated &&
+            {isAuthenticated &&
             role === 'employee' &&
             (<Link href={"/myJobs"}>
               <a
@@ -114,21 +115,30 @@ const ProfilesSideBar = (props) => {
               </a>
             </Link>)
             }
-            {props.isAuthenticated &&
-            (<Link href={"/messages"}>
-              <Badge badgeContent={notificationCount} color={getTheme() ? "secondary" : "primary"}>
+            {isAuthenticated &&
+            (<>
+              <Link href={`${getProfileSlug()}`}>
                 <a
                   className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
-                  Messages
+                  My Profile
                 </a>
-              </Badge>
-            </Link>)
+              </Link>
+
+              <Link href={"/messages"}>
+                <Badge badgeContent={notificationCount} color={getTheme() ? "secondary" : "primary"}>
+                  <a
+                    className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
+                    Messages
+                  </a>
+                </Badge>
+              </Link>
+            </>)
             }
 
           </div>
 
           <div className={`${classes.headerWrapper}__profiles__side-bar__bottom`}>
-            {props.isAuthenticated ? (
+            {isAuthenticated ? (
               <Link href="">
                 <a className={`${classes.headerWrapper}-sign-out`}
                    onClick={handleSignOutClick}>Sign out

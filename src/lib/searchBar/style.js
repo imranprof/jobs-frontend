@@ -43,7 +43,7 @@ export const useStyles = makeStyles({
           },
           [theme.breakpoints.down('md')]: {
             width: "100%",
-            marginTop: 25,
+            marginTop: 15,
           }
         },
         '&__select-menu': {
