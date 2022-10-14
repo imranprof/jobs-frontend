@@ -1,14 +1,14 @@
 import Link from "next/link";
 import {useDispatch} from "react-redux";
 
-import {Avatar, Box, Popper} from "@material-ui/core";
+import {Box, Popper} from "@material-ui/core";
 
-import {getPrivateSlug, getRole, SignOut} from "../../../../../auth/operations";
+import {getPrivateSlug, SignOut} from "../../../../../auth/operations";
 import FontAwesomeIcons from "../../../../../../styles/FontAwesomeIcons";
+import AvatarProfileInfo from "../../../../../lib/profile/avatarProfileInfo";
 
 const AvatarDropDownItems = (props) => {
-  const {fullName, avatar, classes, openEl, anchorEl} = props
-  const role = getRole() === 'employee' ? 'Job Seeker' : 'Employer';
+  const {classes, openEl, anchorEl} = props
   const dispatch = useDispatch()
 
   const handleSignOutClick = async () => {
@@ -33,17 +33,7 @@ const AvatarDropDownItems = (props) => {
           <ul className={`${classes}__popper`}>
             <Link href={`/${getPrivateSlug()}`}>
               <li className={`${classes}__popper-list`}>
-                <>
-                  <Avatar
-                    alt={fullName}
-                    src={avatar}
-                    className={`${classes}__popper-avatar`}
-                  />
-                  <div>
-                    <p className={`${classes}__popper-avatar__name`}>{fullName}</p>
-                    <span className={`${classes}__popper-avatar__type`}>{role}</span>
-                  </div>
-                </>
+                <AvatarProfileInfo />
               </li>
             </Link>
 
