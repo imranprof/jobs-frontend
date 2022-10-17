@@ -52,7 +52,8 @@ const lightTheme = createTheme({
       receivedMessageText: COLORS.black_11,
       confirmButton: COLORS.light_blue,
       radioButton: COLORS.light_blue,
-      jobPostBtn: COLORS.white
+      jobPostBtn: COLORS.white,
+      jobType: COLORS.blue_1
     },
     customShadow: {
       main: COLORS.boxShadow_2,

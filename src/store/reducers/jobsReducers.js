@@ -1,6 +1,7 @@
 import {
+  SET_All_JOB_OFFER,
   SET_APPLICATION_DETAILS,
-  SET_JOB_APPLICATION,
+  SET_JOB_APPLICATION, SET_JOB_OFFER,
   SET_JOBS,
   SET_SEARCH_JOB,
   SHOW_JOBS,
@@ -13,7 +14,9 @@ const initialState = {
   individualJobs: [],
   searchJobs: [],
   applicationDetails: {},
-  jobApplication: {}
+  jobApplication: {},
+  jobOfferList: [],
+  jobOffer: {}
 }
 
 export const jobsReducer = (state = initialState, action) => {
@@ -45,6 +48,18 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         jobApplication: action.payload,
+        initialLoader: false
+      }
+    case SET_All_JOB_OFFER:
+      return {
+        ...state,
+        jobOfferList: action.payload,
+        initialLoader: false
+      }
+    case SET_JOB_OFFER:
+      return {
+        ...state,
+        jobOffer: action.payload,
         initialLoader: false
       }
     case UPDATE_JOB:
