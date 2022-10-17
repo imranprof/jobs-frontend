@@ -14,14 +14,20 @@ const useStyles = makeStyles({
       marginBottom: 5,
       fontFamily: FONTS.modalTitleFont,
       textAlign: "center",
-      letterSpacing: "1px"
+      letterSpacing: "1px",
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 14
+      }
     },
     '&__selected-title': {
       marginBottom: 5,
       fontFamily: FONTS.modalTitleFont,
       textAlign: "center",
       letterSpacing: "1px",
-      color: theme.palette.customColor.jobType
+      color: theme.palette.customColor.jobType,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 14
+      }
     },
     '&__select-line': {
       border: `1px solid ${theme.palette.customColor.jobType}`,

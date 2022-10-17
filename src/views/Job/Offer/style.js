@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     padding: 15,
     marginBottom: 10,
     width: "60%",
+    [theme.breakpoints.down('sm')]: {
+      width: "100%"
+    },
     '&::before': {
       position: "absolute",
       content: '""',
