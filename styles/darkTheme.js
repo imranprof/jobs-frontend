@@ -53,7 +53,8 @@ const darkTheme = createTheme({
       receivedMessageText: COLORS.white_8,
       confirmButton: COLORS.success,
       radioButton: COLORS.pink,
-      jobPostBtn: COLORS.white
+      jobPostBtn: COLORS.white,
+      jobType: COLORS.pink_2
     },
     customShadow: {
       main: COLORS.boxShadow_1,

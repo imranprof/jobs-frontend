@@ -9,6 +9,7 @@ import SectionHeader from "../../lib/sectionHeader";
 import JobOffer from "../../views/Job/Offer";
 import {useTheme} from "@material-ui/core/styles";
 import {MyJobsStyle} from "./style";
+import Divider from "@material-ui/core/Divider";
 
 const EmployeeJobs = (props) => {
   const dispatch = useDispatch()
@@ -35,19 +36,22 @@ const EmployeeJobs = (props) => {
       {(role && role === "employee" && isAuthenticated) ? (
           <>
             <SectionHeader title={'My Jobs'}/>
-            <div className={`${classes.myJobsWrapper}__applied-offer-wrapper`}>
-              <div>
+            <div>
+              <div className={`${classes.myJobsWrapper}__applied-offer-wrapper`}>
+                <div className={`${classes.myJobsWrapper}__applied-title-wrapper`}>
                 <span onClick={() => handleCardType('applied')}
                       className={`${classes.myJobsWrapper}__title-wrapper`}><h3
-                  className={`${classes.myJobsWrapper}__title`}>Applied({jobList.length})</h3></span>
-                {cardType === 'applied' && <hr className={`${classes.myJobsWrapper}__select-line`}/>}
-              </div>
-              <div>
+                  className={cardType === 'applied' ? `${classes.myJobsWrapper}__selected-title` : `${classes.myJobsWrapper}__title`}>Applied({jobList.length})</h3></span>
+                  {cardType === 'applied' && <hr className={`${classes.myJobsWrapper}__select-line`}/>}
+                </div>
+                <div>
                 <span onClick={() => handleCardType('offer')}
                       className={`${classes.myJobsWrapper}__title-wrapper`}><h3
-                  className={`${classes.myJobsWrapper}__title`}>Offer({jobOfferList.length})</h3></span>
-                {cardType === 'offer' && <hr className={`${classes.myJobsWrapper}__select-line`}/>}
+                  className={cardType === 'offer' ? `${classes.myJobsWrapper}__selected-title` : `${classes.myJobsWrapper}__title`}>Offer({jobOfferList.length})</h3></span>
+                  {cardType === 'offer' && <hr className={`${classes.myJobsWrapper}__select-line`}/>}
+                </div>
               </div>
+              <Divider className={`${classes.myJobsWrapper}__mui-divider`}/>
             </div>
             {
               cardType === 'offer' ? jobOfferList.map((offer) => <JobOffer key={offer.id} offer={offer}/>)

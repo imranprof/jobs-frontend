@@ -5,20 +5,35 @@ const useStyles = makeStyles({
   myJobsWrapper: theme => ({
     '&__applied-offer-wrapper': {
       display: "flex",
-      marginBottom: 20,
-      width: 210,
-      justifyContent: "space-between"
+      width: "100%"
+    },
+    '&__applied-title-wrapper': {
+      margin: "0px 50px",
     },
     '&__title': {
       marginBottom: 5,
-      fontFamily: FONTS.jobDescriptionFont
+      fontFamily: FONTS.modalTitleFont,
+      textAlign: "center",
+      letterSpacing: "1px"
+    },
+    '&__selected-title': {
+      marginBottom: 5,
+      fontFamily: FONTS.modalTitleFont,
+      textAlign: "center",
+      letterSpacing: "1px",
+      color: theme.palette.customColor.jobType
     },
     '&__select-line': {
-      border: "2px solid #2264C4",
-      borderRadius: 5
+      border: `1px solid ${theme.palette.customColor.jobType}`,
+      borderRadius: 5,
+      marginBottom: 0,
+      width: 120
     },
     '&__title-wrapper': {
       cursor: "pointer"
+    },
+    '&__mui-divider': {
+      marginBottom: 30
     }
   }),
 })
