@@ -1,11 +1,14 @@
 import {
   SET_All_JOB_OFFER,
   SET_APPLICATION_DETAILS,
-  SET_JOB_APPLICATION, SET_JOB_OFFER,
+  SET_JOB_APPLICATION,
+  SET_JOB_OFFER,
   SET_JOBS,
   SET_SEARCH_JOB,
   SHOW_JOBS,
-  UPDATE_JOB
+  UPDATE_JOB,
+  SET_BEST_MATCHES_JOB,
+  SET_MOST_RECENT_JOB
 } from "../actionTypes/jobsTypes";
 
 const initialState = {
@@ -16,7 +19,9 @@ const initialState = {
   applicationDetails: {},
   jobApplication: {},
   jobOfferList: [],
-  jobOffer: {}
+  jobOffer: {},
+  bestMatchesJobs: [],
+  mostRecentJobs: []
 }
 
 export const jobsReducer = (state = initialState, action) => {
@@ -54,6 +59,18 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         jobOfferList: action.payload,
+        initialLoader: false
+      }
+    case SET_BEST_MATCHES_JOB:
+      return {
+        ...state,
+        bestMatchesJobs: action.payload,
+        initialLoader: false
+      }
+    case SET_MOST_RECENT_JOB:
+      return {
+        ...state,
+        mostRecentJobs: action.payload,
         initialLoader: false
       }
     case SET_JOB_OFFER:
