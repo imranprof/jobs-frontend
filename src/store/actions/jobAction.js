@@ -85,6 +85,7 @@ export const updateJobAction = (oldJob, updatedJob) => {
       "pay_type": updatedJob.pay_type,
       "skills": `{${updatedJob.skills}}`,
       "budget": `{${updatedJob.budget}}`,
+      "status": updatedJob.status_label
     }
   }
   return (dispatch) => {
