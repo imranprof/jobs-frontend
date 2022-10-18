@@ -24,6 +24,7 @@ const JobPostForm = (props) => {
   const [mode, setMode] = useState(false);
   const [jobData, setJobData] = useState({});
   const {handleClose} = props
+  const [submitType, setSubmitType] = useState('Published')
 
   const jobSkillsData = [
     {value: 1, label: "Ruby"},
@@ -62,7 +63,8 @@ const JobPostForm = (props) => {
       location: location.trim(),
       skills: skills,
       payType: payType.label,
-      budget: budget
+      budget: budget,
+      status: submitType
     }))
     if (response && response.status === 201) {
       setJobData(response.data.job)
@@ -258,11 +260,15 @@ const JobPostForm = (props) => {
               </div>
             </div>
 
-            <Button fullWidth onClick={formik.handleSubmit} endIcon={<Icon className={FontAwesomeIcons.signIn}/>}
+            <Button onClick={formik.handleSubmit} endIcon={<Icon className={FontAwesomeIcons.signIn}/>}
                     className={`${classes.jobPostFormWrapper}__button`}
             >
               job post
             </Button>
+            <Button onClick={()=>{
+              setSubmitType('Draft')
+              formik.handleSubmit()
+            }}  className={`${classes.jobPostFormWrapper}__button`}>Save as Draft</Button>
           </div>
         )
       }

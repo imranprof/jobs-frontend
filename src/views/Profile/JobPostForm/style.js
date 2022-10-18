@@ -50,6 +50,7 @@ const useStyles = makeStyles({
       },
     },
     '&__button': {
+      width: "50%",
       background: theme.palette.customBackground.gradiant.light,
       color: theme.palette.customColor.highContrast,
       transition: "all .5s ease",
