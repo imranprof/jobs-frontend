@@ -13,7 +13,7 @@ const allJobOfferUrl = process.env.NEXT_PUBLIC_ALL_JOB_OFFER_URL
 const acceptHireUrl = process.env.NEXT_PUBLIC_HIRE_OFFER_URL
 
 export const addJobAction = (job) => {
-  const {title, description, location, skills, payType, budget} = job;
+  const {title, description, location, skills, payType, budget, status} = job;
   let data = {
     "job": {
       "title": title,
@@ -21,7 +21,8 @@ export const addJobAction = (job) => {
       "skills": `{${skills}}`,
       "pay_type": payType,
       "budget": `{${budget}}`,
-      "location": location
+      "location": location,
+      "status": status
     }
   }
 
@@ -85,6 +86,7 @@ export const updateJobAction = (oldJob, updatedJob) => {
       "pay_type": updatedJob.pay_type,
       "skills": `{${updatedJob.skills}}`,
       "budget": `{${updatedJob.budget}}`,
+      "status": updatedJob.status_label
     }
   }
   return (dispatch) => {
