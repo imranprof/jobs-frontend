@@ -1,6 +1,15 @@
 import axios from "axios";
 
-import {SET_All_JOB_OFFER, SET_JOB_APPLICATION, SET_JOB_OFFER, SET_JOBS, UPDATE_JOB} from "../actionTypes/jobsTypes";
+import {
+  SET_All_JOB_OFFER,
+  SET_JOB_APPLICATION,
+  SET_JOB_OFFER,
+  SET_JOBS,
+  UPDATE_JOB,
+  SET_BEST_MATCHES_JOB,
+  SET_MOST_RECENT_JOB,
+  SET_PAGE
+} from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
@@ -11,6 +20,8 @@ const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
 const hireJobSeekerUrl = process.env.NEXT_PUBLIC_HIRE_JOB_SEEKER_URL
 const allJobOfferUrl = process.env.NEXT_PUBLIC_ALL_JOB_OFFER_URL
 const acceptHireUrl = process.env.NEXT_PUBLIC_HIRE_OFFER_URL
+const bestMatchesJobsUrl = process.env.NEXT_PUBLIC_BEST_MATCHES_JOBS_URL
+const mostRecentJobsUrl = process.env.NEXT_PUBLIC_MOST_RECENT_JOBS_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget, status} = job;
@@ -216,7 +227,6 @@ const setAllJobOffer = (details) => {
 }
 
 export const getAllJobOffer = () => {
-
   return (dispatch) => {
     axios.get(allJobOfferUrl)
       .then(res => {
@@ -224,7 +234,52 @@ export const getAllJobOffer = () => {
       })
       .catch(err => err.response);
   }
+}
 
+const setBestMatchesJobs = (jobs) => {
+  return {
+    type: SET_BEST_MATCHES_JOB,
+    payload: jobs
+  }
+}
+
+export const getBestMatchesJobs = () => {
+  return (dispatch) => {
+    axios.get(bestMatchesJobsUrl)
+      .then(res => {
+        dispatch(setBestMatchesJobs(res.data.jobs))
+      })
+      .catch(err => err.response);
+  }
+}
+
+const setMostRecentJobs = (jobs) => {
+  return {
+    type: SET_MOST_RECENT_JOB,
+    payload: jobs
+  }
+}
+
+export const setPage = (page) => {
+  return {
+    type: SET_PAGE,
+    payload: page
+  }
+}
+
+export const getMostRecentJobs = (jobs, page) => {
+  return (dispatch) => {
+    axios.get(mostRecentJobsUrl, {
+      params: {
+        page: page
+      }
+    })
+      .then(res => {
+        dispatch(setMostRecentJobs(jobs.concat(res.data.jobs)))
+        dispatch(setPage(page + 1));
+      })
+      .catch(err => err.response);
+  }
 }
 
 const setJobOffer = (details) => {
