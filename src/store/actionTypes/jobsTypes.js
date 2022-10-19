@@ -1,5 +1,7 @@
 export const SHOW_JOBS = 'SHOW_JOBS'
 export const SET_JOBS = 'SET_JOBS'
+export const SET_PAGE = 'SET_PAGE'
+export const RESET = 'RESET'
 export const UPDATE_JOB = 'UPDATE_JOB'
 export const SET_SEARCH_JOB = 'SET_SEARCH_JOB'
 export const SET_APPLICATION_DETAILS = 'SET_APPLICATION_DETAILS'

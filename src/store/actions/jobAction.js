@@ -1,6 +1,15 @@
 import axios from "axios";
 
-import {SET_All_JOB_OFFER, SET_JOB_APPLICATION, SET_JOB_OFFER, SET_JOBS, UPDATE_JOB, SET_BEST_MATCHES_JOB, SET_MOST_RECENT_JOB} from "../actionTypes/jobsTypes";
+import {
+  SET_All_JOB_OFFER,
+  SET_JOB_APPLICATION,
+  SET_JOB_OFFER,
+  SET_JOBS,
+  UPDATE_JOB,
+  SET_BEST_MATCHES_JOB,
+  SET_MOST_RECENT_JOB,
+  SET_PAGE
+} from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
 const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
@@ -232,7 +241,7 @@ const setBestMatchesJobs = (jobs) => {
   }
 }
 
-export const getBestMatchesJobs= () => {
+export const getBestMatchesJobs = () => {
   return (dispatch) => {
     axios.get(bestMatchesJobsUrl)
       .then(res => {
@@ -249,11 +258,23 @@ const setMostRecentJobs = (jobs) => {
   }
 }
 
-export const getMostRecentJobs= () => {
+export const setPage = (page) => {
+  return {
+    type: SET_PAGE,
+    payload: page
+  }
+}
+
+export const getMostRecentJobs = (jobs, page) => {
   return (dispatch) => {
-    axios.get(mostRecentJobsUrl)
+    axios.get(mostRecentJobsUrl, {
+      params: {
+        page: page
+      }
+    })
       .then(res => {
-        dispatch(setMostRecentJobs(res.data.jobs))
+        dispatch(setMostRecentJobs(jobs.concat(res.data.jobs)))
+        dispatch(setPage(page + 1));
       })
       .catch(err => err.response);
   }
