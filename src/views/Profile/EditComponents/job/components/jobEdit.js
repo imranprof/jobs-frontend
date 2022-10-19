@@ -17,7 +17,7 @@ const JobEdit = (props) => {
   const theme = useTheme();
   const classes = JobEditStyle(theme);
   const {job, handleClose, setToast} = props
-  const {title, description, skills, location, pay_type, budget} = job
+  const {title, description, skills, location, pay_type, budget, status_label, status_value} = job
   const dispatch = useDispatch()
 
   const jobSkillsData = [
@@ -27,10 +27,16 @@ const JobEdit = (props) => {
     {value: 4, label: "Javascript"},
     {value: 5, label: "Golang"}
   ]
-
   const payTypeData = [
     {value: 1, label: "Pay by the hour"},
     {value: 2, label: "Pay a fixed price"}
+  ]
+
+  const statusData = [
+    {value: 0, label: "Draft"},
+    {value: 1, label: "Published"},
+    {value: 2, label: "Closed"},
+    {value: 3, label: "Canceled"}
   ]
 
   const filteredSkills = (selectedSkills) => {
@@ -49,12 +55,13 @@ const JobEdit = (props) => {
     skills: skills.map((skill) => (
       {value: skill, label: skill})),
     payType: {value: 3, label: pay_type},
+    status: {value: status_value, label: status_label},
     location: location,
     minRate: budget[0],
     maxRate: budget.length === 2 ? budget[1] : '',
   }
 
-  const jobUpdate = ({job, title, description, skills, location, pay_type, minRate, maxRate}) => {
+  const jobUpdate = ({job, title, description, skills, location, pay_type, minRate, maxRate, status_label, status_value}) => {
     const oldJob = {...job};
     const skillsLabel = skills.map(
       skill => skill.label
@@ -68,6 +75,8 @@ const JobEdit = (props) => {
     job.location = location.trim();
     job.budget = budget
     job.pay_type = pay_type.label
+    job.status_label =  status_label
+    job.status_value = status_value
     dispatch(updateJobAction(oldJob, job));
     setToast({show: true, severity: "success", text: "Successfully updated the job."});
     handleClose()
@@ -118,6 +127,8 @@ const JobEdit = (props) => {
         pay_type: values.payType,
         minRate: values.minRate,
         maxRate: values.maxRate,
+        status_label: values.status.label,
+        status_value: values.status.value
       });
     },
     validate: jobValidation
@@ -239,6 +250,20 @@ const JobEdit = (props) => {
               {formik.errors.maxRate && <ErrorMessage error={formik.errors.maxRate}/>}
             </>
           )}
+          <div className={`${classes.jobEditWrapper}__content-wrapper__gap`}>
+            <h4>Do you want to change current job status ? </h4>
+            <div>
+              <Select
+                name="status"
+                options={statusData}
+                value = {formik.values.status}
+                onChange={status => formik.setFieldValue("status", status)}
+                menuPosition="fixed"
+                styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
+              />
+            </div>
+          </div>
+
 
           <div className={`${classes.jobEditWrapper}__content-wrapper__gap`}>
             <TextField
