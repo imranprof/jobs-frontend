@@ -8,6 +8,10 @@ const useStyles = makeStyles({
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0
     },
+    '&__job-filters-wrapper': {
+      width: "100%",
+      display: "flex"
+    },
     '&__job-search-title': {
       color: theme.palette.customColor.dark,
       fontFamily: FONTS.modalTitleFont,
