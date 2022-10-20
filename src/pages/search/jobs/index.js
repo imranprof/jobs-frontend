@@ -1,11 +1,12 @@
-import {connect} from "react-redux";
+import {useEffect} from "react";
+import {connect, useDispatch} from "react-redux";
 
 import {useTheme} from "@material-ui/core/styles";
 import {NoSsr} from "@material-ui/core";
 
 import withLayout from "../../../views/Layout";
 import Job from "../../../views/Job";
-import {getSearchValue} from "../../../store/actions/searchAction";
+import {getSearchJobs, getSearchValue} from "../../../store/actions/searchAction";
 import {JobsStyle} from "../../jobs/style";
 import CustomLoader from "../../../lib/customLoader";
 import Filters from "../filters";
@@ -14,6 +15,11 @@ const JobSearch = (props) => {
   const theme = useTheme();
   const classes = JobsStyle(theme);
   const {searchJobList, initialLoader} = props
+  const dispatch = useDispatch()
+
+  useEffect(()=> {
+    getSearchValue() && dispatch(getSearchJobs(getSearchValue()))
+  },[])
 
   return (
     <NoSsr>

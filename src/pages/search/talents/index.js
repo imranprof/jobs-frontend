@@ -1,7 +1,8 @@
-import React from 'react';
+import {useEffect} from 'react';
+
 import withLayout from "../../../views/Layout";
-import {connect} from "react-redux";
-import {getSearchValue} from "../../../store/actions/searchAction";
+import {connect, useDispatch} from "react-redux";
+import {getSearchProfiles, getSearchValue} from "../../../store/actions/searchAction";
 import ProfileCard from "../../../views/Profiles/ProfileCard";
 import {useTheme} from "@material-ui/core/styles";
 import {TalentsSearchStyle} from "./style";
@@ -12,6 +13,11 @@ const TalentSearch = (props) => {
   const theme = useTheme();
   const classes = TalentsSearchStyle(theme);
   const {initialLoader} = props
+  const dispatch = useDispatch()
+
+  useEffect(()=> {
+    getSearchValue() && dispatch(getSearchProfiles(getSearchValue()))
+  },[])
 
   return (
     <NoSsr>
