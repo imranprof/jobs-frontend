@@ -18,6 +18,9 @@ const useStyles = makeStyles({
     '& .MuiCheckbox-colorSecondary.Mui-checked': {
       color: theme.palette.customColor.radioButton
     },
+    '& .MuiOutlinedInput-root': {
+      maxHeight: 30
+    },
     '&__headline': {
       fontFamily: FONTS.modalTitleFont,
       letterSpacing: "1px",
@@ -25,6 +28,16 @@ const useStyles = makeStyles({
     },
     '&__box': {
       marginBottom: 30
+    },
+    '&__hourly-rate': {
+      width: "100%",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      '&__input': {
+        width: 80,
+        height: 30
+      }
     }
   })
 });

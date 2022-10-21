@@ -10,3 +10,11 @@ export const jobTypesFilter = [
   {id: 1, value: 'Pay by the hour', label: 'Hourly'},
   {id: 2, value: 'Pay a fixed price', label: 'Fixed-Price'},
 ]
+
+export const jobRatesFilter = [
+  {id: 1, value: {"min": 0, "max": 100}, label: 'Less than $100'},
+  {id: 2, value: {"min": 100, "max": 500}, label: '$100 - $500'},
+  {id: 3, value: {"min": 500, "max": 1000}, label: '$500 - $1k'},
+  {id: 4, value: {"min": 1000, "max": 5000}, label: '$1k - $5k'},
+  {id: 5, value: {"min": 5000, "max": 20000}, label: '$5k+'},
+]
