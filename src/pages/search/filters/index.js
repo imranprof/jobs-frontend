@@ -1,4 +1,5 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
 
 import {Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField} from "@material-ui/core";
@@ -6,13 +7,31 @@ import {useTheme} from "@material-ui/core/styles";
 
 import {numberOfApplicants, jobTypesFilter, jobRatesFilter} from "../../../../API/elements/jobs/filterList";
 import {FiltersStyle} from "./style";
+import {getSearchJobs, getSearchValue} from "../../../store/actions/searchAction";
 
 const Filters = () => {
   const theme = useTheme();
   const classes = FiltersStyle(theme);
+  const dispatch = useDispatch()
   const [numOfApplicants, setNumOfApplicants] = useState([])
   const [jobTypes, setJobTypes] = useState([])
   const [jobRates, setJobRates] = useState([])
+
+  useEffect(() => {
+    if (jobTypes.length > 0) {
+      createCheckedObject.job["pay_type"]= jobTypes
+      dispatch(getSearchJobs(createCheckedObject))
+    }
+    else {
+      dispatch(getSearchJobs(createCheckedObject))
+    }
+  },[jobTypes])
+
+  const createCheckedObject = {
+    job: {
+      search_value: getSearchValue()
+    }
+  }
 
   const handleApplicantsChange = (e) => {
     const index = numOfApplicants.indexOf(e.target.value)
@@ -23,10 +42,11 @@ const Filters = () => {
     }
   }
 
-  const handleJobTypesChange = (e) => {
-    const index = jobTypes.indexOf(e.target.value)
+  const handleJobTypesChange =  async (e) => {
+    const index = await jobTypes.indexOf(e.target.value)
+
     if (index === -1) {
-      setJobTypes([...jobTypes, e.target.value])
+       setJobTypes([...jobTypes, e.target.value])
     } else {
       setJobTypes(jobTypes.filter(type => type !== e.target.value))
     }
@@ -43,6 +63,10 @@ const Filters = () => {
 
   const checkedApplicants = numOfApplicants.map(item => JSON.parse(item))
   const checkedJobRates = jobRates.map(rate => JSON.parse(rate))
+
+  if(checkedJobRates.length > 0){
+    createCheckedObject.job["rate"] = {"range": checkedJobRates}
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -84,10 +108,11 @@ const Filters = () => {
           <FormLabel>Job type</FormLabel>
           <FormGroup>
             {jobTypesFilter.map(type => (
-              <FormControlLabel
+             <FormControlLabel
                 key={type.id}
                 value={type.value}
-                control={<Checkbox size="small" checked={jobTypes.includes(type.value)} onChange={handleJobTypesChange}/>}
+                control={<Checkbox size="small" checked={jobTypes.includes(type.value)}
+                                   onChange={handleJobTypesChange}/>}
                 label={type.label}
               />
             ))}

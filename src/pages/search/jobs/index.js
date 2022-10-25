@@ -18,7 +18,9 @@ const JobSearch = (props) => {
   const dispatch = useDispatch()
 
   useEffect(()=> {
-    getSearchValue() && dispatch(getSearchJobs(getSearchValue()))
+    getSearchValue() && dispatch(getSearchJobs({job: {
+        search_value: getSearchValue()
+      }}))
   },[])
 
   return (
