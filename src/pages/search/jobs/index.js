@@ -27,7 +27,7 @@ const JobSearch = (props) => {
     <NoSsr>
       <div className={`${classes.jobsWrapper}__job-filters-wrapper`}>
         <Filters />
-        <div>
+        <div className={`${classes.jobsWrapper}__jobs`}>
           <h3 className={`${classes.jobsWrapper}__job-search-title`}>
             Results for "{getSearchValue()}"
           </h3>

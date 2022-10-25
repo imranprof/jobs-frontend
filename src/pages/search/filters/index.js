@@ -18,6 +18,9 @@ const Filters = () => {
   const [jobRates, setJobRates] = useState([])
 
   useEffect(() => {
+    if (checkedJobRates.length > 0) {
+      createCheckedObject.job["rate"]= {"range": checkedJobRates}
+    }
     if (jobTypes.length > 0) {
       createCheckedObject.job["pay_type"]= jobTypes
       dispatch(getSearchJobs(createCheckedObject))
@@ -26,6 +29,21 @@ const Filters = () => {
       dispatch(getSearchJobs(createCheckedObject))
     }
   },[jobTypes])
+
+  useEffect(() => {
+    if (jobTypes.length > 0) {
+      createCheckedObject.job["pay_type"]= jobTypes
+    }
+    if (checkedJobRates.length > 0) {
+      createCheckedObject.job["rate"]= {"range": checkedJobRates}
+      console.log('final obj rate === ', createCheckedObject)
+
+      dispatch(getSearchJobs(createCheckedObject))
+    }
+    else {
+      dispatch(getSearchJobs(createCheckedObject))
+    }
+  },[jobRates])
 
   const createCheckedObject = {
     job: {
@@ -63,10 +81,6 @@ const Filters = () => {
 
   const checkedApplicants = numOfApplicants.map(item => JSON.parse(item))
   const checkedJobRates = jobRates.map(rate => JSON.parse(rate))
-
-  if(checkedJobRates.length > 0){
-    createCheckedObject.job["rate"] = {"range": checkedJobRates}
-  }
 
   const formik = useFormik({
     initialValues: {

@@ -8,6 +8,9 @@ const useStyles = makeStyles({
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0
     },
+    '&__jobs': {
+      width: "100%"
+    },
     '&__job-filters-wrapper': {
       width: "100%",
       display: "flex"
