@@ -10,7 +10,8 @@ const useStyles = makeStyles({
       marginBottom: 10
     },
     '& .MuiTypography-body1': {
-      fontSize: 15
+      fontSize: 15,
+      color: theme.palette.customColor.main,
     },
     '& .MuiCheckbox-root': {
       padding: "7px 9px"

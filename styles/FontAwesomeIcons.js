@@ -29,7 +29,8 @@ const FontAwesomeIcons = {
     "dollar": 'fa-solid fa-money-check-dollar',
     "message": "fa-solid fa-comment-dots",
     "bell": "fa-regular fa-bell",
-    "achievement": "fa-solid fa-trophy"
+    "achievement": "fa-solid fa-trophy",
+    "filter": "fa-solid fa-sliders"
 }
 
 export default FontAwesomeIcons;
