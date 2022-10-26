@@ -18,29 +18,46 @@ const Filters = () => {
   const [jobRates, setJobRates] = useState([])
 
   useEffect(() => {
-    if (checkedJobRates.length > 0) {
-      createCheckedObject.job["rate"]= {"range": checkedJobRates}
-    }
     if (jobTypes.length > 0) {
-      createCheckedObject.job["pay_type"]= jobTypes
+      createCheckedObject.job["pay_type"] = jobTypes
+    }
+    if (checkedJobRates.length > 0) {
+      createCheckedObject.job["rate"] = {"range": checkedJobRates}
+    }
+    if (checkedApplicants.length > 0) {
+      createCheckedObject.job["applicant"] = {"range": checkedApplicants}
+      dispatch(getSearchJobs(createCheckedObject))
+    } else {
       dispatch(getSearchJobs(createCheckedObject))
     }
-    else {
+  },[numOfApplicants])
+
+  useEffect(() => {
+    if (checkedApplicants.length > 0) {
+      createCheckedObject.job["applicant"] = {"range": checkedApplicants}
+    }
+    if (checkedJobRates.length > 0) {
+      createCheckedObject.job["rate"] = {"range": checkedJobRates}
+    }
+    if (jobTypes.length > 0) {
+      createCheckedObject.job["pay_type"] = jobTypes
+      dispatch(getSearchJobs(createCheckedObject))
+    } else {
       dispatch(getSearchJobs(createCheckedObject))
     }
   },[jobTypes])
 
   useEffect(() => {
+    if (checkedApplicants.length > 0) {
+      createCheckedObject.job["applicant"] = {"range": checkedApplicants}
+    }
     if (jobTypes.length > 0) {
-      createCheckedObject.job["pay_type"]= jobTypes
+      createCheckedObject.job["pay_type"] = jobTypes
     }
     if (checkedJobRates.length > 0) {
-      createCheckedObject.job["rate"]= {"range": checkedJobRates}
-      console.log('final obj rate === ', createCheckedObject)
-
+      createCheckedObject.job["rate"] = {"range": checkedJobRates}
       dispatch(getSearchJobs(createCheckedObject))
-    }
-    else {
+    } else {
       dispatch(getSearchJobs(createCheckedObject))
     }
   },[jobRates])
@@ -60,9 +77,8 @@ const Filters = () => {
     }
   }
 
-  const handleJobTypesChange =  async (e) => {
-    const index = await jobTypes.indexOf(e.target.value)
-
+  const handleJobTypesChange = (e) => {
+    const index = jobTypes.indexOf(e.target.value)
     if (index === -1) {
        setJobTypes([...jobTypes, e.target.value])
     } else {

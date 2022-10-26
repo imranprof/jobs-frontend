@@ -3,7 +3,7 @@ export const numberOfApplicants = [
   {id: 2, value: {"min": 5, "max": 10}, label: '5 to 10'},
   {id: 3, value: {"min": 10, "max": 15}, label: '10 to 15'},
   {id: 4, value: {"min": 15, "max": 20}, label: '15 to 20'},
-  {id: 5, value: {"min": 20, "max": 50}, label: '20 to 50'},
+  {id: 5, value: {"min": 20, "max": 200}, label: 'More than 20'},
 ]
 
 export const jobTypesFilter = [

@@ -21,6 +21,12 @@ const useStyles = makeStyles({
     '& .MuiOutlinedInput-root': {
       maxHeight: 30
     },
+    '& .MuiInputLabel-outlined.MuiInputLabel-marginDense': {
+      transform: "translate(14px, 7px) scale(1)"
+    },
+    '& .MuiInputLabel-outlined.MuiInputLabel-shrink': {
+      transform: "translate(14px, -6px) scale(0.75)"
+    },
     '&__headline': {
       fontFamily: FONTS.modalTitleFont,
       letterSpacing: "1px",
