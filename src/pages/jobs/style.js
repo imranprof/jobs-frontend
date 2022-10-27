@@ -56,6 +56,9 @@ const useStyles = makeStyles({
       },
       [theme.breakpoints.down('md')]: {
         width: 300,
+      },
+      [theme.breakpoints.down('xs')]: {
+        height: "auto"
       }
     }
   })
