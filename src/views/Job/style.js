@@ -39,9 +39,18 @@ const useStyles = makeStyles({
       fontSize: 20,
       fontFamily: FONTS.modalTitleFont,
       fontWeight: 500,
+      display: "-webkit-box",
+      WebkitLineClamp: 1,
+      WebkitBoxOrient: "vertical",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
       marginBottom: 30,
       letterSpacing: "1px",
       transition: "all 0.3s ease-in-out",
+      [theme.breakpoints.down('xs')]: {
+        WebkitLineClamp: 2,
+        marginBottom: 20
+      },
     },
     '&__pay-type': {
       fontSize: 12,
@@ -69,10 +78,17 @@ const useStyles = makeStyles({
       textOverflow: "ellipsis",
       marginBottom: 30,
       transition: "all 0.3s ease-in-out",
+      [theme.breakpoints.down('xs')]: {
+        WebkitLineClamp: 2,
+        marginBottom: 20
+      },
     },
     '&__location': {
       color: theme.palette.customColor.dark,
-      marginTop: 30
+      marginTop: 30,
+      [theme.breakpoints.down('xs')]: {
+        marginTop: 20
+      },
     },
     '&__total-applied': {
       fontSize: 13,

@@ -1,6 +1,5 @@
 import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
-
 import {useFormik} from "formik";
 
 import {InputAdornment, InputBase} from "@material-ui/core";
@@ -8,7 +7,13 @@ import {useTheme} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
 import {SearchBarStyle} from "./style";
-import {getSearchJobs, getSearchProfiles, getSearchType, setSearchType} from "../../store/actions/searchAction";
+import {
+  getSearchJobs,
+  getSearchProfiles,
+  getSearchType,
+  setSearchType,
+  setSearchValue
+} from "../../store/actions/searchAction";
 import Select from "react-select";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {selectStyles} from './style'
@@ -31,7 +36,13 @@ const SearchBar = () => {
       router.push("/search/talents")
     } else {
       setSearchType('Jobs')
-      dispatch(getSearchJobs(values.searchValue))
+      setSearchValue(values.searchValue)
+      let value = {
+        job: {
+          search_value: values.searchValue
+        }
+      }
+      dispatch(getSearchJobs(value))
       router.push("/search/jobs")
     }
   }
