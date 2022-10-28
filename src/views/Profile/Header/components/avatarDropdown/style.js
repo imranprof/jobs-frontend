@@ -56,13 +56,18 @@ export const useStyles = makeStyles({
           fontSize: 20,
           margin: "0px 15px 0px 6px"
         },
-        '&__signout': {
+        '&__item': {
           color: theme.palette.customColor.main,
           fontSize: 15,
           fontFamily: FONTS.secondaryFont,
         }
       }
     },
+    '&__nested-popper': {
+      width: 200,
+      height: "auto",
+      padding: "10px 0"
+    }
   }),
 });
 

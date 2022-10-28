@@ -69,19 +69,6 @@ const ProfilesHeader = (props) => {
 
             {props.isAuthenticated ?
               <>
-                <Link href={`/${getPrivateSlug()}`}>
-                  <a className={`${classes.headerWrapper}__button`}>
-                    My Profile
-                  </a>
-                </Link>
-
-                {role === 'employee' ?
-                (<Link href={"/myJobs"}>
-                  <a className={`${classes.headerWrapper}__button`}>
-                    My Jobs
-                  </a>
-                </Link>) : ""}
-
                 <Link href={"/messages"}>
                   <Badge badgeContent={notificationCount} color={getTheme() ? "secondary" : "primary"}>
                     <a className={`${classes.headerWrapper}__button`}>
