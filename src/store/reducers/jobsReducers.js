@@ -10,7 +10,9 @@ import {
   SET_BEST_MATCHES_JOB,
   SET_MOST_RECENT_JOB,
   SET_PAGE,
-  RESET
+  RESET,
+  SET_ALL_PROGRESS_JOBS,
+  SET_ALL_COMPLETED_JOBS
 } from "../actionTypes/jobsTypes";
 
 const initialState = {
@@ -24,6 +26,8 @@ const initialState = {
   jobOffer: {},
   bestMatchesJobs: [],
   mostRecentJobs: [],
+  inProgressJobsList: [],
+  completedJobsList: [],
   page: 0,
   set: true
 }
@@ -75,6 +79,12 @@ export const jobsReducer = (state = initialState, action) => {
         jobOfferList: action.payload,
         initialLoader: false
       }
+    case SET_JOB_OFFER:
+      return {
+        ...state,
+        jobOffer: action.payload,
+        initialLoader: false
+      }
     case SET_BEST_MATCHES_JOB:
       return {
         ...state,
@@ -87,10 +97,16 @@ export const jobsReducer = (state = initialState, action) => {
         mostRecentJobs: action.payload,
         initialLoader: false
       }
-    case SET_JOB_OFFER:
+    case SET_ALL_PROGRESS_JOBS:
       return {
         ...state,
-        jobOffer: action.payload,
+        inProgressJobsList: action.payload,
+        initialLoader: false
+      }
+    case SET_ALL_COMPLETED_JOBS:
+      return {
+        ...state,
+        completedJobsList: action.payload,
         initialLoader: false
       }
     case UPDATE_JOB:

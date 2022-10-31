@@ -8,7 +8,9 @@ import {
   UPDATE_JOB,
   SET_BEST_MATCHES_JOB,
   SET_MOST_RECENT_JOB,
-  SET_PAGE
+  SET_PAGE,
+  SET_ALL_PROGRESS_JOBS,
+  SET_ALL_COMPLETED_JOBS
 } from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
@@ -22,6 +24,7 @@ const allJobOfferUrl = process.env.NEXT_PUBLIC_ALL_JOB_OFFER_URL
 const acceptHireUrl = process.env.NEXT_PUBLIC_HIRE_OFFER_URL
 const bestMatchesJobsUrl = process.env.NEXT_PUBLIC_BEST_MATCHES_JOBS_URL
 const mostRecentJobsUrl = process.env.NEXT_PUBLIC_MOST_RECENT_JOBS_URL
+const allContractJobsUrl = process.env.NEXT_PUBLIC_ALL_CONTRACT_JOBS_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget, status} = job;
@@ -315,5 +318,51 @@ export const acceptHireAction = (id, choice) => {
       .then(res => dispatch(getJobOffer(id)))
       .catch(err => err.response)
     return (response);
+  }
+}
+
+const setAllJobProgress = (details) => {
+  return {
+    type: SET_ALL_PROGRESS_JOBS,
+    payload: details
+  }
+}
+
+export const getAllJobProgress = () => {
+  const data = {
+    "job_contract": {
+      "contract_status": 1
+    }
+  }
+
+  return (dispatch) => {
+    axios.post(allContractJobsUrl, data)
+      .then(res => {
+        dispatch(setAllJobProgress(res.data.job_contracts))
+      })
+      .catch(err => err.response);
+  }
+}
+
+const setAllCompletedJobs = (details) => {
+  return {
+    type: SET_ALL_COMPLETED_JOBS,
+    payload: details
+  }
+}
+
+export const getAllCompletedJobs = () => {
+  const data = {
+    "job_contract": {
+      "contract_status": 2
+    }
+  }
+
+  return (dispatch) => {
+    axios.post(allContractJobsUrl, data)
+      .then(res => {
+        dispatch(setAllCompletedJobs(res.data.job_contracts))
+      })
+      .catch(err => err.response);
   }
 }
