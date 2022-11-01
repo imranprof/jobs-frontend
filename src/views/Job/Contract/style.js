@@ -46,6 +46,9 @@ const useStyles = makeStyles({
       fontFamily: FONTS.jobDescriptionFont,
       fontWeight: 500,
       marginBottom: 10
+    },
+    '&__link:hover': {
+      textDecoration: "none"
     }
   })
 });

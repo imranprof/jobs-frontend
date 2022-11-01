@@ -12,7 +12,8 @@ import {
   SET_PAGE,
   RESET,
   SET_ALL_PROGRESS_JOBS,
-  SET_ALL_COMPLETED_JOBS
+  SET_ALL_COMPLETED_JOBS,
+  SET_CONTRACT_JOB_SHOW
 } from "../actionTypes/jobsTypes";
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   mostRecentJobs: [],
   inProgressJobsList: [],
   completedJobsList: [],
+  jobContract: {},
   page: 0,
   set: true
 }
@@ -107,6 +109,12 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         completedJobsList: action.payload,
+        initialLoader: false
+      }
+    case SET_CONTRACT_JOB_SHOW:
+      return {
+        ...state,
+        jobContract: action.payload,
         initialLoader: false
       }
     case UPDATE_JOB:

@@ -7,7 +7,6 @@ import SectionHeader from "../../../../lib/sectionHeader";
 import {acceptHireAction, getJobOffer} from "../../../../store/actions/jobAction";
 import {NoSsr, Paper} from "@material-ui/core";
 import CustomLoader from "../../../../lib/customLoader";
-import Divider from "@material-ui/core/Divider";
 import Button from '@material-ui/core/Button';
 import {useTheme} from "@material-ui/core/styles";
 import {JobOfferShowStyle} from "./style";
