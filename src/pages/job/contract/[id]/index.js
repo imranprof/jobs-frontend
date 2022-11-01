@@ -2,15 +2,18 @@ import {connect, useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
 
-import {Avatar, Button, Paper} from "@material-ui/core";
+import {Paper} from "@material-ui/core";
 import {NoSsr} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
+import Divider from "@material-ui/core/Divider";
 
 import {getContractJobShow} from "../../../../store/actions/jobAction";
 import withLayout from '../../../../views/Layout'
 import {ContractJobShowStyle} from "./style";
 import CustomLoader from "../../../../lib/customLoader";
 import {jobContractEnd} from "../../../../store/actions/jobAction";
+import ContractHeaderDetails from "../../../../views/Job/Contract/ShowContract/contractHeaderDetails";
+import ContractBodyDetails from "../../../../views/Job/Contract/ShowContract/contractBodyDetails";
 
 const ContractJobShow = (props) => {
   const theme = useTheme();
@@ -19,7 +22,6 @@ const ContractJobShow = (props) => {
   const router = useRouter()
   const {id} = router.query;
   const {jobContract, initialLoader} = props
-  const {avatar, contract_title, name, contract_status} = jobContract
 
   useEffect(() => {
     id && dispatch(getContractJobShow(id))
@@ -33,22 +35,9 @@ const ContractJobShow = (props) => {
     <NoSsr>
       {initialLoader ? <CustomLoader /> : (
         <Paper elevation={3} className={classes.contractJobShowWrapper} >
-          <div className={`${classes.contractJobShowWrapper}__header-wrapper`}>
-            <div className={`${classes.contractJobShowWrapper}__header`}>
-              <Avatar src={avatar} className={`${classes.contractJobShowWrapper}__avatar`} />
-              <h4 className={`${classes.contractJobShowWrapper}__name`}>{name}</h4>
-            </div>
-            <Button
-              variant="contained"
-              onClick={() => jobContractEndHandler(id)}
-              className={`${classes.contractJobShowWrapper}__contract-end-btn`}
-              disabled={contract_status}
-            >
-              Contract End
-            </Button>
-          </div>
+          <ContractHeaderDetails jobContract={jobContract} jobContractEndHandler={jobContractEndHandler} />
 
-          <h1 className={`${classes.contractJobShowWrapper}__title`}>{contract_title}</h1>
+          <ContractBodyDetails jobContract={jobContract} />
         </Paper>
       )}
     </NoSsr>
