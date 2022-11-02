@@ -22,6 +22,7 @@ const useStyles = makeStyles({
     },
     '&__name': {
       fontSize: 16,
+      fontFamily: FONTS.modalTitleFont,
       margin: 0
     },
     '&__contract-end-btn': {
@@ -70,6 +71,40 @@ const useStyles = makeStyles({
       },
       '&__mui-divider': {
         marginBottom: 30
+      },
+      '&__summary': {
+        width: "100%",
+        marginBottom: 50,
+        '&-title': {
+          fontSize: 18,
+          fontFamily: FONTS.modalTitleFont,
+          marginBottom: 30
+        },
+        '&-info': {
+          fontSize: 15,
+          fontFamily: FONTS.contentFont,
+          '& span': {
+            color: theme.palette.customColor.main,
+          }
+        }
+      },
+      '&__description': {
+        width: "100%",
+        '&-title': {
+          fontSize: 18,
+          fontFamily: FONTS.modalTitleFont,
+          marginBottom: 30
+        },
+        '&-text': {
+          fontFamily: FONTS.jobDescriptionFont,
+          marginBottom: 30
+        }
+      },
+      '&__links': {
+        width: "100%",
+        '&-item': {
+          fontSize: 15,
+        }
       }
     }
   }),

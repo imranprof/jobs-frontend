@@ -40,7 +40,7 @@ const ContractBodyDetails = (props) => {
       {cardType === 'feedback' ? (
         <ContractFeedback />
       ) : (
-        <ContractDetails jobContract={jobContract} />
+        <ContractDetails classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract} />
       )}
     </>
   );
