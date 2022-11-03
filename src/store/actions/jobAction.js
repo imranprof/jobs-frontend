@@ -28,6 +28,7 @@ const mostRecentJobsUrl = process.env.NEXT_PUBLIC_MOST_RECENT_JOBS_URL
 const allContractJobsUrl = process.env.NEXT_PUBLIC_ALL_CONTRACT_JOBS_URL
 const contractJobShowUrl = process.env.NEXT_PUBLIC_CONTRACT_JOB_SHOW_URL
 const jobContractEndUrl = process.env.NEXT_PUBLIC_JOB_CONTRACT_END_URL
+const contractEndFeedbackUrl = process.env.NEXT_PUBLIC_CONTRACT_END_FEEDBACK_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget, status} = job;
@@ -397,6 +398,22 @@ export const jobContractEnd = (id) => {
   }
   return (dispatch) => {
     const response = axios.patch(jobContractEndUrl, data)
+      .then(res => dispatch(getContractJobShow(id)))
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export const contractEndFeedback = (id, feedback, rating) => {
+  const data = {
+    "job_contract": {
+      "id": id,
+      "feedback": feedback,
+      "rating": rating
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(contractEndFeedbackUrl, data)
       .then(res => dispatch(getContractJobShow(id)))
       .catch(err => err.response)
     return (response);

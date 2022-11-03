@@ -105,6 +105,78 @@ const useStyles = makeStyles({
         '&-item': {
           fontSize: 15,
         }
+      },
+      '&__feedback': {
+        width: "100%",
+        // Override TextField
+        '& label.Mui-focused': {
+          color: theme.palette.customBorder.customInputBorder
+        },
+        '& .MuiInput-underline:after': {
+          borderBottomColor: theme.palette.customBorder.customInputBorder
+        },
+        '& .MuiFilledInput-underline:after': {
+          borderBottomColor: theme.palette.customBorder.customInputBorder
+        },
+        '& .MuiOutlinedInput-multiline': {
+          padding: 0
+        },
+        '& .MuiOutlinedInput-inputMultiline': {
+          padding: 12
+        },
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: theme.palette.customBorder.customInputBorder,
+          }
+        },
+        '&-title': {
+          color: theme.palette.customColor.main,
+          fontWeight: 500
+        },
+        '&-subtitle': {
+          color: theme.palette.customColor.main,
+          fontFamily: FONTS.modalTitleFont,
+          fontSize: 15
+        },
+        '&-rating': {
+          width: "35%",
+          display: "flex",
+          flexDirection: "column",
+          padding: 20,
+          '&__score': {
+            fontSize: 16,
+            fontFamily: FONTS.modalTitleFont,
+            marginTop: 20
+          }
+        },
+        '&-message': {
+          marginTop: 50,
+          '&__title': {
+            color: theme.palette.customColor.main,
+            fontFamily: FONTS.modalTitleFont
+          },
+          '&__input': {
+            display: "flex",
+            flexDirection: "row-reverse",
+            justifyContent: "space-between"
+          },
+          '&__input-length': {
+            display: "block",
+            color: theme.palette.customColor.main,
+            fontFamily: FONTS.modalTitleFont,
+            textAlign: "right",
+            marginTop: 10
+          }
+        },
+        '&__submit-btn': {
+          backgroundColor: theme.palette.customBackground.buttonBg,
+          color: theme.palette.customColor.jobPostBtn,
+          textTransform: 'capitalize',
+          marginTop: 20,
+          '&:hover': {
+            backgroundColor: theme.palette.customBackground.buttonHoverBg,
+          }
+        }
       }
     }
   }),
