@@ -1,19 +1,21 @@
 import {useState} from "react";
+import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
-import { Rating } from 'react-simple-star-rating';
 import {useFormik} from "formik";
+import {Rating} from 'react-simple-star-rating';
 
 import {Button, Paper, TextField} from "@material-ui/core";
 
 import {getRole} from "../../../../auth/operations";
 import ErrorMessage from "../../../../lib/errorMessage";
 import {contractEndFeedback} from "../../../../store/actions/jobAction";
-import {useRouter} from "next/router";
 
-const ContractFeedback = ({classes}) => {
+const ContractFeedback = (props) => {
   const router = useRouter()
   const {id} = router.query;
   const dispatch = useDispatch()
+  const {jobContract, classes} = props
+  const {feedback, rating, get_feedback, get_rating} = jobContract
   const [ratingValue, setRatingValue] = useState(0)
   const role = getRole() === 'employee' ? 'employer' : 'job seeker'
 
@@ -74,52 +76,108 @@ const ContractFeedback = ({classes}) => {
 
   return (
     <div className={`${classes}__feedback`}>
-      <h2 className={`${classes}__feedback-title`}>Leave Feedback</h2>
-
-      <div>
-        <h4 className={`${classes}__feedback-subtitle`}>Feedback to {role}</h4>
-        <Paper className={`${classes}__feedback-rating`}>
-          <Rating
-            initialValue={ratingValue}
-            size={35}
-            transition
-            allowFraction
-            showTooltip
-            tooltipArray={tooltipArray}
-            fillColorArray={fillColorArray}
-            onClick={handleRating}
-          />
-          <span className={`${classes}__feedback-rating__score`}>Rating: {ratingValue}</span>
-        </Paper>
-
-        <div className={`${classes}__feedback-message`}>
-          <p className={`${classes}__feedback-message__title`}>Share your experience with this {role}</p>
-          <TextField
-            required
-            multiline={true}
-            fullWidth
-            rows={5}
-            label="Feedback"
-            variant="outlined"
-            name="feedback"
-            value={formik.values.feedback}
-            onChange={formik.handleChange}
-          />
-          <div className={`${classes}__feedback-message__input`}>
-            <span className={`${classes}__feedback-message__input-length`}>{5000 - formik.values.feedback.length} characters left</span>
-            {formik.errors.feedback ? <ErrorMessage error={formik.errors.feedback} /> : null}
+      {(feedback !== null && rating !== null) ? (
+        <>
+          <div>
+            <h3 className={`${classes}__feedback-title`}>Your Feedback to {role}</h3>
+            <Paper className={`${classes}__feedback-rating`}>
+              <Rating
+                readonly={true}
+                initialValue={rating}
+                size={35}
+                transition
+                allowFraction
+                showTooltip
+                tooltipArray={tooltipArray}
+                fillColorArray={fillColorArray}
+                onClick={handleRating}
+              />
+              <span className={`${classes}__feedback-rating__score`}>Rating: {rating}</span>
+              <p className={`${classes}__feedback__text`}>{feedback}</p>
+            </Paper>
           </div>
-        </div>
-      </div>
 
-      <Button
-        variant="contained"
-        onClick={() => giveFeedbackHandler(id, formik.values.feedback, ratingValue)}
-        className={`${classes}__feedback__submit-btn`}
-        disabled={isDisabledFeedbackBtn}
-      >
-        Submit feedback
-      </Button>
+          {(get_feedback !== null && get_rating !== null) ? (
+            <div>
+              <h3 className={`${classes}__feedback-title`}>{role} feedback to you</h3>
+              <Paper className={`${classes}__feedback-rating`}>
+                <Rating
+                  readonly={true}
+                  initialValue={get_rating}
+                  size={35}
+                  transition
+                  allowFraction
+                  showTooltip
+                  tooltipArray={tooltipArray}
+                  fillColorArray={fillColorArray}
+                  onClick={handleRating}
+                />
+                <span className={`${classes}__feedback-rating__score`}>Rating: {get_rating}</span>
+                <p className={`${classes}__feedback__text`}>{get_feedback}</p>
+              </Paper>
+            </div>
+          ) : (
+            <>
+              <h3 className={`${classes}__feedback-title`}>{role} feedback to you</h3>
+              <p className={`${classes}__feedback-message__title`}>{role} has not feedback to you yet</p>
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          <div>
+            <h2 className={`${classes}__feedback-title`}>{role} feedback to you</h2>
+            <p className={`${classes}__feedback-message__title`}>{role} feedback is hidden until you provide feedback</p>
+          </div>
+
+          <h2 className={`${classes}__feedback-title`}>Leave Feedback</h2>
+          <div>
+            <h4 className={`${classes}__feedback-subtitle`}>Feedback to {role}</h4>
+            <Paper className={`${classes}__feedback-rating`}>
+              <Rating
+                initialValue={ratingValue}
+                size={35}
+                transition
+                allowFraction
+                showTooltip
+                tooltipArray={tooltipArray}
+                fillColorArray={fillColorArray}
+                onClick={handleRating}
+              />
+              <span className={`${classes}__feedback-rating__score`}>Rating: {ratingValue}</span>
+            </Paper>
+
+            <div className={`${classes}__feedback-message`}>
+              <p className={`${classes}__feedback-message__title`}>Share your experience with this {role}</p>
+              <TextField
+                required
+                multiline={true}
+                fullWidth
+                rows={5}
+                label="Feedback"
+                variant="outlined"
+                name="feedback"
+                value={formik.values.feedback}
+                onChange={formik.handleChange}
+              />
+              <div className={`${classes}__feedback-message__input`}>
+                <span
+                  className={`${classes}__feedback-message__input-length`}>{5000 - formik.values.feedback.length} characters left</span>
+                {formik.errors.feedback ? <ErrorMessage error={formik.errors.feedback}/> : null}
+              </div>
+            </div>
+          </div>
+
+          <Button
+            variant="contained"
+            onClick={() => giveFeedbackHandler(id, formik.values.feedback, ratingValue)}
+            className={`${classes}__feedback__submit-btn`}
+            disabled={isDisabledFeedbackBtn}
+          >
+            Submit feedback
+          </Button>
+        </>
+      )}
     </div>
   );
 };

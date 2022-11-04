@@ -38,7 +38,7 @@ const ContractBodyDetails = (props) => {
       </div>
 
       {cardType === 'feedback' ? (
-        <ContractFeedback classes={`${classes.showContractWrapper}__title-tabs-wrapper`} />
+        <ContractFeedback classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract} />
       ) : (
         <ContractDetails classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract} />
       )}

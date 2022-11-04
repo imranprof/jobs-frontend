@@ -131,7 +131,10 @@ const useStyles = makeStyles({
         },
         '&-title': {
           color: theme.palette.customColor.main,
-          fontWeight: 500
+          fontWeight: 500,
+          '&:first-letter': {
+            textTransform: "capitalize"
+          }
         },
         '&-subtitle': {
           color: theme.palette.customColor.main,
@@ -149,11 +152,17 @@ const useStyles = makeStyles({
             marginTop: 20
           }
         },
+        '&__text': {
+          fontFamily: FONTS.jobDescriptionFont
+        },
         '&-message': {
           marginTop: 50,
           '&__title': {
             color: theme.palette.customColor.main,
-            fontFamily: FONTS.modalTitleFont
+            fontFamily: FONTS.modalTitleFont,
+            '&:first-letter': {
+              textTransform: "capitalize"
+            }
           },
           '&__input': {
             display: "flex",
