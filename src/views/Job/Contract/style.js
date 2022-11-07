@@ -35,7 +35,10 @@ const useStyles = makeStyles({
       background: theme.palette.customBackground.gradiant.dark,
     },
     '&__wrapper': {
-      width: "60%"
+      width: "60%",
+      [theme.breakpoints.down('sm')]: {
+        width: "100%"
+      },
     },
     '&__title': {
       color: theme.palette.customColor.highContrast,

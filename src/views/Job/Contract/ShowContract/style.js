@@ -7,7 +7,11 @@ const useStyles = makeStyles({
     '&__header-wrapper': {
       width: "100%",
       display: "flex",
-      justifyContent: "space-between"
+      justifyContent: "space-between",
+      [theme.breakpoints.down('xs')]: {
+        height: 100,
+        flexDirection: "column"
+      },
     },
     '&__header': {
       width: 165,
@@ -32,12 +36,19 @@ const useStyles = makeStyles({
       textTransform: 'capitalize',
       '&:hover': {
         backgroundColor: theme.palette.customBackground.buttonHoverBg,
-      }
+      },
+      [theme.breakpoints.down('xs')]: {
+        maxWidth: 150,
+        marginLeft: 0
+      },
     },
     '&__title': {
       fontSize: 20,
       fontFamily: FONTS.modalTitleFont,
-      margin: "30px 0 20px 0"
+      margin: "30px 0 20px 0",
+      [theme.breakpoints.down('xs')]: {
+        fontSize: 16
+      },
     },
     '&__contracts-tabs-wrapper': {
       display: "flex",
@@ -153,7 +164,20 @@ const useStyles = makeStyles({
             fontSize: 16,
             fontFamily: FONTS.modalTitleFont,
             marginTop: 20
-          }
+          },
+          [theme.breakpoints.down('md')]: {
+            width: "45%"
+          },
+          [theme.breakpoints.down('sm')]: {
+            width: "100%"
+          },
+          [theme.breakpoints.down('xs')]: {
+            width: "70%",
+            '& .style-module_tooltip__tKc3i': {
+              marginLeft: "0px !important",
+              marginTop: 10
+            }
+          },
         },
         '&__text': {
           fontFamily: FONTS.jobDescriptionFont
