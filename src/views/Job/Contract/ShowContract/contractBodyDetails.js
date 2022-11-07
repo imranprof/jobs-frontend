@@ -11,6 +11,7 @@ const ContractBodyDetails = (props) => {
   const theme = useTheme();
   const classes = ShowContractStyle(theme);
   const {jobContract} = props
+  const {contract_status} = jobContract
   const [cardType, setCardType] = useState('details')
 
   const handleCardType = (type) => {
@@ -25,22 +26,25 @@ const ContractBodyDetails = (props) => {
                 <span onClick={() => handleCardType('details')}
                       className={`${classes.showContractWrapper}__title-tabs-wrapper__title-wrapper`}><h3
                   className={cardType === 'details' ? `${classes.showContractWrapper}__title-tabs-wrapper__selected-title` : `${classes.showContractWrapper}__title-tabs-wrapper__title`}>Details</h3></span>
-            {cardType === 'details' && <hr className={`${classes.showContractWrapper}__title-tabs-wrapper__select-line`}/>}
+            {cardType === 'details' &&
+            <hr className={`${classes.showContractWrapper}__title-tabs-wrapper__select-line`}/>}
           </div>
+          {contract_status &&
           <div>
                 <span onClick={() => handleCardType('feedback')}
                       className={`${classes.showContractWrapper}__title-tabs-wrapper__title-wrapper`}><h3
                   className={cardType === 'feedback' ? `${classes.showContractWrapper}__title-tabs-wrapper__selected-title` : `${classes.showContractWrapper}__title-tabs-wrapper__title`}>Feedback</h3></span>
-            {cardType === 'feedback' && <hr className={`${classes.showContractWrapper}__title-tabs-wrapper__select-line`}/>}
-          </div>
+            {cardType === 'feedback' &&
+            <hr className={`${classes.showContractWrapper}__title-tabs-wrapper__select-line`}/>}
+          </div>}
         </div>
         <Divider className={`${classes.showContractWrapper}__title-tabs-wrapper__mui-divider`}/>
       </div>
 
       {cardType === 'feedback' ? (
-        <ContractFeedback classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract} />
+        <ContractFeedback classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract}/>
       ) : (
-        <ContractDetails classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract} />
+        <ContractDetails classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract}/>
       )}
     </>
   );

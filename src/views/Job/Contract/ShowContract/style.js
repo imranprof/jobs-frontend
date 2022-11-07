@@ -129,6 +129,9 @@ const useStyles = makeStyles({
             borderColor: theme.palette.customBorder.customInputBorder,
           }
         },
+        '&-wrapper': {
+          marginBottom: 40
+        },
         '&-title': {
           color: theme.palette.customColor.main,
           fontWeight: 500,

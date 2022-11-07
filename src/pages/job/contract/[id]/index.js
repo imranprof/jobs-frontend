@@ -27,7 +27,7 @@ const ContractJobShow = (props) => {
     id && dispatch(getContractJobShow(id))
   }, [id])
 
-  const jobContractEndHandler = (id) => {
+  const jobContractEndHandler = () => {
     id && dispatch(jobContractEnd(id))
   }
 
@@ -35,7 +35,7 @@ const ContractJobShow = (props) => {
     <NoSsr>
       {initialLoader ? <CustomLoader /> : (
         <Paper elevation={3} className={classes.contractJobShowWrapper} >
-          <ContractHeaderDetails jobContract={jobContract} jobContractEndHandler={jobContractEndHandler} />
+          <ContractHeaderDetails jobContract={jobContract} jobContractEndHandler={jobContractEndHandler}  />
 
           <ContractBodyDetails jobContract={jobContract} />
         </Paper>

@@ -18,7 +18,7 @@ const ContractHeaderDetails = (props) => {
         </div>
         <Button
           variant="contained"
-          onClick={() => jobContractEndHandler(id)}
+          onClick={jobContractEndHandler}
           className={`${classes.showContractWrapper}__contract-end-btn`}
           disabled={contract_status}
         >

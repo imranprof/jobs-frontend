@@ -15,7 +15,7 @@ const ContractFeedback = (props) => {
   const {id} = router.query;
   const dispatch = useDispatch()
   const {jobContract, classes} = props
-  const {feedback, rating, get_feedback, get_rating} = jobContract
+  const {self_feedback, self_rating, get_feedback, get_rating} = jobContract
   const [ratingValue, setRatingValue] = useState(0)
   const role = getRole() === 'employee' ? 'employer' : 'job seeker'
 
@@ -55,10 +55,8 @@ const ContractFeedback = (props) => {
 
   const feedbackValidation = (values) => {
     let errors = {}
-    if (!values.feedback) {
-      errors.feedback = "Feedback can't be empty"
-    } else if (values.feedback.length > 5000) {
-      errors.feedback = "Feedback must be within 5000 characters"
+    if (values.feedback.length > 3000) {
+      errors.feedback = "Feedback must be within 3000 characters"
     }
     return errors;
   }
@@ -72,18 +70,18 @@ const ContractFeedback = (props) => {
     id && dispatch(contractEndFeedback(id, feedback, rating))
   }
 
-  const isDisabledFeedbackBtn = (!(formik.values.feedback.length !== 0 && ratingValue !== 0))
+  const isDisabledFeedbackBtn = (!(ratingValue !== 0 && formik.values.feedback.length <= 3000))
 
   return (
     <div className={`${classes}__feedback`}>
-      {(feedback !== null && rating !== null) ? (
+      {(self_feedback !== null && self_rating !== null) ? (
         <>
-          <div>
+          <div className={`${classes}__feedback-wrapper`}>
             <h3 className={`${classes}__feedback-title`}>Your Feedback to {role}</h3>
             <Paper className={`${classes}__feedback-rating`}>
               <Rating
                 readonly={true}
-                initialValue={rating}
+                initialValue={self_rating}
                 size={35}
                 transition
                 allowFraction
@@ -92,8 +90,8 @@ const ContractFeedback = (props) => {
                 fillColorArray={fillColorArray}
                 onClick={handleRating}
               />
-              <span className={`${classes}__feedback-rating__score`}>Rating: {rating}</span>
-              <p className={`${classes}__feedback__text`}>{feedback}</p>
+              <span className={`${classes}__feedback-rating__score`}>Rating: {self_rating}</span>
+              <p className={`${classes}__feedback__text`}>{self_feedback}</p>
             </Paper>
           </div>
 
@@ -125,7 +123,7 @@ const ContractFeedback = (props) => {
         </>
       ) : (
         <>
-          <div>
+          <div className={`${classes}__feedback-wrapper`}>
             <h2 className={`${classes}__feedback-title`}>{role} feedback to you</h2>
             <p className={`${classes}__feedback-message__title`}>{role} feedback is hidden until you provide feedback</p>
           </div>
@@ -148,9 +146,8 @@ const ContractFeedback = (props) => {
             </Paper>
 
             <div className={`${classes}__feedback-message`}>
-              <p className={`${classes}__feedback-message__title`}>Share your experience with this {role}</p>
+              <p className={`${classes}__feedback-message__title`}>Share your experience with this {role} (Optional)</p>
               <TextField
-                required
                 multiline={true}
                 fullWidth
                 rows={5}
@@ -162,7 +159,7 @@ const ContractFeedback = (props) => {
               />
               <div className={`${classes}__feedback-message__input`}>
                 <span
-                  className={`${classes}__feedback-message__input-length`}>{5000 - formik.values.feedback.length} characters left</span>
+                  className={`${classes}__feedback-message__input-length`}>{3000 - formik.values.feedback.length} characters left</span>
                 {formik.errors.feedback ? <ErrorMessage error={formik.errors.feedback}/> : null}
               </div>
             </div>
