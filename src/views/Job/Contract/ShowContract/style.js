@@ -56,6 +56,9 @@ const useStyles = makeStyles({
     },
     '&__title-tabs-wrapper': {
       margin: "0px 40px",
+      [theme.breakpoints.down('xs')]: {
+        margin: "0px 20px"
+      },
       '&__title': {
         marginBottom: 5,
         fontSize: 14,
@@ -89,7 +92,10 @@ const useStyles = makeStyles({
         '&-title': {
           fontSize: 18,
           fontFamily: FONTS.modalTitleFont,
-          marginBottom: 30
+          marginBottom: 30,
+          [theme.breakpoints.down('xs')]: {
+            marginBottom: 0,
+          },
         },
         '&-info': {
           fontSize: 15,
@@ -104,7 +110,10 @@ const useStyles = makeStyles({
         '&-title': {
           fontSize: 18,
           fontFamily: FONTS.modalTitleFont,
-          marginBottom: 30
+          marginBottom: 30,
+          [theme.breakpoints.down('xs')]: {
+            marginBottom: 0,
+          },
         },
         '&-text': {
           fontFamily: FONTS.jobDescriptionFont,
@@ -148,7 +157,10 @@ const useStyles = makeStyles({
           fontWeight: 500,
           '&:first-letter': {
             textTransform: "capitalize"
-          }
+          },
+          [theme.breakpoints.down('xs')]: {
+            fontSize: 16
+          },
         },
         '&-subtitle': {
           color: theme.palette.customColor.main,
@@ -169,13 +181,16 @@ const useStyles = makeStyles({
             width: "45%"
           },
           [theme.breakpoints.down('sm')]: {
-            width: "100%"
+            width: "80%"
           },
           [theme.breakpoints.down('xs')]: {
-            width: "70%",
+            width: "90%",
             '& .style-module_tooltip__tKc3i': {
               marginLeft: "0px !important",
               marginTop: 10
+            },
+            '& .style-module_simpleStarRating__nWUxf': {
+              display: "block"
             }
           },
         },

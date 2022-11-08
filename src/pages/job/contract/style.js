@@ -10,6 +10,9 @@ const useStyles = makeStyles({
     },
     '&__contract-title-wrapper': {
       margin: "0px 50px",
+      [theme.breakpoints.down('xs')]: {
+        margin: "0px 30px",
+      },
     },
     '&__title': {
       marginBottom: 5,
