@@ -30,7 +30,8 @@ const FontAwesomeIcons = {
     "message": "fa-solid fa-comment-dots",
     "bell": "fa-regular fa-bell",
     "achievement": "fa-solid fa-trophy",
-    "filter": "fa-solid fa-sliders"
+    "filter": "fa-solid fa-sliders",
+    "contract": "fa-solid fa-file-contract"
 }
 
 export default FontAwesomeIcons;

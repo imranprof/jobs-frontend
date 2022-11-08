@@ -33,7 +33,7 @@ const AvatarDropDown = (props) => {
 
   return (
     <div>
-      <ClickAwayListener onClickAway={handleClose}>
+      {/*<ClickAwayListener onClickAway={handleClose}>*/}
         <span onClick={handleClick}>
           <Avatar
             alt={fullName}
@@ -41,7 +41,7 @@ const AvatarDropDown = (props) => {
             className={`${classes.avatarDropdownWrapper}__avatar`}
           />
         </span>
-      </ClickAwayListener>
+      {/*</ClickAwayListener>*/}
 
       <AvatarDropDownItems fullName={fullName} avatar={avatar} classes={classes.avatarDropdownWrapper} openEl={openEl} anchorEl={anchorEl} />
     </div>

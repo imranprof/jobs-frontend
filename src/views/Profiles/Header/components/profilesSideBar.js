@@ -117,6 +117,13 @@ const ProfilesSideBar = (props) => {
             }
             {isAuthenticated &&
             (<>
+              <Link href={"/job/contract"}>
+                <a
+                  className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
+                  All Contacts
+                </a>
+              </Link>
+
               <Link href={`${getProfileSlug()}`}>
                 <a
                   className={`${classes.headerWrapper}__button ${classes.headerWrapper}__profiles__side-bar__links-link`}>
