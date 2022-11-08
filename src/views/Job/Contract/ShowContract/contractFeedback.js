@@ -88,7 +88,6 @@ const ContractFeedback = (props) => {
                 showTooltip
                 tooltipArray={tooltipArray}
                 fillColorArray={fillColorArray}
-                onClick={handleRating}
               />
               <span className={`${classes}__feedback-rating__score`}>Rating: {self_rating}</span>
               <p className={`${classes}__feedback__text`}>{self_feedback}</p>
@@ -108,7 +107,6 @@ const ContractFeedback = (props) => {
                   showTooltip
                   tooltipArray={tooltipArray}
                   fillColorArray={fillColorArray}
-                  onClick={handleRating}
                 />
                 <span className={`${classes}__feedback-rating__score`}>Rating: {get_rating}</span>
                 <p className={`${classes}__feedback__text`}>{get_feedback}</p>
