@@ -228,6 +228,29 @@ const useStyles = makeStyles({
             backgroundColor: theme.palette.customBackground.buttonHoverBg,
           }
         }
+      },
+      '&__timesheet-wrapper': {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+      },
+      '&__timesheet-title': {
+        color: theme.palette.customColor.main,
+        fontFamily: FONTS.modalTitleFont,
+        fontSize: 18
+      },
+      '&__create-record': {
+        color: theme.palette.customColor.main,
+        fontFamily: FONTS.modalTitleFont,
+      },
+      '&__picker': {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 20,
+        '&-wrapper': {
+          width: 150
+        }
       }
     }
   }),

@@ -6,6 +6,7 @@ import {useTheme} from "@material-ui/core/styles";
 import {ShowContractStyle} from "./style";
 import ContractDetails from "./contractDetails";
 import ContractFeedback from "./contractFeedback";
+import ContractTimesheet from "./contractTimesheet";
 
 const ContractBodyDetails = (props) => {
   const theme = useTheme();
@@ -37,14 +38,23 @@ const ContractBodyDetails = (props) => {
             {cardType === 'feedback' &&
             <hr className={`${classes.showContractWrapper}__title-tabs-wrapper__select-line`}/>}
           </div>}
+          <div className={`${classes.showContractWrapper}__title-tabs-wrapper`}>
+                <span onClick={() => handleCardType('timesheet')}
+                      className={`${classes.showContractWrapper}__title-tabs-wrapper__title-wrapper`}><h3
+                  className={cardType === 'timesheet' ? `${classes.showContractWrapper}__title-tabs-wrapper__selected-title` : `${classes.showContractWrapper}__title-tabs-wrapper__title`}>Timesheet</h3></span>
+            {cardType === 'timesheet' &&
+            <hr className={`${classes.showContractWrapper}__title-tabs-wrapper__select-line`}/>}
+          </div>
         </div>
         <Divider className={`${classes.showContractWrapper}__title-tabs-wrapper__mui-divider`}/>
       </div>
 
       {cardType === 'feedback' ? (
         <ContractFeedback classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract}/>
+      ) : cardType === 'details' ? (
+        <ContractDetails classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract} />
       ) : (
-        <ContractDetails classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContract={jobContract}/>
+        <ContractTimesheet classes={`${classes.showContractWrapper}__title-tabs-wrapper`} jobContractId={jobContract.id} />
       )}
     </>
   );
