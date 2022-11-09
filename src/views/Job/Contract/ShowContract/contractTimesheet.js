@@ -1,15 +1,22 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch, connect} from "react-redux";
 
 import Button from "@material-ui/core/Button";
 
 import CreateRecordContents from "./createRecordContents";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import CustomSnackbar from "../../../../lib/customSnackbar";
+import {getAllTimeSheets} from "../../../../store/actions/jobAction";
 
 const ContractTimesheet = (props) => {
-  const {classes, jobContractId} = props
+  const dispatch = useDispatch()
+  const {classes, jobContractId, getAllTimeSheetList} = props
   const [openModal, setOpenModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+
+  useEffect(() => {
+    jobContractId && dispatch(getAllTimeSheets(jobContractId))
+  }, [jobContractId])
 
   const modalOpen = () => {
     setOpenModal(true);
@@ -39,4 +46,10 @@ const ContractTimesheet = (props) => {
   );
 };
 
-export default ContractTimesheet;
+const mapStateToProps = (state) => {
+  return {
+    getAllTimeSheetList: state.allJobs.allTimeSheets
+  }
+}
+
+export default connect(mapStateToProps)(ContractTimesheet);

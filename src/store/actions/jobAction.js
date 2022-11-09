@@ -11,7 +11,8 @@ import {
   SET_PAGE,
   SET_ALL_PROGRESS_JOBS,
   SET_ALL_COMPLETED_JOBS,
-  SET_CONTRACT_JOB_SHOW
+  SET_CONTRACT_JOB_SHOW,
+  SHOW_ALL_TIMESHEETS
 } from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
@@ -30,6 +31,7 @@ const contractJobShowUrl = process.env.NEXT_PUBLIC_CONTRACT_JOB_SHOW_URL
 const jobContractEndUrl = process.env.NEXT_PUBLIC_JOB_CONTRACT_END_URL
 const contractEndFeedbackUrl = process.env.NEXT_PUBLIC_CONTRACT_END_FEEDBACK_URL
 const timesheetCreateDetailsUrl = process.env.NEXT_PUBLIC_TIMESHEET_CREATE_DETAILS_URL
+const getAllTimeSheetsUrl = process.env.NEXT_PUBLIC_ALL_TIMESHEETS_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget, status} = job;
@@ -434,6 +436,28 @@ export const timesheetCreateDetails = (id, startDate, endDate, hours, descriptio
   return (dispatch) => {
     const response = axios.post(timesheetCreateDetailsUrl, data)
       .then(res => dispatch(getContractJobShow(id)))
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+const setAllTimeSheets = (timesheetList) => {
+  return {
+    type: SHOW_ALL_TIMESHEETS,
+    payload: timesheetList
+  }
+}
+
+export const getAllTimeSheets = (id) => {
+  return (dispatch) => {
+    const response = axios.get(getAllTimeSheetsUrl, {
+      params: {
+        contract_id: id
+      }
+    })
+      .then(res => {
+        dispatch(setAllTimeSheets(res.data.time_sheets))
+      })
       .catch(err => err.response)
     return (response);
   }
