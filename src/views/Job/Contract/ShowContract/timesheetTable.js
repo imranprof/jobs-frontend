@@ -1,8 +1,39 @@
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {useState} from "react";
+
+import {
+  ClickAwayListener,
+  Fade,
+  Popper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Tooltip,
+  Typography
+} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+
+import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
+import {getRole} from "../../../../auth/operations";
 
 const TimesheetTable = (props) => {
   const {timeSheetList, classes} = props
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState('')
+
+  const truncateDescription = (str, n) => {
+    return (str.length > n) ? str.slice(0, n-1) + '...' : str;
+  };
+
+  const seeMoreHandler = (event, value) => {
+    setAnchorEl(event.currentTarget);
+    setData(value)
+    setOpen(!open);
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -13,6 +44,7 @@ const TimesheetTable = (props) => {
             <TableCell>End Date</TableCell>
             <TableCell>Work Hours</TableCell>
             <TableCell>Work Description</TableCell>
+            {getRole() === 'employee' && <TableCell>Actions</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -21,7 +53,43 @@ const TimesheetTable = (props) => {
               <TableCell>{timesheet.start_date}</TableCell>
               <TableCell>{timesheet.end_date}</TableCell>
               <TableCell>{timesheet.work_hours}</TableCell>
-              <TableCell>{timesheet.work_description}</TableCell>
+
+              <Popper open={open} anchorEl={anchorEl} placement="top" transition>
+                {({ TransitionProps }) => (
+                  <Fade {...TransitionProps} timeout={350}>
+                    <Paper style={{maxWidth: 300, padding: 15}}>
+                      <Typography>{data}</Typography>
+                    </Paper>
+                  </Fade>
+                )}
+              </Popper>
+              <TableCell>
+                {truncateDescription(timesheet.work_description, 50)}
+                {timesheet.work_description.length > 50 && (
+                  <ClickAwayListener onClickAway={()=>setOpen(false)}>
+                  <Button
+                    size="small"
+                    variant="text"
+                    onClick={(e)=>seeMoreHandler(e,timesheet.work_description)}
+                  >
+                    See more
+                  </Button>
+                  </ClickAwayListener>
+                )}
+              </TableCell>
+
+              {getRole() === 'employee' && (
+                <TableCell>
+                  <div className={`${classes}__table-actions`}>
+                    <Tooltip title="Edit" placement="top">
+                      <i className={`${FontAwesomeIcons.pencil} ${classes}__table-actions__edit`} />
+                    </Tooltip>
+                    <Tooltip title="Delete" placement="top">
+                      <i className={`${FontAwesomeIcons.trash} ${classes}__table-actions__delete`} />
+                    </Tooltip>
+                  </div>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

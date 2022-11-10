@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import FONTS from "../../../../../styles/fonts";
+import COLORS from "../../../../../styles/colors";
 
 const useStyles = makeStyles({
   showContractWrapper: theme => ({
@@ -235,6 +236,24 @@ const useStyles = makeStyles({
         alignItems: "center",
         '&__table': {
           minWidth: 650,
+          '& .MuiButton-label': {
+            textTransform: "capitalize"
+          },
+          '&-actions': {
+            width: 50,
+            display: "flex",
+            justifyContent: "space-between",
+            '&__edit, &__delete': {
+              fontSize: 16,
+              cursor: "pointer"
+            },
+            '&__edit': {
+              color: COLORS.warning
+            },
+            '&__delete': {
+              color: COLORS.danger
+            }
+          }
         }
       },
       '&__timesheet-title': {
