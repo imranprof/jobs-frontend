@@ -40,7 +40,7 @@ const ContractTimesheet = (props) => {
         )}
       </div>
 
-      <TimesheetTable timeSheetList={getAllTimeSheetList} jobContractId={jobContractId} classes={`${classes}__timesheet-wrapper`} />
+      <TimesheetTable timeSheetList={getAllTimeSheetList} jobContractId={jobContractId} classes={`${classes}__timesheet-wrapper`} setToast={setToast} />
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
         <CreateRecordContents classes={classes} handleClose={modalClose} jobContractId={jobContractId} setToast={setToast} />

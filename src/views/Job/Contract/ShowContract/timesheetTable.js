@@ -1,7 +1,7 @@
 import {useState} from "react";
+import {useDispatch} from "react-redux";
 
 import {
-  ClickAwayListener,
   Fade,
   Popper,
   Table,
@@ -18,9 +18,11 @@ import Button from "@material-ui/core/Button";
 
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {getRole} from "../../../../auth/operations";
+import {deleteTimeSheet, getAllTimeSheets} from "../../../../store/actions/jobAction";
 
 const TimesheetTable = (props) => {
-  const {timeSheetList, classes} = props
+  const dispatch = useDispatch()
+  const {timeSheetList, classes, jobContractId, setToast} = props
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState('')
@@ -34,6 +36,12 @@ const TimesheetTable = (props) => {
     setData(value)
     setOpen(!open);
   };
+
+  const deleteTimesheetHandler = async (id) => {
+    await dispatch(deleteTimeSheet(id))
+    await dispatch(getAllTimeSheets(jobContractId))
+    setToast({show: true, severity: "success", text: "Work record deleted Successfully"});
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -66,15 +74,13 @@ const TimesheetTable = (props) => {
               <TableCell>
                 {truncateDescription(timesheet.work_description, 50)}
                 {timesheet.work_description.length > 50 && (
-                  <ClickAwayListener onClickAway={()=>setOpen(false)}>
                   <Button
                     size="small"
                     variant="text"
-                    onClick={(e)=>seeMoreHandler(e,timesheet.work_description)}
+                    onClick={(e) => seeMoreHandler(e, timesheet.work_description)}
                   >
                     See more
                   </Button>
-                  </ClickAwayListener>
                 )}
               </TableCell>
 
@@ -85,7 +91,7 @@ const TimesheetTable = (props) => {
                       <i className={`${FontAwesomeIcons.pencil} ${classes}__table-actions__edit`} />
                     </Tooltip>
                     <Tooltip title="Delete" placement="top">
-                      <i className={`${FontAwesomeIcons.trash} ${classes}__table-actions__delete`} />
+                      <i onClick={() => deleteTimesheetHandler(timesheet.id)} className={`${FontAwesomeIcons.trash} ${classes}__table-actions__delete`} />
                     </Tooltip>
                   </div>
                 </TableCell>

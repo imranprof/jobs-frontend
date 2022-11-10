@@ -32,6 +32,7 @@ const jobContractEndUrl = process.env.NEXT_PUBLIC_JOB_CONTRACT_END_URL
 const contractEndFeedbackUrl = process.env.NEXT_PUBLIC_CONTRACT_END_FEEDBACK_URL
 const timesheetCreateDetailsUrl = process.env.NEXT_PUBLIC_TIMESHEET_CREATE_DETAILS_URL
 const getAllTimeSheetsUrl = process.env.NEXT_PUBLIC_ALL_TIMESHEETS_URL
+const timeSheetUrl = process.env.NEXT_PUBLIC_TIMESHEET_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget, status} = job;
@@ -458,6 +459,20 @@ export const getAllTimeSheets = (id) => {
       .then(res => {
         dispatch(setAllTimeSheets(res.data.time_sheets))
       })
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export const deleteTimeSheet = (id) => {
+  const data = {
+    "job_contract": {
+      "id": id
+    }
+  }
+  return (dispatch) => {
+    const response = axios.delete(timeSheetUrl, {data} )
+      .then(res => res)
       .catch(err => err.response)
     return (response);
   }

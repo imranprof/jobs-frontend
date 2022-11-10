@@ -48,9 +48,9 @@ const CreateRecordContents = (props) => {
     return [year, month, day].join('-');
   }
 
-  const createRecordHandler = () => {
-    jobContractId && dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.description))
-    jobContractId && dispatch(getAllTimeSheets(jobContractId))
+  const createRecordHandler = async () => {
+    jobContractId && await dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.description))
+    jobContractId && await dispatch(getAllTimeSheets(jobContractId))
     setToast({show: true, severity: "success", text: "Work record created Successfully"});
     handleClose()
   }
