@@ -232,7 +232,10 @@ const useStyles = makeStyles({
       '&__timesheet-wrapper': {
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        '&__table': {
+          minWidth: 650,
+        }
       },
       '&__timesheet-title': {
         color: theme.palette.customColor.main,

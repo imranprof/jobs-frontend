@@ -9,7 +9,7 @@ import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers"
 
 import ModalTitle from "../../../../lib/profile/modalTitle";
 import CustomButtons from "../../../../lib/profile/customButtons";
-import {timesheetCreateDetails} from "../../../../store/actions/jobAction";
+import {getAllTimeSheets, timesheetCreateDetails} from "../../../../store/actions/jobAction";
 
 const CreateRecordContents = (props) => {
   const dispatch = useDispatch()
@@ -50,6 +50,7 @@ const CreateRecordContents = (props) => {
 
   const createRecordHandler = () => {
     jobContractId && dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.description))
+    jobContractId && dispatch(getAllTimeSheets(jobContractId))
     setToast({show: true, severity: "success", text: "Work record created Successfully"});
     handleClose()
   }

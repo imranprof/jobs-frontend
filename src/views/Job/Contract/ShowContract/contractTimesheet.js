@@ -7,6 +7,8 @@ import CreateRecordContents from "./createRecordContents";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import {getAllTimeSheets} from "../../../../store/actions/jobAction";
+import TimesheetTable from "./timesheetTable";
+import {getRole} from "../../../../auth/operations";
 
 const ContractTimesheet = (props) => {
   const dispatch = useDispatch()
@@ -30,8 +32,15 @@ const ContractTimesheet = (props) => {
     <div>
       <div className={`${classes}__timesheet-wrapper`}>
         <h2 className={`${classes}__timesheet-title`}>Work diary</h2>
-        <Button size="small" variant="outlined" onClick={modalOpen} className={`${classes}__create-record`}>Create record</Button>
+
+        {getRole() === 'employee' && (
+          <Button size="small" variant="outlined" onClick={modalOpen} className={`${classes}__create-record`}>
+            Create record
+          </Button>
+        )}
       </div>
+
+      <TimesheetTable timeSheetList={getAllTimeSheetList} jobContractId={jobContractId} classes={`${classes}__timesheet-wrapper`} />
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
         <CreateRecordContents classes={classes} handleClose={modalClose} jobContractId={jobContractId} setToast={setToast} />
