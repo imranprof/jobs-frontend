@@ -9,13 +9,13 @@ import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers"
 
 import ModalTitle from "../../../../lib/profile/modalTitle";
 import CustomButtons from "../../../../lib/profile/customButtons";
-import {getAllTimeSheets, timesheetCreateDetails} from "../../../../store/actions/jobAction";
+import {getAllTimeSheets, timesheetCreateDetails, updateTimeSheet} from "../../../../store/actions/jobAction";
 
-const CreateRecordContents = (props) => {
+const TimesheetRecordContents = (props) => {
   const dispatch = useDispatch()
-  const {classes, handleClose, jobContractId, setToast} = props
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const {classes, handleClose, jobContractId, setToast, mode, timesheetData} = props
+  const [startDate, setStartDate] = useState(mode === 'edit' ? timesheetData.start_date : new Date());
+  const [endDate, setEndDate] = useState(mode === 'edit' ? timesheetData.end_date : new Date());
 
   const handleStartDateChange = (date) => {
     setStartDate(date);
@@ -27,8 +27,8 @@ const CreateRecordContents = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      hours: 0,
-      description: ''
+      hours: mode === 'edit' ? timesheetData.work_hours : 0,
+      description: mode === 'edit' ? timesheetData.work_description : ''
     }
   })
 
@@ -48,16 +48,23 @@ const CreateRecordContents = (props) => {
     return [year, month, day].join('-');
   }
 
-  const createRecordHandler = async () => {
-    jobContractId && await dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.description))
-    jobContractId && await dispatch(getAllTimeSheets(jobContractId))
-    setToast({show: true, severity: "success", text: "Work record created Successfully"});
-    handleClose()
+  const timesheetRecordHandler = async () => {
+    if (mode === 'edit') {
+      timesheetData.id && await dispatch(updateTimeSheet({id: timesheetData.id, start_date: formatDate(startDate), end_date: formatDate(endDate), work_description: formik.values.description, work_hours: formik.values.hours}))
+      jobContractId && await dispatch(getAllTimeSheets(jobContractId))
+      setToast({show: true, severity: "success", text: "Work record updated Successfully"});
+      handleClose()
+    } else {
+      jobContractId && await dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.description))
+      jobContractId && await dispatch(getAllTimeSheets(jobContractId))
+      setToast({show: true, severity: "success", text: "Work record created Successfully"});
+      handleClose()
+    }
   }
 
   return (
     <div>
-      <ModalTitle title="Add new record" />
+      <ModalTitle title={`${mode === 'edit' ? 'Edit' : 'Add new'} record`} />
 
       <div className={`${classes}__picker`}>
         <div className={`${classes}__picker-wrapper`}>
@@ -105,9 +112,9 @@ const CreateRecordContents = (props) => {
         />
       </div>
 
-      <CustomButtons handler={createRecordHandler} mode={handleClose} actionText="Add" />
+      <CustomButtons handler={timesheetRecordHandler} mode={handleClose} actionText={mode === 'edit' ? 'Update' : "Add"} />
     </div>
   );
 };
 
-export default CreateRecordContents;
+export default TimesheetRecordContents;

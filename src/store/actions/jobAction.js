@@ -477,3 +477,21 @@ export const deleteTimeSheet = (id) => {
     return (response);
   }
 }
+
+export const updateTimeSheet = (timesheet) => {
+  const data = {
+    "job_contract": {
+      "id": timesheet.id,
+      "start_date": timesheet.start_date,
+      "end_date": timesheet.end_date,
+      "work_description": timesheet.work_description,
+      "work_hours": timesheet.work_hours
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(timeSheetUrl, data)
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
+}

@@ -3,7 +3,7 @@ import {useDispatch, connect} from "react-redux";
 
 import Button from "@material-ui/core/Button";
 
-import CreateRecordContents from "./createRecordContents";
+import TimesheetRecordContents from "./timesheetRecordContents";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import CustomSnackbar from "../../../../lib/customSnackbar";
 import {getAllTimeSheets} from "../../../../store/actions/jobAction";
@@ -40,10 +40,10 @@ const ContractTimesheet = (props) => {
         )}
       </div>
 
-      <TimesheetTable timeSheetList={getAllTimeSheetList} jobContractId={jobContractId} classes={`${classes}__timesheet-wrapper`} setToast={setToast} />
+      <TimesheetTable timeSheetList={getAllTimeSheetList} jobContractId={jobContractId} classes={`${classes}`} setToast={setToast} />
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
-        <CreateRecordContents classes={classes} handleClose={modalClose} jobContractId={jobContractId} setToast={setToast} />
+        <TimesheetRecordContents classes={classes} handleClose={modalClose} jobContractId={jobContractId} setToast={setToast} mode="" />
       </EditCustomModal>
 
       {toast.show &&
