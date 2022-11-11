@@ -30,7 +30,6 @@ const allContractJobsUrl = process.env.NEXT_PUBLIC_ALL_CONTRACT_JOBS_URL
 const contractJobShowUrl = process.env.NEXT_PUBLIC_CONTRACT_JOB_SHOW_URL
 const jobContractEndUrl = process.env.NEXT_PUBLIC_JOB_CONTRACT_END_URL
 const contractEndFeedbackUrl = process.env.NEXT_PUBLIC_CONTRACT_END_FEEDBACK_URL
-const timesheetCreateDetailsUrl = process.env.NEXT_PUBLIC_TIMESHEET_CREATE_DETAILS_URL
 const getAllTimeSheetsUrl = process.env.NEXT_PUBLIC_ALL_TIMESHEETS_URL
 const timeSheetUrl = process.env.NEXT_PUBLIC_TIMESHEET_URL
 
@@ -435,7 +434,7 @@ export const timesheetCreateDetails = (id, startDate, endDate, hours, descriptio
     }
   }
   return (dispatch) => {
-    const response = axios.post(timesheetCreateDetailsUrl, data)
+    const response = axios.post(timeSheetUrl, data)
       .then(res => dispatch(getContractJobShow(id)))
       .catch(err => err.response)
     return (response);

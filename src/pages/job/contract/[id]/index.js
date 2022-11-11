@@ -1,5 +1,5 @@
 import {connect, useDispatch} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 
 import {Paper} from "@material-ui/core";
@@ -14,6 +14,7 @@ import CustomLoader from "../../../../lib/customLoader";
 import {jobContractEnd} from "../../../../store/actions/jobAction";
 import ContractHeaderDetails from "../../../../views/Job/Contract/ShowContract/contractHeaderDetails";
 import ContractBodyDetails from "../../../../views/Job/Contract/ShowContract/contractBodyDetails";
+import CustomSnackbar from "../../../../lib/customSnackbar";
 
 const ContractJobShow = (props) => {
   const theme = useTheme();
@@ -22,6 +23,7 @@ const ContractJobShow = (props) => {
   const router = useRouter()
   const {id} = router.query;
   const {jobContract, initialLoader} = props
+  const [toast, setToast] = useState({show: false, severity: "", text: ""})
 
   useEffect(() => {
     id && dispatch(getContractJobShow(id))
@@ -29,17 +31,24 @@ const ContractJobShow = (props) => {
 
   const jobContractEndHandler = () => {
     id && dispatch(jobContractEnd(id))
+    setToast({show: true, severity: "success", text: "Contract closed Successfully"});
   }
 
   return (
     <NoSsr>
       {initialLoader ? <CustomLoader /> : (
         <Paper elevation={3} className={classes.contractJobShowWrapper} >
-          <ContractHeaderDetails jobContract={jobContract} jobContractEndHandler={jobContractEndHandler}  />
+          <ContractHeaderDetails jobContract={jobContract} jobContractEndHandler={jobContractEndHandler} />
 
           <ContractBodyDetails jobContract={jobContract} />
         </Paper>
       )}
+
+      {toast.show &&
+      <CustomSnackbar
+        toast={toast}
+        setToast={setToast}/>
+      }
     </NoSsr>
   );
 };

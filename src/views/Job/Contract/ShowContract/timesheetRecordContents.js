@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
+import moment from "moment";
 import 'date-fns';
 import DateFnsUtils from "@date-io/date-fns";
 
@@ -14,8 +15,8 @@ import {getAllTimeSheets, timesheetCreateDetails, updateTimeSheet} from "../../.
 const TimesheetRecordContents = (props) => {
   const dispatch = useDispatch()
   const {classes, handleClose, jobContractId, setToast, mode, timesheetData} = props
-  const [startDate, setStartDate] = useState(mode === 'edit' ? timesheetData.start_date : new Date());
-  const [endDate, setEndDate] = useState(mode === 'edit' ? timesheetData.end_date : new Date());
+  const [startDate, setStartDate] = useState(mode === 'edit' ? moment(timesheetData.start_date, "DD-MM-YYYY") : new Date());
+  const [endDate, setEndDate] = useState(mode === 'edit' ? moment(timesheetData.end_date, "DD-MM-YYYY") : new Date());
 
   const handleStartDateChange = (date) => {
     setStartDate(date);
@@ -72,7 +73,7 @@ const TimesheetRecordContents = (props) => {
             <KeyboardDatePicker
               disableToolbar
               variant="inline"
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               margin="normal"
               label="Start date"
               value={startDate}
@@ -85,7 +86,7 @@ const TimesheetRecordContents = (props) => {
             <KeyboardDatePicker
               disableToolbar
               variant="inline"
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               margin="normal"
               label="End date"
               value={endDate}
