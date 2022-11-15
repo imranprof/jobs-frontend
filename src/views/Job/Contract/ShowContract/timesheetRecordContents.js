@@ -5,7 +5,7 @@ import moment from "moment";
 import 'date-fns';
 import DateFnsUtils from "@date-io/date-fns";
 
-import {TextField} from "@material-ui/core";
+import {MenuItem, TextField} from "@material-ui/core";
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 
 import ModalTitle from "../../../../lib/profile/modalTitle";
@@ -29,6 +29,7 @@ const TimesheetRecordContents = (props) => {
   const formik = useFormik({
     initialValues: {
       hours: mode === 'edit' ? timesheetData.work_hours : 0,
+      minutes: mode === 'edit' ? timesheetData.work_minutes : 0,
       description: mode === 'edit' ? timesheetData.work_description : ''
     }
   })
@@ -51,16 +52,24 @@ const TimesheetRecordContents = (props) => {
 
   const timesheetRecordHandler = async () => {
     if (mode === 'edit') {
-      timesheetData.id && await dispatch(updateTimeSheet({id: timesheetData.id, start_date: formatDate(startDate), end_date: formatDate(endDate), work_description: formik.values.description, work_hours: formik.values.hours}))
+      timesheetData.id && await dispatch(updateTimeSheet({id: timesheetData.id, start_date: formatDate(startDate), end_date: formatDate(endDate), work_description: formik.values.description, work_hours: formik.values.hours, work_minutes: formik.values.minutes}))
       jobContractId && await dispatch(getAllTimeSheets(jobContractId))
       setToast({show: true, severity: "success", text: "Work record updated Successfully"});
       handleClose()
     } else {
-      jobContractId && await dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.description))
+      jobContractId && await dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.minutes, formik.values.description))
       jobContractId && await dispatch(getAllTimeSheets(jobContractId))
       setToast({show: true, severity: "success", text: "Work record created Successfully"});
       handleClose()
     }
+  }
+
+  const generateMinuteList = (range) => {
+    const minutes = []
+    for (let i = 0; i <= range; i++) {
+      minutes.push(i)
+    }
+    return minutes;
   }
 
   return (
@@ -96,8 +105,25 @@ const TimesheetRecordContents = (props) => {
         </div>
 
         <div className={`${classes}__picker-wrapper`}>
-          <TextField size="small" label="Hours" type="number" name="hours" value={formik.values.hours} onChange={formik.handleChange} />
+          <TextField size="medium" label="Hours" type="number" name="hours" value={formik.values.hours} onChange={formik.handleChange} />
         </div>
+
+        <div className={`${classes}__picker-wrapper`}>
+          <TextField
+            fullWidth
+            select
+            size="medium"
+            label="Minutes"
+            name="minutes"
+            value={formik.values.minutes}
+            onChange={formik.handleChange}
+          >
+            {generateMinuteList(59).map((minutes, index) => (
+              <MenuItem value={minutes} key={index}>{minutes}</MenuItem>
+            ))}
+          </TextField>
+        </div>
+
       </div>
 
       <div>

@@ -423,13 +423,14 @@ export const contractEndFeedback = (id, feedback, rating) => {
   }
 }
 
-export const timesheetCreateDetails = (id, startDate, endDate, hours, description) => {
+export const timesheetCreateDetails = (id, startDate, endDate, hours, minutes, description) => {
   const data = {
     "job_contract": {
       "job_application_id": id,
       "start_date": startDate,
       "end_date": endDate,
       "work_hours": hours,
+      "work_minutes": minutes,
       "work_description": description
     }
   }
@@ -484,7 +485,8 @@ export const updateTimeSheet = (timesheet) => {
       "start_date": timesheet.start_date,
       "end_date": timesheet.end_date,
       "work_description": timesheet.work_description,
-      "work_hours": timesheet.work_hours
+      "work_hours": timesheet.work_hours,
+      "work_minutes": timesheet.work_minutes,
     }
   }
   return (dispatch) => {

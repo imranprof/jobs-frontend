@@ -78,7 +78,7 @@ const TimesheetTable = (props) => {
               <TableRow key={timesheet.id}>
                 <TableCell>{timesheet.start_date}</TableCell>
                 <TableCell>{timesheet.end_date}</TableCell>
-                <TableCell>{timesheet.work_hours}</TableCell>
+                <TableCell>{`${timesheet.work_hours} hrs ${timesheet.work_minutes} mins`}</TableCell>
 
                 <Popper open={open} anchorEl={anchorEl} placement="top" transition>
                   {({TransitionProps}) => (
