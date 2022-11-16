@@ -77,61 +77,64 @@ const TimesheetRecordContents = (props) => {
       <ModalTitle title={`${mode === 'edit' ? 'Edit' : 'Add new'} record`} />
 
       <div className={`${classes}__picker`}>
-        <div className={`${classes}__picker-wrapper`}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="dd/MM/yyyy"
-              margin="normal"
-              label="Start date"
-              value={startDate}
-              onChange={handleStartDateChange}
+        <div className={`${classes}__picker-flex`}>
+          <div className={`${classes}__picker-wrapper`}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="dd/MM/yyyy"
+                margin="normal"
+                label="Start date"
+                value={startDate}
+                onChange={handleStartDateChange}
+              />
+            </MuiPickersUtilsProvider>
+          </div>
+          <div className={`${classes}__picker-wrapper`}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="dd/MM/yyyy"
+                margin="normal"
+                label="End date"
+                value={endDate}
+                onChange={handleEndDateChange}
+              />
+            </MuiPickersUtilsProvider>
+          </div>
+        </div>
+
+        <div className={`${classes}__picker-flex`}>
+          <div className={`${classes}__picker-wrapper`}>
+            <TextField
+              size="medium"
+              label="Hours"
+              type="number"
+              inputProps={{min: '0'}}
+              name="hours"
+              value={formik.values.hours}
+              onChange={formik.handleChange}
             />
-          </MuiPickersUtilsProvider>
-        </div>
-        <div className={`${classes}__picker-wrapper`}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="dd/MM/yyyy"
-              margin="normal"
-              label="End date"
-              value={endDate}
-              onChange={handleEndDateChange}
-            />
-          </MuiPickersUtilsProvider>
-        </div>
+          </div>
 
-        <div className={`${classes}__picker-wrapper`}>
-          <TextField
-            size="medium"
-            label="Hours"
-            type="number"
-            inputProps={{min: '0'}}
-            name="hours"
-            value={formik.values.hours}
-            onChange={formik.handleChange}
-          />
+          <div className={`${classes}__picker-wrapper`}>
+            <TextField
+              fullWidth
+              select
+              size="medium"
+              label="Minutes"
+              name="minutes"
+              value={formik.values.minutes}
+              onChange={formik.handleChange}
+            >
+              {generateMinuteList(59).map((minutes, index) => (
+                <MenuItem value={minutes} key={index}>{minutes}</MenuItem>
+              ))}
+            </TextField>
+          </div>
         </div>
-
-        <div className={`${classes}__picker-wrapper`}>
-          <TextField
-            fullWidth
-            select
-            size="medium"
-            label="Minutes"
-            name="minutes"
-            value={formik.values.minutes}
-            onChange={formik.handleChange}
-          >
-            {generateMinuteList(59).map((minutes, index) => (
-              <MenuItem value={minutes} key={index}>{minutes}</MenuItem>
-            ))}
-          </TextField>
-        </div>
-
       </div>
 
       <div>

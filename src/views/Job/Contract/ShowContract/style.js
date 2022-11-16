@@ -273,12 +273,31 @@ const useStyles = makeStyles({
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: 20,
+        '&-flex': {
+          display: "flex",
+          width: 310,
+          justifyContent: "space-between",
+        },
         '&-wrapper': {
           width: 150
         },
         '& .MuiFormControl-marginNormal': {
           margin: 0
-        }
+        },
+        [theme.breakpoints.down('sm')]: {
+          flexDirection: "column",
+          alignItems: "flex-start",
+          '&-flex': {
+            width: 350,
+            marginBottom: 20
+          }
+        },
+        [theme.breakpoints.down('xs')]: {
+          '&-flex': {
+            width: "100%",
+            justifyContent: "space-evenly"
+          }
+        },
       }
     }
   }),
