@@ -60,6 +60,22 @@ const TimesheetTable = (props) => {
     await modalOpen()
   }
 
+  const pluralize = (count, noun, suffix = 's') =>
+    `${count} ${noun}${count !== 1 ? suffix : ''}`;
+
+  const timeConverter = () => {
+    let totalHours = 0, totalMinutes = 0
+    timeSheetList.map(timesheet => {
+      totalHours += timesheet.work_hours
+      totalMinutes += timesheet.work_minutes
+    })
+
+    let temp = (totalHours * 60) + totalMinutes;
+    totalHours = Math.floor(temp / 60);
+    totalMinutes = temp % 60;
+    return `${pluralize(totalHours, 'hour', 's')} ${pluralize(totalMinutes, 'Minute', 's')}`
+  }
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -78,7 +94,9 @@ const TimesheetTable = (props) => {
               <TableRow key={timesheet.id}>
                 <TableCell>{timesheet.start_date}</TableCell>
                 <TableCell>{timesheet.end_date}</TableCell>
-                <TableCell>{`${timesheet.work_hours} hrs ${timesheet.work_minutes} mins`}</TableCell>
+                <TableCell>
+                  {pluralize(timesheet.work_hours, 'hr', 's')} {pluralize(timesheet.work_minutes, 'min', 's')}
+                </TableCell>
 
                 <Popper open={open} anchorEl={anchorEl} placement="top" transition>
                   {({TransitionProps}) => (
@@ -120,6 +138,10 @@ const TimesheetTable = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <p className={`${classes}__timesheet-wrapper__hours`}>
+        {`Total hours: ${timeConverter()}`}
+      </p>
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
         <TimesheetRecordContents classes={classes} handleClose={modalClose} timesheetData={timesheetData} jobContractId={jobContractId} mode="edit" setToast={setToast} />

@@ -57,7 +57,7 @@ const TimesheetRecordContents = (props) => {
       setToast({show: true, severity: "success", text: "Work record updated Successfully"});
       handleClose()
     } else {
-      jobContractId && await dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), formik.values.hours, formik.values.minutes, formik.values.description))
+      jobContractId && await dispatch(timesheetCreateDetails(jobContractId, formatDate(startDate), formatDate(endDate), Math.abs(formik.values.hours), formik.values.minutes, formik.values.description))
       jobContractId && await dispatch(getAllTimeSheets(jobContractId))
       setToast({show: true, severity: "success", text: "Work record created Successfully"});
       handleClose()
@@ -105,7 +105,15 @@ const TimesheetRecordContents = (props) => {
         </div>
 
         <div className={`${classes}__picker-wrapper`}>
-          <TextField size="medium" label="Hours" type="number" name="hours" value={formik.values.hours} onChange={formik.handleChange} />
+          <TextField
+            size="medium"
+            label="Hours"
+            type="number"
+            inputProps={{min: '0'}}
+            name="hours"
+            value={formik.values.hours}
+            onChange={formik.handleChange}
+          />
         </div>
 
         <div className={`${classes}__picker-wrapper`}>

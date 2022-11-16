@@ -254,6 +254,9 @@ const useStyles = makeStyles({
               color: COLORS.danger
             }
           }
+        },
+        '&__hours': {
+          fontFamily: FONTS.contentFont
         }
       },
       '&__timesheet-title': {
@@ -272,6 +275,9 @@ const useStyles = makeStyles({
         marginBottom: 20,
         '&-wrapper': {
           width: 150
+        },
+        '& .MuiFormControl-marginNormal': {
+          margin: 0
         }
       }
     }
