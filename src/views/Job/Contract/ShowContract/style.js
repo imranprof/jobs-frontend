@@ -293,9 +293,12 @@ const useStyles = makeStyles({
           }
         },
         [theme.breakpoints.down('xs')]: {
+          '&-wrapper': {
+            marginRight: 20
+          },
           '&-flex': {
             width: "100%",
-            justifyContent: "space-evenly"
+            justifyContent: "flex-start"
           }
         },
       }
