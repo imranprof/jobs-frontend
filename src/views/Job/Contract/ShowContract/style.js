@@ -257,6 +257,14 @@ const useStyles = makeStyles({
         },
         '&__hours': {
           fontFamily: FONTS.contentFont
+        },
+        '&__footer': {
+          display: "flex",
+          flexDirection: "row-reverse",
+          justifyContent: "space-between",
+          [theme.breakpoints.down('sm')]: {
+            flexDirection: "column-reverse"
+          },
         }
       },
       '&__timesheet-title': {

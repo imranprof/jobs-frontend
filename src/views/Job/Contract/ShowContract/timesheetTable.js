@@ -9,6 +9,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
   Tooltip,
   Typography
@@ -30,6 +31,8 @@ const TimesheetTable = (props) => {
   const [data, setData] = useState('')
   const [timesheetData, setTimesheetData] = useState({})
   const [openModal, setOpenModal] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(0);
 
   const modalOpen = () => {
     setOpenModal(true);
@@ -76,6 +79,15 @@ const TimesheetTable = (props) => {
     return `${pluralize(totalHours, 'hour', 's')} ${pluralize(totalMinutes, 'Minute', 's')}`
   }
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -90,7 +102,7 @@ const TimesheetTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {timeSheetList.map((timesheet) => (
+            {timeSheetList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((timesheet) => (
               <TableRow key={timesheet.id}>
                 <TableCell>{timesheet.start_date}</TableCell>
                 <TableCell>{timesheet.end_date}</TableCell>
@@ -139,9 +151,21 @@ const TimesheetTable = (props) => {
         </Table>
       </TableContainer>
 
-      <p className={`${classes}__timesheet-wrapper__hours`}>
-        {`Total hours: ${timeConverter()}`}
-      </p>
+      <div className={`${classes}__timesheet-wrapper__footer`}>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={timeSheetList.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+
+        <p className={`${classes}__timesheet-wrapper__hours`}>
+          {`Total hours: ${timeConverter()}`}
+        </p>
+      </div>
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
         <TimesheetRecordContents classes={classes} handleClose={modalClose} timesheetData={timesheetData} jobContractId={jobContractId} mode="edit" setToast={setToast} />
