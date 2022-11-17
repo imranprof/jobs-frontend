@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import FONTS from "../../../../../styles/fonts";
+import COLORS from "../../../../../styles/colors";
 
 const useStyles = makeStyles({
   showContractWrapper: theme => ({
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
       },
     },
     '&__header': {
-      width: 165,
+      width: "auto",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
     '&__name': {
       fontSize: 16,
       fontFamily: FONTS.modalTitleFont,
-      margin: 0
+      margin: "0 0 0 20px"
     },
     '&__contract-end-btn': {
       backgroundColor: theme.palette.customBackground.buttonBg,
@@ -228,6 +229,86 @@ const useStyles = makeStyles({
             backgroundColor: theme.palette.customBackground.buttonHoverBg,
           }
         }
+      },
+      '&__timesheet-wrapper': {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        '&__table': {
+          minWidth: 650,
+          '& .MuiButton-label': {
+            textTransform: "capitalize"
+          },
+          '&-actions': {
+            width: 50,
+            display: "flex",
+            justifyContent: "space-between",
+            '&__edit, &__delete': {
+              fontSize: 16,
+              cursor: "pointer"
+            },
+            '&__edit': {
+              color: COLORS.warning
+            },
+            '&__delete': {
+              color: COLORS.danger
+            }
+          }
+        },
+        '&__hours': {
+          fontFamily: FONTS.contentFont
+        },
+        '&__footer': {
+          display: "flex",
+          flexDirection: "row-reverse",
+          justifyContent: "space-between",
+          [theme.breakpoints.down('sm')]: {
+            flexDirection: "column-reverse"
+          },
+        }
+      },
+      '&__timesheet-title': {
+        color: theme.palette.customColor.main,
+        fontFamily: FONTS.modalTitleFont,
+        fontSize: 18
+      },
+      '&__create-record': {
+        color: theme.palette.customColor.main,
+        fontFamily: FONTS.modalTitleFont,
+      },
+      '&__picker': {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 20,
+        '&-flex': {
+          display: "flex",
+          width: 310,
+          justifyContent: "space-between",
+        },
+        '&-wrapper': {
+          width: 150
+        },
+        '& .MuiFormControl-marginNormal': {
+          margin: 0
+        },
+        [theme.breakpoints.down('sm')]: {
+          flexDirection: "column",
+          alignItems: "flex-start",
+          '&-flex': {
+            width: 350,
+            marginBottom: 20
+          }
+        },
+        [theme.breakpoints.down('xs')]: {
+          '&-wrapper': {
+            marginRight: 20
+          },
+          '&-flex': {
+            width: "100%",
+            justifyContent: "flex-start"
+          }
+        },
       }
     }
   }),

@@ -11,7 +11,8 @@ import {
   SET_PAGE,
   SET_ALL_PROGRESS_JOBS,
   SET_ALL_COMPLETED_JOBS,
-  SET_CONTRACT_JOB_SHOW
+  SET_CONTRACT_JOB_SHOW,
+  SHOW_ALL_TIMESHEETS
 } from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
@@ -29,6 +30,8 @@ const allContractJobsUrl = process.env.NEXT_PUBLIC_ALL_CONTRACT_JOBS_URL
 const contractJobShowUrl = process.env.NEXT_PUBLIC_CONTRACT_JOB_SHOW_URL
 const jobContractEndUrl = process.env.NEXT_PUBLIC_JOB_CONTRACT_END_URL
 const contractEndFeedbackUrl = process.env.NEXT_PUBLIC_CONTRACT_END_FEEDBACK_URL
+const getAllTimeSheetsUrl = process.env.NEXT_PUBLIC_ALL_TIMESHEETS_URL
+const timeSheetUrl = process.env.NEXT_PUBLIC_TIMESHEET_URL
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget, status} = job;
@@ -415,6 +418,80 @@ export const contractEndFeedback = (id, feedback, rating) => {
   return (dispatch) => {
     const response = axios.patch(contractEndFeedbackUrl, data)
       .then(res => dispatch(getContractJobShow(id)))
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export const timesheetCreateDetails = (id, startDate, endDate, hours, minutes, description) => {
+  const data = {
+    "job_contract": {
+      "job_application_id": id,
+      "start_date": startDate,
+      "end_date": endDate,
+      "work_hours": hours,
+      "work_minutes": minutes,
+      "work_description": description
+    }
+  }
+  return (dispatch) => {
+    const response = axios.post(timeSheetUrl, data)
+      .then(res => dispatch(getContractJobShow(id)))
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+const setAllTimeSheets = (timesheetList) => {
+  return {
+    type: SHOW_ALL_TIMESHEETS,
+    payload: timesheetList
+  }
+}
+
+export const getAllTimeSheets = (id) => {
+  return (dispatch) => {
+    const response = axios.get(getAllTimeSheetsUrl, {
+      params: {
+        contract_id: id
+      }
+    })
+      .then(res => {
+        dispatch(setAllTimeSheets(res.data.time_sheets))
+      })
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export const deleteTimeSheet = (id) => {
+  const data = {
+    "job_contract": {
+      "id": id
+    }
+  }
+  return (dispatch) => {
+    const response = axios.delete(timeSheetUrl, {data} )
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export const updateTimeSheet = (timesheet) => {
+  const data = {
+    "job_contract": {
+      "id": timesheet.id,
+      "start_date": timesheet.start_date,
+      "end_date": timesheet.end_date,
+      "work_description": timesheet.work_description,
+      "work_hours": timesheet.work_hours,
+      "work_minutes": timesheet.work_minutes,
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(timeSheetUrl, data)
+      .then(res => res)
       .catch(err => err.response)
     return (response);
   }
