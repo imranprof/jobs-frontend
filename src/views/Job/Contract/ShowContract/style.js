@@ -15,7 +15,7 @@ const useStyles = makeStyles({
       },
     },
     '&__header': {
-      width: 165,
+      width: "auto",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     '&__name': {
       fontSize: 16,
       fontFamily: FONTS.modalTitleFont,
-      margin: 0
+      margin: "0 0 0 20px"
     },
     '&__contract-end-btn': {
       backgroundColor: theme.palette.customBackground.buttonBg,
