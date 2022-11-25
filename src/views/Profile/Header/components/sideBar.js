@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import {useState} from "react";
+import Link from "next/link";
 import {connect} from "react-redux";
 
 import {Hidden, IconButton} from "@material-ui/core";
@@ -11,9 +12,11 @@ import ProfileInfo from "./profileInfo";
 import NavItems from "./navItems";
 import SocialLinks from "../../../../lib/profile/socialLinks";
 import ProfileShare from "../../../../lib/profile/profileshare/profileShare";
+import {getRole} from "../../../../auth/operations";
+import Button from "@material-ui/core/Button";
 
 const ProfileSideBar = (props) => {
-  const {profileInfo, classes} = props;
+  const {profileInfo, classes, resumeURL} = props;
   const {name, avatar} = profileInfo;
   const [open, setOpen] = useState(false);
 
@@ -54,7 +57,16 @@ const ProfileSideBar = (props) => {
           <div className={`${classes.headerWrapper}__side-bar__links`}>
             <NavItems classes={classes} variant={"drawer"}/>
           </div>
-          <Divider style={{marginBottom: "30px"}}/>
+          {getRole() === 'employee' ? (
+            <Button variant="outlined" fullWidth>
+              <Link href={resumeURL}>
+                <a className={`${classes.headerWrapper}__resume`}>
+                  Download Resume
+                </a>
+              </Link>
+            </Button>
+          ) : ""}
+          <Divider style={{margin: "20px 0 30px 0"}}/>
 
           <SocialLinks/>
           <p className={`${classes.headerWrapper}__side-bar__share-bar__title`}>Share Me</p>
