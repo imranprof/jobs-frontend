@@ -496,3 +496,17 @@ export const updateTimeSheet = (timesheet) => {
     return (response);
   }
 }
+
+export const sendTimesheetToEmployer = (timesheet_ids) => {
+  const data = {
+    "job_contract": {
+      "timesheet_ids": timesheet_ids,
+    }
+  }
+  return (dispatch) => {
+    const response = axios.post(getAllTimeSheetsUrl, data)
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
+}

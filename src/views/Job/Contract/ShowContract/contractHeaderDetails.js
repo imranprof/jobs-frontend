@@ -22,7 +22,7 @@ const ContractHeaderDetails = (props) => {
           className={`${classes.showContractWrapper}__contract-end-btn`}
           disabled={contract_status}
         >
-          {contract_status ? 'Contract closed' : 'Contract End'}
+          {contract_status ? 'Contract Closed' : 'Contract End'}
         </Button>
       </div>
 
