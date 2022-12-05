@@ -497,9 +497,10 @@ export const updateTimeSheet = (timesheet) => {
   }
 }
 
-export const sendTimesheetToEmployer = (timesheet_ids) => {
+export const sendTimesheetToEmployer = (timesheet_ids, contract_id) => {
   const data = {
     "job_contract": {
+      "id": contract_id,
       "timesheet_ids": timesheet_ids,
     }
   }

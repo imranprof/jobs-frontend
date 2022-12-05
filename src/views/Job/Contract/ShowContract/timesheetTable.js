@@ -91,8 +91,8 @@ const TimesheetTable = (props) => {
   }
 
   const sendToEmployer = () => {
-    const ids = timeSheetList.map(timesheet => timesheet.id)
-    dispatch(sendTimesheetToEmployer(ids)).then(async () => {
+    const timesheetIds = timeSheetList.map(timesheet => timesheet.id)
+    dispatch(sendTimesheetToEmployer(timesheetIds, jobContractId)).then(async () => {
         await dispatch(getAllTimeSheets(jobContractId))
         await setClick(!click)
     })
