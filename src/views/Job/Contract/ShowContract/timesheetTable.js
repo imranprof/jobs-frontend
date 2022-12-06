@@ -96,6 +96,7 @@ const TimesheetTable = (props) => {
         await dispatch(getAllTimeSheets(jobContractId))
         await setClick(!click)
     })
+    setToast({show: true, severity: "success", text: "Current week records sent Successfully"});
   }
 
   return (

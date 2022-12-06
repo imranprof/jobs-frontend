@@ -59,10 +59,19 @@ const ContractTimesheet = (props) => {
           )}
         </div>
 
-        {getRole() === 'employee' && (
+        {getRole() === 'employee' ? (
           <Button size="small" variant="outlined" onClick={modalOpen} className={`${classes}__create-record`}>
             Create record
           </Button>
+        ) : (
+          <div className={`${classes}__btn-wrapper`}>
+            <Button size="small" variant="contained" className={`${classes}__btn-wrapper__approve`}>
+              Approve
+            </Button>
+            <Button size="small" variant="outlined" color="secondary">
+              Reject
+            </Button>
+          </div>
         )}
       </div>
 

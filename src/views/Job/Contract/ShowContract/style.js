@@ -301,6 +301,18 @@ const useStyles = makeStyles({
         color: theme.palette.customColor.main,
         fontFamily: FONTS.modalTitleFont,
       },
+      '&__btn-wrapper': {
+        width: 160,
+        display: "flex",
+        justifyContent: "space-between",
+        '&__approve': {
+          backgroundColor: COLORS.success,
+          color: theme.palette.customColor.jobPostBtn,
+          '&:hover': {
+            backgroundColor: COLORS.green_1,
+          }
+        }
+      },
       '&__picker': {
         display: "flex",
         justifyContent: "space-between",
