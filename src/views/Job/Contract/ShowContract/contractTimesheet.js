@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import TimesheetRecordContents from "./timesheetRecordContents";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import CustomSnackbar from "../../../../lib/customSnackbar";
-import {getAllTimeSheets} from "../../../../store/actions/jobAction";
+import {getAllTimeSheets, approvedRejectedTimesheet} from "../../../../store/actions/jobAction";
 import TimesheetTable from "./timesheetTable";
 import {getRole} from "../../../../auth/operations";
 
@@ -18,10 +18,24 @@ const ContractTimesheet = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
   const [select, setSelect] = useState('all');
+  const [isDisabled, setIsDisabled] = useState(false)
+  const [click, setClick] = useState(false)
 
   useEffect(() => {
     jobContractId && dispatch(getAllTimeSheets(jobContractId))
   }, [jobContractId])
+
+  useEffect(() => {
+    let countStatus = 0;
+    getAllTimeSheetList.map(timeSheet => {
+      if (timeSheet.status === 'approved') countStatus++
+    })
+    if (getAllTimeSheetList.length === countStatus) {
+      setIsDisabled(true)
+    } else {
+      setIsDisabled(false)
+    }
+  }, [getAllTimeSheetList.length, click])
 
   const modalOpen = () => {
     setOpenModal(true);
@@ -42,6 +56,22 @@ const ContractTimesheet = (props) => {
   }
 
   const dataList = select === 'week' ? findCurrentWeekData() : getAllTimeSheetList
+
+  const approvedTimesheetHandler = () => {
+    dispatch(approvedRejectedTimesheet(jobContractId, 'approved')).then(async () => {
+      await dispatch(getAllTimeSheets(jobContractId))
+      await setClick(!click)
+    })
+    setToast({show: true, severity: "success", text: "Current week records approved Successfully"});
+  }
+
+  const rejectedTimesheetHandler = () => {
+    dispatch(approvedRejectedTimesheet(jobContractId, '')).then(async () => {
+      await dispatch(getAllTimeSheets(jobContractId))
+      await setClick(!click)
+    })
+    setToast({show: true, severity: "success", text: "Current week records rejected"});
+  }
 
   return (
     <div>
@@ -65,10 +95,22 @@ const ContractTimesheet = (props) => {
           </Button>
         ) : (
           <div className={`${classes}__btn-wrapper`}>
-            <Button size="small" variant="contained" className={`${classes}__btn-wrapper__approve`}>
+            <Button
+              size="small"
+              variant="contained"
+              onClick={approvedTimesheetHandler}
+              className={`${classes}__btn-wrapper__approve`}
+              disabled={isDisabled}
+            >
               Approve
             </Button>
-            <Button size="small" variant="outlined" color="secondary">
+            <Button
+              size="small"
+              variant="outlined"
+              color="secondary"
+              onClick={rejectedTimesheetHandler}
+              disabled={isDisabled}
+            >
               Reject
             </Button>
           </div>

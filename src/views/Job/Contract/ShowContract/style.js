@@ -302,12 +302,13 @@ const useStyles = makeStyles({
         fontFamily: FONTS.modalTitleFont,
       },
       '&__btn-wrapper': {
-        width: 160,
+        width: "auto",
         display: "flex",
         justifyContent: "space-between",
         '&__approve': {
           backgroundColor: COLORS.success,
           color: theme.palette.customColor.jobPostBtn,
+          marginRight: 10,
           '&:hover': {
             backgroundColor: COLORS.green_1,
           }
