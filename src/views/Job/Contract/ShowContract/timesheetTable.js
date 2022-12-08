@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 
 import {
@@ -9,17 +9,16 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TablePagination,
   TableRow,
   Tooltip,
-  Typography
+  Typography,
+  Paper,
+  Button
 } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 
 import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
 import {getRole} from "../../../../auth/operations";
-import {deleteTimeSheet, getAllTimeSheets} from "../../../../store/actions/jobAction";
+import {deleteTimeSheet, getAllTimeSheets, sendTimesheetToEmployer} from "../../../../store/actions/jobAction";
 import EditCustomModal from "../../../../lib/profile/editCustomModal";
 import TimesheetRecordContents from "./timesheetRecordContents";
 
@@ -31,8 +30,20 @@ const TimesheetTable = (props) => {
   const [data, setData] = useState('')
   const [timesheetData, setTimesheetData] = useState({})
   const [openModal, setOpenModal] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [page, setPage] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(false)
+  const [click, setClick] = useState(false)
+
+  useEffect(() => {
+    let countStatus = 0;
+    timeSheetList.map(timeSheet => {
+      if (timeSheet.status === 'requested') countStatus++
+    })
+    if (timeSheetList.length === countStatus && countStatus !== 0) {
+      setIsDisabled(true)
+    } else {
+      setIsDisabled(false)
+    }
+  }, [timeSheetList.length, click])
 
   const modalOpen = () => {
     setOpenModal(true);
@@ -76,17 +87,17 @@ const TimesheetTable = (props) => {
     let temp = (totalHours * 60) + totalMinutes;
     totalHours = Math.floor(temp / 60);
     totalMinutes = temp % 60;
-    return `${pluralize(totalHours, 'hour', 's')} ${pluralize(totalMinutes, 'Minute', 's')}`
+    return `${pluralize(totalHours, 'hour', 's')} ${pluralize(totalMinutes, 'minute', 's')}`
   }
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  const sendToEmployer = () => {
+    const timesheetIds = timeSheetList.map(timesheet => timesheet.id)
+    dispatch(sendTimesheetToEmployer(timesheetIds, jobContractId)).then(async () => {
+        await dispatch(getAllTimeSheets(jobContractId))
+        await setClick(!click)
+    })
+    setToast({show: true, severity: "success", text: "Current week records sent Successfully"});
+  }
 
   return (
     <>
@@ -102,7 +113,7 @@ const TimesheetTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {timeSheetList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((timesheet) => (
+            {timeSheetList.map((timesheet) => (
               <TableRow key={timesheet.id}>
                 <TableCell>{timesheet.start_date}</TableCell>
                 <TableCell>{timesheet.end_date}</TableCell>
@@ -136,7 +147,8 @@ const TimesheetTable = (props) => {
                   <TableCell>
                     <div className={`${classes}__timesheet-wrapper__table-actions`}>
                       <Tooltip title="Edit" placement="top">
-                        <i onClick={() => editTimesheetHandler(timesheet)} className={`${FontAwesomeIcons.pencil} ${classes}__timesheet-wrapper__table-actions__edit`}/>
+                        <i onClick={() => editTimesheetHandler(timesheet)}
+                           className={`${FontAwesomeIcons.pencil} ${classes}__timesheet-wrapper__table-actions__edit`}/>
                       </Tooltip>
                       <Tooltip title="Delete" placement="top">
                         <i onClick={() => deleteTimesheetHandler(timesheet.id)}
@@ -151,27 +163,29 @@ const TimesheetTable = (props) => {
         </Table>
       </TableContainer>
 
-      <div className={`${classes}__timesheet-wrapper__footer`}>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={timeSheetList.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-
-        <p className={`${classes}__timesheet-wrapper__hours`}>
+      <div className={`${classes}__timesheet-wrapper__bottom`}>
+        <span className={`${classes}__timesheet-wrapper__hours`}>
           {`Total hours: ${timeConverter()}`}
-        </p>
+        </span>
+
+        {getRole() === 'employee' && (
+          <Button
+            variant="contained"
+            onClick={sendToEmployer}
+            className={`${classes}__timesheet-wrapper__send-timesheet`}
+            disabled={isDisabled}
+          >
+            {isDisabled ? 'Sent' : 'Send'} to employer
+          </Button>
+        )}
       </div>
 
       <EditCustomModal handleClose={modalClose} open={openModal}>
-        <TimesheetRecordContents classes={classes} handleClose={modalClose} timesheetData={timesheetData} jobContractId={jobContractId} mode="edit" setToast={setToast} />
+        <TimesheetRecordContents classes={classes} handleClose={modalClose} timesheetData={timesheetData}
+                                 jobContractId={jobContractId} mode="edit" setToast={setToast}/>
       </EditCustomModal>
     </>
   );
-};
+}
 
 export default TimesheetTable;

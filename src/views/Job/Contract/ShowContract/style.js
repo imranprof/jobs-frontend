@@ -234,6 +234,30 @@ const useStyles = makeStyles({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        '&__bottom': {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: 15
+        },
+        '&__send-timesheet': {
+          backgroundColor: theme.palette.customBackground.buttonBg,
+          color: theme.palette.customColor.jobPostBtn,
+          marginLeft: 20,
+          textTransform: 'capitalize',
+          '&:hover': {
+            backgroundColor: theme.palette.customBackground.buttonHoverBg,
+          },
+        },
+        '&__left': {
+          display: "flex",
+          '& .MuiInput-underline::before, & .MuiInput-underline::after': {
+            display: "none"
+          },
+          '& .MuiSelect-select': {
+            paddingLeft: 10
+          }
+        },
         '&__table': {
           minWidth: 650,
           '& .MuiButton-label': {
@@ -270,11 +294,25 @@ const useStyles = makeStyles({
       '&__timesheet-title': {
         color: theme.palette.customColor.main,
         fontFamily: FONTS.modalTitleFont,
-        fontSize: 18
+        fontSize: 18,
+        marginRight: 20
       },
       '&__create-record': {
         color: theme.palette.customColor.main,
         fontFamily: FONTS.modalTitleFont,
+      },
+      '&__btn-wrapper': {
+        width: "auto",
+        display: "flex",
+        justifyContent: "space-between",
+        '&__approve': {
+          backgroundColor: COLORS.success,
+          color: theme.palette.customColor.jobPostBtn,
+          marginRight: 10,
+          '&:hover': {
+            backgroundColor: COLORS.green_1,
+          }
+        }
       },
       '&__picker': {
         display: "flex",

@@ -496,3 +496,33 @@ export const updateTimeSheet = (timesheet) => {
     return (response);
   }
 }
+
+export const sendTimesheetToEmployer = (timesheet_ids, contract_id) => {
+  const data = {
+    "job_contract": {
+      "id": contract_id,
+      "timesheet_ids": timesheet_ids,
+    }
+  }
+  return (dispatch) => {
+    const response = axios.post(getAllTimeSheetsUrl, data)
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
+}
+
+export const approvedRejectedTimesheet = (contract_id, status) => {
+  const data = {
+    "job_contract": {
+      "id": contract_id,
+      "status": status
+    }
+  }
+  return (dispatch) => {
+    const response = axios.patch(getAllTimeSheetsUrl, data)
+      .then(res => res)
+      .catch(err => err.response)
+    return (response);
+  }
+}
