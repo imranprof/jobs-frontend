@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import {useFormik} from "formik";
 
 import {Card, CardMedia, Grid, TextField} from "@material-ui/core";
@@ -14,7 +15,13 @@ import CustomSnackbar from "../../../../lib/customSnackbar";
 import {
   designationEditMode,
   contactDescriptionEditMode,
-  phoneEditMode, phoneUpdateAction, designationUpdateAction, contactDescriptionUpdateAction, getDemoContactAction
+  phoneEditMode,
+  phoneUpdateAction,
+  locationEditMode,
+  locationUpdateAction,
+  designationUpdateAction,
+  contactDescriptionUpdateAction,
+  getDemoContactAction
 } from "../../../../store/actions/contactActions";
 import {getContactAction} from "../../../../store/actions/contactActions";
 
@@ -30,11 +37,18 @@ const ContactInfo = (props) => {
     contactDescriptionMode,
     phone,
     phoneMode,
+    location,
+    locationMode,
     email,
     editPermission,
     profileSlug
   } = props;
+  const getLocation = location?.split(",")
+  const getCountry = (getLocation[1])?.trim()
+  const getRegion = getLocation[0]?.trim()
   const [toast, setToast] = useState({show: false, severity: "", text: ""})
+  const [country, setCountry] = useState('');
+  const [region, setRegion] = useState('');
   const fullName = `${firstName} ${lastName}`
   const dispatch = useDispatch()
   const {profile} = useRouter().query;
@@ -42,6 +56,13 @@ const ContactInfo = (props) => {
   useEffect(() => {
     profile && profileSlug ? dispatch(getContactAction()) : dispatch(getDemoContactAction());
   }, [profile, profileSlug])
+
+  useEffect(()=>{
+    if (getCountry !== '' && getRegion !== '') {
+      setCountry(getCountry)
+      setRegion(getRegion)
+    }
+  },[getCountry, getRegion])
 
   const designationHandler = useFormik({
     initialValues: {
@@ -104,6 +125,25 @@ const ContactInfo = (props) => {
       let errors = {}
       if (!values.phone) {
         errors.phone = "Phone number can't be empty"
+      }
+      return errors;
+    }
+  })
+
+  const locationHandler = useFormik({
+    initialValues: {
+      location: `${region}, ${country}`
+    },
+    onSubmit: values => {
+      dispatch(locationUpdateAction(profileID, values.location))
+      props.setLocationMode(false);
+      setToast({show: true, severity: "success", text: "Successfully updated the location"});
+    },
+    enableReinitialize: true,
+    validate: values => {
+      let errors = {}
+      if (!values.location) {
+        errors.location = "Location can't be empty"
       }
       return errors;
     }
@@ -179,6 +219,8 @@ const ContactInfo = (props) => {
               </div>
             )}
 
+            <span className={`${classes}__contact-info__email`}>Email: {email}</span>
+
             {phoneMode ? (
               <div>
                 <TextField
@@ -196,7 +238,7 @@ const ContactInfo = (props) => {
             ) : (
               <div className={`${classes}__contact-info__phoneWrapper`}>
               <span className={`${classes}__contact-info__phone`}>
-                Phone: <Link href="#"><a>{phone}</a></Link>
+                Phone: {phone}
               </span>
                 {getPermission() &&
                 <span onClick={() => props.setPhoneMode(true)}>
@@ -206,7 +248,40 @@ const ContactInfo = (props) => {
               </div>
             )}
 
-            <span className={`${classes}__contact-info__email`}>Email: <Link href="#"><a>{email}</a></Link></span>
+            {locationMode ? (
+              <div>
+                <div className={`${classes}__contact-info__locationWrapper`}>
+                  <CountryDropdown
+                    name='location'
+                    value={country}
+                    onChange={(val) => setCountry(val)}
+                    classes={`${classes}__contact-info__location`}
+                  />
+                  <RegionDropdown
+                    name='location'
+                    country={country}
+                    value={region}
+                    onChange={(val) => setRegion(val)}
+                    classes={`${classes}__contact-info__location`}
+                  />
+                </div>
+                {locationHandler.errors.location ?
+                  <ErrorMessage error={locationHandler.errors.location}/> : null}
+                <CustomButton handler={locationHandler.handleSubmit} mode={() => props.setLocationMode(false)}/>
+              </div>
+            ) : (
+              <div className={`${classes}__contact-info__phoneWrapper`}>
+              <span className={`${classes}__contact-info__phone`}>
+                Location: {location}
+              </span>
+                {getPermission() &&
+                <span onClick={() => props.setLocationMode(true)}>
+                <EditButton/>
+              </span>
+                }
+              </div>
+            )}
+
           </div>
           <SocialLinks setToast={setToast} editPermission={getPermission()}/>
         </Card>
@@ -235,7 +310,9 @@ const mapStateToProps = (state) => {
     contactDescriptionMode: state.contacts.contactDescriptionMode,
     phone: state.contacts.phone,
     phoneMode: state.contacts.phoneMode,
-    email: state.contacts.contact_email
+    email: state.contacts.contact_email,
+    location: state.contacts.location,
+    locationMode: state.contacts.locationMode,
   }
 }
 
@@ -243,6 +320,7 @@ const mapDispatchToProps = (dispatch) => ({
   setDesignationMode: (boolean) => dispatch(designationEditMode(boolean)),
   setContactDescriptionMode: (boolean) => dispatch(contactDescriptionEditMode(boolean)),
   setPhoneMode: (boolean) => dispatch(phoneEditMode(boolean)),
+  setLocationMode: (boolean) => dispatch(locationEditMode(boolean)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactInfo);

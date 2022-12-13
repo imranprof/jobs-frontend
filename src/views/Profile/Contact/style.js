@@ -81,7 +81,8 @@ const useStyles = makeStyles({
         }
       },
       '&__phoneWrapper': {
-        display: "flex"
+        display: "flex",
+        marginTop: 10
       },
       '&__phone, &__email': {
         fontSize: 18,
@@ -113,6 +114,15 @@ const useStyles = makeStyles({
           fontSize: 16,
           lineHeight: "26px"
         }
+      },
+      '&__locationWrapper': {
+        display: "flex",
+        marginTop: 5
+      },
+      '&__location': {
+        width: "40%",
+        height: 30,
+        marginRight: 10
       }
     },
     '&__contact-form': {

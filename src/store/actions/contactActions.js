@@ -7,7 +7,9 @@ import {
   CONTACT_DESCRIPTION_EDIT_MODE,
   PHONE_UPDATE,
   PHONE_EDIT_MODE,
-  SET_EMAIL
+  SET_EMAIL,
+  LOCATION_UPDATE,
+  LOCATION_EDIT_MODE
 } from "../actionTypes/contactTypes";
 import {getProfileSlug} from "../reducers/authReducers";
 import {ProfileData} from "../../../API/mock/profile/profileData";
@@ -57,6 +59,20 @@ export const phoneEditMode = (boolean) => {
   }
 }
 
+export const locationUpdate = (location) => {
+  return {
+    type: LOCATION_UPDATE,
+    payload: location
+  }
+}
+
+export const locationEditMode = (boolean) => {
+  return {
+    type: LOCATION_EDIT_MODE,
+    payload: boolean
+  }
+}
+
 export const setEmail = (values) => {
   return {
     type: SET_EMAIL,
@@ -67,22 +83,24 @@ export const setEmail = (values) => {
 export const getContactAction = () => {
   return (dispatch) => {
     axios.get(profileURL()).then(res => {
-      const {contact_email, phone, designation, description} = res.data.contacts_data;
+      const {contact_email, phone, designation, description, location} = res.data.contacts_data;
       dispatch(setEmail(contact_email));
       dispatch(phoneUpdate(phone));
       dispatch(contactDescriptionUpdate(description));
       dispatch(designationUpdate(designation));
+      dispatch(locationUpdate(location));
     })
   }
 }
 
 export const getDemoContactAction = () => {
   return (dispatch) => {
-    const {email, phone, designation, contactDescription} = ProfileData;
+    const {email, phone, designation, contactDescription, location} = ProfileData;
     dispatch(setEmail(email));
     dispatch(phoneUpdate(phone));
     dispatch(contactDescriptionUpdate(contactDescription));
     dispatch(designationUpdate(designation))
+    dispatch(locationUpdate(location));
   }
 }
 
@@ -130,6 +148,23 @@ export const phoneUpdateAction = (phone) => {
   return (dispatch) => {
     axios.patch(profileURL(), data)
       .then(res => dispatch(phoneUpdate(res.data.contacts_data.phone)))
+      .catch(err => err.response);
+  }
+}
+
+export const locationUpdateAction = (profileID,  location) => {
+  const data = {
+    "user": {
+      "user_profile_attributes": {
+        "id": profileID,
+        "location": location
+      }
+    }
+  }
+
+  return (dispatch) => {
+    axios.patch(profileURL(), data)
+      .then(res => dispatch(locationUpdate(res.data.contacts_data.location)))
       .catch(err => err.response);
   }
 }

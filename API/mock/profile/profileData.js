@@ -8,6 +8,7 @@ export const ProfileData = {
   avatar: "profile-pic.png",
   email: "admin@example.com",
   designation: "Chief operating officer",
+  location: "New York, United States",
   contactDescription: "I am available for freelance work. Connect with me via and call in to my account",
   phone: "+01234567890",
   expertises: ["Developer", "Programmer", "Designer", "Professional Coder", "Rails Developer"],
