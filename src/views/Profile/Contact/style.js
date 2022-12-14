@@ -92,21 +92,6 @@ const useStyles = makeStyles({
         lineHeight: "30px",
         display: "block",
         marginRight: 10,
-        '& a': {
-          color: theme.palette.customColor.main,
-          textDecoration: "none",
-          display: "inline-block",
-          backgroundImage: theme.palette.customBackground.gradiant.highContrast,
-          backgroundPosition: "0 100%",
-          backgroundSize: "0% 1px",
-          backgroundRepeat: "no-repeat",
-          transition: "background-size 0.4s, background-position 0.4s, color 0.4s, ease 0s",
-          '&:hover': {
-            color: theme.palette.customColor.highContrast,
-            backgroundPosition: "0 100%",
-            backgroundSize: "100% 1px"
-          }
-        },
       },
       [theme.breakpoints.down('xs')]: {
         padding: 24,
@@ -115,26 +100,6 @@ const useStyles = makeStyles({
           lineHeight: "26px"
         }
       },
-      '&__locationWrapper': {
-        display: "flex",
-        marginTop: 5
-      },
-      '&__location': {
-        width: "40%",
-        height: 35,
-        marginRight: 10,
-        padding: 5,
-        fontSize: 14,
-        borderRadius: 3,
-        border: "1px solid rgba(0,0,0,0.25)",
-        color: theme.palette.customColor.dark,
-        background: theme.palette.customBackground.dark,
-        '&:focus': {
-          background: theme.palette.customBackground.dark,
-          color: theme.palette.customColor.dark,
-          fontSize: 14,
-        }
-      }
     },
     '&__contact-form': {
       background: theme.palette.customBackground.gradiant.light,

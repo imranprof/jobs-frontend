@@ -18,6 +18,7 @@ import IntroExpertisesEdit from "../EditComponents/topSection/components/introEx
 import ErrorMessage from "../../../lib/errorMessage";
 import CustomSnackbar from "../../../lib/customSnackbar";
 import AvatarEdit from "../EditComponents/topSection/components/avatarEdit";
+import Location from "../../../lib/profile/location";
 import {
   bioEditMode,
   getDemoProfileAction,
@@ -198,10 +199,14 @@ const TopSection = (props) => {
             )}
           </div>
 
-          {(publicRole && publicRole === 'employee' || publicRole === '') && (
+          {(publicRole && publicRole === 'employee' || publicRole === '') ? (
             <div className={`${classes.topSectionWrapper}__left-bottom`}>
               <SocialLinks setToast={setToast} editPermission={getPermission()}/>
               <Skills setToast={setToast}/>
+            </div>
+          ) : (
+            <div className={`${classes.topSectionWrapper}__left-bottom`}>
+              <Location setToast={setToast} editPermission={getPermission()} />
             </div>
           )}
         </Grid>
