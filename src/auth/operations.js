@@ -60,6 +60,10 @@ export function getRole() {
   }
 }
 
+export const setPrivateRole = (role) => {
+  setRole(role)
+}
+
 export function setRole(role) {
   if (role) {
     localStorage.setItem('role', role);
