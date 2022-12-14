@@ -142,8 +142,11 @@ const ContactInfo = (props) => {
     enableReinitialize: true,
     validate: values => {
       let errors = {}
-      if (!values.location) {
-        errors.location = "Location can't be empty"
+      if (country === "") {
+        errors.location = "Country can't be empty"
+      }
+      if (region === "") {
+        errors.location = "Region can't be empty"
       }
       return errors;
     }

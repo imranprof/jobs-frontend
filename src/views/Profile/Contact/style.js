@@ -121,8 +121,19 @@ const useStyles = makeStyles({
       },
       '&__location': {
         width: "40%",
-        height: 30,
-        marginRight: 10
+        height: 35,
+        marginRight: 10,
+        padding: 5,
+        fontSize: 14,
+        borderRadius: 3,
+        border: "1px solid rgba(0,0,0,0.25)",
+        color: theme.palette.customColor.dark,
+        background: theme.palette.customBackground.dark,
+        '&:focus': {
+          background: theme.palette.customBackground.dark,
+          color: theme.palette.customColor.dark,
+          fontSize: 14,
+        }
       }
     },
     '&__contact-form': {
