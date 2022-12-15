@@ -4,7 +4,7 @@ import {connect, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {animateScroll as scroll} from 'react-scroll';
 
-import {Grid, TextField, Tooltip, Zoom} from "@material-ui/core";
+import {Button, Grid, Paper, TextField, Tooltip, Zoom} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
 import TypeWriter from "./typeWriter";
@@ -27,6 +27,7 @@ import {
   updateHeadline,
 } from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
+import {updateRoleAction} from "../../../store/actions/profileAction";
 
 const TopSection = (props) => {
   const theme = useTheme();
@@ -121,8 +122,33 @@ const TopSection = (props) => {
     return !!(profileSlug && editPermission);
   }
 
+  const roleChangeHandler = (choice) => {
+    dispatch(updateRoleAction(props.profileID, choice))
+  }
+
   return (
     <>
+      {getPermission() && props.roleModifyPermission &&
+      <Paper className={`${classes.topSectionWrapper}__role-confirmation`}>
+        <p className={`${classes.topSectionWrapper}__role-confirmation__heading`}>Hence you logged in with linkedin. Your profile type is now job seeker. Do you want to change your profile type job seeker to employer?</p>
+        <div>
+          <Button
+            onClick={() => roleChangeHandler(true)}
+            variant='outlined'
+            size='small'
+            className={`${classes.topSectionWrapper}__role-confirmation__yes-btn`}
+          >Yes</Button>
+          <Button
+            onClick={() => roleChangeHandler(false)}
+            variant='outlined'
+            size='small'
+            className={`${classes.topSectionWrapper}__role-confirmation__no-btn`}
+          >No</Button>
+        </div>
+        <p className={`${classes.topSectionWrapper}__role-confirmation__alert-text`}>
+          This can be change only once, choose it carefully.</p>
+      </Paper>
+      }
       <Grid container className={classes.topSectionWrapper} id="topSection" ref={topSectionRef}>
         <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
           <div className={`${classes.topSectionWrapper}__left-top`}>
@@ -258,7 +284,8 @@ const mapStateToProps = (state) => {
     avatar: state.topSection.avatar,
     bioEditMode: state.topSection.bioMode,
     expertises: state.topSection.expertises,
-    publicRole: state.topSection.role
+    publicRole: state.topSection.role,
+    roleModifyPermission: state.topSection.modifyPermission
   }
 }
 
