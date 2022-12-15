@@ -130,7 +130,7 @@ const TopSection = (props) => {
     <>
       {getPermission() && props.roleModifyPermission &&
       <Paper className={`${classes.topSectionWrapper}__role-confirmation`}>
-        <p className={`${classes.topSectionWrapper}__role-confirmation__heading`}>Hence you logged in with linkedin. Your profile type is now job seeker. Do you want to change your profile type job seeker to employer?</p>
+        <p className={`${classes.topSectionWrapper}__role-confirmation__heading`}>Since you logged in with linkedin. Your profile type is now job seeker. Do you want to change your profile type job seeker to employer?</p>
         <div>
           <Button
             onClick={() => roleChangeHandler(true)}
