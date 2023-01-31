@@ -18,7 +18,7 @@ const Logo = () => {
   return (
     <Link href="/">
       <a className={`${classes.logoWrapper}__logo`} onClick={handleClick}>
-        <h1>SeekRightJobs</h1>
+        <h1>Seek<span>Right</span>Jobs</h1>
       </a>
     </Link>
   );

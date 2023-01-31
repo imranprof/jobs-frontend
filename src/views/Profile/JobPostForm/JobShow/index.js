@@ -33,7 +33,7 @@ import {
   setApplicationDetails
 } from "../../../../store/actions/jobAction";
 import {getRole} from "../../../../auth/operations";
-import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons";
+import FontAwesomeIcons from "../../../../../styles/FontAwesomeIcons"
 import ErrorMessage from "../../../../lib/errorMessage";
 import JobTooltip from "./jobTooltip";
 import {getAllParentMessage} from "../../../../store/actions/messageAction";
@@ -127,25 +127,15 @@ const JobShow = (props) => {
       }
     )
   }
-
-  const detailsHandler = (applicant) => {
-    const Details = applicant;
-    Details['jobTitle'] = title;
-    Details['jobPayType'] = pay_type;
-    setApplicationDetails(Details)
-    window.open('/application/details', '_blank');
-  }
-
   return (
     <>
       <div className={classes.jobShowWrapper}>
-        {role === 'employer' &&
-        (<div className={`${classes.jobShowWrapper}__close-button`}>
+        <div className={`${classes.jobShowWrapper}__close-button`}>
             <span onClick={handleClose}>
               <IconButton><CloseIcon/></IconButton>
             </span>
-          </div>
-        )}
+        </div>
+
         <h1 className={`${classes.jobShowWrapper}__title`}>
           {title}
         </h1>
@@ -307,18 +297,24 @@ const JobShow = (props) => {
                               {fullName[0].charAt(0).toUpperCase() + fullName[0].slice(1)} {fullName[1]}
                             </span>
                           </Tooltip>
+                          {applicant.hire_confirmation && <span className={`${classes.jobShowWrapper}__hired-icon`}>
+                            <Tooltip title={"Hired"} placement="top" arrow>
+                                <i className={`${FontAwesomeIcons.achievement}`} />
+                            </Tooltip>
+                            </span>}
                         </div>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
                         <Link href={`${applicant.profile_slug}`}><a target="_blank">More</a></Link>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell`}>
-                        <a
-                          onClick={()=>detailsHandler(applicant)}
-                          className={`${classes.jobShowWrapper}__applicant-list__details-link`}
-                        >
-                           Details
-                        </a>
+                        <Link href={`/job-application/${applicant.application_id}/details`} >
+                          <a target={"_blank"}
+                            className={`${classes.jobShowWrapper}__applicant-list__details-link`}
+                          >
+                            Details
+                          </a>
+                        </Link>
                       </TableCell>
                       <TableCell className={`${classes.jobShowWrapper}__applicant-list__table-cell__shortlist`}>
                         <div className={`${classes.jobShowWrapper}__applicant-list__table-cell__checkbox-wrapper`}>

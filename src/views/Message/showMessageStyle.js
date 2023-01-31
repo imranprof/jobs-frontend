@@ -39,7 +39,10 @@ export const useStyles = makeStyles({
     },
     '&__body-text': {
       whiteSpace: "pre-wrap",
-      margin: 0
+      margin: 0,
+      [theme.breakpoints.down('xs')]: {
+        fontSize: 13
+      }
     },
     '&__message-time': {
       marginBottom: 10, fontSize: "10px"

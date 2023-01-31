@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     },
     '&__title': {
       color: theme.palette.customColor.highContrast,
+      fontFamily: FONTS.modalTitleFont,
       margin: "0 0 5px 0"
     },
     '&__pay-type': {
@@ -226,6 +227,9 @@ const useStyles = makeStyles({
         fontSize: 16,
         fontWeight: 600
       }
+    },
+    '&__hired-icon': {
+      marginLeft: 5
     }
   }),
 })

@@ -11,6 +11,7 @@ import {getProfileSlug} from "../../store/reducers/authReducers";
 import {handleApiResponse, signIn, signUp} from "../operations";
 import {AuthStyle} from "./style";
 import {modalType} from "../../store/actions/authAction";
+import LinkedInPage from "../../lib/LinkedInPage";
 
 const SignUpForm = (props) => {
   const theme = useTheme();
@@ -151,6 +152,11 @@ const SignUpForm = (props) => {
       <Button fullWidth type="submit">
         Sign Up
       </Button>
+      <div className={`${classes.authWrapper}__linkedin-Icon-Wrapper`}>
+        <p>Or</p>
+        <LinkedInPage/>
+      </div>
+
     </Box>
   );
 };

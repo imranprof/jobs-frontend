@@ -185,7 +185,6 @@ const BlogModal = (props) => {
                   onChange={categories => {
                     editHandler.setValues({categories: categories, title: editHandler.values.title})
                   }}
-                  className={`${blogModalWrapper}__modal-content__categories-edit__selectDropdown`}
                 />
               </div>
             ) : (

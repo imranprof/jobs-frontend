@@ -1,7 +1,8 @@
+import {useEffect} from "react";
 import Link from 'next/link';
 import {connect, useDispatch} from "react-redux";
 
-import {AppBar, Badge, Hidden, IconButton, Toolbar, Tooltip} from "@material-ui/core";
+import {AppBar, Badge, Hidden, Toolbar} from "@material-ui/core";
 
 import Logo from "../../../lib/logo";
 import SearchBar from "../../../lib/searchBar";
@@ -10,8 +11,9 @@ import ProfilesSideBar from "./components/profilesSideBar";
 import {modalType} from "../../../store/actions/authAction";
 import {getRole} from "../../../auth/operations";
 import {resetProfiles} from "../../../store/actions/searchAction";
-import {useEffect} from "react";
 import {getAllParentMessage} from "../../../store/actions/messageAction";
+import {getTheme} from "../../Layout";
+import AvatarDropDown from "../../Profile/Header/components/avatarDropdown/avatarDropDown";
 
 const ProfilesHeader = (props) => {
   const {classes, headerRef, notificationCount} = props;
@@ -67,33 +69,15 @@ const ProfilesHeader = (props) => {
 
             {props.isAuthenticated ?
               <>
-                <Link href={`/${getPrivateSlug()}`}>
-                  <a className={`${classes.headerWrapper}__button`}>
-                    My Profile
-                  </a>
-                </Link>
-
-                {role === 'employee' ?
-                (<Link href={"/myJobs"}>
-                  <a className={`${classes.headerWrapper}__button`}>
-                    My Jobs
-                  </a>
-                </Link>) : ""}
-
                 <Link href={"/messages"}>
-                  <Badge badgeContent={notificationCount} color="secondary">
+                  <Badge badgeContent={notificationCount} color={getTheme() ? "secondary" : "primary"}>
                     <a className={`${classes.headerWrapper}__button`}>
                       Messages
                     </a>
                   </Badge>
                 </Link>
 
-                <Link href="">
-                  <a className={`${classes.headerWrapper}-sign-out`}
-                     onClick={handleSignOutClick}>
-                    Sign out
-                  </a>
-                </Link>
+                <AvatarDropDown />
               </> :
               <>
                 <Link href="">

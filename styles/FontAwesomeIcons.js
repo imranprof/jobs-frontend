@@ -16,6 +16,7 @@ const FontAwesomeIcons = {
     "angleRight": "fas fa-angle-right",
     "pencil": "fa-solid fa-pencil",
     "signIn": "fa-solid fa-right-to-bracket",
+    "signOut": "fa-solid fa-arrow-right-from-bracket",
     "trash": "fa-solid fa-trash",
     "darkMode": "fa-solid fa-moon",
     "plus": "fa-solid fa-plus",
@@ -23,7 +24,14 @@ const FontAwesomeIcons = {
     "camera": "fa-solid fa-camera",
     "selected": "fa-solid fa-circle-check",
     "users": "fa-solid fa-user-group",
-    "briefcase": "fa-solid fa-briefcase"
+    "briefcase": "fa-solid fa-briefcase",
+    "location": "fa-solid fa-location-dot",
+    "dollar": 'fa-solid fa-money-check-dollar',
+    "message": "fa-solid fa-comment-dots",
+    "bell": "fa-regular fa-bell",
+    "achievement": "fa-solid fa-trophy",
+    "filter": "fa-solid fa-sliders",
+    "contract": "fa-solid fa-file-contract"
 }
 
 export default FontAwesomeIcons;

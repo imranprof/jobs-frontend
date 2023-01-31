@@ -11,6 +11,11 @@ export const useStyles = makeStyles({
     position: "static",
     transition: 'backdrop-filter 0.3s ease-in-out',
     backdropFilter: 'blur(15px) opacity(0)',
+    '& .MuiButton-outlined': {
+      width: "-webkit-fill-available",
+      textTransform: "capitalize",
+      margin: "0 20px",
+    },
     '&.isSticky': {
       position: "fixed",
       width: "100%",
@@ -44,6 +49,10 @@ export const useStyles = makeStyles({
     },
 
     // Profile Header Styles
+    '&__resume': {
+      textDecoration: "none",
+      color: theme.palette.customColor.dark
+    },
     '&__profile': {
       display: 'flex',
       alignItems: 'center',
@@ -344,6 +353,7 @@ export const useStyles = makeStyles({
       border: "none",
       borderRadius: 6,
       color: theme.palette.customColor.highContrast,
+      marginLeft: 15,
       zIndex: 1,
       transition: "all 0.4s ease",
       '&::before': {

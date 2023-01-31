@@ -44,6 +44,7 @@ const ProfileInfo = (props) => {
 const mapStateToProps = (state) => {
   return {
     profileInfo: state.topSection.profileInfo,
+    avatar: state.topSection.avatar,
     isAuthenticated: state.auth.isAuthenticated
   }
 }

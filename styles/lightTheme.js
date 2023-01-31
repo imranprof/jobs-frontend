@@ -13,39 +13,47 @@ const lightTheme = createTheme({
       dark: COLORS.white_2,
       gradiant: {
         light: COLORS.white_3,
-        dark: COLORS.pink,
-        highContrast: COLORS.pink_1,
+        dark: COLORS.bluish_2,
+        highContrast: COLORS.blue_1,
         cardHover: COLORS.white_3
       },
       sideBar: COLORS.white_1,
       seeMoreBtn: COLORS.white_2,
       seeMoreBtnHover: COLORS.gray_6,
-      skillBackground: COLORS.white_6,
-      shareBar: COLORS.white_2
+      skillBackground: COLORS.blue_2,
+      shareBar: COLORS.white_2,
+      buttonHover: COLORS.blue_1,
+      hirePaperBg: COLORS.white,
+      buttonBg: COLORS.light_blue,
+      buttonHoverBg: COLORS.blue_1
     },
     customColor: {
       main: COLORS.gray,
       light: COLORS.gray,
       dark: COLORS.black,
-      highContrast: COLORS.pink,
-      navLinkActive: COLORS.pink,
-      socialLinkHover: COLORS.white,
-      backToTop: COLORS.pink,
-      featuresHover: COLORS.white,
+      highContrast: COLORS.blue_1,
+      navLinkActive: COLORS.blue_1,
+      socialLinkHover: COLORS.black_1,
+      backToTop: COLORS.blue_1,
+      featuresHover: COLORS.black_1,
       featureIconHover: COLORS.white,
       inputBorder: COLORS.gray_6,
-      sendMessageBtn: COLORS.white,
-      searchBtn: COLORS.pink,
+      sendMessageBtn: COLORS.black_1,
+      searchBtn: COLORS.blue_1,
       hourlyRate: COLORS.gray,
-      shareBtn: COLORS.pink,
+      shareBtn: COLORS.bluish,
       dangerColor: COLORS.danger,
       backToHomeHover: COLORS.black_1,
       avatarBgEdit: COLORS.white_5,
       success: COLORS.success,
       sendMessageText: COLORS.white_8,
-      sendMessageBody: COLORS.light_blue,
+      sendMessageBody: COLORS.light_purple,
       receivedMessageBody: COLORS.grey_7,
-      receivedMessageText: COLORS.black_11
+      receivedMessageText: COLORS.black_11,
+      confirmButton: COLORS.light_blue,
+      radioButton: COLORS.light_blue,
+      jobPostBtn: COLORS.white,
+      jobType: COLORS.blue_1
     },
     customShadow: {
       main: COLORS.boxShadow_2,
@@ -63,11 +71,11 @@ const lightTheme = createTheme({
     },
     customHoverColor: {
       main: COLORS.white,
-      light: COLORS.white
+      light: COLORS.black_1
     },
     customHoverBackground: {
-      main: COLORS.pink_1,
-      closeIcon: COLORS.pink_1,
+      main: COLORS.blue_1,
+      closeIcon: COLORS.blue_1,
       searchHover: COLORS.searchHover
     },
     beforeBackground: {
@@ -87,10 +95,10 @@ const lightTheme = createTheme({
     resume: {
       navListColor: COLORS.black,
       navListShadow: COLORS.boxShadow_9,
-      navListTitle: COLORS.pink,
+      navListTitle: COLORS.blue_1,
       mainTitle: COLORS.black,
-      subTitle: COLORS.pink_2,
-      cardBeforeBG: COLORS.pink_1,
+      subTitle: COLORS.blue_1,
+      cardBeforeBG: COLORS.bluish,
       cardShadow: COLORS.boxShadow_9,
       cardTitle: COLORS.black,
       cardSubTitle: COLORS.gray,
@@ -98,14 +106,14 @@ const lightTheme = createTheme({
       cardDivider: COLORS.white_7,
       hover: {
         cardTitle: COLORS.black,
-        cardSubTitle: COLORS.white,
-        cardDescription: COLORS.white,
-        cardDivider: COLORS.pink_4,
+        cardSubTitle: COLORS.black,
+        cardDescription: COLORS.black,
+        cardDivider: COLORS.blue_1,
       }
     },
     progressBar: {
       main: COLORS.white_5,
-      secondary: COLORS.pink_3,
+      secondary: COLORS.bluish_3,
       title: COLORS.black,
       percentText: COLORS.gray,
       boxShadow: "none",

@@ -11,13 +11,26 @@ import Footer from "../Profile/Footer";
 import CustomModal from "../../lib/CustomModal";
 import ThemeButton from "../../lib/themeButton";
 
-function withLayout(Component, type) {
+// LocalStorage
+export const getTheme = () => {
+  if (typeof window !== 'undefined') {
+    const theme = localStorage.getItem('theme')
+    if (theme) {
+      return theme === 'true';
+    }
+    return null;
+  }
+}
+
+const withLayout = (Component, type) => {
   return (props) => {
-    const [darkMode, setDarkMode] = useState(true)
-    const [customTheme, setCustomTheme] = useState(darkTheme)
+    const [darkMode, setDarkMode] = useState(getTheme() === null ? false : getTheme());
+    const [customTheme, setCustomTheme] = useState(lightTheme)
     const modalType = useSelector(state => state.auth.modalType)
 
+    let getThemeMode = '';
     useEffect(() => {
+      getThemeMode = getTheme()
       setCustomTheme(darkMode ? darkTheme : lightTheme)
     }, [darkMode]);
 
@@ -28,7 +41,7 @@ function withLayout(Component, type) {
         <Header type={type}/>
         <Container fixed>
           <Component {...props} />
-          <ThemeButton themeMode={darkMode} setTheme={setDarkMode}/>
+          <ThemeButton themeMode={darkMode} setDarkMode={setDarkMode}/>
         </Container>
         <Footer/>
       </ThemeProvider>

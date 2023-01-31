@@ -4,8 +4,9 @@ import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
 import {useDispatch} from "react-redux";
 
-import {Button, Icon, TextField} from "@material-ui/core";
+import {Button, Icon, IconButton, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
+import CloseIcon from "@material-ui/icons/Close";
 
 import ModalTitle from "../../../lib/profile/modalTitle";
 import ErrorMessage from "../../../lib/errorMessage";
@@ -23,6 +24,7 @@ const JobPostForm = (props) => {
   const [mode, setMode] = useState(false);
   const [jobData, setJobData] = useState({});
   const {handleClose} = props
+  const [submitType, setSubmitType] = useState('Published')
 
   const jobSkillsData = [
     {value: 1, label: "Ruby"},
@@ -61,7 +63,8 @@ const JobPostForm = (props) => {
       location: location.trim(),
       skills: skills,
       payType: payType.label,
-      budget: budget
+      budget: budget,
+      status: submitType
     }))
     if (response && response.status === 201) {
       setJobData(response.data.job)
@@ -119,6 +122,12 @@ const JobPostForm = (props) => {
           <JobShow data={jobData} handleClose={handleClose} />
         ):(
           <div className={classes.jobPostFormWrapper}>
+            <div className={`${classes.jobPostFormWrapper}__close-button`}>
+            <span onClick={handleClose}>
+              <IconButton><CloseIcon/></IconButton>
+            </span>
+            </div>
+
             <ModalTitle title="Post New Job"/>
 
             <div className={`${classes.jobPostFormWrapper}__contentWrapper`}>
@@ -177,7 +186,6 @@ const JobPostForm = (props) => {
                   placeholder="Select type"
                   menuPosition="fixed"
                   styles={{menuPortal: (base) => ({...base, zIndex: 2})}}
-                  className={`${classes.jobPostFormWrapper}__contentWrapper__selectDropdown`}
                 />
                 {formik.errors.payType && <ErrorMessage error={formik.errors.payType}/>}
               </div>
@@ -252,11 +260,15 @@ const JobPostForm = (props) => {
               </div>
             </div>
 
-            <Button fullWidth onClick={formik.handleSubmit} endIcon={<Icon className={FontAwesomeIcons.signIn}/>}
+            <Button onClick={formik.handleSubmit} endIcon={<Icon className={FontAwesomeIcons.signIn}/>}
                     className={`${classes.jobPostFormWrapper}__button`}
             >
               job post
             </Button>
+            <Button onClick={()=>{
+              setSubmitType('Draft')
+              formik.handleSubmit()
+            }}  className={`${classes.jobPostFormWrapper}__button`}>Save as Draft</Button>
           </div>
         )
       }

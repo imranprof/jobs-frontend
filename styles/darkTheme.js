@@ -21,7 +21,11 @@ const darkTheme = createTheme({
       seeMoreBtn: COLORS.black_2,
       seeMoreBtnHover: COLORS.gray_1,
       skillBackground: COLORS.gray,
-      shareBar: COLORS.gray_1
+      shareBar: COLORS.gray_1,
+      buttonHover: COLORS.green_1,
+      hirePaperBg: COLORS.black_2,
+      buttonBg: COLORS.pink,
+      buttonHoverBg: COLORS.pink_5
     },
     customColor: {
       main: COLORS.white_4,
@@ -44,9 +48,13 @@ const darkTheme = createTheme({
       modalTitle: COLORS.white_5,
       success: COLORS.success,
       sendMessageText: COLORS.white_8,
-      sendMessageBody: COLORS.light_blue,
+      sendMessageBody: COLORS.dark_purple,
       receivedMessageBody: COLORS.grey_8,
-      receivedMessageText: COLORS.white_8
+      receivedMessageText: COLORS.white_8,
+      confirmButton: COLORS.success,
+      radioButton: COLORS.pink,
+      jobPostBtn: COLORS.white,
+      jobType: COLORS.pink_2
     },
     customShadow: {
       main: COLORS.boxShadow_1,

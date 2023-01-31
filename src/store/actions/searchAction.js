@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {RESET, SET_PROFILES} from "../actionTypes/profilesTypes";
 import {SET_SEARCH_JOB} from "../actionTypes/jobsTypes";
 
@@ -15,7 +16,7 @@ export const getSearchValue = () => {
   }
 }
 
-const setSearchValue = (value) =>{
+export const setSearchValue = (value) => {
   if (value) {
     localStorage.setItem('searchValue', value);
   } else {
@@ -34,10 +35,9 @@ export const getSearchType = () => {
 }
 
 export const setSearchType = (value) => {
-  if(value) {
-    localStorage.setItem('searchType',value)
-  }
-  else{
+  if (value) {
+    localStorage.setItem('searchType', value)
+  } else {
     localStorage.removeItem('searchType')
   }
 }
@@ -59,7 +59,7 @@ export const resetProfiles = (value) => {
 export const getSearchProfiles = (value) => {
   return (dispatch) => {
     let tempValue = value.trim()
-    if(tempValue.length !==0){
+    if (tempValue.length !== 0) {
       dispatch(resetProfiles(false))
       setSearchValue(value)
       axios.get(searchURL, {
@@ -84,18 +84,9 @@ export const setSearchJobs = (jobs) => {
 
 export const getSearchJobs = (value) => {
   return (dispatch) => {
-    let tempValue = value.trim()
-    if(tempValue.length !==0){
-      setSearchValue(value)
-      axios.get(jobSearchURL, {
-        params: {
-          search_value: value
-        }
-      }).then(res => {
-        dispatch(setSearchJobs(res.data.jobs))
-      })
-        .catch(err => console.log(err.response));
-    }
-
+    axios.patch(jobSearchURL, value).then(res => {
+      dispatch(setSearchJobs(res.data.jobs))
+    })
+      .catch(err => console.log(err.response));
   }
 }
