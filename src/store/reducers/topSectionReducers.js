@@ -12,7 +12,8 @@ import {
   SET_AVATAR,
   SET_LOADER,
   SET_ROLE,
-  SET_PRIVATE_INFO
+  SET_PRIVATE_INFO,
+  SET_ROLE_MODIFY_PERMISSION
 } from "../actionTypes/topSectionTypes";
 
 const initialState = {
@@ -31,7 +32,8 @@ const initialState = {
   skills: [],
   loader: true,
   role: '',
-  profileInfo: {}
+  profileInfo: {},
+  modifyPermission: false
 }
 
 export const topSectionReducer = (state = initialState, action) => {
@@ -106,6 +108,11 @@ export const topSectionReducer = (state = initialState, action) => {
       return {
         ...state,
         profileInfo: action.payload
+      }
+    case SET_ROLE_MODIFY_PERMISSION:
+      return {
+        ...state,
+        modifyPermission: action.payload
       }
     default:
       return state

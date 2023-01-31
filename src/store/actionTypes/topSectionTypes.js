@@ -23,3 +23,5 @@ export const SET_LOADER = 'SET_LOADER'
 export const SET_ROLE = 'SET_ROLE'
 // Private profile info
 export const SET_PRIVATE_INFO = 'SET_PRIVATE_INFO'
+
+export const SET_ROLE_MODIFY_PERMISSION = 'SET_ROLE_MODIFY_PERMISSION'

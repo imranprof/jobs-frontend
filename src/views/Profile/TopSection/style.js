@@ -1,6 +1,7 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 import FONTS from "../../../../styles/fonts";
+import COLORS from "../../../../styles/colors";
 
 export const useStyles = makeStyles({
   topSectionWrapper: theme => ({
@@ -259,6 +260,27 @@ export const useStyles = makeStyles({
     },
     [theme.breakpoints.down('xs')]: {
       padding: "0px 16px"
+    },
+    '&__role-confirmation':{
+      padding: '10px 10px 10px 20px',
+      background: theme.palette.customBackground.gradiant.dark,
+      marginBottom: 30,
+      borderRadius: 10,
+      '&__heading':{
+        color: theme.palette.customColor.main,
+        fontFamily: FONTS.contentFont
+      },
+      '&__yes-btn':{
+        marginRight: 10,
+        color: COLORS.success
+      },
+      '&__no-btn':{
+        color: COLORS.danger
+      },
+      '&__alert-text':{
+        color: COLORS.danger,
+        fontFamily: FONTS.contentFont
+      }
     }
   })
 });
