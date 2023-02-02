@@ -2,17 +2,16 @@ import axios from "axios";
 
 import {authenticate, signInRejected} from "../store/actions/authAction";
 
-const signUpURL = process.env.NEXT_PUBLIC_SIGNUP_URL
-const signInURL = process.env.NEXT_PUBLIC_SIGNIN_URL
-const signOutURL = process.env.NEXT_PUBLIC_SIGNOUT_URL
-
+const signUpURL = `${process.env.NEXT_PUBLIC_APP_URL}/users`
+const signInURL = `${process.env.NEXT_PUBLIC_APP_URL}/sign_in`
+const signOutURL = `${process.env.NEXT_PUBLIC_APP_URL}/sign_out`
+const linkedinLoginUrl = `${process.env.NEXT_PUBLIC_APP_URL}/linkedin_login`
+const linkedinGetProfileUrl = `${process.env.NEXT_PUBLIC_LINKEDIN_API_URL}/me?`
+const linkedinGetEmailUrl = `${process.env.NEXT_PUBLIC_LINKEDIN_API_URL}/emailAddress?q=members&projection=(elements*(handle~))`
 const linkedinClientId = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_ID
 const linkedinClientSecret = process.env.NEXT_PUBLIC_LINKEDIN_CLIENT_SECRET
 const linkedinRedirectUri = process.env.NEXT_PUBLIC_LINKEDIN_REDIRECT_URI
 const linkedinAccessTokenUrl = process.env.NEXT_PUBLIC_LINKEDIN_ACCESS_TOKEN_URL
-const linkedinGetProfileUrl = process.env.NEXT_PUBLIC_LINKEDIN_GET_PROFILE_URL
-const linkedinGetEmailUrl = process.env.NEXT_PUBLIC_LINKEDIN_GET_EMAIL_URL
-const linkedinLoginUrl = process.env.NEXT_PUBLIC_LOGIN_WITH_LINKEDIN_URL
 
 export function setAuthToken(token) {
   if (token) {

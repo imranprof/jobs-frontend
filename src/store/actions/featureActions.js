@@ -4,7 +4,7 @@ import {GET_FEATURES, UPDATE_FEATURE, REMOVE_FEATURE} from "../actionTypes/featu
 import {getProfileSlug} from "../reducers/authReducers";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
+const profileURL = () => `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/${getProfileSlug()}`;
 
 export const getFeatures = (features) => {
   return {

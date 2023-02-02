@@ -23,8 +23,8 @@ import {getContactAction} from "./contactActions";
 import {getPrivateSlug} from "../../auth/operations";
 import {setPrivateRole} from "../../auth/operations";
 
-const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
-const privateProfileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getPrivateSlug()}`;
+const profileURL = () => `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/${getProfileSlug()}`;
+const privateProfileURL = () => `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/${getPrivateSlug()}`;
 
 export const setProfileID = (id) => {
   return {

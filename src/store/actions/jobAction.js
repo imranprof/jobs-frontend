@@ -16,22 +16,22 @@ import {
 } from "../actionTypes/jobsTypes";
 import {sendMessageAction} from "./messageAction";
 
-const jobPostUrl = process.env.NEXT_PUBLIC_JOBS_URL
-const jobApplyUrl = process.env.NEXT_PUBLIC_JOB_APPLY_URL
-const jobsUrl = process.env.NEXT_PUBLIC_My_JOB_URL
-const jobEditUrl = process.env.NEXT_PUBLIC_My_JOB_EDIT_URL
-const employeeSelectionUrl = process.env.NEXT_PUBLIC_EMPLOYEE_SELECTION_URL
-const hireJobSeekerUrl = process.env.NEXT_PUBLIC_HIRE_JOB_SEEKER_URL
-const allJobOfferUrl = process.env.NEXT_PUBLIC_ALL_JOB_OFFER_URL
-const acceptHireUrl = process.env.NEXT_PUBLIC_HIRE_OFFER_URL
-const bestMatchesJobsUrl = process.env.NEXT_PUBLIC_BEST_MATCHES_JOBS_URL
-const mostRecentJobsUrl = process.env.NEXT_PUBLIC_MOST_RECENT_JOBS_URL
-const allContractJobsUrl = process.env.NEXT_PUBLIC_ALL_CONTRACT_JOBS_URL
-const contractJobShowUrl = process.env.NEXT_PUBLIC_CONTRACT_JOB_SHOW_URL
-const jobContractEndUrl = process.env.NEXT_PUBLIC_JOB_CONTRACT_END_URL
-const contractEndFeedbackUrl = process.env.NEXT_PUBLIC_CONTRACT_END_FEEDBACK_URL
-const getAllTimeSheetsUrl = process.env.NEXT_PUBLIC_ALL_TIMESHEETS_URL
-const timeSheetUrl = process.env.NEXT_PUBLIC_TIMESHEET_URL
+const jobPostUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs`
+const jobApplyUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/apply`
+const jobsUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/my-jobs`
+const jobEditUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/job`
+const employeeSelectionUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/employee-select`
+const hireJobSeekerUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/hire_job_seeker`
+const allJobOfferUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/offers`
+const acceptHireUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/accept-hire-offer`
+const bestMatchesJobsUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/best_matches`
+const mostRecentJobsUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/most_recent`
+const allContractJobsUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/job_applications/job_contracts`
+const contractJobShowUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/job_applications/job_contract`
+const jobContractEndUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/job_applications/end_contract`
+const contractEndFeedbackUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/job_applications/feedback`
+const getAllTimeSheetsUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/job_contracts/time_sheets`
+const timeSheetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/job_contracts/time_sheet`
 
 export const addJobAction = (job) => {
   const {title, description, location, skills, payType, budget, status} = job;
@@ -200,7 +200,7 @@ export const setJobApplication = (details) => {
 }
 
 export const getJobApplication = (id) => {
-  const jobApplicationUrl = `${process.env.NEXT_PUBLIC_JOB_APPLICATION_URL}/${id}`;
+  const jobApplicationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/job_application/${id}`;
 
   return (dispatch) => {
     axios.get(jobApplicationUrl)
@@ -300,7 +300,7 @@ const setJobOffer = (details) => {
 }
 
 export const getJobOffer = (id) => {
-  const jobOfferShowUrl = `${process.env.NEXT_PUBLIC_JOB_OFFER_SHOW_URL}/${id}`;
+  const jobOfferShowUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/offer/${id}`;
 
   return (dispatch) => {
     axios.get(jobOfferShowUrl)
