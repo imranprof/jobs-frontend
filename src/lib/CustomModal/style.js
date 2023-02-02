@@ -26,7 +26,10 @@ const useStyles = makeStyles({
           color: theme.palette.customColor.modalTitle,
           fontSize: 24,
           fontFamily: FONTS.modalTitleFont,
-          letterSpacing: "2px"
+          letterSpacing: "2px",
+          [theme.breakpoints.down('xs')]: {
+            fontSize: 18
+          },
         },
         '&-select': {
           width: 440,
@@ -36,7 +39,11 @@ const useStyles = makeStyles({
             color: theme.palette.customColor.modalTitle,
             fontFamily: FONTS.modalTitleFont,
             letterSpacing: "1px"
-          }
+          },
+          [theme.breakpoints.down('xs')]: {
+            flexDirection: "column",
+            paddingLeft: 125
+          },
         }
       }
     },
