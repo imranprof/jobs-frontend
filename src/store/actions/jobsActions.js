@@ -2,7 +2,7 @@ import axios from "axios";
 
 import {SHOW_JOBS} from "../actionTypes/jobsTypes";
 
-const jobsURL = process.env.NEXT_PUBLIC_JOBS_URL;
+const jobsURL = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs`;
 
 export const showJobs = (jobs) => {
   return {

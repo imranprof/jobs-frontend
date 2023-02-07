@@ -2,9 +2,10 @@ import axios from "axios";
 
 import {RESET, SET_PROFILES} from "../actionTypes/profilesTypes";
 import {SET_SEARCH_JOB} from "../actionTypes/jobsTypes";
+import {getProfileSlug} from "../reducers/authReducers";
 
-const searchURL = process.env.NEXT_PUBLIC_SEARCH_URL;
-const jobSearchURL = process.env.NEXT_PUBLIC_JOBS_SEARCH_URL
+const searchURL = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/search`;
+const jobSearchURL = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/jobs/search`
 
 export const getSearchValue = () => {
   if (typeof window !== 'undefined') {

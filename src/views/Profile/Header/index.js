@@ -12,7 +12,7 @@ import {getProfileSlug} from "../../../store/reducers/authReducers";
 import {getRole} from "../../../auth/operations";
 
 const ProfileHeader = ({classes, headerRef}) => {
-  const resumeURL = `${process.env.NEXT_PUBLIC_RESUME_DOWNLOAD_URL}/${getProfileSlug()}.pdf`;
+  const resumeURL = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/resume/${getProfileSlug()}.pdf`;
 
   return (
     <AppBar className={classes.headerWrapper} ref={headerRef}>

@@ -1,8 +1,9 @@
 import axios from "axios";
 
 import {SHOW_PROFILES, SET_PAGE} from "../actionTypes/profilesTypes";
+import {getProfileSlug} from "../reducers/authReducers";
 
-const profilesURL = process.env.NEXT_PUBLIC_PROFILE_URL;
+const profilesURL = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles`;
 
 export const setPage = (page) => {
   return {
