@@ -26,6 +26,7 @@ import {
   headlineEditMode,
   updateBio,
   updateHeadline,
+  updateHourlyRate
 } from "../../../store/actions/topSectionActions";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 import {updateRoleAction} from "../../../store/actions/profileAction";
@@ -42,6 +43,7 @@ const TopSection = (props) => {
   const {profileSlug, avatar, firstName, lastName, editPermission, publicRole} = props;
   const dispatch = useDispatch();
   const {profile} = useRouter().query;
+  const [rateEditMode, setRateEditMode] = useState(false);
 
   const modalClose = () => {
     setOpenModal(false);
@@ -89,6 +91,29 @@ const TopSection = (props) => {
         errors.headline = "Headline can't be empty"
       } else if (values.headline.length > 50) {
         errors.headline = "Headline must have within 50 characters"
+      }
+      return errors;
+    }
+  })
+
+  const hourlyRateHandler = useFormik({
+    initialValues: {hourlyRate: props.hourlyRate},
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      dispatch(updateHourlyRate({
+        rate: values.hourlyRate,
+        profileID: props.profileID
+      }));
+      setRateEditMode(false);
+      setToast({show: true, severity: "success", text: "Successfully updated the hourlyRate"});
+    },
+    onReset: () => {
+      setRateEditMode(false);
+    },
+    validate: values => {
+      let errors = {}
+      if (!values.hourlyRate) {
+        errors.hourlyRate = "Hourly Rate can't be empty"
       }
       return errors;
     }
@@ -153,27 +178,56 @@ const TopSection = (props) => {
       <Grid container className={classes.topSectionWrapper} id="topSection" ref={topSectionRef}>
         <Grid item xs={12} md={7} className={`${classes.topSectionWrapper}__left`}>
           <div className={`${classes.topSectionWrapper}__left-top`}>
-            {props.headlineEditMode ? (<div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  name='headline'
-                  value={headlineHandler.values.headline}
-                  onChange={headlineHandler.handleChange}
-                />
-                {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
-                <CustomButton handler={headlineHandler.handleSubmit} mode={headlineHandler.handleReset}/>
-              </div>
-            ) : (
-              <div className={`${classes.topSectionWrapper}__left-top__headline`}>
-                <span className={`${classes.topSectionWrapper}__left-top__headline-text`}>{props.headline}</span>
-                {getPermission() &&
-                <span onClick={() => props.setHeadlineMode(true)}>
+            <div className={`${classes.topSectionWrapper}__left-top__headlineRateWrapper`}>
+              {props.headlineEditMode ? (
+                <div className={`${classes.topSectionWrapper}__left-top__headline-inputWrapper`}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    name='headline'
+                    value={headlineHandler.values.headline}
+                    onChange={headlineHandler.handleChange}
+                  />
+                  {headlineHandler.errors.headline ? <ErrorMessage error={headlineHandler.errors.headline}/> : null}
+                  <CustomButton handler={headlineHandler.handleSubmit} mode={headlineHandler.handleReset}/>
+                </div>
+              ) : (
+                <div className={`${classes.topSectionWrapper}__left-top__headline`}>
+                  <span className={`${classes.topSectionWrapper}__left-top__headline-text`}>{props.headline}</span>
+                  {getPermission() &&
+                  <span onClick={() => props.setHeadlineMode(true)}>
                 <EditButton/>
               </span>
-                }
-              </div>
-            )}
+                  }
+                </div>
+              )}
+              {publicRole && publicRole === 'employee' && <>
+              {rateEditMode ? (<div className={`${classes.topSectionWrapper}__left-top__rate-inputWrapper`}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    name='hourlyRate'
+                    type='number'
+                    value={hourlyRateHandler.values.hourlyRate}
+                    onChange={hourlyRateHandler.handleChange}
+                  />
+                  {hourlyRateHandler.errors.hourlyRate ?
+                    <ErrorMessage error={hourlyRateHandler.errors.hourlyRate}/> : null}
+                  <CustomButton handler={hourlyRateHandler.handleSubmit} mode={hourlyRateHandler.handleReset}/>
+                </div>
+              ) : (
+                <div className={`${classes.topSectionWrapper}__left-top__hourlyRate`}>
+                  <span
+                    className={`${classes.topSectionWrapper}__left-top__headline-text`}>${props.hourlyRate}/hr</span>
+                  {getPermission() &&
+                  <span onClick={() => setRateEditMode(true)}>
+                <EditButton/>
+              </span>
+                  }
+                </div>
+              )}
+            </>}
+            </div>
 
             <EditCustomModal handleClose={modalClose} open={openModal}>
               <IntroExpertisesEdit
@@ -283,6 +337,7 @@ const mapStateToProps = (state) => {
     firstName: state.topSection.firstName,
     lastName: state.topSection.lastName,
     headline: state.topSection.headline,
+    hourlyRate: state.topSection.hourlyRate,
     headlineEditMode: state.topSection.headlineMode,
     intro: state.topSection.intro,
     bio: state.topSection.bio,
