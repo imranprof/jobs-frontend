@@ -12,7 +12,7 @@ import Job from "../../../views/Job";
 import {getSearchJobs, getSearchValue} from "../../../store/actions/searchAction";
 import {JobsStyle} from "../../../views/PagesStyle/jobs/style";
 import CustomLoader from "../../../lib/customLoader";
-import Filters from "../filters";
+import Filters from "../../../lib/filters";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";
 
 const JobSearch = (props) => {
