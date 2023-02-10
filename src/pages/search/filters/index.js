@@ -6,7 +6,7 @@ import {Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Text
 import {useTheme} from "@material-ui/core/styles";
 
 import {numberOfApplicants, jobTypesFilter, jobRatesFilter} from "../../../../API/elements/jobs/filterList";
-import {FiltersStyle} from "./style";
+import {FiltersStyle} from "../../../views/PagesStyle/search/filters/style";
 import {getSearchJobs, getSearchValue} from "../../../store/actions/searchAction";
 
 const Filters = () => {

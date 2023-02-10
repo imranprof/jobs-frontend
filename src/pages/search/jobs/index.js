@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import withLayout from "../../../views/Layout";
 import Job from "../../../views/Job";
 import {getSearchJobs, getSearchValue} from "../../../store/actions/searchAction";
-import {JobsStyle} from "../../jobs/style";
+import {JobsStyle} from "../../../views/PagesStyle/jobs/style";
 import CustomLoader from "../../../lib/customLoader";
 import Filters from "../filters";
 import FontAwesomeIcons from "../../../../styles/FontAwesomeIcons";

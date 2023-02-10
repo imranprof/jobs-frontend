@@ -9,7 +9,7 @@ import withLayout from "../../views/Layout";
 import {getJobs} from "../../store/actions/jobsActions";
 import CustomLoader from "../../lib/customLoader";
 import Job from "../../views/Job";
-import {JobsStyle} from "./style";
+import {JobsStyle} from "../../views/PagesStyle/jobs/style";
 import EndMessage from "../../lib/endMessage";
 import {getIndividualJobs} from "../../store/actions/jobAction";
 
