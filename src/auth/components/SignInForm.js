@@ -10,6 +10,9 @@ import {signIn, handleApiResponse} from "../operations";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 import {modalType} from "../../store/actions/authAction";
 import {setIndividualJobs} from "../../store/actions/jobAction";
+import LinkedInPage from "../../lib/LinkedInPage";
+import {useTheme} from "@material-ui/core/styles";
+import {AuthStyle} from "./style";
 
 const validationSchema = yup.object({
   email: yup
@@ -25,6 +28,8 @@ const validationSchema = yup.object({
 const SignInForm = ({error, isAuthenticated}) => {
   const dispatch = useDispatch()
   const router = useRouter();
+  const theme = useTheme();
+  const classes = AuthStyle(theme);
 
   useEffect( () => {
     if (isAuthenticated) {
@@ -87,6 +92,10 @@ const SignInForm = ({error, isAuthenticated}) => {
       <Button fullWidth type="submit" endIcon={<Icon className={FontAwesomeIcons.signIn}/>}>
         Sign In
       </Button>
+      <div className={`${classes.authWrapper}__linkedin-Icon-Wrapper`}>
+        <p>Or</p>
+        <LinkedInPage />
+      </div>
     </Box>
   );
 }

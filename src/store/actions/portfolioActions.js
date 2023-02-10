@@ -4,7 +4,7 @@ import {GET_PORTFOLIOS, REMOVE_PORTFOLIO, UPDATE_PORTFOLIO} from "../actionTypes
 import {getProfileSlug} from "../reducers/authReducers";
 import {ProfileData} from "../../../API/mock/profile/profileData";
 
-const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
+const profileURL = () => `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/${getProfileSlug()}`;
 
 export const updatePortfolio = (portfolios, allCategories) => {
   return {

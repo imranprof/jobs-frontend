@@ -7,10 +7,10 @@ import {
   SET_TOTAL_NOTIFICATION_COUNT
 } from "../actionTypes/messageTypes";
 
-const parentMessageUrl = process.env.NEXT_PUBLIC_SHOW_ALL_MESSAGE_URL
-const privateConversationUrl = process.env.NEXT_PUBLIC_PRIVATE_CONVERSATION_URL
-const sendMessageUrl = process.env.NEXT_PUBLIC_SEND_MESSAGE_URL
-const messageStatusUrl = process.env.NEXT_PUBLIC_UPDATE_MESSAGE_STATUS_URL
+const parentMessageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/messages/show_threads`
+const privateConversationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/messages/private_conversation`
+const sendMessageUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/messages/send_message`
+const messageStatusUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/messages/message`
 
 
 export const setParentMessages = (messages) => {

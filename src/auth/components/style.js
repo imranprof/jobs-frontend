@@ -7,6 +7,11 @@ const useStyles = makeStyles({
     '&__name': {
       width: "48%"
     },
+    '&__linkedin-Icon-Wrapper': {
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column"
+    }
   })
 });
 

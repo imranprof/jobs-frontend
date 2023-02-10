@@ -14,16 +14,17 @@ import {
   SET_AVATAR,
   SET_LOADER,
   SET_ROLE,
-  SET_PRIVATE_INFO,
+  SET_PRIVATE_INFO, SET_ROLE_MODIFY_PERMISSION,
 } from "../actionTypes/topSectionTypes";
 import {getProfileSlug} from "../reducers/authReducers";
 import {setEditPermission} from "./authAction";
 import {ProfileData} from "../../../API/mock/profile/profileData"
 import {getContactAction} from "./contactActions";
 import {getPrivateSlug} from "../../auth/operations";
+import {setPrivateRole} from "../../auth/operations";
 
-const profileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getProfileSlug()}`;
-const privateProfileURL = () => `${process.env.NEXT_PUBLIC_PROFILE_URL}/${getPrivateSlug()}`;
+const profileURL = () => `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/${getProfileSlug()}`;
+const privateProfileURL = () => `${process.env.NEXT_PUBLIC_APP_URL}/api/v1p1/profiles/${getPrivateSlug()}`;
 
 export const setProfileID = (id) => {
   return {
@@ -121,6 +122,13 @@ export const setPrivateProfileInfo = (info) =>{
   }
 }
 
+export const setRoleModifyPermission = (choice) =>{
+  return {
+    type: SET_ROLE_MODIFY_PERMISSION,
+    payload: choice
+  }
+}
+
 export const getPrivateProfileAction = () => {
   return (dispatch) => {
     axios.get(privateProfileURL()).then(res => {
@@ -155,6 +163,8 @@ export function getProfileAction() {
       dispatch(socialLinksUpdate(social_links));
       dispatch(skillsUpdate(skills));
       dispatch(setLoader(false));
+      dispatch(setRoleModifyPermission(res.data.modify_permission))
+      setPrivateRole(res.data.role)
       dispatch(setRole(res.data.role))
       dispatch(getContactAction())
     })
