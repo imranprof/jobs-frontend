@@ -24,7 +24,7 @@ export const useStyles = makeStyles({
         },
         '&__rate-inputWrapper': {
           width: "30%",
-          marginRight: 60,
+          marginLeft: 10,
           '& label.Mui-focused': {
             color: theme.palette.customBorder.customInputBorder
           },
@@ -101,7 +101,7 @@ export const useStyles = makeStyles({
           }
         },
         '&__hourlyRate': {
-          width: "25%",
+          width: "30%",
           fontSize: 14,
           fontFamily: FONTS.primaryFont,
           color: theme.palette.customColor.main,
@@ -109,13 +109,22 @@ export const useStyles = makeStyles({
           display: "block",
           marginBottom: 20,
           wordBreak: "break-word",
+          marginLeft: 10,
           '&-text': {
-            marginRight: 14
+            marginRight: 14,
+            fontWeight: 700,
+            fontSize: 18,
+            color: theme.palette.customColor.highContrast,
+            [theme.breakpoints.down('xs')]: {
+              fontSize: 15
+            }
           },
           // ========= Breakpoints =========
           [theme.breakpoints.down('xs')]: {
             width: "50%",
             fontSize: 14,
+            display: "flex",
+            alignItems: "center"
           }
         },
         '&__bio-inputWrapper': {
