@@ -218,7 +218,7 @@ const TopSection = (props) => {
               ) : (
                 <div className={`${classes.topSectionWrapper}__left-top__hourlyRate`}>
                   <span
-                    className={`${classes.topSectionWrapper}__left-top__headline-text`}>${props.hourlyRate}/hr</span>
+                    className={`${classes.topSectionWrapper}__left-top__hourlyRate-text`}>${props.hourlyRate}/hr</span>
                   {getPermission() &&
                   <span onClick={() => setRateEditMode(true)}>
                 <EditButton/>
