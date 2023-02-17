@@ -9,7 +9,7 @@ import {NoSsr, Paper} from "@material-ui/core";
 import CustomLoader from "../../../../lib/customLoader";
 import Button from '@material-ui/core/Button';
 import {useTheme} from "@material-ui/core/styles";
-import {JobOfferShowStyle} from "./style";
+import {JobOfferShowStyle} from "../../../../views/PagesStyle/job/offer/style";
 
 const JobOfferShow = (props) => {
   const dispatch = useDispatch()

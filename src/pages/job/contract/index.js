@@ -6,7 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
 
 import withLayout from "../../../views/Layout";
-import {AllContractsStyle} from "./style";
+import {AllContractsStyle} from "../../../views/PagesStyle/job/contract/style";
 import {getRole} from "../../../auth/operations";
 import SectionHeader from "../../../lib/sectionHeader";
 import {

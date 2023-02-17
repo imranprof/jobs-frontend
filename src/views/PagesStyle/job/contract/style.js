@@ -1,14 +1,18 @@
 import {makeStyles} from "@material-ui/core/styles";
-import FONTS from "../../../styles/fonts";
+
+import FONTS from "../../../../../styles/fonts";
 
 const useStyles = makeStyles({
-  myJobsWrapper: theme => ({
-    '&__applied-offer-wrapper': {
+  allContractsWrapper: theme => ({
+    '&__contracts-wrapper': {
       display: "flex",
       width: "100%"
     },
-    '&__applied-title-wrapper': {
+    '&__contract-title-wrapper': {
       margin: "0px 50px",
+      [theme.breakpoints.down('xs')]: {
+        margin: "0px 30px",
+      },
     },
     '&__title': {
       marginBottom: 5,
@@ -44,6 +48,6 @@ const useStyles = makeStyles({
   }),
 })
 
-export function MyJobsStyle(theme) {
+export function AllContractsStyle(theme) {
   return useStyles(theme);
 }
