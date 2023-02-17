@@ -50,8 +50,8 @@ const useStyles = makeStyles({
       '&__item': {
         padding: 0,
         height: 86,
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: "center !important",
+        justifyContent: "center !important",
         cursor: "pointer",
         transition: "all .5s ease-in-out",
         // ========= Breakpoints =========
