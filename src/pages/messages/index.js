@@ -14,7 +14,7 @@ import {getAllParentMessage, getPrivateConversations, sendMessageAction} from ".
 import {getProfileAction} from "../../store/actions/topSectionActions";
 import CustomLoader from "../../lib/customLoader";
 import ShowMessage from "../../views/Message/showMessage";
-import {MessagesStyle} from "./style";
+import {MessagesStyle} from "../../views/PagesStyle/messages/style";
 import FontAwesomeIcons from "../../../styles/FontAwesomeIcons";
 
 const MessageList = (props) => {

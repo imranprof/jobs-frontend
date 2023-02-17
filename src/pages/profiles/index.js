@@ -11,7 +11,7 @@ import SectionHeader from "../../lib/sectionHeader";
 import CustomLoader from "../../lib/customLoader";
 import EndMessage from "../../lib/endMessage";
 import {getProfiles, setPage, showProfiles} from "../../store/actions/profilesAction";
-import {ProfilesStyle} from "./style";
+import {ProfilesStyle} from "../../views/PagesStyle/profiles/style";
 
 const Profiles = (props) => {
   const theme = useTheme();

@@ -8,7 +8,7 @@ import {NoSsr} from "@material-ui/core";
 import SectionHeader from "../../lib/sectionHeader";
 import JobOffer from "../../views/Job/Offer";
 import {useTheme} from "@material-ui/core/styles";
-import {MyJobsStyle} from "./style";
+import {MyJobsStyle} from "../../views/PagesStyle/myJobs/style";
 import Divider from "@material-ui/core/Divider";
 
 const EmployeeJobs = (props) => {
