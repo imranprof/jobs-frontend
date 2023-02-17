@@ -17,15 +17,13 @@ const SignUpForm = (props) => {
   const theme = useTheme();
   const classes = AuthStyle(theme);
   const dispatch = useDispatch();
-  const {isAuthenticated, selectedValue} = props;
+  const {isAuthenticated, selectedValue, handleClose} = props;
   const router = useRouter();
 
   useEffect( async () => {
-
     if (isAuthenticated) {
-      await router.push(`/${getProfileSlug()}`).then( setTimeout(()=>{
-        dispatch(modalType(""))
-      },500))
+      await router.push(`/${getProfileSlug()}`);
+      dispatch(modalType(""));
     }
   }, [isAuthenticated])
 
