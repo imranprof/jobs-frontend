@@ -8,7 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import {useTheme} from "@material-ui/core/styles";
 
 import withLayout from "../../../../views/Layout";
-import {DetailsStyle} from "./style";
+import {DetailsStyle} from "../../../../views/PagesStyle/jobApplication/details/style";
 import DetailsHeader from "../../../../views/Profile/Jobs/Application/detailsHeader";
 import CoverLetterWrapper from "../../../../views/Profile/Jobs/Application/coverLetterWrapper";
 import {getJobApplication} from "../../../../store/actions/jobAction";

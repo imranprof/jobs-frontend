@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 
-import FONTS from "../../../styles/fonts";
+import FONTS from "../../../../styles/fonts";
 
 export const useStyles = makeStyles({
   messagesWrapper: theme => ({

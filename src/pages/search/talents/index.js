@@ -5,7 +5,7 @@ import {connect, useDispatch} from "react-redux";
 import {getSearchProfiles, getSearchValue} from "../../../store/actions/searchAction";
 import ProfileCard from "../../../views/Profiles/ProfileCard";
 import {useTheme} from "@material-ui/core/styles";
-import {TalentsSearchStyle} from "./style";
+import {TalentsSearchStyle} from "../../../views/PagesStyle/search/talents/style";
 import {NoSsr} from "@material-ui/core";
 import CustomLoader from "../../../lib/customLoader";
 
