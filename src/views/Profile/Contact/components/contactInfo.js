@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {connect, useDispatch} from "react-redux";
@@ -11,10 +10,15 @@ import EditButton from "../../../../lib/editButton";
 import ErrorMessage from "../../../../lib/errorMessage";
 import CustomButton from "../../../../lib/profile/customButtons";
 import CustomSnackbar from "../../../../lib/customSnackbar";
+import Location from "../../../../lib/profile/location";
 import {
   designationEditMode,
   contactDescriptionEditMode,
-  phoneEditMode, phoneUpdateAction, designationUpdateAction, contactDescriptionUpdateAction, getDemoContactAction
+  phoneEditMode,
+  phoneUpdateAction,
+  designationUpdateAction,
+  contactDescriptionUpdateAction,
+  getDemoContactAction
 } from "../../../../store/actions/contactActions";
 import {getContactAction} from "../../../../store/actions/contactActions";
 
@@ -179,6 +183,8 @@ const ContactInfo = (props) => {
               </div>
             )}
 
+            <span className={`${classes}__contact-info__email`}>Email: {email}</span>
+
             {phoneMode ? (
               <div>
                 <TextField
@@ -196,7 +202,7 @@ const ContactInfo = (props) => {
             ) : (
               <div className={`${classes}__contact-info__phoneWrapper`}>
               <span className={`${classes}__contact-info__phone`}>
-                Phone: <Link href="#"><a>{phone}</a></Link>
+                Phone: {phone}
               </span>
                 {getPermission() &&
                 <span onClick={() => props.setPhoneMode(true)}>
@@ -206,7 +212,8 @@ const ContactInfo = (props) => {
               </div>
             )}
 
-            <span className={`${classes}__contact-info__email`}>Email: <Link href="#"><a>{email}</a></Link></span>
+            <Location setToast={setToast} editPermission={getPermission()} />
+
           </div>
           <SocialLinks setToast={setToast} editPermission={getPermission()}/>
         </Card>
@@ -235,7 +242,7 @@ const mapStateToProps = (state) => {
     contactDescriptionMode: state.contacts.contactDescriptionMode,
     phone: state.contacts.phone,
     phoneMode: state.contacts.phoneMode,
-    email: state.contacts.contact_email
+    email: state.contacts.contact_email,
   }
 }
 

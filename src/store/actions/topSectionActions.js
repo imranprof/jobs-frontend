@@ -15,6 +15,7 @@ import {
   SET_LOADER,
   SET_ROLE,
   SET_PRIVATE_INFO, SET_ROLE_MODIFY_PERMISSION,
+  SET_HOURLY_RATE
 } from "../actionTypes/topSectionTypes";
 import {getProfileSlug} from "../reducers/authReducers";
 import {setEditPermission} from "./authAction";
@@ -137,6 +138,13 @@ export const getPrivateProfileAction = () => {
   }
 }
 
+export const setHourlyRate = (rate) => {
+  return {
+    type: SET_HOURLY_RATE,
+    payload: rate
+  }
+}
+
 export function getProfileAction() {
   return (dispatch) => {
     axios.get(profileURL()).then(res => {
@@ -145,6 +153,7 @@ export function getProfileAction() {
         first_name,
         last_name,
         headline,
+        hourly_rate,
         title,
         bio,
         avatar,
@@ -155,6 +164,7 @@ export function getProfileAction() {
       dispatch(setEditPermission(res.data.edit_permission));
       dispatch(setProfileID(id));
       dispatch(headlineText(headline));
+      dispatch(setHourlyRate(hourly_rate));
       dispatch(setName({firstName: first_name, lastName: last_name}));
       dispatch(introText(title));
       dispatch(bioText(bio));
@@ -221,6 +231,22 @@ export const updateHeadline = ({headline, profileID}) => {
   return (dispatch) => {
     axios.patch(profileURL(), data)
       .then(res => dispatch(headlineText(res.data.profile.headline)))
+      .catch(err => err.response);
+  }
+}
+
+export const updateHourlyRate = ({rate, profileID}) => {
+  const data = {
+    "user": {
+      "user_profile_attributes": {
+        "id": profileID,
+        "hourly_rate": rate
+      }
+    }
+  }
+  return (dispatch) => {
+    axios.patch(profileURL(), data)
+      .then(res => dispatch(setHourlyRate(res.data.profile.hourly_rate)))
       .catch(err => err.response);
   }
 }

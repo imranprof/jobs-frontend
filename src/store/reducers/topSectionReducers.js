@@ -13,7 +13,8 @@ import {
   SET_LOADER,
   SET_ROLE,
   SET_PRIVATE_INFO,
-  SET_ROLE_MODIFY_PERMISSION
+  SET_ROLE_MODIFY_PERMISSION,
+  SET_HOURLY_RATE
 } from "../actionTypes/topSectionTypes";
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   headline: "",
+  hourlyRate: "",
   headlineMode: false,
   intro: "",
   introMode: false,
@@ -113,6 +115,11 @@ export const topSectionReducer = (state = initialState, action) => {
       return {
         ...state,
         modifyPermission: action.payload
+      }
+    case SET_HOURLY_RATE:
+      return {
+        ...state,
+        hourlyRate: action.payload
       }
     default:
       return state

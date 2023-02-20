@@ -81,7 +81,8 @@ const useStyles = makeStyles({
         }
       },
       '&__phoneWrapper': {
-        display: "flex"
+        display: "flex",
+        marginTop: 10
       },
       '&__phone, &__email': {
         fontSize: 18,
@@ -91,21 +92,6 @@ const useStyles = makeStyles({
         lineHeight: "30px",
         display: "block",
         marginRight: 10,
-        '& a': {
-          color: theme.palette.customColor.main,
-          textDecoration: "none",
-          display: "inline-block",
-          backgroundImage: theme.palette.customBackground.gradiant.highContrast,
-          backgroundPosition: "0 100%",
-          backgroundSize: "0% 1px",
-          backgroundRepeat: "no-repeat",
-          transition: "background-size 0.4s, background-position 0.4s, color 0.4s, ease 0s",
-          '&:hover': {
-            color: theme.palette.customColor.highContrast,
-            backgroundPosition: "0 100%",
-            backgroundSize: "100% 1px"
-          }
-        },
       },
       [theme.breakpoints.down('xs')]: {
         padding: 24,
@@ -113,7 +99,7 @@ const useStyles = makeStyles({
           fontSize: 16,
           lineHeight: "26px"
         }
-      }
+      },
     },
     '&__contact-form': {
       background: theme.palette.customBackground.gradiant.light,
