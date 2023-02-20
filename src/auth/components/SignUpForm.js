@@ -17,7 +17,7 @@ const SignUpForm = (props) => {
   const theme = useTheme();
   const classes = AuthStyle(theme);
   const dispatch = useDispatch();
-  const {isAuthenticated, selectedValue, handleClose} = props;
+  const {isAuthenticated, selectedValue} = props;
   const router = useRouter();
 
   useEffect( async () => {
