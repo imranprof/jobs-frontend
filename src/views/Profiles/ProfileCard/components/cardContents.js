@@ -22,7 +22,7 @@ const CardContents = (props) => {
         </div>
       </CardContent>
       <Divider/>
-      <CardContent className={`${classes}__visibilityHidden`}>
+      <CardContent >
         <div className={`${classes}__rate-info`}>
           <Typography variant="h5" component="h4" className={`${classes}__rate-info__hourly`}>
             ${hourly_rate}/hr
@@ -30,7 +30,7 @@ const CardContents = (props) => {
           <Typography variant="body2" color="textSecondary" component="p" className={`${classes}__rate-info__ratings`}>
             <StarIcon/>
             <span
-              className={`${classes}__rate-info__rate`}>{`1/5`}</span><span>{`(${completed_jobs} jobs)`}</span>
+              className={`${classes}__rate-info__rate`}>{`${rating.toFixed(1)}/5`}</span><span>{`(${completed_jobs} jobs)`}</span>
           </Typography>
         </div>
       </CardContent>
