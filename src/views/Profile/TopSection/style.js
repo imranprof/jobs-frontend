@@ -18,6 +18,37 @@ export const useStyles = makeStyles({
       justifyContent: "center",
       '&-top': {
         marginBottom: 80,
+        '&__headlineRateWrapper': {
+          display: "flex",
+          justifyContent: "space-between"
+        },
+        '&__rate-inputWrapper': {
+          width: "30%",
+          marginLeft: 10,
+          '& label.Mui-focused': {
+            color: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiFilledInput-underline:after': {
+            borderBottomColor: theme.palette.customBorder.customInputBorder
+          },
+          '& .MuiOutlinedInput-input': {
+            padding: 12
+          },
+          '& .MuiOutlinedInput-inputMultiline': {
+            padding: 0
+          },
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: theme.palette.customBorder.customInputBorder,
+            }
+          },
+          [theme.breakpoints.down('xs')]: {
+            width: "100%"
+          }
+        },
         '&__editBtnWrapper': {
           height: "fit-content",
         },
@@ -67,6 +98,33 @@ export const useStyles = makeStyles({
             fontSize: 14,
             margin: 0,
             letterSpacing: 1
+          }
+        },
+        '&__hourlyRate': {
+          width: "30%",
+          fontSize: 14,
+          fontFamily: FONTS.primaryFont,
+          color: theme.palette.customColor.main,
+          fontWeight: 500,
+          display: "block",
+          marginBottom: 20,
+          wordBreak: "break-word",
+          marginLeft: 10,
+          '&-text': {
+            marginRight: 14,
+            fontWeight: 700,
+            fontSize: 18,
+            color: theme.palette.customColor.highContrast,
+            [theme.breakpoints.down('xs')]: {
+              fontSize: 15
+            }
+          },
+          // ========= Breakpoints =========
+          [theme.breakpoints.down('xs')]: {
+            width: "50%",
+            fontSize: 14,
+            display: "flex",
+            alignItems: "center"
           }
         },
         '&__bio-inputWrapper': {

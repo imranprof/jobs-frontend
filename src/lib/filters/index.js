@@ -5,9 +5,9 @@ import {useFormik} from "formik";
 import {Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField} from "@material-ui/core";
 import {useTheme} from "@material-ui/core/styles";
 
-import {numberOfApplicants, jobTypesFilter, jobRatesFilter} from "../../../../API/elements/jobs/filterList";
-import {FiltersStyle} from "./style";
-import {getSearchJobs, getSearchValue} from "../../../store/actions/searchAction";
+import {numberOfApplicants, jobTypesFilter, jobRatesFilter} from "../../../API/elements/jobs/filterList";
+import {FiltersStyle} from "../../views/PagesStyle/search/filters/style";
+import {getSearchJobs, getSearchValue} from "../../store/actions/searchAction";
 
 const Filters = () => {
   const theme = useTheme();

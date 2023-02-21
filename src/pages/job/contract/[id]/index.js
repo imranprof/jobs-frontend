@@ -9,7 +9,7 @@ import Divider from "@material-ui/core/Divider";
 
 import {getContractJobShow} from "../../../../store/actions/jobAction";
 import withLayout from '../../../../views/Layout'
-import {ContractJobShowStyle} from "./style";
+import {ContractJobShowStyle} from "../../../../views/PagesStyle/job/contract/[id]/style";
 import CustomLoader from "../../../../lib/customLoader";
 import {jobContractEnd} from "../../../../store/actions/jobAction";
 import ContractHeaderDetails from "../../../../views/Job/Contract/ShowContract/contractHeaderDetails";

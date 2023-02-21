@@ -5,7 +5,7 @@ import {Checkbox, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {useTheme} from "@material-ui/styles";
 
-import {HireStyle} from "../../../../pages/job-application/[id]/hire/style";
+import {HireStyle} from "../../../PagesStyle/jobApplication/hire/style";
 
 const Confirmation = (props) => {
   const theme = useTheme()
