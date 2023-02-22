@@ -5,7 +5,9 @@ import {
   CONTACT_DESCRIPTION_EDIT_MODE,
   PHONE_UPDATE,
   PHONE_EDIT_MODE,
-  SET_EMAIL
+  SET_EMAIL,
+  LOCATION_UPDATE,
+  LOCATION_EDIT_MODE
 } from "../actionTypes/contactTypes";
 
 const initialState = {
@@ -15,7 +17,9 @@ const initialState = {
   contactDescriptionMode: false,
   phone: "",
   phoneMode: false,
-  contact_email: ""
+  contact_email: "",
+  location: "",
+  locationMode: false
 }
 
 export const contactReducer = (state = initialState, action) => {
@@ -49,6 +53,16 @@ export const contactReducer = (state = initialState, action) => {
       return {
         ...state,
         phoneMode: action.payload,
+      }
+    case LOCATION_UPDATE:
+      return {
+        ...state,
+        location: action.payload,
+      }
+    case LOCATION_EDIT_MODE:
+      return {
+        ...state,
+        locationMode: action.payload,
       }
     case SET_EMAIL:
       return {
