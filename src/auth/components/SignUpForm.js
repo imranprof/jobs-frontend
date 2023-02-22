@@ -21,11 +21,9 @@ const SignUpForm = (props) => {
   const router = useRouter();
 
   useEffect( async () => {
-
     if (isAuthenticated) {
-      await router.push(`/${getProfileSlug()}`).then( setTimeout(()=>{
-        dispatch(modalType(""))
-      },500))
+      await router.push(`/${getProfileSlug()}`);
+      dispatch(modalType(""));
     }
   }, [isAuthenticated])
 
